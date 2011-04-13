@@ -1,0 +1,382 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */; };
+		1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */; };
+		1629DD0112C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1629DD0012C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp */; };
+		1629DD0312C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1629DD0212C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp */; };
+		16466AC011AB50B700AF9F07 /* DbgTracesFeederCore.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */; };
+		16466ACC11AB517300AF9F07 /* DbgTracesFeederCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */; };
+		165976FF1127103C00CC718B /* TracesPoolCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165976FE1127103C00CC718B /* TracesPoolCollection.cpp */; };
+		165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977021127109B00CC718B /* TracesPoolCollection.hpp */; };
+		1659779C11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1659779B11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp */; };
+		1659779E11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1659779D11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp */; };
+		165977A41127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977A31127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp */; };
+		165977A81127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165977A71127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp */; };
+		165977B1112840C200CC718B /* TraceDataRepositoryLink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977B0112840C200CC718B /* TraceDataRepositoryLink.hpp */; };
+		165977B31128418B00CC718B /* TraceDataRepositoryLink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165977B21128418B00CC718B /* TraceDataRepositoryLink.cpp */; };
+		165CF2BD114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2BC114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp */; };
+		165CF2C1114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2BF114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp */; };
+		165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */; };
+		165CF2E1114D7F49007430AE /* RepositoryObserverThreadProc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DF114D7F49007430AE /* RepositoryObserverThreadProc.hpp */; };
+		165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */; };
+		165CF2E5114D7F53007430AE /* RepositoryObserverThreadProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E3114D7F53007430AE /* RepositoryObserverThreadProc.cpp */; };
+		165CF2F1114D9984007430AE /* DbgTracesFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */; };
+		1665B7A311EA4FB100D4B309 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1665B7A111EA4FB100D4B309 /* PoolsList.cpp */; };
+		1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1665B7A211EA4FB100D4B309 /* PoolsList.hpp */; };
+		1693872C1347A0C400691948 /* DbgTracesFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */; };
+		169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169387361347ACB000691948 /* RepositoryTraceInserter.cpp */; };
+		169387391347ACB700691948 /* RepositoryTraceInserter.h in Headers */ = {isa = PBXBuildFile; fileRef = 169387381347ACB700691948 /* RepositoryTraceInserter.h */; };
+		16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */; };
+		16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */; };
+		16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */; };
+		16EECE691126406500465BE0 /* TraceData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16EECE681126406500465BE0 /* TraceData.hpp */; };
+		16EECE6D1126409800465BE0 /* TraceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECE6B1126409800465BE0 /* TraceData.cpp */; };
+		16EECE9D1126476E00465BE0 /* TraceDataRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */; };
+		16EECE9F1126479800465BE0 /* TraceDataRepository.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16EECE9E1126479800465BE0 /* TraceDataRepository.hpp */; };
+		16EECEEC11265A1A00465BE0 /* TraceClientCoreModule.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16EECEEB11265A1A00465BE0 /* TraceClientCoreModule.hpp */; };
+		16EECEEE11265BA300465BE0 /* TraceClientCoreModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECEED11265BA300465BE0 /* TraceClientCoreModule.cpp */; };
+		16EECEF711265D8A00465BE0 /* TracesPool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16EECEF611265D8A00465BE0 /* TracesPool.hpp */; };
+		16EECEF911265E3800465BE0 /* TracesPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECEF811265E3800465BE0 /* TracesPool.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PipeTraceFeeder.hpp; path = ../include/PipeTraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
+		1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PipeTraceFeeder.cpp; path = ../sources/PipeTraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
+		1629DD0012C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLinkToDataRepository.cpp; path = ../sources/TraceDataRepositoryLinkToDataRepository.cpp; sourceTree = SOURCE_ROOT; };
+		1629DD0212C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLinkToDataRepository.hpp; path = ../include/TraceDataRepositoryLinkToDataRepository.hpp; sourceTree = SOURCE_ROOT; };
+		16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DbgTracesFeederCore.hpp; path = ../include/DbgTracesFeederCore.hpp; sourceTree = SOURCE_ROOT; };
+		16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DbgTracesFeederCore.cpp; path = ../sources/DbgTracesFeederCore.cpp; sourceTree = SOURCE_ROOT; };
+		165976FE1127103C00CC718B /* TracesPoolCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPoolCollection.cpp; path = ../Sources/TracesPoolCollection.cpp; sourceTree = SOURCE_ROOT; };
+		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
+		1659779B11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLinkBase.hpp; path = ../include/TraceDataRepositoryLinkBase.hpp; sourceTree = SOURCE_ROOT; };
+		1659779D11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLinkBase.cpp; path = ../Sources/TraceDataRepositoryLinkBase.cpp; sourceTree = SOURCE_ROOT; };
+		165977A31127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLinkCollection.hpp; path = ../include/TraceDataRepositoryLinkCollection.hpp; sourceTree = SOURCE_ROOT; };
+		165977A71127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLinkCollection.cpp; path = ../sources/TraceDataRepositoryLinkCollection.cpp; sourceTree = SOURCE_ROOT; };
+		165977B0112840C200CC718B /* TraceDataRepositoryLink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLink.hpp; path = ../include/TraceDataRepositoryLink.hpp; sourceTree = SOURCE_ROOT; };
+		165977B21128418B00CC718B /* TraceDataRepositoryLink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLink.cpp; path = ../Sources/TraceDataRepositoryLink.cpp; sourceTree = SOURCE_ROOT; };
+		165CF2BC114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserverNotificationsHandler.hpp; path = ../include/RepositoryObserverNotificationsHandler.hpp; sourceTree = SOURCE_ROOT; };
+		165CF2BF114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserverNotificationsHandler.cpp; path = ../sources/RepositoryObserverNotificationsHandler.cpp; sourceTree = SOURCE_ROOT; };
+		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
+		165CF2DF114D7F49007430AE /* RepositoryObserverThreadProc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserverThreadProc.hpp; path = ../include/RepositoryObserverThreadProc.hpp; sourceTree = SOURCE_ROOT; };
+		165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserver.cpp; path = ../sources/RepositoryObserver.cpp; sourceTree = SOURCE_ROOT; };
+		165CF2E3114D7F53007430AE /* RepositoryObserverThreadProc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserverThreadProc.cpp; path = ../sources/RepositoryObserverThreadProc.cpp; sourceTree = SOURCE_ROOT; };
+		165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DbgTracesFeeder.hpp; path = ../include/DbgTracesFeeder.hpp; sourceTree = SOURCE_ROOT; };
+		1665B7A111EA4FB100D4B309 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../include/DataStruct/PoolsList.cpp; sourceTree = SOURCE_ROOT; };
+		1665B7A211EA4FB100D4B309 /* PoolsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsList.hpp; path = ../include/DataStruct/PoolsList.hpp; sourceTree = SOURCE_ROOT; };
+		1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DbgTracesFeeder.cpp; path = ../sources/DbgTracesFeeder.cpp; sourceTree = "<group>"; };
+		169387361347ACB000691948 /* RepositoryTraceInserter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryTraceInserter.cpp; path = ../sources/RepositoryTraceInserter.cpp; sourceTree = "<group>"; };
+		169387381347ACB700691948 /* RepositoryTraceInserter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryTraceInserter.h; path = ../sources/RepositoryTraceInserter.h; sourceTree = "<group>"; };
+		16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceFeeder.hpp; path = ../include/TraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
+		16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceFeeder.cpp; path = ../sources/TraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
+		16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceInserter.hpp; path = ../include/TraceInserter.hpp; sourceTree = SOURCE_ROOT; };
+		16EECE681126406500465BE0 /* TraceData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceData.hpp; path = ../include/TraceData.hpp; sourceTree = SOURCE_ROOT; };
+		16EECE6B1126409800465BE0 /* TraceData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceData.cpp; path = ../Sources/TraceData.cpp; sourceTree = SOURCE_ROOT; };
+		16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepository.cpp; path = ../Sources/TraceDataRepository.cpp; sourceTree = SOURCE_ROOT; };
+		16EECE9E1126479800465BE0 /* TraceDataRepository.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepository.hpp; path = ../include/TraceDataRepository.hpp; sourceTree = SOURCE_ROOT; };
+		16EECEEB11265A1A00465BE0 /* TraceClientCoreModule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceClientCoreModule.hpp; path = ../include/TraceClientCoreModule.hpp; sourceTree = SOURCE_ROOT; };
+		16EECEED11265BA300465BE0 /* TraceClientCoreModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceClientCoreModule.cpp; path = ../Sources/TraceClientCoreModule.cpp; sourceTree = SOURCE_ROOT; };
+		16EECEF611265D8A00465BE0 /* TracesPool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPool.hpp; path = ../include/TracesPool.hpp; sourceTree = SOURCE_ROOT; };
+		16EECEF811265E3800465BE0 /* TracesPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPool.cpp; path = ../Sources/TracesPool.cpp; sourceTree = SOURCE_ROOT; };
+		D2AAC046055464E500DB518D /* libTraceClientCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTraceClientCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D289987405E68DCB004EDB86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* TraceClientCore */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = TraceClientCore;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				16AE9AED11A9D6160064A5F9 /* Feeders */,
+				165977AF1128406B00CC718B /* Repository Links */,
+				16EECE681126406500465BE0 /* TraceData.hpp */,
+				16EECE6B1126409800465BE0 /* TraceData.cpp */,
+				16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */,
+				16EECE9E1126479800465BE0 /* TraceDataRepository.hpp */,
+				16EECEEB11265A1A00465BE0 /* TraceClientCoreModule.hpp */,
+				16EECEED11265BA300465BE0 /* TraceClientCoreModule.cpp */,
+				1665B7A111EA4FB100D4B309 /* PoolsList.cpp */,
+				1665B7A211EA4FB100D4B309 /* PoolsList.hpp */,
+				16EECEF611265D8A00465BE0 /* TracesPool.hpp */,
+				16EECEF811265E3800465BE0 /* TracesPool.cpp */,
+				165977021127109B00CC718B /* TracesPoolCollection.hpp */,
+				165976FE1127103C00CC718B /* TracesPoolCollection.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		165977AF1128406B00CC718B /* Repository Links */ = {
+			isa = PBXGroup;
+			children = (
+				169387381347ACB700691948 /* RepositoryTraceInserter.h */,
+				169387361347ACB000691948 /* RepositoryTraceInserter.cpp */,
+				1629DD0212C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp */,
+				1629DD0012C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp */,
+				165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */,
+				165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */,
+				165CF2E3114D7F53007430AE /* RepositoryObserverThreadProc.cpp */,
+				165CF2DF114D7F49007430AE /* RepositoryObserverThreadProc.hpp */,
+				1659779B11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp */,
+				1659779D11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp */,
+				165977A31127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp */,
+				165977A71127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp */,
+				165977B0112840C200CC718B /* TraceDataRepositoryLink.hpp */,
+				165977B21128418B00CC718B /* TraceDataRepositoryLink.cpp */,
+				165CF2BC114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp */,
+				165CF2BF114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp */,
+			);
+			name = "Repository Links";
+			sourceTree = "<group>";
+		};
+		1693872D1347A44F00691948 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */,
+				165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */,
+				16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */,
+				16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */,
+			);
+			name = Debug;
+			sourceTree = "<group>";
+		};
+		16AE9AED11A9D6160064A5F9 /* Feeders */ = {
+			isa = PBXGroup;
+			children = (
+				1693872D1347A44F00691948 /* Debug */,
+				16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */,
+				16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */,
+				16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */,
+				1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */,
+				1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */,
+			);
+			name = Feeders;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC046055464E500DB518D /* libTraceClientCore.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC043055464E500DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16EECE691126406500465BE0 /* TraceData.hpp in Headers */,
+				16EECE9F1126479800465BE0 /* TraceDataRepository.hpp in Headers */,
+				16EECEEC11265A1A00465BE0 /* TraceClientCoreModule.hpp in Headers */,
+				16EECEF711265D8A00465BE0 /* TracesPool.hpp in Headers */,
+				165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */,
+				1659779C11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp in Headers */,
+				165977A41127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp in Headers */,
+				165977B1112840C200CC718B /* TraceDataRepositoryLink.hpp in Headers */,
+				165CF2BD114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp in Headers */,
+				165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */,
+				165CF2E1114D7F49007430AE /* RepositoryObserverThreadProc.hpp in Headers */,
+				165CF2F1114D9984007430AE /* DbgTracesFeeder.hpp in Headers */,
+				16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */,
+				16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */,
+				16466AC011AB50B700AF9F07 /* DbgTracesFeederCore.hpp in Headers */,
+				1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */,
+				1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */,
+				1629DD0312C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp in Headers */,
+				169387391347ACB700691948 /* RepositoryTraceInserter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC045055464E500DB518D /* TraceClientCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "TraceClientCore" */;
+			buildPhases = (
+				D2AAC043055464E500DB518D /* Headers */,
+				D2AAC044055464E500DB518D /* Sources */,
+				D289987405E68DCB004EDB86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TraceClientCore;
+			productName = TraceClientCore;
+			productReference = D2AAC046055464E500DB518D /* libTraceClientCore.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "TraceClientCore" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* TraceClientCore */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC045055464E500DB518D /* TraceClientCore */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC044055464E500DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16EECE6D1126409800465BE0 /* TraceData.cpp in Sources */,
+				16EECE9D1126476E00465BE0 /* TraceDataRepository.cpp in Sources */,
+				16EECEEE11265BA300465BE0 /* TraceClientCoreModule.cpp in Sources */,
+				16EECEF911265E3800465BE0 /* TracesPool.cpp in Sources */,
+				165976FF1127103C00CC718B /* TracesPoolCollection.cpp in Sources */,
+				1659779E11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp in Sources */,
+				165977A81127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp in Sources */,
+				165977B31128418B00CC718B /* TraceDataRepositoryLink.cpp in Sources */,
+				165CF2C1114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp in Sources */,
+				165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */,
+				165CF2E5114D7F53007430AE /* RepositoryObserverThreadProc.cpp in Sources */,
+				16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */,
+				16466ACC11AB517300AF9F07 /* DbgTracesFeederCore.cpp in Sources */,
+				1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */,
+				1665B7A311EA4FB100D4B309 /* PoolsList.cpp in Sources */,
+				1629DD0112C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp in Sources */,
+				1693872C1347A0C400691948 /* DbgTracesFeeder.cpp in Sources */,
+				169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB91EC08733DB70010E9CD /* Debug_32 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = TraceClientCore;
+			};
+			name = Debug_32;
+		};
+		1DEB91ED08733DB70010E9CD /* Release_32 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = TraceClientCore;
+			};
+			name = Release_32;
+		};
+		1DEB91F008733DB70010E9CD /* Debug_32 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../lib/OSX/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../../../NyxLibs/NyxBase/include,
+					../../../NyxLibs/NyxBase/include/OSX,
+					../../../NyxLibs/NyxNet/include,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = "";
+			};
+			name = Debug_32;
+		};
+		1DEB91F108733DB70010E9CD /* Release_32 */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CONFIGURATION_BUILD_DIR = "../lib/OSX/$(CONFIGURATION)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../include,
+					../../../NyxLibs/NyxBase/include,
+					../../../NyxLibs/NyxBase/include/OSX,
+					../../../NyxLibs/NyxNet/include,
+				);
+				PREBINDING = NO;
+				SDKROOT = "";
+			};
+			name = Release_32;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "TraceClientCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91EC08733DB70010E9CD /* Debug_32 */,
+				1DEB91ED08733DB70010E9CD /* Release_32 */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release_32;
+		};
+		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "TraceClientCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB91F008733DB70010E9CD /* Debug_32 */,
+				1DEB91F108733DB70010E9CD /* Release_32 */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release_32;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
