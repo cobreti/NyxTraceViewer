@@ -315,7 +315,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CONFIGURATION_BUILD_DIR = "../lib/OSX/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				CONFIGURATION_BUILD_DIR = "../../lib/OSX/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -324,9 +324,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
-					../../../NyxLibs/NyxBase/include,
-					../../../NyxLibs/NyxBase/include/OSX,
-					../../../NyxLibs/NyxNet/include,
+					../../NyxLibs/include,
+					../../NyxLibs/include/OSX,
+					../../NyxLibs/include/NyxNet,
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
@@ -338,7 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CONFIGURATION_BUILD_DIR = "../lib/OSX/$(CONFIGURATION)";
+				CONFIGURATION_BUILD_DIR = "../../lib/OSX/$(CONFIGURATION)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -346,9 +346,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
-					../../../NyxLibs/NyxBase/include,
-					../../../NyxLibs/NyxBase/include/OSX,
-					../../../NyxLibs/NyxNet/include,
+					../../NyxLibs/include,
+					../../NyxLibs/include/OSX,
+					../../NyxLibs/include/NyxNet,
 				);
 				PREBINDING = NO;
 				SDKROOT = "";

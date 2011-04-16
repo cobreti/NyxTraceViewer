@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../NyxLibs/NyxBase/NyxBase_OSX/NyxBase_OSX.xcodeproj">
+      location = "group:../NyxLibs/NyxBase/OSX/NyxBase.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../NyxLibs/NyxNet/OSX/NyxNet.xcodeproj">
+      location = "group:../NyxLibs/NyxNet/OSX/NyxNet.xcodeproj">
    </FileRef>
    <FileRef
       location = "container:OSX/TraceClientCore.xcodeproj">
