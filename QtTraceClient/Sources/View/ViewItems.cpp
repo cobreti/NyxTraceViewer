@@ -103,6 +103,8 @@ const CViewItems& CViewItems::operator += (CViewItems& items)
         Add( items.m_Items.front() );
         items.m_Items.pop_front();
     }
+
+    return *this;
 }
 
 

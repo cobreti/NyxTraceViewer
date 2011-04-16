@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="../../../TraceClientLink/public"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;DLLFEED_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -187,7 +188,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TraceClientLink_Win32.cpp"
+				RelativePath="..\..\..\TraceClientLink\public\TraceClientLink_Win32.cpp"
 				>
 			</File>
 		</Filter>

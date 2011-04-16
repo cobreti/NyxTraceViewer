@@ -6,6 +6,6 @@
 	>
 	<UserMacro
 		Name="NyxLibs"
-		Value="../../../NyxLibs"
+		Value="../../NyxLibs"
 	/>
 </VisualStudioPropertySheet>

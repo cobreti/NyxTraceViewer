@@ -113,7 +113,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\qtmain&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;.\;&quot;$(NYXLIBS)\NyxBase\include&quot;;&quot;$(NYXLIBS)\NyxBase\include\Win32&quot;;&quot;$(NYXLIBS)\NyxNet\include&quot;;..\TraceClientLink"
+				AdditionalIncludeDirectories=".\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;.\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\qtmain&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;.\;&quot;$(NYXLIBS)\include&quot;;&quot;$(NYXLIBS)\include\Win32&quot;;&quot;$(NYXLIBS)\include\NyxNet&quot;;..\..\TraceClientLink\public"
 				PreprocessorDefinitions=",UNICODE,WIN32,QT_LARGEFILE_SUPPORT;QT_CORE_LIB;QT_GUI_LIB;QT_DLL"
 				RuntimeLibrary="3"
 				TreatWChar_tAsBuiltInType="true"
@@ -133,7 +133,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="qtmaind.lib QtCored4.lib QtGuid4.lib NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
 				OutputFile="$(OutDir)\$(ProjectName).exe"
-				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(NYXLIBS)\NyxBase\lib\win32\debug&quot;;&quot;$(NYXLIBS)\NyxNet\lib\win32\debug&quot;"
+				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;&quot;$(NYXLIBS)\lib\win32\debug&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 			/>
@@ -277,7 +277,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL -D_UNICODE  &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I.&quot; &quot;-I$(NYXLIBS)\NyxBase\include&quot; &quot;-I$(NYXLIBS)\NyxBase\include\Win32&quot; &quot;-I$(NYXLIBS)\NyxNet\include&quot; &quot;-I.\..\TraceClientLink&quot; &quot;..\TraceViewerFeeder.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL -D_UNICODE  &quot;-I.\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\qtmain&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I.&quot; &quot;-I$(NYXLIBS)\include&quot; &quot;-I$(NYXLIBS)\include\Win32&quot; &quot;-I$(NYXLIBS)\include\NyxNet&quot; &quot;-I.\..\..\TraceClientLink\public&quot; &quot;..\TraceViewerFeeder.h&quot; -o &quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;.\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -287,15 +287,15 @@
 				Name="TraceClientLink"
 				>
 				<File
-					RelativePath="..\TraceClientLink\TraceClientLink.hpp"
+					RelativePath="..\..\TraceClientLink\public\TraceClientLink.hpp"
 					>
 				</File>
 				<File
-					RelativePath="..\TraceClientLink\TraceClientLink_Win32.cpp"
+					RelativePath="..\..\TraceClientLink\public\TraceClientLink_Win32.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\TraceClientLink\TraceClientLink_Win32.hpp"
+					RelativePath="..\..\TraceClientLink\public\TraceClientLink_Win32.hpp"
 					>
 				</File>
 			</Filter>
