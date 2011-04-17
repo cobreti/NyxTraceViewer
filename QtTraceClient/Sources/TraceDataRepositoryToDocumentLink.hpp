@@ -9,7 +9,6 @@ namespace TraceClientCore
     class CTraceDataRepository;
 }
 
-class CDocTraceDataRepository;
 
 class CTraceDataRepositoryToDocumentLink : public TraceClientCore::CTraceDataRepositoryLink
 {

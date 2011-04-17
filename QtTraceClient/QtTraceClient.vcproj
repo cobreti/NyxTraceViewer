@@ -575,14 +575,6 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\Sources\DocTraceData.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sources\DocTraceData.hpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Sources\Document\DocumentsCollection.cpp"
 					>
 				</File>
@@ -878,14 +870,6 @@
 				</File>
 				<File
 					RelativePath=".\Sources\View\ViewSettings.hpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sources\ViewTraceData.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sources\ViewTraceData.hpp"
 					>
 				</File>
 			</Filter>
@@ -1622,26 +1606,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\Document-icon.png"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\Icons\Document-icon.png"
 				>
 				<FileConfiguration
@@ -1662,7 +1626,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\File-View-icon.png"
+				RelativePath=".\UI\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1683,6 +1647,26 @@
 			</File>
 			<File
 				RelativePath=".\UI\Icons\File-View-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1828,7 +1812,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\View-icon.png"
+				RelativePath=".\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1848,7 +1832,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\View-icon.png"
+				RelativePath=".\UI\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

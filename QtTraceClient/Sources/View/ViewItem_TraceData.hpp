@@ -23,12 +23,10 @@ public:
 
     virtual void dbgOutputInfo();
 
-//    const CDocTraceData* DocTraceData() const      { return m_pDocTraceData; }
     const TraceClientCore::CTraceData* TraceData() const             { return m_pTraceData; }
 
 protected:
 
-    //const CDocTraceData*       m_pDocTraceData;
     const TraceClientCore::CTraceData*           m_pTraceData;
 };
 

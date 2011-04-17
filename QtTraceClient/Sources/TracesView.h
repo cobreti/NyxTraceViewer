@@ -15,7 +15,6 @@ namespace Ui
 
 class CTracesDocument;
 class CViewHeader;
-class CDocTraceData;
 
 class CTracesView : public QWidget
 {
