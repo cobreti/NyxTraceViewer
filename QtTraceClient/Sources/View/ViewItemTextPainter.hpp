@@ -15,6 +15,8 @@ public:
 protected:
     virtual void EvaluateSize(CViewSettings& settings, CViewItem& item, const QString& text );
     virtual void Display( const CViewSettings& settings, CDrawViewItemState& drawstate, CViewItem& item, const QString& text );
+
+    virtual QRectF CalculateTextRect( QFontMetricsF& Metrics, const QStringList& Lines );
 };
 
 #endif // __VIEWITEMTEXTPAINTER_HPP__
