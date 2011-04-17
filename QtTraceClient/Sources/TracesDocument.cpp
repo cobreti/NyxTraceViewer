@@ -37,6 +37,7 @@ void CTracesDocument::Init()
 {
     CViewItemSettings*      pSetting = NULL;
     QFont*                  pFont = new QFont("Courier New", 10);
+    QFontMetricsF           TextMetrics(*pFont);
 
     CViewColumnSettings*		pColSettings = NULL;
 
@@ -47,6 +48,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_ModuleName );
     pColSettings->SetTitle("Module Name");
+    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_ModuleName, pColSettings );
 
     // TickCount
@@ -56,6 +58,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_TickCount );
     pColSettings->SetTitle("TickCount");
+    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_TickCount, pColSettings );
 
     // ThreadId
@@ -65,6 +68,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_ThreadId );
     pColSettings->SetTitle("Thread Id");
+    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_ThreadId, pColSettings );
 
     // data
@@ -74,6 +78,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_Data );
     pColSettings->SetTitle("Data");
+    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_Data, pColSettings );
 
     DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);

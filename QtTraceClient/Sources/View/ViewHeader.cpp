@@ -10,14 +10,15 @@ CViewHeader::CViewHeader(CViewColumnsSettings& rColumnsSettings, QWidget *parent
     QWidget(parent),
     m_rColumnsSettings(rColumnsSettings),
     m_HorzOffset(0),
-    m_Margins(10, 10, 10, 20)
+    m_Margins(10, 10, 10, 20),
+    m_pBkgndImage(NULL)
 {
     resize(0, m_Margins.height());
 
     m_pFont = new QFont("Courier New", 10);
     m_pFont->setBold(true);
 
-    m_pBkgndImage = new QImage(":/View/Images/VGradientInner.png");
+    //m_pBkgndImage = new QImage(":/View/Images/VGradientInner.png");
     SetBkgndColor( QColor(173, 229, 255) );
 }
 
@@ -51,9 +52,6 @@ void CViewHeader::InitDefaultWidth()
 
         if ( rcText.height() > height )
             height = rcText.height();
-
-        //painter.drawText( QRectF(x, 0, rSettings.GetWidth(), headerHeight), Qt::AlignHCenter | Qt::AlignCenter, rSettings.GetTitle() );
-        //painter.drawLine(x + rSettings.GetWidth(), 0, x + rSettings.GetWidth(), headerHeight);
     }
 
     resize( width(), height + m_Margins.height() );
@@ -85,7 +83,6 @@ void CViewHeader::paintEvent(QPaintEvent *event)
 
         painter.drawText( QRectF(x + m_Margins.left(), m_Margins.top(), rSettings.GetWidth() - m_Margins.width(), headerHeight - m_Margins.height()),
                           Qt::AlignLeft, rSettings.GetTitle() );
-//        painter.drawLine(x + rSettings.GetWidth(), 0, x + rSettings.GetWidth(), headerHeight);
         x += rSettings.GetWidth();
     }
 }
