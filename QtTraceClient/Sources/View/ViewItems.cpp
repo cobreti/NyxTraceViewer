@@ -14,13 +14,7 @@ CViewItems::CViewItems()
  */
 CViewItems::~CViewItems()
 {
-    while (!m_Items.empty())
-    {
-        CViewItem* pItem = m_Items.front();
-        delete pItem;
-
-        m_Items.pop_front();
-    }
+    Clear();
 }
 
 
@@ -90,6 +84,20 @@ const QSizeF& CViewItems::GetSize() const
 const QSizeF& CViewItems::GetLastLineSize() const
 {
     return m_LastLineSize;
+}
+
+
+/**
+ *
+ */
+void CViewItems::Clear()
+{
+    while (!m_Items.empty())
+    {
+        CViewItem* pItem = m_Items.front();
+        m_Items.pop_front();
+        delete pItem;
+    }
 }
 
 

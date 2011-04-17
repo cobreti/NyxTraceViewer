@@ -4,8 +4,6 @@
 #include <QWidget>
 //#include <QTimer>
 
-#include "DocTraceDataRepository.hpp"
-#include "ViewTraceDataRepository.hpp"
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
 
@@ -17,6 +15,7 @@ namespace Ui
 
 class CTracesDocument;
 class CViewHeader;
+class CDocTraceData;
 
 class CTracesView : public QWidget
 {
@@ -42,10 +41,8 @@ public:
 
 public slots:
 
-    void OnNewTraceItems();
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
-    void OnRefreshTimer();
 
 protected:
 
@@ -58,7 +55,6 @@ protected:
     virtual void wheelEvent(QWheelEvent* event);
 
 	virtual void InitSettings();
-    virtual void AddTrace( const CDocTraceData* pDocTrace );
 
     virtual QRect ClientRect() const { return ClientRect(rect()); }
     virtual QRect ClientRect( const QRect& rcWnd ) const;
@@ -70,13 +66,11 @@ protected:
 
     Ui::CTracesView*												ui;
     CTracesDocument&                                                m_rDoc;
-    IDocTraceDataRepository::IteratorHandle                         m_hDocLastUpdatedPos;
     QString														m_Name;
     QRectF														m_Margins;
     CViewItemPos                                                    m_TopPos;
     CViewSettings												m_Settings;
     QSizeF                                                          m_MaxLineSize;
-//    QTimer                                                          m_RefreshTimer;
     bool                                                            m_bViewDirty;
     bool                                                            m_bKeepAtEnd;
     CViewHeader*                                                    m_pHeader;

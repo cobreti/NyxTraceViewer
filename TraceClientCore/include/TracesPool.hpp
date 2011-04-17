@@ -30,7 +30,8 @@ namespace TraceClientCore
 		virtual void setDescription(const wchar_t* wszDescription);
 		virtual const Nyx::CWString& getDescription() const		{ return m_Description; }
 		
-		CTraceDataRepository&	Repository()		{ return *m_pRepository; }
+		CTraceDataRepository&	    Repository()		    { return *m_pRepository; }
+        const CTraceDataRepository& Repository() const      { return *m_pRepository; }
 		
 		const CTraceFeederRef&		Feeder() const		{ return m_refFeeder; }
 		CTraceFeederRef&			Feeder()			{ return m_refFeeder; }

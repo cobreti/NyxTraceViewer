@@ -33,8 +33,6 @@ public:
 
 protected:
 
-    typedef     std::list<CViewItemPainterRef>      ViewItemPaintersList;
-
     enum
     {
         kMaxPainters = 20
@@ -42,7 +40,6 @@ protected:
 
 protected:
 
-    //ViewItemPaintersList            m_ChildPainters;
     CViewItemPainter*               m_Painters[kMaxPainters];
     size_t                          m_PaintersCount;
     EPainterId                      m_Id;

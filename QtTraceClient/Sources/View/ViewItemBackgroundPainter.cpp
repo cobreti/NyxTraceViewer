@@ -39,7 +39,7 @@ CViewItemBackgroundPainter::~CViewItemBackgroundPainter()
 /**
  *
  */
-void CViewItemBackgroundPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem &item)
+void CViewItemBackgroundPainter::Display(const CViewSettings&, CDrawViewItemState &drawstate, CViewItem &item)
 {
     QPainter&       rPainter = drawstate.Painter();
 

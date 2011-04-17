@@ -29,7 +29,7 @@ public: // public types
     {
     public:
         XData() {}
-        XData(const XData& data) {}
+        XData(const XData&) {}
         virtual ~XData() {}
 
         virtual bool IsValid() const { return false; }
@@ -40,9 +40,9 @@ public: // public types
         virtual bool IsFirst() const { return false; }
         virtual bool IsLast() const { return false; }
 
-        virtual bool IsOfType( EViewItemPosIdentifier id ) const { return false; }
+        virtual bool IsOfType( EViewItemPosIdentifier ) const { return false; }
 
-        virtual bool IsEqual(const XData& data) const { return false; }
+        virtual bool IsEqual(const XData&) const { return false; }
 
         virtual CViewItem* Item() const { return NULL; }
 

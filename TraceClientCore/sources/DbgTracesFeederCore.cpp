@@ -88,7 +88,7 @@ void TraceClientCore::CDbgTracesFeederCore::Thread_RunningLoop()
 		{			
 			while ( !m_bFeedCancelled && m_nTracesCount-- > 0 )
 			{				
-				pTraceData = new (m_pOwnerPool->MemoryPool())TraceClientCore::CTraceData(m_pOwnerPool->MemoryPool());
+				pTraceData = new (m_pOwnerPool->MemoryPool()) TraceClientCore::CTraceData(m_pOwnerPool->MemoryPool());
 				pTraceData->Data() = L"test trace data";
 				pTraceData->ThreadId() = L"thread id";
                 pTraceData->OwnerPool() = m_pOwnerPool;

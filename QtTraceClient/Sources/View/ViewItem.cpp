@@ -62,6 +62,8 @@ void CViewItem::EvaluateSize(CViewSettings& settings)
                 pPainter->EvaluateSize(settings, *this);
         }
     }
+
+    m_Flags.set(eVIF_SizeCalculated);
 }
 
 
@@ -70,6 +72,9 @@ void CViewItem::EvaluateSize(CViewSettings& settings)
  */
 void CViewItem::Display(const CViewSettings& settings, CDrawViewItemState &drawstate)
 {
+    if ( !m_Flags.test(eVIF_SizeCalculated))
+        return;
+
     const CViewColumnsOrder&    rColsOrder = settings.ColumnsSettings().Order();
     size_t                      ColsCount = rColsOrder.Count();
     size_t                      index = 0;

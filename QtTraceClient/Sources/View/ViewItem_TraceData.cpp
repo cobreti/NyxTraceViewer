@@ -22,6 +22,14 @@ CViewItem_TraceData::~CViewItem_TraceData()
 /**
  *
  */
+void CViewItem_TraceData::operator delete(void*)
+{
+}
+
+
+/**
+ *
+ */
 void CViewItem_TraceData::dbgOutputInfo()
 {
     const TraceClientCore::CTraceData*     pTraceData = m_pTraceData;

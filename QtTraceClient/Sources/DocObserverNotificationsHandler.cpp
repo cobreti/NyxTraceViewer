@@ -34,9 +34,6 @@ CDocObserverNotificationsHandler::~CDocObserverNotificationsHandler()
  */
 void CDocObserverNotificationsHandler::OnNewItems()
 {
-//    CViewItems* pItems = m_pItemsQueue->Detach();
-
-//    m_rDoc.OnNewTraceItems(pItems);
 }
 
 
@@ -45,8 +42,6 @@ void CDocObserverNotificationsHandler::OnNewItems()
  */
 TraceClientCore::CTraceInserter* CDocObserverNotificationsHandler::OnBeginCheckUpdate()
 {
-//    m_pItemsQueue->SetViewItems( new CViewItems() );
-
     return static_cast<TraceClientCore::CTraceInserter*>(this);
 }
 
@@ -60,8 +55,6 @@ void CDocObserverNotificationsHandler::OnEndCheckUpdate()
 
     if ( pItems->ItemsCount() > 0 )
         m_rDoc.OnNewTraceItems(pItems);
-
-    //delete pItems;
 }
 
 

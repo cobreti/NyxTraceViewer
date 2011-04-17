@@ -25,6 +25,7 @@ public:
     {
         eVIF_Marked = 1,
         eVIF_ApproxSize,    // size is an approximation only
+        eVIF_SizeCalculated,
         eVIF_Count
     };
 
@@ -32,7 +33,7 @@ public:
     CViewItem();
     virtual ~CViewItem();
 
-    virtual bool IsOfKind( EViewItemType type ) const { return false; }
+    virtual bool IsOfKind( EViewItemType ) const { return false; }
 
     virtual void dbgOutputInfo();
 

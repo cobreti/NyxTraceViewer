@@ -5,9 +5,7 @@
 #include <QTimer>
 #include <list>
 
-#include "DocTraceDataRepository.hpp"
 #include "RepositoryObserver.hpp"
-//#include "View/ViewItemsSettings.hpp"
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
 
@@ -37,14 +35,10 @@ public:
 	virtual void RemoveRepositorySrc( TraceClientCore::CTracesPool& rSrcPool );
 	virtual bool Contains( const TraceClientCore::CTracesPool& rSrcPool );
 
-    CDocTraceDataRepository& Repository() { return *m_pRepository; }
-
     void OnNewTraceItems(CViewItems* pViewItems);
 
 	const QString& Name() const { return m_Name; }
 	QString& Name() { return m_Name; }
-
-//    CViewItemsSettings& ViewItemsSettings() { return m_ViewItemsSettings; }
 
     CViewSettings&          DefaultViewSettings()              { return m_DefaultViewSettings; }
     const CViewSettings&    DefaultViewSettings() const        { return m_DefaultViewSettings; }
@@ -67,12 +61,10 @@ protected:
 protected:
 
     TracesViewList                              m_Views;
-    CDocTraceDataRepository*                    m_pRepository;
     TraceClientCore::CRepositoryObserver        m_RepositoryObserver;
     QWidget*                                    m_pDefaultViewsParentWindow;
     LinksList                                   m_UsedLinks;
     QString                                     m_Name;
-//    CViewItemsSettings                          m_ViewItemsSettings;
     CViewSettings                               m_DefaultViewSettings;
 
     CViewItems                                  m_ViewItems;

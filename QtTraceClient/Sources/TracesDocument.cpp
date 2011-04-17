@@ -10,13 +10,10 @@
  *
  */
 CTracesDocument::CTracesDocument(QWidget* pDefaultViewsParentWindow, const QString& name) :
-m_pRepository(NULL),
 m_pDefaultViewsParentWindow(pDefaultViewsParentWindow),
 m_Name(name),
 m_RefreshTimer(this)
 {
-	m_pRepository = new CDocTraceDataRepository();
-
     connect(this, SIGNAL(sig_OnNewTraceItems(CViewItems*)), this, SLOT(OnNewTraceItemsHandler(CViewItems*)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(OnRefreshTimer()));
 
@@ -29,7 +26,6 @@ m_RefreshTimer(this)
  */
 CTracesDocument::~CTracesDocument()
 {
-	delete m_pRepository;
     Nyx::CTraceStream(0x0).Write(L"CTracesDocument::~CTracesDocument");
 }
 
@@ -81,9 +77,6 @@ void CTracesDocument::Init()
     DefaultViewSettings().ColumnsSettings().Set( eVCI_Data, pColSettings );
 
     DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);
-//    ViewItemsSettings().GetDefault()->SetFont( pFont );
-
-//    ViewItemsSettings().GetDefault()->SetMargins( CViewItemMargins(5, 0, 5, 0)  );
 
     pSetting = new CViewItemSettings();
     pSetting->SetFont( new QFont("Courier New", 10 ) );
@@ -130,18 +123,14 @@ void CTracesDocument::Destroy()
 
 	Nyx::CTraceStream(0x0).Write(L"before clearing the repository");
 
-	{
-		CDocTraceDataRepository::Accessor		ReposAccess(*m_pRepository);
-
-		ReposAccess->Clear();
-	}
-
 	while ( !m_Views.empty() )
 	{
 		m_Views.front()->close();
 		delete m_Views.front();
 		m_Views.pop_front();
 	}
+
+    m_ViewItems.Clear();
 }
 
 
@@ -156,8 +145,6 @@ CTracesView* CTracesDocument::CreateView(QWidget* pParent)
     m_Views.push_back(pView);
     pView->setParent(NULL/*m_pDefaultViewsParentWindow*/, Qt::Window);
     //pView->show();
-
-//    OnNewTraceItems();
 
     return pView;
 }
@@ -184,7 +171,7 @@ void CTracesDocument::GetViews( CTracesDocument::TracesViewList& ViewsList ) con
 void CTracesDocument::AddRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
 {
     TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
-    CTraceDataRepositoryToDocumentLink*                         pLink = new CTraceDataRepositoryToDocumentLink(rSrcPool, rSrcPool.Repository(), *m_pRepository);
+    CTraceDataRepositoryToDocumentLink*                         pLink = new CTraceDataRepositoryToDocumentLink(rSrcPool);
 
     ROAccess->Links().Add(pLink);
 

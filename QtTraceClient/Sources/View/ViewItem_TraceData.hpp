@@ -17,6 +17,8 @@ public:
     CViewItem_TraceData(Nyx::CMemoryPool* pMemPool, const TraceClientCore::CTraceData* pTraceData);
     virtual ~CViewItem_TraceData();
 
+    void operator delete(void*);
+
     virtual bool IsOfKind( EViewItemType type ) const { return type == eViewItem_TraceData; }
 
     virtual void dbgOutputInfo();

@@ -50,7 +50,7 @@ void CViewItemTextPainter::EvaluateSize(CViewSettings &settings, CViewItem &item
 /**
  *
  */
-void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem &item, const QString &text)
+void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem&, const QString &text)
 {
     const CViewItemSettings*    pSetting = settings.ViewItemsSettings()[Id()];
     const CViewColumnSettings&  rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];

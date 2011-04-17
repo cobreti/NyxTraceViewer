@@ -23,10 +23,8 @@
 CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     QWidget(parent),
     m_rDoc(rDoc),
-    m_hDocLastUpdatedPos(NULL),
     m_MaxLineSize(1.0, 1.0),
     ui( new Ui::CTracesView() ),
-//    m_RefreshTimer(this),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
     m_pHeader(NULL)
@@ -36,11 +34,9 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
     //this->setMinimumSize(500, 500);
 
-//    connect( &m_rDoc, SIGNAL(sig_OnNewTraceItems()), this, SLOT(OnNewTraceItems()));
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
-//    connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(OnRefreshTimer()));
 
 	m_Margins.setLeft(25.0);
 	m_Margins.setRight(25.0);
@@ -51,20 +47,12 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
 
     if ( Doc().ViewItems().ItemsCount() > 0 )
         m_TopPos = Doc().ViewItems().begin();
-
-//    m_RefreshTimer.start(1000);
 }
 
 
 CTracesView::~CTracesView()
 {
     delete m_pHeader;
-
-//    m_RefreshTimer.stop();
-
-    CDocTraceDataRepository::ConstAccessor            ReposAccess(m_rDoc.Repository());
-
-    ReposAccess->ReleaseIterator(m_hDocLastUpdatedPos);
 }
 
 
@@ -127,63 +115,6 @@ void CTracesView::RefreshDisplay()
 }
 
 
-void CTracesView::OnNewTraceItems()
-{
-//    //Nyx::CTraceStream(0x0).Write(L"CTracesView::OnNewTraceItems");
-
-//    bool                                            bChanges = false;
-//    IDocTraceDataRepository::IteratorHandle         hNewEndPos;
-//    CDocTraceDataRepository::ConstAccessor          ReposAccess(m_rDoc.Repository());
-//    const CDocTraceData*                            pDocTrace = NULL;
-////    bool                                            bEndPos = ui->m_VertScrollbar->value() == ui->m_VertScrollbar->maximum();
-
-//    if ( ReposAccess->TracesCount() == 0 )
-//        return;
-    
-//    Nyx::CTraceStream(0x0).Write(L"Doc Data Repository items count : %i", ReposAccess->TracesCount() );
-
-//    hNewEndPos = ReposAccess->AllocIterator();
-//    ReposAccess->GetTailPos(hNewEndPos);
-//    ReposAccess->DecrIterator(hNewEndPos);
-
-//    if ( NULL == m_hDocLastUpdatedPos )
-//    {
-//        m_hDocLastUpdatedPos = ReposAccess->AllocIterator();
-//        ReposAccess->GetHeadPos(m_hDocLastUpdatedPos);
-//        bChanges = true;
-//    }
-//    else
-//    {
-//        bChanges = !ReposAccess->AreEqual(m_hDocLastUpdatedPos, hNewEndPos);
-//        if ( bChanges )
-//            ReposAccess->IncrIterator(m_hDocLastUpdatedPos);
-//    }
-
-//    if ( bChanges )
-//    {
-//        while ( !ReposAccess->AreEqual(m_hDocLastUpdatedPos, hNewEndPos) )
-//        {
-//            pDocTrace = ReposAccess->Get(m_hDocLastUpdatedPos);
-
-//            AddTrace( pDocTrace );
-
-//            ReposAccess->IncrIterator(m_hDocLastUpdatedPos);
-//        }
-
-//        pDocTrace = ReposAccess->Get(m_hDocLastUpdatedPos);
-
-//        AddTrace( pDocTrace );
-//    }
-
-//    ReposAccess->ReleaseIterator(hNewEndPos);
-
-//    if ( !m_TopPos.IsValid() )
-//        m_TopPos = Doc().ViewItems().begin();
-
-//    m_bViewDirty = true;
-}
-
-
 void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
@@ -200,26 +131,6 @@ void CTracesView::OnHorzSliderPosChanged(int value)
     m_pHeader->SetHorzOffset(value);
 
     update();
-}
-
-
-void CTracesView::OnRefreshTimer()
-{
-//    if (m_bViewDirty && this->isVisible() )
-//    {
-//        if ( UpdateVisibleLines() )
-//            UpdateScrollbarRange(ClientRect());
-
-//        if ( m_bKeepAtEnd )
-//        {
-//            ui->m_VertScrollbar->setValue( ui->m_VertScrollbar->maximum() );
-//            m_TopPos.MoveTo( ui->m_VertScrollbar->value() );
-//        }
-
-//        update();
-
-//        m_bViewDirty = false;
-//    }
 }
 
 
@@ -244,7 +155,7 @@ void CTracesView::resizeEvent(QResizeEvent *event)
 }
 
 
-void CTracesView::paintEvent(QPaintEvent *event)
+void CTracesView::paintEvent(QPaintEvent*)
 {
     if ( Doc().ViewItems().ItemsCount() == 0 )
         return;
@@ -290,7 +201,7 @@ void CTracesView::closeEvent(QCloseEvent* event)
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
     int nScrollHeight = Nyx::Max((int)(Doc().ViewItems().GetSize().height()) - rcClient.height() + (int)Doc().ViewItems().GetLastLineSize().height() + ui->m_HorzScrollbar->height(), 0);
-    int nScrollWidth = Nyx::Max((int)(/*m_Items.GetSize().width()*/m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
+    int nScrollWidth = Nyx::Max((int)(m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
 
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
@@ -418,25 +329,6 @@ void CTracesView::InitSettings()
 }
 
 
-void CTracesView::AddTrace( const CDocTraceData* pDocTrace )
-{
-//    const TraceClientCore::CTraceData*      pTraceData = pDocTrace->TraceData();
-//    Nyx::CMemoryPool*                       pMemPool = pTraceData->MemoryPool();
-
-//    CViewItem_TraceData*    pItem = new (pMemPool)CViewItem_TraceData(pMemPool, pTraceData);
-
-//    pItem->Painters().Add( CViewItemBackgroundPainter::Instance() );
-//    pItem->Painters().Add( CViewItemModuleNamePainter::Instance() );
-//    pItem->Painters().Add( CViewItemTickCountPainter::Instance() );
-//    pItem->Painters().Add( CViewItemThreadIdPainter::Instance() );
-//    pItem->Painters().Add( CViewItemDataPainter::Instance() );
-//    pItem->SetFlag( CViewItem::eVIF_ApproxSize );
-////    pItem->SetSize( m_MaxLineSize );
-//    //pItem->EvaluateSize(Settings());
-//    m_Items.Add(pItem);
-}
-
-
 /**
  *
  */
@@ -479,7 +371,7 @@ bool CTracesView::UpdateVisibleLines()
 
     drawstate.TextPos().ry() = pos.Y() - ui->m_VertScrollbar->value();
 
-    while ( pos.IsValid() && drawstate.TextPos().y() < ViewHeight )
+    while ( pos.IsValid() && !(drawstate.TextPos().y() > ViewHeight+20) )
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
@@ -489,7 +381,7 @@ bool CTracesView::UpdateVisibleLines()
         {
             Doc().ViewItems().RemoveFromClientSize(pItem);
 
-            pItem->EvaluateSize(Doc().DefaultViewSettings()/*Settings()*/);
+            pItem->EvaluateSize(Doc().DefaultViewSettings());
 
             if (pItem->GetSize().width() > m_MaxLineSize.width() )
                 m_MaxLineSize.setWidth(pItem->GetSize().width());

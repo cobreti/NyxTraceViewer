@@ -26,9 +26,7 @@ namespace TraceClientCore
 	public:
 		CTraceData(Nyx::CMemoryPool* pMemPool);
 		virtual ~CTraceData();
-		
-		//const CTraceData& operator = (const CTraceData& tracedata);
-		
+				
 		const Nyx::CMemPoolWString& ThreadId() const		{ return m_ThreadId; }
 		Nyx::CMemPoolWString& ThreadId()					{ return m_ThreadId; }
 		
