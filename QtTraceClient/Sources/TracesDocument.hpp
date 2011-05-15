@@ -8,6 +8,8 @@
 #include "RepositoryObserver.hpp"
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
+#include "TracesPool.hpp"
+#include "Document/DocRepositoryObserver.hpp"
 
 class CTracesView;
 class CTraceDataRepositoryToDocumentLink;
@@ -61,7 +63,7 @@ protected:
 protected:
 
     TracesViewList                              m_Views;
-    TraceClientCore::CRepositoryObserver        m_RepositoryObserver;
+    //TraceClientCore::CRepositoryObserver        m_RepositoryObserver;
     QWidget*                                    m_pDefaultViewsParentWindow;
     LinksList                                   m_UsedLinks;
     QString                                     m_Name;
@@ -69,6 +71,7 @@ protected:
 
     CViewItems                                  m_ViewItems;
     QTimer                                      m_RefreshTimer;
+    CDocRepositoryObserver                      m_RepositoryObserver;
 };
 
 #endif // TRACESREPOSITORYDOC_HPP

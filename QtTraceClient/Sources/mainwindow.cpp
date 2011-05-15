@@ -12,6 +12,7 @@
 #include "MainWindow/PipesMgntPage.hpp"
 #include "MainWindow/ViewPage.hpp"
 #include "PipeTraceFeeder.hpp"
+#include "PoolsUpdateClock.hpp"
 
 #include <QCloseEvent>
 #include <QDesktopWidget>
@@ -48,6 +49,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     TraceClientCore::CModule&                   rModule = TraceClientCore::CModule::Instance();
     TraceClientCore::CTracesPoolRef             refTracesPool = rModule.TracesPools()[L"QtDefault"];
+
+    rModule.PoolsUpdateClock().Start();
 
     //m_pDebugPanel = new CDebugPanel(this);
     //m_pDebugPanel->setParent(NULL, Qt::Window);
@@ -148,7 +151,9 @@ void CMainWindow::changeEvent(QEvent *e)
  */
 void CMainWindow::closeEvent(QCloseEvent* e)
 {
-	m_Documents.Clear();
+    TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
+
+    m_Documents.Clear();
 
 	e->accept();
 }

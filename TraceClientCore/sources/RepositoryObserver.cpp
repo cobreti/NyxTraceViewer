@@ -1,86 +1,68 @@
 #include "RepositoryObserver.hpp"
-#include "RepositoryObserverThreadProc.hpp"
+//#include "RepositoryObserverThreadProc.hpp"
+#include "DataStruct/TracesCollection.hpp"
 
-
-/**
- *
- */
-TraceClientCore::CRepositoryObserver::CRepositoryObserver() :
-m_bStopping(false)
+namespace TraceClientCore
 {
-}
-
-
-/**
- *
- */
-TraceClientCore::CRepositoryObserver::~CRepositoryObserver()
-{
-	Nyx::CTraceStream(0x0).Write(L"CRepositoryObserver::~CRepositoryObserver");
-    //Stop();
-}
-
-
-/**
- *
- */
-void TraceClientCore::CRepositoryObserver::Start()
-{
-    m_refThread = Nyx::CThread::Alloc();
-    m_refThread->Start( new TraceClientCore::CRepositoryObserverThreadProc(*this) );
-}
-
-
-/**
- *
- */
-void TraceClientCore::CRepositoryObserver::Stop()
-{
-	m_bStopping = true;
-	m_RepositoryLinks.CancelUpdate();
-	if ( m_refThread.Valid() )
-	{
-		m_refThread->Stop();
-		m_refThread = NULL;
-	}
-	m_bStopping = false;
-
-	Nyx::CTraceStream(0x0).Write(L"CRepositoryObserver::Stop - ending");
-}
-
-
-/**
- *
- */
-void TraceClientCore::CRepositoryObserver::ProcessCheck()
-{
-    CTraceInserter* pTraceInserter = m_refNotificationsHandler->OnBeginCheckUpdate();
-    
-    if ( Links().Update(pTraceInserter) && m_refNotificationsHandler.Valid() )
+    /**
+     *
+     */
+    CRepositoryObserver::CRepositoryObserver() :
+    m_UpdatesCounter(0)
     {
-		m_refNotificationsHandler->OnNewItems();
     }
-    
-    m_refNotificationsHandler->OnEndCheckUpdate();
+
+
+    /**
+     *
+     */
+    CRepositoryObserver::~CRepositoryObserver()
+    {
+	    Nyx::CTraceStream(0x0).Write(L"CRepositoryObserver::~CRepositoryObserver");
+    }
+
+
+    /**
+     *
+     */
+    void CRepositoryObserver::BeginUpdate()
+    {
+        if ( m_UpdatesCounter == 0 )
+            OnFirstBeginUpdate();
+
+        ++ m_UpdatesCounter;
+    }
+
+
+    /**
+     *
+     */
+    void CRepositoryObserver::EndUpdate()
+    {
+        if ( --m_UpdatesCounter == 0 )
+            OnFinalEndUpdate();
+    }
+
+    /**
+     *
+     */
+    void CRepositoryObserver::Insert( CTraceData* pTraceData )
+    {
+    }
+
+
+    /**
+     *
+     */
+    void CRepositoryObserver::OnFirstBeginUpdate()
+    {
+    }
+
+
+    /**
+     *
+     */
+    void CRepositoryObserver::OnFinalEndUpdate()
+    {
+    }
 }
-
-
-/**
- *
- */
-TraceClientCore::CRepositoryObserverNotificationsHandlerRef& TraceClientCore::CRepositoryObserver::NotificationsHandler()
-{
-	return m_refNotificationsHandler;
-}
-
-
-/**
- *
- */
-TraceClientCore::CRepositoryObserverNotificationsHandlerRef TraceClientCore::CRepositoryObserver::NotificationsHandler() const
-{
-	return m_refNotificationsHandler;
-}
-
-
-

@@ -23,7 +23,7 @@ public:
     virtual size_t ItemsCount() const;
     virtual const QSizeF& GetSize() const;
     virtual const QSizeF& GetLastLineSize() const;
-    virtual void Clear();
+    virtual void Clear(bool bDeleteItems = true);
 
     const CViewItems& operator += (CViewItems& items);
 

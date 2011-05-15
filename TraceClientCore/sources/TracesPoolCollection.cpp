@@ -60,10 +60,10 @@ void TraceClientCore::CTracesPoolCollection::Clear()
 		CTracesPoolRef		refPool = it->second;
 		m_TracesPools.erase(it);
 
-		{
-			CTraceDataRepository::Accessor			ReposAccess(refPool->Repository());
-			ReposAccess->Clear();
-		}
+		//{
+		//	CTraceDataRepository::Accessor			ReposAccess(refPool->Repository());
+		//	ReposAccess->Clear();
+		//}
 
 	}
 }

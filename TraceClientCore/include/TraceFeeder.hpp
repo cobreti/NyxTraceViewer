@@ -17,7 +17,7 @@ namespace TraceClientCore
 	class CTraceFeeder : public Nyx::CRefCount_Impl<>
 	{
 	public:
-		CTraceFeeder( CTracesPool* pOwnerPool, CTraceInserter* pTraceInserter );
+		CTraceFeeder( CTracesPool* pOwnerPool );
 		virtual ~CTraceFeeder();
 
 		virtual void Start() = 0;
@@ -26,15 +26,15 @@ namespace TraceClientCore
 
 	protected:
 	
-		virtual void SetTraceInserter( CTraceInserter* pTraceInserter );		
-		CTraceInserter* TraceInserter() const	{ return m_pTraceInserter; }
+		//virtual void SetTraceInserter( CTraceInserter* pTraceInserter );		
+		//CTraceInserter* TraceInserter() const	{ return m_pTraceInserter; }
 
         virtual void SetOwnerPool( CTracesPool* pOwnerPool );
         virtual CTracesPool* GetOwnerPool() const       { return m_pOwnerPool; }
 		
 	protected:
 	
-		CTraceInserter*		m_pTraceInserter;
+		//CTraceInserter*		m_pTraceInserter;
         CTracesPool*        m_pOwnerPool;
 	};
 }

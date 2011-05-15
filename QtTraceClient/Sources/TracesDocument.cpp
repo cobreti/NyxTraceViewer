@@ -1,7 +1,7 @@
 #include "TracesDocument.hpp"
 #include "TracesView.h"
 
-#include "TraceDataRepositoryToDocumentLink.hpp"
+//#include "TraceDataRepositoryToDocumentLink.hpp"
 #include "DocObserverNotificationsHandler.hpp"
 #include "TracesPool.hpp"
 #include "View/ViewColumnSettings.hpp"
@@ -12,7 +12,8 @@
 CTracesDocument::CTracesDocument(QWidget* pDefaultViewsParentWindow, const QString& name) :
 m_pDefaultViewsParentWindow(pDefaultViewsParentWindow),
 m_Name(name),
-m_RefreshTimer(this)
+m_RefreshTimer(this),
+m_RepositoryObserver(*this)
 {
     connect(this, SIGNAL(sig_OnNewTraceItems(CViewItems*)), this, SLOT(OnNewTraceItemsHandler(CViewItems*)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(OnRefreshTimer()));
@@ -97,10 +98,10 @@ void CTracesDocument::Init()
     pSetting->SetFont( new QFont("Courier New", 9, 2) );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_Header, pSetting );
 
-    TraceClientCore::CRepositoryObserver::Accessor       ROAccess(m_RepositoryObserver);
+ //   TraceClientCore::CRepositoryObserver::Accessor       ROAccess(m_RepositoryObserver);
 
-	ROAccess->NotificationsHandler() = new CDocObserverNotificationsHandler(*this);
-    ROAccess->Start();
+	//ROAccess->NotificationsHandler() = new CDocObserverNotificationsHandler(*this);
+ //   ROAccess->Start();
 }
 
 
@@ -111,20 +112,20 @@ void CTracesDocument::Destroy()
 {
     m_RefreshTimer.stop();
 
-	{
-		TraceClientCore::CRepositoryObserver::Accessor		ROAccess(m_RepositoryObserver);
+	//{
+	//	TraceClientCore::CRepositoryObserver::Accessor		ROAccess(m_RepositoryObserver);
 
-		ROAccess->Stop();
-		ROAccess->NotificationsHandler() = NULL;
+	//	ROAccess->Stop();
+	//	ROAccess->NotificationsHandler() = NULL;
 
-		while ( !m_UsedLinks.empty() )
-		{
-			TraceClientCore::CTraceDataRepositoryLinkBaseRef	refLink = m_UsedLinks.front();
-			ROAccess->Links().Remove( refLink );
-			m_UsedLinks.pop_front();
-		}
+	//	while ( !m_UsedLinks.empty() )
+	//	{
+	//		TraceClientCore::CTraceDataRepositoryLinkBaseRef	refLink = m_UsedLinks.front();
+	//		ROAccess->Links().Remove( refLink );
+	//		m_UsedLinks.pop_front();
+	//	}
 
-	}
+	//}
 
 	Nyx::CTraceStream(0x0).Write(L"before clearing the repository");
 
@@ -135,7 +136,7 @@ void CTracesDocument::Destroy()
 		m_Views.pop_front();
 	}
 
-    m_ViewItems.Clear();
+    m_ViewItems.Clear(false);
 }
 
 
@@ -175,12 +176,13 @@ void CTracesDocument::GetViews( CTracesDocument::TracesViewList& ViewsList ) con
  */
 void CTracesDocument::AddRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
 {
-    TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
-    CTraceDataRepositoryToDocumentLink*                         pLink = new CTraceDataRepositoryToDocumentLink(rSrcPool);
+    rSrcPool.Repository().Insert( &m_RepositoryObserver );
+ //   TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
+ //   CTraceDataRepositoryToDocumentLink*                         pLink = new CTraceDataRepositoryToDocumentLink(rSrcPool);
 
-    ROAccess->Links().Add(pLink);
+ //   ROAccess->Links().Add(pLink);
 
-	m_UsedLinks.push_back(pLink);
+	//m_UsedLinks.push_back(pLink);
 }
 
 
@@ -189,11 +191,12 @@ void CTracesDocument::AddRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
  */
 void CTracesDocument::RemoveRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
 {
-    TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
-	TraceClientCore::CTraceDataRepositoryLinkBase*				pLink = ROAccess->Links().GetLinkContains(rSrcPool);
+    rSrcPool.Repository().Remove( &m_RepositoryObserver );
+ //   TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
+	//TraceClientCore::CTraceDataRepositoryLinkBase*				pLink = ROAccess->Links().GetLinkContains(rSrcPool);
 
-	if ( NULL != pLink )
-		ROAccess->Links().Remove(pLink);
+	//if ( NULL != pLink )
+	//	ROAccess->Links().Remove(pLink);
 }
 
 
@@ -202,9 +205,11 @@ void CTracesDocument::RemoveRepositorySrc( TraceClientCore::CTracesPool& rSrcPoo
  */
 bool CTracesDocument::Contains( const TraceClientCore::CTracesPool& rSrcPool )
 {
-    TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
+ //   TraceClientCore::CRepositoryObserver::Accessor              ROAccess(m_RepositoryObserver);
 
-	return ROAccess->Links().Contains(rSrcPool);
+	//return ROAccess->Links().Contains(rSrcPool);
+
+    return rSrcPool.Repository().Contains(&m_RepositoryObserver);
 }
 
 
@@ -231,6 +236,9 @@ void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
         (*pos)->OnNewTraces();
         ++pos;
     }
+
+    pViewItems->Clear(false);
+    delete pViewItems;
 }
 
 

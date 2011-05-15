@@ -23,9 +23,9 @@ namespace TraceClientCore
 		void GetPoolsList( CPoolsList& rList );
 		
 	protected: // protected types
-	
+
 		typedef		std::map<const Nyx::CWString, CTracesPoolRef>		TracesPoolTable;
-		
+
 	protected: // protected members
 	
 		TracesPoolTable			m_TracesPools;

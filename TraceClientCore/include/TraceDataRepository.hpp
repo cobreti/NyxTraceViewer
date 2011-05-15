@@ -2,8 +2,9 @@
 #define _TRACEDATAREPOSITORY_HPP_
 
 #include <Nyx.hpp>
-#include <NyxOpaqueList.hpp>
+//#include <NyxOpaqueList.hpp>
 #include <list>
+#include <map>
 
 #include "TraceData.hpp"
 #include "RepositoryTraceInserter.hpp"
@@ -11,89 +12,61 @@
 
 namespace TraceClientCore
 {
-	/**
+    class CRepositoryObserver;
+
+    typedef     std::list<CTraceData*>      TraceDataList;
+
+    
+    /**
 	 *
 	 */
-	class ITraceDataRepository
-	{
-	public:
-
-		typedef		Nyx::OpaqueListIterator			IteratorHandle;
-
-	public:
-		
-		virtual void Insert(TraceClientCore::CTraceData* pTraceData) = 0;
-		virtual CTraceData* Get( IteratorHandle hIterator ) = 0;
-		virtual CTraceData* Get( IteratorHandle hIterator ) const = 0;
-		virtual size_t TracesCount() const = 0;
-
-		virtual IteratorHandle AllocIterator() = 0;
-		virtual IteratorHandle AllocIterator() const = 0;
-		virtual void ReleaseIterator( IteratorHandle& hIterator ) const = 0;
-		virtual void GetTailPos( IteratorHandle& hIterator ) = 0;
-		virtual void GetTailPos( IteratorHandle& hIterator ) const = 0;
-		virtual void GetHeadPos( IteratorHandle& hIterator ) = 0;
-		virtual void GetHeadPos( IteratorHandle& hIterator ) const = 0;
-		virtual void Clear() = 0;
-		virtual void Copy( IteratorHandle hDst, IteratorHandle hSrc ) const = 0;
-		virtual bool IsTail( IteratorHandle hIterator ) = 0;
-		virtual bool IsTail( IteratorHandle hIterator ) const = 0;
-		virtual bool AreEqual( IteratorHandle hPos1, IteratorHandle hPos2 ) const = 0;
-		virtual bool IncrIterator( IteratorHandle hIterator ) = 0;
-		virtual bool IncrIterator( IteratorHandle hIterator ) const = 0;
-		virtual bool DecrIterator( IteratorHandle hIterator ) = 0;
-		virtual bool DecrIterator( IteratorHandle hIterator ) const = 0;
-	};
-	
-	
-	/**
-	 *
-	 */
-	class CTraceDataRepository :  virtual public Nyx::CMTInterfaceAccess<	TraceClientCore::CTraceDataRepository,
-																			TraceClientCore::ITraceDataRepository >
-	{
-		
+	class CTraceDataRepository
+	{		
 	public: // public methods
 		CTraceDataRepository();
 		virtual ~CTraceDataRepository();
 		
-		CTraceInserter& TraceInserter()		{ return m_TraceInserter; }
-
-	protected: // ITraceDataRepository methods
-
 		virtual void Insert(TraceClientCore::CTraceData* pTraceData);
-		virtual CTraceData* Get( IteratorHandle hIterator );
-		virtual CTraceData* Get( IteratorHandle hIterator ) const;
-		virtual size_t TracesCount() const;
+        virtual void Insert(CRepositoryObserver* pObserver);
+        virtual void Remove(CRepositoryObserver* pObserver);
+        virtual bool Contains(CRepositoryObserver* pObserver) const;
 
-		virtual IteratorHandle AllocIterator();
-		virtual IteratorHandle AllocIterator() const;
-		virtual void ReleaseIterator( IteratorHandle& hIterator ) const;
-		virtual void GetTailPos( IteratorHandle& hIterator );
-		virtual void GetTailPos( IteratorHandle& hIterator ) const;
-		virtual void GetHeadPos( IteratorHandle& hIterator );
-		virtual void GetHeadPos( IteratorHandle& hIterator ) const;
-		virtual void Clear();
-		virtual void Copy( IteratorHandle hDst, IteratorHandle hSrc ) const;
-		virtual bool IsTail( IteratorHandle hIterator );
-		virtual bool IsTail( IteratorHandle hIterator ) const;
-		virtual bool AreEqual( IteratorHandle hPos1, IteratorHandle hPos2 ) const;
-		virtual bool IncrIterator( IteratorHandle hIterator );
-		virtual bool IncrIterator( IteratorHandle hIterator ) const;
-		virtual bool DecrIterator( IteratorHandle hIterator );
-		virtual bool DecrIterator( IteratorHandle hIterator ) const;
-
+        virtual void BeginUpdate();
+        virtual void Update();
+        virtual void EndUpdate();
 
 	protected: // protected methods
 	
-//		virtual void OnMTLocking();
-//		virtual void OnMTUnlocking();
+        class XObserverData
+        {
+        public:
+            XObserverData() {};
+            XObserverData(const XObserverData& data) : m_StartPos(data.m_StartPos) {}
+            ~XObserverData() {};
+
+            TraceDataList::const_iterator&      StartPos() { return m_StartPos; }
+
+            const XObserverData& operator = (const XObserverData& data)
+            {
+                m_StartPos = data.m_StartPos;
+                return *this;
+            }
+
+        protected:
+
+            TraceDataList::const_iterator       m_StartPos;
+        };
+
+
+        typedef     std::map<CRepositoryObserver*, XObserverData>           ObserverDataTable;
+
 
 	protected: // protected members
-			
-		Nyx::TOpaqueListRef<TraceClientCore::CTraceData*>		m_refTracesList;
-		
-		CRepositoryTraceInserter								m_TraceInserter;
+
+        TraceDataList                       m_Traces;
+        ObserverDataTable                   m_Observers;
+        ObserverDataTable                   m_ObserversToUpdate; // map of observers used in the update process
+        Nyx::CMutexRef                      m_refObserversMutex;
 	};	
 }
 

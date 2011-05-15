@@ -11,7 +11,7 @@ namespace TraceClientCore
 	class CDbgTracesFeeder : public CTraceFeeder
 	{
 	public:
-		CDbgTracesFeeder( CTracesPool* pOwnerPool, CTraceInserter* pTraceInserter );
+		CDbgTracesFeeder( CTracesPool* pOwnerPool );
 		virtual ~CDbgTracesFeeder();
 
 		virtual void Start();

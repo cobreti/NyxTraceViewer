@@ -25,12 +25,13 @@ namespace TraceClientCore
      */
     void CRepositoryTraceInserter::Insert( CTraceData* pTraceData )
     {
-        CTraceDataRepository::Accessor		RepoAccess(m_rRepository);
-        
-        if ( RepoAccess )
-        {
-            RepoAccess->Insert(pTraceData);
-        }
+        m_rRepository.Insert(pTraceData);
+        //CTraceDataRepository::Accessor		RepoAccess(m_rRepository);
+        //
+        //if ( RepoAccess )
+        //{
+        //    RepoAccess->Insert(pTraceData);
+        //}
     }
 
 }

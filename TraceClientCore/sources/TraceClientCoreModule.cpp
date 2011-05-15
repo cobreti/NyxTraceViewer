@@ -1,36 +1,42 @@
 #include <Nyx.hpp>
 
 #include "TraceClientCoreModule.hpp"
+#include "PoolsUpdateClock.hpp"
 
-
-/**
- *
- */
-TraceClientCore::CModule* TraceClientCore::CModule::s_pInstance = NULL;
-
-
-/**
- *
- */
-TraceClientCore::CModule& TraceClientCore::CModule::Instance()
+namespace TraceClientCore
 {
-	return *s_pInstance;
-}
+    /**
+     *
+     */
+    CModule* CModule::s_pInstance = NULL;
 
 
-/**
- *
- */
-TraceClientCore::CModule::CModule()
-{
-	s_pInstance = this;
-}
+    /**
+     *
+     */
+   CModule& CModule::Instance()
+    {
+	    return *s_pInstance;
+    }
 
 
-/**
- *
- */
-TraceClientCore::CModule::~CModule()
-{
-	s_pInstance = NULL;
+    /**
+     *
+     */
+    CModule::CModule() :
+    m_pPoolsUpdateClock(NULL)
+    {
+	    s_pInstance = this;
+        m_pPoolsUpdateClock = new CPoolsUpdateClock();
+    }
+
+
+    /**
+     *
+     */
+    CModule::~CModule()
+    {
+        delete m_pPoolsUpdateClock;
+	    s_pInstance = NULL;
+    }
 }

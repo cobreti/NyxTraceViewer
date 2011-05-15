@@ -4,6 +4,7 @@
 #include "TraceClientCoreModule.hpp"
 #include "PipeTraceFeeder.hpp"
 #include "TracesDocument.hpp"
+#include "PoolsUpdateClock.hpp"
 
 
 /**
@@ -67,8 +68,9 @@ void CPipesMgntPage::OnNewPool()
 
     refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), L"new pool");
 	rModule.TracesPools().Add(refPool);
+    rModule.PoolsUpdateClock().Insert(refPool);
 
-    pPipeTraceFeeder = new TraceClientCore::CPipeTraceFeeder( refPool, &refPool->Repository().TraceInserter());
+    pPipeTraceFeeder = new TraceClientCore::CPipeTraceFeeder( refPool);
 	refPool->Feeder() = pPipeTraceFeeder;
 
 	pItem->SetPool(refPool);

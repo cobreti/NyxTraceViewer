@@ -5,6 +5,8 @@
 
 namespace TraceClientCore
 {
+    class CPoolsUpdateClock;
+
 	class CModule
 	{
 	public:
@@ -14,12 +16,15 @@ namespace TraceClientCore
 	public:
 		CModule();
 		virtual ~CModule();
+
+		CTracesPoolCollection&  TracesPools()			{ return m_TracesPools; }
 		
-		CTracesPoolCollection& TracesPools()			{ return m_TracesPools; }
-		
+        CPoolsUpdateClock&      PoolsUpdateClock()      { return *m_pPoolsUpdateClock; }
+
 	protected:
 	
 		CTracesPoolCollection				m_TracesPools;
+        CPoolsUpdateClock*                  m_pPoolsUpdateClock;
 	
 		static CModule*						s_pInstance;
 	};

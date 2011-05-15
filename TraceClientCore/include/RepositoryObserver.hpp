@@ -2,52 +2,32 @@
 #define REPOSITORYOBSERVER_HPP
 
 #include <Nyx.hpp>
-#include "TraceDataRepositoryLinkCollection.hpp"
-#include "RepositoryObserverNotificationsHandler.hpp"
 
 namespace TraceClientCore
 {
-    /**
-     *
-     */
-	class IRepositoryObserver
-	{
-	public:
-		virtual void Start() = 0;
-		virtual void Stop() = 0;
-		virtual TraceClientCore::CTraceDataRepositoryLinkCollection& Links() = 0;
-		virtual void ProcessCheck() = 0;
-		virtual CRepositoryObserverNotificationsHandlerRef& NotificationsHandler() = 0;
-		virtual CRepositoryObserverNotificationsHandlerRef NotificationsHandler() const = 0;
-	};
-
+    class CTraceData;
 
     /**
      *
      */
-	class CRepositoryObserver : public Nyx::CMTInterfaceAccess<CRepositoryObserver, IRepositoryObserver>
+	class CRepositoryObserver
 	{
 	public:
 		CRepositoryObserver();
-		~CRepositoryObserver();
+		virtual ~CRepositoryObserver();
 
-	protected: // IRepositoryObserver methods
-
-		virtual void Start();
-		virtual void Stop();
-		virtual TraceClientCore::CTraceDataRepositoryLinkCollection& Links()    { return m_RepositoryLinks; }
-		virtual void ProcessCheck();
-		virtual CRepositoryObserverNotificationsHandlerRef& NotificationsHandler();
-		virtual CRepositoryObserverNotificationsHandlerRef NotificationsHandler() const;
-
-		virtual bool MTCancelLock() const { return m_bStopping; }
+        virtual void BeginUpdate();
+        virtual void EndUpdate();
+        virtual void Insert( CTraceData* pTraceData );
 
 	protected:
 
-		Nyx::CThreadRef                                         m_refThread;
-		TraceClientCore::CTraceDataRepositoryLinkCollection     m_RepositoryLinks;
-		CRepositoryObserverNotificationsHandlerRef				m_refNotificationsHandler;
-		bool													m_bStopping;
+        virtual void OnFirstBeginUpdate();
+        virtual void OnFinalEndUpdate();
+
+    protected:
+
+        size_t      m_UpdatesCounter;
 	};
 }
 

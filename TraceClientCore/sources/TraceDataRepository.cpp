@@ -1,5 +1,6 @@
 #include "TraceDataRepository.hpp"
 #include "TraceInserter.hpp"
+#include "RepositoryObserver.hpp"
 
 
 /********************************************************/
@@ -7,201 +8,170 @@
 /********************************************************/
 
 
-/**
- *
- */
-TraceClientCore::CTraceDataRepository::CTraceDataRepository() :
-m_TraceInserter(*this)
+namespace TraceClientCore
 {
-}
+    /**
+     *
+     */
+    CTraceDataRepository::CTraceDataRepository()
+    {
+        m_refObserversMutex = Nyx::CMutex::Alloc();
+    }
 
 
-/**
- *
- */
-TraceClientCore::CTraceDataRepository::~CTraceDataRepository()
-{
-}
+    /**
+     *
+     */
+    CTraceDataRepository::~CTraceDataRepository()
+    {
+    }
 
 
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::Insert(TraceClientCore::CTraceData* pTraceData)
-{
-	m_refTracesList.InsertTail( pTraceData );
-}
+    /**
+     *
+     */
+    void CTraceDataRepository::Insert(TraceClientCore::CTraceData* pTraceData)
+    {
+        m_Traces.push_back(pTraceData);
+    }
 
 
-/**
- *
- */
-TraceClientCore::CTraceData* TraceClientCore::CTraceDataRepository::Get( IteratorHandle hIterator )
-{
-	return m_refTracesList.Get(hIterator);
-}
+    /**
+     *
+     */
+    void CTraceDataRepository::Insert(CRepositoryObserver* pObserver)
+    {
+        XObserverData       ObserverData;
+
+        ObserverData.StartPos() = m_Traces.end();
+
+        Nyx::TLock<Nyx::CMutex>     ObserversLock(m_refObserversMutex, true);
+
+        m_Observers[pObserver] = ObserverData;
+    }
 
 
-/**
- *
- */
-TraceClientCore::CTraceData* TraceClientCore::CTraceDataRepository::Get( IteratorHandle hIterator ) const
-{
-	return m_refTracesList.Get(hIterator);
-}
+    /**
+     *
+     */
+    void CTraceDataRepository::Remove(CRepositoryObserver* pObserver)
+    {
+        Nyx::TLock<Nyx::CMutex>     ObserversLock(m_refObserversMutex, true);
+
+        ObserverDataTable::iterator     pos = m_Observers.find(pObserver);
+        if ( pos != m_Observers.end() )
+            m_Observers.erase(pos);
+    }
 
 
-/**
- *
- */
-size_t TraceClientCore::CTraceDataRepository::TracesCount() const
-{
-	return m_refTracesList->Size();
-}
+    /**
+     *
+     */
+    bool CTraceDataRepository::Contains(CRepositoryObserver* pObserver) const
+    {
+        Nyx::TLock<Nyx::CMutex>     ObserversLock(m_refObserversMutex, true);
+
+        return m_Observers.find(pObserver) != m_Observers.end();
+    }
 
 
-/**
- *
- */
-TraceClientCore::ITraceDataRepository::IteratorHandle TraceClientCore::CTraceDataRepository::AllocIterator()
-{
-	return m_refTracesList->AllocIterator();
-}
+    /**
+     *
+     */
+    void CTraceDataRepository::BeginUpdate()
+    {
+
+        //Nyx::CTraceStream(0x0).Write(L"DataRepository - BeginUpdate");
+
+        {
+            Nyx::TLock<Nyx::CMutex>     ObserversLock(m_refObserversMutex, true);
+            ObserverDataTable::const_iterator       srcPos = m_Observers.begin();
+
+            while ( srcPos != m_Observers.end() )
+            {
+                m_ObserversToUpdate[srcPos->first] = srcPos->second;
+                ++ srcPos;
+            }
+        }
+
+        ObserverDataTable::iterator         ObserverPos = m_ObserversToUpdate.begin();
+        while ( ObserverPos != m_ObserversToUpdate.end() )
+        {
+            ObserverPos->first->BeginUpdate();
+            ++ ObserverPos;
+        }
+    }
 
 
-/**
- *
- */
-TraceClientCore::ITraceDataRepository::IteratorHandle TraceClientCore::CTraceDataRepository::AllocIterator() const
-{
-	return m_refTracesList->AllocIterator();
-}
+    /**
+     *
+     */
+    void CTraceDataRepository::Update()
+    {
+        if ( m_Traces.empty() )
+            return;
+
+        TraceDataList::const_iterator       EndPos = m_Traces.end();
+        ObserverDataTable::iterator         posObserver = m_ObserversToUpdate.begin();
+
+        -- EndPos;
+
+        while ( posObserver != m_ObserversToUpdate.end() )
+        {
+            TraceDataList::const_iterator   pos = posObserver->second.StartPos();
+
+            if ( pos != EndPos )
+            {
+                if ( pos == m_Traces.end() )
+                    pos = m_Traces.begin();
+                else
+                    ++ pos;
+
+                while ( pos != EndPos )
+                {
+                    posObserver->first->Insert(*pos);
+                    ++ pos;
+                }
+
+                posObserver->first->Insert(*pos);
+
+                posObserver->second.StartPos() = EndPos;
+            }
+
+            ++ posObserver;
+        }
+
+        //Nyx::CTraceStream(0x0).Write(L"DataRepository - Update");
+    }
 
 
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::ReleaseIterator( TraceClientCore::ITraceDataRepository::IteratorHandle& hIterator ) const
-{
-	m_refTracesList->ReleaseIterator(hIterator);
-}
+    /**
+     *
+     */
+    void CTraceDataRepository::EndUpdate()
+    {
+        //Nyx::CTraceStream(0x0).Write(L"DataRepository - EndUpdate");
+
+        ObserverDataTable::iterator         ObserverPos = m_ObserversToUpdate.begin();
+        while ( ObserverPos != m_ObserversToUpdate.end() )
+        {
+            ObserverPos->first->EndUpdate();
+            ++ ObserverPos;
+        }
 
 
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::GetTailPos( TraceClientCore::ITraceDataRepository::IteratorHandle& hIterator )
-{
-	m_refTracesList->GetTailPos(hIterator);
-}
+        Nyx::TLock<Nyx::CMutex>         ObserversLock(m_refObserversMutex, true);
 
+        while ( !m_ObserversToUpdate.empty() )
+        {
+            ObserverDataTable::iterator         pos = m_ObserversToUpdate.begin();
+            ObserverDataTable::iterator         posObserver = m_Observers.find(pos->first);
 
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::GetTailPos( TraceClientCore::ITraceDataRepository::IteratorHandle& hIterator ) const
-{
-	m_refTracesList->GetTailPos(hIterator);
-}
+            if ( posObserver != m_Observers.end() )
+                m_Observers[pos->first] = pos->second;
 
+            m_ObserversToUpdate.erase( pos );
+        }
+    }
 
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::GetHeadPos( TraceClientCore::ITraceDataRepository::IteratorHandle& hIterator )
-{
-	m_refTracesList->GetHeadPos(hIterator);
-}
-
-
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::GetHeadPos( TraceClientCore::ITraceDataRepository::IteratorHandle& hIterator ) const
-{
-	m_refTracesList->GetHeadPos(hIterator);
-
-}
-
-
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::Clear()
-{
-	m_refTracesList->Clear();
-}
-
-
-/**
- *
- */
-void TraceClientCore::CTraceDataRepository::Copy(	TraceClientCore::ITraceDataRepository::IteratorHandle hDst, 
-													TraceClientCore::ITraceDataRepository::IteratorHandle hSrc ) const
-{
-	m_refTracesList->CopyIterator( hDst, hSrc );
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::IsTail( TraceClientCore::ITraceDataRepository::IteratorHandle hIterator )
-{
-	return m_refTracesList->IsTail(hIterator);
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::IsTail( TraceClientCore::ITraceDataRepository::IteratorHandle hIterator ) const
-{
-	return m_refTracesList->IsTail(hIterator);
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::AreEqual(	TraceClientCore::ITraceDataRepository::IteratorHandle hPos1, 
-														TraceClientCore::ITraceDataRepository::IteratorHandle hPos2 ) const
-{
-	return m_refTracesList->AreIteratorEqual( hPos1, hPos2 );
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::IncrIterator( IteratorHandle hIterator )
-{
-	return m_refTracesList->IncrementIterator(hIterator);
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::IncrIterator( IteratorHandle hIterator ) const
-{
-	return m_refTracesList->IncrementIterator(hIterator);
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::DecrIterator( IteratorHandle hIterator )
-{
-	return m_refTracesList->DecrementIterator(hIterator);
-}
-
-
-/**
- *
- */
-bool TraceClientCore::CTraceDataRepository::DecrIterator( IteratorHandle hIterator ) const
-{
-	return m_refTracesList->DecrementIterator(hIterator);
 }

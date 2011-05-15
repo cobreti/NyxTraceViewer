@@ -6,8 +6,8 @@ namespace TraceClientCore
     /**
      *
      */
-    CDbgTracesFeeder::CDbgTracesFeeder( CTracesPool* pOwnerPool, CTraceInserter* pTraceInserter ) :
-    CTraceFeeder(pOwnerPool, pTraceInserter)
+    CDbgTracesFeeder::CDbgTracesFeeder( CTracesPool* pOwnerPool ) :
+    CTraceFeeder(pOwnerPool)
     //m_Core(pOwnerPool, pTraceInserter)
     {
     }

@@ -90,14 +90,19 @@ const QSizeF& CViewItems::GetLastLineSize() const
 /**
  *
  */
-void CViewItems::Clear()
+void CViewItems::Clear(bool bDeleteItems /*= true*/)
 {
-    while (!m_Items.empty())
+    if ( bDeleteItems )
     {
-        CViewItem* pItem = m_Items.front();
-        m_Items.pop_front();
-        delete pItem;
+        while (!m_Items.empty())
+        {
+            CViewItem* pItem = m_Items.front();
+            m_Items.pop_front();
+            delete pItem;
+        }
     }
+    else
+        m_Items.clear();
 }
 
 
@@ -106,10 +111,14 @@ void CViewItems::Clear()
  */
 const CViewItems& CViewItems::operator += (CViewItems& items)
 {
-    while ( !items.m_Items.empty() )
+    TViewItemsList::iterator        pos = items.m_Items.begin();
+
+    //while ( !items.m_Items.empty() )
+    while ( pos != items.m_Items.end() )
     {
-        Add( items.m_Items.front() );
-        items.m_Items.pop_front();
+        Add( *pos );
+        //items.m_Items.pop_front();
+        ++ pos;
     }
 
     return *this;

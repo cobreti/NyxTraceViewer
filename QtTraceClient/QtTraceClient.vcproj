@@ -575,19 +575,19 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\Sources\Document\DocRepositoryObserver.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\Document\DocRepositoryObserver.hpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Sources\Document\DocumentsCollection.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\Sources\Document\DocumentsCollection.hpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sources\TraceDataRepositoryToDocumentLink.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sources\TraceDataRepositoryToDocumentLink.hpp"
 					>
 				</File>
 				<File

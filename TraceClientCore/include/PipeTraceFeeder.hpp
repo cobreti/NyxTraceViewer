@@ -11,7 +11,7 @@ namespace TraceClientCore
 								public NyxNet::INxConnectionHandler
 	{
 	public:
-		CPipeTraceFeeder( CTracesPool* pOwnerPool, CTraceInserter* pTraceInserter );
+		CPipeTraceFeeder( CTracesPool* pOwnerPool );
 		virtual ~CPipeTraceFeeder();
 		
 		virtual void Start();

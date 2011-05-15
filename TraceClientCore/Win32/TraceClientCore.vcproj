@@ -179,6 +179,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\sources\PoolsUpdateClock.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\PoolsUpdateClock.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sources\RepositoryObserver.cpp"
 				>
 			</File>
@@ -192,18 +200,6 @@
 			</File>
 			<File
 				RelativePath="..\include\RepositoryObserverNotificationsHandler.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\RepositoryObserverThreadProc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\RepositoryObserverThreadProc.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\RepositoryTraceInserter.cpp"
 				>
 			</File>
 			<File
@@ -228,38 +224,6 @@
 			</File>
 			<File
 				RelativePath="..\include\TraceDataRepository.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\TraceDataRepositoryLink.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\TraceDataRepositoryLink.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\TraceDataRepositoryLinkBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\TraceDataRepositoryLinkBase.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\TraceDataRepositoryLinkCollection.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\TraceDataRepositoryLinkCollection.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\TraceDataRepositoryLinkToDataRepository.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\TraceDataRepositoryLinkToDataRepository.hpp"
 				>
 			</File>
 			<File
@@ -299,6 +263,14 @@
 				</File>
 				<File
 					RelativePath="..\include\DataStruct\PoolsList.hpp"
+					>
+				</File>
+				<File
+					RelativePath="..\include\DataStruct\TracesCollection.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\include\DataStruct\TracesCollection.hpp"
 					>
 				</File>
 			</Filter>

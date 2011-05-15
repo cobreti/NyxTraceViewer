@@ -22,7 +22,7 @@ CDebugPanel::CDebugPanel(QWidget* parent) :
 
     refTracesPool = rModule.TracesPools()[L"QtDefault"];
 
-    pFeeder = new TraceClientCore::CDbgTracesFeeder( refTracesPool, &refTracesPool->Repository().TraceInserter() );
+    pFeeder = new TraceClientCore::CDbgTracesFeeder( refTracesPool );
 
     refTracesPool->Feeder() = pFeeder;
 
@@ -59,38 +59,38 @@ void CDebugPanel::OnInsertTraces()
 
 void CDebugPanel::OnEnumTraces()
 {
-    TraceClientCore::CModule&								rModule = TraceClientCore::CModule::Instance();
-    TraceClientCore::CTracesPoolRef							refTracesPool = rModule.TracesPools()[L"QtDefault"];
-    TraceClientCore::CTraceData*							pTrace = NULL;
-	TraceClientCore::ITraceDataRepository::IteratorHandle	hPos = NULL;
-    TraceClientCore::ITraceDataRepository::IteratorHandle   hEndPos = NULL;
+ //   TraceClientCore::CModule&								rModule = TraceClientCore::CModule::Instance();
+ //   TraceClientCore::CTracesPoolRef							refTracesPool = rModule.TracesPools()[L"QtDefault"];
+ //   TraceClientCore::CTraceData*							pTrace = NULL;
+	//TraceClientCore::ITraceDataRepository::IteratorHandle	hPos = NULL;
+ //   TraceClientCore::ITraceDataRepository::IteratorHandle   hEndPos = NULL;
 
-    TraceClientCore::CTraceDataRepository::Accessor			ReposAccess(refTracesPool->Repository());
+ //   TraceClientCore::CTraceDataRepository::Accessor			ReposAccess(refTracesPool->Repository());
 
-    hPos = ReposAccess->AllocIterator();
-    hEndPos = ReposAccess->AllocIterator();
+ //   hPos = ReposAccess->AllocIterator();
+ //   hEndPos = ReposAccess->AllocIterator();
 
-    ReposAccess->GetHeadPos(hPos);
-    ReposAccess->GetTailPos(hEndPos);
+ //   ReposAccess->GetHeadPos(hPos);
+ //   ReposAccess->GetTailPos(hEndPos);
 
-    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Beginning traces enumeration");
+ //   Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Beginning traces enumeration");
 
-    while ( !ReposAccess->AreEqual(hPos, hEndPos)  )
-    {
-        pTrace = ReposAccess->Get(hPos);
+ //   while ( !ReposAccess->AreEqual(hPos, hEndPos)  )
+ //   {
+ //       pTrace = ReposAccess->Get(hPos);
 
-        Nyx::CTraceStream(0x0)
-                << Nyx::CTF_Text(pTrace->TickCount().c_str()) << Nyx::CTF_Text(L" -- ")
-                << Nyx::CTF_Text(pTrace->ThreadId().c_str()) << Nyx::CTF_Text(L" -- ")
-                << Nyx::CTF_Text(pTrace->Data().c_str());
+ //       Nyx::CTraceStream(0x0)
+ //               << Nyx::CTF_Text(pTrace->TickCount().c_str()) << Nyx::CTF_Text(L" -- ")
+ //               << Nyx::CTF_Text(pTrace->ThreadId().c_str()) << Nyx::CTF_Text(L" -- ")
+ //               << Nyx::CTF_Text(pTrace->Data().c_str());
 
-        ReposAccess->IncrIterator(hPos);
-    }
+ //       ReposAccess->IncrIterator(hPos);
+ //   }
 
-    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Completed traces enumeration");
+ //   Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Completed traces enumeration");
 
-    ReposAccess->ReleaseIterator(hPos);
-    ReposAccess->ReleaseIterator(hEndPos);
+ //   ReposAccess->ReleaseIterator(hPos);
+ //   ReposAccess->ReleaseIterator(hEndPos);
 }
 
 
