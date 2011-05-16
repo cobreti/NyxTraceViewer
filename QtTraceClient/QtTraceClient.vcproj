@@ -545,36 +545,6 @@
 				Name="Document"
 				>
 				<File
-					RelativePath="Sources\DocObserverNotificationsHandler.cpp"
-					>
-				</File>
-				<File
-					RelativePath="Sources\DocObserverNotificationsHandler.hpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Performing Custom Build Step"
-							CommandLine=""
-							AdditionalDependencies=""
-							Outputs=""
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Performing Custom Build Step"
-							CommandLine=""
-							AdditionalDependencies=""
-							Outputs=""
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\Sources\Document\DocRepositoryObserver.cpp"
 					>
 				</File>

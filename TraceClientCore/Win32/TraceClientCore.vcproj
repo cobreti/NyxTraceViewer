@@ -195,14 +195,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\sources\RepositoryObserverNotificationsHandler.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\RepositoryObserverNotificationsHandler.hpp"
-				>
-			</File>
-			<File
 				RelativePath="..\sources\TraceClientCoreModule.cpp"
 				>
 			</File>

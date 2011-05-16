@@ -63,7 +63,6 @@ protected:
 protected:
 
     TracesViewList                              m_Views;
-    //TraceClientCore::CRepositoryObserver        m_RepositoryObserver;
     QWidget*                                    m_pDefaultViewsParentWindow;
     LinksList                                   m_UsedLinks;
     QString                                     m_Name;

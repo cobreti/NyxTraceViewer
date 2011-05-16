@@ -113,11 +113,9 @@ const CViewItems& CViewItems::operator += (CViewItems& items)
 {
     TViewItemsList::iterator        pos = items.m_Items.begin();
 
-    //while ( !items.m_Items.empty() )
     while ( pos != items.m_Items.end() )
     {
         Add( *pos );
-        //items.m_Items.pop_front();
         ++ pos;
     }
 
