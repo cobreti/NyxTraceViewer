@@ -62,4 +62,11 @@ protected:
     FlagsSet                        m_Flags;
 };
 
+
+/**
+ *
+ */
+typedef     Nyx::CMemPoolObj<CViewItem>     ViewItemMemPoolObj;
+
+
 #endif // __VIEWITEM_HPP__

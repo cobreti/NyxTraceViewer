@@ -164,7 +164,7 @@ void CPipesMgntPage::OnPoolSelectionChanged()
 /**
  *
  */
-void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int column )
+void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 {
 	MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(pItem);
 
@@ -181,7 +181,7 @@ void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int column )
 /**
  *
  */
-void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int column )
+void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int  )
 {
 	MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(pItem);
 

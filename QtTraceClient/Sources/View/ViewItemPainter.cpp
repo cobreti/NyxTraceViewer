@@ -33,7 +33,7 @@ CViewItemPainter::~CViewItemPainter()
 /**
  *
  */
-void CViewItemPainter::EvaluateSize(CViewSettings& settings, CViewItem &item)
+void CViewItemPainter::EvaluateSize(CViewSettings&, CViewItem& )
 {
 }
 
@@ -41,7 +41,7 @@ void CViewItemPainter::EvaluateSize(CViewSettings& settings, CViewItem &item)
 /**
  *
  */
-void CViewItemPainter::Display(const CViewSettings& settings, CDrawViewItemState &drawstate, CViewItem &item)
+void CViewItemPainter::Display(const CViewSettings&, CDrawViewItemState&, CViewItem&)
 {
 }
 

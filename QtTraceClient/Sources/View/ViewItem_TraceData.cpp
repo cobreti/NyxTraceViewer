@@ -5,7 +5,7 @@
  *
  */
 CViewItem_TraceData::CViewItem_TraceData(Nyx::CMemoryPool* pMemPool, const TraceClientCore::CTraceData* pTraceData ) :
-BaseType(pMemPool),
+ViewItemMemPoolObj(pMemPool),
 m_pTraceData(pTraceData)
 {
 }
@@ -15,14 +15,6 @@ m_pTraceData(pTraceData)
  *
  */
 CViewItem_TraceData::~CViewItem_TraceData()
-{
-}
-
-
-/**
- *
- */
-void CViewItem_TraceData::operator delete(void*)
 {
 }
 

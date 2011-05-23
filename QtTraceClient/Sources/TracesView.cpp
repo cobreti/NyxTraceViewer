@@ -207,7 +207,7 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
     ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-    ui->m_VertScrollbar->setSingleStep( Doc().ViewItems().GetLastLineSize().height() );
+    ui->m_VertScrollbar->setSingleStep( Doc().ViewItems().GetMaxLineSize().height() );
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );

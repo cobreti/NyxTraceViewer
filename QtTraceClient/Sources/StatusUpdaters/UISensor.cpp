@@ -5,7 +5,7 @@
 /**
  *
  */
-CUISensor::CUISensor(void* pCtrl, const CStatusUpdater& rStatusUpdater) : m_rStatusUpdater(rStatusUpdater)
+CUISensor::CUISensor(void*, const CStatusUpdater& rStatusUpdater) : m_rStatusUpdater(rStatusUpdater)
 {
 }
 

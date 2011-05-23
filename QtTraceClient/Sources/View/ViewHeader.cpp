@@ -61,7 +61,7 @@ void CViewHeader::InitDefaultWidth()
 /**
  *
  */
-void CViewHeader::paintEvent(QPaintEvent *event)
+void CViewHeader::paintEvent(QPaintEvent*)
 {
     QPainter        painter(this);
 

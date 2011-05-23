@@ -46,7 +46,7 @@ bool CNewViewDlg::Exec( CNewViewDlg::XData& data )
 /**
  *
  */
-void CNewViewDlg::OnUpdate_Ok( const CStatusUpdater& rUpdater )
+void CNewViewDlg::OnUpdate_Ok( const CStatusUpdater& )
 {
 	bool	bEnabled = !ui->m_editViewName->text().isEmpty();
 

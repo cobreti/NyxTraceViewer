@@ -94,7 +94,7 @@ void CDebugPanel::OnEnumTraces()
 }
 
 
-void CDebugPanel::closeEvent(QCloseEvent *event)
+void CDebugPanel::closeEvent(QCloseEvent*)
 {
 }
 

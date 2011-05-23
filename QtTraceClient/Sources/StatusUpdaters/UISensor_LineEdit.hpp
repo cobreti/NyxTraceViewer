@@ -18,13 +18,13 @@ public:
 		CUISensor(pCtrl, rUIUpdater),
 		m_pLineEdit((QLineEdit*)pCtrl)
 	{
-		bool bRet = connect(	m_pLineEdit, SIGNAL(textChanged(const QString&)), 
-								this, SLOT(OnTextChanged(const QString&)) );
+		connect(	m_pLineEdit, SIGNAL(textChanged(const QString&)), 
+					this, SLOT(OnTextChanged(const QString&)) );
 	}
 
 public slots:
 
-	virtual void OnTextChanged( const QString& text )
+	virtual void OnTextChanged( const QString& )
 	{
 		SendUpdate();
 	}

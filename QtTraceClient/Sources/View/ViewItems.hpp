@@ -27,6 +27,7 @@ public:
     virtual size_t ItemsCount() const;
     virtual const QSizeF& GetSize() const;
     virtual const QSizeF& GetLastLineSize() const;
+    virtual const QSizeF& GetMaxLineSize() const;
     virtual void Clear(bool bDeleteItems = true);
 
     const CViewItems& operator += (CViewItems& items);
@@ -177,6 +178,7 @@ protected:
     TViewItemsList          m_Items;
     QSizeF                  m_Size;
     QSizeF                  m_LastLineSize;
+    QSizeF                  m_MaxLineSize;
 };
 
 

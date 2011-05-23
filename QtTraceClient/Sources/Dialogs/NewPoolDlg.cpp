@@ -60,7 +60,7 @@ bool CNewPoolDlg::Exec( CNewPoolDlg::XData& data )
 /**
  *
  */
-void CNewPoolDlg::OnUpdate_Ok(const CStatusUpdater& rUpdater)
+void CNewPoolDlg::OnUpdate_Ok(const CStatusUpdater& )
 {
 	bool	bEnabled = !ui->m_pPoolNameEdit->text().isEmpty();
 

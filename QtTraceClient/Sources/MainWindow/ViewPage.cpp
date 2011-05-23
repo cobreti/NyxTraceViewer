@@ -42,6 +42,7 @@ void CViewPage::show( CTracesView* pView )
 
     QDialog::show();
     m_pView->show();
+    m_pView->setFocus(Qt::OtherFocusReason);
 }
 
 

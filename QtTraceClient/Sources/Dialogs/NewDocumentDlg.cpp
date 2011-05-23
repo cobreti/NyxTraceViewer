@@ -60,7 +60,7 @@ bool CNewDocumentDlg::Exec( CNewDocumentDlg::XData& data )
 /**
  *
  */
-void CNewDocumentDlg::OnUpdate_Ok(const CStatusUpdater& rUpdater)
+void CNewDocumentDlg::OnUpdate_Ok(const CStatusUpdater& )
 {
 	bool	bEnabled = !ui->m_pDocNameEdit->text().isEmpty();
 
