@@ -45,7 +45,9 @@ public:
     CViewSettings&          DefaultViewSettings()              { return m_DefaultViewSettings; }
     const CViewSettings&    DefaultViewSettings() const        { return m_DefaultViewSettings; }
 
-    CViewItems& ViewItems()     { return m_ViewItems; }
+    CViewItems& ViewItems()     { return *m_pViewItems; }
+
+    Nyx::CMemoryPool*       MemoryPool() const      { return m_refMemoryPool; }
 
 public slots:
 
@@ -68,9 +70,10 @@ protected:
     QString                                     m_Name;
     CViewSettings                               m_DefaultViewSettings;
 
-    CViewItems                                  m_ViewItems;
+    CViewItems*                                 m_pViewItems;
     QTimer                                      m_RefreshTimer;
-    CDocRepositoryObserver                      m_RepositoryObserver;
+    CDocRepositoryObserver*                     m_pRepositoryObserver;
+    Nyx::CMemoryPoolRef                         m_refMemoryPool;
 };
 
 #endif // TRACESREPOSITORYDOC_HPP

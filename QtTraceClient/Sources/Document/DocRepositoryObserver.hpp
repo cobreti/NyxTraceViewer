@@ -3,6 +3,7 @@
 
 #include "RepositoryObserver.hpp"
 #include "View/ViewItems.hpp"
+#include "NyxObjectsPool.hpp"
 
 class CTracesDocument;
 
@@ -24,8 +25,9 @@ protected:
 
 protected:
 
-    CViewItems*             m_pItems;
-    CTracesDocument&        m_rDocument;
+    CViewItems*                     m_pItems;
+    CTracesDocument&                m_rDocument;
+    Nyx::CObjectsPoolRef            m_refObjectsPool;
 };
 
 

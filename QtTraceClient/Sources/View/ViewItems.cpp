@@ -1,10 +1,12 @@
 #include "ViewItems.hpp"
 #include "ViewItem.hpp"
 
+
 /**
  *
  */
-CViewItems::CViewItems()
+CViewItems::CViewItems( Nyx::CMemoryPool* pPool ) :
+Nyx::CMemPoolObj<>(pPool)
 {
 }
 

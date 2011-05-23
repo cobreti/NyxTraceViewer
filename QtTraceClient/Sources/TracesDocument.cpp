@@ -11,7 +11,8 @@ CTracesDocument::CTracesDocument(QWidget* pDefaultViewsParentWindow, const QStri
 m_pDefaultViewsParentWindow(pDefaultViewsParentWindow),
 m_Name(name),
 m_RefreshTimer(this),
-m_RepositoryObserver(*this)
+m_pViewItems(NULL),
+m_pRepositoryObserver(NULL)
 {
     connect(this, SIGNAL(sig_OnNewTraceItems(CViewItems*)), this, SLOT(OnNewTraceItemsHandler(CViewItems*)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(OnRefreshTimer()));
@@ -34,6 +35,11 @@ CTracesDocument::~CTracesDocument()
  */
 void CTracesDocument::Init()
 {
+    m_refMemoryPool = Nyx::CMemoryPool::Alloc(100);
+    m_pViewItems = new (m_refMemoryPool)CViewItems(m_refMemoryPool);
+
+    m_pRepositoryObserver = new CDocRepositoryObserver(*this);
+
     CViewItemSettings*      pSetting = NULL;
     QFont*                  pFont = new QFont("Courier New", 10);
     QFontMetricsF           TextMetrics(*pFont);
@@ -114,7 +120,10 @@ void CTracesDocument::Destroy()
 		m_Views.pop_front();
 	}
 
-    m_ViewItems.Clear(false);
+    m_pViewItems->Clear(false);
+    delete m_pViewItems;
+
+    delete m_pRepositoryObserver;
 }
 
 
@@ -154,7 +163,7 @@ void CTracesDocument::GetViews( CTracesDocument::TracesViewList& ViewsList ) con
  */
 void CTracesDocument::AddRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
 {
-    rSrcPool.Repository().Insert( &m_RepositoryObserver );
+    rSrcPool.Repository().Insert( m_pRepositoryObserver );
 }
 
 
@@ -163,7 +172,7 @@ void CTracesDocument::AddRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
  */
 void CTracesDocument::RemoveRepositorySrc( TraceClientCore::CTracesPool& rSrcPool )
 {
-    rSrcPool.Repository().Remove( &m_RepositoryObserver );
+    rSrcPool.Repository().Remove( m_pRepositoryObserver );
 }
 
 
@@ -172,7 +181,7 @@ void CTracesDocument::RemoveRepositorySrc( TraceClientCore::CTracesPool& rSrcPoo
  */
 bool CTracesDocument::Contains( const TraceClientCore::CTracesPool& rSrcPool )
 {
-    return rSrcPool.Repository().Contains(&m_RepositoryObserver);
+    return rSrcPool.Repository().Contains(m_pRepositoryObserver);
 }
 
 
@@ -190,7 +199,7 @@ void CTracesDocument::OnNewTraceItems(CViewItems* pViewItems)
  */
 void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
 {
-    m_ViewItems += *pViewItems;
+    (*m_pViewItems) += *pViewItems;
 
     TracesViewList::iterator        pos = m_Views.begin();
 

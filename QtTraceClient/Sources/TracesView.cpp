@@ -212,7 +212,7 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 
-    if ( m_TopPos.IsValid() )
+    if ( m_TopPos.IsValid() && isVisible())
         m_TopPos.MoveTo(ui->m_VertScrollbar->value());
 }
 

@@ -4,6 +4,7 @@
 #include "Document/DocumentsCollection.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "TracesView.h"
+#include "View/ViewItemsNodeObjectsPool.hpp"
 
 #include <QMainWindow>
 
@@ -42,12 +43,13 @@ protected:
 private:
     Ui::MainWindow *ui;
 
-    CDebugPanel*            m_pDebugPanel;
-	CDocumentsCollection	m_Documents;
-    int                     m_nNextDocumentId;
-    int                     m_nNextViewId;
-    CPipesMgntPage*         m_pPipesMgntPage;
-    CViewPage*              m_pViewPage;
+    CDebugPanel*                m_pDebugPanel;
+	CDocumentsCollection	    m_Documents;
+    int                         m_nNextDocumentId;
+    int                         m_nNextViewId;
+    CPipesMgntPage*             m_pPipesMgntPage;
+    CViewPage*                  m_pViewPage;
+    CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
 };
 
 #endif // MAINWINDOW_H

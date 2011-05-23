@@ -14,6 +14,7 @@ CDocRepositoryObserver::CDocRepositoryObserver(CTracesDocument& rDocument) : Tra
 m_rDocument(rDocument),
 m_pItems(NULL)
 {
+    m_refObjectsPool = Nyx::CObjectsPool::Alloc( sizeof(CViewItems)*5 );
 }
 
 
@@ -53,7 +54,7 @@ void CDocRepositoryObserver::Insert( TraceClientCore::CTraceData* pTraceData )
 void CDocRepositoryObserver::OnFirstBeginUpdate()
 {
     if ( m_pItems == NULL )
-        m_pItems = new CViewItems();
+        m_pItems = new (m_refObjectsPool)CViewItems(m_refObjectsPool);
 }
 
 
