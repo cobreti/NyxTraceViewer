@@ -289,7 +289,16 @@ void CTracesView::InitSettings()
 {
 	CViewColumnSettings*		pColSettings = NULL;
 
-	// Module name
+	// Line number
+	pColSettings = new CViewColumnSettings();
+	pColSettings->SetWidth(0);
+    pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
+    pColSettings->AutoWidth() = true;
+    pColSettings->SetPainterId( CViewItemPainter::ePId_LineNumber );
+    pColSettings->SetTitle("Line #");
+	Settings().ColumnsSettings().Set( eVCI_LineNumber, pColSettings );
+
+    // Module name
 	pColSettings = new CViewColumnSettings();
 	pColSettings->SetWidth(0);
     pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);

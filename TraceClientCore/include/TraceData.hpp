@@ -36,11 +36,11 @@ namespace TraceClientCore
 		const Nyx::CMemPoolWString& Data() const			{ return m_Data; }
 		Nyx::CMemPoolWString& Data()						{ return m_Data; }
 
-		CTracesPool* OwnerPool() const				{ return m_pOwnerPool; }
-		CTracesPool*& OwnerPool()					{ return m_pOwnerPool; }
+		CTracesPool* OwnerPool() const				        { return m_pOwnerPool; }
+		CTracesPool*& OwnerPool()					        { return m_pOwnerPool; }
 
-        const ETraceType& Type() const              { return m_eType; }
-        ETraceType& Type()                          { return m_eType; }
+        const ETraceType& Type() const                      { return m_eType; }
+        ETraceType& Type()                                  { return m_eType; }
 		
 	protected:
 	

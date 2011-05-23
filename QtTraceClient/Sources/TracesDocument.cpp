@@ -3,6 +3,7 @@
 
 #include "TracesPool.hpp"
 #include "View/ViewColumnSettings.hpp"
+#include "View/ViewItem.hpp"
 
 /**
  *
@@ -12,7 +13,8 @@ m_pDefaultViewsParentWindow(pDefaultViewsParentWindow),
 m_Name(name),
 m_RefreshTimer(this),
 m_pViewItems(NULL),
-m_pRepositoryObserver(NULL)
+m_pRepositoryObserver(NULL),
+m_NextLineNumber(1)
 {
     connect(this, SIGNAL(sig_OnNewTraceItems(CViewItems*)), this, SLOT(OnNewTraceItemsHandler(CViewItems*)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(OnRefreshTimer()));
@@ -45,6 +47,16 @@ void CTracesDocument::Init()
     QFontMetricsF           TextMetrics(*pFont);
 
     CViewColumnSettings*		pColSettings = NULL;
+
+    // Line number
+    pColSettings = new CViewColumnSettings();
+    pColSettings->SetWidth(0);
+    pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
+    pColSettings->AutoWidth() = true;
+    pColSettings->SetPainterId( CViewItemPainter::ePId_LineNumber );
+    pColSettings->SetTitle("Line #");
+    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
+    DefaultViewSettings().ColumnsSettings().Set( eVCI_LineNumber, pColSettings );
 
     // Module name
     pColSettings = new CViewColumnSettings();
@@ -199,6 +211,13 @@ void CTracesDocument::OnNewTraceItems(CViewItems* pViewItems)
  */
 void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
 {
+    CViewItemPos        posItem = pViewItems->begin();
+    while ( posItem.IsValid() )
+    {
+        posItem.Item()->LineNumber() = m_NextLineNumber ++;
+        ++posItem;
+    }
+
     (*m_pViewItems) += *pViewItems;
 
     TracesViewList::iterator        pos = m_Views.begin();

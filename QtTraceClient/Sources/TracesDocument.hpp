@@ -74,6 +74,7 @@ protected:
     QTimer                                      m_RefreshTimer;
     CDocRepositoryObserver*                     m_pRepositoryObserver;
     Nyx::CMemoryPoolRef                         m_refMemoryPool;
+    size_t                                      m_NextLineNumber;
 };
 
 #endif // TRACESREPOSITORYDOC_HPP

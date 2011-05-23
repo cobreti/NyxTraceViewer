@@ -742,6 +742,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Sources\View\ViewItemLineNumberPainter.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\ViewItemLineNumberPainter.hpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Sources\View\ViewItemModuleNamePainter.cpp"
 						>
 					</File>

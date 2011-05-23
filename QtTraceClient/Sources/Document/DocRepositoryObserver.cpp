@@ -5,6 +5,7 @@
 #include "View/ViewItemTickCountPainter.hpp"
 #include "View/ViewItemThreadIdPainter.hpp"
 #include "View/ViewItemDataPainter.hpp"
+#include "View/ViewItemLineNumberPainter.hpp"
 #include "TracesDocument.hpp"
 
 /**
@@ -38,6 +39,7 @@ void CDocRepositoryObserver::Insert( TraceClientCore::CTraceData* pTraceData )
     CViewItem_TraceData*        pItem = new (pMemPool)CViewItem_TraceData(pMemPool, pTraceData);
 
     pItem->Painters().Add( CViewItemBackgroundPainter::Instance() );
+    pItem->Painters().Add( CViewItemLineNumberPainter::Instance() );
     pItem->Painters().Add( CViewItemModuleNamePainter::Instance() );
     pItem->Painters().Add( CViewItemTickCountPainter::Instance() );
     pItem->Painters().Add( CViewItemThreadIdPainter::Instance() );

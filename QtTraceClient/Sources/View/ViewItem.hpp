@@ -51,6 +51,9 @@ public:
     virtual void RemoveFlag( EViewItemFlags flag );
     virtual bool HasFlag( EViewItemFlags flag ) const;
 
+    const size_t& LineNumber() const            { return m_LineNumber; }
+    size_t& LineNumber()                        { return m_LineNumber; }
+
 protected:
 
     typedef     std::bitset<eVIF_Count>         FlagsSet;
@@ -60,6 +63,7 @@ protected:
     QSizeF                          m_Size;
     CViewItemPainterCollection      m_Painters;
     FlagsSet                        m_Flags;
+    size_t                          m_LineNumber;
 };
 
 

@@ -30,7 +30,8 @@ public:
         ePId_ThreadId,
         ePId_ModuleName,
         ePId_Header,
-		ePId_Row
+		ePId_Row,
+        ePId_LineNumber
     };
 
     static EViewColumnId PainterId2ColumnId( EPainterId );

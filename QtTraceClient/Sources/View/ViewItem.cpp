@@ -7,7 +7,8 @@
 /**
  *
  */
-CViewItem::CViewItem()
+CViewItem::CViewItem() :
+m_LineNumber(0)
 {
 }
 

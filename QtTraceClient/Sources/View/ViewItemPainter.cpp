@@ -16,6 +16,8 @@ EViewColumnId CViewItemPainter::PainterId2ColumnId( CViewItemPainter::EPainterId
         return eVCI_ThreadId;
     case ePId_Data:
         return eVCI_Data;
+    case ePId_LineNumber:
+        return eVCI_LineNumber;
     };
 
     return (EViewColumnId)-1;

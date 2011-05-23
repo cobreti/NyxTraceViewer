@@ -8,7 +8,8 @@ enum EViewColumnId
 	eVCI_ThreadId,
 	eVCI_Data,
 	eVCI_ModuleName,
-	eVCI_Count,
+    eVCI_LineNumber,
+	eVCI_Count
 };
 
 #endif // _VIEWCOLUMNID_HPP_
