@@ -34,26 +34,22 @@ public:
 
 protected:
 
-    
 
     template<class _Ty, class Pool>
-	class MyAllocator
-        : public std::_Allocator_base<_Ty>
+    class MyAllocator
 	{	// generic allocator for objects of class _Ty
     protected:
 
         Nyx::CObjectsPoolRef            m_refObjectsPool;
 
     public:
-	    typedef _Allocator_base<_Ty> _Mybase;
-	    typedef typename _Mybase::value_type value_type;
-	    typedef value_type _FARQ *pointer;
-	    typedef value_type _FARQ& reference;
-	    typedef const value_type _FARQ *const_pointer;
-	    typedef const value_type _FARQ& const_reference;
+        typedef _Ty value_type;
+        typedef value_type  *pointer;
+        typedef value_type & reference;
+        typedef const value_type  *const_pointer;
+        typedef const value_type & const_reference;
+        typedef size_t size_type;
 
-	    typedef _SIZT size_type;
-	    typedef _PDFT difference_type;
 
 	    template<class _Other>
 		    struct rebind
@@ -71,19 +67,19 @@ protected:
 		    return (&_Val);
 		    }
 
-	    MyAllocator() _THROW0()
+        MyAllocator()
 		    {	// construct default allocator (do nothing)
                 //m_refObjectsPool = Nyx::CObjectsPool::Alloc(2048, sizeof(_Ty));
                 m_refObjectsPool = Pool::Instance();
 		    }
 
-	    MyAllocator(const MyAllocator<_Ty, Pool>&) _THROW0()
+        MyAllocator(const MyAllocator<_Ty, Pool>&)
 		    {	// construct by copying (do nothing)
                 m_refObjectsPool = Pool::Instance();
 		    }
 
 	    template<class _Other>
-		    MyAllocator(const MyAllocator<_Other, Pool>&) _THROW0()
+            MyAllocator(const MyAllocator<_Other, Pool>&)
 		    {	// construct from a related allocator (do nothing)
                 m_refObjectsPool = Pool::Instance();
 		    }
@@ -107,7 +103,7 @@ protected:
                 return (pointer)m_refObjectsPool->AllocMem(sizeof(_Ty));
 		    }
 
-	    pointer allocate(size_type _Count, const void _FARQ *)
+        pointer allocate(size_type _Count, const void *)
 		    {	// allocate array of _Count elements, ignore hint
 		    //return (allocate(_Count));
                 NyxAssert( _Count == 1, "invalid cound value");
@@ -124,14 +120,14 @@ protected:
                 std::_Destroy(_Ptr);
 		    }
 
-	    _SIZT max_size() const _THROW0()
+        size_type max_size() const
 		    {	// estimate maximum array size
-		    _SIZT _Count = (_SIZT)(-1) / sizeof (_Ty);
+            size_type _Count = (size_type)(-1) / sizeof (_Ty);
 		    return (0 < _Count ? _Count : 1);
 		    }
 	};
 
-    typedef     std::list<CViewItem*, MyAllocator<CViewItem*, CViewItemsNodeObjectsPool>>       TViewItemsList;
+    typedef     std::list<CViewItem*, MyAllocator<CViewItem*, CViewItemsNodeObjectsPool> >       TViewItemsList;
 
     /**
      *

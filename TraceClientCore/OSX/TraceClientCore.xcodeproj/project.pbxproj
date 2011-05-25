@@ -9,33 +9,22 @@
 /* Begin PBXBuildFile section */
 		1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */; };
 		1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */; };
-		1629DD0112C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1629DD0012C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp */; };
-		1629DD0312C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1629DD0212C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp */; };
 		16466AC011AB50B700AF9F07 /* DbgTracesFeederCore.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */; };
 		16466ACC11AB517300AF9F07 /* DbgTracesFeederCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */; };
 		165976FF1127103C00CC718B /* TracesPoolCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165976FE1127103C00CC718B /* TracesPoolCollection.cpp */; };
 		165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977021127109B00CC718B /* TracesPoolCollection.hpp */; };
-		1659779C11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1659779B11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp */; };
-		1659779E11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1659779D11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp */; };
-		165977A41127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977A31127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp */; };
-		165977A81127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165977A71127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp */; };
-		165977B1112840C200CC718B /* TraceDataRepositoryLink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977B0112840C200CC718B /* TraceDataRepositoryLink.hpp */; };
-		165977B31128418B00CC718B /* TraceDataRepositoryLink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165977B21128418B00CC718B /* TraceDataRepositoryLink.cpp */; };
-		165CF2BD114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2BC114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp */; };
-		165CF2C1114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2BF114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp */; };
 		165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */; };
-		165CF2E1114D7F49007430AE /* RepositoryObserverThreadProc.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DF114D7F49007430AE /* RepositoryObserverThreadProc.hpp */; };
 		165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */; };
-		165CF2E5114D7F53007430AE /* RepositoryObserverThreadProc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E3114D7F53007430AE /* RepositoryObserverThreadProc.cpp */; };
 		165CF2F1114D9984007430AE /* DbgTracesFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */; };
 		1665B7A311EA4FB100D4B309 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1665B7A111EA4FB100D4B309 /* PoolsList.cpp */; };
 		1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1665B7A211EA4FB100D4B309 /* PoolsList.hpp */; };
 		1693872C1347A0C400691948 /* DbgTracesFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */; };
 		169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169387361347ACB000691948 /* RepositoryTraceInserter.cpp */; };
-		169387391347ACB700691948 /* RepositoryTraceInserter.h in Headers */ = {isa = PBXBuildFile; fileRef = 169387381347ACB700691948 /* RepositoryTraceInserter.h */; };
 		16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */; };
 		16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */; };
 		16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */; };
+		16DF357E138CA19D008C3E30 /* PoolsUpdateClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */; };
+		16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */; };
 		16EECE691126406500465BE0 /* TraceData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16EECE681126406500465BE0 /* TraceData.hpp */; };
 		16EECE6D1126409800465BE0 /* TraceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECE6B1126409800465BE0 /* TraceData.cpp */; };
 		16EECE9D1126476E00465BE0 /* TraceDataRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */; };
@@ -49,33 +38,22 @@
 /* Begin PBXFileReference section */
 		1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PipeTraceFeeder.hpp; path = ../include/PipeTraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PipeTraceFeeder.cpp; path = ../sources/PipeTraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
-		1629DD0012C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLinkToDataRepository.cpp; path = ../sources/TraceDataRepositoryLinkToDataRepository.cpp; sourceTree = SOURCE_ROOT; };
-		1629DD0212C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLinkToDataRepository.hpp; path = ../include/TraceDataRepositoryLinkToDataRepository.hpp; sourceTree = SOURCE_ROOT; };
 		16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DbgTracesFeederCore.hpp; path = ../include/DbgTracesFeederCore.hpp; sourceTree = SOURCE_ROOT; };
 		16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DbgTracesFeederCore.cpp; path = ../sources/DbgTracesFeederCore.cpp; sourceTree = SOURCE_ROOT; };
 		165976FE1127103C00CC718B /* TracesPoolCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPoolCollection.cpp; path = ../Sources/TracesPoolCollection.cpp; sourceTree = SOURCE_ROOT; };
 		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
-		1659779B11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLinkBase.hpp; path = ../include/TraceDataRepositoryLinkBase.hpp; sourceTree = SOURCE_ROOT; };
-		1659779D11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLinkBase.cpp; path = ../Sources/TraceDataRepositoryLinkBase.cpp; sourceTree = SOURCE_ROOT; };
-		165977A31127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLinkCollection.hpp; path = ../include/TraceDataRepositoryLinkCollection.hpp; sourceTree = SOURCE_ROOT; };
-		165977A71127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLinkCollection.cpp; path = ../sources/TraceDataRepositoryLinkCollection.cpp; sourceTree = SOURCE_ROOT; };
-		165977B0112840C200CC718B /* TraceDataRepositoryLink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceDataRepositoryLink.hpp; path = ../include/TraceDataRepositoryLink.hpp; sourceTree = SOURCE_ROOT; };
-		165977B21128418B00CC718B /* TraceDataRepositoryLink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepositoryLink.cpp; path = ../Sources/TraceDataRepositoryLink.cpp; sourceTree = SOURCE_ROOT; };
-		165CF2BC114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserverNotificationsHandler.hpp; path = ../include/RepositoryObserverNotificationsHandler.hpp; sourceTree = SOURCE_ROOT; };
-		165CF2BF114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserverNotificationsHandler.cpp; path = ../sources/RepositoryObserverNotificationsHandler.cpp; sourceTree = SOURCE_ROOT; };
 		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
-		165CF2DF114D7F49007430AE /* RepositoryObserverThreadProc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserverThreadProc.hpp; path = ../include/RepositoryObserverThreadProc.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserver.cpp; path = ../sources/RepositoryObserver.cpp; sourceTree = SOURCE_ROOT; };
-		165CF2E3114D7F53007430AE /* RepositoryObserverThreadProc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserverThreadProc.cpp; path = ../sources/RepositoryObserverThreadProc.cpp; sourceTree = SOURCE_ROOT; };
 		165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DbgTracesFeeder.hpp; path = ../include/DbgTracesFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		1665B7A111EA4FB100D4B309 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../include/DataStruct/PoolsList.cpp; sourceTree = SOURCE_ROOT; };
 		1665B7A211EA4FB100D4B309 /* PoolsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsList.hpp; path = ../include/DataStruct/PoolsList.hpp; sourceTree = SOURCE_ROOT; };
 		1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DbgTracesFeeder.cpp; path = ../sources/DbgTracesFeeder.cpp; sourceTree = "<group>"; };
 		169387361347ACB000691948 /* RepositoryTraceInserter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryTraceInserter.cpp; path = ../sources/RepositoryTraceInserter.cpp; sourceTree = "<group>"; };
-		169387381347ACB700691948 /* RepositoryTraceInserter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryTraceInserter.h; path = ../sources/RepositoryTraceInserter.h; sourceTree = "<group>"; };
 		16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceFeeder.hpp; path = ../include/TraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceFeeder.cpp; path = ../sources/TraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
 		16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceInserter.hpp; path = ../include/TraceInserter.hpp; sourceTree = SOURCE_ROOT; };
+		16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsUpdateClock.cpp; path = ../sources/PoolsUpdateClock.cpp; sourceTree = "<group>"; };
+		16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsUpdateClock.hpp; path = ../include/PoolsUpdateClock.hpp; sourceTree = "<group>"; };
 		16EECE681126406500465BE0 /* TraceData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceData.hpp; path = ../include/TraceData.hpp; sourceTree = SOURCE_ROOT; };
 		16EECE6B1126409800465BE0 /* TraceData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceData.cpp; path = ../Sources/TraceData.cpp; sourceTree = SOURCE_ROOT; };
 		16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepository.cpp; path = ../Sources/TraceDataRepository.cpp; sourceTree = SOURCE_ROOT; };
@@ -124,6 +102,8 @@
 				16EECEF811265E3800465BE0 /* TracesPool.cpp */,
 				165977021127109B00CC718B /* TracesPoolCollection.hpp */,
 				165976FE1127103C00CC718B /* TracesPoolCollection.cpp */,
+				16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */,
+				16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -131,22 +111,9 @@
 		165977AF1128406B00CC718B /* Repository Links */ = {
 			isa = PBXGroup;
 			children = (
-				169387381347ACB700691948 /* RepositoryTraceInserter.h */,
 				169387361347ACB000691948 /* RepositoryTraceInserter.cpp */,
-				1629DD0212C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp */,
-				1629DD0012C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp */,
 				165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */,
 				165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */,
-				165CF2E3114D7F53007430AE /* RepositoryObserverThreadProc.cpp */,
-				165CF2DF114D7F49007430AE /* RepositoryObserverThreadProc.hpp */,
-				1659779B11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp */,
-				1659779D11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp */,
-				165977A31127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp */,
-				165977A71127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp */,
-				165977B0112840C200CC718B /* TraceDataRepositoryLink.hpp */,
-				165977B21128418B00CC718B /* TraceDataRepositoryLink.cpp */,
-				165CF2BC114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp */,
-				165CF2BF114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp */,
 			);
 			name = "Repository Links";
 			sourceTree = "<group>";
@@ -195,20 +162,14 @@
 				16EECEEC11265A1A00465BE0 /* TraceClientCoreModule.hpp in Headers */,
 				16EECEF711265D8A00465BE0 /* TracesPool.hpp in Headers */,
 				165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */,
-				1659779C11278AEA00CC718B /* TraceDataRepositoryLinkBase.hpp in Headers */,
-				165977A41127A0EA00CC718B /* TraceDataRepositoryLinkCollection.hpp in Headers */,
-				165977B1112840C200CC718B /* TraceDataRepositoryLink.hpp in Headers */,
-				165CF2BD114D7843007430AE /* RepositoryObserverNotificationsHandler.hpp in Headers */,
 				165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */,
-				165CF2E1114D7F49007430AE /* RepositoryObserverThreadProc.hpp in Headers */,
 				165CF2F1114D9984007430AE /* DbgTracesFeeder.hpp in Headers */,
 				16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */,
 				16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */,
 				16466AC011AB50B700AF9F07 /* DbgTracesFeederCore.hpp in Headers */,
 				1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */,
 				1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */,
-				1629DD0312C515B400F23C44 /* TraceDataRepositoryLinkToDataRepository.hpp in Headers */,
-				169387391347ACB700691948 /* RepositoryTraceInserter.h in Headers */,
+				16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,19 +227,14 @@
 				16EECEEE11265BA300465BE0 /* TraceClientCoreModule.cpp in Sources */,
 				16EECEF911265E3800465BE0 /* TracesPool.cpp in Sources */,
 				165976FF1127103C00CC718B /* TracesPoolCollection.cpp in Sources */,
-				1659779E11278B6900CC718B /* TraceDataRepositoryLinkBase.cpp in Sources */,
-				165977A81127A1E600CC718B /* TraceDataRepositoryLinkCollection.cpp in Sources */,
-				165977B31128418B00CC718B /* TraceDataRepositoryLink.cpp in Sources */,
-				165CF2C1114D79A3007430AE /* RepositoryObserverNotificationsHandler.cpp in Sources */,
 				165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */,
-				165CF2E5114D7F53007430AE /* RepositoryObserverThreadProc.cpp in Sources */,
 				16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */,
 				16466ACC11AB517300AF9F07 /* DbgTracesFeederCore.cpp in Sources */,
 				1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */,
 				1665B7A311EA4FB100D4B309 /* PoolsList.cpp in Sources */,
-				1629DD0112C515AB00F23C44 /* TraceDataRepositoryLinkToDataRepository.cpp in Sources */,
 				1693872C1347A0C400691948 /* DbgTracesFeeder.cpp in Sources */,
 				169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */,
+				16DF357E138CA19D008C3E30 /* PoolsUpdateClock.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,11 +8,6 @@ SOURCES += Sources/TracesView.cpp \
     Sources/mainwindow.cpp \
     Sources/DebugPanel.cpp \
     Sources/main.cpp \
-    Sources/DocObserverNotificationsHandler.cpp \
-    Sources/DocTraceData.cpp \
-    Sources/DocTraceDataRepository.cpp \
-    Sources/ViewTraceData.cpp \
-    Sources/ViewTraceDataRepository.cpp \
     Sources/Dialogs/NewViewDlg.cpp \
     Sources/Dialogs/NewPoolDlg.cpp \
     Sources/Dialogs/NewDocumentDlg.cpp \
@@ -48,17 +43,13 @@ SOURCES += Sources/TracesView.cpp \
     Sources/MainWindow/DocViewTreeItem.cpp \
     Sources/View/ViewHeader.cpp \
     Sources/TracesDocument.cpp \
-    Sources/TraceDataRepositoryToDocumentLink.cpp \
     Sources/View/ViewItemInserter.cpp \
-    Sources/View/ViewItemsQueue.cpp
+    Sources/Document/DocRepositoryObserver.cpp \
+    Sources/View/ViewItemLineNumberPainter.cpp \
+    Sources/View/ViewItemsNodeObjectsPool.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
     Sources/DebugPanel.h \
-    Sources/DocObserverNotificationsHandler.hpp \
-    Sources/DocTraceData.hpp \
-    Sources/DocTraceDataRepository.hpp \
-    Sources/ViewTraceData.hpp \
-    Sources/ViewTraceDataRepository.hpp \
     Sources/Dialogs/NewViewDlg.hpp \
     Sources/Dialogs/NewPoolDlg.hpp \
     Sources/Dialogs/NewDocumentDlg.hpp \
@@ -97,9 +88,10 @@ HEADERS += Sources/TracesView.h \
     Sources/MainWindow/DocViewTreeItem.hpp \
     Sources/View/ViewHeader.hpp \
     Sources/TracesDocument.hpp \
-    Sources/TraceDataRepositoryToDocumentLink.hpp \
     Sources/View/ViewItemInserter.hpp \
-    Sources/View/ViewItemsQueue.hpp
+    Sources/Document/DocRepositoryObserver.hpp \
+    Sources/View/ViewItemLineNumberPainter.hpp \
+    Sources/View/ViewItemsNodeObjectsPool.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
     UI/DebugPanel.ui \
