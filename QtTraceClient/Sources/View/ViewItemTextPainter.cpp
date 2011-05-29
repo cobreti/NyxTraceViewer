@@ -74,6 +74,7 @@ void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemS
     while ( pos != TextLines.end() )
     {
         rcSubText = metrics.boundingRect( *pos);
+        drawstate.Painter().setFont( *pFont);
         drawstate.Painter().drawText(rcDrawTextArea, Qt::AlignLeft, *pos);
 
         rcDrawTextArea.setTop( rcDrawTextArea.top() + rcSubText.height());
