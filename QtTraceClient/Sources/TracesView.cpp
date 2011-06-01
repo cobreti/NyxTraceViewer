@@ -27,23 +27,33 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
-    m_pHeader(NULL)
+    m_pHeader(NULL),
+    m_pToolbar(NULL)
 {
     ui->setupUi(this);
 
-    this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
+    m_pToolbar = new QToolBar(this);
+    m_pToolbar->setFloatable(false);
+    m_pToolbar->setMovable(false);
+    m_pToolbar->setAllowedAreas( Qt::TopToolBarArea );
+
+    QToolButton*  pButton = new QToolButton();
+    pButton->setText("Test");
+    m_pToolbar->addWidget(pButton);
+
+    this->setContentsMargins(0, m_pToolbar->height(), ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
     //this->setMinimumSize(500, 500);
 
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
 
-	m_Margins.setLeft(25.0);
-	m_Margins.setRight(25.0);
+	  m_Margins.setLeft(25.0);
+	  m_Margins.setRight(25.0);
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
 
-	InitSettings();
+	  InitSettings();
 
     if ( Doc().ViewItems().ItemsCount() > 0 )
         m_TopPos = Doc().ViewItems().begin();
@@ -146,7 +156,7 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     ui->m_VertScrollbar->resize( nWidth, event->size().height()-nWidth );
     ui->m_VertScrollbar->move(event->size().width()-nWidth, 0);
 
-    m_pHeader->move(0,0);
+    m_pHeader->move( this->ClientRect().left(), this->ClientRect().top());
     m_pHeader->resize( event->size().width()-nWidth, m_pHeader->size().height() );
 
     UpdateScrollbarRange( ClientRect(rcWnd) );
@@ -168,7 +178,7 @@ void CTracesView::paintEvent(QPaintEvent*)
 
     drawstate.TextPos() = QPointF(0.0, HeaderSize().height());
 
-	painter.setClipping(true);
+	  painter.setClipping(true);
     painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
 
     drawstate.TextPos().ry() = pos.Y() - ui->m_VertScrollbar->value() + HeaderSize().height();
@@ -264,13 +274,14 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
     if ( Qt::ControlModifier == event->modifiers() && Doc().ViewItems().ItemsCount() > 0 && event->pos().y() > m_pHeader->size().height() )
 	{
         CViewItemPos        pos = Doc().ViewItems().begin();
-        pos.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() );
+        if ( pos.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
+        {
+            CViewItem*  pItem = pos.Item();
 
-        CViewItem*  pItem = pos.Item();
+            pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
 
-        pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
-
-		this->update();
+		    this->update();
+        }
 	}
 }
 
@@ -343,9 +354,9 @@ void CTracesView::InitSettings()
  */
 QRect CTracesView::ClientRect( const QRect& rcWnd ) const
 {
-    return QRect(   0, 0,
+    return QRect(   0, m_pToolbar->height(),
                     rcWnd.width() - ui->m_VertScrollbar->width(),
-                    rcWnd.height() - ui->m_HorzScrollbar->height() - HeaderSize().height() );
+                    rcWnd.height() - ui->m_HorzScrollbar->height() - HeaderSize().height() - m_pToolbar->height() );
 }
 
 
@@ -354,10 +365,15 @@ QRect CTracesView::ClientRect( const QRect& rcWnd ) const
  */
 QSize CTracesView::HeaderSize() const
 {
-    if ( m_pHeader )
-        return m_pHeader->size();
+    QSize       size;
 
-    return QSize();
+    if ( m_pHeader )
+        size += m_pHeader->size();
+
+    if ( m_pToolbar )
+        size.setHeight( size.height() + m_pToolbar->size().height() );
+
+    return size;
 }
 
 

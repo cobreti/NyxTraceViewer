@@ -59,12 +59,12 @@ const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
 /**
  *
  */
-void CViewItemPos::MoveTo(const double& y)
+bool CViewItemPos::MoveTo(const double& y)
 {
-    while ( m_pData->Y() + m_pData->Item()->GetSize().height() < y )
-        m_pData->MoveToNext();
+    while ( m_pData->IsValid() && m_pData->Y() + m_pData->Item()->GetSize().height() < y && m_pData->MoveToNext() );
 
-    while ( m_pData->Y() > y )
-        m_pData->MoveToPrevious();
+    while ( m_pData->IsValid() && m_pData->Y() > y && m_pData->MoveToPrevious() );
+
+    return ( m_pData->IsValid() && m_pData->Y() <= y && m_pData->Y() + m_pData->Item()->GetSize().height() >= y ); 
 }
 

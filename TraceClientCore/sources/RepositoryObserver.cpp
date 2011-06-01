@@ -1,6 +1,4 @@
 #include "RepositoryObserver.hpp"
-//#include "RepositoryObserverThreadProc.hpp"
-#include "DataStruct/TracesCollection.hpp"
 
 namespace TraceClientCore
 {

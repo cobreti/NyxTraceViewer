@@ -2,8 +2,7 @@
 #define TRACESVIEW_H
 
 #include <QWidget>
-//#include <QTimer>
-
+#include <QToolBar>
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
 
@@ -63,16 +62,17 @@ protected:
 
 protected:
 
-    Ui::CTracesView*												ui;
-    CTracesDocument&                                                m_rDoc;
-    QString														m_Name;
-    QRectF														m_Margins;
-    CViewItemPos                                                    m_TopPos;
-    CViewSettings												m_Settings;
-    QSizeF                                                          m_MaxLineSize;
-    bool                                                            m_bViewDirty;
-    bool                                                            m_bKeepAtEnd;
-    CViewHeader*                                                    m_pHeader;
+  Ui::CTracesView*											  ui;
+  CTracesDocument&                        m_rDoc;
+  QString														      m_Name;
+  QRectF														      m_Margins;
+  CViewItemPos                            m_TopPos;
+  CViewSettings												    m_Settings;
+  QSizeF                                  m_MaxLineSize;
+  bool                                    m_bViewDirty;
+  bool                                    m_bKeepAtEnd;
+  CViewHeader*                            m_pHeader;
+  QToolBar*                               m_pToolbar;
 };
 
 #endif // TRACESVIEW_H

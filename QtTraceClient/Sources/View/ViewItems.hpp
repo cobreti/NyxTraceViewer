@@ -49,8 +49,8 @@ protected:
         virtual bool IsValid() const;
         virtual CViewItemPos::XData* Clone() const;
 
-        virtual void MoveToNext();
-        virtual void MoveToPrevious();
+        virtual bool MoveToNext();
+        virtual bool MoveToPrevious();
         virtual bool IsFirst() const;
         virtual bool IsLast() const;
 
