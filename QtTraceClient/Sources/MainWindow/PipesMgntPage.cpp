@@ -5,6 +5,7 @@
 #include "PipeTraceFeeder.hpp"
 #include "TracesDocument.hpp"
 #include "PoolsUpdateClock.hpp"
+#include "DataStruct/PoolsList.hpp"
 
 
 /**
@@ -41,15 +42,17 @@ void CPipesMgntPage::show(CTracesDocument* pDoc)
 
     m_pDoc = pDoc;
 
-    for (int index = 0; index < ui->m_PoolsTree->topLevelItemCount(); ++index)
-    {
-        MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(ui->m_PoolsTree->topLevelItem(index));
+    FillPoolsList();
 
-        if ( m_pDoc->Contains(*pPoolItem->TracesPool()) )
-            pPoolItem->setCheckState(0, Qt::Checked );
-        else
-            pPoolItem->setCheckState(0, Qt::Unchecked );
-    }
+    //for (int index = 0; index < ui->m_PoolsTree->topLevelItemCount(); ++index)
+    //{
+    //    MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(ui->m_PoolsTree->topLevelItem(index));
+
+    //    if ( m_pDoc->Contains(*pPoolItem->TracesPool()) )
+    //        pPoolItem->setCheckState(0, Qt::Checked );
+    //    else
+    //        pPoolItem->setCheckState(0, Qt::Unchecked );
+    //}
 
     QDialog::show();
 }
@@ -199,4 +202,62 @@ void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int  )
 		if ( m_pDoc->Contains( *pPoolItem->TracesPool() ) )
 			m_pDoc->RemoveRepositorySrc(*pPoolItem->TracesPool());
 	}
+}
+
+
+/**
+ *
+ */
+void CPipesMgntPage::paintEvent( QPaintEvent* event )
+{
+    //QPainter            painter(this);
+
+    //painter.drawRect( QRectF( QPointF(0.0, 0.0), QSizeF(size().width()-1, size().height()-1)));
+}
+
+
+/**
+ *
+ */
+void CPipesMgntPage::FillPoolsList()
+{
+	TraceClientCore::CModule&					    rModule = TraceClientCore::CModule::Instance();
+    QIcon                                           PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
+    TraceClientCore::CPoolsList                     PoolsList;
+    TraceClientCore::CPoolsList::const_iterator     PoolIter;
+
+    rModule.TracesPools().GetPoolsList( PoolsList );
+
+    ui->m_PoolsTree->clear();
+
+    for ( PoolIter = PoolsList.begin(); PoolIter != PoolsList.end(); ++ PoolIter )
+    {
+    	MainWindow::CPoolTreeItem*		    pItem = new MainWindow::CPoolTreeItem();
+        TraceClientCore::CTracesPool*       pPool = (*PoolIter)->Pool();
+	    pItem->SetPool( pPool );
+	    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+	    pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
+        pItem->setIcon(0, PipeSourceIcon);
+
+        if ( pPool->Feeder().Valid() )
+        {
+			if ( pPool->Feeder()->IsRunning() )
+			{
+				pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
+				pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
+			}
+			else
+			{
+				pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+				pItem->setForeground(0, QBrush(QColor(150, 0, 0)));
+			}
+        }
+
+        if ( m_pDoc->Contains(*pPool) )
+            pItem->setCheckState(0, Qt::Checked );
+        else
+            pItem->setCheckState(0, Qt::Unchecked );
+
+        ui->m_PoolsTree->insertTopLevelItem(ui->m_PoolsTree->topLevelItemCount(), pItem );
+    }
 }

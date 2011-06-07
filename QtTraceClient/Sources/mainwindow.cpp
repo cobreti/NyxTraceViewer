@@ -5,11 +5,7 @@
 #include "Dialogs/NewPoolDlg.hpp"
 #include "Dialogs/NewDocumentDlg.hpp"
 #include "Dialogs/NewViewDlg.hpp"
-//#include "MainWindow/PoolTreeItem.hpp"
-//#include "MainWindow/DocListItem.hpp"
-//#include "MainWindow/ViewListItem.hpp"
-#include "MainWindow/DocViewTreeItem.hpp"
-#include "MainWindow/PipesMgntPage.hpp"
+#include "MainWindow/ViewTreeItem.hpp"
 #include "MainWindow/ViewPage.hpp"
 #include "PipeTraceFeeder.hpp"
 #include "PoolsUpdateClock.hpp"
@@ -28,17 +24,12 @@ CMainWindow::CMainWindow(QWidget *parent) :
     m_pDebugPanel(NULL),
     m_nNextDocumentId(1),
     m_nNextViewId(1),
-    m_pPipesMgntPage(NULL),
     m_pViewPage(NULL)
 {
     ui->setupUi(this);
 
-    connect(ui->m_DocsViewsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnDocsViewsTreeSelectionChanged()));
-    connect(ui->m_btnAddDocument, SIGNAL(clicked()), this, SLOT(OnAddDoc()));
+    connect(ui->m_ViewsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnViewsTreeSelectionChanged()));
     connect(ui->m_btnAddView, SIGNAL(clicked()), this, SLOT(OnAddView()));
-
-    m_pPipesMgntPage = new CPipesMgntPage(ui->m_ContentFrame);
-    ui->m_ContentFrame->layout()->addWidget(m_pPipesMgntPage);
 
     m_pViewPage = new CViewPage(ui->m_ContentFrame);
     ui->m_ContentFrame->layout()->addWidget(m_pViewPage);
@@ -76,7 +67,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
  */
 CMainWindow::~CMainWindow()
 {
-    delete m_pPipesMgntPage;
     delete m_pViewPage;
     delete ui;
 }
@@ -85,37 +75,17 @@ CMainWindow::~CMainWindow()
 /**
  *
  */
-void CMainWindow::OnDocsViewsTreeSelectionChanged()
+void CMainWindow::OnViewsTreeSelectionChanged()
 {
-    if ( ui->m_DocsViewsTree->selectedItems().empty() )
+    if ( ui->m_ViewsTree->selectedItems().empty() )
         return;
 
-    MainWindow::CDocViewTreeItem*      pDocViewItem = static_cast<MainWindow::CDocViewTreeItem*>(ui->m_DocsViewsTree->selectedItems().front());
+    MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
 
-    if ( pDocViewItem->Type() == MainWindow::CDocViewTreeItem::eCT_Document )
-    {
-        m_pPipesMgntPage->show(pDocViewItem->Document());
-        m_pViewPage->hide();
-    }
-    else if ( pDocViewItem->Type() == MainWindow::CDocViewTreeItem::eCT_View )
-    {
-        m_pPipesMgntPage->hide();
-        m_pViewPage->show(pDocViewItem->View());
-    }
+    if ( pViewItem )
+        m_pViewPage->show(pViewItem->View());
     else
-    {
-        m_pPipesMgntPage->hide();
         m_pViewPage->hide();
-    }
-}
-
-
-/**
- *
- */
-void CMainWindow::OnAddDoc()
-{
-    CreateNewDocument(QString("Document ") + QString().setNum(m_nNextDocumentId++));
 }
 
 
@@ -124,9 +94,19 @@ void CMainWindow::OnAddDoc()
  */
 void CMainWindow::OnAddView()
 {
-    MainWindow::CDocViewTreeItem*       pCurrentItem = static_cast<MainWindow::CDocViewTreeItem*>(ui->m_DocsViewsTree->selectedItems().front());    
+    CTracesDocument*                 pDocument = NULL;
 
-    CreateNewView(pCurrentItem->Document(), QString("View ") + QString().setNum(m_nNextViewId++));
+    if ( ui->m_ViewsTree->selectedItems().empty() )
+    {
+        pDocument = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
+    }
+    else
+    {
+        MainWindow::CViewTreeItem*       pCurrentItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
+        pDocument = &pCurrentItem->View()->Doc();
+    }
+
+    CreateNewView(pDocument, QString("View ") + QString().setNum(m_nNextViewId++));
 }
 
 
@@ -162,33 +142,12 @@ void CMainWindow::closeEvent(QCloseEvent* e)
 /**
  *
  */
-void CMainWindow::CreateDocViewRoot()
-{
-    MainWindow::CDocViewTreeItem*       pTreeItem = new MainWindow::CDocViewTreeItem(NULL, "Root");
-    ui->m_DocsViewsTree->addTopLevelItem(pTreeItem);
-    ui->m_DocsViewsTree->clearSelection();
-    pTreeItem->setSelected(true);
-    pTreeItem->setExpanded(true);
-}
-
-
-/**
- *
- */
 CTracesDocument* CMainWindow::CreateNewDocument( const QString& rDocumentName )
 {
     CTracesDocument*                pDocument = new CTracesDocument(this, rDocumentName);
-    QIcon                           DocIcon(":/MainWindow/Icons/Document-icon.png");
 	pDocument->Init();
 
 	m_Documents.Insert( Nyx::CAString(rDocumentName.toStdString().c_str()), pDocument );
-
-    MainWindow::CDocViewTreeItem*                   pTreeItem = new MainWindow::CDocViewTreeItem(NULL, pDocument);
-    pTreeItem->setFlags( Qt::ItemIsEditable | pTreeItem->flags() );
-    pTreeItem->setIcon(0, DocIcon);
-    ui->m_DocsViewsTree->addTopLevelItem( pTreeItem );
-    ui->m_DocsViewsTree->clearSelection();
-    pTreeItem->setSelected(true);
 
 	return pDocument;
 }
@@ -199,25 +158,19 @@ CTracesDocument* CMainWindow::CreateNewDocument( const QString& rDocumentName )
  */
 CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& ViewName )
 {
-	CTracesView*					pView = pDoc->CreateView(NULL);
+	CTracesView*					pView = pDoc->CreateView(m_pViewPage);
     QIcon                           ViewIcon(":/MainWindow/Icons/View-icon.png");
 
 	pView->SetName(ViewName);
 
-    MainWindow::CDocViewTreeItem*       pParentTreeItem = static_cast<MainWindow::CDocViewTreeItem*>(ui->m_DocsViewsTree->selectedItems()[0]);
+    MainWindow::CViewTreeItem*          pViewItem = new MainWindow::CViewTreeItem(NULL, pView);
+    pViewItem->setFlags( Qt::ItemIsEditable | pViewItem->flags() );
+    pViewItem->setIcon(0, ViewIcon);
+    pViewItem->setSelected(true);
 
-    if ( pParentTreeItem->Type() == MainWindow::CDocViewTreeItem::eCT_View )
-        pParentTreeItem = static_cast<MainWindow::CDocViewTreeItem*>(pParentTreeItem->parent());
+    ui->m_ViewsTree->addTopLevelItem( pViewItem );
 
-    MainWindow::CDocViewTreeItem*       pTreeItem = new MainWindow::CDocViewTreeItem(pParentTreeItem, pDoc, pView);
+    m_pViewPage->show(pView);
 
-    pTreeItem->setFlags( Qt::ItemIsEditable | pTreeItem->flags() );
-    pTreeItem->setIcon(0, ViewIcon);
-    ui->m_DocsViewsTree->clearSelection();
-    pTreeItem->setSelected(true);
-    pParentTreeItem->setExpanded(true);
-
-    pView->show();
-
-	return pView;
+    return pView;
 }

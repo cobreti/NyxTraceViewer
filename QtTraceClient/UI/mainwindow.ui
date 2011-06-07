@@ -80,18 +80,9 @@
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
-         <widget class="QTreeWidget" name="m_DocsViewsTree">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-            <horstretch>2</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>150</width>
-            <height>0</height>
-           </size>
+         <widget class="QTreeWidget" name="m_ViewsTree">
+          <property name="itemsExpandable">
+           <bool>false</bool>
           </property>
           <attribute name="headerVisible">
            <bool>false</bool>
@@ -121,24 +112,6 @@
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QPushButton" name="m_btnAddDocument">
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normalon>:/MainWindow/Icons/New-Document-icon.png</normalon>
-             </iconset>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
-            </property>
-           </widget>
-          </item>
           <item>
            <widget class="QPushButton" name="m_btnAddView">
             <property name="text">
@@ -224,7 +197,7 @@
      <x>0</x>
      <y>0</y>
      <width>867</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

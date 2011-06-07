@@ -3,8 +3,11 @@
 
 #include <QWidget>
 #include <QToolBar>
+#include <QPushButton>
+#include <QToolButton>
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
+#include "View/SettingsToolBar.hpp"
 
 
 namespace Ui
@@ -14,6 +17,7 @@ namespace Ui
 
 class CTracesDocument;
 class CViewHeader;
+class CPipesMgntPage;
 
 class CTracesView : public QWidget
 {
@@ -41,6 +45,7 @@ public slots:
 
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
+    void OnShowHideSettings( ViewEnums::ESettings settings, bool bShow );
 
 protected:
 
@@ -62,17 +67,24 @@ protected:
 
 protected:
 
-  Ui::CTracesView*											  ui;
-  CTracesDocument&                        m_rDoc;
-  QString														      m_Name;
-  QRectF														      m_Margins;
-  CViewItemPos                            m_TopPos;
-  CViewSettings												    m_Settings;
-  QSizeF                                  m_MaxLineSize;
-  bool                                    m_bViewDirty;
-  bool                                    m_bKeepAtEnd;
-  CViewHeader*                            m_pHeader;
-  QToolBar*                               m_pToolbar;
+    enum
+    {
+        kPanel_LeftMargin = 50,
+        kPanel_RightMargin = 50
+    };
+
+    Ui::CTracesView*			        ui;
+    CTracesDocument&                    m_rDoc;
+    QString								m_Name;
+    QRectF								m_Margins;
+    CViewItemPos                        m_TopPos;
+    CViewSettings						m_Settings;
+    QSizeF                              m_MaxLineSize;
+    bool                                m_bViewDirty;
+    bool                                m_bKeepAtEnd;
+    CViewHeader*                        m_pHeader;
+    CSettingsToolBar*                   m_pSettingsToolbar;
+    CPipesMgntPage*                     m_pPipesMgntPage;
 };
 
 #endif // TRACESVIEW_H

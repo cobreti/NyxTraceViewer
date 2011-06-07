@@ -1,5 +1,5 @@
-#ifndef _DOCVIEWTREEITEM_HPP_
-#define _DOCVIEWTREEITEM_HPP_
+#ifndef _VIEWTREEITEM_HPP_
+#define _VIEWTREEITEM_HPP_
 
 #include <QTreeWidgetItem>
 
@@ -12,7 +12,7 @@ namespace MainWindow
     /**
     *
     */
-    class CDocViewTreeItem : public QTreeWidgetItem
+    class CViewTreeItem : public QTreeWidgetItem
     {
     public:
 
@@ -24,9 +24,10 @@ namespace MainWindow
         };
 
     public:
-        CDocViewTreeItem( QTreeWidgetItem* parentItem, CTracesDocument* pDoc, CTracesView* pView );
-        CDocViewTreeItem( QTreeWidgetItem* parentItem, CTracesDocument* pDoc );
-        CDocViewTreeItem( QTreeWidgetItem* parentItem, const char* szText );
+        CViewTreeItem( QTreeWidgetItem* parentItem, CTracesDocument* pDoc, CTracesView* pView );
+        CViewTreeItem( QTreeWidgetItem* parentItem, CTracesDocument* pDoc );
+        CViewTreeItem( QTreeWidgetItem* parentItem, CTracesView* pView );
+        CViewTreeItem( QTreeWidgetItem* parentItem, const char* szText );
 
         ContentType                 Type() const            { return m_eType; }
         CTracesView*                View() const            { return m_pView; }
@@ -38,6 +39,7 @@ namespace MainWindow
         CTracesDocument*            m_pDocument;
         ContentType                 m_eType;
     };
+
 }
 
 #endif // _DOCVIEWTREEITEM_HPP_

@@ -431,14 +431,6 @@
 				Name="MainWindow"
 				>
 				<File
-					RelativePath=".\Sources\MainWindow\DocViewTreeItem.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Sources\MainWindow\DocViewTreeItem.hpp"
-					>
-				</File>
-				<File
 					RelativePath="Sources\mainwindow.cpp"
 					>
 				</File>
@@ -536,6 +528,14 @@
 						/>
 					</FileConfiguration>
 				</File>
+				<File
+					RelativePath=".\Sources\MainWindow\ViewTreeItem.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\MainWindow\ViewTreeItem.hpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Data Structures"
@@ -603,6 +603,36 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Sources\View\SettingsToolBar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\View\SettingsToolBar.hpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\NyxLibs\include&quot; &quot;-I.\..\NyxLibs\include\NyxNet&quot; &quot;-I.\..\NyxLibs\include\win32&quot; &quot;-I.\..\TraceClientCore\include&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\Sources&quot; &quot;-I.\UI&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\NyxLibs\include&quot; &quot;-I.\..\NyxLibs\include\NyxNet&quot; &quot;-I.\..\NyxLibs\include\Win32&quot; &quot;-I.\..\TraceClientCore\include&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\Sources&quot; &quot;-I.\UI&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="Sources\TracesView.cpp"
 					>
 				</File>
@@ -631,6 +661,10 @@
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
 					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\Sources\View\ViewEnums.hpp"
+					>
 				</File>
 				<File
 					RelativePath=".\Sources\View\ViewHeader.cpp"
@@ -1069,6 +1103,18 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\moc\debug\moc_SettingsToolBar.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\moc\debug\moc_TracesDocument.cpp"
 					>
 					<FileConfiguration
@@ -1208,6 +1254,18 @@
 				</File>
 				<File
 					RelativePath=".\MOC\release\moc_PipesMgntPage.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\moc\release\moc_SettingsToolBar.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"

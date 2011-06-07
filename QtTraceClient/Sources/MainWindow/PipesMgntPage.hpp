@@ -30,6 +30,11 @@ public slots:
 
 protected:
 
+    void paintEvent( QPaintEvent* event );
+    void FillPoolsList();
+
+protected:
+
     Ui::PipesMgntPage*          ui;
     CTracesDocument*            m_pDoc;
 };
