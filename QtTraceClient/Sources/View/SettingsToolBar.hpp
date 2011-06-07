@@ -22,6 +22,8 @@ public:
     CSettingsToolBar( CTracesView* pView );
     virtual ~CSettingsToolBar();
 
+    void ForceShowSettings( ViewEnums::ESettings settings );
+
 public slots:
 
     void OnSourceFeedsBtnClicked();

@@ -19,6 +19,7 @@ public:
     CPipesMgntPage( QWidget* pParent );
 
     void show(CTracesDocument* pDoc);
+    void Refresh();
 
 public slots:
 

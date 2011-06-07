@@ -41,6 +41,8 @@ public:
     void UpdateVisibleLines( const CViewSettings& settings );
     void RefreshDisplay();
 
+    void ShowFeedsPanel();
+
 public slots:
 
     void OnVertSliderPosChanged(int value);
@@ -56,6 +58,7 @@ protected:
 	virtual void keyPressEvent( QKeyEvent* event );
 	virtual void mousePressEvent( QMouseEvent* event );
     virtual void wheelEvent(QWheelEvent* event);
+    virtual void showEvent( QShowEvent* event);
 
 	virtual void InitSettings();
 

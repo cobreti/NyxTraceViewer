@@ -35,6 +35,16 @@ CSettingsToolBar::~CSettingsToolBar()
 /**
  *
  */
+void CSettingsToolBar::ForceShowSettings( ViewEnums::ESettings )
+{
+    m_pBtn_SourceFeeds->setChecked(true);
+    OnSourceFeedsBtnClicked();
+}
+
+
+/**
+ *
+ */
 void CSettingsToolBar::OnSourceFeedsBtnClicked()
 {
     emit sig_OnShowHideSettings(ViewEnums::eSourceFeeds, m_pBtn_SourceFeeds->isChecked());

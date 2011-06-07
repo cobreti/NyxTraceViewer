@@ -56,7 +56,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     CTracesDocument* pNewDoc = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
 
 	// create view
-	CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
+	CTracesView* pView = CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
+    pView->ShowFeedsPanel();
 
     ui->m_btnRemove->setEnabled(false);
 }
@@ -166,9 +167,9 @@ CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& V
     MainWindow::CViewTreeItem*          pViewItem = new MainWindow::CViewTreeItem(NULL, pView);
     pViewItem->setFlags( Qt::ItemIsEditable | pViewItem->flags() );
     pViewItem->setIcon(0, ViewIcon);
-    pViewItem->setSelected(true);
 
     ui->m_ViewsTree->addTopLevelItem( pViewItem );
+    pViewItem->setSelected(true);
 
     m_pViewPage->show(pView);
 

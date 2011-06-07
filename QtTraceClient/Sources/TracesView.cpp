@@ -124,6 +124,15 @@ void CTracesView::RefreshDisplay()
 }
 
 
+/**
+ *
+ */
+void CTracesView::ShowFeedsPanel()
+{
+    m_pSettingsToolbar->ForceShowSettings( ViewEnums::eSourceFeeds );
+}
+
+
 void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
@@ -313,6 +322,9 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 }
 
 
+/**
+ *
+ */
 void CTracesView::wheelEvent(QWheelEvent* event)
 {
     int numDegrees = event->delta() / 8;
@@ -320,6 +332,16 @@ void CTracesView::wheelEvent(QWheelEvent* event)
 
 	int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
 	ui->m_VertScrollbar->setValue( value );
+}
+
+
+/**
+ *
+ */
+void CTracesView::showEvent( QShowEvent* )
+{
+    if ( m_pPipesMgntPage->isVisible() )
+        m_pPipesMgntPage->Refresh();
 }
 
 
