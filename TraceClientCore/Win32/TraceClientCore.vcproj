@@ -257,14 +257,6 @@
 					RelativePath="..\include\DataStruct\PoolsList.hpp"
 					>
 				</File>
-				<File
-					RelativePath="..\include\DataStruct\TracesCollection.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\include\DataStruct\TracesCollection.hpp"
-					>
-				</File>
 			</Filter>
 		</Filter>
 	</Files>

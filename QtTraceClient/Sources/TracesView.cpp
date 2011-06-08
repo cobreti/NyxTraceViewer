@@ -16,6 +16,8 @@
 #include "View/DrawViewItemState.hpp"
 #include "View/ViewColumnSettings.hpp"
 #include "View/ViewHeader.hpp"
+#include "View/SettingsToolBar.hpp"
+#include "MainWindow/PipesMgntPage.hpp"
 
 /**
  *
@@ -27,19 +29,23 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
-    m_pHeader(NULL)
+    m_pHeader(NULL),
+    m_pSettingsToolbar(NULL),
+    m_pPipesMgntPage(NULL)
 {
     ui->setupUi(this);
 
-    this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
-    //this->setMinimumSize(500, 500);
+    m_pSettingsToolbar = new CSettingsToolBar(this);
+
+    this->setContentsMargins(0, m_pSettingsToolbar->height(), ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
 
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
+    connect( m_pSettingsToolbar, SIGNAL(sig_OnShowHideSettings(ViewEnums::ESettings, bool)), this, SLOT(OnShowHideSettings(ViewEnums::ESettings, bool)));
 
-	m_Margins.setLeft(25.0);
-	m_Margins.setRight(25.0);
+    m_Margins.setLeft(25.0);
+    m_Margins.setRight(25.0);
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
 
@@ -47,6 +53,9 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
 
     if ( Doc().ViewItems().ItemsCount() > 0 )
         m_TopPos = Doc().ViewItems().begin();
+
+    m_pPipesMgntPage = new CPipesMgntPage(this);
+    m_pPipesMgntPage->hide();
 }
 
 
@@ -115,6 +124,15 @@ void CTracesView::RefreshDisplay()
 }
 
 
+/**
+ *
+ */
+void CTracesView::ShowFeedsPanel()
+{
+    m_pSettingsToolbar->ForceShowSettings( ViewEnums::eSourceFeeds );
+}
+
+
 void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
@@ -134,10 +152,33 @@ void CTracesView::OnHorzSliderPosChanged(int value)
 }
 
 
+/**
+ *
+ */
+void CTracesView::OnShowHideSettings( ViewEnums::ESettings settings, bool bShow )
+{
+    switch ( settings )
+    {
+        case ViewEnums::eSourceFeeds:
+            {
+                if ( bShow )
+                    m_pPipesMgntPage->show(&Doc());
+                else
+                {
+                    m_pPipesMgntPage->hide();
+                    setFocus();
+                }
+            }
+            break;
+    };
+}
+
+
 void CTracesView::resizeEvent(QResizeEvent *event)
 {
     int     nHeight = ui->m_HorzScrollbar->height();
     int     nWidth = ui->m_VertScrollbar->width();
+    int     nPipesMgntPageWidth = event->size().width() - nWidth - kPanel_LeftMargin - kPanel_RightMargin;
     QRect   rcWnd(  QPoint(0,0), event->size() );
 
     ui->m_HorzScrollbar->resize( event->size().width()-nHeight, nHeight );
@@ -146,10 +187,16 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     ui->m_VertScrollbar->resize( nWidth, event->size().height()-nWidth );
     ui->m_VertScrollbar->move(event->size().width()-nWidth, 0);
 
-    m_pHeader->move(0,0);
+    m_pHeader->move( this->ClientRect().left(), this->ClientRect().top());
     m_pHeader->resize( event->size().width()-nWidth, m_pHeader->size().height() );
 
     UpdateScrollbarRange( ClientRect(rcWnd) );
+
+    m_pPipesMgntPage->move( kPanel_LeftMargin, m_pSettingsToolbar->size().height() );
+
+    if ( nPipesMgntPageWidth > 500 )
+        nPipesMgntPageWidth = 500;
+    m_pPipesMgntPage->resize( nPipesMgntPageWidth, event->size().height() / 2 );
 
     update();
 }
@@ -177,7 +224,6 @@ void CTracesView::paintEvent(QPaintEvent*)
                                     ui->m_VertScrollbar->value(),
                                     ClientRect().width()+ui->m_HorzScrollbar->value(), 
                                     ClientRect().height()+ui->m_VertScrollbar->value());
-
 
     while ( pos.IsValid() && drawstate.TextPos().y() < ViewHeight )
     {
@@ -264,17 +310,21 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
     if ( Qt::ControlModifier == event->modifiers() && Doc().ViewItems().ItemsCount() > 0 && event->pos().y() > m_pHeader->size().height() )
 	{
         CViewItemPos        pos = Doc().ViewItems().begin();
-        pos.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() );
+        if ( pos.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
+        {
+            CViewItem*  pItem = pos.Item();
 
-        CViewItem*  pItem = pos.Item();
+            pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
 
-        pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
-
-		this->update();
+		    this->update();
+        }
 	}
 }
 
 
+/**
+ *
+ */
 void CTracesView::wheelEvent(QWheelEvent* event)
 {
     int numDegrees = event->delta() / 8;
@@ -282,6 +332,16 @@ void CTracesView::wheelEvent(QWheelEvent* event)
 
 	int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
 	ui->m_VertScrollbar->setValue( value );
+}
+
+
+/**
+ *
+ */
+void CTracesView::showEvent( QShowEvent* )
+{
+    if ( m_pPipesMgntPage->isVisible() )
+        m_pPipesMgntPage->Refresh();
 }
 
 
@@ -343,9 +403,9 @@ void CTracesView::InitSettings()
  */
 QRect CTracesView::ClientRect( const QRect& rcWnd ) const
 {
-    return QRect(   0, 0,
+    return QRect(   0, m_pSettingsToolbar->height(),
                     rcWnd.width() - ui->m_VertScrollbar->width(),
-                    rcWnd.height() - ui->m_HorzScrollbar->height() - HeaderSize().height() );
+                    rcWnd.height() - ui->m_HorzScrollbar->height() - HeaderSize().height() - m_pSettingsToolbar->height() );
 }
 
 
@@ -354,10 +414,15 @@ QRect CTracesView::ClientRect( const QRect& rcWnd ) const
  */
 QSize CTracesView::HeaderSize() const
 {
-    if ( m_pHeader )
-        return m_pHeader->size();
+    QSize       size;
 
-    return QSize();
+    if ( m_pHeader )
+        size += m_pHeader->size();
+
+    if ( m_pSettingsToolbar )
+        size.setHeight( size.height() + m_pSettingsToolbar->size().height() );
+
+    return size;
 }
 
 

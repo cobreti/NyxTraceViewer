@@ -12,7 +12,7 @@
 #include "Document/DocRepositoryObserver.hpp"
 
 class CTracesView;
-class CTraceDataRepositoryToDocumentLink;
+//class CTraceDataRepositoryToDocumentLink;
 class QWidget;
 
 class CTracesDocument : public QObject
@@ -60,13 +60,13 @@ Q_SIGNALS:
 
 protected:
 
-    typedef std::list<CTraceDataRepositoryToDocumentLink*>         LinksList;
+    //typedef std::list<CTraceDataRepositoryToDocumentLink*>         LinksList;
 
 protected:
 
     TracesViewList                              m_Views;
     QWidget*                                    m_pDefaultViewsParentWindow;
-    LinksList                                   m_UsedLinks;
+    //LinksList                                   m_UsedLinks;
     QString                                     m_Name;
     CViewSettings                               m_DefaultViewSettings;
 

@@ -19,6 +19,7 @@ public:
     CPipesMgntPage( QWidget* pParent );
 
     void show(CTracesDocument* pDoc);
+    void Refresh();
 
 public slots:
 
@@ -27,6 +28,11 @@ public slots:
     void OnPoolSelectionChanged();
     void OnPoolItemChanged( QTreeWidgetItem* pItem, int column );
     void OnPoolItemClicked( QTreeWidgetItem* pItem, int column );
+
+protected:
+
+    void paintEvent( QPaintEvent* event );
+    void FillPoolsList();
 
 protected:
 

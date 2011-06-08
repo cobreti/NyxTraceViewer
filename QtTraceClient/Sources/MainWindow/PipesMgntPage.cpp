@@ -5,6 +5,7 @@
 #include "PipeTraceFeeder.hpp"
 #include "TracesDocument.hpp"
 #include "PoolsUpdateClock.hpp"
+#include "DataStruct/PoolsList.hpp"
 
 
 /**
@@ -41,17 +42,18 @@ void CPipesMgntPage::show(CTracesDocument* pDoc)
 
     m_pDoc = pDoc;
 
-    for (int index = 0; index < ui->m_PoolsTree->topLevelItemCount(); ++index)
-    {
-        MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(ui->m_PoolsTree->topLevelItem(index));
-
-        if ( m_pDoc->Contains(*pPoolItem->TracesPool()) )
-            pPoolItem->setCheckState(0, Qt::Checked );
-        else
-            pPoolItem->setCheckState(0, Qt::Unchecked );
-    }
+    FillPoolsList();
 
     QDialog::show();
+}
+
+
+/**
+ *
+ */
+void CPipesMgntPage::Refresh()
+{
+    FillPoolsList();
 }
 
 
@@ -74,12 +76,15 @@ void CPipesMgntPage::OnNewPool()
 	refPool->Feeder() = pPipeTraceFeeder;
 
 	pItem->SetPool(refPool);
-	pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
     pItem->setIcon(0, PipeSourceIcon);
     ui->m_PoolsTree->insertTopLevelItem(ui->m_PoolsTree->topLevelItemCount(), pItem );
     ui->m_PoolsTree->clearSelection();
     pItem->setSelected(true);
+    pItem->setCheckState(0, Qt::Checked);
+
+    m_pDoc->AddRepositorySrc(*refPool);
 }
 
 
@@ -199,4 +204,75 @@ void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int  )
 		if ( m_pDoc->Contains( *pPoolItem->TracesPool() ) )
 			m_pDoc->RemoveRepositorySrc(*pPoolItem->TracesPool());
 	}
+}
+
+
+/**
+ *
+ */
+void CPipesMgntPage::paintEvent( QPaintEvent*  )
+{
+    QPainter            painter(this);
+    QPen                penMid( palette().mid(), 2 );
+    QPen                penLight( palette().midlight(), 3 );
+    
+
+    painter.setBrush( palette().mid() );
+    painter.setPen( penMid );
+    painter.drawLine( 1, 0, 1, size().height()-1 );
+    painter.drawLine( 0, size().height()-1, size().width()-1, size().height()-1 );
+    
+    painter.setBrush( palette().midlight() );
+    painter.setPen( penLight );
+    painter.drawLine( size().width()-2, 0, size().width()-2, size().height()-1 );
+    //painter.drawRect( QRectF( QPointF(0.0, 0.0), QSizeF(size().width()-1, size().height()-1)));
+}
+
+
+/**
+ *
+ */
+void CPipesMgntPage::FillPoolsList()
+{
+	TraceClientCore::CModule&					    rModule = TraceClientCore::CModule::Instance();
+    QIcon                                           PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
+    TraceClientCore::CPoolsList                     PoolsList;
+    TraceClientCore::CPoolsList::const_iterator     PoolIter;
+
+    rModule.TracesPools().GetPoolsList( PoolsList );
+
+    ui->m_PoolsTree->clear();
+
+    for ( PoolIter = PoolsList.begin(); PoolIter != PoolsList.end(); ++ PoolIter )
+    {
+    	MainWindow::CPoolTreeItem*		    pItem = new MainWindow::CPoolTreeItem();
+        TraceClientCore::CTracesPool*       pPool = (*PoolIter)->Pool();
+	    pItem->SetPool( pPool );
+	    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+	    pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
+        pItem->setIcon(0, PipeSourceIcon);
+
+        if ( pPool->Feeder().Valid() )
+        {
+			if ( pPool->Feeder()->IsRunning() )
+			{
+				pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
+				pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
+			}
+			else
+			{
+				pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+				pItem->setForeground(0, QBrush(QColor(150, 0, 0)));
+			}
+        }
+
+        if ( m_pDoc->Contains(*pPool) )
+            pItem->setCheckState(0, Qt::Checked );
+        else
+            pItem->setCheckState(0, Qt::Unchecked );
+
+        ui->m_PoolsTree->insertTopLevelItem(ui->m_PoolsTree->topLevelItemCount(), pItem );
+    }
+
+    ui->m_btnStartStop->setEnabled(false);
 }

@@ -35,8 +35,8 @@ public: // public types
         virtual bool IsValid() const { return false; }
         virtual XData* Clone() const { return new XData(); }
 
-        virtual void MoveToNext() {}
-        virtual void MoveToPrevious() {}
+        virtual bool MoveToNext() { return false; }
+        virtual bool MoveToPrevious() { return false; }
         virtual bool IsFirst() const { return false; }
         virtual bool IsLast() const { return false; }
 
@@ -71,7 +71,7 @@ public: // public methods
 
     virtual double Y() const { return m_pData->Y(); }
 
-    virtual void MoveTo( const double& y );
+    virtual bool MoveTo( const double& y );
 
 protected:
 

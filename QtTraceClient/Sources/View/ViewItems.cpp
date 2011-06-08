@@ -188,20 +188,30 @@ CViewItemPos::XData* CViewItems::XPosData::Clone() const
 /**
  *
  */
-void CViewItems::XPosData::MoveToNext()
+bool CViewItems::XPosData::MoveToNext()
 {
+    if ( m_Pos == m_pList->end() )
+        return false;
+
     m_Y += (*m_Pos)->GetSize().height();
     ++ m_Pos;
+
+    return true;
 }
 
 
 /**
  *
  */
-void CViewItems::XPosData::MoveToPrevious()
+bool CViewItems::XPosData::MoveToPrevious()
 {
+    if ( m_Pos == m_pList->begin())
+        return false;
+
     -- m_Pos;
     m_Y -= (*m_Pos)->GetSize().height();
+
+    return true;
 }
 
 
@@ -255,7 +265,10 @@ bool CViewItems::XPosData::IsEqual(const CViewItemPos::XData &data) const
  */
 CViewItem* CViewItems::XPosData::Item() const
 {
-    return *m_Pos;
+    if ( IsValid() )
+        return *m_Pos;
+
+    return NULL;
 }
 
 

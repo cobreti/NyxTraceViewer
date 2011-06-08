@@ -10,6 +10,7 @@
 
 class CPipesMgntPage;
 class CViewPage;
+class QTreeWidgetItem;
 
 namespace Ui {
     class MainWindow;
@@ -27,16 +28,15 @@ public:
 public slots:
 
 	//void OnDump();
-    void OnDocsViewsTreeSelectionChanged();
-    void OnAddDoc();
+    void OnViewsTreeSelectionChanged();
     void OnAddView();
+    void OnViewItemChanged( QTreeWidgetItem* pItem, int );
 
 protected:
 
 	void changeEvent(QEvent *e);
 	void closeEvent(QCloseEvent *e);
 
-    virtual void CreateDocViewRoot();
     virtual CTracesDocument* CreateNewDocument(  const QString& rDocumentName );
     virtual CTracesView* CreateNewView( CTracesDocument* pDoc, const QString& ViewName );
 
@@ -47,7 +47,6 @@ private:
 	CDocumentsCollection	    m_Documents;
     int                         m_nNextDocumentId;
     int                         m_nNextViewId;
-    CPipesMgntPage*             m_pPipesMgntPage;
     CViewPage*                  m_pViewPage;
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
 };
