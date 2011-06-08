@@ -30,6 +30,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     connect(ui->m_ViewsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnViewsTreeSelectionChanged()));
     connect(ui->m_btnAddView, SIGNAL(clicked()), this, SLOT(OnAddView()));
+    bool bRet = connect(ui->m_ViewsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnViewItemChanged(QTreeWidgetItem*, int )));
 
     m_pViewPage = new CViewPage(ui->m_ContentFrame);
     ui->m_ContentFrame->layout()->addWidget(m_pViewPage);
@@ -137,6 +138,17 @@ void CMainWindow::closeEvent(QCloseEvent* e)
     m_Documents.Clear();
 
 	e->accept();
+}
+
+
+/**
+ *
+ */
+void CMainWindow::OnViewItemChanged( QTreeWidgetItem* pItem, int )
+{
+    MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(pItem);
+
+    pViewItem->View()->SetName( pViewItem->text(0) );
 }
 
 

@@ -81,6 +81,12 @@
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QTreeWidget" name="m_ViewsTree">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <property name="itemsExpandable">
            <bool>false</bool>
           </property>

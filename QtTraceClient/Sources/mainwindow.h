@@ -10,6 +10,7 @@
 
 class CPipesMgntPage;
 class CViewPage;
+class QTreeWidgetItem;
 
 namespace Ui {
     class MainWindow;
@@ -29,6 +30,7 @@ public slots:
 	//void OnDump();
     void OnViewsTreeSelectionChanged();
     void OnAddView();
+    void OnViewItemChanged( QTreeWidgetItem* pItem, int );
 
 protected:
 
