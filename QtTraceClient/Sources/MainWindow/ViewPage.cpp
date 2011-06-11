@@ -12,20 +12,18 @@ m_pView(NULL)
 {
     ui->setupUi(this);
 
-    setWindowFlags( Qt::Widget );
-
-    ui->m_TopViewFrame->hide();
-    ui->m_RightViewFrame->hide();
+    if ( pParent )
+        setWindowFlags( Qt::Widget );
 }
 
 
 /**
  *
  */
-//QFrame* CViewPage::ViewFrame() const
-//{
-//    return ui->m_ViewFrame;
-//}
+CViewPage::~CViewPage()
+{
+}
+
 
 
 /**
@@ -58,4 +56,14 @@ void CViewPage::hide()
     }
 
     QDialog::hide();
+}
+
+
+/**
+ *
+ */
+void CViewPage::DetachView( CTracesView* pView )
+{
+    if ( m_pView == pView )
+        m_pView = NULL;
 }

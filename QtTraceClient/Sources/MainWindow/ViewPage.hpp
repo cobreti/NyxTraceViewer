@@ -19,11 +19,13 @@ class CViewPage : public QDialog
 
 public:
     CViewPage( QWidget* pParent );
+    virtual ~CViewPage();
 
     //QFrame* ViewFrame() const;
 
     void show( CTracesView* pView );
     void hide();
+    void DetachView( CTracesView* pView );
 
 protected:
     Ui::ViewPage*       ui;

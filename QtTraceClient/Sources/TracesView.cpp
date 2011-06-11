@@ -4,6 +4,8 @@
 #include "TracesView.h"
 #include "ui_TracesView.h"
 #include "TracesDocument.hpp"
+#include "TraceClientApp.hpp"
+#include "MainWindow.h"
 
 #include <Nyx.hpp>
 
@@ -31,18 +33,14 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     m_bKeepAtEnd(true),
     m_pHeader(NULL),
     m_pSettingsToolbar(NULL),
-    m_pPipesMgntPage(NULL)
+    m_pPipesMgntPage(NULL),
+    m_pPinBtn(NULL)
 {
     ui->setupUi(this);
 
     m_pSettingsToolbar = new CSettingsToolBar(this);
 
     this->setContentsMargins(0, m_pSettingsToolbar->height(), ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
-
-    connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
-    connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
-    connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
-    connect( m_pSettingsToolbar, SIGNAL(sig_OnShowHideSettings(ViewEnums::ESettings, bool)), this, SLOT(OnShowHideSettings(ViewEnums::ESettings, bool)));
 
     m_Margins.setLeft(25.0);
     m_Margins.setRight(25.0);
@@ -56,6 +54,22 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
 
     m_pPipesMgntPage = new CPipesMgntPage(this);
     m_pPipesMgntPage->hide();
+
+    QIcon   PinIcon(":/View/pinwhite");
+    m_pPinBtn = new QToolButton(this);
+    m_pPinBtn->setIcon(PinIcon);
+    m_pPinBtn->setIconSize( QSize(16, 16) );
+    m_pPinBtn->setAutoRaise(true);
+    m_pPinBtn->setCheckable(true);
+    m_pPinBtn->setChecked(true);
+    m_pPinBtn->resize(20, 20);
+
+    connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
+    connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
+    connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
+    connect( m_pSettingsToolbar, SIGNAL(sig_OnShowHideSettings(ViewEnums::ESettings, bool)), this, SLOT(OnShowHideSettings(ViewEnums::ESettings, bool)));
+    connect( m_pPinBtn, SIGNAL(clicked(bool)), this, SLOT(OnPinBtnClicked(bool)));
+
 }
 
 
@@ -133,6 +147,15 @@ void CTracesView::ShowFeedsPanel()
 }
 
 
+/**
+ *
+ */
+bool CTracesView::IsPinned() const
+{
+    return m_pPinBtn->isChecked();
+}
+
+
 void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
@@ -174,6 +197,22 @@ void CTracesView::OnShowHideSettings( ViewEnums::ESettings settings, bool bShow 
 }
 
 
+/**
+ *
+ */
+void CTracesView::OnPinBtnClicked( bool checked )
+{
+    if ( checked )
+    {
+        CTraceClientApp::Instance().MainWindow()->PinView(this);
+    }
+    else
+    {
+        CTraceClientApp::Instance().MainWindow()->UnpinView(this);
+    }
+}
+
+
 void CTracesView::resizeEvent(QResizeEvent *event)
 {
     int     nHeight = ui->m_HorzScrollbar->height();
@@ -197,6 +236,8 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     if ( nPipesMgntPageWidth > 500 )
         nPipesMgntPageWidth = 500;
     m_pPipesMgntPage->resize( nPipesMgntPageWidth, event->size().height() / 2 );
+
+    m_pPinBtn->move( event->size().width() - nWidth - m_pPinBtn->size().width()-2, 2 );
 
     update();
 }

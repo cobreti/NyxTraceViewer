@@ -1,5 +1,5 @@
 #include <QtGui/QApplication>
-#include "mainwindow.h"
+//#include "mainwindow.h"
 
 #include <Nyx.hpp>
 #include <NyxNet.hpp>
@@ -7,6 +7,7 @@
 
 #include "TraceClientCoreModule.hpp"
 #include "PipeTraceFeeder.hpp"
+#include "TraceClientApp.hpp"
 
 #include "StatusUpdaters/UISensorsFactory.hpp"
 
@@ -26,21 +27,17 @@ int main(int argc, char *argv[])
 
     Nyx::CTraceStream(0x0).Write(L"Application starting");
 
-    QApplication a(argc, argv);
-    CMainWindow* pMainWindow = new CMainWindow();
-	pMainWindow->show();
-    int ret = a.exec();
+    CTraceClientApp     TheApp;
 
-	delete pMainWindow;
-	pMainWindow = NULL;
+    TheApp.Init(argc, argv);
+    TheApp.Run();
+    TheApp.Destroy();
 
 	CUISensorsFactory::Terminate();
-
-	//w.close();
 
 	TraceClientCoreModule.TracesPools().Clear();
 
     Nyx::CTraceStream(0x0).Write(L"Application ending");
 
-    return ret;
+    return TheApp.ReturnValue();
 }

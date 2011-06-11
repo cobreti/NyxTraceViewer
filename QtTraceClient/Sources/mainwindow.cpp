@@ -30,7 +30,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     connect(ui->m_ViewsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnViewsTreeSelectionChanged()));
     connect(ui->m_btnAddView, SIGNAL(clicked()), this, SLOT(OnAddView()));
-    bool bRet = connect(ui->m_ViewsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnViewItemChanged(QTreeWidgetItem*, int )));
+    connect(ui->m_ViewsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnViewItemChanged(QTreeWidgetItem*, int )));
 
     m_pViewPage = new CViewPage(ui->m_ContentFrame);
     ui->m_ContentFrame->layout()->addWidget(m_pViewPage);
@@ -77,6 +77,39 @@ CMainWindow::~CMainWindow()
 /**
  *
  */
+void CMainWindow::PinView( CTracesView* pView )
+{
+    QWidget*        pViewParent = static_cast<QWidget*>(pView->parent());
+    
+    m_pViewPage->show(pView);
+
+    if ( pViewParent && pViewParent != m_pViewPage && !m_pViewPage->children().contains(pViewParent) )
+    {
+        pViewParent = pViewParent->topLevelWidget();
+        pViewParent->close();
+        delete pViewParent;
+    }
+
+    SelectItemWithView(pView);
+}
+
+
+/**
+ *
+ */
+void CMainWindow::UnpinView( CTracesView* pView )
+{
+    CViewPage*      pViewPage = new CViewPage(NULL);
+
+    pViewPage->show(pView);
+    m_pViewPage->DetachView(pView);
+}
+
+
+
+/**
+ *
+ */
 void CMainWindow::OnViewsTreeSelectionChanged()
 {
     if ( ui->m_ViewsTree->selectedItems().empty() )
@@ -85,7 +118,16 @@ void CMainWindow::OnViewsTreeSelectionChanged()
     MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
 
     if ( pViewItem )
-        m_pViewPage->show(pViewItem->View());
+    {
+        if ( pViewItem->View()->IsPinned() )
+            m_pViewPage->show(pViewItem->View());
+        else
+        {
+            QWidget*    pTopLevelParent = pViewItem->View()->topLevelWidget();
+            pTopLevelParent->activateWindow();
+            pViewItem->View()->setFocus();
+        }
+    }
     else
         m_pViewPage->hide();
 }
@@ -180,10 +222,34 @@ CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& V
     pViewItem->setFlags( Qt::ItemIsEditable | pViewItem->flags() );
     pViewItem->setIcon(0, ViewIcon);
 
+    ui->m_ViewsTree->clearSelection();
     ui->m_ViewsTree->addTopLevelItem( pViewItem );
     pViewItem->setSelected(true);
 
-    m_pViewPage->show(pView);
+    //m_pViewPage->show(pView);
+    PinView(pView);
 
     return pView;
+}
+
+
+/**
+ *
+ */
+void CMainWindow::SelectItemWithView( CTracesView* pView )
+{
+    int     count = ui->m_ViewsTree->topLevelItemCount();
+
+    ui->m_ViewsTree->clearSelection();
+
+    for (int index = 0; index < count; ++index)
+    {
+        MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->topLevelItem(index));
+
+        if ( pViewItem->View() == pView )
+        {
+            pViewItem->setSelected(true);
+            break;
+        }
+    }
 }

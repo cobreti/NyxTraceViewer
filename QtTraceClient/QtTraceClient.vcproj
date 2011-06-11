@@ -245,6 +245,14 @@
 				RelativePath="Sources\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Sources\TraceClientApp.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Sources\TraceClientApp.hpp"
+				>
+			</File>
 			<Filter
 				Name="Dialogs"
 				>
@@ -1654,7 +1662,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\Document-icon.png"
+				RelativePath=".\UI\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1674,7 +1682,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\Document-icon.png"
+				RelativePath=".\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1734,6 +1742,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Icons\New-Document-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath=".\UI\Icons\New-Document-icon.png"
 				>
 				<FileConfiguration
@@ -1754,7 +1782,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\New-Document-icon.png"
+				RelativePath=".\Icons\Pin-white-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1803,7 +1831,7 @@
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
 						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);.\Icons\Document-icon.png;.\Icons\File-View-icon.png;.\Icons\New-Document-icon.png;.\Icons\View-icon.png;.\Icons\add-icon.png;.\Icons\DeleteDocView-icon.png;.\Icons\delete-icon.png;.\Icons\PipeSource-icon.png;.\Icons\StartPipe-icon.png;.\Icons\StopPipe-icon.png"
+						AdditionalDependencies="$(InputPath);.\Icons\Document-icon.png;.\Icons\File-View-icon.png;.\Icons\New-Document-icon.png;.\Icons\View-icon.png;.\Icons\add-icon.png;.\Icons\DeleteDocView-icon.png;.\Icons\delete-icon.png;.\Icons\PipeSource-icon.png;.\Icons\StartPipe-icon.png;.\Icons\StopPipe-icon.png;.\Images\VGradientOuter.png;.\Images\VGradientInner.png;.\Icons\Pin-white-icon.png"
 						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
@@ -1814,7 +1842,7 @@
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
 						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);.\Icons\Document-icon.png;.\Icons\File-View-icon.png;.\Icons\New-Document-icon.png;.\Icons\View-icon.png;.\Icons\add-icon.png;.\Icons\DeleteDocView-icon.png;.\Icons\delete-icon.png;.\Icons\PipeSource-icon.png;.\Icons\StartPipe-icon.png;.\Icons\StopPipe-icon.png"
+						AdditionalDependencies="$(InputPath);.\Icons\Document-icon.png;.\Icons\File-View-icon.png;.\Icons\New-Document-icon.png;.\Icons\View-icon.png;.\Icons\add-icon.png;.\Icons\DeleteDocView-icon.png;.\Icons\delete-icon.png;.\Icons\PipeSource-icon.png;.\Icons\StartPipe-icon.png;.\Icons\StopPipe-icon.png;.\Images\VGradientOuter.png;.\Images\VGradientInner.png;.\Icons\Pin-white-icon.png"
 						Outputs=".\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
@@ -1864,7 +1892,27 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\View-icon.png"
+				RelativePath=".\Images\VGradientInner.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Images\VGradientOuter.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1885,6 +1933,26 @@
 			</File>
 			<File
 				RelativePath=".\UI\Icons\View-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

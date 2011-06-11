@@ -9,7 +9,6 @@
 #include "View/ViewSettings.hpp"
 #include "View/SettingsToolBar.hpp"
 
-
 namespace Ui
 {
     class CTracesView;
@@ -18,6 +17,7 @@ namespace Ui
 class CTracesDocument;
 class CViewHeader;
 class CPipesMgntPage;
+class QToolButton;
 
 class CTracesView : public QWidget
 {
@@ -43,11 +43,14 @@ public:
 
     void ShowFeedsPanel();
 
+    bool IsPinned() const;
+
 public slots:
 
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
     void OnShowHideSettings( ViewEnums::ESettings settings, bool bShow );
+    void OnPinBtnClicked( bool checked );
 
 protected:
 
@@ -88,6 +91,7 @@ protected:
     CViewHeader*                        m_pHeader;
     CSettingsToolBar*                   m_pSettingsToolbar;
     CPipesMgntPage*                     m_pPipesMgntPage;
+    QToolButton*                        m_pPinBtn;
 };
 
 #endif // TRACESVIEW_H

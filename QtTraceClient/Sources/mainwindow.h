@@ -25,6 +25,9 @@ public:
     CMainWindow(QWidget *parent = 0);
     ~CMainWindow();
 
+    void PinView( CTracesView* pView );
+    void UnpinView( CTracesView* pView );
+
 public slots:
 
 	//void OnDump();
@@ -39,6 +42,7 @@ protected:
 
     virtual CTracesDocument* CreateNewDocument(  const QString& rDocumentName );
     virtual CTracesView* CreateNewView( CTracesDocument* pDoc, const QString& ViewName );
+    virtual void SelectItemWithView( CTracesView* pView );
 
 private:
     Ui::MainWindow *ui;
