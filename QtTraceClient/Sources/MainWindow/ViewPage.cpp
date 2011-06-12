@@ -18,6 +18,8 @@ m_pView(NULL)
 
     if ( pParent )
         setWindowFlags( Qt::Widget );
+
+    ui->m_TitleFrame->hide();
 }
 
 
