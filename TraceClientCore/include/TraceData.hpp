@@ -20,7 +20,8 @@ namespace TraceClientCore
         enum ETraceType
         {
             eTT_User,
-            eTT_ConnectionStatus
+            eTT_ConnectionStatus_Connection,
+            eTT_ConnectionStatus_Disconnection
         };
 
 	public:

@@ -140,7 +140,7 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
             {
                 CTraceData*   pConnTraceData = new (GetOwnerPool()->MemoryPool())TraceClientCore::CTraceData(GetOwnerPool()->MemoryPool());
 
-                pConnTraceData->Type() = CTraceData::eTT_ConnectionStatus;
+                pConnTraceData->Type() = CTraceData::eTT_ConnectionStatus_Connection;
                 pConnTraceData->Data() = L"Connection";
                 pConnTraceData->OwnerPool() = GetOwnerPool();
                 GetOwnerPool()->Repository().Insert(pConnTraceData);
@@ -182,7 +182,7 @@ void TraceClientCore::CPipeTraceFeeder::OnConnectionTerminated( NyxNet::IConnect
     {
         CTraceData*       pTraceData = new (GetOwnerPool()->MemoryPool())TraceClientCore::CTraceData(GetOwnerPool()->MemoryPool());
 
-        pTraceData->Type() = CTraceData::eTT_ConnectionStatus;
+        pTraceData->Type() = CTraceData::eTT_ConnectionStatus_Disconnection;
         pTraceData->Data() = L"Disconnection";
         pTraceData->OwnerPool() =  GetOwnerPool();
         GetOwnerPool()->Repository().Insert(pTraceData);

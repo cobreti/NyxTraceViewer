@@ -177,6 +177,16 @@ void CMainWindow::closeEvent(QCloseEvent* e)
 {
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
 
+    int     count = ui->m_ViewsTree->topLevelItemCount();
+
+    for (int index = 0; index < count; ++index)
+    {
+        MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->topLevelItem(index));
+
+        if ( !pViewItem->View()->IsPinned() )
+            PinView(pViewItem->View());
+    }
+
     m_Documents.Clear();
 
 	e->accept();
