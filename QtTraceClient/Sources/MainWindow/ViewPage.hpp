@@ -28,6 +28,10 @@ public:
     void DetachView( CTracesView* pView );
 
 protected:
+
+    void closeEvent( QCloseEvent* );
+
+protected:
     Ui::ViewPage*       ui;
     CTracesView*        m_pView;
 };

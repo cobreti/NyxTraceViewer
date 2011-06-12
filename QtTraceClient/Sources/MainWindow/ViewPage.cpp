@@ -1,6 +1,10 @@
 #include "ViewPage.hpp"
 #include "ui_ViewPage.h"
 #include "TracesView.h"
+#include "TraceClientApp.hpp"
+#include "MainWindow.h"
+
+#include <QCloseEvent>
 
 /**
  *
@@ -66,4 +70,16 @@ void CViewPage::DetachView( CTracesView* pView )
 {
     if ( m_pView == pView )
         m_pView = NULL;
+}
+
+
+/**
+ *
+ */
+void CViewPage::closeEvent( QCloseEvent* event )
+{
+    event->ignore();
+
+    if ( m_pView )
+        CTraceClientApp::Instance().MainWindow()->PinView(m_pView);
 }

@@ -60,13 +60,8 @@ Q_SIGNALS:
 
 protected:
 
-    //typedef std::list<CTraceDataRepositoryToDocumentLink*>         LinksList;
-
-protected:
-
     TracesViewList                              m_Views;
     QWidget*                                    m_pDefaultViewsParentWindow;
-    //LinksList                                   m_UsedLinks;
     QString                                     m_Name;
     CViewSettings                               m_DefaultViewSettings;
 

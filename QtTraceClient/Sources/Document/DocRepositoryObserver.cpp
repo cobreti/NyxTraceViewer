@@ -56,7 +56,7 @@ void CDocRepositoryObserver::Insert( TraceClientCore::CTraceData* pTraceData )
 void CDocRepositoryObserver::OnFirstBeginUpdate()
 {
     if ( m_pItems == NULL )
-        m_pItems = new (m_refObjectsPool)CViewItems(m_refObjectsPool);
+        m_pItems = new (m_refObjectsPool)CViewItems(m_refObjectsPool, false);
 }
 
 

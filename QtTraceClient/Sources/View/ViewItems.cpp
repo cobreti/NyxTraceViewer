@@ -5,8 +5,9 @@
 /**
  *
  */
-CViewItems::CViewItems( Nyx::CMemoryPool* pPool ) :
-Nyx::CMemPoolObj<>(pPool)
+CViewItems::CViewItems( Nyx::CMemoryPool* pPool, bool bOwnItems ) :
+Nyx::CMemPoolObj<>(pPool),
+m_bOwnItems(bOwnItems)
 {
 }
 
@@ -16,7 +17,7 @@ Nyx::CMemPoolObj<>(pPool)
  */
 CViewItems::~CViewItems()
 {
-    Clear();
+    Clear(m_bOwnItems);
 }
 
 

@@ -38,7 +38,7 @@ CTracesDocument::~CTracesDocument()
 void CTracesDocument::Init()
 {
     m_refMemoryPool = Nyx::CMemoryPool::Alloc(100);
-    m_pViewItems = new (m_refMemoryPool)CViewItems(m_refMemoryPool);
+    m_pViewItems = new (m_refMemoryPool)CViewItems(m_refMemoryPool, true);
 
     m_pRepositoryObserver = new CDocRepositoryObserver(*this);
 
@@ -228,7 +228,6 @@ void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
         ++pos;
     }
 
-    pViewItems->Clear(false);
     delete pViewItems;
 }
 

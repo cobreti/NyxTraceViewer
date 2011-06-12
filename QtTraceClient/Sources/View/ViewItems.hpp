@@ -18,7 +18,7 @@ class CViewItem;
 class CViewItems : public Nyx::CMemPoolObj<>
 {
 public:
-    CViewItems( Nyx::CMemoryPool* pPool );
+    CViewItems( Nyx::CMemoryPool* pPool, bool bOwnItems );
     virtual ~CViewItems();
 
     virtual void Add( CViewItem* pItem );
@@ -83,6 +83,7 @@ protected:
     QSizeF                  m_Size;
     QSizeF                  m_LastLineSize;
     QSizeF                  m_MaxLineSize;
+    bool                    m_bOwnItems;
 };
 
 
