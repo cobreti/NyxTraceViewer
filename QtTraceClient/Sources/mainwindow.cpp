@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "DebugPanel.h"
-#include "TracesDocument.hpp"
+#include "Document/TracesDocument.hpp"
 #include "Dialogs/NewPoolDlg.hpp"
 #include "Dialogs/NewDocumentDlg.hpp"
 #include "Dialogs/NewViewDlg.hpp"

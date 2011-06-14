@@ -41,14 +41,14 @@ SOURCES += Sources/TracesView.cpp \
     Sources/MainWindow/ViewPage.cpp \
     Sources/MainWindow/PipesMgntPage.cpp \
     Sources/View/ViewHeader.cpp \
-    Sources/TracesDocument.cpp \
     Sources/View/ViewItemInserter.cpp \
     Sources/Document/DocRepositoryObserver.cpp \
     Sources/View/ViewItemLineNumberPainter.cpp \
     Sources/View/ViewItemsNodeObjectsPool.cpp \
     Sources/MainWindow/ViewTreeItem.cpp \
     Sources/TraceClientApp.cpp \
-    Sources/View/SettingsToolBar.cpp
+    Sources/View/SettingsToolBar.cpp \
+    Sources/Document/TracesDocument.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
     Sources/DebugPanel.h \
@@ -88,14 +88,14 @@ HEADERS += Sources/TracesView.h \
     Sources/MainWindow/ViewPage.hpp \
     Sources/MainWindow/PipesMgntPage.hpp \
     Sources/View/ViewHeader.hpp \
-    Sources/TracesDocument.hpp \
     Sources/View/ViewItemInserter.hpp \
     Sources/Document/DocRepositoryObserver.hpp \
     Sources/View/ViewItemLineNumberPainter.hpp \
     Sources/View/ViewItemsNodeObjectsPool.hpp \
     Sources/MainWindow/ViewTreeItem.hpp \
     Sources/TraceClientApp.hpp \
-    Sources/View/SettingsToolBar.hpp
+    Sources/View/SettingsToolBar.hpp \
+    Sources/Document/TracesDocument.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
     UI/DebugPanel.ui \

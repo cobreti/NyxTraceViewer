@@ -3,7 +3,7 @@
 #include "MainWindow/PoolTreeItem.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "PipeTraceFeeder.hpp"
-#include "TracesDocument.hpp"
+#include "Document/TracesDocument.hpp"
 #include "PoolsUpdateClock.hpp"
 #include "DataStruct/PoolsList.hpp"
 

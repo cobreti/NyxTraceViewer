@@ -1,5 +1,5 @@
 #include "ViewTreeItem.hpp"
-#include "TracesDocument.hpp"
+#include "Document/TracesDocument.hpp"
 #include "TracesView.h"
 
 namespace MainWindow

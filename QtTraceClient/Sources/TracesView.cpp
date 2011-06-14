@@ -3,7 +3,7 @@
 
 #include "TracesView.h"
 #include "ui_TracesView.h"
-#include "TracesDocument.hpp"
+#include "Document/TracesDocument.hpp"
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
 
