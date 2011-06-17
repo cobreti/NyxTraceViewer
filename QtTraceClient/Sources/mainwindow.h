@@ -33,6 +33,7 @@ public slots:
 	//void OnDump();
     void OnViewsTreeSelectionChanged();
     void OnAddView();
+    void OnCopyView();
     void OnViewItemChanged( QTreeWidgetItem* pItem, int );
 
 protected:
@@ -40,8 +41,9 @@ protected:
 	void changeEvent(QEvent *e);
 	void closeEvent(QCloseEvent *e);
 
+    void CloseChildViews( QTreeWidgetItem* pParent );
     virtual CTracesDocument* CreateNewDocument(  const QString& rDocumentName );
-    virtual CTracesView* CreateNewView( CTracesDocument* pDoc, const QString& ViewName );
+    virtual CTracesView* CreateNewView( CTracesDocument* pDoc, const QString& ViewName, QTreeWidgetItem* pParent = NULL );
     virtual void SelectItemWithView( CTracesView* pView );
 
 private:

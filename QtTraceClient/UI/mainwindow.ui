@@ -81,6 +81,9 @@
        <layout class="QVBoxLayout" name="verticalLayout_4">
         <item>
          <widget class="QTreeWidget" name="m_ViewsTree">
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
           <property name="showDropIndicator" stdset="0">
            <bool>false</bool>
           </property>
@@ -97,7 +100,7 @@
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <property name="itemsExpandable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <attribute name="headerVisible">
            <bool>false</bool>
@@ -142,6 +145,18 @@
               <width>16</width>
               <height>16</height>
              </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_btnCopyView">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normalon>:/MainWindow/Icons/View-Copy-icon.png</normalon>
+             </iconset>
             </property>
            </widget>
           </item>
@@ -212,7 +227,7 @@
      <x>0</x>
      <y>0</y>
      <width>867</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -227,8 +242,6 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="../QTraceClient.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

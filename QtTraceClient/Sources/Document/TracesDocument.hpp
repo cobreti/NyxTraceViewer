@@ -12,7 +12,6 @@
 #include "Document/DocRepositoryObserver.hpp"
 
 class CTracesView;
-//class CTraceDataRepositoryToDocumentLink;
 class QWidget;
 
 class CTracesDocument : public QObject

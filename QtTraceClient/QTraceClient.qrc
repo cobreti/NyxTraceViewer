@@ -10,6 +10,7 @@
         <file>Icons/PipeSource-icon.png</file>
         <file>Icons/StartPipe-icon.png</file>
         <file>Icons/StopPipe-icon.png</file>
+        <file>Icons/View-Copy-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

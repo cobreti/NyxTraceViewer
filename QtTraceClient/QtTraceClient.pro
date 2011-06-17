@@ -48,7 +48,10 @@ SOURCES += Sources/TracesView.cpp \
     Sources/MainWindow/ViewTreeItem.cpp \
     Sources/TraceClientApp.cpp \
     Sources/View/SettingsToolBar.cpp \
-    Sources/Document/TracesDocument.cpp
+    Sources/Document/TracesDocument.cpp \
+    Sources/View/SessionViewItems.cpp \
+    Sources/View/ModuleViewItems.cpp \
+    Sources/View/ViewItemsModules.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
     Sources/DebugPanel.h \
@@ -95,7 +98,10 @@ HEADERS += Sources/TracesView.h \
     Sources/MainWindow/ViewTreeItem.hpp \
     Sources/TraceClientApp.hpp \
     Sources/View/SettingsToolBar.hpp \
-    Sources/Document/TracesDocument.hpp
+    Sources/Document/TracesDocument.hpp \
+    Sources/View/SessionViewItems.hpp \
+    Sources/View/ModuleViewItems.hpp \
+    Sources/View/ViewItemsModules.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
     UI/DebugPanel.ui \

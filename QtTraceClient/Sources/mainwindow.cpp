@@ -30,6 +30,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     connect(ui->m_ViewsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnViewsTreeSelectionChanged()));
     connect(ui->m_btnAddView, SIGNAL(clicked()), this, SLOT(OnAddView()));
+    connect(ui->m_btnCopyView, SIGNAL(clicked()), this, SLOT(OnCopyView()));
     connect(ui->m_ViewsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnViewItemChanged(QTreeWidgetItem*, int )));
 
     m_pViewPage = new CViewPage(ui->m_ContentFrame);
@@ -130,6 +131,8 @@ void CMainWindow::OnViewsTreeSelectionChanged()
     }
     else
         m_pViewPage->hide();
+
+    ui->m_btnCopyView->setEnabled( pViewItem->parent() == NULL);
 }
 
 
@@ -140,17 +143,31 @@ void CMainWindow::OnAddView()
 {
     CTracesDocument*                 pDocument = NULL;
 
-    if ( ui->m_ViewsTree->selectedItems().empty() )
-    {
+//    if ( ui->m_ViewsTree->selectedItems().empty() )
+//    {
         pDocument = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
-    }
-    else
-    {
-        MainWindow::CViewTreeItem*       pCurrentItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
-        pDocument = &pCurrentItem->View()->Doc();
-    }
+//    }
+//    else
+//    {
+//        MainWindow::CViewTreeItem*       pCurrentItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
+//        pDocument = &pCurrentItem->View()->Doc();
+//    }
 
     CreateNewView(pDocument, QString("View ") + QString().setNum(m_nNextViewId++));
+}
+
+
+/**
+ *
+ */
+void CMainWindow::OnCopyView()
+{
+    CTracesDocument*                 pDocument = NULL;
+
+    MainWindow::CViewTreeItem*       pCurrentItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
+    pDocument = &pCurrentItem->View()->Doc();
+
+    CreateNewView(pDocument, QString("View ") + QString().setNum(m_nNextViewId++), pCurrentItem);
 }
 
 
@@ -185,11 +202,27 @@ void CMainWindow::closeEvent(QCloseEvent* e)
 
         if ( !pViewItem->View()->IsPinned() )
             PinView(pViewItem->View());
+
+        CloseChildViews(pViewItem);
     }
 
     m_Documents.Clear();
 
 	e->accept();
+}
+
+
+void CMainWindow::CloseChildViews( QTreeWidgetItem* pParent )
+{
+    int     count = pParent->childCount();
+
+    for (int index = 0; index < count; ++index)
+    {
+        MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(pParent->child(index));
+
+        if ( !pViewItem->View()->IsPinned())
+            PinView(pViewItem->View());
+    }
 }
 
 
@@ -221,23 +254,35 @@ CTracesDocument* CMainWindow::CreateNewDocument( const QString& rDocumentName )
 /**
  *
  */
-CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& ViewName )
+CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& ViewName, QTreeWidgetItem* pParent /*= NULL*/ )
 {
 	CTracesView*					pView = pDoc->CreateView(m_pViewPage);
     QIcon                           ViewIcon(":/MainWindow/Icons/View-icon.png");
 
 	pView->SetName(ViewName);
 
-    MainWindow::CViewTreeItem*          pViewItem = new MainWindow::CViewTreeItem(NULL, pView);
+    MainWindow::CViewTreeItem*          pViewItem = new MainWindow::CViewTreeItem(pParent, pView);
     pViewItem->setFlags( Qt::ItemIsEditable | pViewItem->flags() );
     pViewItem->setIcon(0, ViewIcon);
 
     ui->m_ViewsTree->clearSelection();
-    ui->m_ViewsTree->addTopLevelItem( pViewItem );
-    pViewItem->setSelected(true);
+
+    if ( pParent )
+    {
+        ui->m_ViewsTree->expandItem(pParent);
+        pParent->addChild(pViewItem);
+        pViewItem->setSelected(true);
+//        m_pViewPage->hide();
+    }
+    else
+    {
+        ui->m_ViewsTree->addTopLevelItem( pViewItem );
+        pViewItem->setSelected(true);
+        PinView(pView);
+    }
+    //ui->m_ViewsTree->setCurrentItem(pViewItem, 1);
 
     //m_pViewPage->show(pView);
-    PinView(pView);
 
     return pView;
 }
