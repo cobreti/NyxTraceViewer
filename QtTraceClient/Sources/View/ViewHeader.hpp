@@ -2,7 +2,7 @@
 #define VIEWHEADER_HPP
 
 #include <QWidget>
-#include <QtGui>
+#include <QResizeEvent>
 
 
 class CViewColumnsSettings;

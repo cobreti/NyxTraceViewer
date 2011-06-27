@@ -8,13 +8,17 @@
 #include "RepositoryObserver.hpp"
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
+#include "View/IViewItemsModulesListener.hpp"
 #include "TracesPool.hpp"
 #include "Document/DocRepositoryObserver.hpp"
 
 class CTracesView;
 class QWidget;
+class CViewItemsModulesMgr;
 
-class CTracesDocument : public QObject
+
+class CTracesDocument : public QObject,
+                        public IViewItemsModulesListener
 {
 Q_OBJECT
 
@@ -48,6 +52,11 @@ public:
 
     Nyx::CMemoryPool*       MemoryPool() const      { return m_refMemoryPool; }
 
+public: // IViewItemsModulesListener methods
+
+    virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
+    virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
+
 public slots:
 
     void OnNewTraceItemsHandler(CViewItems* pViewItems);
@@ -69,6 +78,8 @@ protected:
     CDocRepositoryObserver*                     m_pRepositoryObserver;
     Nyx::CMemoryPoolRef                         m_refMemoryPool;
     size_t                                      m_NextLineNumber;
+
+    CViewItemsModulesMgr*                       m_pViewItemsModulesMgr;
 };
 
 #endif // TRACESREPOSITORYDOC_HPP

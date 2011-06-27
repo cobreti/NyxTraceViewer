@@ -9,7 +9,8 @@
  */
 TraceClientCore::CPipeTraceFeeder::CPipeTraceFeeder( TraceClientCore::CTracesPool* pOwnerPool ) :
 CTraceFeeder(pOwnerPool),
-m_TracesCount(0)
+m_TracesCount(0),
+m_pLastTrace(NULL)
 {
 }
 
@@ -30,6 +31,7 @@ void TraceClientCore::CPipeTraceFeeder::Start()
 {
     m_Name = GetOwnerPool()->Name().c_str();
 	m_Name += "_Pipe";
+    m_pLastTrace = NULL;
 
 	m_refNxConnection  = NyxNet::CNxConnection::Alloc();
 	m_refNxConnection->SetConnectionHandler( static_cast<NyxNet::INxConnectionHandler*>(this) );
@@ -52,6 +54,7 @@ void TraceClientCore::CPipeTraceFeeder::Stop()
 		
 	m_refServer = NULL;
 	m_refNxConnection = NULL;
+    m_pLastTrace = NULL;
 }
 
 
@@ -142,15 +145,16 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
 
                 pConnTraceData->Type() = CTraceData::eTT_ConnectionStatus_Connection;
                 pConnTraceData->Data() = L"Connection";
+                pConnTraceData->TickCount() = pTraceData->TickCount();
                 pConnTraceData->OwnerPool() = GetOwnerPool();
                 GetOwnerPool()->Repository().Insert(pConnTraceData);
-                //TraceInserter()->Insert(pConnTraceData);
             }
 
     		
             pTraceData->OwnerPool() = GetOwnerPool();
             GetOwnerPool()->Repository().Insert(pTraceData);
-		    //TraceInserter()->Insert(pTraceData);
+            
+            m_pLastTrace = pTraceData;
 
             ++ m_TracesCount;
 	    }
@@ -184,9 +188,9 @@ void TraceClientCore::CPipeTraceFeeder::OnConnectionTerminated( NyxNet::IConnect
 
         pTraceData->Type() = CTraceData::eTT_ConnectionStatus_Disconnection;
         pTraceData->Data() = L"Disconnection";
+        pTraceData->TickCount() = m_pLastTrace->TickCount();
         pTraceData->OwnerPool() =  GetOwnerPool();
         GetOwnerPool()->Repository().Insert(pTraceData);
-        //TraceInserter()->Insert(pTraceData);
     }
 
     m_TracesCount = 0;

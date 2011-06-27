@@ -5,6 +5,7 @@
 #include "TraceClientCoreModule.hpp"
 #include "TracesView.h"
 #include "View/ViewItemsNodeObjectsPool.hpp"
+#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
 
 #include <QMainWindow>
 
@@ -50,11 +51,12 @@ private:
     Ui::MainWindow *ui;
 
     CDebugPanel*                m_pDebugPanel;
-	CDocumentsCollection	    m_Documents;
+    CDocumentsCollection        m_Documents;
     int                         m_nNextDocumentId;
     int                         m_nNextViewId;
     CViewPage*                  m_pViewPage;
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
+    CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
 };
 
 #endif // MAINWINDOW_H

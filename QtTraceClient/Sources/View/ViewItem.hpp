@@ -33,6 +33,8 @@ public:
     CViewItem();
     virtual ~CViewItem();
 
+    virtual const Nyx::CWString& ModuleName() const = 0;
+
     virtual bool IsOfKind( EViewItemType ) const { return false; }
 
     virtual void dbgOutputInfo();
@@ -53,6 +55,8 @@ public:
 
     const size_t& LineNumber() const            { return m_LineNumber; }
     size_t& LineNumber()                        { return m_LineNumber; }
+
+    virtual const Nyx::CWString& TickCount() const      { return Nyx::CWString(L""); }
 
 protected:
 

@@ -69,6 +69,18 @@ CViewItemPos CViewItems::begin() const
 /**
  *
  */
+CViewItemPos CViewItems::end() const
+{
+    TViewItemsList::const_iterator        last = m_Items.end();
+    -- last;
+
+    return CViewItems::XPos(m_Items, last, 0.0);
+}
+
+
+/**
+ *
+ */
 size_t CViewItems::ItemsCount() const
 {
     return m_Items.size();
@@ -276,7 +288,7 @@ CViewItem* CViewItems::XPosData::Item() const
 /**
  *
  */
-double CViewItems::XPosData::Y() const
+float  CViewItems::XPosData::Y() const
 {
     return m_Y;
 }

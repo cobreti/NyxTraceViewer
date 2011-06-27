@@ -51,7 +51,15 @@ SOURCES += Sources/TracesView.cpp \
     Sources/Document/TracesDocument.cpp \
     Sources/View/SessionViewItems.cpp \
     Sources/View/ModuleViewItems.cpp \
-    Sources/View/ViewItemsModules.cpp
+    Sources/View/ViewItemsModules.cpp \
+    Sources/View/ViewItemsModulesMgr.cpp \
+    Sources/View/Walkers/ViewItemsWalkerStats.cpp \
+    Sources/View/Walkers/ViewItemsWalkerNode.cpp \
+    Sources/View/Walkers/ViewItemsWalker.cpp \
+    Sources/View/Walkers/ViewItemsModuleWalkerNode.cpp \
+    Sources/View/Walkers/ViewItemsSessionWalkerNode.cpp \
+    Sources/View/Walkers/ViewItemsWalkerNodesPool.cpp \
+    Sources/View/Walkers/ViewItemsWalkerPos.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
     Sources/DebugPanel.h \
@@ -101,7 +109,16 @@ HEADERS += Sources/TracesView.h \
     Sources/Document/TracesDocument.hpp \
     Sources/View/SessionViewItems.hpp \
     Sources/View/ModuleViewItems.hpp \
-    Sources/View/ViewItemsModules.hpp
+    Sources/View/ViewItemsModules.hpp \
+    Sources/View/ViewItemsModulesMgr.hpp \
+    Sources/View/IViewItemsModulesListener.hpp \
+    Sources/View/Walkers/ViewItemsWalkerStats.hpp \
+    Sources/View/Walkers/ViewItemsWalkerNode.hpp \
+    Sources/View/Walkers/ViewItemsWalker.hpp \
+    Sources/View/Walkers/ViewItemsModuleWalkerNode.hpp \
+    Sources/View/Walkers/ViewItemsSessionWalkerNode.hpp \
+    Sources/View/Walkers/ViewItemsWalkerNodesPool.hpp \
+    Sources/View/Walkers/ViewItemsWalkerPos.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
     UI/DebugPanel.ui \

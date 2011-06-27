@@ -7,6 +7,8 @@
 
 #include <map>
 
+class CViewItem;
+class IViewItemsModulesListener;
 
 /**
  *
@@ -24,8 +26,13 @@ public:
 
     void GetIDs( SessionViewItemsIDSet& IDSet) const;
 
-    const Nyx::CMFString&           Name() const            { return m_Name; }
-    Nyx::CMFString&                 Name()                  { return m_Name; }
+    const Nyx::CWString&            Name() const            { return m_Name; }
+    Nyx::CWString&                  Name()                  { return m_Name; }
+
+    void InsertItem( CViewItem* pItem );
+
+    IViewItemsModulesListener*      Listener() const        { return m_pListener; }
+    IViewItemsModulesListener*&     Listener()              { return m_pListener; }
 
 protected:
 
@@ -37,11 +44,12 @@ protected:
 
 protected:
 
-    SessionsTable           m_Sessions;
-    SessionViewItemsID      m_NextAvailId;
-    CSessionViewItems*      m_pActiveSession;
-    Nyx::CMemoryPool*       m_pPool;
-    Nyx::CMFString          m_Name;
+    SessionsTable                       m_Sessions;
+    SessionViewItemsID                  m_NextAvailId;
+    CSessionViewItems*                  m_pActiveSession;
+    Nyx::CMemoryPool*                   m_pPool;
+    Nyx::CWString                       m_Name;
+    IViewItemsModulesListener*          m_pListener;
 };
 
 #endif // _MODULEVIEWITEMS_HPP_

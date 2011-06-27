@@ -46,7 +46,7 @@ public: // public types
 
         virtual CViewItem* Item() const { return NULL; }
 
-        virtual double Y() const { return 0; }
+        virtual float Y() const { return 0; }
     };
 
 public: // public methods
@@ -69,9 +69,9 @@ public: // public methods
 
     virtual CViewItem* Item() const { return m_pData->Item(); }
 
-    virtual double Y() const { return m_pData->Y(); }
+    virtual float Y() const { return m_pData->Y(); }
 
-    virtual bool MoveTo( const double& y );
+    virtual bool MoveTo( const float& y );
 
 protected:
 

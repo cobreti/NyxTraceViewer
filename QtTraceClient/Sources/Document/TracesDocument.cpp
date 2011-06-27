@@ -4,6 +4,7 @@
 #include "TracesPool.hpp"
 #include "View/ViewColumnSettings.hpp"
 #include "View/ViewItem.hpp"
+#include "View/ViewItemsModulesMgr.hpp"
 
 /**
  *
@@ -38,12 +39,16 @@ CTracesDocument::~CTracesDocument()
 void CTracesDocument::Init()
 {
     m_refMemoryPool = Nyx::CMemoryPool::Alloc(100);
+
+    m_pViewItemsModulesMgr = new CViewItemsModulesMgr(m_refMemoryPool);
+    m_pViewItemsModulesMgr->Listener() = static_cast<IViewItemsModulesListener*>(this);
+
     m_pViewItems = new (m_refMemoryPool)CViewItems(m_refMemoryPool, true);
 
     m_pRepositoryObserver = new CDocRepositoryObserver(*this);
 
     CViewItemSettings*      pSetting = NULL;
-    QFont*                  pFont = new QFont("Courier New", 10);
+    QFont*                  pFont = new QFont("Courier New", 11);
     QFontMetricsF           TextMetrics(*pFont);
 
     CViewColumnSettings*		pColSettings = NULL;
@@ -101,17 +106,17 @@ void CTracesDocument::Init()
     DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);
 
     pSetting = new CViewItemSettings();
-    pSetting->SetFont( new QFont("Courier New", 10 ) );
+    pSetting->SetFont( new QFont("Courier New", 11 ) );
 //    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_TickCount, pSetting );
 
     pSetting = new CViewItemSettings();
-    pSetting->SetFont( new QFont("Courier New", 10 ) );
+    pSetting->SetFont( new QFont("Courier New", 11 ) );
 //    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_ThreadId, pSetting );
 
     pSetting = new CViewItemSettings();
-    pSetting->SetFont( new QFont("Courier New", 9, 2) );
+    pSetting->SetFont( new QFont("Courier New", 11, 2) );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_Header, pSetting );
 }
 
@@ -131,6 +136,9 @@ void CTracesDocument::Destroy()
 		delete m_Views.front();
 		m_Views.pop_front();
 	}
+
+    delete m_pViewItemsModulesMgr;
+    m_pViewItemsModulesMgr = NULL;
 
     m_pViewItems->Clear(false);
     delete m_pViewItems;
@@ -209,12 +217,47 @@ void CTracesDocument::OnNewTraceItems(CViewItems* pViewItems)
 /**
  *
  */
+void CTracesDocument::OnNewModuleViewItems( CModuleViewItems* pModule )
+{
+    Nyx::CTraceStream(0x0).Write( "OnNewModuleViewItems : %X", pModule );
+
+    TracesViewList::iterator        pos = m_Views.begin();
+
+    while ( pos != m_Views.end() )
+    {
+        (*pos)->OnNewModuleViewItems(pModule);
+        ++pos;
+    }
+}
+
+
+/**
+ *
+ */
+void CTracesDocument::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession )
+{
+    Nyx::CTraceStream(0x0).Write( "OnNewSessionViewItems : %X : %X", pModule, pSession );
+
+    TracesViewList::iterator        pos = m_Views.begin();
+
+    while ( pos != m_Views.end() )
+    {
+        (*pos)->OnNewSessionViewItems(pModule, pSession);
+        ++pos;
+    }
+}
+
+
+/**
+ *
+ */
 void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
 {
     CViewItemPos        posItem = pViewItems->begin();
     while ( posItem.IsValid() )
     {
         posItem.Item()->LineNumber() = m_NextLineNumber ++;
+        m_pViewItemsModulesMgr->Insert( posItem.Item() );
         ++posItem;
     }
 

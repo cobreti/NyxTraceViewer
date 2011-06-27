@@ -48,8 +48,13 @@ const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
     if ( &pos != this )
     {
         if ( m_pData )
+        {
             delete m_pData;
-        m_pData = pos.m_pData->Clone();
+            m_pData = NULL;
+        }
+
+        if ( pos.m_pData )
+            m_pData = pos.m_pData->Clone();
     }
 
     return *this;
@@ -59,7 +64,7 @@ const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
 /**
  *
  */
-bool CViewItemPos::MoveTo(const double& y)
+bool CViewItemPos::MoveTo(const float& y)
 {
     while ( m_pData->IsValid() && m_pData->Y() + m_pData->Item()->GetSize().height() < y && m_pData->MoveToNext() );
 

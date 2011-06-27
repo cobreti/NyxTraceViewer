@@ -212,20 +212,19 @@ void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int  )
  */
 void CPipesMgntPage::paintEvent( QPaintEvent*  )
 {
-    QPainter            painter(this);
-    QPen                penMid( palette().mid(), 2 );
-    QPen                penLight( palette().midlight(), 3 );
+//    QPainter            painter(this);
+//    QPen                penMid( palette().mid(), 2 );
+//    QPen                penLight( palette().midlight(), 3 );
     
 
-    painter.setBrush( palette().mid() );
-    painter.setPen( penMid );
-    painter.drawLine( 1, 0, 1, size().height()-1 );
-    painter.drawLine( 0, size().height()-1, size().width()-1, size().height()-1 );
+//    painter.setBrush( palette().mid() );
+//    painter.setPen( penMid );
+//    painter.drawLine( 1, 0, 1, size().height()-1 );
+//    painter.drawLine( 0, size().height()-1, size().width()-1, size().height()-1 );
     
-    painter.setBrush( palette().midlight() );
-    painter.setPen( penLight );
-    painter.drawLine( size().width()-2, 0, size().width()-2, size().height()-1 );
-    //painter.drawRect( QRectF( QPointF(0.0, 0.0), QSizeF(size().width()-1, size().height()-1)));
+//    painter.setBrush( palette().midlight() );
+//    painter.setPen( penLight );
+//    painter.drawLine( size().width()-2, 0, size().width()-2, size().height()-1 );
 }
 
 

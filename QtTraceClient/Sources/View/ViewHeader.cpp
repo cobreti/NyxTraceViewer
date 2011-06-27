@@ -15,7 +15,7 @@ CViewHeader::CViewHeader(CViewColumnsSettings& rColumnsSettings, QWidget *parent
 {
     resize(0, m_Margins.height());
 
-    m_pFont = new QFont("Courier New", 10);
+    m_pFont = new QFont("Courier New", 11);
     m_pFont->setBold(true);
 
     //m_pBkgndImage = new QImage(":/View/Images/VGradientInner.png");

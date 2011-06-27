@@ -7,6 +7,8 @@
 
 namespace TraceClientCore
 {
+    class CTraceData;
+    
 	class CPipeTraceFeeder :	public CTraceFeeder,
 								public NyxNet::INxConnectionHandler
 	{
@@ -30,6 +32,7 @@ namespace TraceClientCore
 		Nyx::TBuffer<Nyx::Byte>		m_ReadBuffer;
 		Nyx::CAString				m_Name;
         Nyx::Int32                  m_TracesCount;
+        CTraceData*                 m_pLastTrace;
 	};
 }
 

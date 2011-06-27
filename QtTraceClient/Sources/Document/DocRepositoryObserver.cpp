@@ -32,9 +32,6 @@ CDocRepositoryObserver::~CDocRepositoryObserver()
  */
 void CDocRepositoryObserver::Insert( TraceClientCore::CTraceData* pTraceData )
 {
-    Nyx::CTraceStream(0x0)  << Nyx::CTF_Text(L"CDocRepositoryObserver::Insert --> ")
-                            << Nyx::CTF_Text(pTraceData->Data().c_str());
-
     Nyx::CMemoryPool*           pMemPool = pTraceData->MemoryPool();
     CViewItem_TraceData*        pItem = new (pMemPool)CViewItem_TraceData(pMemPool, pTraceData);
 

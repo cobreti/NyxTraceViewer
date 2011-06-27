@@ -1,6 +1,8 @@
 #ifndef TRACESVIEW_H
 #define TRACESVIEW_H
 
+//#include <QtGUI>
+
 #include <QWidget>
 #include <QToolBar>
 #include <QPushButton>
@@ -8,6 +10,8 @@
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
 #include "View/SettingsToolBar.hpp"
+#include "View/Walkers/ViewItemsWalker.hpp"
+
 
 namespace Ui
 {
@@ -18,7 +22,13 @@ class CTracesDocument;
 class CViewHeader;
 class CPipesMgntPage;
 class QToolButton;
+class CModuleViewItems;
+class CSessionViewItems;
 
+
+/**
+ *
+ */
 class CTracesView : public QWidget
 {
     Q_OBJECT
@@ -44,6 +54,10 @@ public:
     void ShowFeedsPanel();
 
     bool IsPinned() const;
+    void SetPinned();
+
+    virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
+    virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
 
 public slots:
 
@@ -92,6 +106,7 @@ protected:
     CSettingsToolBar*                   m_pSettingsToolbar;
     CPipesMgntPage*                     m_pPipesMgntPage;
     QToolButton*                        m_pPinBtn;
+    CViewItemsWalker                    m_ItemsWalker;
 };
 
 #endif // TRACESVIEW_H

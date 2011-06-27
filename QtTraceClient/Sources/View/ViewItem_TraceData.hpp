@@ -21,6 +21,9 @@ public:
 
     const TraceClientCore::CTraceData* TraceData() const             { return m_pTraceData; }
 
+    virtual const Nyx::CWString& ModuleName() const;
+    virtual const Nyx::CWString& TickCount() const;
+
 protected:
 
     const TraceClientCore::CTraceData*           m_pTraceData;

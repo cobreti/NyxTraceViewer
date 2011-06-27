@@ -25,6 +25,7 @@ public:
     virtual void RemoveFromClientSize( CViewItem* pItem );
     virtual void AddToClientSize( CViewItem* pItem );
     virtual CViewItemPos begin() const;
+    virtual CViewItemPos end() const;
     virtual size_t ItemsCount() const;
     virtual const QSizeF& GetSize() const;
     virtual const QSizeF& GetLastLineSize() const;
@@ -59,13 +60,13 @@ protected:
         virtual bool IsEqual(const CViewItemPos::XData &data) const;
 
         virtual CViewItem* Item() const;
-        virtual double Y() const;
+        virtual float Y() const;
 
     protected:
 
         TViewItemsList::const_iterator      m_Pos;
         const TViewItemsList*               m_pList;
-        double                              m_Y;
+        float                               m_Y;
     };
 
     /**

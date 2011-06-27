@@ -83,6 +83,7 @@ void CMainWindow::PinView( CTracesView* pView )
     QWidget*        pViewParent = static_cast<QWidget*>(pView->parent());
     
     m_pViewPage->show(pView);
+    pView->SetPinned();
 
     if ( pViewParent && pViewParent != m_pViewPage && !m_pViewPage->children().contains(pViewParent) )
     {

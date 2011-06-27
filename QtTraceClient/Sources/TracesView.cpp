@@ -1,11 +1,11 @@
-#include <QtGui>
-
-
 #include "TracesView.h"
 #include "ui_TracesView.h"
 #include "Document/TracesDocument.hpp"
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
+#include "View/SettingsToolBar.hpp"
+#include "View/ViewHeader.hpp"
+#include "MainWindow/PipesMgntPage.hpp"
 
 #include <Nyx.hpp>
 
@@ -17,9 +17,6 @@
 #include "View/ViewItemModuleNamePainter.hpp"
 #include "View/DrawViewItemState.hpp"
 #include "View/ViewColumnSettings.hpp"
-#include "View/ViewHeader.hpp"
-#include "View/SettingsToolBar.hpp"
-#include "MainWindow/PipesMgntPage.hpp"
 
 /**
  *
@@ -98,6 +95,16 @@ void CTracesView::OnNewTraces()
     if ( !m_TopPos.IsValid() )
         m_TopPos = Doc().ViewItems().begin();
 
+    if ( !m_ItemsWalker.ValidPos() )
+    {
+        if ( m_ItemsWalker.MoveToBegin() )
+        {
+            Nyx::CTraceStream(0x0)
+                    << Nyx::CTF_Text(L"OnNewTraces - Walker  MoveToBegin");
+            m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
+        }
+    }
+
     m_bViewDirty = true;
 }
 
@@ -156,11 +163,58 @@ bool CTracesView::IsPinned() const
 }
 
 
+/**
+ *
+ */
+void CTracesView::SetPinned()
+{
+    m_pPinBtn->setChecked(true);
+}
+
+
+/**
+ *
+ */
+void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
+{
+    Nyx::CTraceStream(0x0).Write("CTracesView::OnNewModuleViewItems : %X", pModule);
+
+    m_ItemsWalker.OnNewModuleViewItem(pModule);
+}
+
+
+/**
+ *
+ */
+void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession )
+{
+    Nyx::CTraceStream(0x0).Write("CTracesView::OnNewSessionViewItems : %X : %X", pModule, pSession);
+
+    m_ItemsWalker.OnNewSessionViewItem(pModule, pSession);
+}
+
+
+/**
+ *
+ */
 void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
     {
         m_TopPos.MoveTo(value);
+
+        Nyx::CTraceStream(0x0)
+                << Nyx::CTF_Text(L"OnVertSliderPosChanged - pos = ")
+                << Nyx::CTF_Int(value);
+
+        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"m_TopPos ") << Nyx::CTF_Float(m_TopPos.Y());
+        m_TopPos.Item()->dbgOutputInfo();
+
+        m_ItemsWalker.MoveTo(value);
+
+        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"walker ") << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
+        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
+
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
         update();
     }
@@ -299,8 +353,27 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 
-    if ( m_TopPos.IsValid() && isVisible())
+    if ( m_TopPos.IsValid() && isVisible() && m_TopPos.Y() != ui->m_VertScrollbar->value())
+    {
         m_TopPos.MoveTo(ui->m_VertScrollbar->value());
+
+        Nyx::CTraceStream(0x0)
+                << Nyx::CTF_Text(L"MoveTo : ")
+                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
+                << Nyx::CTF_Text(L" item Y value : ")
+                << Nyx::CTF_Float(m_TopPos.Y());
+        m_TopPos.Item()->dbgOutputInfo();
+
+        m_ItemsWalker.MoveTo(ui->m_VertScrollbar->value());
+
+        Nyx::CTraceStream(0x0)
+                << Nyx::CTF_Text(L"Walker MoveTo : ")
+                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
+                << Nyx::CTF_Text(L" walker item Y pos : ")
+                << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
+
+        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
+    }
 }
 
 
