@@ -4,8 +4,8 @@
 /**
  *
  */
-CDrawViewItemState::CDrawViewItemState(QPainter& rPainter) :
-m_rPainter(rPainter)
+CDrawViewItemState::CDrawViewItemState(QPainter* pPainter) :
+m_pPainter(pPainter)
 {
 }
 

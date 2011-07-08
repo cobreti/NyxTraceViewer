@@ -12,11 +12,6 @@
 class CModuleViewItems;
 class CViewItemsModuleWalkerNode;
 
-/**
- *
- */
-typedef     std::list<CViewItemsModuleWalkerNode*, Nyx::StdListAllocator<CViewItemsModuleWalkerNode*, CViewItemsWalkerNodesPool> >       TViewItemsModuleWalkerNodeList;
-
 
 /**
  *
@@ -37,6 +32,8 @@ public:
     void GetPosData( CViewItemsWalkerPos& walkerPos ) const;
 
     const CViewItemsWalkerPos& CachedPos() const            { return m_CachedPos; }
+
+    const Nyx::CWString& Name() const;
 
 protected:
 

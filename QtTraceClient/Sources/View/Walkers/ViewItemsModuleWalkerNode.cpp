@@ -62,12 +62,15 @@ bool CViewItemsModuleWalkerNode::MoveToNext()
     if ( !m_CachedPos.Valid() )
         return false;
 
-    ++ m_CachedPos.ItemPos();
+//    ++ m_CachedPos.ItemPos();
 
-    if ( !m_CachedPos.Valid() )
+//    if ( !m_CachedPos.Valid() )
+    if ( !m_CachedPos.ItemPos().MoveToNext() )
     {
         CViewItemsSessionWalkerNode*        pNextSession = GetNextSession(m_CachedPos.Session());
-        return pNextSession->GetTopPos(m_CachedPos);
+        if ( pNextSession )
+            return pNextSession->GetTopPos(m_CachedPos);
+        return false;
     }
 
     return true;
@@ -82,12 +85,15 @@ bool CViewItemsModuleWalkerNode::MoveToPrevious()
     if ( !m_CachedPos.Valid() )
         return false;
 
-    -- m_CachedPos.ItemPos();
+//    -- m_CachedPos.ItemPos();
 
-    if ( !m_CachedPos.Valid() )
+//    if ( !m_CachedPos.Valid() )
+    if ( !m_CachedPos.ItemPos().MoveToPrevious() )
     {
         CViewItemsSessionWalkerNode*        pPreviousSession = GetPreviousSession(m_CachedPos.Session());
-        return pPreviousSession->GetLastPos(m_CachedPos);
+        if ( pPreviousSession )
+            return pPreviousSession->GetLastPos(m_CachedPos);
+        return false;
     }
 
     return true;
@@ -102,6 +108,15 @@ void CViewItemsModuleWalkerNode::GetPosData( CViewItemsWalkerPos& walkerPos ) co
     walkerPos.ItemPos() = m_CachedPos.ItemPos();
     walkerPos.Module() = m_CachedPos.Module();
     walkerPos.Session() = m_CachedPos.Session();
+}
+
+
+/**
+ *
+ */
+const Nyx::CWString& CViewItemsModuleWalkerNode::Name() const
+{
+    return m_pModuleViewItems->Name();
 }
 
 

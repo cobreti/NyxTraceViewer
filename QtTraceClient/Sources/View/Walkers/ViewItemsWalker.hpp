@@ -3,6 +3,8 @@
 
 #include "ViewItemsModuleWalkerNode.hpp"
 #include "ViewItemsWalkerPos.hpp"
+#include <vector>
+
 
 class CModuleViewItems;
 class CSessionViewItems;
@@ -19,6 +21,8 @@ public:
     void OnNewModuleViewItem( CModuleViewItems* pModule );
     void OnNewSessionViewItem( CModuleViewItems* pModule, CSessionViewItems* pSession );
 
+    bool InitNewModulesPosition();
+
     bool MoveToBegin();
     bool MoveToNext();
     bool MoveToPrevious();
@@ -30,12 +34,24 @@ public:
 
 protected:
 
+    typedef     std::vector<CViewItemsModuleWalkerNode*>        ViewItemsModuleWalkerNodeArray;
+
+    enum EDirection
+    {
+        eD_Undefined,
+        eD_Increasing,
+        eD_Decreasing
+    };
+
+protected:
+
     CViewItemsModuleWalkerNode* GetNodeWithModule( CModuleViewItems* pModule ) const;
 
 protected:
 
-    TViewItemsModuleWalkerNodeList          m_Nodes;
+    ViewItemsModuleWalkerNodeArray          m_Nodes;
     CViewItemsWalkerPos                     m_Pos;
+    EDirection                              m_Direction;
 };
 
 #endif // VIEWITEMSWALKER_HPP

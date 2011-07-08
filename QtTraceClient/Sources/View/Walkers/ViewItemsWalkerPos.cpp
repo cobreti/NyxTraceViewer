@@ -52,8 +52,57 @@ const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsWalk
  */
 bool CViewItemsWalkerPos::operator < (const CViewItemsWalkerPos& pos) const
 {
+    return (m_ItemPos.Item()->TickCount() < pos.m_ItemPos.Item()->TickCount());/* ||
+           (m_ItemPos.Item()->TickCount() == pos.m_ItemPos.Item()->TickCount());*/
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerPos::operator <= (const CViewItemsWalkerPos& pos) const
+{
     return (m_ItemPos.Item()->TickCount() < pos.m_ItemPos.Item()->TickCount()) ||
            (m_ItemPos.Item()->TickCount() == pos.m_ItemPos.Item()->TickCount());
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerPos::IsBefore( const CViewItemsWalkerPos& pos ) const
+{
+//    if ( !Valid() || !pos.Valid() )
+//        return false;
+
+//    if ( m_ItemPos.Item()->TickCount() == pos.ItemPos().Item()->TickCount())
+//        return m_ItemPos.Item()->Id() != pos.ItemPos().Item()->Id();
+
+    return m_ItemPos.Item()->TickCount() < pos.ItemPos().Item()->TickCount();
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerPos::IsAfter( const CViewItemsWalkerPos& pos ) const
+{
+//    if ( !Valid() || !pos.Valid() )
+//        return false;
+
+//    if ( m_ItemPos.Item()->TickCount() == pos.ItemPos().Item()->TickCount())
+//        return m_ItemPos.Item()->Id() != pos.ItemPos().Item()->Id();
+
+    return m_ItemPos.Item()->TickCount() > pos.ItemPos().Item()->TickCount();
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerPos::IsConcurrent( const CViewItemsWalkerPos& pos) const
+{
+    return m_ItemPos.Item()->TickCount() == pos.ItemPos().Item()->TickCount() && m_ItemPos.Item()->Id() != pos.ItemPos().Item()->Id();
 }
 
 

@@ -9,6 +9,10 @@
 class CDrawViewItemState;
 class CViewSettings;
 
+
+typedef     size_t          ViewItemID;
+
+
 /**
  *
  */
@@ -55,6 +59,8 @@ public:
 
     const size_t& LineNumber() const            { return m_LineNumber; }
     size_t& LineNumber()                        { return m_LineNumber; }
+
+    const ViewItemID Id() const                 { return m_LineNumber; }
 
     virtual const Nyx::CWString& TickCount() const      { return Nyx::CWString(L""); }
 

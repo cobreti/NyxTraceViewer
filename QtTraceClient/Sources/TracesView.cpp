@@ -95,6 +95,8 @@ void CTracesView::OnNewTraces()
     if ( !m_TopPos.IsValid() )
         m_TopPos = Doc().ViewItems().begin();
 
+    m_ItemsWalker.InitNewModulesPosition();
+
     if ( !m_ItemsWalker.ValidPos() )
     {
         if ( m_ItemsWalker.MoveToBegin() )
@@ -204,7 +206,7 @@ void CTracesView::OnVertSliderPosChanged(int value)
         m_TopPos.MoveTo(value);
 
         Nyx::CTraceStream(0x0)
-                << Nyx::CTF_Text(L"OnVertSliderPosChanged - pos = ")
+                << Nyx::CTF_Text(L"\nOnVertSliderPosChanged - pos = ")
                 << Nyx::CTF_Int(value);
 
         Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"m_TopPos ") << Nyx::CTF_Float(m_TopPos.Y());
@@ -303,7 +305,7 @@ void CTracesView::paintEvent(QPaintEvent*)
         return;
 
     QPainter                            painter(this);
-    CDrawViewItemState                  drawstate(painter);
+    CDrawViewItemState                  drawstate(&painter);
     qreal                               ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
     CViewItemPos                        pos = m_TopPos;
     CViewItem*                          pItem = NULL;
@@ -548,8 +550,8 @@ bool CTracesView::UpdateVisibleLines()
     if ( Doc().ViewItems().ItemsCount() == 0 )
         return false;
 
-    QPainter                            painter(this);
-    CDrawViewItemState                  drawstate(painter);
+    //QPainter                            painter(this);
+    CDrawViewItemState                  drawstate(NULL);
     qreal                               ViewHeight = (qreal) this->rect().height();
     CViewItemPos                        pos = m_TopPos;
     CViewItem*                          pItem = NULL;

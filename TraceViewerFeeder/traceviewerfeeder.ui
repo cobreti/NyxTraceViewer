@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>696</width>
-    <height>474</height>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
              </size>
             </property>
             <property name="editTriggers">
-             <set>QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
+             <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
             </property>
            </widget>
           </item>
@@ -502,7 +502,7 @@
      <x>0</x>
      <y>0</y>
      <width>696</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
@@ -517,8 +517,6 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="TraceViewerFeeder.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

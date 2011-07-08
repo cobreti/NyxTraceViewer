@@ -10,10 +10,10 @@
 class CDrawViewItemState
 {
 public:
-    CDrawViewItemState(QPainter& rPainter);
+    CDrawViewItemState(QPainter* pPainter);
     ~CDrawViewItemState();
 
-    QPainter&       Painter()               { return m_rPainter; }
+    QPainter&       Painter()               { return *m_pPainter; }
 
     const QRectF&   ViewRect() const        { return m_ViewRect; }
     QRectF&         ViewRect()              { return m_ViewRect; }
@@ -29,7 +29,7 @@ public:
 
 protected:
 
-    QPainter&       m_rPainter;
+    QPainter*       m_pPainter;
     QRectF          m_ViewRect;
     QPointF         m_TextPos;
     QSizeF          m_LineSize;

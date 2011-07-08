@@ -56,6 +56,10 @@ public: // public methods
 
     void operator ++ () { m_pData->MoveToNext(); }
     void operator -- () { m_pData->MoveToPrevious(); }
+
+    bool MoveToNext()       { return m_pData->MoveToNext(); }
+    bool MoveToPrevious()   { return m_pData->MoveToPrevious(); }
+
     virtual bool IsFirst() const { return m_pData->IsFirst(); }
     virtual bool IsLast() const { return m_pData->IsLast(); }
     virtual bool IsValid() const;

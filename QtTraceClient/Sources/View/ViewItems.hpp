@@ -15,6 +15,12 @@ class CViewItem;
 /**
  *
  */
+typedef     std::list<CViewItem*, Nyx::StdListAllocator<CViewItem*, CViewItemsNodeObjectsPool> >        TViewItemsList;
+typedef     TViewItemsList::const_iterator                                                              TViewItemsPos;
+
+/**
+ *
+ */
 class CViewItems : public Nyx::CMemPoolObj<>
 {
 public:
@@ -35,8 +41,6 @@ public:
     const CViewItems& operator += (CViewItems& items);
 
 protected:
-
-    typedef     std::list<CViewItem*, Nyx::StdListAllocator<CViewItem*, CViewItemsNodeObjectsPool> >       TViewItemsList;
 
     /**
      *
