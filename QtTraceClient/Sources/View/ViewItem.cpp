@@ -3,12 +3,13 @@
 #include "ViewColumnsSettings.hpp"
 #include "ViewColumnSettings.hpp"
 
+static Nyx::CWString g_EmptyString(L"");
 
 /**
  *
  */
 CViewItem::CViewItem() :
-m_LineNumber(0)
+m_Id(0)
 {
 }
 
@@ -126,4 +127,13 @@ void CViewItem::RemoveFlag( CViewItem::EViewItemFlags flag )
 bool CViewItem::HasFlag(EViewItemFlags flag) const
 {
     return m_Flags[flag];
+}
+
+
+/**
+ *
+ */
+const Nyx::CWString& CViewItem::TickCount() const
+{
+    return g_EmptyString;
 }

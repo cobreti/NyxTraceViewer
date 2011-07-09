@@ -27,6 +27,9 @@ public:
     bool			Marked() const			{ return m_bMarked; }
     bool&			Marked()				{ return m_bMarked; }
 
+    const size_t&   LineNumber() const      { return m_LineNumber; }
+    size_t&         LineNumber()            { return m_LineNumber; }
+
 protected:
 
     QPainter*       m_pPainter;
@@ -34,6 +37,7 @@ protected:
     QPointF         m_TextPos;
     QSizeF          m_LineSize;
     bool			m_bMarked;
+    size_t          m_LineNumber;
 };
 
 #endif // __DRAWVIEWITEMSTATE_HPP__

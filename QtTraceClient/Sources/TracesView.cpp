@@ -343,6 +343,7 @@ void CTracesView::paintEvent(QPaintEvent*)
 //        pItem = pos.Item();
         pItem = m_ItemsWalker.ItemPos().Item();
 
+        drawstate.LineNumber() = m_ItemsWalker.LineNumber();
         pItem->Display(Settings(), drawstate);
 
 //        ++pos;

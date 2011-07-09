@@ -57,12 +57,10 @@ public:
     virtual void RemoveFlag( EViewItemFlags flag );
     virtual bool HasFlag( EViewItemFlags flag ) const;
 
-    const size_t& LineNumber() const            { return m_LineNumber; }
-    size_t& LineNumber()                        { return m_LineNumber; }
+    const ViewItemID&   Id() const              { return m_Id; }
+    ViewItemID&         Id()                    { return m_Id; }
 
-    const ViewItemID Id() const                 { return m_LineNumber; }
-
-    virtual const Nyx::CWString& TickCount() const      { return Nyx::CWString(L""); }
+    virtual const Nyx::CWString& TickCount() const;
 
 protected:
 
@@ -73,7 +71,7 @@ protected:
     QSizeF                          m_Size;
     CViewItemPainterCollection      m_Painters;
     FlagsSet                        m_Flags;
-    size_t                          m_LineNumber;
+    size_t                          m_Id;
 };
 
 

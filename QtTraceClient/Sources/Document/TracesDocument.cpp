@@ -15,7 +15,7 @@ m_Name(name),
 m_RefreshTimer(this),
 m_pViewItems(NULL),
 m_pRepositoryObserver(NULL),
-m_NextLineNumber(1)
+m_NextLineId(1)
 {
     connect(this, SIGNAL(sig_OnNewTraceItems(CViewItems*)), this, SLOT(OnNewTraceItemsHandler(CViewItems*)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(OnRefreshTimer()));
@@ -256,7 +256,7 @@ void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
     CViewItemPos        posItem = pViewItems->begin();
     while ( posItem.IsValid() )
     {
-        posItem.Item()->LineNumber() = m_NextLineNumber ++;
+        posItem.Item()->Id() = m_NextLineId ++;
         m_pViewItemsModulesMgr->Insert( posItem.Item() );
         ++posItem;
     }

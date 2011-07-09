@@ -41,7 +41,7 @@ CViewItemLineNumberPainter::~CViewItemLineNumberPainter()
  */
 void CViewItemLineNumberPainter::EvaluateSize(CViewSettings &settings, CViewItem &item)
 {
-    QString                     text = QString::number(item.LineNumber());
+    QString                     text = QString::number(UINT_MAX);
 
     CViewItemTextPainter::EvaluateSize(settings, item, text);
 }
@@ -54,7 +54,7 @@ void CViewItemLineNumberPainter::Display( const CViewSettings &settings,
                                             CDrawViewItemState &drawstate,
                                             CViewItem &item )
 {
-    QString                     text = QString::number(item.LineNumber());
+    QString                     text = QString::number(drawstate.LineNumber());
 
     CViewItemTextPainter::Display(settings, drawstate, item, text);
 }

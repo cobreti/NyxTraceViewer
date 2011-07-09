@@ -7,7 +7,8 @@
  *
  */
 CViewItemsWalker::CViewItemsWalker() :
-    m_Direction(eD_Undefined)
+    m_Direction(eD_Undefined),
+    m_LineNumber(0)
 {
 }
 
@@ -106,6 +107,7 @@ bool CViewItemsWalker::MoveToBegin()
     m_Pos.ConcurrentItemsVisited().clear();
     m_Pos.ConcurrentItemsVisited().insert( m_Pos.ItemId() );
     m_Direction = eD_Undefined;
+    m_LineNumber = 1;
 
     return m_Pos.Valid();
 }
@@ -200,6 +202,7 @@ bool CViewItemsWalker::MoveToNext()
         }
 
         m_Pos.Y() += CurrentLineHeight;
+        ++ m_LineNumber;
     }
 
     return ChangedLine && m_Pos.Valid();
@@ -294,6 +297,7 @@ bool CViewItemsWalker::MoveToPrevious()
         }
 
         m_Pos.Y() -= m_Pos.ItemPos().Item()->GetSize().height();
+        -- m_LineNumber;
     }
 
     return FoundNewLine && m_Pos.Valid();
@@ -328,6 +332,7 @@ void CViewItemsWalker::PushState()
 
     m_PositionStack.push_back(m_Pos);
     m_DirectionStack.push_back(m_Direction);
+    m_LineNumberStack.push_back(m_LineNumber);
 }
 
 
@@ -349,6 +354,12 @@ void CViewItemsWalker::PopState()
     {
         m_Direction = m_DirectionStack.back();
         m_DirectionStack.pop_back();
+    }
+
+    if ( !m_LineNumberStack.empty())
+    {
+        m_LineNumber = m_LineNumberStack.back();
+        m_LineNumberStack.pop_back();
     }
 }
 
@@ -395,6 +406,7 @@ void CViewItemsWalker::CopyDataFrom(const CViewItemsWalker& walker)
     m_Direction = walker.m_Direction;
     m_Nodes.resize(walker.m_Nodes.size());
     m_Pos = walker.m_Pos;
+    m_LineNumber = walker.m_LineNumber;
 
     for (size_t index = 0; index < walker.m_Nodes.size(); ++index)
     {

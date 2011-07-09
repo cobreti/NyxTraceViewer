@@ -33,6 +33,7 @@ public:
     bool ValidPos() const                   { return m_Pos.Valid(); }
     const CViewItemPos& ItemPos() const     { return m_Pos.ItemPos(); }
     const float& ItemYPos() const           { return m_Pos.Y(); }
+    const size_t LineNumber() const         { return m_LineNumber; }
 
     void PushState();
     void PopState();
@@ -51,6 +52,7 @@ protected:
     typedef     std::vector<CViewItemsModuleWalkerNode*>        ViewItemsModuleWalkerNodeArray;
     typedef     std::vector<CViewItemsWalkerPos>                TWalkerPosStack;
     typedef     std::vector<EDirection>                         TDirectionStack;
+    typedef     std::vector<size_t>                             TLineNumberStack;
 
 protected:
 
@@ -64,9 +66,11 @@ protected:
 
     CViewItemsWalkerPos                     m_Pos;
     EDirection                              m_Direction;
+    size_t                                  m_LineNumber;
 
     TWalkerPosStack                         m_PositionStack;
     TDirectionStack                         m_DirectionStack;
+    TLineNumberStack                        m_LineNumberStack;
 };
 
 #endif // VIEWITEMSWALKER_HPP

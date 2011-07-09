@@ -77,7 +77,7 @@ protected:
     QTimer                                      m_RefreshTimer;
     CDocRepositoryObserver*                     m_pRepositoryObserver;
     Nyx::CMemoryPoolRef                         m_refMemoryPool;
-    size_t                                      m_NextLineNumber;
+    size_t                                      m_NextLineId;
 
     CViewItemsModulesMgr*                       m_pViewItemsModulesMgr;
 };
