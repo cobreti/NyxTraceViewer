@@ -177,7 +177,6 @@ void CTracesView::resizeEvent(QResizeEvent *event)
 {
     int     nHeight = ui->m_HorzScrollbar->height();
     int     nWidth = ui->m_VertScrollbar->width();
-    int     nPipesMgntPageWidth = event->size().width() - nWidth - kPanel_LeftMargin - kPanel_RightMargin;
     QRect   rcWnd(  QPoint(0,0), event->size() );
 
     ui->m_HorzScrollbar->resize( event->size().width()-nHeight, nHeight );

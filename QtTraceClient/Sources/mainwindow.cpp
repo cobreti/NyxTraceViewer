@@ -58,7 +58,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     CTracesDocument* pNewDoc = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
 
 	// create view
-	CTracesView* pView = CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
+	reateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
 
     ui->m_btnRemove->setEnabled(false);
 }
@@ -78,9 +78,7 @@ CMainWindow::~CMainWindow()
  *
  */
 void CMainWindow::PinView( CTracesView* pView )
-{
-    QWidget*        pViewParent = static_cast<QWidget*>(pView->parent());
-    
+{    
     m_pViewPage->show(pView);
 
     SelectItemWithView(pView);

@@ -75,6 +75,11 @@ void CViewPage::show( CTracesView* pView )
     m_pBtnPin->setChecked(parent() != NULL);
     ui->m_ViewFrame->layout()->addWidget(pView);
 
+    if ( m_pPipesMgntPage->isVisible() )
+    {
+        m_pPipesMgntPage->show(&m_pView->Doc());
+    }
+
     QDialog::show();
     m_pView->show();
     m_pView->setFocus(Qt::OtherFocusReason);
