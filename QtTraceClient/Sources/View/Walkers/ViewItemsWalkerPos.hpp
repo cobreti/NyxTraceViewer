@@ -46,8 +46,8 @@ public:
     ViewItemIDSet&                  ConcurrentItemsVisited()            { return m_ConcurrentItemsVisited; }
 
     const CViewItemsWalkerPos& operator = (const CViewItemsWalkerPos& pos);
-    bool operator < (const CViewItemsWalkerPos& pos) const;
-    bool operator <= (const CViewItemsWalkerPos& pos) const;
+//    bool operator < (const CViewItemsWalkerPos& pos) const;
+//    bool operator <= (const CViewItemsWalkerPos& pos) const;
 
     bool IsBefore( const CViewItemsWalkerPos& pos ) const;
     bool IsAfter( const CViewItemsWalkerPos& pos ) const;

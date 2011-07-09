@@ -35410,9 +35410,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331839421.33045602</real>
-		<string>{1584, 1201}</string>
-		<string>{2772, 0}</string>
+		<real>331864053.672481</real>
+		<string>{1496, 1138}</string>
+		<string>{2522, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -36041,7 +36041,7 @@
 			</array>
 		</dict>
 		<string>IDENameString</string>
-		<string>TraceClientCore Debug</string>
+		<string>TraceClientCore Release</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -36190,7 +36190,7 @@
 		</dict>
 		<real>4</real>
 		<string>: </string>
-		<string>TraceClientCore Debug</string>
+		<string>TraceClientCore Release</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -36329,7 +36329,7 @@
 				<integer>2712</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>331839419.30912298</real>
+			<real>331864048.66995102</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -36340,9 +36340,9 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 1:36 PM</string>
+		<string>Today at 8:27 PM</string>
 		<integer>106</integer>
-		<string>TraceClientCore</string>
+		<string>NyxNet</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -55940,7 +55940,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 449}, {328, 916}}</string>
+		<string>{{0, 474}, {328, 916}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -57085,10 +57085,10 @@
 				</dict>
 			</array>
 		</dict>
-		<real>331839421.33211899</real>
-		<string>{1584, 1201}</string>
-		<string>{2772, 0}</string>
-		<string>CWString::operator &gt; (const CWString&amp; str)</string>
+		<real>331864053.67430401</real>
+		<string>{1496, 1138}</string>
+		<string>{2522, 0}</string>
+		<string>CWString::operator &lt; (const CWString&amp; str)</string>
 		<dict>
 			<key>$class</key>
 			<dict>

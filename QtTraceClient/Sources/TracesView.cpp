@@ -46,8 +46,8 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
 
 	InitSettings();
 
-    if ( Doc().ViewItems().ItemsCount() > 0 )
-        m_TopPos = Doc().ViewItems().begin();
+//    if ( Doc().ViewItems().ItemsCount() > 0 )
+//        m_TopPos = Doc().ViewItems().begin();
 
     m_pPipesMgntPage = new CPipesMgntPage(this);
     m_pPipesMgntPage->hide();
@@ -92,8 +92,8 @@ void CTracesView::SetName(const QString& name)
  */
 void CTracesView::OnNewTraces()
 {
-    if ( !m_TopPos.IsValid() )
-        m_TopPos = Doc().ViewItems().begin();
+//    if ( !m_TopPos.IsValid() )
+//        m_TopPos = Doc().ViewItems().begin();
 
     m_ItemsWalker.InitNewModulesPosition();
 
@@ -137,7 +137,7 @@ void CTracesView::RefreshDisplay()
         if ( m_bKeepAtEnd )
         {
             ui->m_VertScrollbar->setValue( ui->m_VertScrollbar->maximum() );
-            m_TopPos.MoveTo( ui->m_VertScrollbar->value() );
+            //m_TopPos.MoveTo( ui->m_VertScrollbar->value() );
         }
 
         update();
@@ -203,19 +203,19 @@ void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
     {
-        m_TopPos.MoveTo(value);
+//        m_TopPos.MoveTo(value);
 
-        Nyx::CTraceStream(0x0)
-                << Nyx::CTF_Text(L"\nOnVertSliderPosChanged - pos = ")
-                << Nyx::CTF_Int(value);
+//        Nyx::CTraceStream(0x0)
+//                << Nyx::CTF_Text(L"\nOnVertSliderPosChanged - pos = ")
+//                << Nyx::CTF_Int(value);
 
-        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"m_TopPos ") << Nyx::CTF_Float(m_TopPos.Y());
-        m_TopPos.Item()->dbgOutputInfo();
+//        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"m_TopPos ") << Nyx::CTF_Float(m_TopPos.Y());
+//        m_TopPos.Item()->dbgOutputInfo();
 
         m_ItemsWalker.MoveTo(value);
 
-        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"walker ") << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
-        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
+//        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"walker ") << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
+//        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
 
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
         update();
@@ -307,31 +307,38 @@ void CTracesView::paintEvent(QPaintEvent*)
     QPainter                            painter(this);
     CDrawViewItemState                  drawstate(&painter);
     qreal                               ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
-    CViewItemPos                        pos = m_TopPos;
+//    CViewItemPos                        pos = m_TopPos;
     CViewItem*                          pItem = NULL;
+    bool                                bContinue = true;
 
     drawstate.TextPos() = QPointF(0.0, HeaderSize().height());
+
+    m_ItemsWalker.PushState();
 
 	painter.setClipping(true);
     painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
 
-    drawstate.TextPos().ry() = pos.Y() - ui->m_VertScrollbar->value() + HeaderSize().height();
+    drawstate.TextPos().ry() = m_ItemsWalker.ItemYPos()/*pos.Y()*/ - ui->m_VertScrollbar->value() + HeaderSize().height();
 
     drawstate.ViewRect() = QRectF(  ui->m_HorzScrollbar->value(), 
                                     ui->m_VertScrollbar->value(),
                                     ClientRect().width()+ui->m_HorzScrollbar->value(), 
                                     ClientRect().height()+ui->m_VertScrollbar->value());
 
-    while ( pos.IsValid() && drawstate.TextPos().y() < ViewHeight )
+    while ( bContinue && m_ItemsWalker.ValidPos() && drawstate.TextPos().y() < ViewHeight )
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
-        pItem = pos.Item();
+//        pItem = pos.Item();
+        pItem = m_ItemsWalker.ItemPos().Item();
 
         pItem->Display(Settings(), drawstate);
 
-        ++pos;
+//        ++pos;
+        bContinue = m_ItemsWalker.MoveToNext();
     }
+
+    m_ItemsWalker.PopState();
 }
 
 
@@ -355,26 +362,26 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 
-    if ( m_TopPos.IsValid() && isVisible() && m_TopPos.Y() != ui->m_VertScrollbar->value())
+    if ( m_ItemsWalker.ValidPos() && isVisible() && m_ItemsWalker.ItemYPos() != ui->m_VertScrollbar->value())
     {
-        m_TopPos.MoveTo(ui->m_VertScrollbar->value());
+//        m_TopPos.MoveTo(ui->m_VertScrollbar->value());
 
-        Nyx::CTraceStream(0x0)
-                << Nyx::CTF_Text(L"MoveTo : ")
-                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
-                << Nyx::CTF_Text(L" item Y value : ")
-                << Nyx::CTF_Float(m_TopPos.Y());
-        m_TopPos.Item()->dbgOutputInfo();
+//        Nyx::CTraceStream(0x0)
+//                << Nyx::CTF_Text(L"MoveTo : ")
+//                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
+//                << Nyx::CTF_Text(L" item Y value : ")
+//                << Nyx::CTF_Float(m_TopPos.Y());
+//        m_TopPos.Item()->dbgOutputInfo();
 
         m_ItemsWalker.MoveTo(ui->m_VertScrollbar->value());
 
-        Nyx::CTraceStream(0x0)
-                << Nyx::CTF_Text(L"Walker MoveTo : ")
-                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
-                << Nyx::CTF_Text(L" walker item Y pos : ")
-                << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
+//        Nyx::CTraceStream(0x0)
+//                << Nyx::CTF_Text(L"Walker MoveTo : ")
+//                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
+//                << Nyx::CTF_Text(L" walker item Y pos : ")
+//                << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
 
-        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
+//        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
     }
 }
 
@@ -425,15 +432,23 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 {
     if ( Qt::ControlModifier == event->modifiers() && Doc().ViewItems().ItemsCount() > 0 && event->pos().y() > m_pHeader->size().height() )
 	{
-        CViewItemPos        pos = Doc().ViewItems().begin();
-        if ( pos.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
+        bool        bItemStateChanged = false;
+
+        //CViewItemPos        pos = Doc().ViewItems().begin();
+        m_ItemsWalker.PushState();
+        if ( m_ItemsWalker.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
         {
-            CViewItem*  pItem = pos.Item();
+            CViewItem*  pItem = m_ItemsWalker.ItemPos().Item(); /*pos.Item();*/
 
             pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
 
-		    this->update();
+            bItemStateChanged = true;
         }
+        m_ItemsWalker.PopState();
+
+
+        if ( bItemStateChanged )
+            update();
 	}
 }
 
@@ -553,19 +568,23 @@ bool CTracesView::UpdateVisibleLines()
     //QPainter                            painter(this);
     CDrawViewItemState                  drawstate(NULL);
     qreal                               ViewHeight = (qreal) this->rect().height();
-    CViewItemPos                        pos = m_TopPos;
+//    CViewItemPos                        pos = m_TopPos;
     CViewItem*                          pItem = NULL;
     bool                                bSizeUpdate = false;
+    bool                                bContinue = true;
+
+    m_ItemsWalker.PushState();
 
     drawstate.TextPos() = QPointF(0.0, 0.0);
 
-    drawstate.TextPos().ry() = pos.Y() - ui->m_VertScrollbar->value();
+    drawstate.TextPos().ry() = m_ItemsWalker.ItemYPos() /*pos.Y()*/ - ui->m_VertScrollbar->value();
 
-    while ( pos.IsValid() && !(drawstate.TextPos().y() > ViewHeight+20) )
+    while ( bContinue && m_ItemsWalker.ValidPos() && !(drawstate.TextPos().y() > ViewHeight+20) )
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
-        pItem = pos.Item();
+//        pItem = pos.Item();
+        pItem = m_ItemsWalker.ItemPos().Item();
 
         if ( pItem->HasFlag(CViewItem::eVIF_ApproxSize) )
         {
@@ -584,8 +603,11 @@ bool CTracesView::UpdateVisibleLines()
             bSizeUpdate = true;
         }
 
-        ++pos;
+        //++pos;
+        bContinue = m_ItemsWalker.MoveToNext();
     }
+
+    m_ItemsWalker.PopState();
 
     return bSizeUpdate;
 }

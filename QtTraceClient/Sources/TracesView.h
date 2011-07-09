@@ -97,7 +97,7 @@ protected:
     CTracesDocument&                    m_rDoc;
     QString								m_Name;
     QRectF								m_Margins;
-    CViewItemPos                        m_TopPos;
+//    CViewItemPos                        m_TopPos;
     CViewSettings						m_Settings;
     QSizeF                              m_MaxLineSize;
     bool                                m_bViewDirty;

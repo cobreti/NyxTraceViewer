@@ -32,9 +32,11 @@ public:
     const CViewItemPos& ItemPos() const     { return m_Pos.ItemPos(); }
     const float& ItemYPos() const           { return m_Pos.Y(); }
 
-protected:
+    void PushState();
+    void PopState();
 
-    typedef     std::vector<CViewItemsModuleWalkerNode*>        ViewItemsModuleWalkerNodeArray;
+
+protected:
 
     enum EDirection
     {
@@ -43,6 +45,10 @@ protected:
         eD_Decreasing
     };
 
+    typedef     std::vector<CViewItemsModuleWalkerNode*>        ViewItemsModuleWalkerNodeArray;
+    typedef     std::vector<CViewItemsWalkerPos>                TWalkerPosStack;
+    typedef     std::vector<EDirection>                         TDirectionStack;
+
 protected:
 
     CViewItemsModuleWalkerNode* GetNodeWithModule( CModuleViewItems* pModule ) const;
@@ -50,8 +56,12 @@ protected:
 protected:
 
     ViewItemsModuleWalkerNodeArray          m_Nodes;
+
     CViewItemsWalkerPos                     m_Pos;
     EDirection                              m_Direction;
+
+    TWalkerPosStack                         m_PositionStack;
+    TDirectionStack                         m_DirectionStack;
 };
 
 #endif // VIEWITEMSWALKER_HPP

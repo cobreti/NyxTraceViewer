@@ -48,11 +48,9 @@ void CViewItemsWalker::OnNewSessionViewItem( CModuleViewItems* pModule, CSession
  */
 bool CViewItemsWalker::InitNewModulesPosition()
 {
-    //TViewItemsModuleWalkerNodeList::iterator        NodeIter = m_Nodes.begin();
     size_t          index = 0;
     bool            bModuleInitialized = false;
 
-    //while ( NodeIter != m_Nodes.end() )
     while ( index < m_Nodes.size() )
     {
         CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
@@ -60,18 +58,8 @@ bool CViewItemsWalker::InitNewModulesPosition()
         if ( !pNode->CachedPos().Valid() )
         {
             pNode->MoveToBegin();
-//            if ( pNode->MoveToBegin() && m_Pos.Valid() )
-//            {
-//                float   height = pNode->CachedPos().ItemPos().Item()->GetSize().height();
-//                while ( pNode->CachedPos() < m_Pos && pNode->MoveToNext() )
-//                {
-//                    m_Pos.Y() += height;
-//                    height = pNode->CachedPos().ItemPos().Item()->GetSize().height();
-//                }
-//            }
         }
 
-//        ++ NodeIter;
         ++ index;
     }
 
@@ -89,10 +77,8 @@ bool CViewItemsWalker::MoveToBegin()
 
     m_Pos = CViewItemsWalkerPos();
 
-//    TViewItemsModuleWalkerNodeList::const_iterator  NodeIter = m_Nodes.begin();
     size_t          index = 0;
 
-//    while ( NodeIter != m_Nodes.end() )
     while ( index < m_Nodes.size() )
     {
         if ( m_Nodes[index]->MoveToBegin() )
@@ -100,12 +86,11 @@ bool CViewItemsWalker::MoveToBegin()
             if ( !m_Pos.Valid() )
                 m_Nodes[index]->GetPosData(m_Pos);
 
-            if ( m_Nodes[index]->CachedPos() < m_Pos )
+            if ( m_Nodes[index]->CachedPos().IsBefore(m_Pos) )
                 m_Nodes[index]->GetPosData(m_Pos);
         }
 
         ++ index;
-//        ++ NodeIter;
     }
 
     m_Pos.ConcurrentItemsVisited().clear();
@@ -145,7 +130,7 @@ bool CViewItemsWalker::MoveToNext()
         CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
         while (     pNode->CachedPos().Valid() &&
-                    pNode->CachedPos() < m_Pos &&
+                    pNode->CachedPos().IsBefore(m_Pos) &&
                     pNode->MoveToNext());
     }
 
@@ -171,7 +156,6 @@ bool CViewItemsWalker::MoveToNext()
     //
     // find the first line after the current one
     //
-    //while ( index < m_Nodes.size())
     for ( index = 0; index < m_Nodes.size() && !ChangedLine; ++index)
     {
         const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
@@ -241,7 +225,7 @@ bool CViewItemsWalker::MoveToPrevious()
         CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
         while (     pNode->CachedPos().Valid() &&
-                    m_Pos < pNode->CachedPos() &&
+                    m_Pos.IsBefore(pNode->CachedPos()) &&
                     pNode->MoveToPrevious());
     }
 
@@ -311,9 +295,6 @@ bool CViewItemsWalker::MoveToPrevious()
  */
 bool CViewItemsWalker::MoveTo(const float& y)
 {
-//    if ( !MoveToBegin() )
-//        return false;
-
     if ( m_Pos.Valid() && m_Pos.Y() + m_Pos.ItemPos().Item()->GetSize().height() < y )
     {
         while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.ItemPos().Item()->GetSize().height() < y && MoveToNext() );
@@ -330,12 +311,45 @@ bool CViewItemsWalker::MoveTo(const float& y)
 /**
  *
  */
+void CViewItemsWalker::PushState()
+{
+    for (size_t index = 0; index < m_Nodes.size(); ++index)
+        m_Nodes[index]->PushState();
+
+    m_PositionStack.push_back(m_Pos);
+    m_DirectionStack.push_back(m_Direction);
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalker::PopState()
+{
+    for (size_t index = 0; index < m_Nodes.size(); ++index)
+        m_Nodes[index]->PopState();
+
+    if ( !m_PositionStack.empty())
+    {
+        m_Pos = m_PositionStack.back();
+        m_PositionStack.pop_back();
+    }
+
+    if ( !m_DirectionStack.empty())
+    {
+        m_Direction = m_DirectionStack.back();
+        m_DirectionStack.pop_back();
+    }
+}
+
+
+/**
+ *
+ */
 CViewItemsModuleWalkerNode* CViewItemsWalker::GetNodeWithModule( CModuleViewItems* pModule ) const
 {
-//    TViewItemsModuleWalkerNodeList::const_iterator        pos = m_Nodes.begin();
     size_t          index = 0;
 
-//    while ( pos != m_Nodes.end())
     while ( index < m_Nodes.size())
     {
         if ( m_Nodes[index]->ContainsModule(pModule) )

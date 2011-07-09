@@ -35,6 +35,13 @@ public:
 
     const Nyx::CWString& Name() const;
 
+    void PushState();
+    void PopState();
+
+protected:
+
+    typedef         std::vector<CViewItemsWalkerPos>        TWalkerPosStack;
+
 protected:
 
     CViewItemsSessionWalkerNode* GetNextSession( CViewItemsSessionWalkerNode* pSession ) const;
@@ -43,9 +50,11 @@ protected:
 protected:
 
     CModuleViewItems*                       m_pModuleViewItems;
+    TViewItemsSessionWalkerNodeArray        m_ChildNodes;
 
-    TViewItemsSessionWalkerNodeList         m_ChildNodes;
     CViewItemsWalkerPos                     m_CachedPos;
+
+    TWalkerPosStack                         m_PositionStack;
 };
 
 #endif // VIEWITEMSMODULEWALKERNODE_HPP

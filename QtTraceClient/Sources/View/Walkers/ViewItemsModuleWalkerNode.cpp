@@ -48,7 +48,7 @@ bool CViewItemsModuleWalkerNode::MoveToBegin()
     if ( m_ChildNodes.empty() )
         return false;
 
-    CViewItemsSessionWalkerNode*        pNode = m_ChildNodes.front();
+    CViewItemsSessionWalkerNode*        pNode = m_ChildNodes[0];
 
     return pNode->GetTopPos(m_CachedPos);
 }
@@ -62,9 +62,6 @@ bool CViewItemsModuleWalkerNode::MoveToNext()
     if ( !m_CachedPos.Valid() )
         return false;
 
-//    ++ m_CachedPos.ItemPos();
-
-//    if ( !m_CachedPos.Valid() )
     if ( !m_CachedPos.ItemPos().MoveToNext() )
     {
         CViewItemsSessionWalkerNode*        pNextSession = GetNextSession(m_CachedPos.Session());
@@ -85,9 +82,6 @@ bool CViewItemsModuleWalkerNode::MoveToPrevious()
     if ( !m_CachedPos.Valid() )
         return false;
 
-//    -- m_CachedPos.ItemPos();
-
-//    if ( !m_CachedPos.Valid() )
     if ( !m_CachedPos.ItemPos().MoveToPrevious() )
     {
         CViewItemsSessionWalkerNode*        pPreviousSession = GetPreviousSession(m_CachedPos.Session());
@@ -123,22 +117,40 @@ const Nyx::CWString& CViewItemsModuleWalkerNode::Name() const
 /**
  *
  */
+void CViewItemsModuleWalkerNode::PushState()
+{
+    m_PositionStack.push_back(m_CachedPos);
+}
+
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::PopState()
+{
+    if ( !m_PositionStack.empty())
+    {
+        m_CachedPos = m_PositionStack.back();
+        m_PositionStack.pop_back();
+    }
+}
+
+
+/**
+ *
+ */
 CViewItemsSessionWalkerNode* CViewItemsModuleWalkerNode::GetNextSession( CViewItemsSessionWalkerNode* pSession ) const
 {
-    CViewItemsSessionWalkerNode*                            pNextSession = NULL;
-    TViewItemsSessionWalkerNodeList::const_iterator         NodeIter = m_ChildNodes.begin();
+    CViewItemsSessionWalkerNode*            pNextSession = NULL;
+    size_t                                  index;
 
-    while ( NodeIter != m_ChildNodes.end() )
+    for (index = 0; index < m_ChildNodes.size()-1; ++index)
     {
-        if ( *NodeIter == pSession )
+        if ( m_ChildNodes[index] == pSession )
         {
-            ++ NodeIter;
-            if ( NodeIter != m_ChildNodes.end() )
-                pNextSession = *NodeIter;
+            pNextSession = m_ChildNodes[index+1];
             break;
         }
-
-        ++ NodeIter;
     }
 
     return pNextSession;
@@ -150,20 +162,16 @@ CViewItemsSessionWalkerNode* CViewItemsModuleWalkerNode::GetNextSession( CViewIt
  */
 CViewItemsSessionWalkerNode* CViewItemsModuleWalkerNode::GetPreviousSession( CViewItemsSessionWalkerNode* pSession ) const
 {
-    CViewItemsSessionWalkerNode*                            pPreviousSession = NULL;
-    TViewItemsSessionWalkerNodeList::const_iterator         NodeIter = m_ChildNodes.end();
+    CViewItemsSessionWalkerNode*        pPreviousSession = NULL;
+    size_t                              index;
 
-    -- NodeIter;
-    while ( NodeIter != m_ChildNodes.begin() )
+    for (index = 1; index < m_ChildNodes.size(); ++index)
     {
-        if ( *NodeIter == pSession )
+        if ( pSession == m_ChildNodes[index] )
         {
-            -- NodeIter;
-            pPreviousSession = *NodeIter;
+            pPreviousSession  =m_ChildNodes[index-1];
             break;
         }
-
-        -- NodeIter;
     }
 
     return pPreviousSession;
