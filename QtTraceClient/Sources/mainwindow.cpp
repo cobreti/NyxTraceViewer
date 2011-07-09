@@ -58,7 +58,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     CTracesDocument* pNewDoc = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
 
 	// create view
-	reateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
+	CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
 
     ui->m_btnRemove->setEnabled(false);
 }

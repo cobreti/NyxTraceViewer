@@ -74,7 +74,9 @@ bool CViewItemsModuleWalkerNode::MoveToNext()
     if ( !m_CachedPos.Valid() )
         return false;
 
-    if ( !m_CachedPos.ItemPos().MoveToNext() )
+    m_CachedPos.ItemPos().MoveToNext();
+
+    if ( !m_CachedPos.Valid() )
     {
         CViewItemsSessionWalkerNode*        pNextSession = GetNextSession(m_CachedPos.Session());
         if ( pNextSession )
