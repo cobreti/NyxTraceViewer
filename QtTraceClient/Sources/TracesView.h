@@ -6,10 +6,8 @@
 #include <QWidget>
 #include <QToolBar>
 #include <QPushButton>
-#include <QToolButton>
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
-#include "View/SettingsToolBar.hpp"
 #include "View/Walkers/ViewItemsWalker.hpp"
 
 
@@ -20,7 +18,6 @@ namespace Ui
 
 class CTracesDocument;
 class CViewHeader;
-class CPipesMgntPage;
 class QToolButton;
 class CModuleViewItems;
 class CSessionViewItems;
@@ -53,11 +50,6 @@ public:
     void UpdateVisibleLines( const CViewSettings& settings );
     void RefreshDisplay();
 
-    void ShowFeedsPanel();
-
-    bool IsPinned() const;
-    void SetPinned();
-
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
     virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
 
@@ -65,8 +57,6 @@ public slots:
 
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
-    void OnShowHideSettings( ViewEnums::ESettings settings, bool bShow );
-    void OnPinBtnClicked( bool checked );
 
 protected:
 
@@ -105,9 +95,6 @@ protected:
     bool                                m_bViewDirty;
     bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
-    CSettingsToolBar*                   m_pSettingsToolbar;
-    CPipesMgntPage*                     m_pPipesMgntPage;
-    QToolButton*                        m_pPinBtn;
     CViewItemsWalker                    m_ItemsWalker;
 };
 

@@ -3,9 +3,7 @@
 #include "Document/TracesDocument.hpp"
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
-#include "View/SettingsToolBar.hpp"
 #include "View/ViewHeader.hpp"
-#include "MainWindow/PipesMgntPage.hpp"
 
 #include <Nyx.hpp>
 
@@ -28,16 +26,11 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
-    m_pHeader(NULL),
-    m_pSettingsToolbar(NULL),
-    m_pPipesMgntPage(NULL),
-    m_pPinBtn(NULL)
+    m_pHeader(NULL)
 {
     ui->setupUi(this);
 
-    m_pSettingsToolbar = new CSettingsToolBar(this);
-
-    this->setContentsMargins(0, m_pSettingsToolbar->height(), ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
+    this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
 
     m_Margins.setLeft(25.0);
     m_Margins.setRight(25.0);
@@ -46,27 +39,9 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
 
 	InitSettings();
 
-//    if ( Doc().ViewItems().ItemsCount() > 0 )
-//        m_TopPos = Doc().ViewItems().begin();
-
-    m_pPipesMgntPage = new CPipesMgntPage(this);
-    m_pPipesMgntPage->hide();
-
-    QIcon   PinIcon(":/View/pinwhite");
-    m_pPinBtn = new QToolButton(this);
-    m_pPinBtn->setIcon(PinIcon);
-    m_pPinBtn->setIconSize( QSize(16, 16) );
-    m_pPinBtn->setAutoRaise(true);
-    m_pPinBtn->setCheckable(true);
-    m_pPinBtn->setChecked(true);
-    m_pPinBtn->resize(20, 20);
-
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
-    connect( m_pSettingsToolbar, SIGNAL(sig_OnShowHideSettings(ViewEnums::ESettings, bool)), this, SLOT(OnShowHideSettings(ViewEnums::ESettings, bool)));
-    connect( m_pPinBtn, SIGNAL(clicked(bool)), this, SLOT(OnPinBtnClicked(bool)));
-
 }
 
 
@@ -103,9 +78,6 @@ void CTracesView::SetName(const QString& name)
  */
 void CTracesView::OnNewTraces()
 {
-//    if ( !m_TopPos.IsValid() )
-//        m_TopPos = Doc().ViewItems().begin();
-
     m_ItemsWalker.InitNewModulesPosition();
 
     if ( !m_ItemsWalker.ValidPos() )
@@ -148,7 +120,6 @@ void CTracesView::RefreshDisplay()
         if ( m_bKeepAtEnd )
         {
             ui->m_VertScrollbar->setValue( ui->m_VertScrollbar->maximum() );
-            //m_TopPos.MoveTo( ui->m_VertScrollbar->value() );
         }
 
         update();
@@ -156,34 +127,6 @@ void CTracesView::RefreshDisplay()
         m_bViewDirty = false;
     }
 }
-
-
-/**
- *
- */
-void CTracesView::ShowFeedsPanel()
-{
-    m_pSettingsToolbar->ForceShowSettings( ViewEnums::eSourceFeeds );
-}
-
-
-/**
- *
- */
-bool CTracesView::IsPinned() const
-{
-    return m_pPinBtn->isChecked();
-}
-
-
-/**
- *
- */
-void CTracesView::SetPinned()
-{
-    m_pPinBtn->setChecked(true);
-}
-
 
 /**
  *
@@ -214,19 +157,7 @@ void CTracesView::OnVertSliderPosChanged(int value)
 {
     if ( Doc().ViewItems().ItemsCount() > 0 )
     {
-//        m_TopPos.MoveTo(value);
-
-//        Nyx::CTraceStream(0x0)
-//                << Nyx::CTF_Text(L"\nOnVertSliderPosChanged - pos = ")
-//                << Nyx::CTF_Int(value);
-
-//        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"m_TopPos ") << Nyx::CTF_Float(m_TopPos.Y());
-//        m_TopPos.Item()->dbgOutputInfo();
-
         m_ItemsWalker.MoveTo(value);
-
-//        Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"walker ") << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
-//        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
 
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
         update();
@@ -239,44 +170,6 @@ void CTracesView::OnHorzSliderPosChanged(int value)
     m_pHeader->SetHorzOffset(value);
 
     update();
-}
-
-
-/**
- *
- */
-void CTracesView::OnShowHideSettings( ViewEnums::ESettings settings, bool bShow )
-{
-    switch ( settings )
-    {
-        case ViewEnums::eSourceFeeds:
-            {
-                if ( bShow )
-                    m_pPipesMgntPage->show(&Doc());
-                else
-                {
-                    m_pPipesMgntPage->hide();
-                    setFocus();
-                }
-            }
-            break;
-    };
-}
-
-
-/**
- *
- */
-void CTracesView::OnPinBtnClicked( bool checked )
-{
-    if ( checked )
-    {
-        CTraceClientApp::Instance().MainWindow()->PinView(this);
-    }
-    else
-    {
-        CTraceClientApp::Instance().MainWindow()->UnpinView(this);
-    }
 }
 
 
@@ -297,14 +190,6 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     m_pHeader->resize( event->size().width()-nWidth, m_pHeader->size().height() );
 
     UpdateScrollbarRange( ClientRect(rcWnd) );
-
-    m_pPipesMgntPage->move( kPanel_LeftMargin, m_pSettingsToolbar->size().height() );
-
-    if ( nPipesMgntPageWidth > 500 )
-        nPipesMgntPageWidth = 500;
-    m_pPipesMgntPage->resize( nPipesMgntPageWidth, event->size().height() / 2 );
-
-    m_pPinBtn->move( event->size().width() - nWidth - m_pPinBtn->size().width()-2, 2 );
 
     update();
 }
@@ -483,8 +368,6 @@ void CTracesView::wheelEvent(QWheelEvent* event)
  */
 void CTracesView::showEvent( QShowEvent* )
 {
-    if ( m_pPipesMgntPage->isVisible() )
-        m_pPipesMgntPage->Refresh();
 }
 
 
@@ -546,9 +429,9 @@ void CTracesView::InitSettings()
  */
 QRect CTracesView::ClientRect( const QRect& rcWnd ) const
 {
-    return QRect(   0, m_pSettingsToolbar->height(),
+    return QRect(   0, 0,
                     rcWnd.width() - ui->m_VertScrollbar->width(),
-                    rcWnd.height() - ui->m_HorzScrollbar->height() - HeaderSize().height() - m_pSettingsToolbar->height() );
+                    rcWnd.height() - ui->m_HorzScrollbar->height() - HeaderSize().height() );
 }
 
 
@@ -561,9 +444,6 @@ QSize CTracesView::HeaderSize() const
 
     if ( m_pHeader )
         size += m_pHeader->size();
-
-    if ( m_pSettingsToolbar )
-        size.setHeight( size.height() + m_pSettingsToolbar->size().height() );
 
     return size;
 }

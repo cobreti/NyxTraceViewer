@@ -3,9 +3,13 @@
 
 #include <QDialog>
 #include <QFrame>
+#include <QHBoxLayout>
+#include <QToolButton>
+#include "View/SettingsToolBar.hpp"
 
 
 class CTracesView;
+class CPipesMgntPage;
 
 namespace Ui
 {
@@ -27,13 +31,22 @@ public:
     void hide();
     void DetachView( CTracesView* pView );
 
+public slots:
+
+    void OnShowHideSettings( ViewEnums::ESettings settings, bool bShow );
+    void OnPinBtnClicked( bool checked );
+
 protected:
 
     void closeEvent( QCloseEvent* );
 
 protected:
-    Ui::ViewPage*       ui;
-    CTracesView*        m_pView;
+    Ui::ViewPage*               ui;
+    CTracesView*                m_pView;
+    CSettingsToolBar*           m_pTBSettings;
+    QHBoxLayout*                m_pTBArea;
+    QToolButton*                m_pBtnPin;
+    CPipesMgntPage*             m_pPipesMgntPage;
 };
 
 

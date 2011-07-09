@@ -6,7 +6,7 @@
 /**
  *
  */
-CSettingsToolBar::CSettingsToolBar( CTracesView* pView ) : QToolBar(pView),
+CSettingsToolBar::CSettingsToolBar( QWidget* pParent ) : QToolBar(pParent),
 m_pBtn_SourceFeeds(NULL)
 {
     setFloatable(false);

@@ -59,7 +59,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
 	// create view
 	CTracesView* pView = CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
-    pView->ShowFeedsPanel();
 
     ui->m_btnRemove->setEnabled(false);
 }
@@ -83,14 +82,6 @@ void CMainWindow::PinView( CTracesView* pView )
     QWidget*        pViewParent = static_cast<QWidget*>(pView->parent());
     
     m_pViewPage->show(pView);
-    pView->SetPinned();
-
-    if ( pViewParent && pViewParent != m_pViewPage && !m_pViewPage->children().contains(pViewParent) )
-    {
-        pViewParent = pViewParent->topLevelWidget();
-        pViewParent->close();
-        delete pViewParent;
-    }
 
     SelectItemWithView(pView);
 }
@@ -121,13 +112,19 @@ void CMainWindow::OnViewsTreeSelectionChanged()
 
     if ( pViewItem )
     {
-        if ( pViewItem->View()->IsPinned() )
-            m_pViewPage->show(pViewItem->View());
-        else
+        CTracesView*        pView = pViewItem->View();
+
+        if ( pView )
         {
-            QWidget*    pTopLevelParent = pViewItem->View()->topLevelWidget();
-            pTopLevelParent->activateWindow();
-            pViewItem->View()->setFocus();
+            QWidget*            pParent = pView->topLevelWidget();
+
+            if ( pParent != this )
+            {
+                pParent->activateWindow();
+                pParent->setFocus();
+            }
+            else
+                m_pViewPage->show(pView);
         }
     }
     else
@@ -201,8 +198,8 @@ void CMainWindow::closeEvent(QCloseEvent* e)
     {
         MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->topLevelItem(index));
 
-        if ( !pViewItem->View()->IsPinned() )
-            PinView(pViewItem->View());
+        if ( pViewItem->View()->topLevelWidget() != this )
+            pViewItem->View()->topLevelWidget()->close();
 
         CloseChildViews(pViewItem);
     }
@@ -221,8 +218,8 @@ void CMainWindow::CloseChildViews( QTreeWidgetItem* pParent )
     {
         MainWindow::CViewTreeItem*      pViewItem = static_cast<MainWindow::CViewTreeItem*>(pParent->child(index));
 
-        if ( !pViewItem->View()->IsPinned())
-            PinView(pViewItem->View());
+        if ( pViewItem->View()->topLevelWidget() != this )
+            pViewItem->View()->topLevelWidget()->close();
     }
 }
 
@@ -281,8 +278,9 @@ CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& V
     {
         ui->m_ViewsTree->addTopLevelItem( pViewItem );
         pViewItem->setSelected(true);
-        PinView(pView);
     }
+
+    PinView(pView);
     //ui->m_ViewsTree->setCurrentItem(pViewItem, 1);
 
     //m_pViewPage->show(pView);

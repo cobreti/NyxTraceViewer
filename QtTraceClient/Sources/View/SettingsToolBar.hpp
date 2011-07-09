@@ -5,7 +5,7 @@
 
 #include "View/ViewEnums.hpp"
 
-class CTracesView;
+//class CTracesView;
 class QToolButton;
 
 /**
@@ -19,7 +19,7 @@ public:
 
 
 public:
-    CSettingsToolBar( CTracesView* pView );
+    CSettingsToolBar( QWidget* pParent );
     virtual ~CSettingsToolBar();
 
     void ForceShowSettings( ViewEnums::ESettings settings );
