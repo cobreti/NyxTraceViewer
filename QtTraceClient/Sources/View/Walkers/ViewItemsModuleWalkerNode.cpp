@@ -17,8 +17,20 @@ CViewItemsModuleWalkerNode::CViewItemsModuleWalkerNode(CModuleViewItems* pModule
 /**
  *
  */
+CViewItemsModuleWalkerNode::CViewItemsModuleWalkerNode(const CViewItemsModuleWalkerNode& node) :
+    CViewItemsWalkerNode(),
+    m_pModuleViewItems(node.m_pModuleViewItems)
+{
+    CopyDataFrom(node);
+}
+
+
+/**
+ *
+ */
 CViewItemsModuleWalkerNode::~CViewItemsModuleWalkerNode()
 {
+    ClearChildNodes();
 }
 
 
@@ -139,6 +151,34 @@ void CViewItemsModuleWalkerNode::PopState()
 /**
  *
  */
+CViewItemsSessionWalkerNode* CViewItemsModuleWalkerNode::GetEquivalentSession( CViewItemsModuleWalkerNode* pModuleNode, CViewItemsSessionWalkerNode* pSessionNode )
+{
+    for (size_t index = 0; index < pModuleNode->m_ChildNodes.size(); ++index)
+        if ( pModuleNode->m_ChildNodes[index] == pSessionNode )
+            return m_ChildNodes[index];
+
+    return NULL;
+}
+
+
+/**
+ *
+ */
+const CViewItemsModuleWalkerNode& CViewItemsModuleWalkerNode::operator = (const CViewItemsModuleWalkerNode& node)
+{
+    if ( this == &node )
+        return *this;
+
+    ClearChildNodes();
+    CopyDataFrom(node);
+
+    return *this;
+}
+
+
+/**
+ *
+ */
 CViewItemsSessionWalkerNode* CViewItemsModuleWalkerNode::GetNextSession( CViewItemsSessionWalkerNode* pSession ) const
 {
     CViewItemsSessionWalkerNode*            pNextSession = NULL;
@@ -177,4 +217,34 @@ CViewItemsSessionWalkerNode* CViewItemsModuleWalkerNode::GetPreviousSession( CVi
     return pPreviousSession;
 }
 
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::ClearChildNodes()
+{
+    for (size_t index = 0; index < m_ChildNodes.size(); ++index)
+        delete m_ChildNodes[index];
+}
+
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::CopyDataFrom( const CViewItemsModuleWalkerNode& node)
+{
+    m_pModuleViewItems = node.m_pModuleViewItems;
+    m_ChildNodes.resize(node.m_ChildNodes.size());
+
+    m_CachedPos = node.m_CachedPos;
+    m_CachedPos.Module() = this;
+
+    for (size_t index = 0; index < node.m_ChildNodes.size(); ++index)
+    {
+        m_ChildNodes[index] = new CViewItemsSessionWalkerNode(*node.m_ChildNodes[index]);
+
+        if ( node.m_ChildNodes[index] == m_CachedPos.Session() )
+            m_CachedPos.Session() = m_ChildNodes[index];
+    }
+}
 

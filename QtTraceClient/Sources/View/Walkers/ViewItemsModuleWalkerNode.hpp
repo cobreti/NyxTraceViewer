@@ -20,6 +20,7 @@ class CViewItemsModuleWalkerNode : public CViewItemsWalkerNode
 {
 public:
     CViewItemsModuleWalkerNode(CModuleViewItems* pModuleViewItems);
+    explicit CViewItemsModuleWalkerNode(const CViewItemsModuleWalkerNode& node);
     virtual ~CViewItemsModuleWalkerNode();
 
     bool ContainsModule( CModuleViewItems* pModule ) const;
@@ -38,6 +39,10 @@ public:
     void PushState();
     void PopState();
 
+    CViewItemsSessionWalkerNode* GetEquivalentSession( CViewItemsModuleWalkerNode* pModuleNode, CViewItemsSessionWalkerNode* pSessionNode );
+
+    const CViewItemsModuleWalkerNode& operator = (const CViewItemsModuleWalkerNode& node);
+
 protected:
 
     typedef         std::vector<CViewItemsWalkerPos>        TWalkerPosStack;
@@ -46,6 +51,9 @@ protected:
 
     CViewItemsSessionWalkerNode* GetNextSession( CViewItemsSessionWalkerNode* pSession ) const;
     CViewItemsSessionWalkerNode* GetPreviousSession( CViewItemsSessionWalkerNode* pSession ) const;
+
+    void ClearChildNodes();
+    void CopyDataFrom( const CViewItemsModuleWalkerNode& node);
 
 protected:
 

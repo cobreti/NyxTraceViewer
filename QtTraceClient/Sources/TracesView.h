@@ -37,6 +37,8 @@ public:
     explicit CTracesView(CTracesDocument& rDoc, QWidget *parent = NULL);
     ~CTracesView();
 
+    void InitFromView( const CTracesView& view );
+
 	void SetName( const QString& name );
 	const QString& Name() const		{ return m_Name; }
 

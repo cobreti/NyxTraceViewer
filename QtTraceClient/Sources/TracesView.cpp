@@ -79,6 +79,17 @@ CTracesView::~CTracesView()
 /**
  *
  */
+void CTracesView::InitFromView( const CTracesView& view )
+{
+    m_ItemsWalker = view.m_ItemsWalker;
+    ui->m_VertScrollbar->setValue( view.ui->m_VertScrollbar->value());
+    update();
+}
+
+
+/**
+ *
+ */
 void CTracesView::SetName(const QString& name)
 {
 	m_Name = name;

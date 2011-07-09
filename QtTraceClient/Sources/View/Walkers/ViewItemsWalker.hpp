@@ -9,6 +9,7 @@
 class CModuleViewItems;
 class CSessionViewItems;
 
+
 /**
  *
  */
@@ -16,6 +17,7 @@ class CViewItemsWalker
 {
 public:
     CViewItemsWalker();
+    explicit CViewItemsWalker(const CViewItemsWalker& walker);
     virtual ~CViewItemsWalker();
 
     void OnNewModuleViewItem( CModuleViewItems* pModule );
@@ -35,6 +37,7 @@ public:
     void PushState();
     void PopState();
 
+    const CViewItemsWalker& operator = (const CViewItemsWalker& walker);
 
 protected:
 
@@ -52,6 +55,8 @@ protected:
 protected:
 
     CViewItemsModuleWalkerNode* GetNodeWithModule( CModuleViewItems* pModule ) const;
+    void CopyDataFrom(const CViewItemsWalker& walker);
+    void ClearModuleNodes();
 
 protected:
 

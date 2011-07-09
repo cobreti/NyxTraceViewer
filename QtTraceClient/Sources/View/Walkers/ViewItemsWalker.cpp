@@ -15,8 +15,18 @@ CViewItemsWalker::CViewItemsWalker() :
 /**
  *
  */
+CViewItemsWalker::CViewItemsWalker(const CViewItemsWalker& walker)
+{
+    CopyDataFrom(walker);
+}
+
+
+/**
+ *
+ */
 CViewItemsWalker::~CViewItemsWalker()
 {
+    ClearModuleNodes();
 }
 
 
@@ -346,6 +356,21 @@ void CViewItemsWalker::PopState()
 /**
  *
  */
+const CViewItemsWalker& CViewItemsWalker::operator = (const CViewItemsWalker& walker)
+{
+    if ( this == &walker )
+        return *this;
+
+    ClearModuleNodes();
+    CopyDataFrom(walker);
+
+    return *this;
+}
+
+
+/**
+ *
+ */
 CViewItemsModuleWalkerNode* CViewItemsWalker::GetNodeWithModule( CModuleViewItems* pModule ) const
 {
     size_t          index = 0;
@@ -359,4 +384,36 @@ CViewItemsModuleWalkerNode* CViewItemsWalker::GetNodeWithModule( CModuleViewItem
     }
 
     return NULL;
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalker::CopyDataFrom(const CViewItemsWalker& walker)
+{
+    m_Direction = walker.m_Direction;
+    m_Nodes.resize(walker.m_Nodes.size());
+    m_Pos = walker.m_Pos;
+
+    for (size_t index = 0; index < walker.m_Nodes.size(); ++index)
+    {
+        m_Nodes[index] = new CViewItemsModuleWalkerNode(*walker.m_Nodes[index]);
+
+        if ( m_Pos.Module() == walker.m_Nodes[index])
+            m_Pos.Module() = m_Nodes[index];
+    }
+
+    if ( m_Pos.Module() )
+        m_Pos.Session() = m_Pos.Module()->GetEquivalentSession(walker.m_Pos.Module(), walker.m_Pos.Session());
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalker::ClearModuleNodes()
+{
+    for (size_t index = 0; index < m_Nodes.size(); ++index)
+        delete m_Nodes[index];
 }

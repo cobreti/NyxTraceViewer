@@ -16,6 +16,16 @@ CViewItemsSessionWalkerNode::CViewItemsSessionWalkerNode(CSessionViewItems* pSes
 /**
  *
  */
+CViewItemsSessionWalkerNode::CViewItemsSessionWalkerNode(const CViewItemsSessionWalkerNode& node) :
+    CViewItemsWalkerNode(),
+    m_pSession(node.m_pSession)
+{
+}
+
+
+/**
+ *
+ */
 CViewItemsSessionWalkerNode::~CViewItemsSessionWalkerNode()
 {
 }
@@ -42,5 +52,19 @@ bool CViewItemsSessionWalkerNode::GetLastPos( CViewItemsWalkerPos& walkerPos )
     walkerPos.Session() = this;
 
     return walkerPos.ItemPos().IsValid();
+}
+
+
+/**
+ *
+ */
+const CViewItemsSessionWalkerNode& CViewItemsSessionWalkerNode::operator = (const CViewItemsSessionWalkerNode& node)
+{
+    if ( this == &node )
+        return *this;
+
+    m_pSession = node.m_pSession;
+
+    return *this;
 }
 

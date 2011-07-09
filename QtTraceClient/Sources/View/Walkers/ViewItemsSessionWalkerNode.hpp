@@ -22,10 +22,13 @@ class CViewItemsSessionWalkerNode : public CViewItemsWalkerNode
 {
 public:
     CViewItemsSessionWalkerNode(CSessionViewItems* pSession);
+    explicit CViewItemsSessionWalkerNode(const CViewItemsSessionWalkerNode& node);
     virtual ~CViewItemsSessionWalkerNode();
 
     virtual bool GetTopPos( CViewItemsWalkerPos& walkerPos );
     virtual bool GetLastPos( CViewItemsWalkerPos& walkerPos );
+
+    const CViewItemsSessionWalkerNode& operator = (const CViewItemsSessionWalkerNode& node);
 
 protected:
 

@@ -262,16 +262,18 @@ CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& V
 
 	pView->SetName(ViewName);
 
+    MainWindow::CViewTreeItem*          pParentViewItem = static_cast<MainWindow::CViewTreeItem*>(pParent);
     MainWindow::CViewTreeItem*          pViewItem = new MainWindow::CViewTreeItem(pParent, pView);
     pViewItem->setFlags( Qt::ItemIsEditable | pViewItem->flags() );
     pViewItem->setIcon(0, ViewIcon);
 
     ui->m_ViewsTree->clearSelection();
 
-    if ( pParent )
+    if ( pParentViewItem )
     {
-        ui->m_ViewsTree->expandItem(pParent);
-        pParent->addChild(pViewItem);
+        pView->InitFromView( *pParentViewItem->View() );
+        ui->m_ViewsTree->expandItem(pParentViewItem);
+        pParentViewItem->addChild(pViewItem);
         pViewItem->setSelected(true);
 //        m_pViewPage->hide();
     }
