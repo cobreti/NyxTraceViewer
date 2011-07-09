@@ -569,11 +569,11 @@
 					>
 				</File>
 				<File
-					RelativePath=".\Sources\TracesDocument.cpp"
+					RelativePath=".\Sources\Document\TracesDocument.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\Sources\TracesDocument.hpp"
+					RelativePath=".\Sources\Document\TracesDocument.hpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -592,7 +592,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\Sources&quot; &quot;-I.\UI&quot; &quot;-I.\..\NyxLibs\include&quot; &quot;-I.\..\NyxLibs\include\Win32&quot; &quot;-I.\..\NyxLibs\include\NyxNet&quot; &quot;-I.\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;.\Sources\TracesDocument.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\NyxLibs\include&quot; &quot;-I.\..\NyxLibs\include\NyxNet&quot; &quot;-I.\..\NyxLibs\include\Win32&quot; &quot;-I.\..\TraceClientCore\include&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\Sources&quot; &quot;-I.\UI&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -608,6 +608,22 @@
 				</File>
 				<File
 					RelativePath=".\Sources\View\DrawViewItemState.hpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\View\ModuleViewItems.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\View\ModuleViewItems.hpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\View\SessionViewItems.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\View\SessionViewItems.hpp"
 					>
 				</File>
 				<File
@@ -756,6 +772,22 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Sources\View\ViewItemsModules.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\ViewItemsModules.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\ViewItemsModulesMgr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\ViewItemsModulesMgr.hpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Sources\View\ViewItemsNodeObjectsPool.cpp"
 						>
 					</File>
@@ -901,6 +933,66 @@
 					</File>
 					<File
 						RelativePath=".\Sources\View\ViewSettings.hpp"
+						>
+					</File>
+				</Filter>
+				<Filter
+					Name="Walkers"
+					>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsModuleWalkerNode.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsModuleWalkerNode.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsSessionWalkerNode.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsSessionWalkerNode.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalker.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalker.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNode.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNode.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNodesPool.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNodesPool.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerPos.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerPos.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerStats.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerStats.hpp"
 						>
 					</File>
 				</Filter>
@@ -1285,7 +1377,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\moc\release\moc_TracesDocument.cpp"
+					RelativePath=".\moc\Release\moc_TracesDocument.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -1702,26 +1794,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\File-View-icon.png"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
@@ -1742,7 +1814,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\New-Document-icon.png"
+				RelativePath=".\UI\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1763,6 +1835,26 @@
 			</File>
 			<File
 				RelativePath=".\UI\Icons\New-Document-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Icons\New-Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1932,7 +2024,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\View-icon.png"
+				RelativePath=".\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1952,7 +2044,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\View-icon.png"
+				RelativePath=".\UI\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
