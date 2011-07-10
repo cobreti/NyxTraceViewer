@@ -16,16 +16,20 @@ ui(new Ui::ViewPage()),
 m_pView(NULL),
 m_pTBSettings(NULL),
 m_pTBArea(NULL),
+m_pViewLayout(NULL),
 m_pBtnPin(NULL),
 m_pPipesMgntPage(NULL)
 {
     ui->setupUi(this);
 
-    m_pTBArea = new QHBoxLayout;
+    m_pTBArea = new QHBoxLayout();
 
     m_pTBSettings = new CSettingsToolBar(this);
-    ui->m_ViewFrame->layout()->addItem(m_pTBArea);
+    m_pTBSettings->setEnabled(true);
     m_pTBArea->addWidget(m_pTBSettings);
+    m_pTBArea->setEnabled(true);
+
+    m_pViewLayout = new QVBoxLayout();
 
     QIcon   PinIcon(":/View/pinwhite");
     m_pBtnPin = new QToolButton(this);
@@ -37,9 +41,13 @@ m_pPipesMgntPage(NULL)
     m_pBtnPin->resize(20, 20);
     m_pTBArea->addWidget(m_pBtnPin);
 
+    m_pViewLayout->addLayout(m_pTBArea);
+
     m_pPipesMgntPage = new CPipesMgntPage(this);
-    ui->m_ViewFrame->layout()->addWidget(m_pPipesMgntPage);
+    m_pViewLayout->addWidget(m_pPipesMgntPage);
     m_pPipesMgntPage->hide();
+
+    ui->m_ViewFrame->setLayout(m_pViewLayout);
 
     if ( pParent )
         setWindowFlags( Qt::Widget );
@@ -73,7 +81,7 @@ void CViewPage::show( CTracesView* pView )
     m_pTBSettings->show();
     m_pBtnPin->show();
     m_pBtnPin->setChecked(parent() != NULL);
-    ui->m_ViewFrame->layout()->addWidget(pView);
+    m_pViewLayout->addWidget(pView);
 
     if ( m_pPipesMgntPage->isVisible() )
     {

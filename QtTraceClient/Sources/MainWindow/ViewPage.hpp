@@ -45,6 +45,7 @@ protected:
     CTracesView*                m_pView;
     CSettingsToolBar*           m_pTBSettings;
     QHBoxLayout*                m_pTBArea;
+    QVBoxLayout*                m_pViewLayout;
     QToolButton*                m_pBtnPin;
     CPipesMgntPage*             m_pPipesMgntPage;
 };
