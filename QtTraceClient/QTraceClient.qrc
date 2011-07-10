@@ -11,6 +11,7 @@
         <file>Icons/StartPipe-icon.png</file>
         <file>Icons/StopPipe-icon.png</file>
         <file>Icons/View-Copy-icon.png</file>
+        <file>Icons/SaveAs.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

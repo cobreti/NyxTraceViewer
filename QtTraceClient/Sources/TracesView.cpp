@@ -15,6 +15,7 @@
 #include "View/ViewItemModuleNamePainter.hpp"
 #include "View/DrawViewItemState.hpp"
 #include "View/ViewColumnSettings.hpp"
+#include "View/Walkers/FileWriterViewItemsWalker.hpp"
 
 /**
  *
@@ -147,6 +148,17 @@ void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionView
     Nyx::CTraceStream(0x0).Write("CTracesView::OnNewSessionViewItems : %X : %X", pModule, pSession);
 
     m_ItemsWalker.OnNewSessionViewItem(pModule, pSession);
+}
+
+
+/**
+ *
+ */
+void CTracesView::Save( QFile& file )
+{
+    CFileWriterViewItemsWalker      SaveWalker(m_ItemsWalker);
+
+    SaveWalker.Write(file);
 }
 
 

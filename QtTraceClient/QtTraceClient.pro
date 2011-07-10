@@ -59,7 +59,8 @@ SOURCES += Sources/TracesView.cpp \
     Sources/View/Walkers/ViewItemsModuleWalkerNode.cpp \
     Sources/View/Walkers/ViewItemsSessionWalkerNode.cpp \
     Sources/View/Walkers/ViewItemsWalkerNodesPool.cpp \
-    Sources/View/Walkers/ViewItemsWalkerPos.cpp
+    Sources/View/Walkers/ViewItemsWalkerPos.cpp \
+    Sources/View/Walkers/FileWriterViewItemsWalker.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
     Sources/DebugPanel.h \
@@ -118,7 +119,8 @@ HEADERS += Sources/TracesView.h \
     Sources/View/Walkers/ViewItemsModuleWalkerNode.hpp \
     Sources/View/Walkers/ViewItemsSessionWalkerNode.hpp \
     Sources/View/Walkers/ViewItemsWalkerNodesPool.hpp \
-    Sources/View/Walkers/ViewItemsWalkerPos.hpp
+    Sources/View/Walkers/ViewItemsWalkerPos.hpp \
+    Sources/View/Walkers/FileWriterViewItemsWalker.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
     UI/DebugPanel.ui \

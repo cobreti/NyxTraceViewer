@@ -25,8 +25,6 @@ public:
     CViewPage( QWidget* pParent );
     virtual ~CViewPage();
 
-    //QFrame* ViewFrame() const;
-
     void show( CTracesView* pView );
     void hide();
     void DetachView( CTracesView* pView );
@@ -34,7 +32,8 @@ public:
 public slots:
 
     void OnShowHideSettings( ViewEnums::ESettings settings, bool bShow );
-    void OnPinBtnClicked( bool checked );
+    void OnPin(bool bPinned );
+    void OnSave();
 
 protected:
 
@@ -46,7 +45,6 @@ protected:
     CSettingsToolBar*           m_pTBSettings;
     QHBoxLayout*                m_pTBArea;
     QVBoxLayout*                m_pViewLayout;
-    QToolButton*                m_pBtnPin;
     CPipesMgntPage*             m_pPipesMgntPage;
 };
 

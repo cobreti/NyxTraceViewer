@@ -21,6 +21,7 @@ class CViewHeader;
 class QToolButton;
 class CModuleViewItems;
 class CSessionViewItems;
+class QFile;
 
 
 /**
@@ -52,6 +53,8 @@ public:
 
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
     virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
+
+    void Save( QFile& file );
 
 public slots:
 
