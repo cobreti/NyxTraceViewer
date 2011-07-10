@@ -54,7 +54,7 @@ public:
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
     virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
 
-    void Save( QFile& file );
+    void Save( const QString& filename );
 
 public slots:
 

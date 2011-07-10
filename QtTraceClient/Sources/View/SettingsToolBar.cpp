@@ -20,14 +20,17 @@ CSettingsToolBar::CSettingsToolBar( QWidget* pParent ) : QToolBar(pParent),
     QIcon               SaveAsIcon(":/MainWindow/Icons/SaveAs.png");
     QIcon               PinIcon(":/View/pinwhite");
 
+    m_pBtn_SaveAs = new QToolButton();
+    m_pBtn_SaveAs->setIcon(SaveAsIcon);
+    addWidget(m_pBtn_SaveAs);
+
+    addSeparator();
+
     m_pBtn_SourceFeeds = new QToolButton();
     m_pBtn_SourceFeeds->setIcon(PipeSourceIcon);
     m_pBtn_SourceFeeds->setCheckable(true);
     addWidget(m_pBtn_SourceFeeds);
 
-    m_pBtn_SaveAs = new QToolButton();
-    m_pBtn_SaveAs->setIcon(SaveAsIcon);
-    addWidget(m_pBtn_SaveAs);
 
     m_pSpacer = new QWidget(this);
     m_pSpacer->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);

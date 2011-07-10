@@ -6,6 +6,7 @@
 #include "View/ViewHeader.hpp"
 
 #include <Nyx.hpp>
+#include <NyxAnsiFile.hpp>
 
 #include "View/ViewItem_TraceData.hpp"
 #include "View/ViewItemDataPainter.hpp"
@@ -154,11 +155,18 @@ void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionView
 /**
  *
  */
-void CTracesView::Save( QFile& file )
+void CTracesView::Save( const QString& filename )
 {
     CFileWriterViewItemsWalker      SaveWalker(m_ItemsWalker);
+    Nyx::CAnsiFileRef               refFile = Nyx::CAnsiFile::Alloc();
+    Nyx::NyxResult                  res;
 
-    SaveWalker.Write(file);
+    res = refFile->Create(filename.toStdString().c_str());
+    if ( Nyx::Succeeded(res) )
+    {
+        SaveWalker.Write(refFile);
+        refFile->Close();
+    }
 }
 
 

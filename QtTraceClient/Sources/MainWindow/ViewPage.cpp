@@ -168,6 +168,8 @@ void CViewPage::OnSave()
     if ( fileDlg.exec())
     {
         QString     file = fileDlg.selectedFiles()[0];
+
+        m_pView->Save(file);
     }
 }
 
