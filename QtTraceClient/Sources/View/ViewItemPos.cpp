@@ -5,7 +5,7 @@
  *
  */
 CViewItemPos::CViewItemPos() :
-m_pData(NULL)
+    m_pList(NULL)
 {
 }
 
@@ -13,9 +13,20 @@ m_pData(NULL)
 /**
  *
  */
-CViewItemPos::CViewItemPos(const CViewItemPos &rPos)
+CViewItemPos::CViewItemPos( const TViewItemsList& rList, const TViewItemsList::const_iterator& pos) :
+    m_pList(&rList),
+    m_Pos(pos)
 {
-    m_pData = rPos.m_pData->Clone();
+}
+
+
+/**
+ *
+ */
+CViewItemPos::CViewItemPos(const CViewItemPos &rPos) :
+    m_Pos(rPos.m_Pos),
+    m_pList(rPos.m_pList)
+{
 }
 
 
@@ -24,19 +35,6 @@ CViewItemPos::CViewItemPos(const CViewItemPos &rPos)
  */
 CViewItemPos::~CViewItemPos()
 {
-    delete m_pData;
-}
-
-
-/**
- *
- */
-bool CViewItemPos::IsValid() const
-{
-    if ( m_pData )
-        return m_pData->IsValid();
-
-    return false;
 }
 
 
@@ -47,14 +45,8 @@ const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
 {
     if ( &pos != this )
     {
-        if ( m_pData )
-        {
-            delete m_pData;
-            m_pData = NULL;
-        }
-
-        if ( pos.m_pData )
-            m_pData = pos.m_pData->Clone();
+        m_pList = pos.m_pList;
+        m_Pos = pos.m_Pos;
     }
 
     return *this;
@@ -64,12 +56,64 @@ const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
 /**
  *
  */
-bool CViewItemPos::MoveTo(const float& y)
+bool CViewItemPos::MoveToNext()
 {
-    while ( m_pData->IsValid() && m_pData->Y() + m_pData->Item()->GetSize().height() < y && m_pData->MoveToNext() );
+    if ( m_Pos == m_pList->end() )
+        return false;
 
-    while ( m_pData->IsValid() && m_pData->Y() > y && m_pData->MoveToPrevious() );
+    ++ m_Pos;
 
-    return ( m_pData->IsValid() && m_pData->Y() <= y && m_pData->Y() + m_pData->Item()->GetSize().height() >= y ); 
+    return true;
 }
+
+
+/**
+ *
+ */
+bool CViewItemPos::MoveToPrevious()
+{
+    if ( m_Pos == m_pList->begin())
+        return false;
+
+    -- m_Pos;
+
+    return true;
+}
+
+
+/**
+ *
+ */
+bool CViewItemPos::IsFirst() const
+{
+    if ( m_pList )
+        return m_Pos == m_pList->begin();
+
+    return false;
+}
+
+
+/**
+ *
+ */
+bool CViewItemPos::IsLast() const
+{
+    if ( m_pList )
+        return m_Pos == m_pList->end();
+
+    return false;
+}
+
+
+/**
+ *
+ */
+bool CViewItemPos::IsValid() const
+{
+    if ( m_pList )
+        return m_Pos != m_pList->end();
+
+    return false;
+}
+
 

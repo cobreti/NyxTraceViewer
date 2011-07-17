@@ -5,18 +5,8 @@
 #include <list>
 #include <Nyx.hpp>
 #include <NyxAssert.hpp>
-#include <NyxStdAllocators.hpp>
 #include "ViewItemPos.hpp"
-#include "ViewItemsNodeObjectsPool.hpp"
 
-class CViewItem;
-
-
-/**
- *
- */
-typedef     std::list<CViewItem*, Nyx::StdListAllocator<CViewItem*, CViewItemsNodeObjectsPool> >        TViewItemsList;
-typedef     TViewItemsList::const_iterator                                                              TViewItemsPos;
 
 /**
  *
@@ -39,48 +29,6 @@ public:
     virtual void Clear(bool bDeleteItems = true);
 
     const CViewItems& operator += (CViewItems& items);
-
-protected:
-
-    /**
-     *
-     */
-    class XPosData : public CViewItemPos::XData
-    {
-    public:
-        XPosData(const XPosData& data);
-        XPosData(const TViewItemsList& rList, const TViewItemsList::const_iterator& pos, double y );
-
-        virtual bool IsValid() const;
-        virtual CViewItemPos::XData* Clone() const;
-
-        virtual bool MoveToNext();
-        virtual bool MoveToPrevious();
-        virtual bool IsFirst() const;
-        virtual bool IsLast() const;
-
-        virtual bool IsOfType( CViewItemPos::EViewItemPosIdentifier id ) const;
-
-        virtual bool IsEqual(const CViewItemPos::XData &data) const;
-
-        virtual CViewItem* Item() const;
-        virtual float Y() const;
-
-    protected:
-
-        TViewItemsList::const_iterator      m_Pos;
-        const TViewItemsList*               m_pList;
-        float                               m_Y;
-    };
-
-    /**
-     *
-     */
-    class XPos : public CViewItemPos
-    {
-    public:
-        XPos( const TViewItemsList& rList, const TViewItemsList::const_iterator& pos, double y );
-    };
 
 protected:
 

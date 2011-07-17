@@ -28,8 +28,6 @@ void CViewItems::Add( CViewItem* pItem )
 {
     m_Items.push_back(pItem);
 
-//    m_Size.rheight() += pItem->GetSize().height();
-//    m_Size.rwidth() = Nyx::Max( m_Size.width(), pItem->GetSize().width() );
     AddToClientSize(pItem);
     m_LastLineSize = pItem->GetSize();
 }
@@ -62,7 +60,7 @@ void CViewItems::AddToClientSize( CViewItem* pItem )
  */
 CViewItemPos CViewItems::begin() const
 {
-    return CViewItems::XPos(m_Items, m_Items.begin(), 0.0);
+    return CViewItemPos(m_Items, m_Items.begin());
 }
 
 
@@ -74,7 +72,7 @@ CViewItemPos CViewItems::end() const
     TViewItemsList::const_iterator        last = m_Items.end();
     -- last;
 
-    return CViewItems::XPos(m_Items, last, 0.0);
+    return CViewItemPos(m_Items, last);
 }
 
 
@@ -148,163 +146,3 @@ const CViewItems& CViewItems::operator += (CViewItems& items)
 
     return *this;
 }
-
-
-/*********************************************
-  CViewItems::XPosData
-  *******************************************/
-
-
-/**
- *
- */
-CViewItems::XPosData::XPosData(const CViewItems::XPosData &data) :
-m_Pos(data.m_Pos),
-m_pList(data.m_pList),
-m_Y(data.m_Y)
-{
-}
-
-
-/**
- *
- */
-CViewItems::XPosData::XPosData(const TViewItemsList &rList, const TViewItemsList::const_iterator &pos, double y) :
-m_Pos(pos),
-m_pList(&rList),
-m_Y(y)
-{
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::IsValid() const
-{
-    if ( m_pList )
-        return m_Pos != m_pList->end();
-
-    return false;
-}
-
-
-/**
- *
- */
-CViewItemPos::XData* CViewItems::XPosData::Clone() const
-{
-    return new CViewItems::XPosData(*this);
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::MoveToNext()
-{
-    if ( m_Pos == m_pList->end() )
-        return false;
-
-    m_Y += (*m_Pos)->GetSize().height();
-    ++ m_Pos;
-
-    return true;
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::MoveToPrevious()
-{
-    if ( m_Pos == m_pList->begin())
-        return false;
-
-    -- m_Pos;
-    m_Y -= (*m_Pos)->GetSize().height();
-
-    return true;
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::IsFirst() const
-{
-    if ( m_pList )
-        return m_Pos == m_pList->begin();
-
-    return false;
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::IsLast() const
-{
-    if ( m_pList )
-        return m_Pos == m_pList->end();
-
-    return false;
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::IsOfType(CViewItemPos::EViewItemPosIdentifier id) const
-{
-    return id == CViewItemPos::eViewItemPos;
-}
-
-
-/**
- *
- */
-bool CViewItems::XPosData::IsEqual(const CViewItemPos::XData &data) const
-{
-    if ( data.IsOfType(CViewItemPos::eViewItemPos) )
-        return m_Pos == static_cast<const CViewItems::XPosData&>(data).m_Pos;
-
-    return false;
-}
-
-
-/**
- *
- */
-CViewItem* CViewItems::XPosData::Item() const
-{
-    if ( IsValid() )
-        return *m_Pos;
-
-    return NULL;
-}
-
-
-/**
- *
- */
-float  CViewItems::XPosData::Y() const
-{
-    return m_Y;
-}
-
-
-/*********************************************
-  CViewItems::XPos
-  *******************************************/
-
-
-/**
- *
- */
-CViewItems::XPos::XPos(const TViewItemsList& rList, const TViewItemsList::const_iterator &pos, double y) :
-CViewItemPos()
-{
-    m_pData = new CViewItems::XPosData(rList, pos, y);
-}
-
