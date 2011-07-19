@@ -106,17 +106,17 @@ void CTracesDocument::Init()
     DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);
 
     pSetting = new CViewItemSettings();
-    pSetting->SetFont( new QFont("Courier New", 11 ) );
+    pSetting->SetFont( pFont );
 //    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_TickCount, pSetting );
 
     pSetting = new CViewItemSettings();
-    pSetting->SetFont( new QFont("Courier New", 11 ) );
+    pSetting->SetFont( pFont );
 //    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_ThreadId, pSetting );
 
     pSetting = new CViewItemSettings();
-    pSetting->SetFont( new QFont("Courier New", 11, 2) );
+    pSetting->SetFont( pFont );
     DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_Header, pSetting );
 }
 

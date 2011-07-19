@@ -222,7 +222,6 @@ void CTracesView::paintEvent(QPaintEvent*)
     QPainter                            painter(this);
     CDrawViewItemState                  drawstate(&painter);
     qreal                               ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
-//    CViewItemPos                        pos = m_TopPos;
     CViewItem*                          pItem = NULL;
     bool                                bContinue = true;
 
@@ -244,13 +243,11 @@ void CTracesView::paintEvent(QPaintEvent*)
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
-//        pItem = pos.Item();
         pItem = m_ItemsWalker.ItemPos().Item();
 
         drawstate.LineNumber() = m_ItemsWalker.LineNumber();
         pItem->Display(Settings(), drawstate);
 
-//        ++pos;
         bContinue = m_ItemsWalker.MoveToNext();
     }
 
@@ -280,24 +277,7 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 
     if ( m_ItemsWalker.ValidPos() && isVisible() && m_ItemsWalker.ItemYPos() != ui->m_VertScrollbar->value())
     {
-//        m_TopPos.MoveTo(ui->m_VertScrollbar->value());
-
-//        Nyx::CTraceStream(0x0)
-//                << Nyx::CTF_Text(L"MoveTo : ")
-//                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
-//                << Nyx::CTF_Text(L" item Y value : ")
-//                << Nyx::CTF_Float(m_TopPos.Y());
-//        m_TopPos.Item()->dbgOutputInfo();
-
         m_ItemsWalker.MoveTo(ui->m_VertScrollbar->value());
-
-//        Nyx::CTraceStream(0x0)
-//                << Nyx::CTF_Text(L"Walker MoveTo : ")
-//                << Nyx::CTF_Int(ui->m_VertScrollbar->value())
-//                << Nyx::CTF_Text(L" walker item Y pos : ")
-//                << Nyx::CTF_Float(m_ItemsWalker.ItemYPos());
-
-//        m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
     }
 }
 
@@ -350,7 +330,6 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 	{
         bool        bItemStateChanged = false;
 
-        //CViewItemPos        pos = Doc().ViewItems().begin();
         m_ItemsWalker.PushState();
         if ( m_ItemsWalker.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
         {
@@ -476,10 +455,8 @@ bool CTracesView::UpdateVisibleLines()
     if ( Doc().ViewItems().ItemsCount() == 0 )
         return false;
 
-    //QPainter                            painter(this);
     CDrawViewItemState                  drawstate(NULL);
     qreal                               ViewHeight = (qreal) this->rect().height();
-//    CViewItemPos                        pos = m_TopPos;
     CViewItem*                          pItem = NULL;
     bool                                bSizeUpdate = false;
     bool                                bContinue = true;
@@ -494,7 +471,6 @@ bool CTracesView::UpdateVisibleLines()
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
-//        pItem = pos.Item();
         pItem = m_ItemsWalker.ItemPos().Item();
 
         if ( pItem->HasFlag(CViewItem::eVIF_ApproxSize) )
@@ -514,7 +490,6 @@ bool CTracesView::UpdateVisibleLines()
             bSizeUpdate = true;
         }
 
-        //++pos;
         bContinue = m_ItemsWalker.MoveToNext();
     }
 

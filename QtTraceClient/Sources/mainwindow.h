@@ -17,7 +17,6 @@ namespace Ui {
     class MainWindow;
 }
 
-class CDebugPanel;
 class CTracesDocument;
 
 class CMainWindow : public QMainWindow {
@@ -50,7 +49,6 @@ protected:
 private:
     Ui::MainWindow *ui;
 
-    CDebugPanel*                m_pDebugPanel;
     CDocumentsCollection        m_Documents;
     int                         m_nNextDocumentId;
     int                         m_nNextViewId;

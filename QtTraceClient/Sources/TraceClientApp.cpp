@@ -5,6 +5,7 @@
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
 
+
 /**
  *
  */
@@ -24,9 +25,9 @@ CTraceClientApp& CTraceClientApp::Instance()
  *
  */
 CTraceClientApp::CTraceClientApp() :
-m_pQtApplication(NULL),
-m_pMainWindow(NULL),
-m_AppReturnValue(-1)
+    m_pQtApplication(NULL),
+    m_pMainWindow(NULL),
+    m_AppReturnValue(-1)
 {
     s_pInstance = this;
 }

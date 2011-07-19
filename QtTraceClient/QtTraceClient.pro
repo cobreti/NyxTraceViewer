@@ -6,7 +6,6 @@ TARGET = TraceViewer
 TEMPLATE = app
 SOURCES += Sources/TracesView.cpp \
     Sources/mainwindow.cpp \
-    Sources/DebugPanel.cpp \
     Sources/main.cpp \
     Sources/Dialogs/NewViewDlg.cpp \
     Sources/Dialogs/NewPoolDlg.cpp \
@@ -63,7 +62,6 @@ SOURCES += Sources/TracesView.cpp \
     Sources/View/Walkers/FileWriterViewItemsWalker.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
-    Sources/DebugPanel.h \
     Sources/Dialogs/NewViewDlg.hpp \
     Sources/Dialogs/NewPoolDlg.hpp \
     Sources/Dialogs/NewDocumentDlg.hpp \
@@ -123,7 +121,6 @@ HEADERS += Sources/TracesView.h \
     Sources/View/Walkers/FileWriterViewItemsWalker.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
-    UI/DebugPanel.ui \
     UI/NewViewDlg.ui \
     UI/NewPoolDlg.ui \
     UI/NewDocumentDlg.ui \

@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "DebugPanel.h"
 #include "Document/TracesDocument.hpp"
 #include "Dialogs/NewPoolDlg.hpp"
 #include "Dialogs/NewDocumentDlg.hpp"
@@ -21,7 +20,6 @@
 CMainWindow::CMainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_pDebugPanel(NULL),
     m_nNextDocumentId(1),
     m_nNextViewId(1),
     m_pViewPage(NULL)
@@ -44,10 +42,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
     TraceClientCore::CTracesPoolRef             refTracesPool = rModule.TracesPools()[L"QtDefault"];
 
     rModule.PoolsUpdateClock().Start();
-
-    //m_pDebugPanel = new CDebugPanel(this);
-    //m_pDebugPanel->setParent(NULL, Qt::Window);
-    //m_pDebugPanel->show();
 
     //m_pDefaultDocument = new CTracesRepositoryDoc(this, "");
     //m_pDefaultDocument->Init();
