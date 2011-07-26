@@ -12,6 +12,7 @@ class CViewColumnSettings
 {
 public:
 	CViewColumnSettings();
+    CViewColumnSettings(const CViewColumnSettings& settings);
 	virtual ~CViewColumnSettings();
 
 	const qreal& GetWidth() const		{ return m_Width; }

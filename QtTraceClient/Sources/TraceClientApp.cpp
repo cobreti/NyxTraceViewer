@@ -4,6 +4,12 @@
 
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
+#include "View/ViewItemBackgroundPainter.hpp"
+#include "View/ViewItemModuleNamePainter.hpp"
+#include "View/ViewItemTickCountPainter.hpp"
+#include "View/ViewItemThreadIdPainter.hpp"
+#include "View/ViewItemDataPainter.hpp"
+#include "View/ViewItemLineNumberPainter.hpp"
 
 
 /**
@@ -49,6 +55,8 @@ void CTraceClientApp::Init(int &argc, char **argv)
 {
     m_pQtApplication = new QApplication(argc, argv);
 
+    initDefaultSettings();
+
     m_pMainWindow = new CMainWindow;
 }
 
@@ -74,3 +82,31 @@ void CTraceClientApp::Destroy()
     delete m_pQtApplication;
     m_pQtApplication = NULL;
 }
+
+
+/**
+ *
+ */
+void CTraceClientApp::initDefaultSettings()
+{
+    InitDefaultDrawSettings();
+}
+
+
+/**
+ *
+ */
+void CTraceClientApp::InitDefaultDrawSettings()
+{
+    CViewDrawSettings&      rDrawSettings = m_AppSettings.DefaultDrawSettings();
+
+    rDrawSettings.Painter( CViewItemPainter::ePId_Row ) = new CViewItemBackgroundPainter();
+    rDrawSettings.Painter( CViewItemPainter::ePId_LineNumber ) = new CViewItemLineNumberPainter();
+    rDrawSettings.Painter( CViewItemPainter::ePId_ModuleName ) = new CViewItemModuleNamePainter();
+    rDrawSettings.Painter( CViewItemPainter::ePId_TickCount ) = new CViewItemTickCountPainter();
+    rDrawSettings.Painter( CViewItemPainter::ePId_ThreadId ) = new CViewItemThreadIdPainter();
+    rDrawSettings.Painter( CViewItemPainter::ePId_Data ) = new CViewItemDataPainter();
+    rDrawSettings.CalculateLineHeight();
+}
+
+

@@ -13,7 +13,6 @@ CTracesDocument::CTracesDocument(QWidget* pDefaultViewsParentWindow, const QStri
 m_pDefaultViewsParentWindow(pDefaultViewsParentWindow),
 m_Name(name),
 m_RefreshTimer(this),
-m_pViewItems(NULL),
 m_pRepositoryObserver(NULL),
 m_NextLineId(1)
 {
@@ -43,13 +42,11 @@ void CTracesDocument::Init()
     m_pViewItemsModulesMgr = new CViewItemsModulesMgr(m_refMemoryPool);
     m_pViewItemsModulesMgr->Listener() = static_cast<IViewItemsModulesListener*>(this);
 
-    m_pViewItems = new (m_refMemoryPool)CViewItems(m_refMemoryPool, true);
-
     m_pRepositoryObserver = new CDocRepositoryObserver(*this);
 
     CViewItemSettings*      pSetting = NULL;
-    QFont*                  pFont = new QFont("Courier New", 11);
-    QFontMetricsF           TextMetrics(*pFont);
+//    QFont*                  pFont = new QFont("Courier New", 11);
+//    QFontMetricsF           TextMetrics(*pFont);
 
     CViewColumnSettings*		pColSettings = NULL;
 
@@ -60,7 +57,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_LineNumber );
     pColSettings->SetTitle("Line #");
-    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
+//    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_LineNumber, pColSettings );
 
     // Module name
@@ -70,7 +67,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_ModuleName );
     pColSettings->SetTitle("Module Name");
-    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
+//    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_ModuleName, pColSettings );
 
     // TickCount
@@ -80,7 +77,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_TickCount );
     pColSettings->SetTitle("TickCount");
-    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
+//    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_TickCount, pColSettings );
 
     // ThreadId
@@ -90,7 +87,7 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_ThreadId );
     pColSettings->SetTitle("Thread Id");
-    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
+//    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_ThreadId, pColSettings );
 
     // data
@@ -100,24 +97,24 @@ void CTracesDocument::Init()
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_Data );
     pColSettings->SetTitle("Data");
-    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
+//    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_Data, pColSettings );
 
-    DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);
+//    DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);
 
-    pSetting = new CViewItemSettings();
-    pSetting->SetFont( pFont );
-//    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
-    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_TickCount, pSetting );
+//    pSetting = new CViewItemSettings();
+//    pSetting->SetFont( pFont );
+////    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
+//    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_TickCount, pSetting );
 
-    pSetting = new CViewItemSettings();
-    pSetting->SetFont( pFont );
-//    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
-    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_ThreadId, pSetting );
+//    pSetting = new CViewItemSettings();
+//    pSetting->SetFont( pFont );
+////    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
+//    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_ThreadId, pSetting );
 
-    pSetting = new CViewItemSettings();
-    pSetting->SetFont( pFont );
-    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_Header, pSetting );
+//    pSetting = new CViewItemSettings();
+//    pSetting->SetFont( pFont );
+//    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_Header, pSetting );
 }
 
 
@@ -139,9 +136,6 @@ void CTracesDocument::Destroy()
 
     delete m_pViewItemsModulesMgr;
     m_pViewItemsModulesMgr = NULL;
-
-    m_pViewItems->Clear(false);
-    delete m_pViewItems;
 
     delete m_pRepositoryObserver;
 }
@@ -260,8 +254,6 @@ void CTracesDocument::OnNewTraceItemsHandler(CViewItems* pViewItems)
         m_pViewItemsModulesMgr->Insert( posItem.Item() );
         ++posItem;
     }
-
-    (*m_pViewItems) += *pViewItems;
 
     TracesViewList::iterator        pos = m_Views.begin();
 

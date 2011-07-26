@@ -58,6 +58,7 @@ CTracesView::~CTracesView()
  */
 void CTracesView::InitFromView( const CTracesView& view )
 {
+    m_Settings = view.m_Settings;
     m_ItemsWalker = view.m_ItemsWalker;
     ui->m_VertScrollbar->setValue( view.ui->m_VertScrollbar->value());
     update();
@@ -101,8 +102,6 @@ void CTracesView::OnNewTraces()
  */
 void CTracesView::UpdateVisibleLines(const CViewSettings& settings)
 {
-    m_Settings.UpdateFrom(settings);
-
     if (m_bViewDirty && this->isVisible() )
     {
         UpdateVisibleLines();
@@ -175,9 +174,11 @@ void CTracesView::Save( const QString& filename )
  */
 void CTracesView::OnVertSliderPosChanged(int value)
 {
-    if ( Doc().ViewItems().ItemsCount() > 0 )
+    if ( !m_ItemsWalker.MoveTo(value) )
+        m_ItemsWalker.MoveToBegin();
+
+    if ( m_ItemsWalker.MoveTo(value) )
     {
-        m_ItemsWalker.MoveTo(value);
 
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
         update();
@@ -216,9 +217,6 @@ void CTracesView::resizeEvent(QResizeEvent *event)
 
 void CTracesView::paintEvent(QPaintEvent*)
 {
-    if ( Doc().ViewItems().ItemsCount() == 0 )
-        return;
-
     QPainter                            painter(this);
     CDrawViewItemState                  drawstate(&painter);
     qreal                               ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
@@ -232,7 +230,7 @@ void CTracesView::paintEvent(QPaintEvent*)
 	painter.setClipping(true);
     painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
 
-    drawstate.TextPos().ry() = m_ItemsWalker.ItemYPos()/*pos.Y()*/ - ui->m_VertScrollbar->value() + HeaderSize().height();
+    drawstate.TextPos().ry() = m_ItemsWalker.ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
 
     drawstate.ViewRect() = QRectF(  ui->m_HorzScrollbar->value(), 
                                     ui->m_VertScrollbar->value(),
@@ -263,14 +261,14 @@ void CTracesView::closeEvent(QCloseEvent* event)
 
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
-    int nScrollHeight = Nyx::Max((int)(Doc().ViewItems().GetSize().height()) - rcClient.height() + (int)Doc().ViewItems().GetLastLineSize().height() + ui->m_HorzScrollbar->height(), 0);
+    int nScrollHeight = Nyx::Max((int)(m_Size.height()) - rcClient.height() + /*(int)Doc().ViewItems().GetLastLineSize().height()*/ + ui->m_HorzScrollbar->height(), 0);
     int nScrollWidth = Nyx::Max((int)(m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
 
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
     ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-    ui->m_VertScrollbar->setSingleStep( Doc().ViewItems().GetMaxLineSize().height() );
+    ui->m_VertScrollbar->setSingleStep( /*Doc().ViewItems().GetMaxLineSize()*/m_MaxLineSize.height() );
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
@@ -326,14 +324,14 @@ void CTracesView::keyPressEvent( QKeyEvent* event )
 
 void CTracesView::mousePressEvent( QMouseEvent* event )
 {
-    if ( Qt::ControlModifier == event->modifiers() && Doc().ViewItems().ItemsCount() > 0 && event->pos().y() > m_pHeader->size().height() )
+    if ( Qt::ControlModifier == event->modifiers() && /*Doc().ViewItems().ItemsCount() > 0 &&*/ event->pos().y() > m_pHeader->size().height() )
 	{
         bool        bItemStateChanged = false;
 
         m_ItemsWalker.PushState();
         if ( m_ItemsWalker.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
         {
-            CViewItem*  pItem = m_ItemsWalker.ItemPos().Item(); /*pos.Item();*/
+            CViewItem*  pItem = m_ItemsWalker.ItemPos().Item();
 
             pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
 
@@ -373,50 +371,9 @@ void CTracesView::InitSettings()
 {
 	CViewColumnSettings*		pColSettings = NULL;
 
-	// Line number
-	pColSettings = new CViewColumnSettings();
-	pColSettings->SetWidth(0);
-    pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
-    pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_LineNumber );
-    pColSettings->SetTitle("Line #");
-	Settings().ColumnsSettings().Set( eVCI_LineNumber, pColSettings );
+    m_Settings = Doc().DefaultViewSettings();
 
-    // Module name
-	pColSettings = new CViewColumnSettings();
-	pColSettings->SetWidth(0);
-    pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
-    pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_ModuleName );
-    pColSettings->SetTitle("Module Name");
-	Settings().ColumnsSettings().Set( eVCI_ModuleName, pColSettings );
-
-	// TickCount
-	pColSettings = new CViewColumnSettings();
-    pColSettings->SetWidth(0);
-    pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
-    pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_TickCount );
-    pColSettings->SetTitle("TickCount");
-    Settings().ColumnsSettings().Set( eVCI_TickCount, pColSettings );
-
-	// ThreadId
-	pColSettings = new CViewColumnSettings();
-	pColSettings->SetWidth(0);
-    pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
-    pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_ThreadId );
-    pColSettings->SetTitle("Thread Id");
-    Settings().ColumnsSettings().Set( eVCI_ThreadId, pColSettings );
-
-	// data
-	pColSettings = new CViewColumnSettings();
-	pColSettings->SetWidth(0);
-    pColSettings->Margins() = CViewItemMargins(10, 0, 20, 0);
-    pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_Data );
-    pColSettings->SetTitle("Data");
-	Settings().ColumnsSettings().Set( eVCI_Data, pColSettings );
+    Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
 
     m_pHeader->InitDefaultWidth();
 }
@@ -452,9 +409,6 @@ QSize CTracesView::HeaderSize() const
  */
 bool CTracesView::UpdateVisibleLines()
 {
-    if ( Doc().ViewItems().ItemsCount() == 0 )
-        return false;
-
     CDrawViewItemState                  drawstate(NULL);
     qreal                               ViewHeight = (qreal) this->rect().height();
     CViewItem*                          pItem = NULL;
@@ -465,7 +419,7 @@ bool CTracesView::UpdateVisibleLines()
 
     drawstate.TextPos() = QPointF(0.0, 0.0);
 
-    drawstate.TextPos().ry() = m_ItemsWalker.ItemYPos() /*pos.Y()*/ - ui->m_VertScrollbar->value();
+    drawstate.TextPos().ry() = m_ItemsWalker.ItemYPos() - ui->m_VertScrollbar->value();
 
     while ( bContinue && m_ItemsWalker.ValidPos() && !(drawstate.TextPos().y() > ViewHeight+20) )
     {
@@ -475,16 +429,15 @@ bool CTracesView::UpdateVisibleLines()
 
         if ( pItem->HasFlag(CViewItem::eVIF_ApproxSize) )
         {
-            Doc().ViewItems().RemoveFromClientSize(pItem);
-
-            pItem->EvaluateSize(Doc().DefaultViewSettings());
+            pItem->EvaluateSize(Settings());
 
             if (pItem->GetSize().width() > m_MaxLineSize.width() )
                 m_MaxLineSize.setWidth(pItem->GetSize().width());
             if (pItem->GetSize().height() > m_MaxLineSize.height() )
                 m_MaxLineSize.setHeight(pItem->GetSize().height());
 
-            Doc().ViewItems().AddToClientSize(pItem);
+            m_Size.setWidth( Nyx::Max( m_Size.width(), pItem->GetSize().width()) );
+            m_Size.setHeight( m_Size.height() + pItem->GetSize().height() );
 
             pItem->RemoveFlag(CViewItem::eVIF_ApproxSize);
             bSizeUpdate = true;

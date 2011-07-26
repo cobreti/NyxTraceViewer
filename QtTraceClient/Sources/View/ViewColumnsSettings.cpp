@@ -15,10 +15,7 @@ m_VisibleColumnsCount(eVCI_Count)
  */
 CViewColumnsSettings::~CViewColumnsSettings()
 {
-	ColumnSettingsTable::iterator	pos;
-
-	for (pos = m_Settings.begin(); pos != m_Settings.end(); ++pos)
-		delete pos->second;
+    ClearSettings();
 }
 
 
@@ -94,11 +91,41 @@ void CViewColumnsSettings::UpdateFrom(const CViewColumnsSettings &settings)
 
         if ( DstPos != m_Settings.end() )
         {
-            if ( DstPos->second->AutoWidth() )
+            if ( DstPos->second->AutoWidth() && SrcPos->second->GetWidth() > DstPos->second->GetWidth() )
                 DstPos->second->SetWidth( SrcPos->second->GetWidth() );
         }
 
         ++ SrcPos;
     }
+}
+
+
+/**
+ *
+ */
+const CViewColumnsSettings& CViewColumnsSettings::operator = (const CViewColumnsSettings& settings)
+{
+    if ( this != &settings )
+    {
+        ClearSettings();
+        m_Settings.clear();
+
+        for ( ColumnSettingsTable::const_iterator pos = settings.m_Settings.begin(); pos != settings.m_Settings.end(); ++pos )
+            m_Settings[pos->first] = new CViewColumnSettings(*pos->second);
+    }
+
+    return *this;
+}
+
+
+/**
+ *
+ */
+void CViewColumnsSettings::ClearSettings()
+{
+    ColumnSettingsTable::iterator	pos;
+
+    for (pos = m_Settings.begin(); pos != m_Settings.end(); ++pos)
+        delete pos->second;
 }
 

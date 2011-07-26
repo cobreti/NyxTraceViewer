@@ -50,8 +50,8 @@ public:
     virtual void EvaluateSize(CViewSettings& settings);
     virtual void Display( const CViewSettings& settings, CDrawViewItemState& drawstate );
 
-    CViewItemPainterCollection&         Painters()              { return m_Painters; }
-    const CViewItemPainterCollection&   Painters() const        { return m_Painters; }
+//    CViewItemPainterCollection&         Painters()              { return m_Painters; }
+//    const CViewItemPainterCollection&   Painters() const        { return m_Painters; }
 
     virtual void SetFlag( EViewItemFlags flag, bool status = true );
     virtual void RemoveFlag( EViewItemFlags flag );
@@ -69,7 +69,7 @@ protected:
 protected:
 
     QSizeF                          m_Size;
-    CViewItemPainterCollection      m_Painters;
+//    CViewItemPainterCollection      m_Painters;
     FlagsSet                        m_Flags;
     size_t                          m_Id;
 };

@@ -31,9 +31,15 @@ public:
 
     void UpdateFrom( const CViewColumnsSettings& settings );
 
+    const CViewColumnsSettings& operator = (const CViewColumnsSettings& settings);
+
 protected:
 
 	typedef		std::map<EViewColumnId, CViewColumnSettings*>		ColumnSettingsTable;
+
+protected:
+
+    void ClearSettings();
 
 protected:
 

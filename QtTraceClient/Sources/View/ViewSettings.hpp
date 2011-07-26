@@ -3,6 +3,7 @@
 
 #include "ViewItemsSettings.hpp"
 #include "ViewColumnsSettings.hpp"
+#include "ViewDrawSettings.hpp"
 
 /**
  *
@@ -22,12 +23,18 @@ public:
     bool        Dirty() const       { return m_bDirty; }
     bool&       Dirty()             { return m_bDirty; }
 
+    CViewDrawSettings*      DrawSettings() const            { return m_pDrawSettings; }
+    CViewDrawSettings*&     DrawSettings()                  { return m_pDrawSettings; }
+
     void UpdateFrom( const CViewSettings& settings );
+
+    const CViewSettings& operator = (const CViewSettings& settings);
 
 protected:
 
     CViewItemsSettings          m_ViewItemsSettings;
     CViewColumnsSettings        m_ViewColumnsSettings;
+    CViewDrawSettings*          m_pDrawSettings;
     bool                        m_bDirty;
 };
 

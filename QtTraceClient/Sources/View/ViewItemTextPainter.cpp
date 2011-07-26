@@ -27,12 +27,12 @@ CViewItemTextPainter::~CViewItemTextPainter()
 void CViewItemTextPainter::EvaluateSize(CViewSettings &settings, CViewItem &item, const QString &text)
 {
     const qreal                 safeTextMargins = 5.0;
-    const CViewItemSettings*    pSetting = settings.ViewItemsSettings()[Id()];
+//    const CViewItemSettings*    pSetting = settings.ViewItemsSettings()[Id()];
     CViewColumnSettings&        rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
     QStringList                 TextLines = text.split('\n');
     QSizeF                      size;
-    QFont*                      pFont = pSetting->GetFont();
-    QFontMetricsF               metrics(*pFont);
+    //QFont*                      pFont = pSetting->GetFont();
+    QFontMetricsF               metrics(Font());
     QRectF                      rcText = CalculateTextRect(metrics, TextLines);
 
     size = QSizeF(rcText.width() + safeTextMargins, rcText.height());
@@ -52,10 +52,10 @@ void CViewItemTextPainter::EvaluateSize(CViewSettings &settings, CViewItem &item
  */
 void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem&, const QString &text)
 {
-    const CViewItemSettings*        pSetting = settings.ViewItemsSettings()[Id()];
+//    const CViewItemSettings*        pSetting = settings.ViewItemsSettings()[Id()];
     const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
-    QFont*                          pFont = pSetting->GetFont();
-    QFontMetricsF                   metrics(*pFont);
+//    QFont*                          pFont = pSetting->GetFont();
+    QFontMetricsF                   metrics(Font());
     QRectF                          rcText;
     QRectF                          rcDrawTextArea;
     QRectF                          rcSubText;
@@ -74,7 +74,7 @@ void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemS
     while ( pos != TextLines.end() )
     {
         rcSubText = metrics.boundingRect( *pos);
-        drawstate.Painter().setFont( *pFont);
+        drawstate.Painter().setFont( Font() );
         drawstate.Painter().drawText(rcDrawTextArea, Qt::AlignLeft, *pos);
 
         rcDrawTextArea.setTop( rcDrawTextArea.top() + rcSubText.height());

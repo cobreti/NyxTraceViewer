@@ -27,31 +27,6 @@ CViewItems::~CViewItems()
 void CViewItems::Add( CViewItem* pItem )
 {
     m_Items.push_back(pItem);
-
-    AddToClientSize(pItem);
-    m_LastLineSize = pItem->GetSize();
-}
-
-
-/**
- *
- */
-void CViewItems::RemoveFromClientSize( CViewItem* pItem )
-{
-    m_Size.rheight() -= pItem->GetSize().height();
-}
-
-
-/**
- *
- */
-void CViewItems::AddToClientSize( CViewItem* pItem )
-{
-    m_Size.rheight() += pItem->GetSize().height();
-    m_Size.rwidth() = Nyx::Max( m_Size.width(), pItem->GetSize().width() );
-
-    m_MaxLineSize = QSizeF(     Nyx::Max(m_MaxLineSize.width(), pItem->GetSize().width()),
-                                Nyx::Max(m_MaxLineSize.height(), pItem->GetSize().height()) );
 }
 
 
@@ -82,33 +57,6 @@ CViewItemPos CViewItems::end() const
 size_t CViewItems::ItemsCount() const
 {
     return m_Items.size();
-}
-
-
-/**
- *
- */
-const QSizeF& CViewItems::GetSize() const
-{
-    return m_Size;
-}
-
-
-/**
- *
- */
-const QSizeF& CViewItems::GetLastLineSize() const
-{
-    return m_LastLineSize;
-}
-
-
-/**
- *
- */
-const QSizeF& CViewItems::GetMaxLineSize() const
-{
-    return m_MaxLineSize;
 }
 
 

@@ -58,7 +58,8 @@ void CViewItem::EvaluateSize(CViewSettings& settings)
 
         if ( rColSettings.GetVisible() )
         {
-            CViewItemPainter*           pPainter = m_Painters[ rColSettings.GetPainterId() ];
+            //CViewItemPainter*           pPainter = m_Painters[ rColSettings.GetPainterId() ];
+            CViewItemPainter*   pPainter = settings.DrawSettings()->Painter(rColSettings.GetPainterId());
 
             if ( pPainter )
                 pPainter->EvaluateSize(settings, *this);
@@ -82,7 +83,8 @@ void CViewItem::Display(const CViewSettings& settings, CDrawViewItemState &draws
     size_t                      index = 0;
     CViewItemPainter*           pPainter = NULL;
 
-    pPainter = m_Painters[ CViewItemPainter::ePId_Row ];
+    //pPainter = m_Painters[ CViewItemPainter::ePId_Row ];
+    pPainter = settings.DrawSettings()->Painter(CViewItemPainter::ePId_Row);
     if ( pPainter )
         pPainter->Display(settings, drawstate, *this);
 
@@ -92,7 +94,8 @@ void CViewItem::Display(const CViewSettings& settings, CDrawViewItemState &draws
 
         if ( rColSettings.GetVisible() )
         {
-            pPainter = m_Painters[ rColSettings.GetPainterId() ];
+//            pPainter = m_Painters[ rColSettings.GetPainterId() ];
+            pPainter = settings.DrawSettings()->Painter( rColSettings.GetPainterId() );
 
             if ( pPainter )
                 pPainter->Display(settings, drawstate, *this);

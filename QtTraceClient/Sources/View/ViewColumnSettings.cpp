@@ -13,6 +13,17 @@ m_bAutoWidth(false)
 }
 
 
+CViewColumnSettings::CViewColumnSettings(const CViewColumnSettings& settings) :
+    m_Width(settings.m_Width),
+    m_PainterId(settings.m_PainterId),
+    m_bVisible(settings.m_bVisible),
+    m_Title(settings.m_Title),
+    m_Margins(settings.m_Margins),
+    m_bAutoWidth(settings.m_bAutoWidth)
+{
+}
+
+
 /**
  *
  */

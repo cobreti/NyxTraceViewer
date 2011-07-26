@@ -38,7 +38,9 @@ void CViewItemSettings::SetFont(QFont* pFont)
     if ( pFont != m_pFont )
     {
         if ( m_pFont )
+        {
             delete m_pFont;
+        }
 
         m_pFont = pFont;
 
@@ -88,7 +90,10 @@ CViewItemSettings* CViewItemSettings::Clone() const
 void CViewItemSettings::CopyFrom(const CViewItemSettings& settings)
 {
 	if ( m_pFont )
+    {
 		delete m_pFont;
+        m_pFont = NULL;
+    }
 
 	if ( settings.m_pFont )
 		m_pFont = new QFont(*settings.m_pFont);

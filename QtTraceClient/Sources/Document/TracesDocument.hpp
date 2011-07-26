@@ -48,7 +48,7 @@ public:
     CViewSettings&          DefaultViewSettings()              { return m_DefaultViewSettings; }
     const CViewSettings&    DefaultViewSettings() const        { return m_DefaultViewSettings; }
 
-    CViewItems& ViewItems()     { return *m_pViewItems; }
+//    CViewItems& ViewItems()     { return *m_pViewItems; }
 
     Nyx::CMemoryPool*       MemoryPool() const      { return m_refMemoryPool; }
 
@@ -73,7 +73,6 @@ protected:
     QString                                     m_Name;
     CViewSettings                               m_DefaultViewSettings;
 
-    CViewItems*                                 m_pViewItems;
     QTimer                                      m_RefreshTimer;
     CDocRepositoryObserver*                     m_pRepositoryObserver;
     Nyx::CMemoryPoolRef                         m_refMemoryPool;
