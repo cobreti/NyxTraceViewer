@@ -49,7 +49,7 @@ public:
     virtual void SetFont( const QFont& font );
 
     const QFont& Font() const       { return m_Font; }
-    QFont& Font()                   { return m_Font; }
+//    QFont& Font()                   { return m_Font; }
 
     float MaxFontHeight() const     { return m_MaxFontHeight; }
 

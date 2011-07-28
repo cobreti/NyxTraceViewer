@@ -2,6 +2,7 @@
 #include "ModuleViewItems.hpp"
 #include "ViewItem.hpp"
 #include "IViewItemsModulesListener.hpp"
+#include "Walkers/ViewItemsWalker.hpp"
 
 
 /**
@@ -85,5 +86,65 @@ void CViewItemsModulesMgr::Insert( CViewItem* pItem )
         pModule = m_Modules[pItem->ModuleName()];
 
     pModule->InsertItem(pItem);
+
+    for (size_t index = 0; index < m_AttachedWalkers.size(); ++index)
+        if ( m_AttachedWalkers[index] )
+             m_AttachedWalkers[index]->OnNewViewItem(pItem);
 }
+
+
+
+/**
+ *
+ */
+void CViewItemsModulesMgr::OnItemWidthChanged(CViewItem *pItem)
+{
+    for (size_t index = 0; index < m_AttachedWalkers.size(); ++index)
+        if ( m_AttachedWalkers[index] )
+             m_AttachedWalkers[index]->OnItemWidthChanged(pItem);
+}
+
+
+/**
+ *
+ */
+void CViewItemsModulesMgr::AttachWalker( CViewItemsWalker* pWalker )
+{
+    if ( pWalker == NULL )
+        return;
+
+    // first look if already there
+    for (size_t index = 0; index < m_AttachedWalkers.size(); ++index)
+        if ( m_AttachedWalkers[index] == pWalker )
+            return;
+
+    // find an empty spot to add it
+    for (size_t index = 0; index < m_AttachedWalkers.size(); ++index)
+        if ( m_AttachedWalkers[index] == NULL )
+        {
+            m_AttachedWalkers[index] = pWalker;
+            return;
+        }
+
+    // couldn't find a spot, push at the back
+    m_AttachedWalkers.push_back(pWalker);
+}
+
+
+/**
+ *
+ */
+void CViewItemsModulesMgr::DetachWalker( CViewItemsWalker* pWalker )
+{
+    if ( pWalker == NULL )
+        return;
+
+    for (size_t index = 0; index < m_AttachedWalkers.size(); ++index)
+        if ( m_AttachedWalkers[index] == pWalker )
+        {
+            m_AttachedWalkers[index] = NULL;
+            return;
+        }
+}
+
 

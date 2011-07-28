@@ -54,7 +54,7 @@ void CViewItemPainter::Display(const CViewSettings&, CDrawViewItemState&, CViewI
 void CViewItemPainter::SetFont( const QFont& font )
 {
     m_Font = font;
-    m_MaxFontHeight = QFontMetricsF(m_Font).xHeight() * 1.5;
+    m_MaxFontHeight = QFontMetricsF(m_Font).boundingRect("Ap").height() * 1.2;
 }
 
 
@@ -64,5 +64,5 @@ void CViewItemPainter::SetFont( const QFont& font )
 CViewItemPainter::CViewItemPainter() :
     m_MaxFontHeight(0)
 {
-    m_MaxFontHeight = QFontMetricsF(m_Font).xHeight() * 1.5;
+    m_MaxFontHeight = QFontMetricsF(m_Font).boundingRect("Ap").height() * 1.2;
 }

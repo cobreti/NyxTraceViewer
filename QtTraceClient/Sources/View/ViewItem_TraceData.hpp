@@ -26,6 +26,10 @@ public:
 
 protected:
 
+    void ApproximateHeight();
+
+protected:
+
     const TraceClientCore::CTraceData*           m_pTraceData;
 };
 

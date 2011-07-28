@@ -52,6 +52,9 @@ public:
 
     Nyx::CMemoryPool*       MemoryPool() const      { return m_refMemoryPool; }
 
+    CViewItemsModulesMgr&           ViewItemsModulesMgr()           { return *m_pViewItemsModulesMgr; }
+    const CViewItemsModulesMgr&     ViewItemsModulesMgr() const     { return *m_pViewItemsModulesMgr; }
+
 public: // IViewItemsModulesListener methods
 
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );

@@ -1,5 +1,6 @@
 #include "ViewItem_TraceData.hpp"
 #include "TracesPool.hpp"
+#include "TraceClientApp.hpp"
 
 
 /**
@@ -9,6 +10,7 @@ CViewItem_TraceData::CViewItem_TraceData(Nyx::CMemoryPool* pMemPool, const Trace
 ViewItemMemPoolObj(pMemPool),
 m_pTraceData(pTraceData)
 {
+    ApproximateHeight();
 }
 
 
@@ -79,3 +81,14 @@ const Nyx::CWString& CViewItem_TraceData::TickCount() const
 {
     return m_pTraceData->TickCount();
 }
+
+
+/**
+ *
+ */
+void CViewItem_TraceData::ApproximateHeight()
+{
+    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() );
+}
+
+

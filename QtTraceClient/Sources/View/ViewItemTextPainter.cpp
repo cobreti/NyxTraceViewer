@@ -27,13 +27,11 @@ CViewItemTextPainter::~CViewItemTextPainter()
 void CViewItemTextPainter::EvaluateSize(CViewSettings &settings, CViewItem &item, const QString &text)
 {
     const qreal                 safeTextMargins = 5.0;
-//    const CViewItemSettings*    pSetting = settings.ViewItemsSettings()[Id()];
     CViewColumnSettings&        rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
     QStringList                 TextLines = text.split('\n');
     QSizeF                      size;
-    //QFont*                      pFont = pSetting->GetFont();
     QFontMetricsF               metrics(Font());
-    QRectF                      rcText = CalculateTextRect(metrics, TextLines);
+    QRectF                      rcText = CalculateTextRect(settings, metrics, TextLines);
 
     size = QSizeF(rcText.width() + safeTextMargins, rcText.height());
 
@@ -50,19 +48,18 @@ void CViewItemTextPainter::EvaluateSize(CViewSettings &settings, CViewItem &item
 /**
  *
  */
-void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem&, const QString &text)
+void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem& item, const QString &text)
 {
-//    const CViewItemSettings*        pSetting = settings.ViewItemsSettings()[Id()];
     const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
-//    QFont*                          pFont = pSetting->GetFont();
     QFontMetricsF                   metrics(Font());
     QRectF                          rcText;
     QRectF                          rcDrawTextArea;
     QRectF                          rcSubText;
     QStringList                     TextLines = text.split('\n');
     QStringList::const_iterator     pos;
+    float                           lineHeight = settings.DrawSettings()->SingleLineHeight();
 
-    rcText = CalculateTextRect(metrics, TextLines);
+    rcText = CalculateTextRect(settings, metrics, TextLines);
 
     rcDrawTextArea = QRectF(    drawstate.TextPos().x() + rColSettings.Margins().left(), 
                                 drawstate.TextPos().y() + rColSettings.Margins().top(),
@@ -74,6 +71,7 @@ void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemS
     while ( pos != TextLines.end() )
     {
         rcSubText = metrics.boundingRect( *pos);
+        rcSubText.setHeight( lineHeight );
         drawstate.Painter().setFont( Font() );
         drawstate.Painter().drawText(rcDrawTextArea, Qt::AlignLeft, *pos);
 
@@ -82,7 +80,6 @@ void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemS
         ++pos;
     }
 
-
     drawstate.TextPos().rx() += rColSettings.GetWidth();
 }
 
@@ -90,7 +87,7 @@ void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemS
 /**
  *
  */
-QRectF CViewItemTextPainter::CalculateTextRect( QFontMetricsF& Metrics, const QStringList& Lines )
+QRectF CViewItemTextPainter::CalculateTextRect( const CViewSettings& settings, QFontMetricsF& Metrics, const QStringList& Lines )
 {
     QRectF                          rcText;
     QRectF                          rcSubText;
@@ -99,6 +96,13 @@ QRectF CViewItemTextPainter::CalculateTextRect( QFontMetricsF& Metrics, const QS
     while ( pos != Lines.end() )
     {
         rcSubText = Metrics.boundingRect(*pos);
+
+        Nyx::CTraceStream(0x0).Write(L"CalculateTextRect - height = %f", rcSubText.height());
+
+        rcSubText.setHeight( settings.DrawSettings()->SingleLineHeight());
+
+        Nyx::CTraceStream(0x0).Write(L"TextPainter - CalcTextRect : height = %f", rcSubText.height());
+
         rcText = QRectF(    Nyx::Min(rcText.left(), rcSubText.left()),
                             Nyx::Min(rcText.top(), rcSubText.top()),
                             Nyx::Max(rcText.width(), rcSubText.width()),

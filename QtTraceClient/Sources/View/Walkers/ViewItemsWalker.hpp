@@ -8,6 +8,7 @@
 
 class CModuleViewItems;
 class CSessionViewItems;
+class CViewItemsModulesMgr;
 
 
 /**
@@ -16,12 +17,14 @@ class CSessionViewItems;
 class CViewItemsWalker
 {
 public:
-    CViewItemsWalker();
+    CViewItemsWalker(CViewItemsModulesMgr& rViewItemsModulesMgr);
     explicit CViewItemsWalker(const CViewItemsWalker& walker);
     virtual ~CViewItemsWalker();
 
     void OnNewModuleViewItem( CModuleViewItems* pModule );
     void OnNewSessionViewItem( CModuleViewItems* pModule, CSessionViewItems* pSession );
+    void OnNewViewItem( CViewItem* pViewItem );
+    void OnItemWidthChanged( CViewItem* pViewItem );
 
     bool InitNewModulesPosition();
 
@@ -39,6 +42,9 @@ public:
     void PopState();
 
     const CViewItemsWalker& operator = (const CViewItemsWalker& walker);
+
+    const float& Height() const     { return m_Height; }
+    const float& Width() const      { return m_Width; }
 
 protected:
 
@@ -71,6 +77,11 @@ protected:
     TWalkerPosStack                         m_PositionStack;
     TDirectionStack                         m_DirectionStack;
     TLineNumberStack                        m_LineNumberStack;
+
+    float                                   m_Height;
+    float                                   m_Width;
+
+    CViewItemsModulesMgr&                   m_rViewItemsModulesMgr;
 };
 
 #endif // VIEWITEMSWALKER_HPP

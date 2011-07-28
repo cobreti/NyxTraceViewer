@@ -2,22 +2,32 @@
 #include "ViewItemsSessionWalkerNode.hpp"
 #include "../ModuleViewItems.hpp"
 #include "../ViewItem.hpp"
+#include "../ViewItemsModulesMgr.hpp"
 
 /**
  *
  */
-CViewItemsWalker::CViewItemsWalker() :
+CViewItemsWalker::CViewItemsWalker(CViewItemsModulesMgr& rViewItemsModulesMgr) :
     m_Direction(eD_Undefined),
-    m_LineNumber(0)
+    m_LineNumber(0),
+    m_Height(0.0f),
+    m_Width(0.0f),
+    m_rViewItemsModulesMgr(rViewItemsModulesMgr)
 {
+    m_rViewItemsModulesMgr.AttachWalker(this);
 }
 
 
 /**
  *
  */
-CViewItemsWalker::CViewItemsWalker(const CViewItemsWalker& walker)
+CViewItemsWalker::CViewItemsWalker(const CViewItemsWalker& walker) :
+    m_Height(walker.m_Height),
+    m_Width(walker.m_Width),
+    m_rViewItemsModulesMgr(walker.m_rViewItemsModulesMgr)
 {
+    m_rViewItemsModulesMgr.AttachWalker(this);
+
     CopyDataFrom(walker);
 }
 
@@ -27,6 +37,8 @@ CViewItemsWalker::CViewItemsWalker(const CViewItemsWalker& walker)
  */
 CViewItemsWalker::~CViewItemsWalker()
 {
+    m_rViewItemsModulesMgr.DetachWalker(this);
+
     ClearModuleNodes();
 }
 
@@ -51,6 +63,24 @@ void CViewItemsWalker::OnNewSessionViewItem( CModuleViewItems* pModule, CSession
     CViewItemsSessionWalkerNode*        pSessionWalkerNode = new CViewItemsSessionWalkerNode(pSession);
 
     pModuleNode->AddNode(pSessionWalkerNode);
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalker::OnNewViewItem( CViewItem* pViewItem )
+{
+    m_Height += pViewItem->GetSize().height();
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalker::OnItemWidthChanged( CViewItem* pViewItem )
+{
+    m_Width = Nyx::Max( m_Width, (float)pViewItem->GetSize().width() );
 }
 
 
@@ -403,6 +433,8 @@ CViewItemsModuleWalkerNode* CViewItemsWalker::GetNodeWithModule( CModuleViewItem
  */
 void CViewItemsWalker::CopyDataFrom(const CViewItemsWalker& walker)
 {
+    m_Height = walker.m_Height;
+    m_Width = walker.m_Width;
     m_Direction = walker.m_Direction;
     m_Nodes.resize(walker.m_Nodes.size());
     m_Pos = walker.m_Pos;

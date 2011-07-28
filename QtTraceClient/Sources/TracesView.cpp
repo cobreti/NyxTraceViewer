@@ -16,6 +16,7 @@
 #include "View/ViewItemModuleNamePainter.hpp"
 #include "View/DrawViewItemState.hpp"
 #include "View/ViewColumnSettings.hpp"
+#include "View/ViewItemsModulesMgr.hpp"
 #include "View/Walkers/FileWriterViewItemsWalker.hpp"
 
 /**
@@ -24,11 +25,12 @@
 CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     QWidget(parent),
     m_rDoc(rDoc),
-    m_MaxLineSize(1.0, 1.0),
+//    m_MaxLineSize(1.0, 1.0),
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
-    m_pHeader(NULL)
+    m_pHeader(NULL),
+    m_ItemsWalker(rDoc.ViewItemsModulesMgr())
 {
     ui->setupUi(this);
 
@@ -261,14 +263,15 @@ void CTracesView::closeEvent(QCloseEvent* event)
 
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
-    int nScrollHeight = Nyx::Max((int)(m_Size.height()) - rcClient.height() + /*(int)Doc().ViewItems().GetLastLineSize().height()*/ + ui->m_HorzScrollbar->height(), 0);
+    int nScrollHeight = Nyx::Max((int)(m_ItemsWalker.Height()) - rcClient.height() + /*(int)Doc().ViewItems().GetLastLineSize().height()*/ + ui->m_HorzScrollbar->height(), 0);
     int nScrollWidth = Nyx::Max((int)(m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
 
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
     ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-    ui->m_VertScrollbar->setSingleStep( /*Doc().ViewItems().GetMaxLineSize()*/m_MaxLineSize.height() );
+//    ui->m_VertScrollbar->setSingleStep( /*Doc().ViewItems().GetMaxLineSize()*/m_MaxLineSize.height() );
+    ui->m_VertScrollbar->setSingleStep( m_Settings.DrawSettings()->SingleLineHeight() );
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
@@ -412,7 +415,7 @@ bool CTracesView::UpdateVisibleLines()
     CDrawViewItemState                  drawstate(NULL);
     qreal                               ViewHeight = (qreal) this->rect().height();
     CViewItem*                          pItem = NULL;
-    bool                                bSizeUpdate = false;
+//    bool                                bSizeUpdate = false;
     bool                                bContinue = true;
 
     m_ItemsWalker.PushState();
@@ -431,16 +434,19 @@ bool CTracesView::UpdateVisibleLines()
         {
             pItem->EvaluateSize(Settings());
 
-            if (pItem->GetSize().width() > m_MaxLineSize.width() )
-                m_MaxLineSize.setWidth(pItem->GetSize().width());
-            if (pItem->GetSize().height() > m_MaxLineSize.height() )
-                m_MaxLineSize.setHeight(pItem->GetSize().height());
+            Doc().ViewItemsModulesMgr().OnItemWidthChanged(pItem);
 
-            m_Size.setWidth( Nyx::Max( m_Size.width(), pItem->GetSize().width()) );
-            m_Size.setHeight( m_Size.height() + pItem->GetSize().height() );
+
+//            if (pItem->GetSize().width() > m_MaxLineSize.width() )
+//                m_MaxLineSize.setWidth(pItem->GetSize().width());
+//            if (pItem->GetSize().height() > m_MaxLineSize.height() )
+//                m_MaxLineSize.setHeight(pItem->GetSize().height());
+
+//            m_Size.setWidth( Nyx::Max( m_Size.width(), pItem->GetSize().width()) );
+//            m_Size.setHeight( m_Size.height() + pItem->GetSize().height() );
 
             pItem->RemoveFlag(CViewItem::eVIF_ApproxSize);
-            bSizeUpdate = true;
+//            bSizeUpdate = true;
         }
 
         bContinue = m_ItemsWalker.MoveToNext();
@@ -448,5 +454,6 @@ bool CTracesView::UpdateVisibleLines()
 
     m_ItemsWalker.PopState();
 
-    return bSizeUpdate;
+//    return bSizeUpdate;
+    return true;
 }
