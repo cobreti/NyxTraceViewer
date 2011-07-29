@@ -48,8 +48,6 @@ public:
     CViewSettings&          DefaultViewSettings()              { return m_DefaultViewSettings; }
     const CViewSettings&    DefaultViewSettings() const        { return m_DefaultViewSettings; }
 
-//    CViewItems& ViewItems()     { return *m_pViewItems; }
-
     Nyx::CMemoryPool*       MemoryPool() const      { return m_refMemoryPool; }
 
     CViewItemsModulesMgr&           ViewItemsModulesMgr()           { return *m_pViewItemsModulesMgr; }

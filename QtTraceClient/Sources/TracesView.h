@@ -93,12 +93,10 @@ protected:
     QString								m_Name;
     QRectF								m_Margins;
     CViewSettings						m_Settings;
-//    QSizeF                              m_MaxLineSize;
     bool                                m_bViewDirty;
     bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
     CViewItemsWalker                    m_ItemsWalker;
-//    QSizeF                              m_Size;
 };
 
 #endif // TRACESVIEW_H

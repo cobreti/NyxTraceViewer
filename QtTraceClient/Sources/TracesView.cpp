@@ -25,7 +25,6 @@
 CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     QWidget(parent),
     m_rDoc(rDoc),
-//    m_MaxLineSize(1.0, 1.0),
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
@@ -86,14 +85,7 @@ void CTracesView::OnNewTraces()
     m_ItemsWalker.InitNewModulesPosition();
 
     if ( !m_ItemsWalker.ValidPos() )
-    {
-        if ( m_ItemsWalker.MoveToBegin() )
-        {
-            Nyx::CTraceStream(0x0)
-                    << Nyx::CTF_Text(L"OnNewTraces - Walker  MoveToBegin");
-            m_ItemsWalker.ItemPos().Item()->dbgOutputInfo();
-        }
-    }
+        m_ItemsWalker.MoveToBegin();
 
     m_bViewDirty = true;
 }
@@ -136,8 +128,6 @@ void CTracesView::RefreshDisplay()
  */
 void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
 {
-    Nyx::CTraceStream(0x0).Write("CTracesView::OnNewModuleViewItems : %X", pModule);
-
     m_ItemsWalker.OnNewModuleViewItem(pModule);
 }
 
@@ -147,8 +137,6 @@ void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
  */
 void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession )
 {
-    Nyx::CTraceStream(0x0).Write("CTracesView::OnNewSessionViewItems : %X : %X", pModule, pSession);
-
     m_ItemsWalker.OnNewSessionViewItem(pModule, pSession);
 }
 
@@ -263,14 +251,13 @@ void CTracesView::closeEvent(QCloseEvent* event)
 
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
-    int nScrollHeight = Nyx::Max((int)(m_ItemsWalker.Height()) - rcClient.height() + /*(int)Doc().ViewItems().GetLastLineSize().height()*/ + ui->m_HorzScrollbar->height(), 0);
+    int nScrollHeight = Nyx::Max((int)(m_ItemsWalker.Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
     int nScrollWidth = Nyx::Max((int)(m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
 
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
     ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-//    ui->m_VertScrollbar->setSingleStep( /*Doc().ViewItems().GetMaxLineSize()*/m_MaxLineSize.height() );
     ui->m_VertScrollbar->setSingleStep( m_Settings.DrawSettings()->SingleLineHeight() );
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
@@ -327,7 +314,7 @@ void CTracesView::keyPressEvent( QKeyEvent* event )
 
 void CTracesView::mousePressEvent( QMouseEvent* event )
 {
-    if ( Qt::ControlModifier == event->modifiers() && /*Doc().ViewItems().ItemsCount() > 0 &&*/ event->pos().y() > m_pHeader->size().height() )
+    if ( Qt::ControlModifier == event->modifiers() && event->pos().y() > m_pHeader->size().height() )
 	{
         bool        bItemStateChanged = false;
 
@@ -415,7 +402,6 @@ bool CTracesView::UpdateVisibleLines()
     CDrawViewItemState                  drawstate(NULL);
     qreal                               ViewHeight = (qreal) this->rect().height();
     CViewItem*                          pItem = NULL;
-//    bool                                bSizeUpdate = false;
     bool                                bContinue = true;
 
     m_ItemsWalker.PushState();
@@ -436,17 +422,7 @@ bool CTracesView::UpdateVisibleLines()
 
             Doc().ViewItemsModulesMgr().OnItemWidthChanged(pItem);
 
-
-//            if (pItem->GetSize().width() > m_MaxLineSize.width() )
-//                m_MaxLineSize.setWidth(pItem->GetSize().width());
-//            if (pItem->GetSize().height() > m_MaxLineSize.height() )
-//                m_MaxLineSize.setHeight(pItem->GetSize().height());
-
-//            m_Size.setWidth( Nyx::Max( m_Size.width(), pItem->GetSize().width()) );
-//            m_Size.setHeight( m_Size.height() + pItem->GetSize().height() );
-
             pItem->RemoveFlag(CViewItem::eVIF_ApproxSize);
-//            bSizeUpdate = true;
         }
 
         bContinue = m_ItemsWalker.MoveToNext();
@@ -454,6 +430,5 @@ bool CTracesView::UpdateVisibleLines()
 
     m_ItemsWalker.PopState();
 
-//    return bSizeUpdate;
     return true;
 }

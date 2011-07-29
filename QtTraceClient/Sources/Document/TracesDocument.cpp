@@ -28,7 +28,6 @@ m_NextLineId(1)
  */
 CTracesDocument::~CTracesDocument()
 {
-    Nyx::CTraceStream(0x0).Write(L"CTracesDocument::~CTracesDocument");
 }
 
 
@@ -99,22 +98,6 @@ void CTracesDocument::Init()
     pColSettings->SetTitle("Data");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_Data, pColSettings );
-
-//    DefaultViewSettings().ViewItemsSettings().GetDefault()->SetFont(pFont);
-
-//    pSetting = new CViewItemSettings();
-//    pSetting->SetFont( pFont );
-////    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
-//    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_TickCount, pSetting );
-
-//    pSetting = new CViewItemSettings();
-//    pSetting->SetFont( pFont );
-////    pSetting->SetMargins( CViewItemMargins(5, 0, 5, 0) );
-//    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_ThreadId, pSetting );
-
-//    pSetting = new CViewItemSettings();
-//    pSetting->SetFont( pFont );
-//    DefaultViewSettings().ViewItemsSettings().Add( CViewItemPainter::ePId_Header, pSetting );
 }
 
 
@@ -124,8 +107,6 @@ void CTracesDocument::Init()
 void CTracesDocument::Destroy()
 {
     m_RefreshTimer.stop();
-
-	Nyx::CTraceStream(0x0).Write(L"before clearing the repository");
 
 	while ( !m_Views.empty() )
 	{
@@ -150,8 +131,7 @@ CTracesView* CTracesDocument::CreateView(QWidget* pParent)
 
     pView->Settings().ViewItemsSettings() = DefaultViewSettings().ViewItemsSettings();
     m_Views.push_back(pView);
-    pView->setParent(NULL/*m_pDefaultViewsParentWindow*/, Qt::Window);
-    //pView->show();
+    pView->setParent(NULL, Qt::Window);
 
     return pView;
 }
@@ -213,8 +193,6 @@ void CTracesDocument::OnNewTraceItems(CViewItems* pViewItems)
  */
 void CTracesDocument::OnNewModuleViewItems( CModuleViewItems* pModule )
 {
-    Nyx::CTraceStream(0x0).Write( "OnNewModuleViewItems : %X", pModule );
-
     TracesViewList::iterator        pos = m_Views.begin();
 
     while ( pos != m_Views.end() )
@@ -230,8 +208,6 @@ void CTracesDocument::OnNewModuleViewItems( CModuleViewItems* pModule )
  */
 void CTracesDocument::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession )
 {
-    Nyx::CTraceStream(0x0).Write( "OnNewSessionViewItems : %X : %X", pModule, pSession );
-
     TracesViewList::iterator        pos = m_Views.begin();
 
     while ( pos != m_Views.end() )

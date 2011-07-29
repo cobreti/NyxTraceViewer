@@ -97,11 +97,7 @@ QRectF CViewItemTextPainter::CalculateTextRect( const CViewSettings& settings, Q
     {
         rcSubText = Metrics.boundingRect(*pos);
 
-        Nyx::CTraceStream(0x0).Write(L"CalculateTextRect - height = %f", rcSubText.height());
-
         rcSubText.setHeight( settings.DrawSettings()->SingleLineHeight());
-
-        Nyx::CTraceStream(0x0).Write(L"TextPainter - CalcTextRect : height = %f", rcSubText.height());
 
         rcText = QRectF(    Nyx::Min(rcText.left(), rcSubText.left()),
                             Nyx::Min(rcText.top(), rcSubText.top()),

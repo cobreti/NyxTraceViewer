@@ -35,12 +35,6 @@ void CDocRepositoryObserver::Insert( TraceClientCore::CTraceData* pTraceData )
     Nyx::CMemoryPool*           pMemPool = pTraceData->MemoryPool();
     CViewItem_TraceData*        pItem = new (pMemPool)CViewItem_TraceData(pMemPool, pTraceData);
 
-//    pItem->Painters().Add( CViewItemBackgroundPainter::Instance() );
-//    pItem->Painters().Add( CViewItemLineNumberPainter::Instance() );
-//    pItem->Painters().Add( CViewItemModuleNamePainter::Instance() );
-//    pItem->Painters().Add( CViewItemTickCountPainter::Instance() );
-//    pItem->Painters().Add( CViewItemThreadIdPainter::Instance() );
-//    pItem->Painters().Add( CViewItemDataPainter::Instance() );
     pItem->SetFlag( CViewItem::eVIF_ApproxSize );
 
     m_pItems->Add(pItem);
