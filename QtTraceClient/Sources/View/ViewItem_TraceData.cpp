@@ -88,7 +88,8 @@ const Nyx::CWString& CViewItem_TraceData::TickCount() const
  */
 void CViewItem_TraceData::ApproximateHeight()
 {
-    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() );
+    size_t      CRCount = m_pTraceData->Data().CountOccurencesOf(L'\n') + 1;
+    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() * CRCount );
 }
 
 
