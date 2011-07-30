@@ -48,7 +48,7 @@ public:
     virtual void AddSize(const QSizeF& size);
 
     virtual void EvaluateSize(CViewSettings& settings);
-    virtual void Display( const CViewSettings& settings, CDrawViewItemState& drawstate );
+    virtual void Display( CViewSettings& settings, CDrawViewItemState& drawstate );
 
 //    CViewItemPainterCollection&         Painters()              { return m_Painters; }
 //    const CViewItemPainterCollection&   Painters() const        { return m_Painters; }

@@ -250,8 +250,8 @@ void CTracesDocument::OnRefreshTimer()
 {
     TracesViewList::iterator        pos = m_Views.begin();
 
-    for (pos = m_Views.begin(); pos != m_Views.end(); ++pos)
-        (*pos)->UpdateVisibleLines(DefaultViewSettings());
+//    for (pos = m_Views.begin(); pos != m_Views.end(); ++pos)
+//        (*pos)->UpdateVisibleLines(DefaultViewSettings());
 
     for (pos = m_Views.begin(); pos != m_Views.end(); ++pos)
         (*pos)->RefreshDisplay();

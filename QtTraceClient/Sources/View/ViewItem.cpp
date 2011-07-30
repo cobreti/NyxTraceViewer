@@ -73,10 +73,13 @@ void CViewItem::EvaluateSize(CViewSettings& settings)
 /**
  *
  */
-void CViewItem::Display(const CViewSettings& settings, CDrawViewItemState &drawstate)
+void CViewItem::Display(CViewSettings& settings, CDrawViewItemState &drawstate)
 {
     if ( !m_Flags.test(eVIF_SizeCalculated))
-        return;
+    {
+        EvaluateSize(settings);
+        m_Flags.set(eVIF_SizeCalculated);
+    }
 
     const CViewColumnsOrder&    rColsOrder = settings.ColumnsSettings().Order();
     size_t                      ColsCount = rColsOrder.Count();
