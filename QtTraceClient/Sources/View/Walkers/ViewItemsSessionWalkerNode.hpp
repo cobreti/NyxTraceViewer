@@ -9,6 +9,7 @@
 class CSessionViewItems;
 class CViewItemsSessionWalkerNode;
 class CViewItemPos;
+class CViewItemsWalkerNodePos;
 
 /**
  *
@@ -25,8 +26,8 @@ public:
     explicit CViewItemsSessionWalkerNode(const CViewItemsSessionWalkerNode& node);
     virtual ~CViewItemsSessionWalkerNode();
 
-    virtual bool GetTopPos( CViewItemsWalkerPos& walkerPos );
-    virtual bool GetLastPos( CViewItemsWalkerPos& walkerPos );
+    virtual bool GetTopPos( CViewItemsWalkerNodePos& walkerPos );
+    virtual bool GetLastPos( CViewItemsWalkerNodePos& walkerPos );
 
     const CViewItemsSessionWalkerNode& operator = (const CViewItemsSessionWalkerNode& node);
 

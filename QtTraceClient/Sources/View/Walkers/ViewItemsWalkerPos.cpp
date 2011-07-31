@@ -6,8 +6,8 @@
  *
  */
 CViewItemsWalkerPos::CViewItemsWalkerPos() :
-    m_pModule(NULL),
-    m_pSession(NULL),
+    CViewItemsModuleWalkerNodePos(),
+    m_ModuleNodeId(kInvalidNodeId),
     m_Y(0.0f)
 {
 }
@@ -17,9 +17,8 @@ CViewItemsWalkerPos::CViewItemsWalkerPos() :
  *
  */
 CViewItemsWalkerPos::CViewItemsWalkerPos(const CViewItemsWalkerPos &pos) :
-    m_ItemPos(pos.m_ItemPos),
-    m_pModule(pos.m_pModule),
-    m_pSession(pos.m_pSession),
+    CViewItemsModuleWalkerNodePos(pos),
+    m_ModuleNodeId(pos.m_ModuleNodeId),
     m_Y(pos.m_Y),
     m_ConcurrentItemsVisited(pos.m_ConcurrentItemsVisited)
 {
@@ -39,9 +38,9 @@ CViewItemsWalkerPos::~CViewItemsWalkerPos()
  */
 const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsWalkerPos& pos)
 {
-    m_ItemPos = pos.m_ItemPos;
-    m_pModule = pos.m_pModule;
-    m_pSession = pos.m_pSession;
+    CViewItemsModuleWalkerNodePos::operator = (pos);
+
+    m_ModuleNodeId = pos.m_ModuleNodeId;
     m_Y = pos.m_Y;
     m_ConcurrentItemsVisited = pos.m_ConcurrentItemsVisited;
 
@@ -52,47 +51,10 @@ const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsWalk
 /**
  *
  */
-//bool CViewItemsWalkerPos::operator < (const CViewItemsWalkerPos& pos) const
-//{
-//    return (m_ItemPos.Item()->TickCount() < pos.m_ItemPos.Item()->TickCount());/* ||
-//           (m_ItemPos.Item()->TickCount() == pos.m_ItemPos.Item()->TickCount());*/
-//}
-
-
-/**
- *
- */
-//bool CViewItemsWalkerPos::operator <= (const CViewItemsWalkerPos& pos) const
-//{
-//    return (m_ItemPos.Item()->TickCount() < pos.m_ItemPos.Item()->TickCount()) ||
-//           (m_ItemPos.Item()->TickCount() == pos.m_ItemPos.Item()->TickCount());
-//}
-
-
-/**
- *
- */
-bool CViewItemsWalkerPos::IsBefore( const CViewItemsWalkerPos& pos ) const
+const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsModuleWalkerNodePos& pos)
 {
-    return m_ItemPos.Item()->TickCount() < pos.ItemPos().Item()->TickCount();
-}
-
-
-/**
- *
- */
-bool CViewItemsWalkerPos::IsAfter( const CViewItemsWalkerPos& pos ) const
-{
-    return m_ItemPos.Item()->TickCount() > pos.ItemPos().Item()->TickCount();
-}
-
-
-/**
- *
- */
-bool CViewItemsWalkerPos::IsConcurrent( const CViewItemsWalkerPos& pos) const
-{
-    return m_ItemPos.Item()->TickCount() == pos.ItemPos().Item()->TickCount() && m_ItemPos.Item()->Id() != pos.ItemPos().Item()->Id();
+    CViewItemsModuleWalkerNodePos::operator = (pos);
+    return *this;
 }
 
 
@@ -101,6 +63,6 @@ bool CViewItemsWalkerPos::IsConcurrent( const CViewItemsWalkerPos& pos) const
  */
 bool CViewItemsWalkerPos::Valid() const
 {
-    return ( m_ItemPos.IsValid() && m_pSession != NULL && m_pModule != NULL);
+    return ( m_ItemPos.IsValid() && m_SessionNodeId != kInvalidNodeId && m_ModuleNodeId != kInvalidNodeId );
 }
 

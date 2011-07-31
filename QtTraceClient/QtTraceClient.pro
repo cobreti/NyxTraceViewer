@@ -61,7 +61,9 @@ SOURCES += Sources/TracesView.cpp \
     Sources/View/Walkers/ViewItemsWalkerPos.cpp \
     Sources/View/Walkers/FileWriterViewItemsWalker.cpp \
     Sources/AppSettings.cpp \
-    Sources/View/ViewDrawSettings.cpp
+    Sources/View/ViewDrawSettings.cpp \
+    Sources/View/Walkers/ViewItemsModuleWalkerNodePos.cpp \
+    Sources/View/Walkers/ViewItemsWalkerNodePos.cpp
 HEADERS += Sources/TracesView.h \
     Sources/mainwindow.h \
     Sources/Dialogs/NewViewDlg.hpp \
@@ -122,7 +124,9 @@ HEADERS += Sources/TracesView.h \
     Sources/View/Walkers/ViewItemsWalkerPos.hpp \
     Sources/View/Walkers/FileWriterViewItemsWalker.hpp \
     Sources/AppSettings.hpp \
-    Sources/View/ViewDrawSettings.hpp
+    Sources/View/ViewDrawSettings.hpp \
+    Sources/View/Walkers/ViewItemsModuleWalkerNodePos.hpp \
+    Sources/View/Walkers/ViewItemsWalkerNodePos.hpp
 FORMS += UI/TracesView.ui \
     UI/mainwindow.ui \
     UI/NewViewDlg.ui \

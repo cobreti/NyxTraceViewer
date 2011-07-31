@@ -125,10 +125,16 @@ bool CViewItemsWalker::MoveToBegin()
         if ( m_Nodes[index]->MoveToBegin() )
         {
             if ( !m_Pos.Valid() )
+            {
                 m_Nodes[index]->GetPosData(m_Pos);
+                m_Pos.ModuleNodeId() = index;
+            }
 
             if ( m_Nodes[index]->CachedPos().IsBefore(m_Pos) )
+            {
                 m_Nodes[index]->GetPosData(m_Pos);
+                m_Pos.ModuleNodeId() = index;
+            }
         }
 
         ++ index;
@@ -161,20 +167,21 @@ bool CViewItemsWalker::MoveToNext()
     ViewItemIDSet       InSet = m_Pos.ConcurrentItemsVisited();
     Nyx::CWString       FloorTickCount = m_Pos.ItemPos().Item()->TickCount();
 
-    for ( index = 0; index < m_Nodes.size(); ++index)
-        if ( !m_Nodes[index]->CachedPos().Valid() )
-            m_Nodes[index]->MoveToBegin();
+//    for ( index = 0; index < m_Nodes.size(); ++index)
+//        if ( !m_Nodes[index]->CachedPos().Valid() )
+//            m_Nodes[index]->MoveToBegin();
 
-    m_Pos.Module()->MoveToNext();
+    CViewItemsModuleWalkerNode*     pModuleWalker = m_Nodes[m_Pos.ModuleNodeId()];
+    pModuleWalker->MoveToNext();
 
-    for ( index = 0; index < m_Nodes.size(); ++index )
-    {
-        CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
+//    for ( index = 0; index < m_Nodes.size(); ++index )
+//    {
+//        CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
-        while (     pNode->CachedPos().Valid() &&
-                    pNode->CachedPos().IsBefore(m_Pos) &&
-                    pNode->MoveToNext());
-    }
+//        while (     pNode->CachedPos().Valid() &&
+//                    pNode->CachedPos().IsBefore(m_Pos) &&
+//                    pNode->MoveToNext());
+//    }
 
     index = 0;
 
@@ -191,6 +198,7 @@ bool CViewItemsWalker::MoveToNext()
         {
             pNode->GetPosData(m_Pos);
             m_Pos.ConcurrentItemsVisited().insert( pNode->CachedPos().ItemId());
+            m_Pos.ModuleNodeId() = index;
             ChangedLine = true;
         }
     }
@@ -202,11 +210,12 @@ bool CViewItemsWalker::MoveToNext()
     {
         const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
-        if ( pNode->CachedPos().Valid() && m_Pos.IsBefore( pNode->CachedPos()) && pNode->CachedPos().ItemPos().Item()->TickCount() > FloorTickCount )
+        if ( pNode->CachedPos().Valid() && m_Pos.IsBefore( pNode->CachedPos()) && pNode->CachedPos().Item()->TickCount() > FloorTickCount )
         {
             pNode->GetPosData(m_Pos);
             m_Pos.ConcurrentItemsVisited().clear();
             m_Pos.ConcurrentItemsVisited().insert( pNode->CachedPos().ItemId());
+            m_Pos.ModuleNodeId() = index;
             ChangedLine = true;
             break;
         }
@@ -221,11 +230,12 @@ bool CViewItemsWalker::MoveToNext()
         {
             const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
-            if ( pNode->CachedPos().Valid() && pNode->CachedPos().IsBefore(m_Pos) && pNode->CachedPos().ItemPos().Item()->TickCount() > FloorTickCount && InSet.count(pNode->CachedPos().ItemId()) == 0)
+            if ( pNode->CachedPos().Valid() && pNode->CachedPos().IsBefore(m_Pos) && pNode->CachedPos().Item()->TickCount() > FloorTickCount && InSet.count(pNode->CachedPos().ItemId()) == 0)
             {
                 pNode->GetPosData(m_Pos);
                 m_Pos.ConcurrentItemsVisited().clear();
                 m_Pos.ConcurrentItemsVisited().insert( pNode->CachedPos().ItemId());
+                m_Pos.ModuleNodeId() = index;
             }
 
             ++ index;
@@ -257,20 +267,21 @@ bool CViewItemsWalker::MoveToPrevious()
     ViewItemIDSet       InSet = m_Pos.ConcurrentItemsVisited();
     Nyx::CWString       CeilingTickCount = m_Pos.ItemPos().Item()->TickCount();
 
-    for ( index = 0; index < m_Nodes.size(); ++index)
-        if ( !m_Nodes[index]->CachedPos().Valid() )
-            m_Nodes[index]->MoveToBegin();
+//    for ( index = 0; index < m_Nodes.size(); ++index)
+//        if ( !m_Nodes[index]->CachedPos().Valid() )
+//            m_Nodes[index]->MoveToBegin();
 
-    m_Pos.Module()->MoveToPrevious();
+    CViewItemsModuleWalkerNode*     pModuleWalker = m_Nodes[m_Pos.ModuleNodeId()];
+    pModuleWalker->MoveToPrevious();
 
-    for ( index = 0; index < m_Nodes.size(); ++index )
-    {
-        CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
+//    for ( index = 0; index < m_Nodes.size(); ++index )
+//    {
+//        CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
-        while (     pNode->CachedPos().Valid() &&
-                    m_Pos.IsBefore(pNode->CachedPos()) &&
-                    pNode->MoveToPrevious());
-    }
+//        while (     pNode->CachedPos().Valid() &&
+//                    m_Pos.IsBefore(pNode->CachedPos()) &&
+//                    pNode->MoveToPrevious());
+//    }
 
     //
     // Attemps to find a concurrent item first
@@ -284,6 +295,7 @@ bool CViewItemsWalker::MoveToPrevious()
             pNode->GetPosData(m_Pos);
             m_Pos.ConcurrentItemsVisited().insert( pNode->CachedPos().ItemId());
             FoundNewLine = true;
+            m_Pos.ModuleNodeId() = index;
         }
     }
 
@@ -295,12 +307,13 @@ bool CViewItemsWalker::MoveToPrevious()
     {
         const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
-        if (pNode->CachedPos().Valid() && m_Pos.IsAfter(pNode->CachedPos()) && pNode->CachedPos().ItemPos().Item()->TickCount() < CeilingTickCount )
+        if (pNode->CachedPos().Valid() && m_Pos.IsAfter(pNode->CachedPos()) && pNode->CachedPos().Item()->TickCount() < CeilingTickCount )
         {
             pNode->GetPosData(m_Pos);
             m_Pos.ConcurrentItemsVisited().clear();
             m_Pos.ConcurrentItemsVisited().insert( pNode->CachedPos().ItemId());
             FoundNewLine = true;
+            m_Pos.ModuleNodeId() = index;
             break;
         }
 
@@ -316,9 +329,10 @@ bool CViewItemsWalker::MoveToPrevious()
         {
             const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
-            if ( pNode->CachedPos().Valid() && pNode->CachedPos().IsAfter(m_Pos) && pNode->CachedPos().ItemPos().Item()->TickCount() < CeilingTickCount && InSet.count(pNode->CachedPos().ItemId()) == 0 )
+            if ( pNode->CachedPos().Valid() && pNode->CachedPos().IsAfter(m_Pos) && pNode->CachedPos().Item()->TickCount() < CeilingTickCount && InSet.count(pNode->CachedPos().ItemId()) == 0 )
             {
                 pNode->GetPosData(m_Pos);
+                m_Pos.ModuleNodeId() = index;
                 m_Pos.ConcurrentItemsVisited().clear();
                 m_Pos.ConcurrentItemsVisited().insert( pNode->CachedPos().ItemId());
             }
@@ -444,12 +458,15 @@ void CViewItemsWalker::CopyDataFrom(const CViewItemsWalker& walker)
     {
         m_Nodes[index] = new CViewItemsModuleWalkerNode(*walker.m_Nodes[index]);
 
-        if ( m_Pos.Module() == walker.m_Nodes[index])
-            m_Pos.Module() = m_Nodes[index];
+//        if ( m_Pos.Module() == walker.m_Nodes[index])
+//            m_Pos.Module() = m_Nodes[index];
     }
 
-    if ( m_Pos.Module() )
-        m_Pos.Session() = m_Pos.Module()->GetEquivalentSession(walker.m_Pos.Module(), walker.m_Pos.Session());
+//    if ( m_Pos.ModuleNodeId() != kInvalidId )
+//    {
+//        CViewItemsModuleWalkerNode*     pModule = m_Nodes[m_Pos.ModuleNodeId()];
+//        m_Pos.Session() = m_Pos.Module()->GetEquivalentSession(walker.m_Pos.Module(), walker.m_Pos.Session());
+//    }
 }
 
 

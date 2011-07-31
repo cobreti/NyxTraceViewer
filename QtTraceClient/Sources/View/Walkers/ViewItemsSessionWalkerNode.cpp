@@ -1,5 +1,5 @@
 #include "ViewItemsSessionWalkerNode.hpp"
-#include "ViewItemsWalkerPos.hpp"
+#include "ViewItemsWalkerNodePos.hpp"
 #include "../SessionViewItems.hpp"
 
 
@@ -34,24 +34,20 @@ CViewItemsSessionWalkerNode::~CViewItemsSessionWalkerNode()
 /**
  *
  */
-bool CViewItemsSessionWalkerNode::GetTopPos( CViewItemsWalkerPos& walkerPos )
+bool CViewItemsSessionWalkerNode::GetTopPos( CViewItemsWalkerNodePos& walkerPos )
 {
-    walkerPos.ItemPos() = m_pSession->Items().begin();
-    walkerPos.Session() = this;
-
-    return walkerPos.ItemPos().IsValid();
+    walkerPos = m_pSession->Items().begin();
+    return walkerPos.Valid();
 }
 
 
 /**
  *
  */
-bool CViewItemsSessionWalkerNode::GetLastPos( CViewItemsWalkerPos& walkerPos )
+bool CViewItemsSessionWalkerNode::GetLastPos( CViewItemsWalkerNodePos& walkerPos )
 {
-    walkerPos.ItemPos() = m_pSession->Items().end();
-    walkerPos.Session() = this;
-
-    return walkerPos.ItemPos().IsValid();
+    walkerPos = m_pSession->Items().end();
+    return walkerPos.Valid();
 }
 
 

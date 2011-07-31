@@ -82,10 +82,10 @@ void CTracesView::SetName(const QString& name)
  */
 void CTracesView::OnNewTraces()
 {
-//    m_ItemsWalker.InitNewModulesPosition();
+    m_ItemsWalker.InitNewModulesPosition();
 
-//    if ( !m_ItemsWalker.ValidPos() )
-//        m_ItemsWalker.MoveToBegin();
+    if ( !m_ItemsWalker.ValidPos() )
+        m_ItemsWalker.MoveToBegin();
 
     m_bViewDirty = true;
 }
@@ -164,8 +164,8 @@ void CTracesView::Save( const QString& filename )
  */
 void CTracesView::OnVertSliderPosChanged(int value)
 {
-    if ( !m_ItemsWalker.MoveTo(value) )
-        m_ItemsWalker.MoveToBegin();
+//    if ( !m_ItemsWalker.MoveTo(value) )
+//        m_ItemsWalker.MoveToBegin();
 
     if ( m_ItemsWalker.MoveTo(value) )
     {

@@ -2,8 +2,7 @@
 #define _VIEWITEMSWALKERPOS_HPP_
 
 #include <Nyx.hpp>
-#include "../ViewItemPos.hpp"
-#include "../ViewItem.hpp"
+#include "ViewItemsModuleWalkerNodePos.hpp"
 
 #include <set>
 
@@ -18,26 +17,22 @@ class CViewItemsModuleWalkerNode;
 typedef     std::set<ViewItemID>            ViewItemIDSet;
 
 
+
 /**
  *
  */
-class CViewItemsWalkerPos
+class CViewItemsWalkerPos : public CViewItemsModuleWalkerNodePos
 {
 public:
     CViewItemsWalkerPos();
     CViewItemsWalkerPos(const CViewItemsWalkerPos& pos);
-    ~CViewItemsWalkerPos();
+    virtual ~CViewItemsWalkerPos();
 
     const CViewItemPos&             ItemPos() const                     { return m_ItemPos; }
     CViewItemPos&                   ItemPos()                           { return m_ItemPos; }
 
-    ViewItemID                      ItemId() const                      { return m_ItemPos.Item()->Id(); }
-
-    CViewItemsModuleWalkerNode*     Module() const                      { return m_pModule; }
-    CViewItemsModuleWalkerNode*&    Module()                            { return m_pModule; }
-
-    CViewItemsSessionWalkerNode*    Session() const                     { return m_pSession; }
-    CViewItemsSessionWalkerNode*&   Session()                           { return m_pSession; }
+    ViewItemsNodeId                     ModuleNodeId() const            { return m_ModuleNodeId; }
+    ViewItemsNodeId&                    ModuleNodeId()                  { return m_ModuleNodeId; }
 
     const float&                    Y() const                           { return m_Y; }
     float&                          Y()                                 { return m_Y; }
@@ -46,20 +41,14 @@ public:
     ViewItemIDSet&                  ConcurrentItemsVisited()            { return m_ConcurrentItemsVisited; }
 
     const CViewItemsWalkerPos& operator = (const CViewItemsWalkerPos& pos);
-//    bool operator < (const CViewItemsWalkerPos& pos) const;
-//    bool operator <= (const CViewItemsWalkerPos& pos) const;
-
-    bool IsBefore( const CViewItemsWalkerPos& pos ) const;
-    bool IsAfter( const CViewItemsWalkerPos& pos ) const;
-    bool IsConcurrent( const CViewItemsWalkerPos& pos) const;
+    const CViewItemsWalkerPos& operator = (const CViewItemsModuleWalkerNodePos& pos);
 
     bool Valid() const;
 
 protected:
 
-    CViewItemPos                    m_ItemPos;
-    CViewItemsModuleWalkerNode*     m_pModule;
-    CViewItemsSessionWalkerNode*    m_pSession;
+    ViewItemsNodeId                 m_ModuleNodeId;
+
     float                           m_Y;
     ViewItemIDSet                   m_ConcurrentItemsVisited;
 };

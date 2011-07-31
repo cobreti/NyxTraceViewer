@@ -5,12 +5,25 @@
 
 #include "ViewItemsWalkerNodesPool.hpp"
 #include "ViewItemsWalkerNode.hpp"
-#include "ViewItemsWalkerPos.hpp"
+#include "ViewItemsModuleWalkerNodePos.hpp"
 #include "ViewItemsSessionWalkerNode.hpp"
 
 
 class CModuleViewItems;
 class CViewItemsModuleWalkerNode;
+class CViewItemsWalkerPos;
+
+
+/**
+ *
+ */
+enum EViewItemsModuleWalkerNodeState
+{
+    eVIMWNS_Unitinialized,
+    eVIMWNS_BeforeFirst,
+    eVIMWNS_AfterLast,
+    eVIMWNS_ValidPos
+};
 
 
 /**
@@ -32,9 +45,11 @@ public:
 
     void GetPosData( CViewItemsWalkerPos& walkerPos ) const;
 
-    const CViewItemsWalkerPos& CachedPos() const            { return m_CachedPos; }
+    const CViewItemsModuleWalkerNodePos& CachedPos() const            { return m_CachedPos; }
 
     const Nyx::CWString& Name() const;
+
+    EViewItemsModuleWalkerNodeState     State() const       { return m_State; }
 
     void PushState();
     void PopState();
@@ -45,7 +60,7 @@ public:
 
 protected:
 
-    typedef         std::vector<CViewItemsWalkerPos>        TWalkerPosStack;
+    typedef         std::vector<CViewItemsModuleWalkerNodePos>        TWalkerPosStack;
 
 protected:
 
@@ -60,9 +75,10 @@ protected:
     CModuleViewItems*                       m_pModuleViewItems;
     TViewItemsSessionWalkerNodeArray        m_ChildNodes;
 
-    CViewItemsWalkerPos                     m_CachedPos;
+    CViewItemsModuleWalkerNodePos           m_CachedPos;
 
     TWalkerPosStack                         m_PositionStack;
+    EViewItemsModuleWalkerNodeState         m_State;
 };
 
 #endif // VIEWITEMSMODULEWALKERNODE_HPP
