@@ -31,6 +31,8 @@ public:
     virtual bool MoveToNext();
     virtual bool MoveToPrevious();
 
+    CViewItem* Item() const         { return m_ItemPos.Item(); }
+
 protected:
 
     CViewItemPos                m_ItemPos;

@@ -230,7 +230,7 @@ void CTracesView::paintEvent(QPaintEvent*)
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
-        pItem = m_ItemsWalker.ItemPos().Item();
+        pItem = m_ItemsWalker.Item();
 
         drawstate.LineNumber() = m_ItemsWalker.LineNumber();
         pItem->Display(Settings(), drawstate);
@@ -320,7 +320,7 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
         m_ItemsWalker.PushState();
         if ( m_ItemsWalker.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
         {
-            CViewItem*  pItem = m_ItemsWalker.ItemPos().Item();
+            CViewItem*  pItem = m_ItemsWalker.Item();
 
             pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
 
@@ -413,7 +413,7 @@ bool CTracesView::UpdateVisibleLines()
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
 
-        pItem = m_ItemsWalker.ItemPos().Item();
+        pItem = m_ItemsWalker.Item();
 
         if ( pItem->HasFlag(CViewItem::eVIF_ApproxSize) )
         {

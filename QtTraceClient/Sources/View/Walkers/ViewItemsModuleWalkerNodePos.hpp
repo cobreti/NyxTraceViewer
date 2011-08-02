@@ -30,8 +30,6 @@ public:
 
     ViewItemID                      ItemId() const;
 
-    CViewItem* Item() const         { return m_ItemPos.Item(); }
-
 protected:
 
     ViewItemsNodeId                 m_SessionNodeId;

@@ -36,7 +36,7 @@ void CFileWriterViewItemsWalker::CalculateColumnsWidth()
 
     while (1)
     {
-        CViewItem_TraceData*        pItem = static_cast<CViewItem_TraceData*>(ItemPos().Item());
+        CViewItem_TraceData*        pItem = static_cast<CViewItem_TraceData*>(Item());
 
         if ( pItem )
         {
@@ -63,7 +63,7 @@ void CFileWriterViewItemsWalker::WriteItems(Nyx::CAnsiFileRef refFile)
 
     while (1)
     {
-        CViewItem_TraceData*        pItem = static_cast<CViewItem_TraceData*>(ItemPos().Item());
+        CViewItem_TraceData*        pItem = static_cast<CViewItem_TraceData*>(Item());
 
         if ( pItem )
         {

@@ -34,7 +34,8 @@ public:
     bool MoveTo(const float& y);
 
     bool ValidPos() const                   { return m_Pos.Valid(); }
-    const CViewItemPos& ItemPos() const     { return m_Pos.ItemPos(); }
+    //const CViewItemPos& ItemPos() const     { return m_Pos.ItemPos(); }
+    CViewItem* Item() const                 { return m_Pos.Item(); }
     const float& ItemYPos() const           { return m_Pos.Y(); }
     const size_t LineNumber() const         { return m_LineNumber; }
 

@@ -28,9 +28,6 @@ public:
     CViewItemsWalkerPos(const CViewItemsWalkerPos& pos);
     virtual ~CViewItemsWalkerPos();
 
-    const CViewItemPos&             ItemPos() const                     { return m_ItemPos; }
-    CViewItemPos&                   ItemPos()                           { return m_ItemPos; }
-
     ViewItemsNodeId                     ModuleNodeId() const            { return m_ModuleNodeId; }
     ViewItemsNodeId&                    ModuleNodeId()                  { return m_ModuleNodeId; }
 

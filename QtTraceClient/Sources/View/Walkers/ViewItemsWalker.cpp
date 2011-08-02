@@ -165,7 +165,7 @@ bool CViewItemsWalker::MoveToNext()
     size_t              index = 0;
     bool                ChangedLine = false;
     ViewItemIDSet       InSet = m_Pos.ConcurrentItemsVisited();
-    Nyx::CWString       FloorTickCount = m_Pos.ItemPos().Item()->TickCount();
+    Nyx::CWString       FloorTickCount = m_Pos.Item()->TickCount();
 
 //    for ( index = 0; index < m_Nodes.size(); ++index)
 //        if ( !m_Nodes[index]->CachedPos().Valid() )
@@ -185,7 +185,7 @@ bool CViewItemsWalker::MoveToNext()
 
     index = 0;
 
-    float CurrentLineHeight = m_Pos.ItemPos().Item()->GetSize().height();
+    float CurrentLineHeight = m_Pos.Item()->GetSize().height();
 
     //
     // Attemps to find a concurrent item first
@@ -265,7 +265,7 @@ bool CViewItemsWalker::MoveToPrevious()
     size_t              index = 0;
     bool                FoundNewLine = false;
     ViewItemIDSet       InSet = m_Pos.ConcurrentItemsVisited();
-    Nyx::CWString       CeilingTickCount = m_Pos.ItemPos().Item()->TickCount();
+    Nyx::CWString       CeilingTickCount = m_Pos.Item()->TickCount();
 
 //    for ( index = 0; index < m_Nodes.size(); ++index)
 //        if ( !m_Nodes[index]->CachedPos().Valid() )
@@ -340,7 +340,7 @@ bool CViewItemsWalker::MoveToPrevious()
             ++ index;
         }
 
-        m_Pos.Y() -= m_Pos.ItemPos().Item()->GetSize().height();
+        m_Pos.Y() -= m_Pos.Item()->GetSize().height();
         -- m_LineNumber;
     }
 
@@ -353,16 +353,16 @@ bool CViewItemsWalker::MoveToPrevious()
  */
 bool CViewItemsWalker::MoveTo(const float& y)
 {
-    if ( m_Pos.Valid() && m_Pos.Y() + m_Pos.ItemPos().Item()->GetSize().height() < y )
+    if ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y )
     {
-        while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.ItemPos().Item()->GetSize().height() < y && MoveToNext() );
+        while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y && MoveToNext() );
     }
     else if ( m_Pos.Valid() && m_Pos.Y() > y )
     {
         while ( m_Pos.Valid() && m_Pos.Y() > y && MoveToPrevious() );
     }
 
-    return ( m_Pos.Valid() && m_Pos.Y() <= y && m_Pos.Y() + m_Pos.ItemPos().Item()->GetSize().height() >= y );
+    return ( m_Pos.Valid() && m_Pos.Y() <= y && m_Pos.Y() + m_Pos.Item()->GetSize().height() >= y );
 }
 
 
