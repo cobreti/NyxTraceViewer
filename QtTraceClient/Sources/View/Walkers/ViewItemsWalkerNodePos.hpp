@@ -28,8 +28,12 @@ public:
 
     bool Valid() const;
 
-    virtual bool MoveToNext();
-    virtual bool MoveToPrevious();
+    bool MoveToNext();
+    bool MoveToPrevious();
+
+    bool IsBefore( const CViewItemsWalkerNodePos& pos ) const;
+    bool IsAfter( const CViewItemsWalkerNodePos& pos ) const;
+    bool IsConcurrent( const CViewItemsWalkerNodePos& pos) const;
 
     CViewItem* Item() const         { return m_ItemPos.Item(); }
 

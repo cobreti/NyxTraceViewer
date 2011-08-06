@@ -24,10 +24,6 @@ public:
 
     bool Valid() const;
 
-    virtual bool IsBefore( const CViewItemsModuleWalkerNodePos& pos ) const;
-    virtual bool IsAfter( const CViewItemsModuleWalkerNodePos& pos ) const;
-    virtual bool IsConcurrent( const CViewItemsModuleWalkerNodePos& pos) const;
-
     ViewItemID                      ItemId() const;
 
 protected:

@@ -14,8 +14,7 @@ class CViewItemsModuleWalkerNode;
 /**
  *
  */
-typedef     std::set<ViewItemID>            ViewItemIDSet;
-
+//typedef     std::set<ViewItemID>            ViewItemIDSet;
 
 
 /**
@@ -34,9 +33,6 @@ public:
     const float&                    Y() const                           { return m_Y; }
     float&                          Y()                                 { return m_Y; }
 
-    const ViewItemIDSet&            ConcurrentItemsVisited() const      { return m_ConcurrentItemsVisited; }
-    ViewItemIDSet&                  ConcurrentItemsVisited()            { return m_ConcurrentItemsVisited; }
-
     const CViewItemsWalkerPos& operator = (const CViewItemsWalkerPos& pos);
     const CViewItemsWalkerPos& operator = (const CViewItemsModuleWalkerNodePos& pos);
 
@@ -44,10 +40,10 @@ public:
 
 protected:
 
+
     ViewItemsNodeId                 m_ModuleNodeId;
 
     float                           m_Y;
-    ViewItemIDSet                   m_ConcurrentItemsVisited;
 };
 
 #endif // VIEWITEMSWALKERPOS_HPP

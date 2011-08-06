@@ -42,10 +42,10 @@ public:
     bool MoveToBegin();
     bool MoveToNext();
     bool MoveToPrevious();
+    bool ValidPos() const;
 
-    void GetPosData( CViewItemsWalkerPos& walkerPos ) const;
-
-    const CViewItemsModuleWalkerNodePos& CachedPos() const            { return m_CachedPos; }
+    const CViewItemsModuleWalkerNodePos& LowerPos() const           { return m_LowerPos; }
+    const CViewItemsModuleWalkerNodePos& UpperPos() const           { return m_UpperPos; }
 
     const Nyx::CWString& Name() const;
 
@@ -70,14 +70,21 @@ protected:
     void ClearChildNodes();
     void CopyDataFrom( const CViewItemsModuleWalkerNode& node);
 
+    void MoveToNext( CViewItemsModuleWalkerNodePos& pos );
+    void MoveToPrevious( CViewItemsModuleWalkerNodePos& pos );
+    void MoveToBegin( CViewItemsModuleWalkerNodePos& pos );
+
 protected:
 
     CModuleViewItems*                       m_pModuleViewItems;
     TViewItemsSessionWalkerNodeArray        m_ChildNodes;
 
-    CViewItemsModuleWalkerNodePos           m_CachedPos;
+    CViewItemsModuleWalkerNodePos           m_LowerPos;
+    CViewItemsModuleWalkerNodePos           m_UpperPos;
 
-    TWalkerPosStack                         m_PositionStack;
+    TWalkerPosStack                         m_LowerPosStack;
+    TWalkerPosStack                         m_UpperPosStack;
+
     EViewItemsModuleWalkerNodeState         m_State;
 };
 

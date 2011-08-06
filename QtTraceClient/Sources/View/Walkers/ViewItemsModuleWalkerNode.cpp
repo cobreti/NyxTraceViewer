@@ -58,14 +58,23 @@ void CViewItemsModuleWalkerNode::AddNode( CViewItemsSessionWalkerNode* pNode )
  */
 bool CViewItemsModuleWalkerNode::MoveToBegin()
 {
-    if ( m_ChildNodes.empty() )
-        return false;
+    m_LowerPos.SessionNodeId() = kInvalidNodeId;
 
-    CViewItemsSessionWalkerNode*        pNode = m_ChildNodes[0];
+    MoveToBegin(m_UpperPos);
 
-    if ( pNode->GetTopPos(m_CachedPos) )
+    return m_UpperPos.Valid();
+}
+
+
+/**
+ *
+ */
+bool CViewItemsModuleWalkerNode::MoveToNext()
+{
+    if ( m_UpperPos.Valid() )
     {
-        m_CachedPos.SessionNodeId() = 0;
+        m_LowerPos = m_UpperPos;
+        MoveToNext(m_UpperPos);
         return true;
     }
 
@@ -76,54 +85,24 @@ bool CViewItemsModuleWalkerNode::MoveToBegin()
 /**
  *
  */
-bool CViewItemsModuleWalkerNode::MoveToNext()
-{
-    if ( !m_CachedPos.Valid() )
-        return false;
-
-    if ( !m_CachedPos.MoveToNext() )
-    {
-        size_t      index = m_CachedPos.SessionNodeId() + 1;
-        m_CachedPos.SessionNodeId() = kInvalidNodeId;
-        if ( index < m_ChildNodes.size() )
-        {
-            CViewItemsSessionWalkerNode*        pSession = m_ChildNodes[index];
-            if ( pSession->GetTopPos(m_CachedPos) )
-                m_CachedPos.SessionNodeId() = index;
-        }
-    }
-
-    return m_CachedPos.SessionNodeId() != kInvalidNodeId;
-}
-
-
-/**
- *
- */
 bool CViewItemsModuleWalkerNode::MoveToPrevious()
 {
-    if ( !m_CachedPos.Valid() )
-        return false;
-
-    if ( !m_CachedPos.MoveToPrevious() )
+    if ( m_LowerPos.Valid() )
     {
-        size_t index = m_CachedPos.SessionNodeId() - 1;
-        m_CachedPos.SessionNodeId() = kInvalidNodeId;
-
-        if ( index >= 0 && m_ChildNodes[index]->GetLastPos(m_CachedPos))
-            m_CachedPos.SessionNodeId() = index;
+        m_UpperPos = m_LowerPos;
+        MoveToPrevious(m_LowerPos);
     }
 
-    return m_CachedPos.SessionNodeId() != kInvalidNodeId;
+    return false;
 }
 
 
 /**
  *
  */
-void CViewItemsModuleWalkerNode::GetPosData( CViewItemsWalkerPos& walkerPos ) const
+bool CViewItemsModuleWalkerNode::ValidPos() const
 {
-    walkerPos = m_CachedPos;
+    return m_LowerPos.Valid() || m_UpperPos.Valid();
 }
 
 
@@ -141,7 +120,8 @@ const Nyx::CWString& CViewItemsModuleWalkerNode::Name() const
  */
 void CViewItemsModuleWalkerNode::PushState()
 {
-    m_PositionStack.push_back(m_CachedPos);
+    m_LowerPosStack.push_back(m_LowerPos);
+    m_UpperPosStack.push_back(m_UpperPos);
 }
 
 
@@ -150,10 +130,13 @@ void CViewItemsModuleWalkerNode::PushState()
  */
 void CViewItemsModuleWalkerNode::PopState()
 {
-    if ( !m_PositionStack.empty())
+    if ( !m_LowerPosStack.empty())
     {
-        m_CachedPos = m_PositionStack.back();
-        m_PositionStack.pop_back();
+        m_LowerPos = m_LowerPosStack.back();
+        m_LowerPosStack.pop_back();
+
+        m_UpperPos = m_UpperPosStack.back();
+        m_UpperPosStack.pop_back();
     }
 }
 
@@ -246,11 +229,70 @@ void CViewItemsModuleWalkerNode::CopyDataFrom( const CViewItemsModuleWalkerNode&
     m_pModuleViewItems = node.m_pModuleViewItems;
     m_ChildNodes.resize(node.m_ChildNodes.size());
 
-    m_CachedPos = node.m_CachedPos;
+    m_LowerPos = node.m_LowerPos;
+    m_UpperPos = node.m_UpperPos;
 
     for (size_t index = 0; index < node.m_ChildNodes.size(); ++index)
     {
         m_ChildNodes[index] = new CViewItemsSessionWalkerNode(*node.m_ChildNodes[index]);
     }
+}
+
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::MoveToNext( CViewItemsModuleWalkerNodePos& pos )
+{
+    if ( !pos.Valid() )
+        return;
+
+    if ( !pos.MoveToNext() )
+    {
+        size_t      index = pos.SessionNodeId() + 1;
+        pos.SessionNodeId() = kInvalidNodeId;
+        if ( index < m_ChildNodes.size() )
+        {
+            CViewItemsSessionWalkerNode*        pSession = m_ChildNodes[index];
+            if ( pSession->GetTopPos(pos) )
+                pos.SessionNodeId() = index;
+        }
+    }
+}
+
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::MoveToPrevious(CViewItemsModuleWalkerNodePos &pos)
+{
+    if ( !pos.Valid() )
+        return;
+
+    if ( !pos.MoveToPrevious() )
+    {
+        size_t index = pos.SessionNodeId() - 1;
+        pos.SessionNodeId() = kInvalidNodeId;
+
+        if ( index != kInvalidNodeId && index >= 0 && m_ChildNodes[index]->GetLastPos(pos))
+            pos.SessionNodeId() = index;
+    }
+}
+
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::MoveToBegin( CViewItemsModuleWalkerNodePos& pos )
+{
+    pos.SessionNodeId() = kInvalidNodeId;
+
+    if ( m_ChildNodes.empty() )
+        return;
+
+    CViewItemsSessionWalkerNode*        pNode = m_ChildNodes[0];
+
+    if ( pNode->GetTopPos(pos) )
+        pos.SessionNodeId() = 0;
 }
 

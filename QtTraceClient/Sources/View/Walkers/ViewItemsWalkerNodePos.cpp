@@ -1,4 +1,5 @@
 #include "ViewItemsWalkerNodePos.hpp"
+#include "../ViewItem.hpp"
 
 
 /**
@@ -70,4 +71,31 @@ bool CViewItemsWalkerNodePos::MoveToNext()
 bool CViewItemsWalkerNodePos::MoveToPrevious()
 {
     return m_ItemPos.MoveToPrevious();
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerNodePos::IsBefore( const CViewItemsWalkerNodePos& pos ) const
+{
+    return m_ItemPos.Item()->TickCount() < pos.Item()->TickCount();
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerNodePos::IsAfter( const CViewItemsWalkerNodePos& pos ) const
+{
+    return m_ItemPos.Item()->TickCount() > pos.Item()->TickCount();
+}
+
+
+/**
+ *
+ */
+bool CViewItemsWalkerNodePos::IsConcurrent( const CViewItemsWalkerNodePos& pos) const
+{
+    return m_ItemPos.Item()->TickCount() == pos.Item()->TickCount() && m_ItemPos.Item()->Id() != pos.Item()->Id();
 }

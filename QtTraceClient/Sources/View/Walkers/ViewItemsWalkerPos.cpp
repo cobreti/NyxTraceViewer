@@ -19,8 +19,7 @@ CViewItemsWalkerPos::CViewItemsWalkerPos() :
 CViewItemsWalkerPos::CViewItemsWalkerPos(const CViewItemsWalkerPos &pos) :
     CViewItemsModuleWalkerNodePos(pos),
     m_ModuleNodeId(pos.m_ModuleNodeId),
-    m_Y(pos.m_Y),
-    m_ConcurrentItemsVisited(pos.m_ConcurrentItemsVisited)
+    m_Y(pos.m_Y)
 {
 }
 
@@ -42,7 +41,6 @@ const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsWalk
 
     m_ModuleNodeId = pos.m_ModuleNodeId;
     m_Y = pos.m_Y;
-    m_ConcurrentItemsVisited = pos.m_ConcurrentItemsVisited;
 
     return *this;
 }
@@ -63,6 +61,6 @@ const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsModu
  */
 bool CViewItemsWalkerPos::Valid() const
 {
-    return ( m_ItemPos.IsValid() && m_SessionNodeId != kInvalidNodeId && m_ModuleNodeId != kInvalidNodeId );
+    return m_SessionNodeId != kInvalidNodeId && m_ModuleNodeId != kInvalidNodeId && m_ItemPos.IsValid();
 }
 

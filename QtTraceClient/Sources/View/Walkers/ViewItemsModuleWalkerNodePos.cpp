@@ -47,35 +47,10 @@ const CViewItemsModuleWalkerNodePos& CViewItemsModuleWalkerNodePos::operator = (
  */
 bool CViewItemsModuleWalkerNodePos::Valid() const
 {
-    return CViewItemsWalkerNodePos::Valid() && (m_SessionNodeId != kInvalidNodeId );
+    return (m_SessionNodeId != kInvalidNodeId ) && CViewItemsWalkerNodePos::Valid();
 }
 
 
-/**
- *
- */
-bool CViewItemsModuleWalkerNodePos::IsBefore( const CViewItemsModuleWalkerNodePos& pos ) const
-{
-    return m_ItemPos.Item()->TickCount() < pos.Item()->TickCount();
-}
-
-
-/**
- *
- */
-bool CViewItemsModuleWalkerNodePos::IsAfter( const CViewItemsModuleWalkerNodePos& pos ) const
-{
-    return m_ItemPos.Item()->TickCount() > pos.Item()->TickCount();
-}
-
-
-/**
- *
- */
-bool CViewItemsModuleWalkerNodePos::IsConcurrent( const CViewItemsModuleWalkerNodePos& pos) const
-{
-    return m_ItemPos.Item()->TickCount() == pos.Item()->TickCount() && m_ItemPos.Item()->Id() != pos.Item()->Id();
-}
 
 
 ViewItemID CViewItemsModuleWalkerNodePos::ItemId() const

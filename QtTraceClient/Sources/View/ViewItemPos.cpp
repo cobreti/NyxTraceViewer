@@ -41,6 +41,25 @@ CViewItemPos::~CViewItemPos()
 /**
  *
  */
+void CViewItemPos::operator ++ ()
+{
+    if ( !MoveToNext() )
+        m_Pos = m_pList->end();
+}
+
+
+/**
+ *
+ */
+void CViewItemPos::operator -- ()
+{
+    MoveToPrevious();
+}
+
+
+/**
+ *
+ */
 const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
 {
     if ( &pos != this )
@@ -58,10 +77,18 @@ const CViewItemPos& CViewItemPos::operator = (const CViewItemPos& pos)
  */
 bool CViewItemPos::MoveToNext()
 {
-    if ( m_Pos == m_pList->end() )
+    TViewItemsList::const_iterator      pos = m_Pos;
+
+    ++ pos;
+
+    if ( pos == m_pList->end() )
         return false;
 
-    ++ m_Pos;
+    m_Pos = pos;
+//    if ( m_Pos == m_pList->end() )
+//        return false;
+
+//    ++ m_Pos;
 
     return true;
 }

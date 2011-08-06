@@ -28,8 +28,8 @@ public: // public methods
     CViewItemPos(const CViewItemPos& rPos);
     virtual ~CViewItemPos();
 
-    void operator ++ () { MoveToNext(); }
-    void operator -- () { MoveToPrevious(); }
+    void operator ++ ();
+    void operator -- ();
 
     bool MoveToNext();
     bool MoveToPrevious();
