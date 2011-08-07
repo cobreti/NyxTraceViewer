@@ -212,34 +212,12 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="Sources\DebugPanel.cpp"
+				RelativePath=".\Sources\AppSettings.cpp"
 				>
 			</File>
 			<File
-				RelativePath="Sources\DebugPanel.h"
+				RelativePath=".\Sources\AppSettings.hpp"
 				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\Sources&quot; &quot;-I.\UI&quot; &quot;-I.\..\NyxLibs\include&quot; &quot;-I.\..\NyxLibs\include\win32&quot; &quot;-I.\..\NyxLibs\include\NyxNet&quot; &quot;-I.\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;Sources\DebugPanel.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-						Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\Sources&quot; &quot;-I.\UI&quot; &quot;-I.\..\NyxLibs\include&quot; &quot;-I.\..\NyxLibs\include\Win32&quot; &quot;-I.\..\NyxLibs\include\NyxNet&quot; &quot;-I.\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;Sources\DebugPanel.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
-						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-						Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="Sources\main.cpp"
@@ -687,6 +665,14 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\Sources\View\ViewDrawSettings.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Sources\View\ViewDrawSettings.hpp"
+					>
+				</File>
+				<File
 					RelativePath=".\Sources\View\ViewEnums.hpp"
 					>
 				</File>
@@ -956,6 +942,14 @@
 						>
 					</File>
 					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsModuleWalkerNodePos.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsModuleWalkerNodePos.hpp"
+						>
+					</File>
+					<File
 						RelativePath=".\Sources\View\Walkers\ViewItemsSessionWalkerNode.cpp"
 						>
 					</File>
@@ -977,6 +971,14 @@
 					</File>
 					<File
 						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNode.hpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNodePos.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Sources\View\Walkers\ViewItemsWalkerNodePos.hpp"
 						>
 					</File>
 					<File
@@ -1034,32 +1036,6 @@
 			<File
 				RelativePath=".\resource.h"
 				>
-			</File>
-			<File
-				RelativePath="UI\ui_DebugPanel.h"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Performing Custom Build Step"
-						CommandLine=""
-						AdditionalDependencies=""
-						Outputs=""
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="Performing Custom Build Step"
-						CommandLine=""
-						AdditionalDependencies=""
-						Outputs=""
-					/>
-				</FileConfiguration>
 			</File>
 			<File
 				RelativePath="UI\ui_mainwindow.h"
@@ -1138,18 +1114,6 @@
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
-				<File
-					RelativePath=".\MOC\Debug\moc_DebugPanel.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
 				<File
 					RelativePath=".\MOC\Debug\moc_mainwindow.cpp"
 					>
@@ -1300,18 +1264,6 @@
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
-				<File
-					RelativePath=".\MOC\Release\moc_DebugPanel.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
 				<File
 					RelativePath=".\MOC\Release\moc_mainwindow.cpp"
 					>
@@ -1486,32 +1438,6 @@
 			UniqueIdentifier="{99349809-55BA-4b9d-BF79-8FDBB0286EB3}"
 			ParseFiles="false"
 			>
-			<File
-				RelativePath="UI\DebugPanel.ui"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="UIC UI\DebugPanel.ui"
-						CommandLine="$(QTDIR)\bin\uic.exe UI\DebugPanel.ui -o UI\ui_DebugPanel.h&#x0D;&#x0A;"
-						AdditionalDependencies="UI\DebugPanel.ui;$(QTDIR)\bin\uic.exe"
-						Outputs="UI\ui_DebugPanel.h"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-						Description="UIC UI\DebugPanel.ui"
-						CommandLine="$(QTDIR)\bin\uic.exe UI\DebugPanel.ui -o UI\ui_DebugPanel.h&#x0D;&#x0A;"
-						AdditionalDependencies="UI\DebugPanel.ui;$(QTDIR)\bin\uic.exe"
-						Outputs="UI\ui_DebugPanel.h"
-					/>
-				</FileConfiguration>
-			</File>
 			<File
 				RelativePath="UI\mainwindow.ui"
 				>

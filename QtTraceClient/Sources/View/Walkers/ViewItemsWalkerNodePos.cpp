@@ -44,6 +44,8 @@ const CViewItemsWalkerNodePos& CViewItemsWalkerNodePos::operator = (const CViewI
 const CViewItemsWalkerNodePos& CViewItemsWalkerNodePos::operator = (const CViewItemPos& pos)
 {
     m_ItemPos = pos;
+
+    return *this;
 }
 
 
