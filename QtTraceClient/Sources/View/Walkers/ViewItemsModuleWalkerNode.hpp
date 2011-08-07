@@ -36,6 +36,8 @@ public:
     explicit CViewItemsModuleWalkerNode(const CViewItemsModuleWalkerNode& node);
     virtual ~CViewItemsModuleWalkerNode();
 
+    void InitModulePosition();
+
     bool ContainsModule( CModuleViewItems* pModule ) const;
     void AddNode( CViewItemsSessionWalkerNode* pNode );
 

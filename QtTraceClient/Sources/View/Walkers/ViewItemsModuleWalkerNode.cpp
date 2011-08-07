@@ -38,6 +38,23 @@ CViewItemsModuleWalkerNode::~CViewItemsModuleWalkerNode()
 /**
  *
  */
+void CViewItemsModuleWalkerNode::InitModulePosition()
+{
+    if ( !ValidPos() )
+        MoveToBegin();
+    else if ( !m_UpperPos.Valid() )
+    {
+        CViewItemsModuleWalkerNodePos       pos(m_LowerPos);
+
+        if ( pos.MoveToNext() )
+            m_UpperPos = pos;
+    }
+}
+
+
+/**
+ *
+ */
 bool CViewItemsModuleWalkerNode::ContainsModule( CModuleViewItems* pModule ) const
 {
     return (m_pModuleViewItems->Name() == pModule->Name());

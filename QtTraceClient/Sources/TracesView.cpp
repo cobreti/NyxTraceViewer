@@ -315,22 +315,27 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 {
     if ( Qt::ControlModifier == event->modifiers() && event->pos().y() > m_pHeader->size().height() )
 	{
-        bool        bItemStateChanged = false;
+        float       y = m_ItemsWalker.ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
+        bool        bContinue = true;
+        qreal       ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
 
         m_ItemsWalker.PushState();
-        if ( m_ItemsWalker.MoveTo( event->pos().y() + ui->m_VertScrollbar->value() - HeaderSize().height() ) )
+
+        while ( bContinue && m_ItemsWalker.ValidPos() && y < ViewHeight )
         {
-            CViewItem*  pItem = m_ItemsWalker.Item();
+            CViewItem*      pItem = m_ItemsWalker.Item();
 
-            pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
+            if ( event->pos().y() >= y && event->pos().y() <= y + pItem->GetSize().height() )
+                pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
 
-            bItemStateChanged = true;
+            y += pItem->GetSize().height();
+
+            bContinue = m_ItemsWalker.MoveToNext();
         }
+
         m_ItemsWalker.PopState();
 
-
-        if ( bItemStateChanged )
-            update();
+        update();
 	}
 }
 

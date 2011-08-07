@@ -93,14 +93,7 @@ bool CViewItemsWalker::InitNewModulesPosition()
     bool            bModuleInitialized = false;
 
     while ( index < m_Nodes.size() )
-    {
-        CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
-
-        if ( !pNode->ValidPos() )
-            pNode->MoveToBegin();
-
-        ++ index;
-    }
+        m_Nodes[index++]->InitModulePosition();
 
     return bModuleInitialized;
 }
@@ -261,14 +254,8 @@ bool CViewItemsWalker::MoveToPrevious()
  */
 bool CViewItemsWalker::MoveTo(const float& y)
 {
-    if ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y )
-    {
-        while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y && MoveToNext() );
-    }
-    else if ( m_Pos.Valid() && m_Pos.Y() > y )
-    {
-        while ( m_Pos.Valid() && m_Pos.Y() > y && MoveToPrevious() );
-    }
+    while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y && MoveToNext() );
+    while ( m_Pos.Valid() && m_Pos.Y() > y && MoveToPrevious() );
 
     return ( m_Pos.Valid() && m_Pos.Y() <= y && m_Pos.Y() + m_Pos.Item()->GetSize().height() >= y );
 }
