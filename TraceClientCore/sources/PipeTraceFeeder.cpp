@@ -38,7 +38,7 @@ void TraceClientCore::CPipeTraceFeeder::Start()
 	m_refServer = NyxNet::CPipeServer::Alloc();
 	
     //m_refServer->Create( "Default_Pipe", 4096, m_refNxConnection );
-    m_refServer->Create( m_Name.c_str(), 1048576, m_refNxConnection );
+    m_refServer->Create( m_Name.c_str(), 4096, m_refNxConnection );
 	
 	m_refServer->Start();
 }
