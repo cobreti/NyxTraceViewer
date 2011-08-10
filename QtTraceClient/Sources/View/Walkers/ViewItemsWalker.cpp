@@ -166,10 +166,25 @@ bool CViewItemsWalker::MoveToNext()
 
     for ( index = 0; index < m_Nodes.size(); ++index)
     {
+        CViewItemsModuleWalkerNode* pNode = m_Nodes[index];
+
+        if ( !pNode->UpperPos().Valid() ) // attempt getting a valid upper position in case new data came in
+        {
+            if ( pNode->LowerPos().Valid() )
+                pNode->MoveToNext();
+            else
+                pNode->MoveToBegin();
+        }
+
+        while ( pNode->UpperPos().Valid() && pNode->UpperPos().IsBefore(m_Pos) )
+        {
+            m_Pos.Y() += pNode->LowerPos().Item()->GetSize().height();
+            ++ m_LineNumber;
+            pNode->MoveToNext();
+        }
+
         if ( pos.Valid() )
         {
-            const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
-
             if ( pNode->UpperPos().Valid() && pNode->UpperPos().IsBefore(pos) )
             {
                 pos = pNode->UpperPos();

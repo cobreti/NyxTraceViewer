@@ -164,9 +164,6 @@ void CTracesView::Save( const QString& filename )
  */
 void CTracesView::OnVertSliderPosChanged(int value)
 {
-//    if ( !m_ItemsWalker.MoveTo(value) )
-//        m_ItemsWalker.MoveToBegin();
-
     if ( m_ItemsWalker.MoveTo(value) )
     {
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
@@ -261,11 +258,6 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
-
-    if ( m_ItemsWalker.ValidPos() && isVisible() && m_ItemsWalker.ItemYPos() != ui->m_VertScrollbar->value())
-    {
-        m_ItemsWalker.MoveTo(ui->m_VertScrollbar->value());
-    }
 }
 
 
