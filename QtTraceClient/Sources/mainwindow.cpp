@@ -55,6 +55,12 @@ CMainWindow::CMainWindow(QWidget *parent) :
 	CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
 
     ui->m_btnRemove->setEnabled(false);
+
+    QList<int>  widths;
+
+//    widths.append(10);
+//    widths.append(200);
+//    ui->splitter->setSizes(widths);
 }
 
 

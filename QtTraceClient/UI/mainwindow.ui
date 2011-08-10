@@ -54,9 +54,9 @@
        <enum>Qt::Horizontal</enum>
       </property>
       <property name="childrenCollapsible">
-       <bool>true</bool>
+       <bool>false</bool>
       </property>
-      <widget class="QFrame" name="frame_3">
+      <widget class="QFrame" name="m_PropertiesFrame">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -132,6 +132,12 @@
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QPushButton" name="m_btnAddView">
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -150,6 +156,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="m_btnCopyView">
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -162,6 +174,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="m_btnRemove">
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -202,6 +220,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="frameShape">
         <enum>QFrame::NoFrame</enum>
        </property>
@@ -227,7 +251,7 @@
      <x>0</x>
      <y>0</y>
      <width>861</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
