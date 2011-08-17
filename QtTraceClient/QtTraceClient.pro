@@ -144,6 +144,7 @@ INCLUDEPATH += ../NyxLibs/include/NyxNet
 INCLUDEPATH += ../TraceClientCore/include
 mac:INCLUDEPATH += ../NyxLibs/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
+mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 mac:CONFIG += x86
 mac:CONFIG -= x86_64
 CONFIG(debug, debug|release) {
