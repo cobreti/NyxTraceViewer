@@ -21,7 +21,7 @@ public:
     virtual void Stop();
     virtual bool IsRunning() const;
 
-    const CFeederSettings& Settings() const     { return *m_pSettings; }
+    const CFeederSettings& Settings() const         { return *m_pSettings; }
 
 protected:
 

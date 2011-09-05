@@ -4,6 +4,8 @@
 
 #include <Nyx.hpp>
 
+class CFeederSource;
+
 
 /**
  *
@@ -19,6 +21,7 @@ public:
         eTAPI_External,
         eTAPI_Dll
     };
+
 
 public:
     CFeederSettings();
@@ -40,6 +43,9 @@ public:
     const Nyx::UInt32&      IntervalBetweenBlocks() const       { return m_IntervalBetweenBlocks; }
     Nyx::UInt32&            IntervalBetweenBlocks()             { return m_IntervalBetweenBlocks; }
 
+    CFeederSource*          FeederSource() const                { return m_pFeederSource; }
+    CFeederSource*&         FeederSource()                      { return m_pFeederSource; }
+
     const CFeederSettings& operator = (const CFeederSettings& settings);
 
 protected:
@@ -49,6 +55,7 @@ protected:
     ETracesAPI              m_ApiType;
     Nyx::UInt32             m_TracesPerBlock;
     Nyx::UInt32             m_IntervalBetweenBlocks;
+    CFeederSource*          m_pFeederSource;
 };
 
 

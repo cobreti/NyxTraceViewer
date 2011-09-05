@@ -94,7 +94,7 @@ void TraceClientCore::CDbgTracesFeederCore::Thread_RunningLoop()
                 pTraceData->OwnerPool() = m_pOwnerPool;
 
 				refStringFormater->Format(L"%i", m_TracesCounter++);
-				pTraceData->TickCount() = refStringFormater->GetBuffer();
+				pTraceData->TickCount() = refStringFormater->GetFormattedString();
 
 				m_pTraceInserter->Insert(pTraceData);
 

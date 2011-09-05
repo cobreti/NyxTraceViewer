@@ -22,6 +22,10 @@ protected:
 
 protected:
 
+//    virtual void ReadSourceFile();
+
+protected:
+
     Nyx::CTraceCompositorRef        m_refTraceCompositor;
     int                             m_Index;
 };

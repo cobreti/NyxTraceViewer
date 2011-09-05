@@ -2,6 +2,7 @@
 #include "FeederEntryWidgetItem.hpp"
 
 #include <Nyx.hpp>
+#include <QFileDialog>
 
 /**
  *
@@ -19,9 +20,17 @@ CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WFlags flags)
                 this, SLOT(OnRemoveFeeder()));
     connect(    ui.btnStartStop, SIGNAL(clicked()),
                 this, SLOT(OnStartStopFeeder()));
+    connect(    ui.m_cbUseText, SIGNAL(clicked()),
+                this, SLOT(OnUseTextClicked()) );
+    connect(    ui.m_cbUseFile, SIGNAL(clicked()),
+                this, SLOT(OnUseFilenameClicked()));
+    connect(    ui.m_btnBrowseFile, SIGNAL(clicked()),
+                this, SLOT(OnBrowseForFile()));
 
     ui.btnAddChannel->setEnabled(true);
     ui.btnRemoveChannel->setEnabled(false);
+
+    ui.m_cbUseText->setChecked(true);
 
     InitDetailsPanel(NULL);
 }
@@ -80,9 +89,6 @@ void CTraceViewerFeeder::OnStartStopFeeder()
     }
     else
     {
-        //feeder.Settings().Text() = Nyx::CString::Alloc( ui.editTraceText->toPlainText().toStdWString().c_str() );
-        //feeder.Settings().Frequency() = ui.FrequencySpinBox->value();
-        //feeder.Settings().Name() = Nyx::CString::Alloc( pItem->text().toStdWString().c_str() );
         SaveSettings(pItem, feeder.Settings());
 
         feeder.Start();
@@ -102,6 +108,8 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
     if ( pItem->GetFeederEntry()->IsRunning() )
         return;
 
+    m_UserTextFeeder.SetText( ui.editTraceText->toPlainText().toStdWString().c_str());
+
     settings.Text() = ui.editTraceText->toPlainText().toStdWString().c_str();
     settings.TracesPerBlock() = ui.TracesPerBlockSpinBox->value();
     settings.IntervalBetweenBlocks() = ui.IntervalBetweenBlocksSpinBox->value();
@@ -113,6 +121,17 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
         settings.ApiType() = CFeederSettings::eTAPI_External;
     else if ( ui.btnDllSource->isChecked() )
         settings.ApiType() = CFeederSettings::eTAPI_Dll;
+
+    settings.FeederSource() = NULL;
+
+    if ( ui.m_cbUseText->isChecked() )
+    {
+        settings.FeederSource() = &m_UserTextFeeder;
+    }
+    else if ( ui.m_cbUseFile->isChecked() )
+    {
+        settings.FeederSource() = &m_TextFileFeeder;
+    }
 }
 
 
@@ -138,6 +157,47 @@ void CTraceViewerFeeder::OnChannelSelectionChanged(QListWidgetItem* pCurrent, QL
     {
         ui.btnRemoveChannel->setEnabled(false);
         InitDetailsPanel(NULL);
+    }
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::OnUseTextClicked()
+{
+    ui.m_cbUseText->setChecked(true);
+    ui.m_cbUseFile->setChecked(false);
+
+    EnableUserTextSection(true);
+    EnableFilenameSection(true);
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::OnUseFilenameClicked()
+{
+    ui.m_cbUseText->setChecked(false);
+    ui.m_cbUseFile->setChecked(true);
+
+    EnableUserTextSection(true);
+    EnableFilenameSection(true);
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::OnBrowseForFile()
+{
+    QString         filename = QFileDialog::getOpenFileName(this);
+
+    if ( !filename.isEmpty() )
+    {
+        ui.m_editFilename->setText(filename);
+        m_TextFileFeeder.SetFile(filename.toStdString().c_str());
     }
 }
 
@@ -209,4 +269,30 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
     ui.btnDllSource->setEnabled(false);
 #endif
     ui.editTraceText->setEnabled(bFieldsEnabled);
+
+    EnableUserTextSection(bFieldsEnabled);
+    EnableFilenameSection(bFieldsEnabled);
+    ui.m_cbUseFile->setEnabled(bFieldsEnabled);
+    ui.m_cbUseText->setEnabled(bFieldsEnabled);
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::EnableUserTextSection( bool bEnable )
+{
+    ui.editTraceText->setEnabled(bEnable && ui.m_cbUseText->isChecked());
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::EnableFilenameSection( bool bEnable )
+{
+    bool bChecked = ui.m_cbUseFile->isChecked();
+
+    ui.m_editFilename->setEnabled( bEnable && bChecked );
+    ui.m_btnBrowseFile->setEnabled( bEnable && bChecked );
 }

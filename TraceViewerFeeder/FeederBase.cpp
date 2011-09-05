@@ -6,8 +6,8 @@
  *
  */
 CFeederBase::CFeederBase() :
-m_bIsRunning(false),
-m_pSettings(NULL)
+    m_bIsRunning(false),
+    m_pSettings(NULL)
 {
     m_refEvent = Nyx::CEvent::Alloc();
     m_refThread = Nyx::CThread::Alloc();
@@ -64,8 +64,6 @@ void CFeederBase::RunningLoop()
     {
         for ( size_t count = 0; count < Settings().TracesPerBlock(); ++ count )
             OnSendTrace();
-        //if ( m_bIsRunning )
-        //    OnSendTrace();
 
         m_refEvent->WaitSignaled(Settings().IntervalBetweenBlocks());
     }

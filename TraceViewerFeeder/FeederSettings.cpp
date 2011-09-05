@@ -5,9 +5,10 @@
  *
  */
 CFeederSettings::CFeederSettings() :
-m_ApiType(eTAPI_Nyx),
-m_TracesPerBlock(100),
-m_IntervalBetweenBlocks(1000)
+    m_ApiType(eTAPI_Nyx),
+    m_TracesPerBlock(100),
+    m_IntervalBetweenBlocks(1000),
+    m_pFeederSource(NULL)
 {
 }
 
@@ -16,11 +17,12 @@ m_IntervalBetweenBlocks(1000)
  *
  */
 CFeederSettings::CFeederSettings(const CFeederSettings& settings) :
-m_Name(settings.m_Name),
-m_Text(settings.m_Text),
-m_ApiType(settings.m_ApiType),
-m_TracesPerBlock(settings.m_TracesPerBlock),
-m_IntervalBetweenBlocks(settings.m_IntervalBetweenBlocks)
+    m_Name(settings.m_Name),
+    m_Text(settings.m_Text),
+    m_ApiType(settings.m_ApiType),
+    m_TracesPerBlock(settings.m_TracesPerBlock),
+    m_IntervalBetweenBlocks(settings.m_IntervalBetweenBlocks),
+    m_pFeederSource(settings.m_pFeederSource)
 {
 }
 
@@ -45,6 +47,7 @@ const CFeederSettings& CFeederSettings::operator = (const CFeederSettings& setti
         m_ApiType = settings.m_ApiType;
         m_TracesPerBlock = settings.m_TracesPerBlock;
         m_IntervalBetweenBlocks = settings.m_IntervalBetweenBlocks;
+        m_pFeederSource = settings.m_pFeederSource;
     }
 
     return *this;

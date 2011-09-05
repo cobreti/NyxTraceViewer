@@ -1,9 +1,10 @@
 #include <NyxNet.hpp>
 #include <NyxNetPipeTraceOutput.hpp>
+#include <NyxAnsiFile.hpp>
 
 #include "NyxFeeder.hpp"
 #include "FeederSettings.hpp"
-
+#include "FeederSource.hpp"
 
 /**
  *
@@ -50,9 +51,14 @@ void CNyxFeeder::OnEnd()
  */
 void CNyxFeeder::OnSendTrace()
 {
-    Nyx::CTraceStream(0x0, m_refTraceCompositor) << Nyx::CTF_Text( Settings().Text().c_str() )
-            << Nyx::CTF_Text(L" [")
-            << Nyx::CTF_Int(++m_Index)
-            << Nyx::CTF_Text(L"]");
+    if ( Settings().FeederSource() )
+    {
+        Nyx::CWString   text;
+
+        Settings().FeederSource()->GetLine(text);
+
+        Nyx::CTraceStream(0x0, m_refTraceCompositor) << Nyx::CTF_Text( text.c_str() );
+    }
 }
+
 

@@ -9,22 +9,6 @@ QT       += core gui
 TARGET = TraceViewerFeeder
 TEMPLATE = app
 
-HEADERS += \
-    ../NyxFeeder.hpp \
-    ../FeederSettings.hpp \
-    ../FeederEntryWidgetItem.hpp \
-    ../FeederEntry.hpp \
-    ../FeederBase.hpp \
-    ../TraceViewerFeeder.h
-
-SOURCES += \
-    ../NyxFeeder.cpp \
-    ../main.cpp \
-    ../FeederSettings.cpp \
-    ../FeederEntryWidgetItem.cpp \
-    ../FeederEntry.cpp \
-    ../FeederBase.cpp \
-    ../TraceViewerFeeder.cpp
 
 FORMS += \
     ../traceviewerfeeder.ui
@@ -33,6 +17,7 @@ INCLUDEPATH += ../../NyxLibs/include
 INCLUDEPATH += ../../NyxLibs/include/NyxNet
 mac:INCLUDEPATH += ../../NyxLibs/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
+mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 mac:CONFIG += x86
 mac:CONFIG -= x86_64
 
@@ -57,3 +42,26 @@ else {
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }
+
+HEADERS += \
+    ../TraceViewerFeeder.h \
+    ../NyxFeeder.hpp \
+    ../FeederSettings.hpp \
+    ../FeederEntryWidgetItem.hpp \
+    ../FeederEntry.hpp \
+    ../FeederBase.hpp \
+    ../FeederSource.hpp \
+    ../FeederSource_UserText.hpp \
+    ../FeederSource_TextFile.hpp
+
+SOURCES += \
+    ../TraceViewerFeeder.cpp \
+    ../NyxFeeder.cpp \
+    ../main.cpp \
+    ../FeederSettings.cpp \
+    ../FeederEntryWidgetItem.cpp \
+    ../FeederEntry.cpp \
+    ../FeederBase.cpp \
+    ../FeederSource.cpp \
+    ../FeederSource_UserText.cpp \
+    ../FeederSource_TextFile.cpp

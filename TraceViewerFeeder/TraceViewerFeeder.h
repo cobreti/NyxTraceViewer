@@ -3,6 +3,9 @@
 
 #include <QtGui/QMainWindow>
 #include "ui_traceviewerfeeder.h"
+#include "FeederSource_UserText.hpp"
+#include "FeederSource_TextFile.hpp"
+
 
 class CFeederEntry;
 class CFeederSettings;
@@ -26,15 +29,23 @@ public slots:
     void OnStartStopFeeder();
     void SaveSettings( CFeederEntryWidgetItem* pItem, CFeederSettings& settings );
     void OnChannelSelectionChanged( QListWidgetItem* pCurrent, QListWidgetItem* pPrevious );
+    void OnUseTextClicked();
+    void OnUseFilenameClicked();
+    void OnBrowseForFile();
 
 protected:
 
 protected:
 
     void InitDetailsPanel( CFeederEntry* pEntry );
+    void EnableUserTextSection( bool bEnable );
+    void EnableFilenameSection( bool bEnable );
 
 private:
     Ui::CTraceViewerFeederClass ui;
+
+    CFeederSource_UserText      m_UserTextFeeder;
+    CFeederSource_TextFile      m_TextFileFeeder;
 };
 
 
