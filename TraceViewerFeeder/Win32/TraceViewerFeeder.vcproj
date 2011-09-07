@@ -242,6 +242,30 @@
 				>
 			</File>
 			<File
+				RelativePath="..\FeederSource.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\FeederSource.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\FeederSource_TextFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\FeederSource_TextFile.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\FeederSource_UserText.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\FeederSource_UserText.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\main.cpp"
 				>
 			</File>
