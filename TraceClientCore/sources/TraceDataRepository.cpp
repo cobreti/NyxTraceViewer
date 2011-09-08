@@ -2,6 +2,8 @@
 #include "TraceInserter.hpp"
 #include "RepositoryObserver.hpp"
 
+#include <ctime>
+
 
 /********************************************************/
 /*		Repository										*/
@@ -111,8 +113,11 @@ namespace TraceClientCore
         if ( m_Traces.empty() )
             return;
 
+        const clock_t                       kThreshold = CLOCKS_PER_SEC / 5;
+
         TraceDataList::const_iterator       EndPos = m_Traces.end();
         ObserverDataTable::iterator         posObserver = m_ObserversToUpdate.begin();
+        clock_t                             start_clock;
 
         -- EndPos;
 
@@ -127,7 +132,9 @@ namespace TraceClientCore
                 else
                     ++ pos;
 
-                while ( pos != EndPos )
+                start_clock = clock();
+
+                while ( pos != EndPos && clock() - start_clock < kThreshold )
                 {
                     posObserver->first->Insert(*pos);
                     ++ pos;

@@ -35,6 +35,7 @@ public slots:
     void OnAddView();
     void OnCopyView();
     void OnViewItemChanged( QTreeWidgetItem* pItem, int );
+    void OnToggleTreePanel();
 
 protected:
 
@@ -45,6 +46,7 @@ protected:
     virtual CTracesDocument* CreateNewDocument(  const QString& rDocumentName );
     virtual CTracesView* CreateNewView( CTracesDocument* pDoc, const QString& ViewName, QTreeWidgetItem* pParent = NULL );
     virtual void SelectItemWithView( CTracesView* pView );
+    void ShowLeftPanel(bool bShow);
 
 private:
     Ui::MainWindow *ui;
@@ -55,6 +57,7 @@ private:
     CViewPage*                  m_pViewPage;
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
     CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
+    int                         m_LeftSplitterAreaWidth;
 };
 
 #endif // MAINWINDOW_H

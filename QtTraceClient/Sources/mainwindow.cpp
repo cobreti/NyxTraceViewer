@@ -13,6 +13,7 @@
 #include <QDesktopWidget>
 #include <QResizeEvent>
 #include <QFile>
+#include <QFrame>
 
 /**
  *
@@ -22,7 +23,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_nNextDocumentId(1),
     m_nNextViewId(1),
-    m_pViewPage(NULL)
+    m_pViewPage(NULL),
+    m_LeftSplitterAreaWidth(50)
 {
     ui->setupUi(this);
 
@@ -30,6 +32,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
     connect(ui->m_btnAddView, SIGNAL(clicked()), this, SLOT(OnAddView()));
     connect(ui->m_btnCopyView, SIGNAL(clicked()), this, SLOT(OnCopyView()));
     connect(ui->m_ViewsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnViewItemChanged(QTreeWidgetItem*, int )));
+    connect(ui->m_btnHidePanel, SIGNAL(clicked()), this, SLOT(OnToggleTreePanel()));
 
     m_pViewPage = new CViewPage(ui->m_ContentFrame);
     ui->m_ContentFrame->layout()->addWidget(m_pViewPage);
@@ -56,11 +59,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
     ui->m_btnRemove->setEnabled(false);
 
-    QList<int>  widths;
-
-//    widths.append(10);
-//    widths.append(200);
-//    ui->splitter->setSizes(widths);
+    ShowLeftPanel(false);
 }
 
 
@@ -236,6 +235,15 @@ void CMainWindow::OnViewItemChanged( QTreeWidgetItem* pItem, int )
 /**
  *
  */
+void CMainWindow::OnToggleTreePanel()
+{
+    ShowLeftPanel( !ui->m_ViewsPanel->isVisible());
+}
+
+
+/**
+ *
+ */
 CTracesDocument* CMainWindow::CreateNewDocument( const QString& rDocumentName )
 {
     CTracesDocument*                pDocument = new CTracesDocument(this, rDocumentName);
@@ -305,5 +313,35 @@ void CMainWindow::SelectItemWithView( CTracesView* pView )
             pViewItem->setSelected(true);
             break;
         }
+    }
+}
+
+
+/**
+ *
+ */
+void CMainWindow::ShowLeftPanel(bool bShow)
+{
+    if ( bShow )
+    {
+        QList<int>  Sizes;
+        Sizes.push_back(m_LeftSplitterAreaWidth);
+
+        ui->splitter->setSizes(Sizes);
+
+        ui->m_ViewsPanel->setVisible(true);
+        ui->m_btnHidePanel->setText("<");
+    }
+    else
+    {
+        m_LeftSplitterAreaWidth = ui->splitter->sizes()[0];
+
+        QList<int>  Sizes;
+        Sizes.push_back(ui->m_btnHidePanel->size().width());
+
+        ui->m_ViewsPanel->setVisible(false);
+        ui->m_btnHidePanel->setText(">");
+
+        ui->splitter->setSizes(Sizes);
     }
 }
