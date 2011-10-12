@@ -167,8 +167,10 @@ void CTracesView::OnVertSliderPosChanged(int value)
     if ( m_ItemsWalker.MoveTo(value) )
     {
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
-        update();
+        //update();
     }
+
+    update();
 }
 
 
