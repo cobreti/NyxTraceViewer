@@ -8,6 +8,7 @@
 #include "MainWindow/ViewPage.hpp"
 #include "PipeTraceFeeder.hpp"
 #include "PoolsUpdateClock.hpp"
+#include "TraceClientApp.hpp"
 
 #include <QCloseEvent>
 #include <QDesktopWidget>
@@ -32,7 +33,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
     connect(ui->m_btnAddView, SIGNAL(clicked()), this, SLOT(OnAddView()));
     connect(ui->m_btnCopyView, SIGNAL(clicked()), this, SLOT(OnCopyView()));
     connect(ui->m_ViewsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnViewItemChanged(QTreeWidgetItem*, int )));
-    connect(ui->m_btnHidePanel, SIGNAL(clicked()), this, SLOT(OnToggleTreePanel()));
 
     m_pViewPage = new CViewPage(ui->m_ContentFrame);
     ui->m_ContentFrame->layout()->addWidget(m_pViewPage);
@@ -60,6 +60,15 @@ CMainWindow::CMainWindow(QWidget *parent) :
     ui->m_btnRemove->setEnabled(false);
 
     ShowLeftPanel(false);
+
+    InitToolbar();
+
+    QString     caption = windowTitle();
+    caption += " (";
+    caption += CTraceClientApp::Instance().GetVersion();
+    caption += ")";
+
+    setWindowTitle( caption );
 }
 
 
@@ -330,18 +339,32 @@ void CMainWindow::ShowLeftPanel(bool bShow)
         ui->splitter->setSizes(Sizes);
 
         ui->m_ViewsPanel->setVisible(true);
-        ui->m_btnHidePanel->setText("<");
     }
     else
     {
         m_LeftSplitterAreaWidth = ui->splitter->sizes()[0];
 
         QList<int>  Sizes;
-        Sizes.push_back(ui->m_btnHidePanel->size().width());
+        Sizes.push_back(0/*ui->m_btnHidePanel->size().width()*/);
 
         ui->m_ViewsPanel->setVisible(false);
-        ui->m_btnHidePanel->setText(">");
 
         ui->splitter->setSizes(Sizes);
     }
+}
+
+
+/**
+ *
+ */
+void CMainWindow::InitToolbar()
+{
+    QToolButton*        pLeftPanelBtn = new QToolButton( ui->mainToolBar );
+
+    pLeftPanelBtn->setText(">");
+    pLeftPanelBtn->setCheckable(true);
+
+    connect(pLeftPanelBtn, SIGNAL(clicked()), this, SLOT(OnToggleTreePanel()));
+
+    ui->mainToolBar->addWidget(pLeftPanelBtn);
 }

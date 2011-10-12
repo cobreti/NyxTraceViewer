@@ -48,6 +48,8 @@ protected:
     virtual void SelectItemWithView( CTracesView* pView );
     void ShowLeftPanel(bool bShow);
 
+    void InitToolbar();
+
 private:
     Ui::MainWindow *ui;
 

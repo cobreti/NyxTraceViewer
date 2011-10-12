@@ -87,6 +87,15 @@ void CTraceClientApp::Destroy()
 /**
  *
  */
+const char* CTraceClientApp::GetVersion() const
+{
+    return "0.0.0.1";
+}
+
+
+/**
+ *
+ */
 void CTraceClientApp::initDefaultSettings()
 {
     InitDefaultDrawSettings();

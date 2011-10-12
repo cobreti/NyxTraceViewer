@@ -1728,26 +1728,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\File-View-icon.png"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
@@ -1768,7 +1748,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\Icons\New-Document-icon.png"
+				RelativePath=".\UI\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1789,6 +1769,26 @@
 			</File>
 			<File
 				RelativePath=".\UI\Icons\New-Document-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Icons\New-Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1958,26 +1958,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\UI\Icons\View-icon.png"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\Icons\View-icon.png"
 				>
 				<FileConfiguration
@@ -1997,7 +1977,31 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\UI\Icons\View-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
 		</Filter>
+		<File
+			RelativePath=".\Icons\App-icon.ico"
+			>
+		</File>
 	</Files>
 	<Globals>
 		<Global

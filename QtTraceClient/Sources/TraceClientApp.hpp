@@ -25,6 +25,8 @@ public:
     const CAppSettings&     AppSettings() const         { return m_AppSettings; }
     CAppSettings&           AppSettings()               { return m_AppSettings; }
 
+    const char* GetVersion() const;
+
 protected:
 
     void initDefaultSettings();

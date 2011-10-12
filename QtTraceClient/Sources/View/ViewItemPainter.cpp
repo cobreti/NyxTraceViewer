@@ -1,6 +1,8 @@
 #include "ViewItemPainter.hpp"
 
 
+static char* HeightCalcString = "abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
 /**
  *
  */
@@ -54,7 +56,7 @@ void CViewItemPainter::Display(const CViewSettings&, CDrawViewItemState&, CViewI
 void CViewItemPainter::SetFont( const QFont& font )
 {
     m_Font = font;
-    m_MaxFontHeight = QFontMetricsF(m_Font).boundingRect("Ap").height() * 1.2;
+    m_MaxFontHeight = QFontMetricsF(m_Font).boundingRect(HeightCalcString).height() * 1.2;
 }
 
 
@@ -64,5 +66,5 @@ void CViewItemPainter::SetFont( const QFont& font )
 CViewItemPainter::CViewItemPainter() :
     m_MaxFontHeight(0)
 {
-    m_MaxFontHeight = QFontMetricsF(m_Font).boundingRect("Ap").height() * 1.2;
+    m_MaxFontHeight = QFontMetricsF(m_Font).boundingRect(HeightCalcString).height() * 1.2;
 }
