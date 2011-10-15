@@ -10,7 +10,7 @@
 #define TRACECLIENTLINK_API __declspec(dllimport)
 #endif
 
-extern "C" __declspec( dllexport ) unsigned int CreateTraceLink( const char* szName, int nType );
-extern "C" __declspec( dllexport ) void ReleaseTraceLink( const unsigned int& id );
-extern "C" __declspec( dllexport ) void WriteTraceA( const unsigned int& id, const char* szData, va_list args );
-extern "C" __declspec( dllexport ) void WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );
+extern "C" __declspec( dllexport ) unsigned int __cdecl CreateTraceLink( const char* szName, int nType );
+extern "C" __declspec( dllexport ) void __cdecl ReleaseTraceLink( const unsigned int& id );
+extern "C" __declspec( dllexport ) void __cdecl WriteTraceA( const unsigned int& id, const char* szData, va_list args );
+extern "C" __declspec( dllexport ) void __cdecl WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );

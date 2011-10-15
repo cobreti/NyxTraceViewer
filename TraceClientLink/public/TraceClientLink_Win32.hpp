@@ -6,10 +6,10 @@
 
 class CTraceClientLink_Win32 : public CTraceClientLink
 {
-	typedef unsigned int (*PFCTCreateTraceLink)( const char* szName, int nType );
-	typedef void (*PFCTReleaseTraceLink)( const unsigned int& id );
-	typedef void (*PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
-	typedef void (*PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
+	typedef unsigned int (__cdecl *PFCTCreateTraceLink)( const char* szName, int nType );
+	typedef void (__cdecl *PFCTReleaseTraceLink)( const unsigned int& id );
+	typedef void (__cdecl *PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
+	typedef void (__cdecl *PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
 
 public:
 

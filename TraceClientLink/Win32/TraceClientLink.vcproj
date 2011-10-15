@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(NyxLibs)\NyxBase\include&quot;;&quot;$(NyxLibs)\NyxBase\include\win32&quot;;&quot;$(NyxLibs)\NyxNet\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(NyxLibs)\include&quot;;&quot;$(NyxLibs)\include\win32&quot;;&quot;$(NyxLibs)\include\NyxNet&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;TRACECLIENTLINK_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
 				OutputFile="..\libs\win32\debug\$(ProjectName).dll"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(NyxLibs)\NyxBase\lib\win32\debug&quot;;&quot;$(NyxLibs)\NyxNet\lib\win32\debug&quot;"
+				AdditionalLibraryDirectories="&quot;$(NyxLibs)\lib\win32\debug&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -121,7 +121,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(NyxLibs)\NyxBase\include&quot;;&quot;$(NyxLibs)\NyxBase\include\win32&quot;;&quot;$(NyxLibs)\NyxNet\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(NyxLibs)\include&quot;;&quot;$(NyxLibs)\include\win32&quot;;&quot;$(NyxLibs)\include\NyxNet&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;TRACECLIENTLINK_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -143,7 +143,7 @@
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
 				OutputFile="..\libs\win32\release\$(ProjectName).dll"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(NyxLibs)\NyxBase\lib\win32\release&quot;;&quot;$(NyxLibs)\NyxNet\lib\win32\release&quot;"
+				AdditionalLibraryDirectories="&quot;$(NyxLibs)\lib\win32\release&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"

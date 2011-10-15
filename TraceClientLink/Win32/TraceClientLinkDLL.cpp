@@ -93,7 +93,7 @@ void OnProcessDetach()
 /**
  *
  */
-unsigned int CreateTraceLink( const char* szName, int nType )
+unsigned int __cdecl CreateTraceLink( const char* szName, int nType )
 {
     Nyx::ETraceCompositorCharSet    eCharSet = Nyx::eTCCS_Ansi;
 	Nyx::CTraceCompositorRef		refTraceCompositor;
@@ -115,7 +115,7 @@ unsigned int CreateTraceLink( const char* szName, int nType )
 /**
  *
  */
-void ReleaseTraceLink( const unsigned int& id )
+void __cdecl ReleaseTraceLink( const unsigned int& id )
 {
 	TraceCompositorsMap::iterator		pos = g_TraceCompositorsTable.find(id);
 
@@ -126,7 +126,7 @@ void ReleaseTraceLink( const unsigned int& id )
 /**
  *
  */
-void WriteTraceA( const unsigned int& id, const char* szData, va_list args )
+void __cdecl WriteTraceA( const unsigned int& id, const char* szData, va_list args )
 {
     Nyx::TLock<Nyx::CMutex>     Lock(g_refMutex, true);
 
@@ -147,7 +147,7 @@ void WriteTraceA( const unsigned int& id, const char* szData, va_list args )
 /**
  *
  */
-void WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args )
+void __cdecl WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args )
 {
     Nyx::TLock<Nyx::CMutex>     Lock(g_refMutex, true);
 
