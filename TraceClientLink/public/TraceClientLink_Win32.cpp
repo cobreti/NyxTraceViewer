@@ -2,18 +2,18 @@
 #include <stdio.h>
 
 
-extern "C" __declspec(dllexport) void TraceClientLinkDll_Init(const char* szTraceLinkName, int charType);
-extern "C" __declspec(dllexport) void TraceClientLinkDll_Release();
+extern "C" __declspec(dllexport) void __cdecl TraceClientLinkDll_Init(const char* szTraceLinkName, int charType);
+extern "C" __declspec(dllexport) void __cdecl TraceClientLinkDll_Release();
 
 /**
  *
  */
-void TraceClientLinkDll_Init(const char* szTraceLinkName, int charType)
+void __cdecl TraceClientLinkDll_Init(const char* szTraceLinkName, int charType)
 {
     CTraceClientLink::CreateInstance(szTraceLinkName, (CTraceClientLink::ECharType)charType);
 }
 
-void TraceClientLinkDll_Release()
+void __cdecl TraceClientLinkDll_Release()
 {
    CTraceClientLink::ReleaseInstance();
 }
@@ -53,7 +53,7 @@ void CTraceClientLink::CreateInstance(const char* szTraceLinkName, CTraceClientL
  */
 void CTraceClientLink::CreateDllInstance(HINSTANCE hDll, const char* szTraceLinkName, CTraceClientLink::ECharType charType)
 {
-   typedef void (*TraceClientLinkDll_InitProc)(const char* szTraceLinkName, int);
+   typedef void (__cdecl *TraceClientLinkDll_InitProc)(const char* szTraceLinkName, int);
 
    TraceClientLinkDll_InitProc         InitProc = (TraceClientLinkDll_InitProc)GetProcAddress(hDll, "_TraceClientLinkDll_Init");
 
@@ -73,7 +73,7 @@ void CTraceClientLink::CreateDllInstance(HINSTANCE hDll, const char* szTraceLink
  */
 void CTraceClientLink::ReleaseDllInstance(HINSTANCE hDll)
 {
-   typedef void (*TraceClientLinkDll_ReleaseProc)();
+   typedef void (__cdecl *TraceClientLinkDll_ReleaseProc)();
 
    TraceClientLinkDll_ReleaseProc         ReleaseProc = (TraceClientLinkDll_ReleaseProc)GetProcAddress(hDll, "_TraceClientLinkDll_Release");
 
