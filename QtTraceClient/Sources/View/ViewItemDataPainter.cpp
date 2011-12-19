@@ -42,8 +42,9 @@ void CViewItemDataPainter::EvaluateSize(CViewSettings &settings, CViewItem &item
 {
     CViewItem_TraceData&        rItemData = static_cast<CViewItem_TraceData&>(item);
     QString                     text = QString().fromWCharArray(rItemData.TraceData()->Data().c_str());
+    const Nyx::CRange&          range = rItemData.TextRange();
 
-    CViewItemTextPainter::EvaluateSize(settings, item, text);
+    CViewItemTextPainter::EvaluateSize(settings, item, text.mid(range.Start(), range.Length()));
 }
 
 
@@ -56,8 +57,9 @@ void CViewItemDataPainter::Display( const CViewSettings &settings,
 {
     CViewItem_TraceData&        rItemData = static_cast<CViewItem_TraceData&>(item);
     QString                     text = QString().fromWCharArray(rItemData.TraceData()->Data().c_str());
+    const Nyx::CRange&          range = rItemData.TextRange();
 
-    CViewItemTextPainter::Display(settings, drawstate, item, text);
+    CViewItemTextPainter::Display(settings, drawstate, item, text.mid(range.Start(), range.Length()));
 }
 
 

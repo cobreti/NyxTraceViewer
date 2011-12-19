@@ -54,7 +54,15 @@ void CViewItemLineNumberPainter::Display( const CViewSettings &settings,
                                             CDrawViewItemState &drawstate,
                                             CViewItem &item )
 {
-    QString                     text = QString::number(drawstate.LineNumber());
+    if ( item.GetOwner() == &item )
+    {
+        QString                     text = QString::number(drawstate.LineNumber());
 
-    CViewItemTextPainter::Display(settings, drawstate, item, text);
+        CViewItemTextPainter::Display(settings, drawstate, item, text);
+    }
+    else
+    {
+        const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_LineNumber];
+        drawstate.TextPos().rx() += rColSettings.GetWidth();
+    }
 }

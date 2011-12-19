@@ -7,7 +7,7 @@
  *
  */
 CViewItem_TraceData::CViewItem_TraceData(Nyx::CMemoryPool* pMemPool, const TraceClientCore::CTraceData* pTraceData ) :
-ViewItemMemPoolObj(pMemPool),
+CViewItemMemPoolObj(pMemPool),
 m_pTraceData(pTraceData)
 {
     ApproximateHeight();
@@ -88,8 +88,8 @@ const Nyx::CWString& CViewItem_TraceData::TickCount() const
  */
 void CViewItem_TraceData::ApproximateHeight()
 {
-    size_t      CRCount = m_pTraceData->Data().CountOccurencesOf(L'\n') + 1;
-    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() * CRCount );
+//    size_t      CRCount = m_pTraceData->Data().CountOccurencesOf(L'\n') + 1;
+    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() /** CRCount*/ );
 }
 
 

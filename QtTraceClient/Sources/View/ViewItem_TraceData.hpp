@@ -3,13 +3,14 @@
 
 #include <Nyx.hpp>
 #include <NyxMemPoolObj.hpp>
+#include <NyxRange.hpp>
 #include "ViewItem.hpp"
 #include "TraceData.hpp"
 
 /**
  *
  */
-class CViewItem_TraceData : public ViewItemMemPoolObj
+class CViewItem_TraceData : public CViewItemMemPoolObj
 {
 public:
     CViewItem_TraceData(Nyx::CMemoryPool* pMemPool, const TraceClientCore::CTraceData* pTraceData);
@@ -24,13 +25,17 @@ public:
     virtual const Nyx::CWString& ModuleName() const;
     virtual const Nyx::CWString& TickCount() const;
 
+    const Nyx::CRange&      TextRange() const           { return m_TextRange; }
+    Nyx::CRange&            TextRange()                 { return m_TextRange; }
+
 protected:
 
     void ApproximateHeight();
 
 protected:
 
-    const TraceClientCore::CTraceData*           m_pTraceData;
+    const TraceClientCore::CTraceData*          m_pTraceData;
+    Nyx::CRange                                 m_TextRange;
 };
 
 #endif // __VIEWITEM_TRACEDATA_HPP__

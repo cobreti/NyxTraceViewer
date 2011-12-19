@@ -201,11 +201,17 @@ bool CViewItemsWalker::MoveToNext()
     if ( pos.Valid() )
     {
         pos.Y() = m_Pos.Y() + CurrentLineHeight;
+
+        CViewItem*  pNewItem = pos.Item();
+
+        if ( pNewItem->GetOwner() != Item()->GetOwner() )
+            ++ m_LineNumber;
+
         m_Pos = pos;
 
         m_Nodes[pos.ModuleNodeId()]->MoveToNext();
 
-        ++ m_LineNumber;
+//        ++ m_LineNumber;
         return true;
     }
 
@@ -253,10 +259,16 @@ bool CViewItemsWalker::MoveToPrevious()
     if ( pos.Valid() )
     {
         pos.Y() = m_Pos.Y() - m_Pos.Item()->GetSize().height();
+
+        CViewItem*  pNewItem = pos.Item();
+
+        if ( pNewItem->GetOwner() != Item()->GetOwner() )
+            -- m_LineNumber;
+
         m_Pos = pos;
 
         m_Nodes[pos.ModuleNodeId()]->MoveToPrevious();
-        -- m_LineNumber;
+//        -- m_LineNumber;
         return true;
     }
 

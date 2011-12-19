@@ -9,7 +9,8 @@ static Nyx::CWString g_EmptyString(L"");
  *
  */
 CViewItem::CViewItem() :
-m_Id(0)
+m_Id(0),
+m_pOwner(NULL)
 {
 }
 

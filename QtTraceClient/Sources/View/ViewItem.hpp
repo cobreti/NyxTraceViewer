@@ -62,6 +62,9 @@ public:
 
     virtual const Nyx::CWString& TickCount() const;
 
+    void SetOwner( CViewItem* pOwner )          { m_pOwner = pOwner; }
+    CViewItem* GetOwner() const                 { return m_pOwner; }
+
 protected:
 
     typedef     std::bitset<eVIF_Count>         FlagsSet;
@@ -72,13 +75,23 @@ protected:
 //    CViewItemPainterCollection      m_Painters;
     FlagsSet                        m_Flags;
     size_t                          m_Id;
+    CViewItem*                      m_pOwner;
 };
 
 
 /**
  *
  */
-typedef     Nyx::CMemPoolObj<CViewItem>     ViewItemMemPoolObj;
+class CViewItemMemPoolObj : public Nyx::CMemPoolObj<CViewItem>
+{
+    typedef     Nyx::CMemPoolObj<CViewItem>     Super;
+
+public:
+    CViewItemMemPoolObj(Nyx::CMemoryPool* pMemPool) : Super(pMemPool) {}
+    virtual ~CViewItemMemPoolObj() {}
+};
+
+//typedef     Nyx::CMemPoolObj<CViewItem>     ViewItemMemPoolObj;
 
 
 #endif // __VIEWITEM_HPP__

@@ -56,9 +56,17 @@ void CViewItemThreadIdPainter::Display(const CViewSettings &settings, CDrawViewI
 
     if ( rDataItem.TraceData()->Type() == TraceClientCore::CTraceData::eTT_User )
     {
-        QString                         text = QString().fromWCharArray(rDataItem.TraceData()->ThreadId().c_str());
+        if ( item.GetOwner() == &item )
+        {
+            QString                         text = QString().fromWCharArray(rDataItem.TraceData()->ThreadId().c_str());
 
-        CViewItemTextPainter::Display(settings, drawstate, item, text);
+            CViewItemTextPainter::Display(settings, drawstate, item, text);
+        }
+        else
+        {
+            const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_ThreadId];
+            drawstate.TextPos().rx() += rColSettings.GetWidth();
+        }
     }
     else
     {

@@ -57,24 +57,16 @@ void CViewItemTickCountPainter::Display(const CViewSettings &settings, CDrawView
 {
     CViewItem_TraceData&        rItemData = static_cast<CViewItem_TraceData&>(item);
 
-//    if ( rItemData.TraceData()->Type() == TraceClientCore::CTraceData::eTT_User ||
-//         rItemData.TraceData()->Type() == TraceClientCore::CTraceData::eTT_ConnectionStatus_Connection )
-//    {
+    if ( item.GetOwner() == &item )
+    {
         QString                     text = QString().fromWCharArray(rItemData.TraceData()->TickCount().c_str());
 
         CViewItemTextPainter::Display(settings, drawstate, item, text);
-//    }
-//    else
-//    {
-//        const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_TickCount];
-//        QPainter&                       rPainter = drawstate.Painter();
-
-//        rPainter.drawLine(  drawstate.TextPos().x() + rColSettings.Margins().left(),
-//                            drawstate.TextPos().y() + item.GetSize().height() / 2,
-//                            drawstate.TextPos().x() + rColSettings.GetWidth() - rColSettings.Margins().width(),
-//                            drawstate.TextPos().y() + item.GetSize().height() / 2 );
-
-//        drawstate.TextPos().rx() += rColSettings.GetWidth();
-//    }
+    }
+    else
+    {
+        const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_TickCount];
+        drawstate.TextPos().rx() += rColSettings.GetWidth();
+    }
 }
 
