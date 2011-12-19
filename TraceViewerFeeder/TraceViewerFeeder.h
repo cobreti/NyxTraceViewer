@@ -44,8 +44,8 @@ protected:
 private:
     Ui::CTraceViewerFeederClass ui;
 
-    CFeederSource_UserText      m_UserTextFeeder;
-    CFeederSource_TextFile      m_TextFileFeeder;
+    CFeederSource_UserText*      m_pUserTextFeeder;
+    CFeederSource_TextFile*      m_pTextFileFeeder;
 };
 
 

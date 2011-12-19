@@ -8,7 +8,9 @@
  *
  */
 CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WFlags flags)
-    : QMainWindow(parent, flags)
+    : QMainWindow(parent, flags),
+      m_pUserTextFeeder(NULL),
+      m_pTextFileFeeder(NULL)
 {
     ui.setupUi(this);
 
@@ -108,7 +110,8 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
     if ( pItem->GetFeederEntry()->IsRunning() )
         return;
 
-    m_UserTextFeeder.SetText( ui.editTraceText->toPlainText().toStdWString().c_str());
+    if ( m_pUserTextFeeder )
+        m_pUserTextFeeder->SetText( ui.editTraceText->toPlainText().toStdWString().c_str());
 
     settings.Text() = ui.editTraceText->toPlainText().toStdWString().c_str();
     settings.TracesPerBlock() = ui.TracesPerBlockSpinBox->value();
@@ -126,11 +129,11 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
 
     if ( ui.m_cbUseText->isChecked() )
     {
-        settings.FeederSource() = &m_UserTextFeeder;
+        settings.FeederSource() = m_pUserTextFeeder;
     }
     else if ( ui.m_cbUseFile->isChecked() )
     {
-        settings.FeederSource() = &m_TextFileFeeder;
+        settings.FeederSource() = m_pTextFileFeeder;
     }
 }
 
@@ -146,11 +149,20 @@ void CTraceViewerFeeder::OnChannelSelectionChanged(QListWidgetItem* pCurrent, QL
         SaveSettings(pItem, pItem->GetFeederEntry()->Settings() );
     }
 
+    m_pTextFileFeeder = NULL;
+    m_pUserTextFeeder = NULL;
+
     if ( pCurrent )
     {
+        CFeederEntryWidgetItem* pItem = static_cast<CFeederEntryWidgetItem*>(pCurrent);
         ui.btnRemoveChannel->setEnabled(true);
 
-        CFeederEntryWidgetItem*     pItem = static_cast<CFeederEntryWidgetItem*>(pCurrent);
+        if ( !pItem->GetFeederEntry()->IsRunning() )
+        {
+            m_pTextFileFeeder = &pItem->GetTextFileFeeder();
+            m_pUserTextFeeder = &pItem->GetUserTextFeeder();
+        }
+
         InitDetailsPanel(pItem->GetFeederEntry());
     }
     else
@@ -197,7 +209,7 @@ void CTraceViewerFeeder::OnBrowseForFile()
     if ( !filename.isEmpty() )
     {
         ui.m_editFilename->setText(filename);
-        m_TextFileFeeder.SetFile(filename.toStdString().c_str());
+        m_pTextFileFeeder->SetFile(filename.toStdString().c_str());
     }
 }
 
