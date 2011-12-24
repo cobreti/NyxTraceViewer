@@ -18,27 +18,25 @@ INCLUDEPATH += ../../NyxLibs/include/NyxNet
 mac:INCLUDEPATH += ../../NyxLibs/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
-mac:CONFIG += x86
-mac:CONFIG -= x86_64
 
 CONFIG(debug, debug|release) {
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Debug_32/libNyxBase.a
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Debug_32/libNyxNet.a
+    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Debug_Universal_32_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Debug_Universal_32_64/libNyxNet.a
     mac:LIBS += -lNyxBase \
-        -L../../NyxLibs/lib/OSX/Debug_32
+        -L../../NyxLibs/lib/OSX/Debug_Universal_32_64
     mac:LIBS += -lNyxNet \
-        -L../../NyxLibs/lib/OSX/Debug_32
+        -L../../NyxLibs/lib/OSX/Debug_Universal_32_64
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
 }
 else {
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Release_32/libNyxBase.a
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Release_32/libNyxNet.a
+    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Release_Universal_32_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Release_Universal_32_64/libNyxNet.a
     mac:LIBS += -lNyxBase \
-        -L../../NyxLibs/lib/OSX/Release_32
+        -L../../NyxLibs/lib/OSX/Release_Universal_32_64
     mac:LIBS += -lNyxNet \
-        -L../../NyxLibs/lib/OSX/Release_32
+        -L../../NyxLibs/lib/OSX/Release_Universal_32_64
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }

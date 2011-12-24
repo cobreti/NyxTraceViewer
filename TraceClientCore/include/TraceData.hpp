@@ -5,6 +5,7 @@
 #include <NyxRefCount_Impl.hpp>
 #include <NyxMemPoolObj.hpp>
 #include <NyxMemPoolWString.hpp>
+#include <NyxNetTraceFlags.hpp>
 
 
 namespace TraceClientCore
@@ -42,6 +43,9 @@ namespace TraceClientCore
 
         const ETraceType& Type() const                      { return m_eType; }
         ETraceType& Type()                                  { return m_eType; }
+        
+        const NyxNet::TraceFlags& Flags() const             { return m_Flags; }
+        NyxNet::TraceFlags& Flags()                         { return m_Flags; }
 		
 	protected:
 	
@@ -50,6 +54,7 @@ namespace TraceClientCore
 		Nyx::CMemPoolWString		m_Data;
 		CTracesPool*				m_pOwnerPool;
         ETraceType					m_eType;
+        NyxNet::TraceFlags          m_Flags;
 	};
 }
 

@@ -2,6 +2,7 @@
 #include "TraceInserter.hpp"
 #include "TraceData.hpp"
 #include "TracesPool.hpp"
+#include "NyxNetTraceFlags.hpp"
 
 
 /**
@@ -74,7 +75,7 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
 {
 	NyxNet::CNxStreamReader			Reader(rStream);
 	CTraceData*						pTraceData = NULL;
-	Nyx::UInt32						version = 0;
+    NyxNet::TraceFlags              flags = 0;
     Nyx::NyxResult                  res;
 	
     try
@@ -83,7 +84,7 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
 	    {
 		    pTraceData = new (GetOwnerPool()->MemoryPool())CTraceData(GetOwnerPool()->MemoryPool());
     	
-		    // version
+		    // flags
 		    {
 			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
 
@@ -92,7 +93,8 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
                 if ( Nyx::Failed(res) )
                     throw Nyx::CException("failure to read version");
 
-			    version = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
+			    flags = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
+                pTraceData->Flags() = flags;
 		    }
 
 		    // thread id
@@ -128,15 +130,10 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
                 if ( Nyx::Failed(res) )
                     throw Nyx::CException("failure to read data");
     			
-			    switch ( version )
-			    {
-				    case 0x0001:
-					    pTraceData->Data() = m_ReadBuffer.GetBufferAs<char>();
-					    break;
-				    case 0x0002:
-					    pTraceData->Data() = m_ReadBuffer.GetBufferAs<wchar_t>();
-					    break;
-			    };
+                if ( flags & NyxNet::TFlags_WideChar )
+                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<wchar_t>();
+                else if ( flags & NyxNet::TFlags_Ansi )
+                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<char>();
 		    }
 
             if ( m_TracesCount == 0 )
@@ -147,6 +144,7 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
                 pConnTraceData->Data() = L"Connection";
                 pConnTraceData->TickCount() = pTraceData->TickCount();
                 pConnTraceData->OwnerPool() = GetOwnerPool();
+                pConnTraceData->Flags() = flags;
                 GetOwnerPool()->Repository().Insert(pConnTraceData);
             }
 

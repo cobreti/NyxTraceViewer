@@ -3,6 +3,8 @@
 
 #include "ViewItemTextPainter.hpp"
 
+class CViewItem_TraceData;
+
 
 /**
  *
@@ -21,6 +23,12 @@ public:
 
     virtual void EvaluateSize(CViewSettings& settings, CViewItem& item );
     virtual void Display( const CViewSettings& settings, CDrawViewItemState& drawstate, CViewItem& item );
+
+protected:
+
+    void GetTickCountString( CViewItem_TraceData& item, QString& text );
+    void GetUnixStyleTickCountString( CViewItem_TraceData& item, QString& text );
+    void GetWindowsStyleTickCountString( CViewItem_TraceData& item, QString& text );
 
 private:
 

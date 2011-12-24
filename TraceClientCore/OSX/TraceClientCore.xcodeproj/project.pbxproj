@@ -241,10 +241,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		1DEB91EC08733DB70010E9CD /* Debug_32 */ = {
+		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -254,23 +255,24 @@
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = TraceClientCore;
 			};
-			name = Debug_32;
+			name = Debug;
 		};
-		1DEB91ED08733DB70010E9CD /* Release_32 */ = {
+		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = TraceClientCore;
 			};
-			name = Release_32;
+			name = Release;
 		};
-		1DEB91F008733DB70010E9CD /* Debug_32 */ = {
+		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "../../lib/OSX/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -284,16 +286,16 @@
 					../../NyxLibs/include/OSX,
 					../../NyxLibs/include/NyxNet,
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				SDKROOT = "";
 			};
-			name = Debug_32;
+			name = Debug;
 		};
-		1DEB91F108733DB70010E9CD /* Release_32 */ = {
+		1DEB91F108733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CONFIGURATION_BUILD_DIR = "../../lib/OSX/$(CONFIGURATION)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -309,7 +311,7 @@
 				PREBINDING = NO;
 				SDKROOT = "";
 			};
-			name = Release_32;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -317,20 +319,20 @@
 		1DEB91EB08733DB70010E9CD /* Build configuration list for PBXNativeTarget "TraceClientCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DEB91EC08733DB70010E9CD /* Debug_32 */,
-				1DEB91ED08733DB70010E9CD /* Release_32 */,
+				1DEB91EC08733DB70010E9CD /* Debug */,
+				1DEB91ED08733DB70010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release_32;
+			defaultConfigurationName = Release;
 		};
 		1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "TraceClientCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DEB91F008733DB70010E9CD /* Debug_32 */,
-				1DEB91F108733DB70010E9CD /* Release_32 */,
+				1DEB91F008733DB70010E9CD /* Debug */,
+				1DEB91F108733DB70010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release_32;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
