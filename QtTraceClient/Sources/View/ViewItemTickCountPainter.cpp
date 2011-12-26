@@ -5,6 +5,7 @@
 #include "ViewColumnsSettings.hpp"
 #include "ViewColumnSettings.hpp"
 
+#include "TimeStamp.hpp"
 
 CViewItemPainterRef     CViewItemTickCountPainter::s_refPainter;
 
@@ -170,8 +171,7 @@ void CViewItemTickCountPainter::GetUnixStyleTickCountString(CViewItem_TraceData 
     while ( strSec.length() < 2 )
         strSec = strSec.prepend("0");
 
-    text =      strYear + ":" +
-                strDays + ":" +
+    text =      strDays + ":" +
                 strHours + ":" +
                 strMinutes + ":" +
                 strSec + ":" +
@@ -184,63 +184,13 @@ void CViewItemTickCountPainter::GetUnixStyleTickCountString(CViewItem_TraceData 
  */
 void CViewItemTickCountPainter::GetWindowsStyleTickCountString(CViewItem_TraceData &item, QString &text)
 {
-    text = QString().fromWCharArray(item.TraceData()->TickCount().c_str());
+    Nyx::CWString       TimestampText;
+    QString             time_text = QString().fromWCharArray(item.TraceData()->TickCount().c_str());
+    long                sec = time_text.left(12).toLong();
+    TraceClientCore::CTimeStamp     TimeStamp( sec, TraceClientCore::CTimeStamp::eIT_Milliseconds );
 
-    const long      kSecPerMin = 60;
-    const long      kSecPerHours = kSecPerMin * 60;
-    const long      kSecPerDays = kSecPerHours * 24;
-    const long      kSecPerYear = kSecPerDays * 365;
-
-    QString         time_text = QString().fromWCharArray(item.TraceData()->TickCount().c_str());
-    long            sec = time_text.left(12).toLong();
-    long            hours, minutes, msec, days, year;
-    QString         strYear, strDays, strHours, strMinutes, strSec, strMSec;
-
-    msec = sec % 1000;
-    sec = sec / 1000;
-
-    year = sec / kSecPerYear;
-    sec -= year * kSecPerYear;
-
-    days = sec / kSecPerDays;
-    sec -= days * kSecPerDays;
-
-    hours = sec / kSecPerHours;
-    sec -= hours * kSecPerHours;
-
-    minutes = sec / kSecPerMin;
-    sec -= minutes * kSecPerMin;
-
-    strYear = QString::number(year);
-    while ( strYear.length() < 3 )
-        strYear = strYear.prepend("0");
-
-    strDays = QString::number(days);
-    while ( strDays.length() < 2 )
-        strDays = strDays.prepend("0");
-
-    strHours = QString::number(hours);
-    while ( strHours.length() < 2 )
-        strHours = strHours.prepend("0");
-
-    strMinutes = QString::number(minutes);
-    while ( strMinutes.length() < 2 )
-        strMinutes = strMinutes.prepend("0");
-
-    strSec = QString::number(sec);
-    while ( strSec.length() < 2 )
-        strSec = strSec.prepend("0");
-
-    strMSec = QString::number(msec);
-    while ( strMSec.length() < 3 )
-        strMSec = strMSec.prepend("0");
-
-    text =      strYear + ":" +
-                strDays + ":" +
-                strHours + ":" +
-                strMinutes + ":" +
-                strSec + ":" +
-                strMSec;
+    TimeStamp.ToString( TimestampText );
+    text = QString().fromWCharArray(TimestampText.c_str());
 }
 
 
