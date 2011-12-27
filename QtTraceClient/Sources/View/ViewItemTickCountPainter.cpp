@@ -141,7 +141,6 @@ void CViewItemTickCountPainter::GetUnixStyleTickCountString(CViewItem_TraceData 
 
     TimeStamp.ToString( TimestampText );
     text = QString().fromWCharArray(TimestampText.c_str());
-    text += " " + time_text;
 }
 
 
