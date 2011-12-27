@@ -67,28 +67,29 @@ namespace TraceClientCore
         Nyx::UInt64         Seconds = m_MicroSeconds / (1000 * 1000);
         Nyx::UInt64         Microseconds = m_MicroSeconds - Seconds*1000*1000;
         Nyx::UInt64         Minutes = (Seconds / 60) % 60;
-        Nyx::UInt64         Hours = Seconds / 3600;
+        Nyx::UInt64         Hours = (Seconds / 3600) % 24;
         
         Seconds = Seconds % 60;
 
-        wchar_t             buffer[10];
+        Nyx::CWString       Buffer;
 
+        Buffer.Reserve(10);
         str.Reserve( kHoursSize + kMinutesSize + kSecondsSize + kMicroSecondsSize + kSeparatorSize * 3 );
 
-        wsprintf( buffer, L"%4lu", Hours );
-        str = buffer;
+        Buffer.Format(L"%4lu", Hours);
+        str = Buffer;
         str += kwszSeparator;
 
-        wsprintf( buffer, L"%02lu", Minutes );
-        str += buffer;
+        Buffer.Format( L"%02lu", Minutes );
+        str += Buffer;
         str += kwszSeparator;
 
-        wsprintf( buffer, L"%02lu", Seconds );
-        str += buffer;
+        Buffer.Format( L"%02lu", Seconds );
+        str += Buffer;
         str += kwszSeparator;
 
-        wsprintf( buffer, L"%lu", Microseconds );
-        str += buffer;
+        Buffer.Format( L"%lu", Microseconds );
+        str += Buffer;
     }
 
 }
