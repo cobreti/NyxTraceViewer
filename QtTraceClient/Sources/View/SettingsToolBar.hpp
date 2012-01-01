@@ -1,7 +1,7 @@
 #ifndef _SettingsToolBar_HPP_
 #define _SettingsToolBar_HPP_
 
-#include <QToolbar>
+#include <QToolBar>
 
 #include "View/ViewEnums.hpp"
 

@@ -1,5 +1,5 @@
 #include "ViewItemsModuleWalkerNode.hpp"
-#include "ViewItemsSessionWalkernode.hpp"
+#include "ViewItemsSessionWalkerNode.hpp"
 #include "ViewItemsWalkerPos.hpp"
 #include "../ModuleViewItems.hpp"
 

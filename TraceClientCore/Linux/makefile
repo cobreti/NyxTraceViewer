@@ -42,7 +42,8 @@ OBJS := $(OBJDIR)/PipeTraceFeeder.o \
 		$(OBJDIR)/TraceDataRepository.o \
 		$(OBJDIR)/TraceFeeder.o \
 		$(OBJDIR)/TracesPool.o \
-		$(OBJDIR)/TracesPoolCollection.o
+		$(OBJDIR)/TracesPoolCollection.o \
+		$(OBJDIR)/PoolsList.o
 
 
 $(OBJDIR)/%.o: ../sources/%.cpp

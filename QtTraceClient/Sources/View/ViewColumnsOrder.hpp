@@ -1,6 +1,8 @@
 #ifndef _VIEWCOLUMNSORDER_HPP_
 #define _VIEWCOLUMNSORDER_HPP_
 
+#include <Nyx.hpp>
+
 #include "ViewColumnId.hpp"
 #include <vector>
 
