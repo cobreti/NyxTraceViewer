@@ -163,9 +163,9 @@ CONFIG(debug, debug|release) {
     DEFINES += _DEBUG
 }
 else {
-    PRE_TARGETDEPS += ../../lib/Linux/Release/libTraceClientCore.a
-    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxBase.a
-    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxNet.a
+#    PRE_TARGETDEPS += ../../lib/Linux/Release/libTraceClientCore.a
+#    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxBase.a
+#    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../lib/Linux/Release
     LIBS += -lNyxBase \
