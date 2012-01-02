@@ -11,7 +11,8 @@
 TraceClientCore::CPipeTraceFeeder::CPipeTraceFeeder( TraceClientCore::CTracesPool* pOwnerPool ) :
 CTraceFeeder(pOwnerPool),
 m_TracesCount(0),
-m_pLastTrace(NULL)
+m_pLastTrace(NULL),
+m_TraceReader(pOwnerPool)
 {
 }
 
@@ -73,69 +74,87 @@ bool TraceClientCore::CPipeTraceFeeder::IsRunning() const
  */
 void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStream )
 {
-	NyxNet::CNxStreamReader			Reader(rStream);
+//	NyxNet::CNxStreamReader			Reader(rStream);
 	CTraceData*						pTraceData = NULL;
-    NyxNet::TraceFlags              flags = 0;
+//    NyxNet::TraceFlags              flags = 0;
     Nyx::NyxResult                  res;
 	
     try
     {
-	    if ( Reader.Valid() )
-	    {
-		    pTraceData = new (GetOwnerPool()->MemoryPool())CTraceData(GetOwnerPool()->MemoryPool());
-    	
-		    // flags
-		    {
-			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+//	    if ( Reader.Valid() )
+//	    {
+//		    pTraceData = new (GetOwnerPool()->MemoryPool())CTraceData(GetOwnerPool()->MemoryPool());
+//    	
+//		    // flags
+//		    {
+//			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+//
+//			    m_ReadBuffer.Resize(SectionReader.Size());
+//			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+//                if ( Nyx::Failed(res) )
+//                    throw Nyx::CException("failure to read version");
+//
+//			    flags = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
+//                pTraceData->Flags() = flags;
+//		    }
+//
+//		    // thread id
+//		    {
+//			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+//    			
+//			    m_ReadBuffer.Resize(SectionReader.Size());
+//			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+//                if ( Nyx::Failed(res) )
+//                    throw Nyx::CException("failure to read thread id");
+//    			
+//			    pTraceData->ThreadId() = m_ReadBuffer.GetBufferAs<char>();
+//		    }
+//
+//		    // tick count
+//		    {
+//			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+//    			
+//			    m_ReadBuffer.Resize(SectionReader.Size());
+//			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+//                if ( Nyx::Failed(res) )
+//                    throw Nyx::CException("failure to read tick count");
+//    			
+//			    pTraceData->TickCount() = m_ReadBuffer.GetBufferAs<char>();
+//		    }
+//
+//		    // data
+//		    {
+//			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+//    			
+//			    m_ReadBuffer.Resize(SectionReader.Size());
+//			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+//                if ( Nyx::Failed(res) )
+//                    throw Nyx::CException("failure to read data");
+//    			
+//                if ( flags & NyxNet::TFlags_WideChar )
+//                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<wchar_t>();
+//                else if ( flags & NyxNet::TFlags_Ansi )
+//                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<char>();
+//		    }
+//
+//            if ( m_TracesCount == 0 )
+//            {
+//                CTraceData*   pConnTraceData = new (GetOwnerPool()->MemoryPool())TraceClientCore::CTraceData(GetOwnerPool()->MemoryPool());
+//
+//                pConnTraceData->Type() = CTraceData::eTT_ConnectionStatus_Connection;
+//                pConnTraceData->Data() = L"Connection";
+//                pConnTraceData->TickCount() = pTraceData->TickCount();
+//                pConnTraceData->OwnerPool() = GetOwnerPool();
+//                pConnTraceData->Flags() = flags;
+//                GetOwnerPool()->Repository().Insert(pConnTraceData);
+//            }
 
-			    m_ReadBuffer.Resize(SectionReader.Size());
-			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
-                if ( Nyx::Failed(res) )
-                    throw Nyx::CException("failure to read version");
-
-			    flags = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
-                pTraceData->Flags() = flags;
-		    }
-
-		    // thread id
-		    {
-			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
-    			
-			    m_ReadBuffer.Resize(SectionReader.Size());
-			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
-                if ( Nyx::Failed(res) )
-                    throw Nyx::CException("failure to read thread id");
-    			
-			    pTraceData->ThreadId() = m_ReadBuffer.GetBufferAs<char>();
-		    }
-
-		    // tick count
-		    {
-			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
-    			
-			    m_ReadBuffer.Resize(SectionReader.Size());
-			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
-                if ( Nyx::Failed(res) )
-                    throw Nyx::CException("failure to read tick count");
-    			
-			    pTraceData->TickCount() = m_ReadBuffer.GetBufferAs<char>();
-		    }
-
-		    // data
-		    {
-			    NyxNet::CNxSectionStreamReader		SectionReader(Reader);
-    			
-			    m_ReadBuffer.Resize(SectionReader.Size());
-			    res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
-                if ( Nyx::Failed(res) )
-                    throw Nyx::CException("failure to read data");
-    			
-                if ( flags & NyxNet::TFlags_WideChar )
-                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<wchar_t>();
-                else if ( flags & NyxNet::TFlags_Ansi )
-                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<char>();
-		    }
-
+    		
+//            pTraceData->OwnerPool() = GetOwnerPool();
+        
+        pTraceData = m_TraceReader.Read(rStream);
+        if ( pTraceData )
+        {
             if ( m_TracesCount == 0 )
             {
                 CTraceData*   pConnTraceData = new (GetOwnerPool()->MemoryPool())TraceClientCore::CTraceData(GetOwnerPool()->MemoryPool());
@@ -144,12 +163,10 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
                 pConnTraceData->Data() = L"Connection";
                 pConnTraceData->TickCount() = pTraceData->TickCount();
                 pConnTraceData->OwnerPool() = GetOwnerPool();
-                pConnTraceData->Flags() = flags;
+                pConnTraceData->Flags() = pTraceData->Flags();
                 GetOwnerPool()->Repository().Insert(pConnTraceData);
             }
-
-    		
-            pTraceData->OwnerPool() = GetOwnerPool();
+        
             GetOwnerPool()->Repository().Insert(pTraceData);
             
             m_pLastTrace = pTraceData;

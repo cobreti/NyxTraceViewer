@@ -75,7 +75,10 @@ void TraceClientCore::CDbgTracesFeederCore::Thread_RunningLoop()
 	Nyx::CTraceStream(0x0).Write(L"Starting Dbg Traces Feeder core thread");
 
     TraceClientCore::CTraceData*				pTraceData = NULL;
-    Nyx::CStringFormaterRef                     refStringFormater = Nyx::CStringFormater::Alloc(1024);
+    Nyx::CWString                               TickCount;
+    
+    TickCount.Reserve(1024);
+    //Nyx::CStringFormaterRef                     refStringFormater = Nyx::CStringFormater::Alloc(1024);
 
 	while ( !m_bFeedCancelled )
 	{
@@ -93,8 +96,9 @@ void TraceClientCore::CDbgTracesFeederCore::Thread_RunningLoop()
 				pTraceData->ThreadId() = L"thread id";
                 pTraceData->OwnerPool() = m_pOwnerPool;
 
-				refStringFormater->Format(L"%i", m_TracesCounter++);
-				pTraceData->TickCount() = refStringFormater->GetFormattedString();
+				//refStringFormater->Format(L"%i", m_TracesCounter++);
+                TickCount.Format(L"%i", m_TracesCounter++);
+				pTraceData->TickCount() = TickCount.c_str(); //refStringFormater->GetFormattedString();
 
 				m_pTraceInserter->Insert(pTraceData);
 

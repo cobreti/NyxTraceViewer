@@ -1,8 +1,10 @@
 #ifndef _PIPETRACEFEEDER_HPP_
 #define _PIPETRACEFEEDER_HPP_
 
-#include <Nyx.hpp>
 #include "TraceFeeder.hpp"
+#include "TraceNxStreamReader.hpp"
+
+#include <Nyx.hpp>
 #include <NyxNet.hpp>
 
 namespace TraceClientCore
@@ -33,6 +35,7 @@ namespace TraceClientCore
 		Nyx::CAString				m_Name;
         Nyx::Int32                  m_TracesCount;
         CTraceData*                 m_pLastTrace;
+        CTraceNxStreamReader        m_TraceReader;
 	};
 }
 
