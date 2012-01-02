@@ -1,0 +1,246 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		16A2777114B25C7D002D6924 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2777014B25C7D002D6924 /* Main.cpp */; };
+		16A2777914B260E8002D6924 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A2777814B260E8002D6924 /* CoreServices.framework */; };
+		16A2778114B26AA2002D6924 /* TracePipeReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2778014B26AA2002D6924 /* TracePipeReceiver.cpp */; };
+		16A2778314B26F7D002D6924 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16A2778214B26F7D002D6924 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		16A2775514B25C16002D6924 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		16A2775714B25C16002D6924 /* TraceViewerTcpBridge */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TraceViewerTcpBridge; sourceTree = BUILT_PRODUCTS_DIR; };
+		16A2777014B25C7D002D6924 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../Sources/Main.cpp; sourceTree = "<group>"; };
+		16A2777814B260E8002D6924 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = ../../../../../../../System/Library/Frameworks/CoreServices.framework; sourceTree = "<group>"; };
+		16A2777F14B26A3A002D6924 /* TracePipeReceiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracePipeReceiver.hpp; path = ../Sources/TracePipeReceiver.hpp; sourceTree = "<group>"; };
+		16A2778014B26AA2002D6924 /* TracePipeReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracePipeReceiver.cpp; path = ../Sources/TracePipeReceiver.cpp; sourceTree = "<group>"; };
+		16A2778214B26F7D002D6924 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = ../../../../../../../System/Library/Frameworks/Foundation.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		16A2775414B25C16002D6924 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16A2777914B260E8002D6924 /* CoreServices.framework in Frameworks */,
+				16A2778314B26F7D002D6924 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		16A2774C14B25C16002D6924 = {
+			isa = PBXGroup;
+			children = (
+				16A2778214B26F7D002D6924 /* Foundation.framework */,
+				16A2777814B260E8002D6924 /* CoreServices.framework */,
+				16A2777714B25C9E002D6924 /* Sources */,
+				16A2775A14B25C16002D6924 /* TraceViewerTcpBridge */,
+				16A2775814B25C16002D6924 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		16A2775814B25C16002D6924 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				16A2775714B25C16002D6924 /* TraceViewerTcpBridge */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		16A2775A14B25C16002D6924 /* TraceViewerTcpBridge */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TraceViewerTcpBridge;
+			sourceTree = "<group>";
+		};
+		16A2777714B25C9E002D6924 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				16A2777014B25C7D002D6924 /* Main.cpp */,
+				16A2777F14B26A3A002D6924 /* TracePipeReceiver.hpp */,
+				16A2778014B26AA2002D6924 /* TracePipeReceiver.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		16A2775614B25C16002D6924 /* TraceViewerTcpBridge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 16A2776114B25C16002D6924 /* Build configuration list for PBXNativeTarget "TraceViewerTcpBridge" */;
+			buildPhases = (
+				16A2775314B25C16002D6924 /* Sources */,
+				16A2775414B25C16002D6924 /* Frameworks */,
+				16A2775514B25C16002D6924 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TraceViewerTcpBridge;
+			productName = TraceViewerTcpBridge;
+			productReference = 16A2775714B25C16002D6924 /* TraceViewerTcpBridge */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		16A2774E14B25C16002D6924 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 16A2775114B25C16002D6924 /* Build configuration list for PBXProject "TraceViewerTcpBridge" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 16A2774C14B25C16002D6924;
+			productRefGroup = 16A2775814B25C16002D6924 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				16A2775614B25C16002D6924 /* TraceViewerTcpBridge */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		16A2775314B25C16002D6924 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16A2777114B25C7D002D6924 /* Main.cpp in Sources */,
+				16A2778114B26AA2002D6924 /* TracePipeReceiver.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		16A2775F14B25C16002D6924 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CONFIGURATION_BUILD_DIR = build/Debug;
+				CONFIGURATION_TEMP_DIR = build/Debug;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		16A2776014B25C16002D6924 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CONFIGURATION_BUILD_DIR = build/Release;
+				CONFIGURATION_TEMP_DIR = build/Release;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		16A2776214B25C16002D6924 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					../../NyxLibs/include,
+					../../NyxLibs/include/OSX,
+					../../NyxLibs/include/NyxNet,
+				);
+				LIBRARY_SEARCH_PATHS = ../../NyxLibs/Lib/OSX/Debug_Universal_32_64;
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		16A2776314B25C16002D6924 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					../../NyxLibs/include,
+					../../NyxLibs/include/OSX,
+					../../NyxLibs/include/NyxNet,
+				);
+				LIBRARY_SEARCH_PATHS = ../../NyxLibs/Lib/OSX/Debug_Universal_32_64;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		16A2775114B25C16002D6924 /* Build configuration list for PBXProject "TraceViewerTcpBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16A2775F14B25C16002D6924 /* Debug */,
+				16A2776014B25C16002D6924 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		16A2776114B25C16002D6924 /* Build configuration list for PBXNativeTarget "TraceViewerTcpBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16A2776214B25C16002D6924 /* Debug */,
+				16A2776314B25C16002D6924 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 16A2774E14B25C16002D6924 /* Project object */;
+}
