@@ -9,6 +9,7 @@ CFeederSource_UserText::CFeederSource_UserText() :
     m_Index(0)
 {
     //m_refStringFormater = Nyx::CStringFormater::Alloc(2048);
+    m_FormattedLine.Reserve(2048);
 }
 
 
@@ -43,6 +44,7 @@ void CFeederSource_UserText::SetText(const wchar_t *wszText)
  */
 void CFeederSource_UserText::GetLine( Nyx::CWString& line )
 {
-    line.Format( L" [%i]", ++m_Index );
-    line += m_Text;
+    m_FormattedLine.Format( L" [%i]", ++m_Index );
+    line = m_Text;
+    line += m_FormattedLine;
 }

@@ -21,6 +21,7 @@ public:
 protected:
 
     Nyx::CWString               m_Text;
+    Nyx::CWString               m_FormattedLine;
     unsigned int                m_Index;
     //Nyx::CStringFormaterRef     m_refStringFormater;
 };
