@@ -22,7 +22,7 @@ protected:
 
     Nyx::CWString               m_Text;
     unsigned int                m_Index;
-    Nyx::CStringFormaterRef     m_refStringFormater;
+    //Nyx::CStringFormaterRef     m_refStringFormater;
 };
 
 #endif // FEEDERSOURCE_USERTEXT_HPP
