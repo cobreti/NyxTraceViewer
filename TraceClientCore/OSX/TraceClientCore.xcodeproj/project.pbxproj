@@ -23,6 +23,12 @@
 		16A2773B14B23597002D6924 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773A14B23597002D6924 /* PoolsList.cpp */; };
 		16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */; };
 		16A2773F14B24888002D6924 /* TraceNxStreamReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773E14B24888002D6924 /* TraceNxStreamReader.cpp */; };
+		16A2774114B24DAE002D6924 /* TcpModule.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2774014B24DAE002D6924 /* TcpModule.hpp */; };
+		16A2774314B24E48002D6924 /* TcpModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2774214B24E48002D6924 /* TcpModule.cpp */; };
+		16A2774514B24F9D002D6924 /* TcpTracesReceiver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2774414B24F9C002D6924 /* TcpTracesReceiver.hpp */; };
+		16A2774714B24FDF002D6924 /* TcpTracesReceivers.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2774614B24FDF002D6924 /* TcpTracesReceivers.hpp */; };
+		16A2774914B2504A002D6924 /* TcpTracesReceivers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2774814B2504A002D6924 /* TcpTracesReceivers.cpp */; };
+		16A2774B14B254B3002D6924 /* TcpTracesReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2774A14B254B3002D6924 /* TcpTracesReceiver.cpp */; };
 		16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */; };
 		16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */; };
 		16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */; };
@@ -55,6 +61,12 @@
 		16A2773A14B23597002D6924 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../sources/PoolsList.cpp; sourceTree = "<group>"; };
 		16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceNxStreamReader.hpp; path = ../include/TraceNxStreamReader.hpp; sourceTree = "<group>"; };
 		16A2773E14B24888002D6924 /* TraceNxStreamReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceNxStreamReader.cpp; path = ../sources/TraceNxStreamReader.cpp; sourceTree = "<group>"; };
+		16A2774014B24DAE002D6924 /* TcpModule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpModule.hpp; path = ../include/TcpModule.hpp; sourceTree = "<group>"; };
+		16A2774214B24E48002D6924 /* TcpModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpModule.cpp; path = ../sources/TcpModule.cpp; sourceTree = "<group>"; };
+		16A2774414B24F9C002D6924 /* TcpTracesReceiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpTracesReceiver.hpp; path = ../include/TcpTracesReceiver.hpp; sourceTree = "<group>"; };
+		16A2774614B24FDF002D6924 /* TcpTracesReceivers.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpTracesReceivers.hpp; path = ../include/TcpTracesReceivers.hpp; sourceTree = "<group>"; };
+		16A2774814B2504A002D6924 /* TcpTracesReceivers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceivers.cpp; path = ../sources/TcpTracesReceivers.cpp; sourceTree = "<group>"; };
+		16A2774A14B254B3002D6924 /* TcpTracesReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceiver.cpp; path = ../sources/TcpTracesReceiver.cpp; sourceTree = "<group>"; };
 		16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceFeeder.hpp; path = ../include/TraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceFeeder.cpp; path = ../sources/TraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
 		16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceInserter.hpp; path = ../include/TraceInserter.hpp; sourceTree = SOURCE_ROOT; };
@@ -111,6 +123,12 @@
 				16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */,
 				16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */,
 				16A2773A14B23597002D6924 /* PoolsList.cpp */,
+				16A2774014B24DAE002D6924 /* TcpModule.hpp */,
+				16A2774214B24E48002D6924 /* TcpModule.cpp */,
+				16A2774414B24F9C002D6924 /* TcpTracesReceiver.hpp */,
+				16A2774A14B254B3002D6924 /* TcpTracesReceiver.cpp */,
+				16A2774614B24FDF002D6924 /* TcpTracesReceivers.hpp */,
+				16A2774814B2504A002D6924 /* TcpTracesReceivers.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -180,6 +198,9 @@
 				1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */,
 				16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */,
 				16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */,
+				16A2774114B24DAE002D6924 /* TcpModule.hpp in Headers */,
+				16A2774514B24F9D002D6924 /* TcpTracesReceiver.hpp in Headers */,
+				16A2774714B24FDF002D6924 /* TcpTracesReceivers.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +268,9 @@
 				168CBEE814AA6FA6004FB957 /* TimeStamp.cpp in Sources */,
 				16A2773B14B23597002D6924 /* PoolsList.cpp in Sources */,
 				16A2773F14B24888002D6924 /* TraceNxStreamReader.cpp in Sources */,
+				16A2774314B24E48002D6924 /* TcpModule.cpp in Sources */,
+				16A2774914B2504A002D6924 /* TcpTracesReceivers.cpp in Sources */,
+				16A2774B14B254B3002D6924 /* TcpTracesReceiver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,7 @@
 #define _TRACECLIENTCOREMODULE_HPP_
 
 #include "TracesPoolCollection.hpp"
+#include "TcpModule.hpp"
 
 namespace TraceClientCore
 {
@@ -20,11 +21,14 @@ namespace TraceClientCore
 		CTracesPoolCollection&  TracesPools()			{ return m_TracesPools; }
 		
         CPoolsUpdateClock&      PoolsUpdateClock()      { return *m_pPoolsUpdateClock; }
+        
+        CTcpModule&             TcpModule()             { return m_TcpModule; }
 
 	protected:
 	
 		CTracesPoolCollection				m_TracesPools;
         CPoolsUpdateClock*                  m_pPoolsUpdateClock;
+        CTcpModule                          m_TcpModule;
 	
 		static CModule*						s_pInstance;
 	};

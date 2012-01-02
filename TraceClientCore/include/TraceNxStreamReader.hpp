@@ -6,6 +6,7 @@
 namespace NyxNet
 {
     class INxStreamRW;
+    class CNxStreamReader;
 }
 
 namespace TraceClientCore
@@ -19,7 +20,7 @@ namespace TraceClientCore
         CTraceNxStreamReader( CTracesPool* pPool );
         ~CTraceNxStreamReader();
         
-        virtual CTraceData* Read( NyxNet::INxStreamRW& rStream );
+        virtual CTraceData* Read( NyxNet::CNxStreamReader& Reader );
         
     protected:
 		Nyx::TBuffer<Nyx::Byte>		m_ReadBuffer;

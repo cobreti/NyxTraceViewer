@@ -58,6 +58,8 @@ void CTraceClientApp::Init(int &argc, char **argv)
     initDefaultSettings();
 
     m_pMainWindow = new CMainWindow;
+
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start();
 }
 
 
@@ -76,6 +78,8 @@ void CTraceClientApp::Run()
  */
 void CTraceClientApp::Destroy()
 {
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
+
     delete m_pMainWindow;
     m_pMainWindow = NULL;
 

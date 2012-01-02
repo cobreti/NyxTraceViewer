@@ -28,9 +28,8 @@ namespace TraceClientCore
     /**
      *
      */
-    CTraceData* CTraceNxStreamReader::Read( NyxNet::INxStreamRW& rStream )
+    CTraceData* CTraceNxStreamReader::Read( NyxNet::CNxStreamReader& Reader )
     {
-        NyxNet::CNxStreamReader			Reader(rStream);
         CTraceData*						pTraceData = NULL;
         NyxNet::TraceFlags              flags = 0;
         Nyx::NyxResult                  res;
