@@ -33,10 +33,23 @@ namespace TraceClientCore
         CTraceData*						pTraceData = NULL;
         NyxNet::TraceFlags              flags = 0;
         Nyx::NyxResult                  res;
+        Nyx::UInt32                     SectionsCount = 0;
         
         if ( Reader.Valid() )
         {
             pTraceData = new (m_pPool->MemoryPool())CTraceData(m_pPool->MemoryPool());
+            
+            // sections count
+            {
+                NyxNet::CNxSectionStreamReader      SectionReader(Reader);
+                
+                m_ReadBuffer.Resize(SectionReader.Size());
+                res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+                if ( Nyx::Failed(res) )
+                    throw Nyx::CException("failure to read sections count");
+                
+                SectionsCount = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
+            }
             
             // flags
             {
@@ -47,7 +60,7 @@ namespace TraceClientCore
                 if ( Nyx::Failed(res) )
                     throw Nyx::CException("failure to read version");
                 
-                flags = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
+                flags = *m_ReadBuffer.GetBufferAs<NyxNet::TraceFlags>();
                 pTraceData->Flags() = flags;
             }
             

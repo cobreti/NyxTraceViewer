@@ -3,22 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 45;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */; };
 		1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */; };
-		16466AC011AB50B700AF9F07 /* DbgTracesFeederCore.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */; };
-		16466ACC11AB517300AF9F07 /* DbgTracesFeederCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */; };
 		165976FF1127103C00CC718B /* TracesPoolCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165976FE1127103C00CC718B /* TracesPoolCollection.cpp */; };
 		165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977021127109B00CC718B /* TracesPoolCollection.hpp */; };
 		165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */; };
 		165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */; };
-		165CF2F1114D9984007430AE /* DbgTracesFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */; };
 		1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1665B7A211EA4FB100D4B309 /* PoolsList.hpp */; };
 		168CBEE814AA6FA6004FB957 /* TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */; };
-		1693872C1347A0C400691948 /* DbgTracesFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */; };
 		169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169387361347ACB000691948 /* RepositoryTraceInserter.cpp */; };
 		16A2773B14B23597002D6924 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773A14B23597002D6924 /* PoolsList.cpp */; };
 		16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */; };
@@ -47,16 +43,12 @@
 /* Begin PBXFileReference section */
 		1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PipeTraceFeeder.hpp; path = ../include/PipeTraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PipeTraceFeeder.cpp; path = ../sources/PipeTraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
-		16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DbgTracesFeederCore.hpp; path = ../include/DbgTracesFeederCore.hpp; sourceTree = SOURCE_ROOT; };
-		16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DbgTracesFeederCore.cpp; path = ../sources/DbgTracesFeederCore.cpp; sourceTree = SOURCE_ROOT; };
 		165976FE1127103C00CC718B /* TracesPoolCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPoolCollection.cpp; path = ../Sources/TracesPoolCollection.cpp; sourceTree = SOURCE_ROOT; };
 		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserver.cpp; path = ../sources/RepositoryObserver.cpp; sourceTree = SOURCE_ROOT; };
-		165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DbgTracesFeeder.hpp; path = ../include/DbgTracesFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		1665B7A211EA4FB100D4B309 /* PoolsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsList.hpp; path = ../include/DataStruct/PoolsList.hpp; sourceTree = SOURCE_ROOT; };
 		168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeStamp.cpp; path = ../sources/TimeStamp.cpp; sourceTree = "<group>"; };
-		1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DbgTracesFeeder.cpp; path = ../sources/DbgTracesFeeder.cpp; sourceTree = "<group>"; };
 		169387361347ACB000691948 /* RepositoryTraceInserter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryTraceInserter.cpp; path = ../sources/RepositoryTraceInserter.cpp; sourceTree = "<group>"; };
 		16A2773A14B23597002D6924 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../sources/PoolsList.cpp; sourceTree = "<group>"; };
 		16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceNxStreamReader.hpp; path = ../include/TraceNxStreamReader.hpp; sourceTree = "<group>"; };
@@ -143,21 +135,9 @@
 			name = "Repository Links";
 			sourceTree = "<group>";
 		};
-		1693872D1347A44F00691948 /* Debug */ = {
-			isa = PBXGroup;
-			children = (
-				1693872B1347A0C300691948 /* DbgTracesFeeder.cpp */,
-				165CF2F0114D9984007430AE /* DbgTracesFeeder.hpp */,
-				16466ABF11AB50B700AF9F07 /* DbgTracesFeederCore.hpp */,
-				16466ACA11AB517300AF9F07 /* DbgTracesFeederCore.cpp */,
-			);
-			name = Debug;
-			sourceTree = "<group>";
-		};
 		16AE9AED11A9D6160064A5F9 /* Feeders */ = {
 			isa = PBXGroup;
 			children = (
-				1693872D1347A44F00691948 /* Debug */,
 				16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */,
 				16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */,
 				16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */,
@@ -190,10 +170,8 @@
 				16EECEF711265D8A00465BE0 /* TracesPool.hpp in Headers */,
 				165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */,
 				165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */,
-				165CF2F1114D9984007430AE /* DbgTracesFeeder.hpp in Headers */,
 				16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */,
 				16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */,
-				16466AC011AB50B700AF9F07 /* DbgTracesFeederCore.hpp in Headers */,
 				1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */,
 				1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */,
 				16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */,
@@ -229,8 +207,11 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "TraceClientCore" */;
-			compatibilityVersion = "Xcode 3.1";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
@@ -260,9 +241,7 @@
 				165976FF1127103C00CC718B /* TracesPoolCollection.cpp in Sources */,
 				165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */,
 				16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */,
-				16466ACC11AB517300AF9F07 /* DbgTracesFeederCore.cpp in Sources */,
 				1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */,
-				1693872C1347A0C400691948 /* DbgTracesFeeder.cpp in Sources */,
 				169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */,
 				16DF357E138CA19D008C3E30 /* PoolsUpdateClock.cpp in Sources */,
 				168CBEE814AA6FA6004FB957 /* TimeStamp.cpp in Sources */,
@@ -285,7 +264,6 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/lib;
@@ -323,7 +301,6 @@
 					../../NyxLibs/include/NyxNet,
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PREBINDING = NO;
 				SDKROOT = "";
 			};
 			name = Debug;
@@ -344,7 +321,6 @@
 					../../NyxLibs/include/OSX,
 					../../NyxLibs/include/NyxNet,
 				);
-				PREBINDING = NO;
 				SDKROOT = "";
 			};
 			name = Release;

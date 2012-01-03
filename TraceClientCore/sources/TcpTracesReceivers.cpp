@@ -36,6 +36,7 @@ namespace TraceClientCore
         res = m_refServer->Create(  8500,
                                     100,
                                     m_refNxConnection );
+        m_refServer->Start();
         
     }
     
@@ -45,7 +46,7 @@ namespace TraceClientCore
      */
     void CTcpTracesReceivers::Stop()
     {
-        if ( m_refServer.Valid() )
+        if ( m_refServer.Valid() && m_refServer->IsRunning() )
             m_refServer->Stop();
     }
     
