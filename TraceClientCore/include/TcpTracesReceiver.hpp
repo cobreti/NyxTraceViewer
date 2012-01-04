@@ -22,7 +22,8 @@ namespace TraceClientCore
         
     protected:
         
-        NyxNet::IConnection*    m_pConnection;
+        NyxNet::IConnection*            m_pConnection;
+        Nyx::TBuffer<Nyx::Byte>         m_Buffer;
     };
 }
 

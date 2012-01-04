@@ -36,6 +36,9 @@ protected:
     
     NyxNet::CNxConnectionRef        m_refNxConnection;
     NyxNet::CPipeServerRef          m_refPipeServer;
+    
+    NyxNet::CNxConnectionRef        m_refOutConnection;
+    NyxNet::CTcpIpSocketRef         m_refOutSocket;
 };
 
 

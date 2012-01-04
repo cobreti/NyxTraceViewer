@@ -40,6 +40,7 @@ int main( int argc, char *argv[] )
     wprintf(L"[%i]\n", getpid());
     
     Nyx::CModuleRef                     refModule = Nyx::CModule::Alloc();
+    NyxNet::CModuleRef                  refNetModule = NyxNet::CModule::Alloc();
     
     Nyx::CTraceCompositorRef            refTraceCompositor = Nyx::CTraceCompositor::Alloc();
     refTraceCompositor->SetOutput( Nyx::CConsoleTraceOutput::Alloc() );

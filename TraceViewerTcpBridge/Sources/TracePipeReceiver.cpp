@@ -1,6 +1,5 @@
 #include "TracePipeReceiver.hpp"
 
-
 /**
  *
  */
@@ -25,12 +24,26 @@ CTracePipeReceiver::~CTracePipeReceiver()
  */
 void CTracePipeReceiver::Start()
 {
+    Nyx::CAString       HostName;
+    Nyx::CAString       HostIp;
+    Nyx::NyxResult      res;
+    
     m_refNxConnection = NyxNet::CNxConnection::Alloc();
     m_refNxConnection->SetConnectionHandler(static_cast<NyxNet::INxConnectionHandler*>(this));
     
     m_refPipeServer = NyxNet::CPipeServer::Alloc();
     m_refPipeServer->Create( m_PipeName.c_str(), 4096, m_refNxConnection );
     m_refPipeServer->Start();
+    
+    m_refOutConnection = NyxNet::CNxConnection::Alloc();
+    
+    m_refOutSocket = NyxNet::CTcpIpSocket::Alloc();
+    res = NyxNet::CModule::Default()->GetHostname( HostName );
+    res = NyxNet::CModule::Default()->GetHostIp( HostName.c_str(), HostIp );
+    
+    m_refOutConnection->Open( m_refOutSocket );
+    m_refOutSocket->Create( HostIp.c_str(), 8500 );
+    m_refOutSocket->Connect();
 }
 
 
@@ -40,6 +53,8 @@ void CTracePipeReceiver::Start()
 void CTracePipeReceiver::Stop()
 {
     m_refPipeServer->Stop();
+    m_refOutSocket->Disconnect();
+    m_refOutConnection->Close();
 }
 
 
@@ -50,20 +65,44 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
 {
     NyxNet::CNxStreamReader     Reader(rStream);
     NyxNet::NxDataSize          TotalSize = 0;
+    Nyx::UInt32                 SectionsCount = 0;
+    
+    NyxNet::CNxStreamWriter     OutWriter( (NyxNet::CNxConnection*)m_refOutConnection, NyxNet::eNxDT_TraceData );
     
     try
     {
-        TotalSize += ReadSection(Reader); // flags
-        TotalSize += ReadSection(Reader); // thread id
-        TotalSize += ReadSection(Reader); // tickcount
-        TotalSize += ReadSection(Reader); // data
+        // read sections count
+        {
+            NyxNet::CNxSectionStreamReader        SectionReader(Reader);
+            
+            m_Buffer.Resize(SectionReader.Size());
+            SectionReader.Read(m_Buffer, SectionReader.Size());
+            
+            SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();            
+
+            NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(SectionsCount));
+            SectionWriter.Write(&SectionsCount, sizeof(SectionsCount));
+        }
+        
+        while ( SectionsCount -- > 0 )
+        {
+            NyxNet::CNxSectionStreamReader        SectionReader(Reader);
+            
+            m_Buffer.Resize(SectionReader.Size());
+            SectionReader.Read(m_Buffer, SectionReader.Size());
+            TotalSize += SectionReader.Size();
+            
+            NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, SectionReader.Size());
+            SectionWriter.Write( m_Buffer.GetBufferAs<void*>(), SectionReader.Size());
+        }
     }
     catch (...)
     {
         Nyx::CTraceStream(0x0).Write("Error reading from pipe");
     }
     
-    Nyx::CTraceStream(0x0).Write(L"Read %i data from pipe %s", TotalSize, m_PipeName.c_str());
+//    Nyx::CTraceStream(0x0).Write(L"Read %i data from pipe %S", TotalSize, m_PipeName.c_str());
+    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Read ") << Nyx::CTF_Int(TotalSize) << Nyx::CTF_Text(L" bytes from pipe : ") << Nyx::CTF_AnsiText(m_PipeName.c_str());
 }
 
 
