@@ -1,5 +1,7 @@
 #include "TcpTracesReceiver.hpp"
-
+#include "TraceChannel.hpp"
+#include "TraceClientCoreModule.hpp"
+#include "TraceNxStreamReader.hpp"
 
 namespace TraceClientCore
 {
@@ -30,6 +32,7 @@ namespace TraceClientCore
         NyxNet::CNxStreamReader     Reader(rStream);
         NyxNet::NxDataSize          TotalSize = 0;
         Nyx::UInt32                 SectionsCount = 0;
+        Nyx::CAString               Name;
         
         try
         {
@@ -43,19 +46,42 @@ namespace TraceClientCore
                 SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();            
             }
             
-            while ( SectionsCount -- > 0 )
+            // read module name
             {
-                NyxNet::CNxSectionStreamReader        SectionReader(Reader);
+                NyxNet::CNxSectionStreamReader      SectionReader(Reader);
                 
                 m_Buffer.Resize(SectionReader.Size());
                 SectionReader.Read(m_Buffer, SectionReader.Size());
-                TotalSize += SectionReader.Size();
                 
+                Name = m_Buffer.GetBufferAs<const char>();
             }
             
-            //        TotalSize += ReadSection(Reader); // thread id
-            //        TotalSize += ReadSection(Reader); // tickcount
-            //        TotalSize += ReadSection(Reader); // data
+            CModule&            rModule = CModule::Instance();
+            CTraceChannel*      pChannel = rModule.TraceChannels().Get(Name);
+            
+            -- SectionsCount;
+            
+            if ( pChannel )
+            {
+                CTraceNxStreamReader        TraceReader( pChannel->Pool() );
+                CTraceData*                 pTrace = NULL;
+                
+                pTrace = TraceReader.Read(SectionsCount, Reader);
+                if ( pTrace )
+                    pChannel->Insert(pTrace);          
+            }
+            else
+            {            
+                while ( SectionsCount -- > 0 )
+                {
+                    NyxNet::CNxSectionStreamReader        SectionReader(Reader);
+                    
+                    m_Buffer.Resize(SectionReader.Size());
+                    SectionReader.Read(m_Buffer, SectionReader.Size());
+                    TotalSize += SectionReader.Size();
+                    
+                }
+            }
         }
         catch (...)
         {

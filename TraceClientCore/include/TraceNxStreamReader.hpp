@@ -20,7 +20,7 @@ namespace TraceClientCore
         CTraceNxStreamReader( CTracesPool* pPool );
         ~CTraceNxStreamReader();
         
-        virtual CTraceData* Read( NyxNet::CNxStreamReader& Reader );
+        virtual CTraceData* Read( Nyx::UInt32 SectionsCount, NyxNet::CNxStreamReader& Reader );
         
     protected:
 		Nyx::TBuffer<Nyx::Byte>		m_ReadBuffer;

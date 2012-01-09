@@ -11,7 +11,7 @@
 class CTracePipeReceiver : public NyxNet::INxConnectionHandler
 {
 public:
-    CTracePipeReceiver(const char* szPipeName);
+    CTracePipeReceiver(const char* szName);
     virtual ~CTracePipeReceiver();
 
     virtual void Start();
@@ -31,6 +31,7 @@ protected:
     
 protected:
     
+    Nyx::CAString                   m_Name;
     Nyx::CAString                   m_PipeName;
     Nyx::TBuffer<Nyx::Byte>         m_Buffer;
     

@@ -76,10 +76,24 @@ void TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW& rStre
 {
     NyxNet::CNxStreamReader			Reader(rStream);
 	CTraceData*						pTraceData = NULL;
+    Nyx::UInt32                     SectionsCount = 0;
+    Nyx::NyxResult                  res;
 	
     try
     {        
-        pTraceData = m_TraceReader.Read(Reader);
+        // sections count
+        {
+            NyxNet::CNxSectionStreamReader      SectionReader(Reader);
+            
+            m_ReadBuffer.Resize(SectionReader.Size());
+            res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+            if ( Nyx::Failed(res) )
+                throw Nyx::CException("failure to read sections count");
+            
+            SectionsCount = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
+        }
+
+        pTraceData = m_TraceReader.Read(SectionsCount, Reader);
         if ( pTraceData )
         {
             if ( m_TracesCount == 0 )

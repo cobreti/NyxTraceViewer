@@ -3,10 +3,11 @@
 /**
  *
  */
-CTracePipeReceiver::CTracePipeReceiver(const char* szPipeName)
+CTracePipeReceiver::CTracePipeReceiver(const char* szName)
 {
-    m_PipeName = szPipeName;
-    m_PipeName += "_Pipe";
+    m_Name = szName;
+    
+    m_PipeName = m_Name + "_Pipe";
 }
 
 
@@ -66,6 +67,10 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
     NyxNet::CNxStreamReader     Reader(rStream);
     NyxNet::NxDataSize          TotalSize = 0;
     Nyx::UInt32                 SectionsCount = 0;
+    Nyx::UInt32                 OutSectionsCount = 0;
+    
+    if ( !m_refOutSocket->Valid() )
+        m_refOutSocket->Connect();
     
     NyxNet::CNxStreamWriter     OutWriter( (NyxNet::CNxConnection*)m_refOutConnection, NyxNet::eNxDT_TraceData );
     
@@ -78,10 +83,24 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
             m_Buffer.Resize(SectionReader.Size());
             SectionReader.Read(m_Buffer, SectionReader.Size());
             
-            SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();            
+            SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();
+            
+            OutSectionsCount = SectionsCount + 1;
 
-            NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(SectionsCount));
-            SectionWriter.Write(&SectionsCount, sizeof(SectionsCount));
+            NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(OutSectionsCount));
+            SectionWriter.Write(&SectionsCount, sizeof(OutSectionsCount));
+        }
+        
+        //
+        // write name
+        //
+        
+        {
+            NyxNet::NxDataSize                  size = (NyxNet::NxDataSize)m_Name.length() + 1;
+            NyxNet::CNxSectionStreamWriter      SectionWriter(OutWriter, size);
+            
+            SectionWriter.Write( m_Name.BufferPtr(), size );
+            
         }
         
         while ( SectionsCount -- > 0 )

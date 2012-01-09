@@ -6,6 +6,7 @@
 #include "Document/TracesDocument.hpp"
 #include "PoolsUpdateClock.hpp"
 #include "DataStruct/PoolsList.hpp"
+#include "TraceChannel.hpp"
 
 
 /**
@@ -68,14 +69,37 @@ void CPipesMgntPage::OnNewPool()
 	TraceClientCore::CModule&					rModule = TraceClientCore::CModule::Instance();
     QIcon                                       PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
 
+    //
+    // Add pool
+    //
+
     refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), L"new pool");
 	rModule.TracesPools().Add(refPool);
     rModule.PoolsUpdateClock().Insert(refPool);
 
+
+    //
+    // Add Pipe Feeder
+    //
+
     pPipeTraceFeeder = new TraceClientCore::CPipeTraceFeeder( refPool);
 	refPool->Feeder() = pPipeTraceFeeder;
 
+
+    //
+    // Add channel
+    //
+
+    TraceClientCore::CTraceChannel*      pChannel = new TraceClientCore::CTraceChannel(refPool);
+    pChannel->Name() = refPool->Name();
+    rModule.TraceChannels().Add(pChannel);
+
+    //
+    // Add gui item
+    //
+
 	pItem->SetPool(refPool);
+    pItem->SetChannel(pChannel);
     pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
     pItem->setIcon(0, PipeSourceIcon);
@@ -180,6 +204,14 @@ void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 
 		rModule.TracesPools().Update(pPoolItem->TracesPool());
 	}
+
+    if ( pPoolItem->TraceChannel() && pPoolItem->TraceChannel()->Name() != pItem->text(0).toStdString().c_str() )
+    {
+        pPoolItem->TraceChannel()->Name() = pItem->text(0).toStdString().c_str();
+
+        TraceClientCore::CModule&			rModule = TraceClientCore::CModule::Instance();
+        rModule.TraceChannels().Update( pPoolItem->TraceChannel() );
+    }
 }
 
 
