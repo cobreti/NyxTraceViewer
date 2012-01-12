@@ -79,14 +79,6 @@ void CPipesMgntPage::OnNewPool()
 
 
     //
-    // Add Pipe Feeder
-    //
-
-    pPipeTraceFeeder = new TraceClientCore::CPipeTraceFeeder( refPool);
-	refPool->Feeder() = pPipeTraceFeeder;
-
-
-    //
     // Add channel
     //
 
@@ -95,10 +87,16 @@ void CPipesMgntPage::OnNewPool()
     rModule.TraceChannels().Add(pChannel);
 
     //
+    // Add Pipe Feeder
+    //
+
+    pPipeTraceFeeder = new TraceClientCore::CPipeTraceFeeder( pChannel );
+    pChannel->Feeder() = pPipeTraceFeeder;
+
+    //
     // Add gui item
     //
 
-	pItem->SetPool(refPool);
     pItem->SetChannel(pChannel);
     pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
@@ -123,21 +121,20 @@ void CPipesMgntPage::OnStartStop()
 
 	if ( pItem != NULL )
 	{
-		TraceClientCore::CTracesPool* pPool = pItem->TracesPool();
+        TraceClientCore::CTraceChannel* pChannel = pItem->TraceChannel();
 
-		if ( pPool->Feeder().Valid() )
+        if ( pChannel->Feeder().Valid() )
 		{
-			if ( pPool->Feeder()->IsRunning() )
+            if ( pChannel->Feeder()->IsRunning() )
 			{
-				pPool->Feeder()->Stop();
+                pChannel->Feeder()->Stop();
 				pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 				pItem->setForeground(0, QBrush(QColor(150, 0, 0)));
                 ui->m_btnStartStop->setIcon(StartPipeIcon);
 			}
 			else
 			{
-				pPool->SetName( pItem->text(0).toStdWString().c_str() );
-				pPool->Feeder()->Start();
+                pChannel->Feeder()->Start();
 				pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
 				pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
                 ui->m_btnStartStop->setIcon(StopPipeIcon);
@@ -166,16 +163,16 @@ void CPipesMgntPage::OnPoolSelectionChanged()
 	}
 	else
 	{
-		TraceClientCore::CTracesPool*		pPool = pItem->TracesPool();
+        TraceClientCore::CTraceChannel*     pChannel = pItem->TraceChannel();
 
-		if ( !pPool->Feeder().Valid() )
+        if ( !pChannel->Feeder().Valid() )
 		{
             ui->m_btnStartStop->setIcon(StartPipeIcon);
 			ui->m_btnStartStop->setEnabled(false);
 		}
 		else
 		{
-			if ( pPool->Feeder()->IsRunning() )
+            if ( pChannel->Feeder()->IsRunning() )
 			{
                 ui->m_btnStartStop->setIcon(StopPipeIcon);
 				ui->m_btnStartStop->setEnabled(true);
@@ -197,14 +194,6 @@ void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 {
 	MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(pItem);
 
-	if ( pPoolItem->TracesPool()->Name() != Nyx::CWString(pItem->text(0).toStdWString().c_str()) )
-	{
-		pPoolItem->TracesPool()->SetName( pItem->text(0).toStdWString().c_str() );
-		TraceClientCore::CModule&			rModule = TraceClientCore::CModule::Instance();
-
-		rModule.TracesPools().Update(pPoolItem->TracesPool());
-	}
-
     if ( pPoolItem->TraceChannel() && pPoolItem->TraceChannel()->Name() != pItem->text(0).toStdString().c_str() )
     {
         pPoolItem->TraceChannel()->Name() = pItem->text(0).toStdString().c_str();
@@ -224,39 +213,14 @@ void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int  )
 
 	if ( pPoolItem->checkState(0) == Qt::Checked )
 	{
-		//CTracesRepositoryDoc*		pCurrentDoc = SelectedDocument();
-
-		if ( !m_pDoc->Contains( *pPoolItem->TracesPool() ) )
-			m_pDoc->AddRepositorySrc(*pPoolItem->TracesPool());
+        if ( !m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
+            m_pDoc->AddRepositorySrc(*pPoolItem->TraceChannel()->Pool());
 	}
 	else if ( pPoolItem->checkState(0) == Qt::Unchecked )
 	{
-		//CTracesRepositoryDoc*		pCurrentDoc = SelectedDocument();
-
-		if ( m_pDoc->Contains( *pPoolItem->TracesPool() ) )
-			m_pDoc->RemoveRepositorySrc(*pPoolItem->TracesPool());
+        if ( m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
+            m_pDoc->RemoveRepositorySrc(*pPoolItem->TraceChannel()->Pool());
 	}
-}
-
-
-/**
- *
- */
-void CPipesMgntPage::paintEvent( QPaintEvent*  )
-{
-//    QPainter            painter(this);
-//    QPen                penMid( palette().mid(), 2 );
-//    QPen                penLight( palette().midlight(), 3 );
-    
-
-//    painter.setBrush( palette().mid() );
-//    painter.setPen( penMid );
-//    painter.drawLine( 1, 0, 1, size().height()-1 );
-//    painter.drawLine( 0, size().height()-1, size().width()-1, size().height()-1 );
-    
-//    painter.setBrush( palette().midlight() );
-//    painter.setPen( penLight );
-//    painter.drawLine( size().width()-2, 0, size().width()-2, size().height()-1 );
 }
 
 
@@ -265,27 +229,28 @@ void CPipesMgntPage::paintEvent( QPaintEvent*  )
  */
 void CPipesMgntPage::FillPoolsList()
 {
-	TraceClientCore::CModule&					    rModule = TraceClientCore::CModule::Instance();
-    QIcon                                           PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
-    TraceClientCore::CPoolsList                     PoolsList;
-    TraceClientCore::CPoolsList::const_iterator     PoolIter;
+    TraceClientCore::CModule&                               rModule = TraceClientCore::CModule::Instance();
+    QIcon                                                   PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
+    TraceClientCore::CTraceChannelsList                     ChannelsList;
+    TraceClientCore::CTraceChannelsList::const_iterator     ChannelPos;
 
-    rModule.TracesPools().GetPoolsList( PoolsList );
+    rModule.TraceChannels().GetChannelsList(ChannelsList);
 
     ui->m_PoolsTree->clear();
 
-    for ( PoolIter = PoolsList.begin(); PoolIter != PoolsList.end(); ++ PoolIter )
+    for ( ChannelPos = ChannelsList.begin(); ChannelPos != ChannelsList.end(); ++ ChannelPos )
     {
-    	MainWindow::CPoolTreeItem*		    pItem = new MainWindow::CPoolTreeItem();
-        TraceClientCore::CTracesPool*       pPool = (*PoolIter)->Pool();
-	    pItem->SetPool( pPool );
+        MainWindow::CPoolTreeItem*                  pItem = new MainWindow::CPoolTreeItem();
+        TraceClientCore::CTraceChannel&       rChannel = (*ChannelPos).Channel();
+
+        pItem->SetChannel( &rChannel );
 	    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	    pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
         pItem->setIcon(0, PipeSourceIcon);
 
-        if ( pPool->Feeder().Valid() )
+        if ( rChannel.Feeder().Valid() )
         {
-			if ( pPool->Feeder()->IsRunning() )
+            if ( rChannel.Feeder()->IsRunning() )
 			{
 				pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
 				pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
@@ -297,7 +262,7 @@ void CPipesMgntPage::FillPoolsList()
 			}
         }
 
-        if ( m_pDoc->Contains(*pPool) )
+        if ( m_pDoc->Contains(*rChannel.Pool()) )
             pItem->setCheckState(0, Qt::Checked );
         else
             pItem->setCheckState(0, Qt::Unchecked );

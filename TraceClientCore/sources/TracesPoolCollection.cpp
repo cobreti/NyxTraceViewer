@@ -92,7 +92,7 @@ void TraceClientCore::CTracesPoolCollection::GetPoolsList(CPoolsList &rList)
 
 	while ( pos != m_TracesPools.end() )
 	{
-		rList.push_back( new CPoolsListItem( (CTracesPool*)pos->second ) );
+		rList.push_back( CPoolsListItem( (CTracesPool*)pos->second ) );
 		++ pos;
 	}
 }

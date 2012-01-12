@@ -76,6 +76,21 @@ namespace TraceClientCore
     /**
      *
      */
+    void CTraceChannels::GetChannelsList( CTraceChannelsList& rList ) const
+    {
+        TraceChannelsMap::const_iterator        pos = m_Channels.begin();
+        
+        while ( pos != m_Channels.end() )
+        {
+            rList.push_back( CTraceChannelListItem(*pos->second) );
+            ++ pos;
+        }
+    }
+    
+    
+    /**
+     *
+     */
     void CTraceChannels::Clear()
     {
         TraceChannelsMap::iterator      pos = m_Channels.begin();

@@ -32,10 +32,7 @@ namespace TraceClientCore
 		
 		CTraceDataRepository&	    Repository()		    { return *m_pRepository; }
         const CTraceDataRepository& Repository() const      { return *m_pRepository; }
-		
-		const CTraceFeederRef&		Feeder() const		{ return m_refFeeder; }
-		CTraceFeederRef&			Feeder()			{ return m_refFeeder; }
-		
+				
 		Nyx::CMemoryPoolRef			MemoryPool() const	{ return m_refMemoryPool; }
 		
 	protected:
@@ -43,7 +40,6 @@ namespace TraceClientCore
 		Nyx::CWString				m_Name;
 		Nyx::CWString				m_Description;
 		CTraceDataRepository*		m_pRepository;
-		CTraceFeederRef				m_refFeeder;
 		Nyx::CMemoryPoolRef			m_refMemoryPool;
 	};
 }

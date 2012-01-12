@@ -31,7 +31,6 @@ public slots:
 
 protected:
 
-    void paintEvent( QPaintEvent* event );
     void FillPoolsList();
 
 protected:

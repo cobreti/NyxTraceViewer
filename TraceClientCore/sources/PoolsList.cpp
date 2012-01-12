@@ -9,6 +9,16 @@ namespace TraceClientCore
 	CPoolsListItem::CPoolsListItem(TraceClientCore::CTracesPool *pPool) : m_pPool(pPool)
 	{
 	}
+    
+    
+    /**
+     *
+     */
+    CPoolsListItem::CPoolsListItem(const CPoolsListItem& item) :
+    m_pPool(item.m_pPool)
+    {        
+    }
+    
 
 	/**
 	 *
@@ -30,12 +40,6 @@ namespace TraceClientCore
 	 */
 	CPoolsList::~CPoolsList()
 	{
-		while ( !empty() )
-		{
-			CPoolsListItem*	pItem = front();
-			pop_front();
-			delete pItem;
-		}
 	}
 
 }

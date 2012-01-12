@@ -15,7 +15,8 @@ namespace TraceClientCore
 	{
 	public:
 		CPoolsListItem( CTracesPool* pPool );
-		virtual ~CPoolsListItem();
+        CPoolsListItem( const CPoolsListItem& item );
+		~CPoolsListItem();
 
 		CTracesPool* Pool() const		{ return m_pPool; }
 
@@ -27,7 +28,7 @@ namespace TraceClientCore
 	/**
 	 *
 	 */
-	class CPoolsList : public std::list<CPoolsListItem*>
+	class CPoolsList : public std::list<CPoolsListItem>
 	{
 	public:
 		CPoolsList();

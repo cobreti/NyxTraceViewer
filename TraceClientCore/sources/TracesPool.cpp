@@ -18,8 +18,6 @@ TraceClientCore::CTracesPool::CTracesPool(Nyx::CMemoryPool* pMemoryPool, const w
  */
 TraceClientCore::CTracesPool::~CTracesPool()
 {
-	m_refFeeder = NULL;
-
 	delete m_pRepository;
 }
 

@@ -13,7 +13,6 @@
 		165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977021127109B00CC718B /* TracesPoolCollection.hpp */; };
 		165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */; };
 		165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */; };
-		1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1665B7A211EA4FB100D4B309 /* PoolsList.hpp */; };
 		168CBEE814AA6FA6004FB957 /* TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */; };
 		169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169387361347ACB000691948 /* RepositoryTraceInserter.cpp */; };
 		16A2773B14B23597002D6924 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773A14B23597002D6924 /* PoolsList.cpp */; };
@@ -34,6 +33,7 @@
 		16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */; };
 		16DF357E138CA19D008C3E30 /* PoolsUpdateClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */; };
 		16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */; };
+		16E93BF514BBDBAB002B3C9C /* PoolsList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16E93BF414BBDBAB002B3C9C /* PoolsList.hpp */; };
 		16EECE691126406500465BE0 /* TraceData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16EECE681126406500465BE0 /* TraceData.hpp */; };
 		16EECE6D1126409800465BE0 /* TraceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECE6B1126409800465BE0 /* TraceData.cpp */; };
 		16EECE9D1126476E00465BE0 /* TraceDataRepository.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */; };
@@ -51,7 +51,6 @@
 		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserver.cpp; path = ../sources/RepositoryObserver.cpp; sourceTree = SOURCE_ROOT; };
-		1665B7A211EA4FB100D4B309 /* PoolsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsList.hpp; path = ../include/DataStruct/PoolsList.hpp; sourceTree = SOURCE_ROOT; };
 		168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeStamp.cpp; path = ../sources/TimeStamp.cpp; sourceTree = "<group>"; };
 		169387361347ACB000691948 /* RepositoryTraceInserter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryTraceInserter.cpp; path = ../sources/RepositoryTraceInserter.cpp; sourceTree = "<group>"; };
 		16A2773A14B23597002D6924 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../sources/PoolsList.cpp; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceInserter.hpp; path = ../include/TraceInserter.hpp; sourceTree = SOURCE_ROOT; };
 		16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsUpdateClock.cpp; path = ../sources/PoolsUpdateClock.cpp; sourceTree = "<group>"; };
 		16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsUpdateClock.hpp; path = ../include/PoolsUpdateClock.hpp; sourceTree = "<group>"; };
+		16E93BF414BBDBAB002B3C9C /* PoolsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsList.hpp; path = ../include/DataStruct/PoolsList.hpp; sourceTree = "<group>"; };
 		16EECE681126406500465BE0 /* TraceData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceData.hpp; path = ../include/TraceData.hpp; sourceTree = SOURCE_ROOT; };
 		16EECE6B1126409800465BE0 /* TraceData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceData.cpp; path = ../Sources/TraceData.cpp; sourceTree = SOURCE_ROOT; };
 		16EECE9C1126476E00465BE0 /* TraceDataRepository.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepository.cpp; path = ../Sources/TraceDataRepository.cpp; sourceTree = SOURCE_ROOT; };
@@ -115,13 +115,13 @@
 				16EECE9E1126479800465BE0 /* TraceDataRepository.hpp */,
 				16EECEEB11265A1A00465BE0 /* TraceClientCoreModule.hpp */,
 				16EECEED11265BA300465BE0 /* TraceClientCoreModule.cpp */,
-				1665B7A211EA4FB100D4B309 /* PoolsList.hpp */,
 				16EECEF611265D8A00465BE0 /* TracesPool.hpp */,
 				16EECEF811265E3800465BE0 /* TracesPool.cpp */,
 				165977021127109B00CC718B /* TracesPoolCollection.hpp */,
 				165976FE1127103C00CC718B /* TracesPoolCollection.cpp */,
 				16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */,
 				16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */,
+				16E93BF414BBDBAB002B3C9C /* PoolsList.hpp */,
 				16A2773A14B23597002D6924 /* PoolsList.cpp */,
 				16A2774014B24DAE002D6924 /* TcpModule.hpp */,
 				16A2774214B24E48002D6924 /* TcpModule.cpp */,
@@ -185,7 +185,6 @@
 				16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */,
 				16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */,
 				1604112A11B1C57E00E3F6AF /* PipeTraceFeeder.hpp in Headers */,
-				1665B7A411EA4FB100D4B309 /* PoolsList.hpp in Headers */,
 				16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */,
 				16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */,
 				16A2774114B24DAE002D6924 /* TcpModule.hpp in Headers */,
@@ -193,6 +192,7 @@
 				16A2774714B24FDF002D6924 /* TcpTracesReceivers.hpp in Headers */,
 				16A563C414BA36A500466A23 /* TraceChannels.hpp in Headers */,
 				16A563C814BA3CB800466A23 /* TraceChannel.hpp in Headers */,
+				16E93BF514BBDBAB002B3C9C /* PoolsList.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

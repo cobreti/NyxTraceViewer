@@ -20,6 +20,8 @@ namespace TraceClientCore
         virtual CTraceChannel* Get( const Nyx::CAString& name );
         virtual void Update( CTraceChannel* pChannel );
         
+        virtual void GetChannelsList( CTraceChannelsList& rList ) const;
+        
     protected:
         
         typedef     std::map<Nyx::CAString, CTraceChannel*>        TraceChannelsMap;
