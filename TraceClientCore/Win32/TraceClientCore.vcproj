@@ -155,22 +155,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\sources\DbgTracesFeeder.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\DbgTracesFeeder.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\sources\DbgTracesFeederCore.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\include\DbgTracesFeederCore.hpp"
-				>
-			</File>
-			<File
 				RelativePath="..\sources\PipeTraceFeeder.cpp"
 				>
 			</File>
@@ -195,7 +179,47 @@
 				>
 			</File>
 			<File
+				RelativePath="..\sources\TcpModule.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\TcpModule.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TcpTracesReceiver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\TcpTracesReceiver.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TcpTracesReceivers.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\TcpTracesReceivers.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sources\TimeStamp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TraceChannel.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\TraceChannel.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TraceChannels.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\include\TraceChannels.hpp"
 				>
 			</File>
 			<File
@@ -235,6 +259,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\sources\TraceNxStreamReader.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sources\TracesPool.cpp"
 				>
 			</File>
@@ -254,7 +282,7 @@
 				Name="DataStruct"
 				>
 				<File
-					RelativePath="..\include\DataStruct\PoolsList.cpp"
+					RelativePath="..\sources\PoolsList.cpp"
 					>
 				</File>
 				<File
