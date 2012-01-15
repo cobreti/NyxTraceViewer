@@ -2,6 +2,8 @@
 #include "FeederSettings.hpp"
 
 #include "TraceClientLink.hpp"
+#include "FeederSettings.hpp"
+#include "FeederSource.hpp"
 
 /**
  *
@@ -46,11 +48,19 @@ void CExternalFeeder::OnEnd()
 void CExternalFeeder::OnSendTrace()
 {
     static      int i = 0;
-    Nyx::CAString     text;
-    text = Settings().Text().c_str();
 
-    CTraceClientLink::Instance().Write(text.c_str());
-    //CTraceClientLink::Instance().Write(L"Test with parameters : str = '%s' and value = %i (%Xh)", L"string value", i, i);
+    if ( Settings().FeederSource() )
+    {
+        Nyx::CWString   text;
+        Nyx::CAString   Atext;
+
+        Settings().FeederSource()->GetLine(text);
+
+        Atext = text;
+
+        CTraceClientLink::Instance().Write(text.c_str());
+        //CTraceClientLink::Instance().Write(L"Test with parameters : str = '%s' and value = %i (%Xh)", L"string value", i, i);
+    }
 
     ++i;
     i << 2;

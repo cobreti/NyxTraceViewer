@@ -2,10 +2,11 @@
 //
 
 #include "stdafx.h"
-#include "TraceClientLinkDLL.h"
+#include <mmsystem.h>
 #include "Nyx.hpp"
 #include "NyxNet.hpp"
 #include "NyxNetPipeTraceOutput.hpp"
+#include "TraceClientLinkDLL.h"
 
 #include <map>
 
