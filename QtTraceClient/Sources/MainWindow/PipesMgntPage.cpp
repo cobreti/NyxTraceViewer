@@ -196,10 +196,18 @@ void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 
     if ( pPoolItem->TraceChannel() && pPoolItem->TraceChannel()->Name() != pItem->text(0).toStdString().c_str() )
     {
-        pPoolItem->TraceChannel()->Name() = pItem->text(0).toStdString().c_str();
+        Nyx::CAString            AnsiName( pItem->text(0).toStdString().c_str() );
+        Nyx::CWString            WName;
+        
+        WName = AnsiName;
+
+        pPoolItem->TraceChannel()->Name() = AnsiName; //pItem->text(0).toStdString().c_str();
 
         TraceClientCore::CModule&			rModule = TraceClientCore::CModule::Instance();
         rModule.TraceChannels().Update( pPoolItem->TraceChannel() );
+
+        pPoolItem->TraceChannel()->Pool()->SetName( WName.c_str() );
+        rModule.TracesPools().Update(pPoolItem->TraceChannel()->Pool());
     }
 }
 
