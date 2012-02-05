@@ -66,7 +66,6 @@ void CViewItemTextPainter::Display(const CViewSettings &settings, CDrawViewItemS
                                 rColSettings.GetWidth() - rColSettings.Margins().width(),
                                 rcText.height() - rColSettings.Margins().height() );
 
-
     pos = TextLines.begin();
     while ( pos != TextLines.end() )
     {

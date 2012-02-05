@@ -43,7 +43,7 @@ void CTracesDocument::Init()
 
     m_pRepositoryObserver = new CDocRepositoryObserver(*this);
 
-    CViewItemSettings*      pSetting = NULL;
+    //CViewItemSettings*      pSetting = NULL;
 //    QFont*                  pFont = new QFont("Courier New", 11);
 //    QFontMetricsF           TextMetrics(*pFont);
 
@@ -75,7 +75,7 @@ void CTracesDocument::Init()
     pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
     pColSettings->AutoWidth() = true;
     pColSettings->SetPainterId( CViewItemPainter::ePId_TickCount );
-    pColSettings->SetTitle("TickCount");
+    pColSettings->SetTitle("Time Stamp");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     DefaultViewSettings().ColumnsSettings().Set( eVCI_TickCount, pColSettings );
 

@@ -357,7 +357,7 @@ void CTracesView::showEvent( QShowEvent* )
 
 void CTracesView::InitSettings()
 {
-	CViewColumnSettings*		pColSettings = NULL;
+	//CViewColumnSettings*		pColSettings = NULL;
 
     m_Settings = Doc().DefaultViewSettings();
 

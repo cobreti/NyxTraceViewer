@@ -17,6 +17,7 @@ CViewHeader::CViewHeader(CViewColumnsSettings& rColumnsSettings, QWidget *parent
 
     m_pFont = new QFont("Courier New", 11);
     m_pFont->setBold(true);
+    m_pFont->setUnderline(true);
 
     //m_pBkgndImage = new QImage(":/View/Images/VGradientInner.png");
     SetBkgndColor( QColor(173, 229, 255) );
