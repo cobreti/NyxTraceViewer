@@ -43,7 +43,13 @@ OBJS := $(OBJDIR)/PipeTraceFeeder.o \
 		$(OBJDIR)/TraceFeeder.o \
 		$(OBJDIR)/TracesPool.o \
 		$(OBJDIR)/TracesPoolCollection.o \
-		$(OBJDIR)/PoolsList.o
+		$(OBJDIR)/PoolsList.o \
+		$(OBJDIR)/TraceChannel.o \
+		$(OBJDIR)/TraceChannels.o \
+		$(OBJDIR)/TraceNxStreamReader.o \
+		$(OBJDIR)/TcpModule.o \
+		$(OBJDIR)/TcpTracesReceiver.o \
+		$(OBJDIR)/TcpTracesReceivers.o
 
 
 $(OBJDIR)/%.o: ../sources/%.cpp

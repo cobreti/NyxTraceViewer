@@ -154,9 +154,9 @@ CONFIG(debug, debug|release) {
 #    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Debug/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../lib/Linux/Debug
-    LIBS += -lNyxBase \
-        -L../../NyxLibs/Lib/Linux/Debug
     LIBS += -lNyxNet \
+        -L../../NyxLibs/Lib/Linux/Debug
+    LIBS += -lNyxBase \
         -L../../NyxLibs/Lib/Linux/Debug
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
@@ -168,9 +168,9 @@ else {
 #    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../lib/Linux/Release
-    LIBS += -lNyxBase \
-        -L../../NyxLibs/Lib/Linux/Release
     LIBS += -lNyxNet \
+        -L../../NyxLibs/Lib/Linux/Release
+    LIBS += -lNyxBase \
         -L../../NyxLibs/Lib/Linux/Release
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
