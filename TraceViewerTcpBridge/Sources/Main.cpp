@@ -22,12 +22,18 @@ Nyx::CEventRef      g_refTerminateEvent;
  *
  */
 void AbortHandler(int);
+void SigPipeHandler(int);
 
 void AbortHandler(int)
 {
 //    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"AbortHandler");
     g_refTerminateEvent->Signal(0);
 }
+
+//void SigPipeHandler(int)
+//{
+//	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"SigPipe received");
+//}
 
 
 /**
@@ -50,16 +56,17 @@ int main( int argc, char *argv[] )
     signal(SIGTERM, AbortHandler);
     signal(SIGABRT, AbortHandler);
     signal(SIGINT, AbortHandler);
+//    signal(SIGPIPE, SigPipeHandler);
     
     Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"TraceViewerBridge starting");
     
-    pReceiver = new CTracePipeReceiver("Test");
-    pReceiver->Start();
-    
-    g_refTerminateEvent->WaitSignaled();
-    
-    pReceiver->Stop();
-    delete pReceiver;
+	pReceiver = new CTracePipeReceiver("Test");
+	pReceiver->Start();
+
+	g_refTerminateEvent->WaitSignaled();
+
+	pReceiver->Stop();
+	delete pReceiver;
     
     Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"TraceViewerBridge ending");
     

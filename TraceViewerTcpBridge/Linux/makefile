@@ -8,11 +8,11 @@ endif
 ifeq ($(Config),Release)
 	OBJDIR := Release
 	LIBDIR := $(LIBBASEDIR)/Release
-	CONFIG_CFLAGS := -O3
+	CONFIG_CFLAGS := -O3 -fexceptions
 else
 	OBJDIR := Debug
 	LIBDIR := $(LIBBASEDIR)/Debug
-	CONFIG_CFLAGS := -O0
+	CONFIG_CFLAGS := -O0 -fexceptions
 endif
 
 

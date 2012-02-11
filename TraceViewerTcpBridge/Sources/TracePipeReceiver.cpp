@@ -39,12 +39,25 @@ void CTracePipeReceiver::Start()
     m_refOutConnection = NyxNet::CNxConnection::Alloc();
     
     m_refOutSocket = NyxNet::CTcpIpSocket::Alloc();
-    res = NyxNet::CModule::Default()->GetHostname( HostName );
-    res = NyxNet::CModule::Default()->GetHostIp( HostName.c_str(), HostIp );
+    //res = NyxNet::CModule::Default()->GetHostname( HostName );
+    //res = NyxNet::CModule::Default()->GetHostIp( HostName.c_str(), HostIp );
     
+    HostIp = "192.168.1.103";
+
     m_refOutConnection->Open( m_refOutSocket );
-    m_refOutSocket->Create( HostIp.c_str(), 8500 );
-    m_refOutSocket->Connect();
+    res = m_refOutSocket->Create( HostIp.c_str(), 8500 );
+
+    if ( Nyx::Failed(res) )
+    {
+    	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Failed to create output tcp socket");
+    }
+
+    res = m_refOutSocket->Connect();
+
+    if ( Nyx::Failed(res) )
+    {
+    	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Failed to connect to client");
+    }
 }
 
 
@@ -69,32 +82,45 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
     Nyx::UInt32                 SectionsCount = 0;
     Nyx::UInt32                 OutSectionsCount = 0;
     
+    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Handle Stream");
+
     if ( !m_refOutSocket->Valid() )
-        m_refOutSocket->Connect();
+    {
+    	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"no output connection: trying to reconnect");
+        Nyx::NyxResult res = m_refOutSocket->Connect();
+
+        if ( Nyx::Failed(res) )
+        	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"failed to connect");
+    }
     
-    NyxNet::CNxStreamWriter     OutWriter( (NyxNet::CNxConnection*)m_refOutConnection, NyxNet::eNxDT_TraceData );
     
     try
     {
+        NyxNet::CNxStreamWriter     OutWriter( (NyxNet::CNxConnection*)m_refOutConnection, NyxNet::eNxDT_TraceData );
+
         // read sections count
         {
             NyxNet::CNxSectionStreamReader        SectionReader(Reader);
             
-            m_Buffer.Resize(SectionReader.Size());
-            SectionReader.Read(m_Buffer, SectionReader.Size());
-            
-            SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();
-            
-            OutSectionsCount = SectionsCount + 1;
+            if ( SectionReader.Size() > 0 )
+            {
+				m_Buffer.Resize(SectionReader.Size());
+				SectionReader.Read(m_Buffer, SectionReader.Size());
 
-            NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(OutSectionsCount));
-            SectionWriter.Write(&SectionsCount, sizeof(OutSectionsCount));
+				SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();
+
+				OutSectionsCount = SectionsCount + 1;
+
+				NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(OutSectionsCount));
+				SectionWriter.Write(&SectionsCount, sizeof(OutSectionsCount));
+            }
         }
         
         //
         // write name
         //
         
+        if ( SectionsCount > 0 )
         {
             NyxNet::NxDataSize                  size = (NyxNet::NxDataSize)m_Name.length() + 1;
             NyxNet::CNxSectionStreamWriter      SectionWriter(OutWriter, size);
