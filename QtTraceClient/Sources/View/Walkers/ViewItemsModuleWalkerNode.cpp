@@ -42,13 +42,25 @@ void CViewItemsModuleWalkerNode::InitModulePosition()
 {
     if ( !ValidPos() )
         MoveToBegin();
-//    else if ( !m_UpperPos.Valid() )
-//    {
-//        CViewItemsModuleWalkerNodePos       pos(m_LowerPos);
+}
 
-//        if ( pos.MoveToNext() )
-//            m_UpperPos = pos;
-//    }
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::RefreshPositions()
+{
+    if ( m_LowerPos.Valid() && !m_UpperPos.Valid() )
+    {
+        m_UpperPos = m_LowerPos;
+        MoveToNext(m_UpperPos);
+    }
+
+    if ( !m_LowerPos.Valid() && m_UpperPos.Valid() )
+    {
+        m_LowerPos = m_UpperPos;
+        MoveToPrevious(m_LowerPos);
+    }
 }
 
 

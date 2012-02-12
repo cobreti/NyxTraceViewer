@@ -37,6 +37,7 @@ public:
     virtual ~CViewItemsModuleWalkerNode();
 
     void InitModulePosition();
+    void RefreshPositions();
 
     bool ContainsModule( CModuleViewItems* pModule ) const;
     void AddNode( CViewItemsSessionWalkerNode* pNode );

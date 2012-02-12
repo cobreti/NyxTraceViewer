@@ -68,7 +68,7 @@ namespace TraceClientCore
                 
                 pTrace = TraceReader.Read(SectionsCount, Reader);
                 if ( pTrace )
-                    pChannel->Insert(pTrace);          
+                    pChannel->Insert(pTrace);
             }
             else
             {            
@@ -79,7 +79,6 @@ namespace TraceClientCore
                     m_Buffer.Resize(SectionReader.Size());
                     SectionReader.Read(m_Buffer, SectionReader.Size());
                     TotalSize += SectionReader.Size();
-                    
                 }
             }
         }

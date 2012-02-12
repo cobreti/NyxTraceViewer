@@ -168,6 +168,8 @@ bool CViewItemsWalker::MoveToNext()
     {
         CViewItemsModuleWalkerNode* pNode = m_Nodes[index];
 
+        pNode->RefreshPositions();
+
         if ( !pNode->UpperPos().Valid() ) // attempt getting a valid upper position in case new data came in
         {
             if ( pNode->LowerPos().Valid() )
@@ -211,7 +213,6 @@ bool CViewItemsWalker::MoveToNext()
 
         m_Nodes[pos.ModuleNodeId()]->MoveToNext();
 
-//        ++ m_LineNumber;
         return true;
     }
 
@@ -239,9 +240,11 @@ bool CViewItemsWalker::MoveToPrevious()
 
     for (index = 0; index < m_Nodes.size(); ++index)
     {
+        CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
+        pNode->RefreshPositions();
+
         if ( pos.Valid() )
         {
-            const CViewItemsModuleWalkerNode*   pNode = m_Nodes[index];
 
             if ( pNode->LowerPos().Valid() && pNode->LowerPos().IsAfter(pos))
             {
@@ -251,7 +254,7 @@ bool CViewItemsWalker::MoveToPrevious()
         }
         else
         {
-            pos = m_Nodes[index]->LowerPos();
+            pos = pNode->LowerPos();
             pos.ModuleNodeId() = index;
         }
     }

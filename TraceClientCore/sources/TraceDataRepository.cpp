@@ -141,8 +141,8 @@ namespace TraceClientCore
                 }
 
                 posObserver->first->Insert(*pos);
-
-                posObserver->second.StartPos() = EndPos;
+                
+                posObserver->second.StartPos() = pos;
             }
 
             ++ posObserver;
