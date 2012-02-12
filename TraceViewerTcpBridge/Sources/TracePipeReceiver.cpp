@@ -3,7 +3,8 @@
 /**
  *
  */
-CTracePipeReceiver::CTracePipeReceiver(const char* szName)
+CTracePipeReceiver::CTracePipeReceiver(const char* szName) :
+m_ConnectionAttemptInterval(15)
 {
     m_Name = szName;
     
@@ -86,11 +87,28 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
 
     if ( !m_refOutSocket->Valid() )
     {
-    	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"no output connection: trying to reconnect");
-        Nyx::NyxResult res = m_refOutSocket->Connect();
+    	if ( m_LastConnectionAttempt.Valid() )
+    	{
+    		Nyx::CTime	curTime = Nyx::CTime::GetCurrentTime();
 
-        if ( Nyx::Failed(res) )
-        	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"failed to connect");
+    		if ( curTime - m_LastConnectionAttempt > m_ConnectionAttemptInterval )
+    		{
+				Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"no output connection: trying to reconnect");
+				m_refOutSocket->Disconnect();
+
+				m_refOutSocket->Renew();
+				Nyx::NyxResult res = m_refOutSocket->Connect();
+
+				if ( Nyx::Failed(res) )
+					Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"failed to connect");
+
+				m_LastConnectionAttempt = curTime;
+    		}
+    	}
+    	else
+    	{
+        	m_LastConnectionAttempt = Nyx::CTime::GetCurrentTime();
+    	}
     }
     
     
@@ -137,8 +155,14 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
             SectionReader.Read(m_Buffer, SectionReader.Size());
             TotalSize += SectionReader.Size();
             
+//            if ( SectionsCount == 0 )
+//            {
+//            	wchar_t* pText = m_Buffer.GetBufferAs<wchar_t>();
+//            	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Text : ") << Nyx::CTF_Text(pText);
+//            }
+
             NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, SectionReader.Size());
-            SectionWriter.Write( m_Buffer.GetBufferAs<void*>(), SectionReader.Size());
+            SectionWriter.Write( m_Buffer.GetBufferAs<void>(), SectionReader.Size());
         }
     }
     catch (...)

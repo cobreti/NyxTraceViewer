@@ -40,6 +40,9 @@ protected:
     
     NyxNet::CNxConnectionRef        m_refOutConnection;
     NyxNet::CTcpIpSocketRef         m_refOutSocket;
+
+    Nyx::CTime						m_LastConnectionAttempt;
+    Nyx::CTime						m_ConnectionAttemptInterval;
 };
 
 
