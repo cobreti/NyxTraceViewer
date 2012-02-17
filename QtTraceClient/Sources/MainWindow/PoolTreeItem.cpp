@@ -30,7 +30,7 @@ namespace MainWindow
 
         QString     name = pChannel->Name().c_str();
 
-        setText(0, name);
+        setText(3, name);
     }
 }
 

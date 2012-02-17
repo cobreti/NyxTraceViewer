@@ -15,21 +15,34 @@
 CPipesMgntPage::CPipesMgntPage(QWidget* pParent) :
 QDialog(pParent),
 ui(new Ui::PipesMgntPage()),
-m_pDoc(NULL)
+m_pDoc(NULL),
+m_ItemDelegate()
 {
     ui->setupUi(this);
 
     setWindowFlags( Qt::Widget );
 
     connect(ui->m_btnAdd, SIGNAL(clicked()), this, SLOT(OnNewPool()));
-    connect(ui->m_btnStartStop, SIGNAL(clicked()), this, SLOT(OnStartStop()));
     connect(ui->m_PoolsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnPoolSelectionChanged()));
 	connect(ui->m_PoolsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemChanged(QTreeWidgetItem*, int)));
 	connect(ui->m_PoolsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemClicked(QTreeWidgetItem*, int)));
+    connect(ui->m_PoolsTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemDoubleClicked(QTreeWidgetItem*, int)));
 
     ui->m_btnRemove->setEnabled(false);
-    ui->m_btnStartStop->setIcon(QIcon(":/MainWindow/Icons/StartPipe-icon.png"));
-    ui->m_btnStartStop->setEnabled(false);
+
+    QIcon                                       PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
+    QIcon                                       StateIcon(":/MainWindow/Icons/StartPipe-icon.png");
+
+    ui->m_PoolsTree->setColumnWidth(0, 48);
+    ui->m_PoolsTree->setColumnWidth(1, 48 );
+    ui->m_PoolsTree->setColumnWidth(2, 48 );
+
+    m_ItemDelegate.SetTreeWidget( ui->m_PoolsTree );
+
+    ui->m_PoolsTree->setItemDelegateForColumn(0, &m_ItemDelegate);
+    ui->m_PoolsTree->setItemDelegateForColumn(1, &m_ItemDelegate);
+    ui->m_PoolsTree->setItemDelegateForColumn(2, &m_ItemDelegate);
+    ui->m_PoolsTree->setItemDelegateForColumn(3, &m_ItemDelegate);
 }
 
 
@@ -68,6 +81,7 @@ void CPipesMgntPage::OnNewPool()
     TraceClientCore::CPipeTraceFeeder*          pPipeTraceFeeder = NULL;
 	TraceClientCore::CModule&					rModule = TraceClientCore::CModule::Instance();
     QIcon                                       PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
+    QIcon                                       StateIcon(":/MainWindow/Icons/StartPipe-icon.png");
 
     //
     // Add pool
@@ -100,7 +114,8 @@ void CPipesMgntPage::OnNewPool()
     pItem->SetChannel(pChannel);
     pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
-    pItem->setIcon(0, PipeSourceIcon);
+    //pItem->setIcon(0, PipeSourceIcon);
+    //pItem->setIcon(1, StateIcon);
     ui->m_PoolsTree->insertTopLevelItem(ui->m_PoolsTree->topLevelItemCount(), pItem );
     ui->m_PoolsTree->clearSelection();
     pItem->setSelected(true);
@@ -113,90 +128,13 @@ void CPipesMgntPage::OnNewPool()
 /**
  *
  */
-void CPipesMgntPage::OnStartStop()
-{
-	MainWindow::CPoolTreeItem*		pItem = static_cast<MainWindow::CPoolTreeItem*>(ui->m_PoolsTree->selectedItems().front());
-    QIcon                           StartPipeIcon(":/MainWindow/Icons/StartPipe-icon.png");
-    QIcon                           StopPipeIcon(":/MainWindow/Icons/StopPipe-icon.png");
-
-	if ( pItem != NULL )
-	{
-        TraceClientCore::CTraceChannel* pChannel = pItem->TraceChannel();
-
-        if ( pChannel->Feeder().Valid() )
-		{
-            if ( pChannel->Feeder()->IsRunning() )
-			{
-                pChannel->Feeder()->Stop();
-				pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
-				pItem->setForeground(0, QBrush(QColor(150, 0, 0)));
-                ui->m_btnStartStop->setIcon(StartPipeIcon);
-			}
-			else
-			{
-                pChannel->Feeder()->Start();
-				pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
-				pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
-                ui->m_btnStartStop->setIcon(StopPipeIcon);
-			}
-		}
-	}
-}
-
-
-/**
- *
- */
-void CPipesMgntPage::OnPoolSelectionChanged()
-{
-    if ( ui->m_PoolsTree->selectedItems().empty() )
-        return;
-
-	MainWindow::CPoolTreeItem*		pItem = static_cast<MainWindow::CPoolTreeItem*>(ui->m_PoolsTree->selectedItems().front());
-    QIcon                           StartPipeIcon(":/MainWindow/Icons/StartPipe-icon.png");
-    QIcon                           StopPipeIcon(":/MainWindow/Icons/StopPipe-icon.png");
-
-	if ( pItem == NULL )
-	{
-        ui->m_btnStartStop->setIcon(StartPipeIcon);
-		ui->m_btnStartStop->setEnabled(false);
-	}
-	else
-	{
-        TraceClientCore::CTraceChannel*     pChannel = pItem->TraceChannel();
-
-        if ( !pChannel->Feeder().Valid() )
-		{
-            ui->m_btnStartStop->setIcon(StartPipeIcon);
-			ui->m_btnStartStop->setEnabled(false);
-		}
-		else
-		{
-            if ( pChannel->Feeder()->IsRunning() )
-			{
-                ui->m_btnStartStop->setIcon(StopPipeIcon);
-				ui->m_btnStartStop->setEnabled(true);
-			}
-			else
-			{
-                ui->m_btnStartStop->setIcon(StartPipeIcon);
-				ui->m_btnStartStop->setEnabled(true);
-			}
-		}
-	}
-}
-
-
-/**
- *
- */
 void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 {
 	MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(pItem);
 
-    if ( pPoolItem->TraceChannel() && pPoolItem->TraceChannel()->Name() != pItem->text(0).toStdString().c_str() )
+    if ( pPoolItem->TraceChannel() && pPoolItem->TraceChannel()->Name() != pItem->text(3).toStdString().c_str() )
     {
-        Nyx::CAString            AnsiName( pItem->text(0).toStdString().c_str() );
+        Nyx::CAString            AnsiName( pItem->text(3).toStdString().c_str() );
         Nyx::CWString            WName;
         
         WName = AnsiName;
@@ -215,20 +153,53 @@ void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 /**
  *
  */
-void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int  )
+void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int column )
 {
 	MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(pItem);
 
-	if ( pPoolItem->checkState(0) == Qt::Checked )
-	{
-        if ( !m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
-            m_pDoc->AddRepositorySrc(*pPoolItem->TraceChannel()->Pool());
-	}
-	else if ( pPoolItem->checkState(0) == Qt::Unchecked )
-	{
-        if ( m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
-            m_pDoc->RemoveRepositorySrc(*pPoolItem->TraceChannel()->Pool());
-	}
+    if ( column == 0 )
+    {
+	    if ( pPoolItem->checkState(0) == Qt::Checked )
+	    {
+            if ( !m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
+                m_pDoc->AddRepositorySrc(*pPoolItem->TraceChannel()->Pool());
+	    }
+	    else if ( pPoolItem->checkState(0) == Qt::Unchecked )
+	    {
+            if ( m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
+                m_pDoc->RemoveRepositorySrc(*pPoolItem->TraceChannel()->Pool());
+	    }
+    }
+}
+
+
+/**
+ *
+ */
+void CPipesMgntPage::OnPoolItemDoubleClicked( QTreeWidgetItem* pItem, int column )
+{
+	MainWindow::CPoolTreeItem*		pPoolItem = static_cast<MainWindow::CPoolTreeItem*>(pItem);
+
+    if ( column == 2 )
+    {
+        TraceClientCore::CTraceChannel*     pChannel = pPoolItem->TraceChannel();
+
+        if ( pChannel->Feeder().Valid() )
+		{
+            if ( pChannel->Feeder()->IsRunning() )
+			{
+                pChannel->Feeder()->Stop();
+				pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+				pItem->setForeground(0, QBrush(QColor(150, 0, 0)));
+			}
+			else
+			{
+                pChannel->Feeder()->Start();
+				pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
+				pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
+			}
+		}
+    }
 }
 
 
@@ -277,6 +248,4 @@ void CPipesMgntPage::FillPoolsList()
 
         ui->m_PoolsTree->insertTopLevelItem(ui->m_PoolsTree->topLevelItemCount(), pItem );
     }
-
-    ui->m_btnStartStop->setEnabled(false);
 }

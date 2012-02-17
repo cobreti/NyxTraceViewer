@@ -3,6 +3,9 @@
 
 #include <QDialog>
 
+#include "PipesMgntPageItemDelegate.hpp"
+
+
 class QTreeWidgetItem;
 class CTracesDocument;
 
@@ -24,10 +27,9 @@ public:
 public slots:
 
     void OnNewPool();
-    void OnStartStop();
-    void OnPoolSelectionChanged();
     void OnPoolItemChanged( QTreeWidgetItem* pItem, int column );
     void OnPoolItemClicked( QTreeWidgetItem* pItem, int column );
+    void OnPoolItemDoubleClicked( QTreeWidgetItem* pItem, int column );
 
 protected:
 
@@ -37,6 +39,7 @@ protected:
 
     Ui::PipesMgntPage*          ui;
     CTracesDocument*            m_pDoc;
+    CPipesMgntPageItemDelegate  m_ItemDelegate;
 };
 
 #endif // _PIPESMGNTPAGE_HPP_
