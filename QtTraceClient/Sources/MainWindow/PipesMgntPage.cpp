@@ -1,4 +1,5 @@
 #include "PipesMgntPage.hpp"
+#include "PipesMgntPageItemDelegate.hpp"
 #include "ui_PipesMgntPage.h"
 #include "MainWindow/PoolTreeItem.hpp"
 #include "TraceClientCoreModule.hpp"
@@ -16,7 +17,7 @@ CPipesMgntPage::CPipesMgntPage(QWidget* pParent) :
 QDialog(pParent),
 ui(new Ui::PipesMgntPage()),
 m_pDoc(NULL),
-m_ItemDelegate()
+m_pItemDelegate(NULL)
 {
     ui->setupUi(this);
 
@@ -37,12 +38,22 @@ m_ItemDelegate()
     ui->m_PoolsTree->setColumnWidth(1, 48 );
     ui->m_PoolsTree->setColumnWidth(2, 48 );
 
-    m_ItemDelegate.SetTreeWidget( ui->m_PoolsTree );
 
-    ui->m_PoolsTree->setItemDelegateForColumn(0, &m_ItemDelegate);
-    ui->m_PoolsTree->setItemDelegateForColumn(1, &m_ItemDelegate);
-    ui->m_PoolsTree->setItemDelegateForColumn(2, &m_ItemDelegate);
-    ui->m_PoolsTree->setItemDelegateForColumn(3, &m_ItemDelegate);
+    m_pItemDelegate = new CPipesMgntPageItemDelegate();
+    m_pItemDelegate->SetTreeWidget( ui->m_PoolsTree );
+    ui->m_PoolsTree->setItemDelegateForColumn(0, m_pItemDelegate);
+    ui->m_PoolsTree->setItemDelegateForColumn(1, m_pItemDelegate);
+    ui->m_PoolsTree->setItemDelegateForColumn(2, m_pItemDelegate);
+    ui->m_PoolsTree->setItemDelegateForColumn(3, m_pItemDelegate);
+}
+
+
+/**
+ *
+ */
+CPipesMgntPage::~CPipesMgntPage()
+{
+    delete m_pItemDelegate;
 }
 
 

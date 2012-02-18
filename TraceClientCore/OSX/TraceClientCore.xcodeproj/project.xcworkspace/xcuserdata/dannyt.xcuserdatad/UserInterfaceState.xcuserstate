@@ -2126,7 +2126,7 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>350711384.31708002</real>
+		<real>351280844.07936102</real>
 		<string>{361, 1281}</string>
 		<string>{710, 3}</string>
 		<dict>
@@ -3038,8 +3038,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.31719798</real>
-		<string>{1153, 1778}</string>
+		<real>351280835.10901701</real>
+		<string>{529, 2004}</string>
 		<string>{1556, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -3565,7 +3565,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.31713903</real>
+		<real>351280844.07941401</real>
 		<string>{0, 574}</string>
 		<dict>
 			<key>$class</key>
@@ -3850,7 +3850,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.31699002</real>
+		<real>351280844.07927698</real>
 		<string>{1349, 1208}</string>
 		<string>{2089, 0}</string>
 		<dict>
@@ -3957,7 +3957,7 @@
 			</array>
 		</dict>
 		<string>IDENameString</string>
-		<string>TraceClientCore Release</string>
+		<string>TraceClientCore Debug</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4106,7 +4106,7 @@
 		</dict>
 		<real>4</real>
 		<string>: </string>
-		<string>TraceClientCore Release</string>
+		<string>TraceClientCore Debug</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -4256,7 +4256,7 @@
 				<integer>344</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>350711382.973813</real>
+			<real>351277960.20824701</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -4267,7 +4267,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 10:49 PM</string>
+		<string>Today at 12:12 PM</string>
 		<integer>234</integer>
 		<string>TraceClientCore</string>
 		<dict>
@@ -4719,7 +4719,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>410</integer>
+					<integer>402</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -21943,7 +21943,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.32143497</real>
+		<real>351280844.08299899</real>
 		<string>{0, 2557}</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
@@ -25856,7 +25856,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.31971198</real>
+		<real>351280844.08169502</real>
 		<string>{761, 2236}</string>
 		<string>{2492, 0}</string>
 		<string>CTcpTracesReceiver::HandleStream( NyxNet::INxStreamRW&amp; rStream )</string>
@@ -26304,7 +26304,7 @@
 			<key>NS.objects</key>
 			<array/>
 		</dict>
-		<string>{{1044, 102}, {1271, 824}}</string>
+		<string>{{464, 251}, {1271, 824}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -36520,7 +36520,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.320575</real>
+		<real>351280844.08210498</real>
 		<string>{361, 1281}</string>
 		<string>{710, 3}</string>
 		<string>CTcpTracesReceivers::Start()</string>
@@ -45959,7 +45959,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.31921703</real>
+		<real>351280844.08121598</real>
 		<string>{0, 574}</string>
 		<dict>
 			<key>$class</key>
@@ -50008,10 +50008,6 @@
 					<key>CF$UID</key>
 					<integer>402</integer>
 				</dict>
-				<dict>
-					<key>CF$UID</key>
-					<integer>410</integer>
-				</dict>
 			</array>
 		</dict>
 		<dict>
@@ -51152,7 +51148,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.320988</real>
+		<real>351280844.082555</real>
 		<string>{1349, 1208}</string>
 		<string>{2089, 0}</string>
 		<string>CPoolsUpdateClock::ThreadRun()</string>
@@ -56940,8 +56936,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>350711384.320131</real>
-		<string>{1153, 1778}</string>
+		<real>351277960.22924501</real>
+		<string>{529, 2004}</string>
 		<string>{1556, 0}</string>
 		<dict>
 			<key>$class</key>

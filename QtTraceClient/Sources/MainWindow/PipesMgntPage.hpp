@@ -1,13 +1,13 @@
 #ifndef _PIPESMGNTPAGE_HPP_
 #define _PIPESMGNTPAGE_HPP_
 
-#include <QDialog>
 
-#include "PipesMgntPageItemDelegate.hpp"
+#include <QDialog>
 
 
 class QTreeWidgetItem;
 class CTracesDocument;
+class CPipesMgntPageItemDelegate;
 
 namespace Ui
 {
@@ -20,6 +20,7 @@ class CPipesMgntPage : public QDialog
         
 public:
     CPipesMgntPage( QWidget* pParent );
+    virtual ~CPipesMgntPage();
 
     void show(CTracesDocument* pDoc);
     void Refresh();
@@ -37,9 +38,9 @@ protected:
 
 protected:
 
-    Ui::PipesMgntPage*          ui;
-    CTracesDocument*            m_pDoc;
-    CPipesMgntPageItemDelegate  m_ItemDelegate;
+    Ui::PipesMgntPage*              ui;
+    CTracesDocument*                m_pDoc;
+    CPipesMgntPageItemDelegate*     m_pItemDelegate;
 };
 
 #endif // _PIPESMGNTPAGE_HPP_
