@@ -86,9 +86,10 @@ namespace TraceClientCore
                 
                 if ( flags.IsWideChar() )
                 {
+                    char*           pBuffer = m_ReadBuffer.GetBufferAs<char>();
+
                     if ( sizeof(wchar_t) < flags.WideCharSize() )
                     {
-                        char*           pBuffer = m_ReadBuffer.GetBufferAs<char>();
                         char*           pSrc = pBuffer;
                         char*           pDst = pBuffer;
                         Nyx::NyxSize    size = SectionReader.Size();
@@ -96,14 +97,13 @@ namespace TraceClientCore
                         while ( size > 0 )
                         {
                             memmove( pDst, pSrc, sizeof(wchar_t) );
-                            pSrc += sizeof(wchar_t);
-                            pDst += flags.WideCharSize();
+                            pSrc += flags.WideCharSize();
+                            pDst += sizeof(wchar_t);
                             size -= flags.WideCharSize();
                         }
                     }
 
-
-                    pTraceData->Data() = m_ReadBuffer.GetBufferAs<wchar_t>();
+                    pTraceData->Data() = (wchar_t*)pBuffer;
                 }
                 else if ( flags.IsAnsi() )
                 {
