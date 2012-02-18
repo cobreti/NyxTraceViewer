@@ -31,25 +31,13 @@ namespace TraceClientCore
     CTraceData* CTraceNxStreamReader::Read( Nyx::UInt32 SectionsCount, NyxNet::CNxStreamReader& Reader )
     {
         CTraceData*						pTraceData = NULL;
-        NyxNet::TraceFlags              flags = 0;
+        NyxNet::CTraceFlags             flags;
         Nyx::NyxResult                  res;
         
         if ( Reader.Valid() )
         {
             pTraceData = new (m_pPool->MemoryPool())CTraceData(m_pPool->MemoryPool());
-            
-//            // sections count
-//            {
-//                NyxNet::CNxSectionStreamReader      SectionReader(Reader);
-//                
-//                m_ReadBuffer.Resize(SectionReader.Size());
-//                res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
-//                if ( Nyx::Failed(res) )
-//                    throw Nyx::CException("failure to read sections count");
-//                
-//                SectionsCount = *m_ReadBuffer.GetBufferAs<Nyx::UInt32>();
-//            }
-            
+                        
             // flags
             {
                 NyxNet::CNxSectionStreamReader		SectionReader(Reader);
@@ -59,7 +47,7 @@ namespace TraceClientCore
                 if ( Nyx::Failed(res) )
                     throw Nyx::CException("failure to read version");
                 
-                flags = *m_ReadBuffer.GetBufferAs<NyxNet::TraceFlags>();
+                flags = *m_ReadBuffer.GetBufferAs<NyxNet::CTraceFlags>();
                 pTraceData->Flags() = flags;
             }
             
@@ -96,10 +84,31 @@ namespace TraceClientCore
                 if ( Nyx::Failed(res) )
                     throw Nyx::CException("failure to read data");
                 
-                if ( flags & NyxNet::TFlags_WideChar )
+                if ( flags.IsWideChar() )
+                {
+                    if ( sizeof(wchar_t) < flags.WideCharSize() )
+                    {
+                        char*           pBuffer = m_ReadBuffer.GetBufferAs<char>();
+                        char*           pSrc = pBuffer;
+                        char*           pDst = pBuffer;
+                        Nyx::NyxSize    size = SectionReader.Size();
+                        
+                        while ( size > 0 )
+                        {
+                            memmove( pDst, pSrc, sizeof(wchar_t) );
+                            pSrc += sizeof(wchar_t);
+                            pDst += flags.WideCharSize();
+                            size -= flags.WideCharSize();
+                        }
+                    }
+
+
                     pTraceData->Data() = m_ReadBuffer.GetBufferAs<wchar_t>();
-                else if ( flags & NyxNet::TFlags_Ansi )
+                }
+                else if ( flags.IsAnsi() )
+                {
                     pTraceData->Data() = m_ReadBuffer.GetBufferAs<char>();
+                }
             }
                             
             pTraceData->OwnerPool() = m_pPool;
@@ -110,3 +119,4 @@ namespace TraceClientCore
     }
     
 }
+

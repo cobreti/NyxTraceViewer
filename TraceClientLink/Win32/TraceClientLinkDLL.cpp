@@ -69,7 +69,7 @@ void OnProcessAttach()
 	g_refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_Ansi, false);
 	g_refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceClientLink") );
 
-	Nyx::CTraceStream(0x0).Write("OnProcessAttach");
+	//Nyx::CTraceStream(0x0).Write("OnProcessAttach");
 }
 
 
@@ -78,7 +78,7 @@ void OnProcessAttach()
  */
 void OnProcessDetach()
 {
-	Nyx::CTraceStream(0x0).Write("OnProcessDetach");
+	//Nyx::CTraceStream(0x0).Write("OnProcessDetach");
     g_refMutex = NULL;
 	g_refModule = NULL;
 	g_refTraceCompositor = NULL;

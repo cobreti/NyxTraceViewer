@@ -207,6 +207,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\TimeStamp.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sources\TraceChannel.cpp"
 				>
 			</File>
@@ -291,10 +295,6 @@
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath="..\include\TimeStamp.hpp"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

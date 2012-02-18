@@ -44,8 +44,8 @@ namespace TraceClientCore
         const ETraceType& Type() const                      { return m_eType; }
         ETraceType& Type()                                  { return m_eType; }
         
-        const NyxNet::TraceFlags& Flags() const             { return m_Flags; }
-        NyxNet::TraceFlags& Flags()                         { return m_Flags; }
+        const NyxNet::CTraceFlags& Flags() const            { return m_Flags; }
+        NyxNet::CTraceFlags& Flags()                        { return m_Flags; }
 		
 	protected:
 	
@@ -54,7 +54,7 @@ namespace TraceClientCore
 		Nyx::CMemPoolWString		m_Data;
 		CTracesPool*				m_pOwnerPool;
         ETraceType					m_eType;
-        NyxNet::TraceFlags          m_Flags;
+        NyxNet::CTraceFlags         m_Flags;
 	};
 }
 

@@ -31,4 +31,14 @@ namespace TraceClientCore
     {        
         m_pPool->Repository().Insert(pTraceData);
     }
+
+    
+    /**
+     *
+     */
+    void CTraceChannel::Stop()
+    {
+        if ( m_refFeeder.Valid() && m_refFeeder->IsRunning() )
+            m_refFeeder->Stop();
+    }
 }

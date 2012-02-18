@@ -31,6 +31,8 @@ namespace TraceClientCore
 		CTraceFeederRef&			Feeder()			{ return m_refFeeder; }
         
         void Insert(CTraceData* pTraceData);
+
+        void Stop();
         
     protected:
         

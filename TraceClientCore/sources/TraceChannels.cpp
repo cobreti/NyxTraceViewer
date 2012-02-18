@@ -72,6 +72,21 @@ namespace TraceClientCore
         m_Channels.insert( std::make_pair(pChannel->Name(), pChannel) );
     }
     
+
+    /**
+     *
+     */
+    void CTraceChannels::Stop()
+    {
+        TraceChannelsMap::iterator  pos = m_Channels.begin();
+
+        while ( pos != m_Channels.end() )
+        {
+            pos->second->Stop();
+            ++ pos;
+        }
+    }
+
     
     /**
      *

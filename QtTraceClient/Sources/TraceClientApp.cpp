@@ -79,6 +79,7 @@ void CTraceClientApp::Run()
 void CTraceClientApp::Destroy()
 {
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
+    TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
     delete m_pMainWindow;
     m_pMainWindow = NULL;
