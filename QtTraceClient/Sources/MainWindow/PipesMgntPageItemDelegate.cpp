@@ -2,8 +2,8 @@
 #include "PoolTreeItem.hpp"
 #include "TraceChannel.hpp"
 
-#include <QPainter.h>
-#include <QApplication.h>
+#include <qpainter.h>
+#include <qapplication.h>
 
 /**
  *

@@ -43,7 +43,7 @@ void CTracePipeReceiver::Start()
     //res = NyxNet::CModule::Default()->GetHostname( HostName );
     //res = NyxNet::CModule::Default()->GetHostIp( HostName.c_str(), HostIp );
     
-    HostIp = "192.168.1.103";
+    HostIp = "192.168.1.149";
 
     m_refOutConnection->Open( m_refOutSocket );
     res = m_refOutSocket->Create( HostIp.c_str(), 8500 );

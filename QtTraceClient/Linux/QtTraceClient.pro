@@ -74,7 +74,8 @@ HEADERS += \
     ../Sources/TracesView.h \
     ../Sources/TraceClientApp.hpp \
     ../Sources/MainWindow.h \
-    ../Sources/AppSettings.hpp
+    ../Sources/AppSettings.hpp \
+    ../Sources/MainWindow/PipesMgntPageItemDelegate.hpp
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -136,7 +137,8 @@ SOURCES += \
     ../Sources/TraceClientApp.cpp \
     ../Sources/MainWindow.cpp \
     ../Sources/main.cpp \
-    ../Sources/AppSettings.cpp
+    ../Sources/AppSettings.cpp \
+    ../Sources/MainWindow/PipesMgntPageItemDelegate.cpp
 
 
 ICON=../Icons/AppLinux.icns
@@ -178,6 +180,8 @@ else {
 
 RESOURCES += \
     ../QTraceClient.qrc
+
+
 
 
 
