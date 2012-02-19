@@ -34,6 +34,9 @@ namespace TraceClientCore
         Nyx::UInt32                 SectionsCount = 0;
         Nyx::CAString               Name;
         
+        if ( !Reader.Valid() )
+            return;
+
         try
         {
             // read sections count

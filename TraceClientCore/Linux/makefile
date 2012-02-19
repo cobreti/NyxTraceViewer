@@ -12,7 +12,7 @@ ifeq ($(Config),Release)
 else
 	OBJDIR := Debug
 	LIBDIR := $(LIBBASEDIR)/Debug
-	CONFIG_CFLAGS := -O0
+	CONFIG_CFLAGS := -O0 -g
 endif
 
 

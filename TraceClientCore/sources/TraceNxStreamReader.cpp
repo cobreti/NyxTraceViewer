@@ -102,6 +102,30 @@ namespace TraceClientCore
                             size -= flags.WideCharSize();
                         }
                     }
+                    else if ( sizeof(wchar_t) > flags.WideCharSize() )
+                    {
+                    	size_t	nChar = SectionReader.Size() / flags.WideCharSize();
+                    	size_t	NewSize = nChar * sizeof(wchar_t);
+                    	size_t	DiffSize = sizeof(wchar_t) - flags.WideCharSize();
+                    	char*	pSrc = NULL;
+                    	char*	pDst = NULL;
+
+                    	m_ReadBuffer.Resize(NewSize);
+
+                    	pBuffer = m_ReadBuffer.GetBufferAs<char>();
+                    	pSrc = pBuffer + SectionReader.Size() - flags.WideCharSize();
+                    	pDst = pBuffer + NewSize - DiffSize;
+
+                        while ( NewSize > 0 )
+                    	{
+                            memset(pDst, 0, DiffSize);
+                            pDst -= flags.WideCharSize();
+                            memcpy(pDst, pSrc, flags.WideCharSize());
+                            pDst -= DiffSize;
+                            pSrc -= flags.WideCharSize();
+                            NewSize -= sizeof(wchar_t);
+                    	}
+                    }
 
                     pTraceData->Data() = (wchar_t*)pBuffer;
                 }
@@ -112,7 +136,6 @@ namespace TraceClientCore
             }
                             
             pTraceData->OwnerPool() = m_pPool;
-            //GetOwnerPool()->Repository().Insert(pTraceData);
         }
     
         return pTraceData;
