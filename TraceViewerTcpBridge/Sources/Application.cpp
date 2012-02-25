@@ -38,8 +38,12 @@ CApplication::~CApplication()
  */
 void CApplication::Init()
 {
+	NYXTRACE(0x0, L"TcpBridge starting");
+
 	m_refTerminateEvent = Nyx::CEvent::Alloc();
 	m_pReceiver = new CTracePipeReceiver("Test");
+
+	SetCancelHandlers();
 }
 
 
@@ -48,7 +52,7 @@ void CApplication::Init()
  */
 void CApplication::Run()
 {
-
+	m_pReceiver->Start();
 	m_refTerminateEvent->WaitSignaled();
 }
 
@@ -60,6 +64,8 @@ void CApplication::Terminate()
 {
 	m_pReceiver->Stop();
 	delete m_pReceiver;
+
+	NYXTRACE(0x0, L"TcpBridge closes");
 }
 
 
