@@ -28,16 +28,21 @@ CXX_CFLAGS := 	-I ../include \
 				-I ../../NyxLibs/include/Linux \
 				-I ../../NyxLibs/include/NyxNet \
 				-L ../../NyxLibs/Lib/Linux/$(Config) \
-				-I ../Source \
+				-I ../Sources \
 				-I /usr/include \
 				-v $(CONFIG_CFLAGS)
 
 
 OBJS := $(OBJDIR)/Main.o \
-		$(OBJDIR)/TracePipeReceiver.o
+		$(OBJDIR)/TracePipeReceiver.o \
+		$(OBJDIR)/Application.o \
+		$(OBJDIR)/Application_Impl.o
 
 
 $(OBJDIR)/%.o: ../Sources/%.cpp
+	g++ -o $@ $(CXX_CFLAGS) -c $^
+
+$(OBJDIR)/%.o: ./Sources/%.cpp
 	g++ -o $@ $(CXX_CFLAGS) -c $^
 
 $(LIBDIR)/TraceViewerTcpBridge.a: $(OBJS)	

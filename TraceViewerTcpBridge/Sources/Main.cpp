@@ -10,25 +10,26 @@
 #include <Nyx.hpp>
 #include <NyxConsoleTraceOutput.hpp>
 #include <NyxNet.hpp>
-#include <signal.h>
-#include <unistd.h>
+//#include <signal.h>
+//#include <unistd.h>
 
-#include "TracePipeReceiver.hpp"
+#include "Application.hpp"
+//#include "TracePipeReceiver.hpp"
 
 
-Nyx::CEventRef      g_refTerminateEvent;
+//Nyx::CEventRef      g_refTerminateEvent;
 
 /**
  *
  */
-void AbortHandler(int);
-void SigPipeHandler(int);
-
-void AbortHandler(int)
-{
-//    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"AbortHandler");
-    g_refTerminateEvent->Signal(0);
-}
+//void AbortHandler(int);
+//void SigPipeHandler(int);
+//
+//void AbortHandler(int)
+//{
+////    Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"AbortHandler");
+////    g_refTerminateEvent->Signal(0);
+//}
 
 //void SigPipeHandler(int)
 //{
@@ -41,9 +42,9 @@ void AbortHandler(int)
  */
 int main( int argc, char *argv[] )
 {
-    CTracePipeReceiver*                  pReceiver = NULL;
+//    CTracePipeReceiver*                  pReceiver = NULL;
     
-    wprintf(L"[%i]\n", getpid());
+//    wprintf(L"[%i]\n", getpid());
     
     Nyx::CModuleRef                     refModule = Nyx::CModule::Alloc();
     NyxNet::CModuleRef                  refNetModule = NyxNet::CModule::Alloc();
@@ -51,26 +52,33 @@ int main( int argc, char *argv[] )
     Nyx::CTraceCompositorRef            refTraceCompositor = Nyx::CTraceCompositor::Alloc();
     refTraceCompositor->SetOutput( Nyx::CConsoleTraceOutput::Alloc() );
 
-    g_refTerminateEvent = Nyx::CEvent::Alloc();
+    CApplication		App;
+
+    App.Init();
+
+    App.Run();
+
+    App.Terminate();
+
+//    g_refTerminateEvent = Nyx::CEvent::Alloc();
     
-    signal(SIGTERM, AbortHandler);
-    signal(SIGABRT, AbortHandler);
-    signal(SIGINT, AbortHandler);
-//    signal(SIGPIPE, SigPipeHandler);
+//    signal(SIGTERM, AbortHandler);
+//    signal(SIGABRT, AbortHandler);
+//    signal(SIGINT, AbortHandler);
     
     Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"TraceViewerBridge starting");
     
-	pReceiver = new CTracePipeReceiver("Test");
-	pReceiver->Start();
+//	pReceiver = new CTracePipeReceiver("Test");
+//	pReceiver->Start();
 
-	g_refTerminateEvent->WaitSignaled();
-
-	pReceiver->Stop();
-	delete pReceiver;
+//	g_refTerminateEvent->WaitSignaled();
+//
+//	pReceiver->Stop();
+//	delete pReceiver;
     
     Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"TraceViewerBridge ending");
     
-    g_refTerminateEvent = NULL;
+//    g_refTerminateEvent = NULL;
     
     return 0;
 }
