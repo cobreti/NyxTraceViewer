@@ -11,14 +11,6 @@
 
 #include "StatusUpdaters/UISensorsFactory.hpp"
 
-#include <NyxLocalTime.hpp>
-
-Nyx::CTraceStream& operator << ( Nyx::CTraceStream& stream, const wchar_t* wszText )
-{
-    stream << Nyx::CTF_Text(wszText);
-    return stream;
-}
-
 
 int main(int argc, char *argv[])
 {
@@ -33,10 +25,6 @@ int main(int argc, char *argv[])
 #endif
 
     TraceClientCore::CModule                    TraceClientCoreModule;
-
-    Nyx::CLocalTime ltime = Nyx::CLocalTime::Get();
-
-    Nyx::CTraceStream(0x0) << L"hello";
 
     Nyx::CTraceStream(0x0).Write(L"Application starting");
 
