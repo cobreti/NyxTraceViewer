@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../NyxLibs/include;../../NyxLibs/include/win32;../../NyxLibs/include/NyxNet"
+				AdditionalIncludeDirectories="../../NyxLibs/include;../../NyxLibs/include/win32;../../NyxLibs/include/NyxNet;../Sources"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -178,6 +178,14 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\Sources\Application.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Sources\Application.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Sources\Main.cpp"
 				>
 			</File>
@@ -189,6 +197,14 @@
 				RelativePath="..\Sources\TracePipeReceiver.hpp"
 				>
 			</File>
+			<Filter
+				Name="Win32"
+				>
+				<File
+					RelativePath=".\Sources\Application_Impl.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
