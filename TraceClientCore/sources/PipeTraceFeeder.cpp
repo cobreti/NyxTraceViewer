@@ -40,7 +40,7 @@ void TraceClientCore::CPipeTraceFeeder::Start()
 	m_refNxConnection->SetConnectionHandler( static_cast<NyxNet::INxConnectionHandler*>(this) );
 	m_refServer = NyxNet::CPipeServer::Alloc();
 	
-    m_refServer->Create( m_Name.c_str(), 4096, m_refNxConnection );
+    m_refServer->Create( m_Name.c_str(), 1024 * 1024, m_refNxConnection );
 	
 	m_refServer->Start();
 }
