@@ -6,7 +6,7 @@
  */
 CFeederSettings::CFeederSettings() :
     m_ApiType(eTAPI_Nyx),
-    m_TracesPerBlock(100),
+    m_TracesPerBlock(1),
     m_IntervalBetweenBlocks(1000),
     m_pFeederSource(NULL)
 {

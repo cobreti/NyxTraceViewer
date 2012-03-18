@@ -29,6 +29,12 @@ namespace TraceClientCore
 		CTraceData(Nyx::CMemoryPool* pMemPool);
 		virtual ~CTraceData();
 				
+		const Nyx::CMemPoolWString& TimeReference() const	{ return m_TimeReference; }
+		Nyx::CMemPoolWString& TimeReference()				{ return m_TimeReference; }
+
+        const Nyx::CMemPoolWString& TickCountReference() const		{ return m_TickCountReference; }
+		Nyx::CMemPoolWString& TickCountReference()					{ return m_TickCountReference; }        
+
 		const Nyx::CMemPoolWString& ThreadId() const		{ return m_ThreadId; }
 		Nyx::CMemPoolWString& ThreadId()					{ return m_ThreadId; }
 		
@@ -49,6 +55,9 @@ namespace TraceClientCore
 		
 	protected:
 	
+        Nyx::CMemPoolWString        m_TimeReference;
+        Nyx::CMemPoolWString        m_TickCountReference;
+
 		Nyx::CMemPoolWString		m_ThreadId;
 		Nyx::CMemPoolWString		m_TickCount;
 		Nyx::CMemPoolWString		m_Data;

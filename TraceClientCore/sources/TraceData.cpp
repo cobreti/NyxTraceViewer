@@ -6,6 +6,8 @@
  */
 TraceClientCore::CTraceData::CTraceData(Nyx::CMemoryPool* pMemPool) : 
 TraceClientCore::CTraceData::BaseType(pMemPool),
+m_TimeReference(pMemPool),
+m_TickCountReference(pMemPool),
 m_ThreadId(pMemPool),
 m_TickCount(pMemPool),
 m_Data(pMemPool),

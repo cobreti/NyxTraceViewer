@@ -43,7 +43,7 @@ void CTracePipeReceiver::Start()
     //res = NyxNet::CModule::Default()->GetHostname( HostName );
     //res = NyxNet::CModule::Default()->GetHostIp( HostName.c_str(), HostIp );
     
-    HostIp = "192.168.1.149";
+    HostIp = "192.168.1.103";
 
     m_refOutConnection->Open( m_refOutSocket );
     res = m_refOutSocket->Create( HostIp.c_str(), 8500 );
@@ -114,7 +114,6 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
     
     try
     {
-        NyxNet::CNxStreamWriter     OutWriter( (NyxNet::CNxConnection*)m_refOutConnection, NyxNet::eNxDT_TraceData );
 
         // read sections count
         {
@@ -126,43 +125,47 @@ void CTracePipeReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
 				SectionReader.Read(m_Buffer, SectionReader.Size());
 
 				SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();
-
-				OutSectionsCount = SectionsCount + 1;
-
-				NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(OutSectionsCount));
-				SectionWriter.Write(&SectionsCount, sizeof(OutSectionsCount));
             }
         }
         
-        //
-        // write name
-        //
-        
         if ( SectionsCount > 0 )
         {
-            NyxNet::NxDataSize                  size = (NyxNet::NxDataSize)m_Name.length() + 1;
-            NyxNet::CNxSectionStreamWriter      SectionWriter(OutWriter, size);
-            
-            SectionWriter.Write( m_Name.BufferPtr(), size );
-            
-        }
-        
-        while ( SectionsCount -- > 0 )
-        {
-            NyxNet::CNxSectionStreamReader        SectionReader(Reader);
-            
-            m_Buffer.Resize(SectionReader.Size());
-            SectionReader.Read(m_Buffer, SectionReader.Size());
-            TotalSize += SectionReader.Size();
-            
-//            if ( SectionsCount == 0 )
-//            {
-//            	wchar_t* pText = m_Buffer.GetBufferAs<wchar_t>();
-//            	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Text : ") << Nyx::CTF_Text(pText);
-//            }
+            NyxNet::CNxStreamWriter     OutWriter( (NyxNet::CNxConnection*)m_refOutConnection, NyxNet::eNxDT_TraceData );
 
-            NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, SectionReader.Size());
-            SectionWriter.Write( m_Buffer.GetBufferAs<void>(), SectionReader.Size());
+			NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, sizeof(OutSectionsCount));
+			OutSectionsCount = SectionsCount + 1;
+			SectionWriter.Write(&SectionsCount, sizeof(SectionsCount));
+
+            //
+            // write name
+            //
+            
+            if ( SectionsCount > 0 )
+            {
+                NyxNet::NxDataSize                  size = (NyxNet::NxDataSize)m_Name.length() + 1;
+                NyxNet::CNxSectionStreamWriter      SectionWriter(OutWriter, size);
+                
+                SectionWriter.Write( m_Name.BufferPtr(), size );
+                
+            }
+            
+            while ( SectionsCount -- > 0 )
+            {
+                NyxNet::CNxSectionStreamReader        SectionReader(Reader);
+                
+                m_Buffer.Resize(SectionReader.Size());
+                SectionReader.Read(m_Buffer, SectionReader.Size());
+                TotalSize += SectionReader.Size();
+                
+    //            if ( SectionsCount == 0 )
+    //            {
+    //            	wchar_t* pText = m_Buffer.GetBufferAs<wchar_t>();
+    //            	Nyx::CTraceStream(0x0) << Nyx::CTF_Text(L"Text : ") << Nyx::CTF_Text(pText);
+    //            }
+
+                NyxNet::CNxSectionStreamWriter          SectionWriter(OutWriter, SectionReader.Size());
+                SectionWriter.Write( m_Buffer.GetBufferAs<void>(), SectionReader.Size());
+            }
         }
     }
     catch (...)

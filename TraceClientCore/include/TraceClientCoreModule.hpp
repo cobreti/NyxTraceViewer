@@ -4,6 +4,7 @@
 #include "TracesPoolCollection.hpp"
 #include "TcpModule.hpp"
 #include "TraceChannels.hpp"
+#include "NyxTraceTimeReference.hpp"
 
 namespace TraceClientCore
 {
@@ -27,12 +28,15 @@ namespace TraceClientCore
         
         CTraceChannels&         TraceChannels()         { return m_TraceChannels; }
 
+        const Nyx::CTraceTimeReference& TraceTimeReference() const      { return m_TraceTimeReference; }
+
 	protected:
 	
 		CTracesPoolCollection				m_TracesPools;
         CPoolsUpdateClock*                  m_pPoolsUpdateClock;
         CTcpModule                          m_TcpModule;
         CTraceChannels                      m_TraceChannels;
+        Nyx::CTraceTimeReference            m_TraceTimeReference;
 	
 		static CModule*						s_pInstance;
 	};

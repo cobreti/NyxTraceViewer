@@ -4,7 +4,20 @@
 #include "TracesPool.hpp"
 #include "NyxNetTraceFlags.hpp"
 
+#include "TraceClientCoreModule.hpp"
+
 #include <NyxNet.hpp>
+
+
+Nyx::CTraceStream& operator << ( Nyx::CTraceStream& stream, const Nyx::CTraceTimeReference& timeref )
+{
+    stream << L"[ (" << timeref.TimeString().c_str() << L")  ("
+            << timeref.TickCount().c_str() << L") ]";
+
+    return stream;
+}
+
+
 
 namespace TraceClientCore
 {
@@ -33,7 +46,18 @@ namespace TraceClientCore
         CTraceData*						pTraceData = NULL;
         NyxNet::CTraceFlags             flags;
         Nyx::NyxResult                  res;
+        Nyx::UInt32                     TimeRefInSeconds = 0;
+        Nyx::UInt32                     TickCountRef = 0;
+        Nyx::UInt32                     ModuleTimeRefInSeconds = 0;
+        Nyx::UInt32                     ModuleTickCountRef = 0;
         
+        NYXTRACE(0x0, L"client module time reference : " << CModule::Instance().TraceTimeReference());
+
+        const Nyx::CTraceTimeReference&   rTimeRef = CModule::Instance().TraceTimeReference();
+
+        ModuleTimeRefInSeconds = rTimeRef.Time().Hours() * 3600 + rTimeRef.Time().Minutes() * 60 + rTimeRef.Time().Seconds();
+        sscanf( CModule::Instance().TraceTimeReference().TickCount().c_str(), "%lu.", &ModuleTickCountRef);
+
         if ( Reader.Valid() )
         {
             pTraceData = new (m_pPool->MemoryPool())CTraceData(m_pPool->MemoryPool());
@@ -49,6 +73,37 @@ namespace TraceClientCore
                 
                 flags = *m_ReadBuffer.GetBufferAs<NyxNet::CTraceFlags>();
                 pTraceData->Flags() = flags;
+            }
+
+            // local time reference
+            {
+                NyxNet::CNxSectionStreamReader      SectionReader(Reader);
+
+                m_ReadBuffer.Resize(SectionReader.Size());
+                res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+                if ( Nyx::Failed(res) )
+                    throw Nyx::CException("failure to read local time reference");
+
+                //memcpy(&value, m_ReadBuffer.GetBufferAs<Nyx::UInt32>(), sizeof(value));
+
+                //NYXTRACE(0x0, L"Trace time ref --> " << (value >> 16) << L":" << ((value >> 8) & 0xFF) << L":" << (value & 0xFF) );
+
+                //TimeRefInSeconds = (value >> 16) * 3600 + ((value >> 8) & 0xFF) * 60 + (value & 0xFF);
+            }
+
+            // tick count reference
+            {
+                NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+                
+                m_ReadBuffer.Resize(SectionReader.Size());
+                res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+                if ( Nyx::Failed(res) )
+                    throw Nyx::CException("failure to read tick count reference");
+                
+                //NYXTRACE(0x0, L"Trace tick count ref : " << m_ReadBuffer.GetBufferAs<char>());
+                //pTraceData->TickCount() = m_ReadBuffer.GetBufferAs<char>();
+
+                //sscanf( m_ReadBuffer.GetBufferAs<char>(), "%lu.", &TickCountRef );
             }
             
             // thread id
@@ -74,6 +129,10 @@ namespace TraceClientCore
                 
                 pTraceData->TickCount() = m_ReadBuffer.GetBufferAs<char>();
             }
+
+            NYXTRACE(0x0, L"Time Ref in seconds : " << TimeRefInSeconds << L" - tick count ref : " << TickCountRef );
+            NYXTRACE(0x0, L"Module time ref in seconds : " << ModuleTimeRefInSeconds << L" - module tick count ref : " << ModuleTickCountRef );
+            NYXTRACE(0x0, L"Trace tick count : " << pTraceData->TickCount().c_str() );
             
             // data
             {
