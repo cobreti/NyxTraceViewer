@@ -1,6 +1,7 @@
 #ifndef _DLLFEEDER_HPP_
 #define _DLLFEEDER_HPP_
 
+#include <NyxExternalModule.hpp>
 #include "FeederBase.hpp"
 #include "Win32\DllFeed\DllFeedObject.hpp"
 
@@ -17,8 +18,8 @@ protected:
 
 protected:
 
-    HINSTANCE           m_hDllInstance;
-    CDllFeedObject*     m_pFeedObject;
+    CDllFeedObject*             m_pFeedObject;
+    Nyx::CExternalModuleRef     m_refExternalModule;
 };
 
 
