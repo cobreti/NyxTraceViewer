@@ -49,7 +49,7 @@ $(LIBDIR)/TraceViewerTcpBridge.a: $(OBJS)
 	g++ $(CXX_CFLAGS) $(OBJS) -lpthread -lNyxNet -lNyxBase -o $(Config)/TraceViewerTcpBridge
 
 
-all: 	$(LIBDIR)/libTraceClientCore.a \
+all: 	$(LIBDIR)/TraceViewerTcpBridge.a \
 
 clean:
 	-$(RM) Debug
