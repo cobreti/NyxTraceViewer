@@ -2,30 +2,10 @@
 //
 
 #include "stdafx.h"
-#include <mmsystem.h>
-#include "Nyx.hpp"
-#include "NyxNet.hpp"
-#include "NyxNetPipeTraceOutput.hpp"
 #include "TraceClientLinkDLL.h"
+#include "TraceLink.hpp"
 
-#include <map>
-
-typedef		std::map<unsigned int, Nyx::CTraceCompositorRef>			TraceCompositorsMap;
-
-
-enum
-{
-    kBufferSize = 8192
-};
-
-Nyx::CMutexRef                          g_refMutex;
-Nyx::CModuleRef							g_refModule;
-Nyx::CTraceCompositorRef				g_refTraceCompositor;
-TraceCompositorsMap						g_TraceCompositorsTable;
-unsigned int							g_NextAvailID = 0x0001;
-char                                    g_AnsiBuffer[kBufferSize];
-wchar_t                                 g_WCharBuffer[kBufferSize];
-
+CTraceLink*                             g_pTraceLink = NULL;
 
 
 void OnProcessAttach();
@@ -64,12 +44,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
  */
 void OnProcessAttach()
 {
-	g_refModule = Nyx::CModule::Alloc();
-    g_refMutex = Nyx::CMutex::Alloc();
-	g_refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_Ansi, false);
-	g_refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceClientLink") );
-
-	//Nyx::CTraceStream(0x0).Write("OnProcessAttach");
+    g_pTraceLink = new CTraceLink();
 }
 
 
@@ -78,10 +53,8 @@ void OnProcessAttach()
  */
 void OnProcessDetach()
 {
-	//Nyx::CTraceStream(0x0).Write("OnProcessDetach");
-    g_refMutex = NULL;
-	g_refModule = NULL;
-	g_refTraceCompositor = NULL;
+    delete g_pTraceLink;
+    g_pTraceLink = NULL;
 }
 
 
@@ -96,20 +69,7 @@ void OnProcessDetach()
  */
 unsigned int __cdecl CreateTraceLink( const char* szName, int nType )
 {
-    Nyx::ETraceCompositorCharSet    eCharSet = Nyx::eTCCS_Ansi;
-	Nyx::CTraceCompositorRef		refTraceCompositor;
-	unsigned int					id = g_NextAvailID ++;
-
-    if ( nType != 0 )
-        eCharSet = Nyx::eTCCS_WideChar;
-
-    refTraceCompositor = Nyx::CTraceCompositor::Alloc(eCharSet, false);
-
-	g_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
-	
-	refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc(szName) );
-
-	return id;
+    return g_pTraceLink->CreateTraceLink(szName, nType);
 }
 
 
@@ -118,9 +78,7 @@ unsigned int __cdecl CreateTraceLink( const char* szName, int nType )
  */
 void __cdecl ReleaseTraceLink( const unsigned int& id )
 {
-	TraceCompositorsMap::iterator		pos = g_TraceCompositorsTable.find(id);
-
-	g_TraceCompositorsTable.erase(pos);
+    g_pTraceLink->ReleaseTraceLink(id);
 }
 
 
@@ -129,19 +87,7 @@ void __cdecl ReleaseTraceLink( const unsigned int& id )
  */
 void __cdecl WriteTraceA( const unsigned int& id, const char* szData, va_list args )
 {
-    Nyx::TLock<Nyx::CMutex>     Lock(g_refMutex, true);
-
-	TraceCompositorsMap::iterator		pos = g_TraceCompositorsTable.find(id);
-
-	if ( pos != g_TraceCompositorsTable.end() )
-	{
-		Nyx::CTraceCompositorRef	refTraceCompositor = pos->second;
-		Nyx::CTraceStream			stream(0xFF, refTraceCompositor);
-
-        vsprintf(g_AnsiBuffer, szData, args);
-
-		stream.Write(g_AnsiBuffer);
-	}
+    g_pTraceLink->WriteTraceA(id, szData, args);
 }
 
 
@@ -150,17 +96,5 @@ void __cdecl WriteTraceA( const unsigned int& id, const char* szData, va_list ar
  */
 void __cdecl WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args )
 {
-    Nyx::TLock<Nyx::CMutex>     Lock(g_refMutex, true);
-
-	TraceCompositorsMap::iterator		pos = g_TraceCompositorsTable.find(id);
-
-	if ( pos != g_TraceCompositorsTable.end() )
-	{
-		Nyx::CTraceCompositorRef	refTraceCompositor = pos->second;
-		Nyx::CTraceStream			stream(0xFF, refTraceCompositor);
-
-        wvsprintf(g_WCharBuffer, wszData, args);
-
-		stream.Write(g_WCharBuffer);
-	}
+    g_pTraceLink->WriteTraceW(id, wszData, args);
 }

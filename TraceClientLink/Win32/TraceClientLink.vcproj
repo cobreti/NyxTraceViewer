@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(NyxLibs)\include&quot;;&quot;$(NyxLibs)\include\win32&quot;;&quot;$(NyxLibs)\include\NyxNet&quot;"
+				AdditionalIncludeDirectories="&quot;$(NyxLibs)\include&quot;;&quot;$(NyxLibs)\include\win32&quot;;&quot;$(NyxLibs)\include\NyxNet&quot;;../Source"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;TRACECLIENTLINK_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -121,7 +121,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(NyxLibs)\include&quot;;&quot;$(NyxLibs)\include\win32&quot;;&quot;$(NyxLibs)\include\NyxNet&quot;"
+				AdditionalIncludeDirectories="&quot;$(NyxLibs)\include&quot;;&quot;$(NyxLibs)\include\win32&quot;;&quot;$(NyxLibs)\include\NyxNet&quot;;../Source"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;TRACECLIENTLINK_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -216,6 +216,34 @@
 				RelativePath=".\TraceClientLinkDLL.h"
 				>
 			</File>
+			<Filter
+				Name="Source"
+				>
+				<File
+					RelativePath="..\Source\TraceLink.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\Source\TraceLink.hpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="public"
