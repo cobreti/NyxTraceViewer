@@ -58,7 +58,7 @@ void CExternalFeeder::OnSendTrace()
 
         Atext = text;
 
-        CTraceClientLink::Instance().Write(text.c_str());
+        CTraceClientLink::Instance().Write(Atext.c_str());
         //CTraceClientLink::Instance().Write(L"Test with parameters : str = '%s' and value = %i (%Xh)", L"string value", i, i);
     }
 
