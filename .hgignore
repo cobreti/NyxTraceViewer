@@ -19,3 +19,4 @@ debug/*
 release/*
 Release/*
 generatedfiles/*
+Tests/TraceViewerFeeder/TraceClientLink_public/TraceClientLink_Impl.cpp
