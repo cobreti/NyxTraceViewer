@@ -1,10 +1,10 @@
-#ifndef _TRACECLIENTLINK_WIN32_HPP_
-#define _TRACECLIENTLINK_WIN32_HPP_
+#ifndef _TRACECLIENTLINK_IMPL_HPP_
+#define _TRACECLIENTLINK_IMPL_HPP_
 
 #include <Windows.h>
 #include "TraceClientLink.hpp"
 
-class CTraceClientLink_Win32 : public CTraceClientLink
+class CTraceClientLink_Impl : public CTraceClientLink
 {
 	typedef unsigned int (__cdecl *PFCTCreateTraceLink)( const char* szName, int nType );
 	typedef void (__cdecl *PFCTReleaseTraceLink)( const unsigned int& id );
@@ -19,8 +19,8 @@ public:
 	static CTraceClientLink& Instance();
 
 public:
-	CTraceClientLink_Win32(const char* szTraceLinkName, ECharType charType);
-	virtual ~CTraceClientLink_Win32();
+	CTraceClientLink_Impl(const char* szTraceLinkName, ECharType charType);
+	virtual ~CTraceClientLink_Impl();
 
 	virtual void Write( const char* szData, ... );
     virtual void Write( const wchar_t* wszData, ... );
@@ -34,9 +34,9 @@ protected:
 	PFCTWriteTraceW						m_pfctWriteTraceW;
 	unsigned int						m_id;
 
-	static CTraceClientLink_Win32*		s_pInstance;
+	static CTraceClientLink_Impl*		s_pInstance;
 };
 
 
-#endif // _TRACECLIENTLINK_WIN32_HPP_
+#endif // _TRACECLIENTLINK_IMPL_HPP_
 

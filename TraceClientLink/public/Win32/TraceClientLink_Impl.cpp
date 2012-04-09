@@ -1,4 +1,4 @@
-#include "TraceClientLink_Win32.hpp"
+#include "TraceClientLink_Impl.hpp"
 #include <stdio.h>
 
 
@@ -35,7 +35,7 @@ public:
 /**
  *
  */
-CTraceClientLink_Win32*			CTraceClientLink_Win32::s_pInstance = NULL;
+CTraceClientLink_Impl*			CTraceClientLink_Impl::s_pInstance = NULL;
 
 static CDummyTraceClientLink  s_DummyTraceClientLink;
 
@@ -45,7 +45,7 @@ static CDummyTraceClientLink  s_DummyTraceClientLink;
  */
 void CTraceClientLink::CreateInstance(const char* szTraceLinkName, CTraceClientLink::ECharType charType)
 {
-	CTraceClientLink_Win32::CreateInstance(szTraceLinkName, charType);
+	CTraceClientLink_Impl::CreateInstance(szTraceLinkName, charType);
 }
 
 /**
@@ -90,7 +90,7 @@ void CTraceClientLink::ReleaseDllInstance(HINSTANCE hDll)
  */
 void CTraceClientLink::ReleaseInstance()
 {
-	CTraceClientLink_Win32::ReleaseInstance();
+	CTraceClientLink_Impl::ReleaseInstance();
 }
 
 
@@ -99,24 +99,24 @@ void CTraceClientLink::ReleaseInstance()
  */
 CTraceClientLink& CTraceClientLink::Instance()
 {
-	return CTraceClientLink_Win32::Instance();
+	return CTraceClientLink_Impl::Instance();
 }
 
 
 /**
  *
  */
-void CTraceClientLink_Win32::CreateInstance(const char* szTraceLinkName, CTraceClientLink::ECharType charType)
+void CTraceClientLink_Impl::CreateInstance(const char* szTraceLinkName, CTraceClientLink::ECharType charType)
 {
    if ( s_pInstance == NULL )
-	   s_pInstance = new CTraceClientLink_Win32(szTraceLinkName, charType);
+	   s_pInstance = new CTraceClientLink_Impl(szTraceLinkName, charType);
 }
 
 
 /**
  *
  */
-void CTraceClientLink_Win32::ReleaseInstance()
+void CTraceClientLink_Impl::ReleaseInstance()
 {
    if ( s_pInstance != NULL )
    {
@@ -129,7 +129,7 @@ void CTraceClientLink_Win32::ReleaseInstance()
 /**
  *
  */
-CTraceClientLink& CTraceClientLink_Win32::Instance()
+CTraceClientLink& CTraceClientLink_Impl::Instance()
 {
    if ( s_pInstance != NULL )
 	   return *s_pInstance;
@@ -141,7 +141,7 @@ CTraceClientLink& CTraceClientLink_Win32::Instance()
 /**
  *
  */
-CTraceClientLink_Win32::CTraceClientLink_Win32(const char* szTraceLinkName, ECharType charType) :
+CTraceClientLink_Impl::CTraceClientLink_Impl(const char* szTraceLinkName, ECharType charType) :
 m_hDLLInstance(NULL),
 m_pfctCreateTraceLink(NULL),
 m_pfctReleaseTraceLink(NULL),
@@ -167,7 +167,7 @@ m_id(0)
 /**
  *
  */
-CTraceClientLink_Win32::~CTraceClientLink_Win32()
+CTraceClientLink_Impl::~CTraceClientLink_Impl()
 {
 	if ( m_id > 0 && m_pfctReleaseTraceLink )
 		m_pfctReleaseTraceLink(m_id);
@@ -180,7 +180,7 @@ CTraceClientLink_Win32::~CTraceClientLink_Win32()
 /**
  *
  */
-void CTraceClientLink_Win32::Write(const char* szData, ...)
+void CTraceClientLink_Impl::Write(const char* szData, ...)
 {
 	if ( m_id > 0 && m_pfctWriteTraceA )
     {
@@ -195,7 +195,7 @@ void CTraceClientLink_Win32::Write(const char* szData, ...)
 /**
  *
  */
-void CTraceClientLink_Win32::Write( const wchar_t* wszData, ... )
+void CTraceClientLink_Impl::Write( const wchar_t* wszData, ... )
 {
 	if ( m_id > 0 && m_pfctWriteTraceW )
     {

@@ -253,7 +253,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\public\Win32\TraceClientLink_Win32.cpp"
+				RelativePath="..\public\Win32\TraceClientLink_Impl.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -265,7 +265,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\public\Win32\TraceClientLink_Win32.hpp"
+				RelativePath="..\public\Win32\TraceClientLink_Impl.hpp"
 				>
 			</File>
 		</Filter>
