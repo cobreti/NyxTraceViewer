@@ -249,11 +249,11 @@
 			Name="public"
 			>
 			<File
-				RelativePath="..\public\TraceClientLink.hpp"
+				RelativePath="..\public\Win32\TraceClientLink.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\public\TraceClientLink_Win32.cpp"
+				RelativePath="..\public\Win32\TraceClientLink_Win32.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -263,17 +263,9 @@
 						UsePrecompiledHeader="0"
 					/>
 				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\public\TraceClientLink_Win32.hpp"
+				RelativePath="..\public\Win32\TraceClientLink_Win32.hpp"
 				>
 			</File>
 		</Filter>
