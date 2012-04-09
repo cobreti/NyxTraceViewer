@@ -273,11 +273,12 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
     ui.TracesPerBlockSpinBox->setEnabled(bFieldsEnabled);
     ui.IntervalBetweenBlocksSpinBox->setEnabled(bFieldsEnabled);
     ui.btnNyxAPISource->setEnabled(bFieldsEnabled);
-#if defined(WIN32)
     ui.btnExternalAPISource->setEnabled(bFieldsEnabled);
+
+#if defined(WIN32)
     ui.btnDllSource->setEnabled(bFieldsEnabled);
 #else
-    ui.btnExternalAPISource->setEnabled(false);
+//    ui.btnExternalAPISource->setEnabled(false);
     ui.btnDllSource->setEnabled(false);
 #endif
     ui.editTraceText->setEnabled(bFieldsEnabled);
