@@ -1,0 +1,255 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1674EDDF15336BCA00969EB0 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1674EDDE15336BCA00969EB0 /* Main.cpp */; };
+		1674EDFB15336C6200969EB0 /* TraceLink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1674EDF915336C6200969EB0 /* TraceLink.cpp */; };
+		1674EDFC15336C6200969EB0 /* TraceLink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1674EDFA15336C6200969EB0 /* TraceLink.hpp */; };
+		1674EE0015336CC900969EB0 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1674EDFF15336CC900969EB0 /* CoreServices.framework */; };
+		1674EE0215336CE600969EB0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1674EE0115336CE600969EB0 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1674EDDA15336A9A00969EB0 /* libTraceClientLink.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libTraceClientLink.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		1674EDDE15336BCA00969EB0 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = SOURCE_ROOT; };
+		1674EDF915336C6200969EB0 /* TraceLink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceLink.cpp; path = ../Source/TraceLink.cpp; sourceTree = "<group>"; };
+		1674EDFA15336C6200969EB0 /* TraceLink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceLink.hpp; path = ../Source/TraceLink.hpp; sourceTree = "<group>"; };
+		1674EDFF15336CC900969EB0 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = ../../../../../../../System/Library/Frameworks/CoreServices.framework; sourceTree = "<group>"; };
+		1674EE0115336CE600969EB0 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = ../../../../../../../System/Library/Frameworks/Cocoa.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1674EDD715336A9A00969EB0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1674EE0015336CC900969EB0 /* CoreServices.framework in Frameworks */,
+				1674EE0215336CE600969EB0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1655252115335BF800869C17 = {
+			isa = PBXGroup;
+			children = (
+				1674EE0115336CE600969EB0 /* Cocoa.framework */,
+				1674EDFF15336CC900969EB0 /* CoreServices.framework */,
+				1674EDF915336C6200969EB0 /* TraceLink.cpp */,
+				1674EDFA15336C6200969EB0 /* TraceLink.hpp */,
+				1655252F15335BF800869C17 /* TraceClientLink */,
+				1655252D15335BF800869C17 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1655252D15335BF800869C17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1674EDDA15336A9A00969EB0 /* libTraceClientLink.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1655252F15335BF800869C17 /* TraceClientLink */ = {
+			isa = PBXGroup;
+			children = (
+				1674EDDE15336BCA00969EB0 /* Main.cpp */,
+			);
+			path = TraceClientLink;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		1674EDD815336A9A00969EB0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1674EDFC15336C6200969EB0 /* TraceLink.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1674EDD915336A9A00969EB0 /* TraceClientLink */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1674EDDB15336A9A00969EB0 /* Build configuration list for PBXNativeTarget "TraceClientLink" */;
+			buildPhases = (
+				1674EDD615336A9A00969EB0 /* Sources */,
+				1674EDD715336A9A00969EB0 /* Frameworks */,
+				1674EDD815336A9A00969EB0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TraceClientLink;
+			productName = TraceClientLink;
+			productReference = 1674EDDA15336A9A00969EB0 /* libTraceClientLink.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1655252315335BF800869C17 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1655252615335BF800869C17 /* Build configuration list for PBXProject "TraceClientLink" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1655252115335BF800869C17;
+			productRefGroup = 1655252D15335BF800869C17 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1674EDD915336A9A00969EB0 /* TraceClientLink */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1674EDD615336A9A00969EB0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1674EDDF15336BCA00969EB0 /* Main.cpp in Sources */,
+				1674EDFB15336C6200969EB0 /* TraceLink.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1655253415335BF800869C17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CONFIGURATION_BUILD_DIR = ./Debug;
+				CONFIGURATION_TEMP_DIR = ./Debug;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_FAST_OBJC_DISPATCH = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../Source,
+					../../NyxLibs/include,
+					../../NyxLibs/include/OSX,
+					../../NyxLibs/include/NyxNet,
+				);
+				LIBRARY_SEARCH_PATHS = ../../NyxLibs/Lib/OSX/Debug_Universal_32_64;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-fPIC",
+				);
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+					"-shared",
+				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1655253515335BF800869C17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CONFIGURATION_BUILD_DIR = ./Release;
+				CONFIGURATION_TEMP_DIR = ./Release;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_FAST_OBJC_DISPATCH = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../Source,
+					../../NyxLibs/include,
+					../../NyxLibs/include/OSX,
+					../../NyxLibs/include/NyxNet,
+				);
+				LIBRARY_SEARCH_PATHS = ../../NyxLibs/Lib/OSX/Debug_Universal_32_64;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+					"-shared",
+				);
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1674EDDC15336A9A00969EB0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				MACH_O_TYPE = mh_dylib;
+				PRODUCT_NAME = TraceClientLink;
+			};
+			name = Debug;
+		};
+		1674EDDD15336A9A00969EB0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = TraceClientLink;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1655252615335BF800869C17 /* Build configuration list for PBXProject "TraceClientLink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1655253415335BF800869C17 /* Debug */,
+				1655253515335BF800869C17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1674EDDB15336A9A00969EB0 /* Build configuration list for PBXNativeTarget "TraceClientLink" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1674EDDC15336A9A00969EB0 /* Debug */,
+				1674EDDD15336A9A00969EB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1655252315335BF800869C17 /* Project object */;
+}
