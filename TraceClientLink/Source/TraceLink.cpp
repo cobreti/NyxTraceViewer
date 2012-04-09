@@ -1,11 +1,14 @@
 #include "TraceLink.hpp"
+#include <stdarg.h>
 
 
 /**
  *
  */
 CTraceLink::CTraceLink() :
-m_NextAvailID(0x0001)
+m_NextAvailID(0x0001),
+m_AnsiBuffer(kBufferSize),
+m_WCharBuffer(kBufferSize)
 {
 	m_refModule = Nyx::CModule::Alloc();
     m_refMutex = Nyx::CMutex::Alloc();
@@ -72,9 +75,10 @@ void CTraceLink::WriteTraceA( const unsigned int& id, const char* szData, va_lis
 		Nyx::CTraceCompositorRef	refTraceCompositor = pos->second;
 		Nyx::CTraceStream			stream(0xFF, refTraceCompositor);
 
-        vsprintf(m_AnsiBuffer, szData, args);
+//        vsprintf(m_AnsiBuffer, szData, args);
+		m_AnsiBuffer.Format(szData, args);
 
-		stream.Write(m_AnsiBuffer);
+		stream.Write(m_AnsiBuffer.c_str());
 	}
 }
 
@@ -93,8 +97,9 @@ void CTraceLink::WriteTraceW( const unsigned int& id, const wchar_t* wszData, va
 		Nyx::CTraceCompositorRef	refTraceCompositor = pos->second;
 		Nyx::CTraceStream			stream(0xFF, refTraceCompositor);
 
-        wvsprintf(m_WCharBuffer, wszData, args);
+//        vswprintf(m_WCharBuffer, kBufferSize, wszData, args);
+		m_WCharBuffer.Format(wszData, args);
 
-		stream.Write(m_WCharBuffer);
+		stream.Write(m_WCharBuffer.c_str());
 	}
 }
