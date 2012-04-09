@@ -20,3 +20,6 @@ release/*
 Release/*
 generatedfiles/*
 Tests/TraceViewerFeeder/TraceClientLink_public/TraceClientLink_Impl.cpp
+Tests/TraceViewerFeeder/TraceClientLink_public/TraceClientLink.hpp
+Tests/TraceViewerFeeder/TraceClientLink_public/TraceClientLink_impl.cpp
+Tests/TraceViewerFeeder/TraceClientLink_public/TraceClientLink_impl.hpp
