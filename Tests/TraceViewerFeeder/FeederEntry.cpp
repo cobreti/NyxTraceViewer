@@ -1,9 +1,9 @@
 #include "FeederEntry.hpp"
 #include "FeederBase.hpp"
 #include "NyxFeeder.hpp"
+#include "ExternalFeeder.hpp"
 
 #if defined(_WIN32)
-    #include "ExternalFeeder.hpp"
     #include "DllFeeder.hpp"
 #endif
 
@@ -31,11 +31,10 @@ void CFeederEntry::Start()
 {
     switch ( Settings().ApiType() )
     {
-#if defined(WIN32)
     case CFeederSettings::eTAPI_External:
         m_pFeeder = new CExternalFeeder();
         break;
-
+#if defined(WIN32)
     case CFeederSettings::eTAPI_Dll:
         m_pFeeder = new CDllFeeder();
         break;
