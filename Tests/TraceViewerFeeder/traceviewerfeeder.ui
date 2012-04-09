@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>696</width>
-    <height>540</height>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -377,7 +377,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>External</string>
+                    <string>External (TraceClientLink)</string>
                    </property>
                   </widget>
                  </item>
@@ -556,7 +556,7 @@
      <x>0</x>
      <y>0</y>
      <width>696</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
