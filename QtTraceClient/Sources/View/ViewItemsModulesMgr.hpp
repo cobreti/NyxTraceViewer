@@ -9,11 +9,10 @@
 class CModuleViewItems;
 class CViewItem;
 class IViewItemsModulesListener;
-class CViewItemsWalker;
+class CViewItemsWalkerCore;
 
 
 typedef     std::vector<CModuleViewItems*>          ModulesViewItemsPtrArray;
-typedef     std::vector<CViewItemsWalker*>          ViewItemsWalkerArray;
 
 
 /**
@@ -37,12 +36,13 @@ public:
     IViewItemsModulesListener*      Listener() const        { return m_pListener; }
     IViewItemsModulesListener*&     Listener()              { return m_pListener; }
 
-    void AttachWalker( CViewItemsWalker* pWalker );
-    void DetachWalker( CViewItemsWalker* pWalker );
+    void AttachWalker( CViewItemsWalkerCore* pWalker );
+    void DetachWalker( CViewItemsWalkerCore* pWalker );
 
 protected:
 
-    typedef     std::map<Nyx::CWString, CModuleViewItems*>     ModulesViewItemsTable;
+    typedef     std::vector<CViewItemsWalkerCore*>              ViewItemsWalkerArray;
+    typedef     std::map<Nyx::CWString, CModuleViewItems*>      ModulesViewItemsTable;
 
 protected:
 

@@ -1,4 +1,4 @@
-#include "ViewItemsWalker.hpp"
+#include "ViewItemsWalkerCore.hpp"
 #include "ViewItemsSessionWalkerNode.hpp"
 #include "../ModuleViewItems.hpp"
 #include "../ViewItem.hpp"
@@ -7,7 +7,7 @@
 /**
  *
  */
-CViewItemsWalker::CViewItemsWalker(CViewItemsModulesMgr& rViewItemsModulesMgr) :
+CViewItemsWalkerCore::CViewItemsWalkerCore(CViewItemsModulesMgr& rViewItemsModulesMgr) :
     m_Direction(eD_Undefined),
     m_LineNumber(0),
     m_Height(0.0f),
@@ -21,7 +21,7 @@ CViewItemsWalker::CViewItemsWalker(CViewItemsModulesMgr& rViewItemsModulesMgr) :
 /**
  *
  */
-CViewItemsWalker::CViewItemsWalker(const CViewItemsWalker& walker) :
+CViewItemsWalkerCore::CViewItemsWalkerCore(const CViewItemsWalkerCore& walker) :
     m_Height(walker.m_Height),
     m_Width(walker.m_Width),
     m_rViewItemsModulesMgr(walker.m_rViewItemsModulesMgr)
@@ -35,7 +35,7 @@ CViewItemsWalker::CViewItemsWalker(const CViewItemsWalker& walker) :
 /**
  *
  */
-CViewItemsWalker::~CViewItemsWalker()
+CViewItemsWalkerCore::~CViewItemsWalkerCore()
 {
     m_rViewItemsModulesMgr.DetachWalker(this);
 
@@ -46,7 +46,7 @@ CViewItemsWalker::~CViewItemsWalker()
 /**
  *
  */
-void CViewItemsWalker::OnNewModuleViewItem( CModuleViewItems* pModule )
+void CViewItemsWalkerCore::OnNewModuleViewItem( CModuleViewItems* pModule )
 {
     CViewItemsModuleWalkerNode*     pNode = new CViewItemsModuleWalkerNode(pModule);
 
@@ -57,7 +57,7 @@ void CViewItemsWalker::OnNewModuleViewItem( CModuleViewItems* pModule )
 /**
  *
  */
-void CViewItemsWalker::OnNewSessionViewItem( CModuleViewItems* pModule, CSessionViewItems* pSession )
+void CViewItemsWalkerCore::OnNewSessionViewItem( CModuleViewItems* pModule, CSessionViewItems* pSession )
 {
     CViewItemsModuleWalkerNode*         pModuleNode = GetNodeWithModule(pModule);
     CViewItemsSessionWalkerNode*        pSessionWalkerNode = new CViewItemsSessionWalkerNode(pSession);
@@ -69,7 +69,7 @@ void CViewItemsWalker::OnNewSessionViewItem( CModuleViewItems* pModule, CSession
 /**
  *
  */
-void CViewItemsWalker::OnNewViewItem( CViewItem* pViewItem )
+void CViewItemsWalkerCore::OnNewViewItem( CViewItem* pViewItem )
 {
     m_Height += pViewItem->GetSize().height();
 }
@@ -78,7 +78,7 @@ void CViewItemsWalker::OnNewViewItem( CViewItem* pViewItem )
 /**
  *
  */
-void CViewItemsWalker::OnItemWidthChanged( CViewItem* pViewItem )
+void CViewItemsWalkerCore::OnItemWidthChanged( CViewItem* pViewItem )
 {
     m_Width = Nyx::Max( m_Width, (float)pViewItem->GetSize().width() );
 }
@@ -87,7 +87,7 @@ void CViewItemsWalker::OnItemWidthChanged( CViewItem* pViewItem )
 /**
  *
  */
-bool CViewItemsWalker::InitNewModulesPosition()
+bool CViewItemsWalkerCore::InitNewModulesPosition()
 {
     size_t          index = 0;
     bool            bModuleInitialized = false;
@@ -102,7 +102,7 @@ bool CViewItemsWalker::InitNewModulesPosition()
 /**
  *
  */
-bool CViewItemsWalker::MoveToBegin()
+bool CViewItemsWalkerCore::MoveToBegin()
 {
     if ( m_Nodes.empty() )
         return false;
@@ -147,7 +147,7 @@ bool CViewItemsWalker::MoveToBegin()
 /**
  *
  */
-bool CViewItemsWalker::MoveToNext()
+bool CViewItemsWalkerCore::MoveToNext()
 {
     if ( m_Nodes.empty() || !m_Pos.Valid() )
         return false;
@@ -223,7 +223,7 @@ bool CViewItemsWalker::MoveToNext()
 /**
  *
  */
-bool CViewItemsWalker::MoveToPrevious()
+bool CViewItemsWalkerCore::MoveToPrevious()
 {
     if ( m_Nodes.empty() || !m_Pos.Valid() )
         return false;
@@ -282,7 +282,7 @@ bool CViewItemsWalker::MoveToPrevious()
 /**
  *
  */
-bool CViewItemsWalker::MoveTo(const float& y)
+bool CViewItemsWalkerCore::MoveTo(const float& y)
 {
     while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y && MoveToNext() );
     while ( m_Pos.Valid() && m_Pos.Y() > y && MoveToPrevious() );
@@ -294,7 +294,7 @@ bool CViewItemsWalker::MoveTo(const float& y)
 /**
  *
  */
-void CViewItemsWalker::PushState()
+void CViewItemsWalkerCore::PushState()
 {
     for (size_t index = 0; index < m_Nodes.size(); ++index)
         m_Nodes[index]->PushState();
@@ -308,7 +308,7 @@ void CViewItemsWalker::PushState()
 /**
  *
  */
-void CViewItemsWalker::PopState()
+void CViewItemsWalkerCore::PopState()
 {
     for (size_t index = 0; index < m_Nodes.size(); ++index)
         m_Nodes[index]->PopState();
@@ -336,7 +336,7 @@ void CViewItemsWalker::PopState()
 /**
  *
  */
-const CViewItemsWalker& CViewItemsWalker::operator = (const CViewItemsWalker& walker)
+const CViewItemsWalkerCore& CViewItemsWalkerCore::operator = (const CViewItemsWalkerCore& walker)
 {
     if ( this == &walker )
         return *this;
@@ -351,7 +351,7 @@ const CViewItemsWalker& CViewItemsWalker::operator = (const CViewItemsWalker& wa
 /**
  *
  */
-CViewItemsModuleWalkerNode* CViewItemsWalker::GetNodeWithModule( CModuleViewItems* pModule ) const
+CViewItemsModuleWalkerNode* CViewItemsWalkerCore::GetNodeWithModule( CModuleViewItems* pModule ) const
 {
     size_t          index = 0;
 
@@ -370,7 +370,7 @@ CViewItemsModuleWalkerNode* CViewItemsWalker::GetNodeWithModule( CModuleViewItem
 /**
  *
  */
-void CViewItemsWalker::CopyDataFrom(const CViewItemsWalker& walker)
+void CViewItemsWalkerCore::CopyDataFrom(const CViewItemsWalkerCore& walker)
 {
     m_Height = walker.m_Height;
     m_Width = walker.m_Width;
@@ -389,7 +389,7 @@ void CViewItemsWalker::CopyDataFrom(const CViewItemsWalker& walker)
 /**
  *
  */
-void CViewItemsWalker::ClearModuleNodes()
+void CViewItemsWalkerCore::ClearModuleNodes()
 {
     for (size_t index = 0; index < m_Nodes.size(); ++index)
         delete m_Nodes[index];

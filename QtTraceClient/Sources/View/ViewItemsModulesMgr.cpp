@@ -108,7 +108,7 @@ void CViewItemsModulesMgr::OnItemWidthChanged(CViewItem *pItem)
 /**
  *
  */
-void CViewItemsModulesMgr::AttachWalker( CViewItemsWalker* pWalker )
+void CViewItemsModulesMgr::AttachWalker( CViewItemsWalkerCore* pWalker )
 {
     if ( pWalker == NULL )
         return;
@@ -134,7 +134,7 @@ void CViewItemsModulesMgr::AttachWalker( CViewItemsWalker* pWalker )
 /**
  *
  */
-void CViewItemsModulesMgr::DetachWalker( CViewItemsWalker* pWalker )
+void CViewItemsModulesMgr::DetachWalker( CViewItemsWalkerCore* pWalker )
 {
     if ( pWalker == NULL )
         return;

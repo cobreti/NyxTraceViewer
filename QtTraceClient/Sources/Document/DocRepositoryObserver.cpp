@@ -1,11 +1,11 @@
 #include "DocRepositoryObserver.hpp"
 #include "View/ViewItem_TraceData.hpp"
-#include "View/ViewItemBackgroundPainter.hpp"
-#include "View/ViewItemModuleNamePainter.hpp"
-#include "View/ViewItemTickCountPainter.hpp"
-#include "View/ViewItemThreadIdPainter.hpp"
-#include "View/ViewItemDataPainter.hpp"
-#include "View/ViewItemLineNumberPainter.hpp"
+//#include "View/ViewItemBackgroundPainter.hpp"
+//#include "View/ViewItemModuleNamePainter.hpp"
+//#include "View/ViewItemTickCountPainter.hpp"
+//#include "View/ViewItemThreadIdPainter.hpp"
+//#include "View/ViewItemDataPainter.hpp"
+//#include "View/ViewItemLineNumberPainter.hpp"
 #include "TracesDocument.hpp"
 
 /**
