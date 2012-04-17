@@ -54,7 +54,6 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/ViewItemsModulesMgr.cpp \
     ../Sources/View/Walkers/ViewItemsWalkerStats.cpp \
     ../Sources/View/Walkers/ViewItemsWalkerNode.cpp \
-    ../Sources/View/Walkers/ViewItemsWalker.cpp \
     ../Sources/View/Walkers/ViewItemsModuleWalkerNode.cpp \
     ../Sources/View/Walkers/ViewItemsSessionWalkerNode.cpp \
     ../Sources/View/Walkers/ViewItemsWalkerNodesPool.cpp \
@@ -64,7 +63,11 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/ViewDrawSettings.cpp \
     ../Sources/View/Walkers/ViewItemsModuleWalkerNodePos.cpp \
     ../Sources/View/Walkers/ViewItemsWalkerNodePos.cpp \
-    ../Sources/MainWindow/PipesMgntPageItemDelegate.cpp
+    ../Sources/MainWindow/PipesMgntPageItemDelegate.cpp \
+    ../Sources/View/TracesViewCore.cpp \
+    ../Sources/View/TracesViewCoreRepositoryObserver.cpp \
+    ../Sources/View/Walkers/ViewItemsWalkerCore.cpp \
+    ../Sources/View/Walkers/ViewItemsWalker.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/mainwindow.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
@@ -128,7 +131,12 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/ViewDrawSettings.hpp \
     ../Sources/View/Walkers/ViewItemsModuleWalkerNodePos.hpp \
     ../Sources/View/Walkers/ViewItemsWalkerNodePos.hpp \
-    ../Sources/MainWindow/PipesMgntPageItemDelegate.hpp
+    ../Sources/MainWindow/PipesMgntPageItemDelegate.hpp \
+    ../Sources/View/TracesViewCore.hpp \
+    ../Sources/View/TracesViewCoreRepositoryObserver.hpp \
+    ../Sources/View/Walkers/ViewItemsWalkerCore.hpp \
+    ../Sources/View/Walkers/ViewItemsWalker.hpp \
+    ../Sources/View/Walkers/IViewItemsWalkerMethods.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/mainwindow.ui \
     ../UI/NewViewDlg.ui \

@@ -294,6 +294,42 @@ bool CViewItemsWalkerCore::MoveTo(const float& y)
 /**
  *
  */
+bool CViewItemsWalkerCore::ValidPos() const
+{
+    return m_Pos.Valid();
+}
+
+
+/**
+ *
+*/
+CViewItem* CViewItemsWalkerCore::Item() const
+{
+    return m_Pos.Item();
+}
+
+
+/**
+ *
+ */
+const float& CViewItemsWalkerCore::ItemYPos() const
+{
+    return m_Pos.Y();
+}
+
+
+/**
+ *
+ */
+const size_t CViewItemsWalkerCore::LineNumber() const
+{
+    return m_LineNumber;
+}
+
+
+/**
+ *
+ */
 void CViewItemsWalkerCore::PushState()
 {
     for (size_t index = 0; index < m_Nodes.size(); ++index)
@@ -336,15 +372,34 @@ void CViewItemsWalkerCore::PopState()
 /**
  *
  */
-const CViewItemsWalkerCore& CViewItemsWalkerCore::operator = (const CViewItemsWalkerCore& walker)
+//const CViewItemsWalkerCore& CViewItemsWalkerCore::operator = (const CViewItemsWalkerCore& walker)
+void CViewItemsWalkerCore::Clone(const CViewItemsWalkerCore& walker)
 {
     if ( this == &walker )
-        return *this;
+        return;
 
     ClearModuleNodes();
     CopyDataFrom(walker);
 
-    return *this;
+//    return *this;
+}
+
+
+/**
+ *
+ */
+const float& CViewItemsWalkerCore::Height() const
+{
+    return m_Height;
+}
+
+
+/**
+ *
+ */
+const float& CViewItemsWalkerCore::Width() const
+{
+    return m_Width;
 }
 
 

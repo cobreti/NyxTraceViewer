@@ -1,6 +1,7 @@
 #ifndef __VIEWITEMSWALKER_HPP__
 #define __VIEWITEMSWALKER_HPP__
 
+#include "IViewItemsWalkerMethods.hpp"
 #include "ViewItemsModuleWalkerNode.hpp"
 #include "ViewItemsWalkerPos.hpp"
 #include <vector>
@@ -14,38 +15,38 @@ class CViewItemsModulesMgr;
 /**
  *
  */
-class CViewItemsWalkerCore
+class CViewItemsWalkerCore : public IViewItemsWalkerMethods
 {
 public:
     CViewItemsWalkerCore(CViewItemsModulesMgr& rViewItemsModulesMgr);
     explicit CViewItemsWalkerCore(const CViewItemsWalkerCore& walker);
     virtual ~CViewItemsWalkerCore();
 
-    void OnNewModuleViewItem( CModuleViewItems* pModule );
-    void OnNewSessionViewItem( CModuleViewItems* pModule, CSessionViewItems* pSession );
-    void OnNewViewItem( CViewItem* pViewItem );
-    void OnItemWidthChanged( CViewItem* pViewItem );
+    virtual void OnNewModuleViewItem( CModuleViewItems* pModule );
+    virtual void OnNewSessionViewItem( CModuleViewItems* pModule, CSessionViewItems* pSession );
+    virtual void OnNewViewItem( CViewItem* pViewItem );
+    virtual void OnItemWidthChanged( CViewItem* pViewItem );
 
-    bool InitNewModulesPosition();
+    virtual bool InitNewModulesPosition();
 
-    bool MoveToBegin();
-    bool MoveToNext();
-    bool MoveToPrevious();
-    bool MoveTo(const float& y);
+    virtual bool MoveToBegin();
+    virtual bool MoveToNext();
+    virtual bool MoveToPrevious();
+    virtual bool MoveTo(const float& y);
 
-    bool ValidPos() const                   { return m_Pos.Valid(); }
-    //const CViewItemPos& ItemPos() const     { return m_Pos.ItemPos(); }
-    CViewItem* Item() const                 { return m_Pos.Item(); }
-    const float& ItemYPos() const           { return m_Pos.Y(); }
-    const size_t LineNumber() const         { return m_LineNumber; }
+    virtual bool ValidPos() const;
+    virtual CViewItem* Item() const;
+    virtual const float& ItemYPos() const;
+    virtual const size_t LineNumber() const;
 
-    void PushState();
-    void PopState();
+    virtual void PushState();
+    virtual void PopState();
 
-    const CViewItemsWalkerCore& operator = (const CViewItemsWalkerCore& walker);
+    virtual void Clone( const CViewItemsWalkerCore& walker );
+//    const CViewItemsWalkerCore& operator = (const CViewItemsWalkerCore& walker);
 
-    const float& Height() const     { return m_Height; }
-    const float& Width() const      { return m_Width; }
+    virtual const float& Height() const;
+    virtual const float& Width() const;
 
 protected:
 
