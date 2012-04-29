@@ -11,6 +11,20 @@
 
 #include "StatusUpdaters/UISensorsFactory.hpp"
 
+#include <NyxLocalTime.hpp>
+
+#define NYXTRACE(filter, output)    { Nyx::CTraceStream stream(filter); stream << output; }
+
+
+
+Nyx::CTraceStream& operator << ( Nyx::CTraceStream& stream, const Nyx::CLocalTime& ltime )
+{
+    stream << ltime.Hours() << L":" << ltime.Minutes() << L":" << ltime.Seconds();
+    return stream;
+}
+
+
+
 
 int main(int argc, char *argv[])
 {
@@ -23,6 +37,14 @@ int main(int argc, char *argv[])
     refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
 //    refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceViewer"));
 #endif
+
+    Nyx::CLocalTime     ltime = Nyx::CLocalTime::Get();
+
+    NYXTRACE(0x0, L"current time is : " << ltime << L":");
+
+//    Nyx::CTraceStream(0x0) << ltime.Hours() << L":"
+//                           << ltime.Minutes() << L":"
+//                           << ltime.Seconds();
 
     TraceClientCore::CModule                    TraceClientCoreModule;
 
@@ -42,3 +64,4 @@ int main(int argc, char *argv[])
 
     return TheApp.ReturnValue();
 }
+

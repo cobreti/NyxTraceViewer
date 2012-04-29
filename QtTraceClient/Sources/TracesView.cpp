@@ -1,6 +1,5 @@
 #include "TracesView.h"
 #include "ui_TracesView.h"
-#include "Document/TracesDocument.hpp"
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
 #include "View/ViewHeader.hpp"
@@ -18,20 +17,24 @@
 #include "View/ViewColumnSettings.hpp"
 #include "View/ViewItemsModulesMgr.hpp"
 #include "View/Walkers/FileWriterViewItemsWalker.hpp"
+#include "View/Walkers/ViewItemsWalker.hpp"
+
 
 /**
  *
  */
-CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
+CTracesView::CTracesView(QWidget *parent) :
     QWidget(parent),
-    m_rDoc(rDoc),
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
     m_pHeader(NULL),
-    m_ItemsWalker(rDoc.ViewItemsModulesMgr())
+    m_pItemsWalker(NULL)
 {
     ui->setupUi(this);
+
+    m_refViewCore = new CTracesViewCore();
+    m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
 
     this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
 
@@ -45,12 +48,16 @@ CTracesView::CTracesView(CTracesDocument& rDoc, QWidget *parent) :
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
+    connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
+
+    m_RefreshTimer.start(1000);
 }
 
 
 CTracesView::~CTracesView()
 {
     delete m_pHeader;
+    delete m_pItemsWalker;
 }
 
 
@@ -60,8 +67,7 @@ CTracesView::~CTracesView()
 void CTracesView::InitFromView( const CTracesView& view )
 {
     m_Settings = view.m_Settings;
-//    m_ItemsWalker = view.m_ItemsWalker;
-    m_ItemsWalker.Clone(view.m_ItemsWalker);
+    m_pItemsWalker->Clone(*view.m_pItemsWalker);
     ui->m_VertScrollbar->setValue( view.ui->m_VertScrollbar->value());
     update();
 }
@@ -83,15 +89,12 @@ void CTracesView::SetName(const QString& name)
  */
 void CTracesView::OnNewTraces()
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods& rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     refMethods->InitNewModulesPosition();
 
     if ( !refMethods->ValidPos() )
         refMethods->MoveToBegin();
-
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 
     m_bViewDirty = true;
 }
@@ -134,12 +137,9 @@ void CTracesView::RefreshDisplay()
  */
 void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods& rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     refMethods->OnNewModuleViewItem(pModule);
-
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 }
 
 
@@ -148,12 +148,9 @@ void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
  */
 void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods& rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     refMethods->OnNewSessionViewItem(pModule, pSession);
-
-//    m_ItemsWalker.Unlock( rWalkerMethods );
 }
 
 
@@ -162,7 +159,7 @@ void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionView
  */
 void CTracesView::Save( const QString& filename )
 {
-    CFileWriterViewItemsWalker      SaveWalker(m_ItemsWalker);
+    CFileWriterViewItemsWalker      SaveWalker(*m_pItemsWalker);
     Nyx::CAnsiFileRef               refFile = Nyx::CAnsiFile::Alloc();
     Nyx::NyxResult                  res;
 
@@ -180,8 +177,7 @@ void CTracesView::Save( const QString& filename )
  */
 void CTracesView::OnVertSliderPosChanged(int value)
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods& rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     if ( refMethods->MoveTo(value) )
     {
@@ -189,7 +185,6 @@ void CTracesView::OnVertSliderPosChanged(int value)
         //update();
     }
 
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 
     update();
 }
@@ -231,8 +226,7 @@ void CTracesView::paintEvent(QPaintEvent*)
     qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
     CViewItem*                              pItem = NULL;
     bool                                    bContinue = true;
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods&            rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     drawstate.TextPos() = QPointF(0.0, HeaderSize().height());
 
@@ -261,8 +255,6 @@ void CTracesView::paintEvent(QPaintEvent*)
     }
 
     refMethods->PopState();
-
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 }
 
 
@@ -274,8 +266,7 @@ void CTracesView::closeEvent(QCloseEvent* event)
 
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods&        rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
     int nScrollWidth = Nyx::Max((int)(m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
@@ -287,8 +278,6 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
-
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 }
 
 
@@ -336,8 +325,7 @@ void CTracesView::keyPressEvent( QKeyEvent* event )
 
 void CTracesView::mousePressEvent( QMouseEvent* event )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
-//    IViewItemsWalkerMethods&    rWalkerMethods = m_ItemsWalker.Lock();
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
     if ( Qt::ControlModifier == event->modifiers() && event->pos().y() > m_pHeader->size().height() )
 	{
@@ -363,8 +351,6 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 
         update();
 	}
-
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 }
 
 
@@ -391,13 +377,15 @@ void CTracesView::showEvent( QShowEvent* )
 
 void CTracesView::InitSettings()
 {
-	//CViewColumnSettings*		pColSettings = NULL;
-
-    m_Settings = Doc().DefaultViewSettings();
+    m_Settings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
+//    m_Settings = Doc().DefaultViewSettings();
 
     Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
 
     m_pHeader->InitDefaultWidth();
+
+    m_refViewCore->AddView(this);
+    m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
 }
 
 
@@ -435,8 +423,7 @@ bool CTracesView::UpdateVisibleLines()
     qreal                                   ViewHeight = (qreal) this->rect().height();
     CViewItem*                              pItem = NULL;
     bool                                    bContinue = true;
-//    IViewItemsWalkerMethods&            rWalkerMethods = m_ItemsWalker.Lock();
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_ItemsWalker);
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(*m_pItemsWalker);
 
     refMethods->PushState();
 
@@ -454,7 +441,7 @@ bool CTracesView::UpdateVisibleLines()
         {
             pItem->EvaluateSize(Settings());
 
-            Doc().ViewItemsModulesMgr().OnItemWidthChanged(pItem);
+            m_refViewCore->ViewItemsModulesMgr().OnItemWidthChanged(pItem);
 
             pItem->RemoveFlag(CViewItem::eVIF_ApproxSize);
         }
@@ -463,8 +450,6 @@ bool CTracesView::UpdateVisibleLines()
     }
 
     refMethods->PopState();
-
-//    m_ItemsWalker.Unlock(rWalkerMethods);
 
     return true;
 }

@@ -6,8 +6,8 @@
 
 
 class QTreeWidgetItem;
-class CTracesDocument;
 class CPipesMgntPageItemDelegate;
+class CTracesViewCore;
 
 namespace Ui
 {
@@ -22,7 +22,7 @@ public:
     CPipesMgntPage( QWidget* pParent );
     virtual ~CPipesMgntPage();
 
-    void show(CTracesDocument* pDoc);
+    void show(CTracesViewCore* pViewCore);
     void Refresh();
 
 public slots:
@@ -39,7 +39,7 @@ protected:
 protected:
 
     Ui::PipesMgntPage*              ui;
-    CTracesDocument*                m_pDoc;
+    CTracesViewCore*                m_pViewCore;
     CPipesMgntPageItemDelegate*     m_pItemDelegate;
 };
 

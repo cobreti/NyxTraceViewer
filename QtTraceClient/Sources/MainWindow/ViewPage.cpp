@@ -77,7 +77,7 @@ void CViewPage::show( CTracesView* pView )
 
     if ( m_pPipesMgntPage->isVisible() )
     {
-        m_pPipesMgntPage->show(&m_pView->Doc());
+        m_pPipesMgntPage->show(m_pView->ViewCore());
     }
 
     QDialog::show();
@@ -125,7 +125,7 @@ void CViewPage::OnShowHideSettings( ViewEnums::ESettings settings, bool bShow )
             {
                 if ( bShow )
                 {
-                    m_pPipesMgntPage->show(&m_pView->Doc());
+                    m_pPipesMgntPage->show(m_pView->ViewCore());
                 }
                 else
                 {

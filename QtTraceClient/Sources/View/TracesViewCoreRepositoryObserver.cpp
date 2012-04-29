@@ -1,14 +1,22 @@
 #include "TracesViewCoreRepositoryObserver.hpp"
+#include "TracesViewCore.hpp"
 #include "View/ViewItem_TraceData.hpp"
+
+
 
 /**
  *
  */
-CTracesViewCoreRepositoryObserver::CTracesViewCoreRepositoryObserver(CTracesViewCore& rViewCore) :
-    TraceClientCore::CRepositoryObserver(),
+CTracesViewCoreRepositoryObserver::CTracesViewCoreRepositoryObserver( CTracesViewCore& rViewCore ) :
+    TraceClientCore::CRepositoryObserver::CRepositoryObserver(),
     m_rViewCore(rViewCore),
     m_pItems(NULL)
 {
+    m_refObjectsPool = Nyx::CObjectsPool::Alloc( sizeof(CViewItems)*5 );
+
+    m_refActiveObject = Nyx::CActiveObject::Alloc();
+    m_refActiveObject->Handlers().Add(0, m_rViewCore.GetViewItemsMsgHandler());
+    m_refActiveObject->Start();
 }
 
 
@@ -17,6 +25,7 @@ CTracesViewCoreRepositoryObserver::CTracesViewCoreRepositoryObserver(CTracesView
  */
 CTracesViewCoreRepositoryObserver::~CTracesViewCoreRepositoryObserver()
 {
+    m_refActiveObject->Stop();
 }
 
 
@@ -72,8 +81,10 @@ void CTracesViewCoreRepositoryObserver::OnFinalEndUpdate()
 {
     if ( m_pItems->ItemsCount() > 0 )
     {
+        Nyx::TMsgBucket<CViewItemsMsg> MsgBucket;
+        MsgBucket->ViewItems() = m_pItems;
+        m_refActiveObject->Post(MsgBucket);
 //        m_rDocument.OnNewTraceItems(m_pItems);
         m_pItems = NULL;
     }
 }
-

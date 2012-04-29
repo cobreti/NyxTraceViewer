@@ -1,33 +1,36 @@
-#ifndef TRACESVIEWCOREREPOSITORYOBSERVER_HPP
-#define TRACESVIEWCOREREPOSITORYOBSERVER_HPP
+#ifndef _TRACESVIEWCOREREPOSITORYOBSERVER_HPP_
+#define _TRACESVIEWCOREREPOSITORYOBSERVER_HPP_
 
 #include "RepositoryObserver.hpp"
-#include "ViewItems.hpp"
-#include <NyxObjectsPool.hpp>
+#include "View/ViewItems.hpp"
+#include "NyxObjectsPool.hpp"
+#include "NyxActiveObject.hpp"
+
 
 class CTracesViewCore;
+
 
 /**
  *
  */
-class CTracesViewCoreRepositoryObserver : TraceClientCore::CRepositoryObserver
+class CTracesViewCoreRepositoryObserver : public TraceClientCore::CRepositoryObserver
 {
 public:
-    CTracesViewCoreRepositoryObserver(CTracesViewCore& rViewCore);
+    CTracesViewCoreRepositoryObserver( CTracesViewCore& rViewCore );
     virtual ~CTracesViewCoreRepositoryObserver();
 
     virtual void Insert( TraceClientCore::CTraceData* pTraceData );
 
 protected:
 
-    virtual void OnFirstBeginUpdate();
-    virtual void OnFinalEndUpdate();
+        virtual void OnFirstBeginUpdate();
+        virtual void OnFinalEndUpdate();
 
 protected:
-    CViewItems*                     m_pItems;
-//    CTracesDocument&                m_rDocument;
     CTracesViewCore&                m_rViewCore;
+    CViewItems*                     m_pItems;
     Nyx::CObjectsPoolRef            m_refObjectsPool;
+    Nyx::CActiveObjectRef           m_refActiveObject;
 };
 
-#endif // TRACESVIEWCOREREPOSITORYOBSERVER_HPP
+#endif // _TRACESVIEWCOREREPOSITORYOBSERVER_HPP_

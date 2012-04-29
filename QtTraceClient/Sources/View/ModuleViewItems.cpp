@@ -10,8 +10,7 @@
 CModuleViewItems::CModuleViewItems(Nyx::CMemoryPool* pPool) :
 m_NextAvailId(1),
 m_pActiveSession(NULL),
-m_pPool(pPool),
-m_pListener(NULL)
+m_pPool(pPool)
 {
 }
 
@@ -49,8 +48,10 @@ SessionViewItemsID CModuleViewItems::CreateNewSession()
     m_Sessions[pSession->Id()] = pSession;
     m_pActiveSession = pSession;
 
-    if ( m_pListener )
-        m_pListener->OnNewSessionViewItems(this, pSession);
+//    if ( m_pListener )
+//        m_pListener->OnNewSessionViewItems(this, pSession);
+
+    m_Listeners.OnNewSessionViewItems(this, pSession);
 
     return pSession->Id();
 }

@@ -6,9 +6,11 @@
 #include <QWidget>
 #include <QToolBar>
 #include <QPushButton>
+#include <QTimer>
 #include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
-#include "View/Walkers/ViewItemsWalker.hpp"
+#include "View/IViewItemsModulesListener.hpp"
+#include "View/TracesViewCore.hpp"
 
 
 namespace Ui
@@ -16,23 +18,24 @@ namespace Ui
     class CTracesView;
 }
 
-class CTracesDocument;
 class CViewHeader;
 class QToolButton;
 class CModuleViewItems;
 class CSessionViewItems;
+class CViewItemsWalker;
 class QFile;
 
 
 /**
  *
  */
-class CTracesView : public QWidget
+class CTracesView : public QWidget,
+                    public IViewItemsModulesListener
 {
     Q_OBJECT
 
 public:
-    explicit CTracesView(CTracesDocument& rDoc, QWidget *parent = NULL);
+    explicit CTracesView(QWidget *parent = NULL);
     ~CTracesView();
 
     void InitFromView( const CTracesView& view );
@@ -43,13 +46,11 @@ public:
 	const CViewSettings&		Settings() const		{ return m_Settings; }
 	CViewSettings&				Settings()				{ return m_Settings; }
 
-    const CTracesDocument& Doc() const                  { return m_rDoc; }
-    CTracesDocument& Doc()                              { return m_rDoc; }
+    CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
     void OnNewTraces();
 
     void UpdateVisibleLines( const CViewSettings& settings );
-    void RefreshDisplay();
 
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
     virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
@@ -60,6 +61,7 @@ public slots:
 
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
+    void RefreshDisplay();
 
 protected:
 
@@ -89,14 +91,15 @@ protected:
     };
 
     Ui::CTracesView*			        ui;
-    CTracesDocument&                    m_rDoc;
     QString								m_Name;
     QRectF								m_Margins;
     CViewSettings						m_Settings;
     bool                                m_bViewDirty;
     bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
-    CViewItemsWalker                    m_ItemsWalker;
+    CViewItemsWalker*                   m_pItemsWalker;
+    QTimer                              m_RefreshTimer;
+    CTracesViewCoreRef                  m_refViewCore;
 };
 
 #endif // TRACESVIEW_H

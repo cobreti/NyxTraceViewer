@@ -9,8 +9,7 @@
  *
  */
 CViewItemsModulesMgr::CViewItemsModulesMgr(Nyx::CMemoryPool* pPool) :
-m_pPool(pPool),
-m_pListener(NULL)
+m_pPool(pPool)
 {
 }
 
@@ -33,11 +32,14 @@ CModuleViewItems* CViewItemsModulesMgr::CreateNewModule(const Nyx::CWString& Mod
 
     CModuleViewItems*       pModule = new CModuleViewItems(m_pPool);
     pModule->Name() = ModuleName;
-    pModule->Listener() = m_pListener;
+//    pModule->Listener() = m_pListener;
+    pModule->Listeners() = Listeners();
     m_Modules[ModuleName] = pModule;
 
-    if ( m_pListener )
-        m_pListener->OnNewModuleViewItems(pModule);
+//    if ( m_pListener )
+//        m_pListener->OnNewModuleViewItems(pModule);
+
+    m_Listeners.OnNewModuleViewItems(pModule);
 
     return pModule;
 }

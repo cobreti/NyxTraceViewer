@@ -43,8 +43,8 @@ protected:
 	void closeEvent(QCloseEvent *e);
 
     void CloseChildViews( QTreeWidgetItem* pParent );
-    virtual CTracesDocument* CreateNewDocument(  const QString& rDocumentName );
-    virtual CTracesView* CreateNewView( CTracesDocument* pDoc, const QString& ViewName, QTreeWidgetItem* pParent = NULL );
+//    virtual CTracesDocument* CreateNewDocument(  const QString& rDocumentName );
+    virtual CTracesView* CreateNewView( const QString& ViewName, QTreeWidgetItem* pParent = NULL );
     virtual void SelectItemWithView( CTracesView* pView );
     void ShowLeftPanel(bool bShow);
 
@@ -53,7 +53,7 @@ protected:
 private:
     Ui::MainWindow *ui;
 
-    CDocumentsCollection        m_Documents;
+//    CDocumentsCollection        m_Documents;
     int                         m_nNextDocumentId;
     int                         m_nNextViewId;
     CViewPage*                  m_pViewPage;

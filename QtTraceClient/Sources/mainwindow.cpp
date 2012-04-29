@@ -52,10 +52,10 @@ CMainWindow::CMainWindow(QWidget *parent) :
     //CreateDocViewRoot();
 
     refTracesPool = rModule.TracesPools()[L"TracesPipe"];
-    CTracesDocument* pNewDoc = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
+//    CTracesDocument* pNewDoc = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
 
 	// create view
-	CreateNewView( pNewDoc, QString("View ") + QString().setNum(m_nNextViewId++) );
+    CreateNewView( QString("View ") + QString().setNum(m_nNextViewId++) );
 
     ui->m_btnRemove->setEnabled(false);
 
@@ -145,11 +145,11 @@ void CMainWindow::OnViewsTreeSelectionChanged()
  */
 void CMainWindow::OnAddView()
 {
-    CTracesDocument*                 pDocument = NULL;
+//    CTracesDocument*                 pDocument = NULL;
 
 //    if ( ui->m_ViewsTree->selectedItems().empty() )
 //    {
-        pDocument = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
+//        pDocument = CreateNewDocument( QString("Document ") + QString().setNum(m_nNextDocumentId++) );
 //    }
 //    else
 //    {
@@ -157,7 +157,7 @@ void CMainWindow::OnAddView()
 //        pDocument = &pCurrentItem->View()->Doc();
 //    }
 
-    CreateNewView(pDocument, QString("View ") + QString().setNum(m_nNextViewId++));
+    CreateNewView(QString("View ") + QString().setNum(m_nNextViewId++));
 }
 
 
@@ -166,12 +166,12 @@ void CMainWindow::OnAddView()
  */
 void CMainWindow::OnCopyView()
 {
-    CTracesDocument*                 pDocument = NULL;
+//    CTracesDocument*                 pDocument = NULL;
 
-    MainWindow::CViewTreeItem*       pCurrentItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
-    pDocument = &pCurrentItem->View()->Doc();
+//    MainWindow::CViewTreeItem*       pCurrentItem = static_cast<MainWindow::CViewTreeItem*>(ui->m_ViewsTree->selectedItems().front());
+//    pDocument = &pCurrentItem->View()->Doc();
 
-    CreateNewView(pDocument, QString("View ") + QString().setNum(m_nNextViewId++), pCurrentItem);
+//    CreateNewView(pDocument, QString("View ") + QString().setNum(m_nNextViewId++), pCurrentItem);
 }
 
 
@@ -210,7 +210,7 @@ void CMainWindow::closeEvent(QCloseEvent* e)
         CloseChildViews(pViewItem);
     }
 
-    m_Documents.Clear();
+//    m_Documents.Clear();
 
 	e->accept();
 }
@@ -253,23 +253,25 @@ void CMainWindow::OnToggleTreePanel()
 /**
  *
  */
-CTracesDocument* CMainWindow::CreateNewDocument( const QString& rDocumentName )
-{
-    CTracesDocument*                pDocument = new CTracesDocument(this, rDocumentName);
-	pDocument->Init();
+//CTracesDocument* CMainWindow::CreateNewDocument( const QString& rDocumentName )
+//{
+////    CTracesDocument*                pDocument = new CTracesDocument(this, rDocumentName);
+////	pDocument->Init();
 
-	m_Documents.Insert( Nyx::CAString(rDocumentName.toStdString().c_str()), pDocument );
+////	m_Documents.Insert( Nyx::CAString(rDocumentName.toStdString().c_str()), pDocument );
 
-	return pDocument;
-}
+////	return pDocument;
+//    return NULL;
+//}
 
 
 /**
  *
  */
-CTracesView* CMainWindow::CreateNewView( CTracesDocument* pDoc, const QString& ViewName, QTreeWidgetItem* pParent /*= NULL*/ )
+CTracesView* CMainWindow::CreateNewView( const QString& ViewName, QTreeWidgetItem* pParent /*= NULL*/ )
 {
-	CTracesView*					pView = pDoc->CreateView(m_pViewPage);
+//	CTracesView*					pView = pDoc->CreateView(m_pViewPage);
+    CTracesView*                    pView = new CTracesView(m_pViewPage);
     QIcon                           ViewIcon(":/MainWindow/Icons/View-icon.png");
 
 	pView->SetName(ViewName);

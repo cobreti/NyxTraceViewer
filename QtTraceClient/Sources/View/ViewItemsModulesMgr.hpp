@@ -2,6 +2,7 @@
 #define __VIEWITEMSMODULESMGR_HPP__
 
 #include <Nyx.hpp>
+#include "ViewItemsModulesListeners.hpp"
 
 #include <map>
 #include <vector>
@@ -33,8 +34,8 @@ public:
     void Insert( CViewItem* pItem );
     void OnItemWidthChanged( CViewItem* pItem );
 
-    IViewItemsModulesListener*      Listener() const        { return m_pListener; }
-    IViewItemsModulesListener*&     Listener()              { return m_pListener; }
+    const CViewItemsModulesListeners&   Listeners() const   { return m_Listeners; }
+    CViewItemsModulesListeners&         Listeners()         { return m_Listeners; }
 
     void AttachWalker( CViewItemsWalkerCore* pWalker );
     void DetachWalker( CViewItemsWalkerCore* pWalker );
@@ -48,7 +49,7 @@ protected:
 
     ModulesViewItemsTable           m_Modules;
     Nyx::CMemoryPool*               m_pPool;
-    IViewItemsModulesListener*      m_pListener;
+    CViewItemsModulesListeners      m_Listeners;
     ViewItemsWalkerArray            m_AttachedWalkers;
 };
 

@@ -32,18 +32,18 @@ void CDocumentsCollection::Insert( const Nyx::CAString& name, CTracesDocument* p
  */
 void CDocumentsCollection::Update( CTracesDocument* pDoc )
 {
-	iterator		pos;
+//	iterator		pos;
 
-	for (pos = begin(); pos != end(); ++pos)
-		if ( pos->second == pDoc )
-		{
-			erase(pos);
-			break;
-		}
+//	for (pos = begin(); pos != end(); ++pos)
+//		if ( pos->second == pDoc )
+//		{
+//			erase(pos);
+//			break;
+//		}
 
-	Nyx::CAString		name( pDoc->Name().toStdString().c_str() );
+//	Nyx::CAString		name( pDoc->Name().toStdString().c_str() );
 
-	Insert(name, pDoc);
+//	Insert(name, pDoc);
 }
 
 

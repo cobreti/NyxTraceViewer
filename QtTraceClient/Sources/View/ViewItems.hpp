@@ -4,6 +4,7 @@
 #include <QSizeF>
 #include <list>
 #include <Nyx.hpp>
+#include <NyxMsg.hpp>
 #include <NyxAssert.hpp>
 #include "ViewItemPos.hpp"
 
@@ -29,6 +30,26 @@ protected:
 
     TViewItemsList          m_Items;
     bool                    m_bOwnItems;
+};
+
+
+/**
+ *
+ */
+class CViewItemsMsg : public Nyx::CMsg
+{
+public:
+    CViewItemsMsg() {}
+    virtual ~CViewItemsMsg() {}
+
+    virtual const Nyx::MsgIdentifier Id() const { return 0; }
+
+    CViewItems*&    ViewItems()         { return m_pViewItems; }
+    CViewItems*     ViewItems() const   { return m_pViewItems; }
+
+protected:
+
+    CViewItems*     m_pViewItems;
 };
 
 

@@ -4,10 +4,10 @@
 #include "MainWindow/PoolTreeItem.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "PipeTraceFeeder.hpp"
-#include "Document/TracesDocument.hpp"
 #include "PoolsUpdateClock.hpp"
 #include "DataStruct/PoolsList.hpp"
 #include "TraceChannel.hpp"
+#include "View/TracesViewCore.hpp"
 
 
 /**
@@ -16,7 +16,7 @@
 CPipesMgntPage::CPipesMgntPage(QWidget* pParent) :
 QDialog(pParent),
 ui(new Ui::PipesMgntPage()),
-m_pDoc(NULL),
+m_pViewCore(NULL),
 m_pItemDelegate(NULL)
 {
     ui->setupUi(this);
@@ -60,12 +60,13 @@ CPipesMgntPage::~CPipesMgntPage()
 /**
  *
  */
-void CPipesMgntPage::show(CTracesDocument* pDoc)
+void CPipesMgntPage::show(CTracesViewCore* pViewCore)
 {
-    if ( NULL == pDoc )
+    if ( NULL == pViewCore )
         return;
 
-    m_pDoc = pDoc;
+    m_pViewCore = pViewCore;
+//    m_pDoc = pDoc;
 
     FillPoolsList();
 
@@ -132,7 +133,7 @@ void CPipesMgntPage::OnNewPool()
     pItem->setSelected(true);
     pItem->setCheckState(0, Qt::Checked);
 
-    m_pDoc->AddRepositorySrc(*refPool);
+    m_pViewCore->AddRepository(*refPool);
 }
 
 
@@ -172,13 +173,13 @@ void CPipesMgntPage::OnPoolItemClicked( QTreeWidgetItem* pItem, int column )
     {
 	    if ( pPoolItem->checkState(0) == Qt::Checked )
 	    {
-            if ( !m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
-                m_pDoc->AddRepositorySrc(*pPoolItem->TraceChannel()->Pool());
+            if ( !m_pViewCore->Contains( *pPoolItem->TraceChannel()->Pool() ) )
+                m_pViewCore->AddRepository(*pPoolItem->TraceChannel()->Pool());
 	    }
 	    else if ( pPoolItem->checkState(0) == Qt::Unchecked )
 	    {
-            if ( m_pDoc->Contains( *pPoolItem->TraceChannel()->Pool() ) )
-                m_pDoc->RemoveRepositorySrc(*pPoolItem->TraceChannel()->Pool());
+            if ( m_pViewCore->Contains( *pPoolItem->TraceChannel()->Pool() ) )
+                m_pViewCore->RemoveRepository(*pPoolItem->TraceChannel()->Pool());
 	    }
     }
 }
@@ -231,7 +232,7 @@ void CPipesMgntPage::FillPoolsList()
     for ( ChannelPos = ChannelsList.begin(); ChannelPos != ChannelsList.end(); ++ ChannelPos )
     {
         MainWindow::CPoolTreeItem*                  pItem = new MainWindow::CPoolTreeItem();
-        TraceClientCore::CTraceChannel&       rChannel = (*ChannelPos).Channel();
+        TraceClientCore::CTraceChannel&             rChannel = (*ChannelPos).Channel();
 
         pItem->SetChannel( &rChannel );
 	    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
@@ -252,7 +253,7 @@ void CPipesMgntPage::FillPoolsList()
 			}
         }
 
-        if ( m_pDoc->Contains(*rChannel.Pool()) )
+        if ( m_pViewCore->Contains(*rChannel.Pool()) )
             pItem->setCheckState(0, Qt::Checked );
         else
             pItem->setCheckState(0, Qt::Unchecked );

@@ -4,6 +4,7 @@
 
 
 #include "SessionViewItems.hpp"
+#include "ViewItemsModulesListeners.hpp"
 
 #include <map>
 
@@ -31,8 +32,8 @@ public:
 
     void InsertItem( CViewItem* pItem );
 
-    IViewItemsModulesListener*      Listener() const        { return m_pListener; }
-    IViewItemsModulesListener*&     Listener()              { return m_pListener; }
+    const CViewItemsModulesListeners&       Listeners() const           { return m_Listeners; }
+    CViewItemsModulesListeners&             Listeners()                 { return m_Listeners; }
 
 protected:
 
@@ -49,7 +50,7 @@ protected:
     CSessionViewItems*                  m_pActiveSession;
     Nyx::CMemoryPool*                   m_pPool;
     Nyx::CWString                       m_Name;
-    IViewItemsModulesListener*          m_pListener;
+    CViewItemsModulesListeners          m_Listeners;
 };
 
 #endif // _MODULEVIEWITEMS_HPP_
