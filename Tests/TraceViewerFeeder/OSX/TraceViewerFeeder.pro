@@ -13,31 +13,31 @@ TEMPLATE = app
 FORMS += \
     ../traceviewerfeeder.ui
 
-INCLUDEPATH += ../../../NyxLibs/include
-INCLUDEPATH += ../../../NyxLibs/include/NyxNet
-INCLUDEPATH += ../TraceClientLink_public
-mac:INCLUDEPATH += ../../../NyxLibs/include/OSX
+INCLUDEPATH += $(NyxPath)/include
+INCLUDEPATH += $(NyxPath)/include/NyxNet
+INCLUDEPATH += ../../../TraceClientLink/public/OSX
+mac:INCLUDEPATH += $(NyxPath)/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 
 CONFIG(debug, debug|release) {
-    mac::PRE_TARGETDEPS += ../../../NyxLibs/lib/OSX/Debug_Universal_32_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += ../../../NyxLibs/lib/OSX/Debug_Universal_32_64/libNyxNet.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_Universal_32_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_Universal_32_64/libNyxNet.a
     mac:LIBS += -lNyxBase \
-        -L../../../NyxLibs/lib/OSX/Debug_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Debug_Universal_32_64
     mac:LIBS += -lNyxNet \
-        -L../../../NyxLibs/lib/OSX/Debug_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Debug_Universal_32_64
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
 }
 else {
-    mac::PRE_TARGETDEPS += ../../../NyxLibs/lib/OSX/Release_Universal_32_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += ../../../NyxLibs/lib/OSX/Release_Universal_32_64/libNyxNet.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_Universal_32_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_Universal_32_64/libNyxNet.a
     mac:LIBS += -lNyxBase \
-        -L../../../NyxLibs/lib/OSX/Release_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Release_Universal_32_64
     mac:LIBS += -lNyxNet \
-        -L../../../NyxLibs/lib/OSX/Release_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Release_Universal_32_64
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }
@@ -67,5 +67,5 @@ SOURCES += \
     ../FeederSource_UserText.cpp \
     ../FeederSource_TextFile.cpp \
     ../ExternalFeeder.cpp \
-    ../TraceClientLink_public/TraceClientLink_impl.cpp
+    ../../../TraceClientLink/public/OSX/TraceClientLink_impl.cpp
 

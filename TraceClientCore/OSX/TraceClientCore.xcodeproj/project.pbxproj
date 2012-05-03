@@ -312,10 +312,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
-					../../NyxLibs/include,
-					../../NyxLibs/include/OSX,
-					../../NyxLibs/include/NyxNet,
+					"$(NyxPath)/include",
+					"$(NyxPath)/include/OSX",
+					"$(NyxPath)/include/NyxNet",
 				);
+				NyxPath = ../../../Nyx;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = "";
 			};
@@ -333,10 +334,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					../include,
-					../../NyxLibs/include,
-					../../NyxLibs/include/OSX,
-					../../NyxLibs/include/NyxNet,
+					"$(NyxPath)/include",
+					"$(NyxPath)/include/OSX",
+					"$(NyxPath)/include/NyxNet",
 				);
+				NyxPath = ../../../Nyx;
 				SDKROOT = "";
 			};
 			name = Release;

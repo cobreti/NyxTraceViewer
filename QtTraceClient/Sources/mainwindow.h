@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "Document/DocumentsCollection.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "TracesView.h"
 #include "View/ViewItemsNodeObjectsPool.hpp"

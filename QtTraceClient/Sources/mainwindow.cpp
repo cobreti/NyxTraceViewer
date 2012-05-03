@@ -1,6 +1,5 @@
 #include "MainWindow.h"
 #include "ui_mainwindow.h"
-#include "Document/TracesDocument.hpp"
 #include "Dialogs/NewPoolDlg.hpp"
 #include "Dialogs/NewDocumentDlg.hpp"
 #include "Dialogs/NewViewDlg.hpp"

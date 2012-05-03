@@ -15,7 +15,6 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/StatusUpdaters/UISensor.cpp \
     ../Sources/StatusUpdaters/StatusUpdater.cpp \
     ../Sources/MainWindow/PoolTreeItem.cpp \
-    ../Sources/Document/DocumentsCollection.cpp \
     ../Sources/View/ViewItem.cpp \
     ../Sources/View/ViewItems.cpp \
     ../Sources/View/ViewItemPos.cpp \
@@ -46,7 +45,6 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/MainWindow/ViewTreeItem.cpp \
     ../Sources/TraceClientApp.cpp \
     ../Sources/View/SettingsToolBar.cpp \
-    ../Sources/Document/TracesDocument.cpp \
     ../Sources/View/SessionViewItems.cpp \
     ../Sources/View/ModuleViewItems.cpp \
     ../Sources/View/ViewItemsModules.cpp \
@@ -81,7 +79,6 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/StatusUpdaters/UISensor_LineEdit.hpp \
     ../Sources/StatusUpdaters/StatusUpdater.hpp \
     ../Sources/MainWindow/PoolTreeItem.hpp \
-    ../Sources/Document/DocumentsCollection.hpp \
     ../Sources/View/ViewItem.hpp \
     ../Sources/View/ViewItems.hpp \
     ../Sources/View/ViewItemPos.hpp \
@@ -113,7 +110,6 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/MainWindow/ViewTreeItem.hpp \
     ../Sources/TraceClientApp.hpp \
     ../Sources/View/SettingsToolBar.hpp \
-    ../Sources/Document/TracesDocument.hpp \
     ../Sources/View/SessionViewItems.hpp \
     ../Sources/View/ModuleViewItems.hpp \
     ../Sources/View/ViewItemsModules.hpp \
@@ -151,36 +147,36 @@ MOC_DIR = ../MOC
 UI_DIR = ../UI
 INCLUDEPATH += ../Sources
 INCLUDEPATH += ../UI
-INCLUDEPATH += ../../NyxLibs/include/
-INCLUDEPATH += ../../NyxLibs/include/NyxNet
+INCLUDEPATH += $(NyxPath)/include/
+INCLUDEPATH += $(NyxPath)/include/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
-mac:INCLUDEPATH += ../../NyxLibs/include/OSX
+mac:INCLUDEPATH += $(NyxPath)/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 CONFIG(debug, debug|release) {
     mac::PRE_TARGETDEPS += ../../lib/OSX/Debug/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Debug_Universal_32_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Debug_Universal_32_64/libNyxNet.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_Universal_32_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_Universal_32_64/libNyxNet.a
     mac:LIBS += -lTraceClientCore \
         -L../../lib/OSX/Debug
     mac:LIBS += -lNyxBase \
-        -L../../NyxLibs/lib/OSX/Debug_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Debug_Universal_32_64
     mac:LIBS += -lNyxNet \
-        -L../../NyxLibs/lib/OSX/Debug_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Debug_Universal_32_64
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
 }
 else { 
     mac::PRE_TARGETDEPS += ../../lib/OSX/Release/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Release_Universal_32_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += ../../NyxLibs/lib/OSX/Release_Universal_32_64/libNyxNet.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_Universal_32_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_Universal_32_64/libNyxNet.a
     mac:LIBS += -lTraceClientCore \
         -L../../lib/OSX/Release
     mac:LIBS += -lNyxBase \
-        -L../../NyxLibs/lib/OSX/Release_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Release_Universal_32_64
     mac:LIBS += -lNyxNet \
-        -L../../NyxLibs/lib/OSX/Release_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Release_Universal_32_64
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }
