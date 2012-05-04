@@ -13,7 +13,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "16A2775614B25C16002D6924"
+               BlueprintIdentifier = "16335B2115542BE6002955C9"
                BuildableName = "TraceViewerTcpBridge"
                BlueprintName = "TraceViewerTcpBridge"
                ReferencedContainer = "container:TraceViewerTcpBridge.xcodeproj">
@@ -38,7 +38,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "16A2775614B25C16002D6924"
+            BlueprintIdentifier = "16335B2115542BE6002955C9"
             BuildableName = "TraceViewerTcpBridge"
             BlueprintName = "TraceViewerTcpBridge"
             ReferencedContainer = "container:TraceViewerTcpBridge.xcodeproj">
@@ -55,7 +55,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "16A2775614B25C16002D6924"
+            BlueprintIdentifier = "16335B2115542BE6002955C9"
             BuildableName = "TraceViewerTcpBridge"
             BlueprintName = "TraceViewerTcpBridge"
             ReferencedContainer = "container:TraceViewerTcpBridge.xcodeproj">

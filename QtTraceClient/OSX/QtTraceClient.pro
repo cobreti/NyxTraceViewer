@@ -153,32 +153,34 @@ INCLUDEPATH += ../../TraceClientCore/include
 mac:INCLUDEPATH += $(NyxPath)/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
-CONFIG(debug, debug|release) {
-    mac::PRE_TARGETDEPS += ../../lib/OSX/Debug/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_Universal_32_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_Universal_32_64/libNyxNet.a
+
+CONFIG(Debug_64) {
+    mac::PRE_TARGETDEPS += ../../Lib/OSX/Debug_64/libTraceClientCore.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_64/libNyxNet.a
     mac:LIBS += -lTraceClientCore \
-        -L../../lib/OSX/Debug
+        -L../../Lib/OSX/Debug_64
     mac:LIBS += -lNyxBase \
-        -L$(NyxPath)/Lib/OSX/Debug_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Debug_64
     mac:LIBS += -lNyxNet \
-        -L$(NyxPath)/Lib/OSX/Debug_Universal_32_64
-    DESTDIR = ./Debug
-    OBJECTS_DIR = ./Debug
+        -L$(NyxPath)/Lib/OSX/Debug_64
+    DESTDIR = ./Debug_64
+    OBJECTS_DIR = ./Debug_64
     DEFINES += _DEBUG
 }
-else { 
-    mac::PRE_TARGETDEPS += ../../lib/OSX/Release/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_Universal_32_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_Universal_32_64/libNyxNet.a
+
+CONFIG(Release_64) {
+    mac::PRE_TARGETDEPS += ../../Lib/OSX/Release_64/libTraceClientCore.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_64/libNyxNet.a
     mac:LIBS += -lTraceClientCore \
-        -L../../lib/OSX/Release
+        -L../../Lib/OSX/Release_64
     mac:LIBS += -lNyxBase \
-        -L$(NyxPath)/Lib/OSX/Release_Universal_32_64
+        -L$(NyxPath)/Lib/OSX/Release_64
     mac:LIBS += -lNyxNet \
-        -L$(NyxPath)/Lib/OSX/Release_Universal_32_64
-    DESTDIR = ./Release
-    OBJECTS_DIR = ./Release
+        -L$(NyxPath)/Lib/OSX/Release_64
+    DESTDIR = ./Release_64
+    OBJECTS_DIR = ./Release_64
 }
 
 RESOURCES += \

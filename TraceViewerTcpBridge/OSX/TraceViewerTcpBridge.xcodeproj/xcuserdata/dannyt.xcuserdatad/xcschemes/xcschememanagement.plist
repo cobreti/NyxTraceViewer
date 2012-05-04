@@ -12,12 +12,12 @@
 		<key>Release.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>16A2775614B25C16002D6924</key>
+		<key>16335B2115542BE6002955C9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
