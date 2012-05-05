@@ -8,7 +8,6 @@
  *
  */
 CTracesViewCoreRepositoryObserver::CTracesViewCoreRepositoryObserver( CTracesViewCore& rViewCore ) :
-    TraceClientCore::CRepositoryObserver::CRepositoryObserver(),
     m_rViewCore(rViewCore),
     m_pItems(NULL)
 {
