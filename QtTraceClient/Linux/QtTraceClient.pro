@@ -1,3 +1,5 @@
+NYXPATH = ../../../Nyx
+
 FORMS += \
     ../UI/ViewPage.ui \
     ../UI/TracesView.ui \
@@ -13,10 +15,6 @@ RESOURCES += \
 HEADERS += \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
-    ../Sources/Dialogs/NewDocumentDlg.hpp \
-    ../Sources/Document/TracesDocument.hpp \
-    ../Sources/Document/DocumentsCollection.hpp \
-    ../Sources/Document/DocRepositoryObserver.hpp \
     ../Sources/MainWindow/ViewTreeItem.hpp \
     ../Sources/MainWindow/ViewPage.hpp \
     ../Sources/MainWindow/PoolTreeItem.hpp \
@@ -75,15 +73,16 @@ HEADERS += \
     ../Sources/TraceClientApp.hpp \
     ../Sources/MainWindow.h \
     ../Sources/AppSettings.hpp \
-    ../Sources/MainWindow/PipesMgntPageItemDelegate.hpp
+    ../Sources/MainWindow/PipesMgntPageItemDelegate.hpp \
+    ../Sources/View/TracesViewSet.hpp \
+    ../Sources/View/TracesViewCoreRepositoryObserver.hpp \
+    ../Sources/View/TracesViewCore.hpp \
+    ../Sources/View/ViewItemsModulesListeners.hpp \
+    ../Sources/View/Walkers/ViewItemsWalkerCore.hpp
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
     ../Sources/Dialogs/NewPoolDlg.cpp \
-    ../Sources/Dialogs/NewDocumentDlg.cpp \
-    ../Sources/Document/TracesDocument.cpp \
-    ../Sources/Document/DocumentsCollection.cpp \
-    ../Sources/Document/DocRepositoryObserver.cpp \
     ../Sources/MainWindow/ViewTreeItem.cpp \
     ../Sources/MainWindow/ViewPage.cpp \
     ../Sources/MainWindow/PoolTreeItem.cpp \
@@ -138,7 +137,12 @@ SOURCES += \
     ../Sources/MainWindow.cpp \
     ../Sources/main.cpp \
     ../Sources/AppSettings.cpp \
-    ../Sources/MainWindow/PipesMgntPageItemDelegate.cpp
+    ../Sources/MainWindow/PipesMgntPageItemDelegate.cpp \
+    ../Sources/View/TracesViewSet.cpp \
+    ../Sources/View/TracesViewCoreRepositoryObserver.cpp \
+    ../Sources/View/TracesViewCore.cpp \
+    ../Sources/View/ViewItemsModulesListeners.cpp \
+    ../Sources/View/Walkers/ViewItemsWalkerCore.cpp
 
 
 ICON=../Icons/AppLinux.icns
@@ -146,34 +150,34 @@ MOC_DIR = ../MOC
 UI_DIR = ../UI
 INCLUDEPATH += ../Sources
 INCLUDEPATH += ../UI
-INCLUDEPATH += ../../NyxLibs/include/
-INCLUDEPATH += ../../NyxLibs/include/NyxNet
+INCLUDEPATH += $$NYXPATH/include/
+INCLUDEPATH += $$NYXPATH/include/NyxNet
+INCLUDEPATH += $$NYXPATH/include/Linux
 INCLUDEPATH += ../../TraceClientCore/include
-INCLUDEPATH += ../../NyxLibs/include/Linux
 CONFIG(debug, debug|release) {
-#    PRE_TARGETDEPS += ../../lib/Linux/Debug/libTraceClientCore.a
-#    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Debug/libNyxBase.a
-#    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Debug/libNyxNet.a
+    PRE_TARGETDEPS += ../../lib/Linux/Debug/libTraceClientCore.a
+    PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Debug/libNyxBase.a
+    PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Debug/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../lib/Linux/Debug
     LIBS += -lNyxNet \
-        -L../../NyxLibs/Lib/Linux/Debug
+        -L$$NYXPATH/Lib/Linux/Debug
     LIBS += -lNyxBase \
-        -L../../NyxLibs/Lib/Linux/Debug
+        -L$$NYXPATH/Nyx/Lib/Linux/Debug
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
 }
 else {
-#    PRE_TARGETDEPS += ../../lib/Linux/Release/libTraceClientCore.a
-#    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxBase.a
-#    PRE_TARGETDEPS += ../../NyxLibs/lib/Linux/Release/libNyxNet.a
+    PRE_TARGETDEPS += ../../lib/Linux/Release/libTraceClientCore.a
+    PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Release/libNyxBase.a
+    PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Release/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../lib/Linux/Release
     LIBS += -lNyxNet \
-        -L../../NyxLibs/Lib/Linux/Release
+        -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lNyxBase \
-        -L../../NyxLibs/Lib/Linux/Release
+        -L$$NYXPATH/Lib/Linux/Release
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }

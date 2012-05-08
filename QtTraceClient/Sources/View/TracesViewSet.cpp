@@ -1,3 +1,4 @@
+#include <Nyx.hpp>
 #include "TracesViewSet.hpp"
 
 /**

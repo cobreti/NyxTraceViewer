@@ -6,6 +6,7 @@
 
 QT       += core gui
 
+NYXPATH = ../../../../Nyx
 TARGET = TraceViewerFeeder
 TEMPLATE = app
 
@@ -13,16 +14,16 @@ TEMPLATE = app
 FORMS += \
     ../traceviewerfeeder.ui
 
-INCLUDEPATH += ../../../NyxLibs/include
-INCLUDEPATH += ../../../NyxLibs/include/NyxNet
-INCLUDEPATH += ../../../NyxLibs/include/Linux
+INCLUDEPATH += $$NYXPATH/include
+INCLUDEPATH += $$NYXPATH/include/NyxNet
+INCLUDEPATH += $$NYXPATH/include/Linux
 INCLUDEPATH += ../TraceClientLink_public
 
 CONFIG(debug, debug|release) {
     LIBS += -lNyxBase \
-        -L../../../NyxLibs/Lib/Linux/Debug
+        -L$$NYXPATH/Lib/Linux/Debug
     LIBS += -lNyxNet \
-        -L../../../NyxLibs/Lib/Linux/Debug
+        -L$$NYXPATH/Lib/Linux/Debug
     LIBS += -ldl
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
@@ -30,9 +31,9 @@ CONFIG(debug, debug|release) {
 }
 else {
     LIBS += -lNyxBase \
-        -L../../../NyxLibs/Lib/Linux/Release
+        -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lNyxNet \
-        -L../../../NyxLibs/Lib/Linux/Release
+        -L$$NYXPATH/Lib/Linux/Release
     LIBS += -ldl
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
