@@ -1,4 +1,5 @@
 LIBBASEDIR := ../../lib/Linux
+NYXPATH := ../../../Nyx
 
 ifndef Config
 	Config := Debug
@@ -24,10 +25,10 @@ RM := rm -rf
 MKDIR := mkdir 
 
 CXX_CFLAGS := 	-I ../include \
-				-I ../../NyxLibs/include \
-				-I ../../NyxLibs/include/Linux \
-				-I ../../NyxLibs/include/NyxNet \
-				-L ../../NyxLibs/Lib/Linux/$(Config) \
+				-I $(NYXPATH)/include \
+				-I $(NYXPATH)/include/Linux \
+				-I $(NYXPATH)/include/NyxNet \
+				-L $(NYXPATH)/Lib/Linux/$(Config) \
 				-I ../Sources \
 				-I /usr/include \
 				-v $(CONFIG_CFLAGS)
