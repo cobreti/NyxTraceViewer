@@ -20,6 +20,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			InheritedPropertySheets=".\TraceViewerTcpBridge.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -40,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="../../NyxLibs/include;../../NyxLibs/include/win32;../../NyxLibs/include/NyxNet;../Sources"
+				AdditionalIncludeDirectories="&quot;$(NYXPATH)/include&quot;;&quot;$(NYXPATH)/include/win32&quot;;&quot;$(NYXPATH)/include/NyxNet&quot;;../Sources"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +64,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="../../NyxLibs/lib/win32/debug"
+				AdditionalLibraryDirectories="$(NYXPATH)/lib/win32/debug"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -98,6 +99,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
+			InheritedPropertySheets=".\TraceViewerTcpBridge.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -118,6 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;$(NYXPATH)/include&quot;;&quot;$(NYXPATH)/include/win32&quot;;&quot;$(NYXPATH)/include/NyxNet&quot;;../Sources"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -136,7 +139,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="$(NYXPATH)/lib/win32/release"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
