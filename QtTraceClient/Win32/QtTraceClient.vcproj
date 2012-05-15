@@ -45,7 +45,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="4"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include&quot;;..\Sources;..\UI;..\..\..\Nyx\include;..\..\..\Nyx\include\win32;..\..\..\Nyx\include\NyxNet;..\..\TraceClientCore\include;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2005&quot;;&quot;.\MOC\$(ConfigurationName)&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include&quot;;&quot;..\Sources&quot;;&quot;..\UI&quot;;&quot;..\..\..\Nyx\include&quot;;&quot;..\..\..\Nyx\include\win32&quot;;&quot;..\..\..\Nyx\include\NyxNet&quot;;&quot;..\..\TraceClientCore\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2005&quot;;&quot;.\MOC\$(ConfigurationName)&quot;;&quot;.\..\UI&quot;"
 				PreprocessorDefinitions="_WINDOWS,UNICODE,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
@@ -138,7 +138,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="-Zm200 -w34100 -w34189 -w34100 -w34189"
 				Optimization="2"
-				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include&quot;;..\Sources;..\UI;..\..\..\Nyx\include;..\..\..\Nyx\include\Win32;..\..\..\Nyx\include\NyxNet;..\..\TraceClientCore\include;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2005&quot;;&quot;.\MOC\$(ConfigurationName)&quot;"
+				AdditionalIncludeDirectories="&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;;&quot;$(QTDIR)\include\QtXml&quot;;&quot;$(QTDIR)\include&quot;;&quot;..\Sources&quot;;&quot;..\UI&quot;;&quot;..\..\..\Nyx\include&quot;;&quot;..\..\..\Nyx\include\Win32&quot;;&quot;..\..\..\Nyx\include\NyxNet&quot;;&quot;..\..\TraceClientCore\include&quot;;&quot;$(QTDIR)\include\ActiveQt&quot;;&quot;$(QTDIR)\mkspecs\win32-msvc2005&quot;;&quot;.\MOC\$(ConfigurationName)&quot;;&quot;.\..\UI&quot;"
 				PreprocessorDefinitions="QT_NO_DEBUG,NDEBUG,_WINDOWS,UNICODE,WIN32,QT_LARGEFILE_SUPPORT,QT_DLL,QT_NO_DEBUG,QT_XML_LIB,QT_GUI_LIB,QT_CORE_LIB,QT_THREAD_SUPPORT,NDEBUG"
 				GeneratePreprocessedFile="0"
 				ExceptionHandling="1"
@@ -247,7 +247,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\Dialogs\NewDocumentDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\Dialogs\NewDocumentDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -258,7 +258,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\Dialogs\NewDocumentDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\Dialogs\NewDocumentDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -277,7 +277,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\Dialogs\NewPoolDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\Dialogs\NewPoolDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -288,7 +288,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\Dialogs\NewPoolDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\Dialogs\NewPoolDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -307,7 +307,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\Dialogs\NewViewDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\Dialogs\NewViewDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -318,7 +318,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\Dialogs\NewViewDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\Dialogs\NewViewDlg.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -349,7 +349,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\StatusUpdaters\UISensor.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\StatusUpdaters\UISensor.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -360,7 +360,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\StatusUpdaters\UISensor.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\StatusUpdaters\UISensor.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -429,7 +429,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\mainwindow.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\mainwindow.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -440,7 +440,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\mainwindow.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\mainwindow.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -459,7 +459,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\MainWindow\PipesMgntPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\MainWindow\PipesMgntPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -470,7 +470,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\MainWindow\PipesMgntPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\MainWindow\PipesMgntPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -489,7 +489,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\MainWindow\PipesMgntPageItemDelegate.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\MainWindow\PipesMgntPageItemDelegate.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -500,7 +500,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\MainWindow\PipesMgntPageItemDelegate.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\MainWindow\PipesMgntPageItemDelegate.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -515,6 +515,36 @@
 					>
 				</File>
 				<File
+					RelativePath="..\Sources\TracesWindow.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Sources\TracesWindow.hpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\Sources\MainWindow\ViewPage.cpp"
 					>
 				</File>
@@ -527,7 +557,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\MainWindow\ViewPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\MainWindow\ViewPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -538,7 +568,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\MainWindow\ViewPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\MainWindow\ViewPage.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -597,7 +627,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\View\SettingsToolBar.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\View\SettingsToolBar.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -608,7 +638,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\View\SettingsToolBar.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\View\SettingsToolBar.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -627,7 +657,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\TracesView.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\TracesView.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -638,7 +668,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\TracesView.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\TracesView.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -693,7 +723,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\View\ViewHeader.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\View\ViewHeader.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -704,7 +734,7 @@
 						<Tool
 							Name="VCCustomBuildTool"
 							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\.\MOC\$(ConfigurationName)\.&quot; &quot;..\Sources\View\ViewHeader.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\View\ViewHeader.hpp&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 						/>
@@ -1126,6 +1156,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\UI\ui_TracesWindow.h"
+				>
+			</File>
+			<File
 				RelativePath="..\UI\ui_ViewPage.h"
 				>
 			</File>
@@ -1319,6 +1353,18 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\moc\debug\moc_TracesWindow.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\moc\debug\moc_UISensor.cpp"
 					>
 					<FileConfiguration
@@ -1491,6 +1537,18 @@
 				</File>
 				<File
 					RelativePath=".\moc\release\moc_TracesView.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\moc\release\moc_TracesWindow.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -1725,6 +1783,32 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\UI\TracesWindow.ui"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\..\UI\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;.\..\UI\ui_$(InputName).h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\..\UI\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;.\..\UI\ui_$(InputName).h&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\UI\ViewPage.ui"
 				>
 				<FileConfiguration
@@ -1858,26 +1942,6 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\File-View-icon.png"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath="..\UI\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
@@ -1898,7 +1962,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\New-Document-icon.png"
+				RelativePath="..\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -1919,6 +1983,26 @@
 			</File>
 			<File
 				RelativePath="..\Icons\New-Document-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\UI\Icons\New-Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2088,7 +2172,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\View-icon.png"
+				RelativePath="..\UI\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2108,7 +2192,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\View-icon.png"
+				RelativePath="..\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

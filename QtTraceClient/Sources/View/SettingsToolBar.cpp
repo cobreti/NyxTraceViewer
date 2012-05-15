@@ -1,5 +1,5 @@
 #include "SettingsToolBar.hpp"
-#include "TracesView.h"
+//#include "TracesView.h"
 
 #include <QToolButton>
 

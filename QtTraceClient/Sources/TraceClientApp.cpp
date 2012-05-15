@@ -4,12 +4,14 @@
 
 #include "TraceClientApp.hpp"
 #include "MainWindow.h"
+#include "TracesWindow.hpp"
 #include "View/ViewItemBackgroundPainter.hpp"
 #include "View/ViewItemModuleNamePainter.hpp"
 #include "View/ViewItemTickCountPainter.hpp"
 #include "View/ViewItemThreadIdPainter.hpp"
 #include "View/ViewItemDataPainter.hpp"
 #include "View/ViewItemLineNumberPainter.hpp"
+#include "PoolsUpdateClock.hpp"
 
 
 /**
@@ -33,7 +35,8 @@ CTraceClientApp& CTraceClientApp::Instance()
 CTraceClientApp::CTraceClientApp() :
     m_pQtApplication(NULL),
     m_pMainWindow(NULL),
-    m_AppReturnValue(-1)
+    m_AppReturnValue(-1),
+    m_pTracesWindow(NULL)
 {
     s_pInstance = this;
 }
@@ -57,7 +60,10 @@ void CTraceClientApp::Init(int &argc, char **argv)
 
     initDefaultSettings();
 
-    m_pMainWindow = new CMainWindow;
+    //m_pMainWindow = new CMainWindow;
+    m_pTracesWindow = new CTracesWindow();
+
+    m_pTracesWindow->show();
 
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start();
 }
@@ -68,7 +74,10 @@ void CTraceClientApp::Init(int &argc, char **argv)
  */
 void CTraceClientApp::Run()
 {
-    m_pMainWindow->show();
+    //m_pMainWindow->show();
+
+    TraceClientCore::CModule::Instance().PoolsUpdateClock().Start();
+
     m_AppReturnValue = m_pQtApplication->exec();
 }
 
@@ -78,11 +87,12 @@ void CTraceClientApp::Run()
  */
 void CTraceClientApp::Destroy()
 {
+    TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
-    delete m_pMainWindow;
-    m_pMainWindow = NULL;
+    //delete m_pMainWindow;
+    //m_pMainWindow = NULL;
 
     delete m_pQtApplication;
     m_pQtApplication = NULL;

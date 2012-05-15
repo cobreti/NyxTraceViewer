@@ -149,7 +149,7 @@ void CViewPage::OnPin( bool bPinned )
     }
     else
     {
-        CTraceClientApp::Instance().MainWindow()->UnpinView(m_pView);
+        //CTraceClientApp::Instance().MainWindow()->UnpinView(m_pView);
     }
 }
 
@@ -182,6 +182,6 @@ void CViewPage::closeEvent( QCloseEvent* event )
     if ( parent() )
         event->ignore();
 
-    if ( m_pView )
-        CTraceClientApp::Instance().MainWindow()->PinView(m_pView);
+    //if ( m_pView )
+    //    CTraceClientApp::Instance().MainWindow()->PinView(m_pView);
 }

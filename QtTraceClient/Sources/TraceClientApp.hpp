@@ -4,6 +4,7 @@
 #include "AppSettings.hpp"
 
 class CMainWindow;
+class CTracesWindow;
 class QApplication;
 
 class CTraceClientApp
@@ -20,7 +21,7 @@ public:
     void Destroy();
 
     int ReturnValue() const                 { return m_AppReturnValue; }
-    CMainWindow* MainWindow() const         { return m_pMainWindow; }
+    //CMainWindow* MainWindow() const         { return m_pMainWindow; }
 
     const CAppSettings&     AppSettings() const         { return m_AppSettings; }
     CAppSettings&           AppSettings()               { return m_AppSettings; }
@@ -38,6 +39,8 @@ protected:
     CMainWindow*        m_pMainWindow;
     int                 m_AppReturnValue;
     CAppSettings        m_AppSettings;
+
+    CTracesWindow*      m_pTracesWindow;
 
     static CTraceClientApp*     s_pInstance;
 };
