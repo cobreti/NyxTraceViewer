@@ -66,7 +66,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Walkers/ViewItemsWalkerCore.cpp \
     ../Sources/View/Walkers/ViewItemsWalker.cpp \
     ../Sources/View/TracesViewSet.cpp \
-    ../Sources/View/ViewItemsModulesListeners.cpp
+    ../Sources/View/ViewItemsModulesListeners.cpp \
+    ../Sources/TracesWindow.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/mainwindow.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
@@ -134,14 +135,16 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Walkers/ViewItemsWalker.hpp \
     ../Sources/View/Walkers/IViewItemsWalkerMethods.hpp \
     ../Sources/View/TracesViewSet.hpp \
-    ../Sources/View/ViewItemsModulesListeners.hpp
+    ../Sources/View/ViewItemsModulesListeners.hpp \
+    ../Sources/TracesWindow.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/mainwindow.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
     ../UI/NewDocumentDlg.ui \
     ../UI/PipesMgntPage.ui \
-    ../UI/ViewPage.ui
+    ../UI/ViewPage.ui \
+    ../UI/TracesWindow.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI
