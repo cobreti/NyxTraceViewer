@@ -89,15 +89,15 @@ void CTraceClientApp::Run()
  */
 void CTraceClientApp::Destroy()
 {
+    delete m_pQtApplication;
+    m_pQtApplication = NULL;
+
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
     //delete m_pMainWindow;
     //m_pMainWindow = NULL;
-
-    delete m_pQtApplication;
-    m_pQtApplication = NULL;
 }
 
 
