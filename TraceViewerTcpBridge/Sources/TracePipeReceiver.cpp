@@ -34,7 +34,7 @@ void CTracePipeReceiver::Start()
     m_refNxConnection->SetConnectionHandler(static_cast<NyxNet::INxConnectionHandler*>(this));
     
     m_refPipeServer = NyxNet::CPipeServer::Alloc();
-    m_refPipeServer->Create( m_PipeName.c_str(), 1048576, m_refNxConnection );
+    m_refPipeServer->Create( m_PipeName.c_str(), 4096, m_refNxConnection );
     m_refPipeServer->Start();
     
     m_refOutConnection = NyxNet::CNxConnection::Alloc();
@@ -43,7 +43,7 @@ void CTracePipeReceiver::Start()
     //res = NyxNet::CModule::Default()->GetHostname( HostName );
     //res = NyxNet::CModule::Default()->GetHostIp( HostName.c_str(), HostIp );
     
-    HostIp = "192.168.1.156";
+    HostIp = "192.168.1.149";
 
     m_refOutConnection->Open( m_refOutSocket );
     res = m_refOutSocket->Create( HostIp.c_str(), 8500 );

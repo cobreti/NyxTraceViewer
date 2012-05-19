@@ -1,14 +1,20 @@
 #ifndef _TRACECLIENTAPP_HPP_
 #define _TRACECLIENTAPP_HPP_
 
+#include <QtGui>
+
 #include "AppSettings.hpp"
+#include "TracesWindows.hpp"
 
 class CMainWindow;
 class CTracesWindow;
 class QApplication;
 
-class CTraceClientApp
+class CTraceClientApp : public QObject,
+                        public ITracesWindowsListener
 {
+    Q_OBJECT
+
 public:
     static CTraceClientApp& Instance();
 
@@ -26,7 +32,18 @@ public:
     const CAppSettings&     AppSettings() const         { return m_AppSettings; }
     CAppSettings&           AppSettings()               { return m_AppSettings; }
 
+    const CTracesWindows&   TracesWindows() const       { return m_TracesWindows; }
+    CTracesWindows&         TracesWindows()             { return m_TracesWindows; }
+
     const char* GetVersion() const;
+
+public: // ITracesWindowsListener methods
+
+    virtual void OnTracesWindows_Empty();
+
+public slots:
+
+signals:
 
 protected:
 
@@ -41,6 +58,7 @@ protected:
     CAppSettings        m_AppSettings;
 
     CTracesWindow*      m_pTracesWindow;
+    CTracesWindows      m_TracesWindows;
 
     static CTraceClientApp*     s_pInstance;
 };

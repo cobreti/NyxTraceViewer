@@ -1,6 +1,7 @@
 #include "TracesWindow.hpp"
 #include "TracesView.h"
 #include "MainWindow/PipesMgntPage.hpp"
+#include "TraceClientApp.hpp"
 
 #include "ui_TracesWindow.h"
 
@@ -18,7 +19,9 @@ m_pPipesMgntPage(NULL)
 {
     ui->setupUi(this);
 
-    QIcon               PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
+    QIcon               PipeSourceIcon(":/TracesWindow/Icons/PipeSource-icon.png");
+    QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");
+    QIcon               CloneViewIcon(":/TracesWindow/Icons/View-Copy-icon.png");
 
     m_pTracesView = new CTracesView(this);
     m_pPipesMgntPage = new CPipesMgntPage(this);
@@ -32,9 +35,21 @@ m_pPipesMgntPage(NULL)
     m_pBtn_SourceFeeds->setIcon(PipeSourceIcon);
     m_pBtn_SourceFeeds->setCheckable(true);
 
+    m_pBtn_NewView = new QToolButton();
+    m_pBtn_NewView->setIcon(NewViewIcon);
+
+    m_pBtn_CloneView = new QToolButton();
+    m_pBtn_CloneView->setIcon(CloneViewIcon);
+
     ui->toolBar->addWidget(m_pBtn_SourceFeeds);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addWidget(m_pBtn_NewView);
+    ui->toolBar->addWidget(m_pBtn_CloneView);
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
+    connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
+
+    CTraceClientApp::Instance().TracesWindows().Insert(this);
 }
 
 
@@ -43,6 +58,7 @@ m_pPipesMgntPage(NULL)
  */
 CTracesWindow::~CTracesWindow()
 {
+    CTraceClientApp::Instance().TracesWindows().Remove(this);
 }
 
 
@@ -64,3 +80,21 @@ void CTracesWindow::OnSourceFeedsBtnClicked()
 }
 
 
+/**
+ *
+ */
+void CTracesWindow::OnNewView()
+{
+    CTracesWindow* pWnd =  new CTracesWindow();
+    pWnd->show();
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::closeEvent(QCloseEvent *event)
+{
+    event->accept();
+    delete this;
+}

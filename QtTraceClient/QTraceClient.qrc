@@ -14,6 +14,8 @@
     <file>Icons/SaveAs.png</file>
   </qresource>
   <qresource prefix="TracesWindow">
+    <file>Icons/View-Copy-icon.png</file>
+    <file>Icons/View-icon.png</file>
     <file>Icons/PipeSource-icon.png</file>
   </qresource>
   <qresource prefix="/View">

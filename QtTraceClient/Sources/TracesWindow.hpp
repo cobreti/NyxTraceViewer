@@ -27,16 +27,27 @@ public:
     CTracesWindow();
     virtual ~CTracesWindow();
 
+signals:
+
 public slots:
 
     void OnSourceFeedsBtnClicked();
+    void OnNewView();
+
+protected:
+
+    virtual void closeEvent(QCloseEvent *);
 
 protected:
 
     Ui::TracesWindow*       ui;
 
     CTracesView*            m_pTracesView;
+
     QToolButton*            m_pBtn_SourceFeeds;
+    QToolButton*            m_pBtn_NewView;
+    QToolButton*            m_pBtn_CloneView;
+
     CPipesMgntPage*         m_pPipesMgntPage;
 
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;

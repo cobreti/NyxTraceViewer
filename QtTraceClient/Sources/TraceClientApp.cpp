@@ -32,7 +32,7 @@ CTraceClientApp& CTraceClientApp::Instance()
 /**
  *
  */
-CTraceClientApp::CTraceClientApp() :
+CTraceClientApp::CTraceClientApp() : QObject(),
     m_pQtApplication(NULL),
     m_pMainWindow(NULL),
     m_AppReturnValue(-1),
@@ -56,6 +56,8 @@ CTraceClientApp::~CTraceClientApp()
  */
 void CTraceClientApp::Init(int &argc, char **argv)
 {
+    m_TracesWindows.SetListener( static_cast<ITracesWindowsListener*>(this) );
+
     m_pQtApplication = new QApplication(argc, argv);
 
     initDefaultSettings();
@@ -105,6 +107,15 @@ void CTraceClientApp::Destroy()
 const char* CTraceClientApp::GetVersion() const
 {
     return "0.0.0.2";
+}
+
+
+/**
+ *
+ */
+void CTraceClientApp::OnTracesWindows_Empty()
+{
+    m_pQtApplication->quit();
 }
 
 
