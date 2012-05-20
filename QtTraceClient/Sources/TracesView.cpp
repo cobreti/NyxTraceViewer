@@ -23,34 +23,15 @@
 /**
  *
  */
-CTracesView::CTracesView(QWidget *parent) :
-    QWidget(parent),
+CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
+    QWidget(pParent),
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
     m_pHeader(NULL),
     m_pItemsWalker(NULL)
 {
-    ui->setupUi(this);
-
-    m_refViewCore = new CTracesViewCore();
-    m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
-
-    this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
-
-    m_Margins.setLeft(25.0);
-    m_Margins.setRight(25.0);
-
-    m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
-
-	InitSettings();
-
-    connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
-    connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
-    connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
-    connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
-
-    m_RefreshTimer.start(1000);
+    Init(pBase);
 }
 
 
@@ -58,18 +39,6 @@ CTracesView::~CTracesView()
 {
     delete m_pHeader;
     delete m_pItemsWalker;
-}
-
-
-/**
- *
- */
-void CTracesView::InitFromView( const CTracesView& view )
-{
-    m_Settings = view.m_Settings;
-    m_pItemsWalker->Clone(*view.m_pItemsWalker);
-    ui->m_VertScrollbar->setValue( view.ui->m_VertScrollbar->value());
-    update();
 }
 
 
@@ -375,18 +344,52 @@ void CTracesView::showEvent( QShowEvent* )
 }
 
 
-void CTracesView::InitSettings()
+/**
+ *
+ */
+void CTracesView::Init(CTracesView* pBase)
 {
-    m_Settings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
-//    m_Settings = Doc().DefaultViewSettings();
+    ui->setupUi(this);
 
-    Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
+    this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
 
-    m_pHeader->InitDefaultWidth();
+    m_Margins.setLeft(25.0);
+    m_Margins.setRight(25.0);
+
+    m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
+
+    if ( pBase )
+    {
+        m_refViewCore = pBase->ViewCore();
+        Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
+        m_Settings = pBase->m_Settings;
+        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
+        m_pItemsWalker->Clone(*pBase->m_pItemsWalker);
+        ui->m_VertScrollbar->setValue( pBase->ui->m_VertScrollbar->value());
+    }
+    else
+    {
+        m_refViewCore = new CTracesViewCore();
+        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
+
+        m_Settings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
+
+        Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
+
+        m_pHeader->InitDefaultWidth();
+    }
 
     m_refViewCore->AddView(this);
     m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
+
+    connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
+    connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
+    connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
+    connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
+
+    m_RefreshTimer.start(1000);
 }
+
 
 
 /**

@@ -24,7 +24,7 @@ class CTracesWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    CTracesWindow();
+    CTracesWindow(CTracesWindow* pSrc);
     virtual ~CTracesWindow();
 
 signals:
@@ -33,6 +33,7 @@ public slots:
 
     void OnSourceFeedsBtnClicked();
     void OnNewView();
+    void OnCloneView();
 
 protected:
 

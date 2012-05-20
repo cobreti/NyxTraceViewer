@@ -35,10 +35,8 @@ class CTracesView : public QWidget,
     Q_OBJECT
 
 public:
-    explicit CTracesView(QWidget *parent = NULL);
+    explicit CTracesView(QWidget* pParent, CTracesView* pBase);
     ~CTracesView();
-
-    void InitFromView( const CTracesView& view );
 
 	void SetName( const QString& name );
 	const QString& Name() const		{ return m_Name; }
@@ -74,7 +72,7 @@ protected:
     virtual void wheelEvent(QWheelEvent* event);
     virtual void showEvent( QShowEvent* event);
 
-	virtual void InitSettings();
+    void Init(CTracesView* pBase);
 
     virtual QRect ClientRect() const { return ClientRect(rect()); }
     virtual QRect ClientRect( const QRect& rcWnd ) const;

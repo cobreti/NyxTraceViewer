@@ -11,7 +11,7 @@
 /**
  *
  */
-CTracesWindow::CTracesWindow() : QMainWindow(),
+CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 ui( new Ui::TracesWindow() ),
 m_pTracesView(NULL),
 m_pBtn_SourceFeeds(NULL),
@@ -23,7 +23,12 @@ m_pPipesMgntPage(NULL)
     QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");
     QIcon               CloneViewIcon(":/TracesWindow/Icons/View-Copy-icon.png");
 
-    m_pTracesView = new CTracesView(this);
+    CTracesView* pBase = NULL;
+
+    if ( pSrc )
+        pBase = pSrc->m_pTracesView;
+
+    m_pTracesView = new CTracesView(this, pBase);
     m_pPipesMgntPage = new CPipesMgntPage(this);
     m_pPipesMgntPage->hide();
 
@@ -48,6 +53,7 @@ m_pPipesMgntPage(NULL)
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
+    connect( m_pBtn_CloneView, SIGNAL(clicked()), this, SLOT(OnCloneView()));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
 }
@@ -85,7 +91,17 @@ void CTracesWindow::OnSourceFeedsBtnClicked()
  */
 void CTracesWindow::OnNewView()
 {
-    CTracesWindow* pWnd =  new CTracesWindow();
+    CTracesWindow* pWnd =  new CTracesWindow(NULL);
+    pWnd->show();
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnCloneView()
+{
+    CTracesWindow* pWnd = new CTracesWindow(this);
     pWnd->show();
 }
 

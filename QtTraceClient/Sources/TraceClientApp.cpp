@@ -63,8 +63,7 @@ void CTraceClientApp::Init(int &argc, char **argv)
     initDefaultSettings();
 
     //m_pMainWindow = new CMainWindow;
-    m_pTracesWindow = new CTracesWindow();
-
+    m_pTracesWindow = new CTracesWindow(NULL);
     m_pTracesWindow->show();
 
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start();
@@ -95,9 +94,6 @@ void CTraceClientApp::Destroy()
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
-
-    //delete m_pMainWindow;
-    //m_pMainWindow = NULL;
 }
 
 

@@ -270,7 +270,7 @@ void CMainWindow::OnToggleTreePanel()
 CTracesView* CMainWindow::CreateNewView( const QString& ViewName, QTreeWidgetItem* pParent /*= NULL*/ )
 {
 //	CTracesView*					pView = pDoc->CreateView(m_pViewPage);
-    CTracesView*                    pView = new CTracesView(m_pViewPage);
+    CTracesView*                    pView = new CTracesView(m_pViewPage, NULL);
     QIcon                           ViewIcon(":/MainWindow/Icons/View-icon.png");
 
 	pView->SetName(ViewName);
@@ -284,7 +284,7 @@ CTracesView* CMainWindow::CreateNewView( const QString& ViewName, QTreeWidgetIte
 
     if ( pParentViewItem )
     {
-        pView->InitFromView( *pParentViewItem->View() );
+//        pView->InitFromView( *pParentViewItem->View() );
         ui->m_ViewsTree->expandItem(pParentViewItem);
         pParentViewItem->addChild(pViewItem);
         pViewItem->setSelected(true);
