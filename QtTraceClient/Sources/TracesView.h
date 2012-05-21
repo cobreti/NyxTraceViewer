@@ -41,8 +41,8 @@ public:
 	void SetName( const QString& name );
 	const QString& Name() const		{ return m_Name; }
 
-	const CViewSettings&		Settings() const		{ return m_Settings; }
-	CViewSettings&				Settings()				{ return m_Settings; }
+    const CViewSettings&		Settings() const		{ return ViewCore()->ViewSettings(); }
+    CViewSettings&				Settings()				{ return ViewCore()->ViewSettings(); }
 
     CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
@@ -91,7 +91,6 @@ protected:
     Ui::CTracesView*			        ui;
     QString								m_Name;
     QRectF								m_Margins;
-    CViewSettings						m_Settings;
     bool                                m_bViewDirty;
     bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;

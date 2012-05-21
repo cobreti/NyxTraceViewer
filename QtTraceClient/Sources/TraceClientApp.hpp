@@ -6,6 +6,9 @@
 #include "AppSettings.hpp"
 #include "TracesWindows.hpp"
 
+#include "View/ViewItemsNodeObjectsPool.hpp"
+#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
+
 class CMainWindow;
 class CTracesWindow;
 class QApplication;
@@ -27,7 +30,6 @@ public:
     void Destroy();
 
     int ReturnValue() const                 { return m_AppReturnValue; }
-    //CMainWindow* MainWindow() const         { return m_pMainWindow; }
 
     const CAppSettings&     AppSettings() const         { return m_AppSettings; }
     CAppSettings&           AppSettings()               { return m_AppSettings; }
@@ -53,12 +55,14 @@ protected:
 protected:
 
     QApplication*       m_pQtApplication;
-    CMainWindow*        m_pMainWindow;
     int                 m_AppReturnValue;
     CAppSettings        m_AppSettings;
 
     CTracesWindow*      m_pTracesWindow;
     CTracesWindows      m_TracesWindows;
+
+    CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
+    CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
 
     static CTraceClientApp*     s_pInstance;
 };

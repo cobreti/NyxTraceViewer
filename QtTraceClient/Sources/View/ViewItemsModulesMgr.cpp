@@ -30,14 +30,9 @@ CModuleViewItems* CViewItemsModulesMgr::CreateNewModule(const Nyx::CWString& Mod
     if ( m_Modules.count(ModuleName) > 0 )
         return m_Modules[ModuleName];
 
-    CModuleViewItems*       pModule = new CModuleViewItems(m_pPool);
+    CModuleViewItems*       pModule = new CModuleViewItems(*this);
     pModule->Name() = ModuleName;
-//    pModule->Listener() = m_pListener;
-    pModule->Listeners() = Listeners();
     m_Modules[ModuleName] = pModule;
-
-//    if ( m_pListener )
-//        m_pListener->OnNewModuleViewItems(pModule);
 
     m_Listeners.OnNewModuleViewItems(pModule);
 

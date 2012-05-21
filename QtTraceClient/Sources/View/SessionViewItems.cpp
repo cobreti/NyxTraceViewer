@@ -1,11 +1,12 @@
 #include "SessionViewItems.hpp"
-
+#include "ViewItemsModulesMgr.hpp"
 
 /**
  *
  */
-CSessionViewItems::CSessionViewItems(Nyx::CMemoryPool* pPool) :
-m_Items(pPool, false)
+CSessionViewItems::CSessionViewItems(CViewItemsModulesMgr& rMgr) :
+    m_Items(rMgr.MemoryPool(), false),
+    m_rMgr(rMgr)
 {
 }
 

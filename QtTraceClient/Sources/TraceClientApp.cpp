@@ -34,7 +34,6 @@ CTraceClientApp& CTraceClientApp::Instance()
  */
 CTraceClientApp::CTraceClientApp() : QObject(),
     m_pQtApplication(NULL),
-    m_pMainWindow(NULL),
     m_AppReturnValue(-1),
     m_pTracesWindow(NULL)
 {
@@ -62,7 +61,6 @@ void CTraceClientApp::Init(int &argc, char **argv)
 
     initDefaultSettings();
 
-    //m_pMainWindow = new CMainWindow;
     m_pTracesWindow = new CTracesWindow(NULL);
     m_pTracesWindow->show();
 
@@ -75,8 +73,6 @@ void CTraceClientApp::Init(int &argc, char **argv)
  */
 void CTraceClientApp::Run()
 {
-    //m_pMainWindow->show();
-
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Start();
 
     m_AppReturnValue = m_pQtApplication->exec();

@@ -5,6 +5,7 @@
 #include "ViewItemPos.hpp"
 #include "ViewItems.hpp"
 #include "TracesViewCoreRepositoryObserver.hpp"
+#include "TraceClientApp.hpp"
 
 
 /**
@@ -44,6 +45,15 @@ Nyx::CMsgHandler* CTracesViewCore::GetViewItemsMsgHandler()
 void CTracesViewCore::AddView(CTracesView *pView)
 {
     m_Views.Insert(pView);
+}
+
+
+/**
+ *
+ */
+void CTracesViewCore::RemoveView(CTracesView* pView)
+{
+    m_Views.Remove(pView);
 }
 
 
@@ -104,6 +114,10 @@ void CTracesViewCore::Init()
 
     m_pViewItemsModulesMgr = new CViewItemsModulesMgr(m_refMemoryPool);
     m_pRepositoryObserver = new CTracesViewCoreRepositoryObserver(*this);
+
+    m_ViewSettings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
+
+    m_ViewSettings.DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
 }
 
 

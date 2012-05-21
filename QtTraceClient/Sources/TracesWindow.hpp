@@ -3,9 +3,6 @@
 
 #include <QMainWindow>
 
-#include "View/ViewItemsNodeObjectsPool.hpp"
-#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
-
 
 class QToolButton;
 class CTracesView;
@@ -50,10 +47,6 @@ protected:
     QToolButton*            m_pBtn_CloneView;
 
     CPipesMgntPage*         m_pPipesMgntPage;
-
-    CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
-    CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
-
 };
 
 

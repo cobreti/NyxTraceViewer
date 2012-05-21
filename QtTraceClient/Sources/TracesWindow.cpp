@@ -111,6 +111,9 @@ void CTracesWindow::OnCloneView()
  */
 void CTracesWindow::closeEvent(QCloseEvent *event)
 {
+    m_pTracesView->close();
+    delete m_pTracesView;
+
     event->accept();
     delete this;
 }

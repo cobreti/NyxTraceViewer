@@ -2,15 +2,16 @@
 #include "IViewItemsModulesListener.hpp"
 #include "ViewItem.hpp"
 #include "ViewItem_TraceData.hpp"
+#include "ViewItemsModulesMgr.hpp"
 
 
 /**
  *
  */
-CModuleViewItems::CModuleViewItems(Nyx::CMemoryPool* pPool) :
-m_NextAvailId(1),
-m_pActiveSession(NULL),
-m_pPool(pPool)
+CModuleViewItems::CModuleViewItems(CViewItemsModulesMgr& rMgr) :
+    m_NextAvailId(1),
+    m_pActiveSession(NULL),
+    m_rMgr(rMgr)
 {
 }
 
@@ -41,17 +42,14 @@ CSessionViewItems* CModuleViewItems::Session( const SessionViewItemsID& id)
  */
 SessionViewItemsID CModuleViewItems::CreateNewSession()
 {
-    CSessionViewItems*      pSession = new CSessionViewItems(m_pPool);
+    CSessionViewItems*      pSession = new CSessionViewItems(Mgr());
 
     pSession->Id() = m_NextAvailId++;
 
     m_Sessions[pSession->Id()] = pSession;
     m_pActiveSession = pSession;
 
-//    if ( m_pListener )
-//        m_pListener->OnNewSessionViewItems(this, pSession);
-
-    m_Listeners.OnNewSessionViewItems(this, pSession);
+    Mgr().Listeners().OnNewSessionViewItems(this, pSession);
 
     return pSession->Id();
 }

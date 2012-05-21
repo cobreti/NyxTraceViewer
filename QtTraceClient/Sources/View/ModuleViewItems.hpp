@@ -10,6 +10,7 @@
 
 class CViewItem;
 class IViewItemsModulesListener;
+class CViewItemsModulesMgr;
 
 /**
  *
@@ -17,7 +18,7 @@ class IViewItemsModulesListener;
 class CModuleViewItems
 {
 public:
-    CModuleViewItems(Nyx::CMemoryPool* pPool);
+    CModuleViewItems(CViewItemsModulesMgr& rMgr);
     virtual ~CModuleViewItems();
 
     CSessionViewItems*      ActiveSession() const          { return m_pActiveSession; }
@@ -32,8 +33,8 @@ public:
 
     void InsertItem( CViewItem* pItem );
 
-    const CViewItemsModulesListeners&       Listeners() const           { return m_Listeners; }
-    CViewItemsModulesListeners&             Listeners()                 { return m_Listeners; }
+    const CViewItemsModulesMgr&             Mgr() const                 { return m_rMgr; }
+    CViewItemsModulesMgr&                   Mgr()                       { return m_rMgr; }
 
 protected:
 
@@ -48,9 +49,8 @@ protected:
     SessionsTable                       m_Sessions;
     SessionViewItemsID                  m_NextAvailId;
     CSessionViewItems*                  m_pActiveSession;
-    Nyx::CMemoryPool*                   m_pPool;
     Nyx::CWString                       m_Name;
-    CViewItemsModulesListeners          m_Listeners;
+    CViewItemsModulesMgr&               m_rMgr;
 };
 
 #endif // _MODULEVIEWITEMS_HPP_

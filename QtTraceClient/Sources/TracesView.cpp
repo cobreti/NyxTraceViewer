@@ -229,6 +229,8 @@ void CTracesView::paintEvent(QPaintEvent*)
 
 void CTracesView::closeEvent(QCloseEvent* event)
 {
+    m_refViewCore->ViewItemsModulesMgr().Listeners().Remove( static_cast<IViewItemsModulesListener*>(this) );
+    m_refViewCore->RemoveView(this);
 	event->accept();
 }
 
@@ -236,14 +238,15 @@ void CTracesView::closeEvent(QCloseEvent* event)
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
     CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
 
     int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
-    int nScrollWidth = Nyx::Max((int)(m_Settings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
+    int nScrollWidth = Nyx::Max((int)(rSettings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
     ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-    ui->m_VertScrollbar->setSingleStep( m_Settings.DrawSettings()->SingleLineHeight() );
+    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
 	ui->m_VertScrollbar->setPageStep( rcClient.height() );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
@@ -356,15 +359,13 @@ void CTracesView::Init(CTracesView* pBase)
     m_Margins.setLeft(25.0);
     m_Margins.setRight(25.0);
 
-    m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
-
     if ( pBase )
     {
         m_refViewCore = pBase->ViewCore();
-        Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
-        m_Settings = pBase->m_Settings;
+
         m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
         m_pItemsWalker->Clone(*pBase->m_pItemsWalker);
+
         ui->m_VertScrollbar->setValue( pBase->ui->m_VertScrollbar->value());
     }
     else
@@ -372,12 +373,11 @@ void CTracesView::Init(CTracesView* pBase)
         m_refViewCore = new CTracesViewCore();
         m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
 
-        m_Settings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
-
         Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
-
-        m_pHeader->InitDefaultWidth();
     }
+
+    m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
+    m_pHeader->InitDefaultWidth();
 
     m_refViewCore->AddView(this);
     m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
@@ -388,6 +388,9 @@ void CTracesView::Init(CTracesView* pBase)
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
 
     m_RefreshTimer.start(1000);
+
+    if ( pBase )
+        update();
 }
 
 

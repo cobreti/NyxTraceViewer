@@ -24,7 +24,7 @@ m_pItemDelegate(NULL)
     setWindowFlags( Qt::Widget );
 
     connect(ui->m_btnAdd, SIGNAL(clicked()), this, SLOT(OnNewPool()));
-    connect(ui->m_PoolsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnPoolSelectionChanged()));
+//    connect(ui->m_PoolsTree, SIGNAL(itemSelectionChanged()), this, SLOT(OnPoolSelectionChanged()));
 	connect(ui->m_PoolsTree, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemChanged(QTreeWidgetItem*, int)));
 	connect(ui->m_PoolsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemClicked(QTreeWidgetItem*, int)));
     connect(ui->m_PoolsTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemDoubleClicked(QTreeWidgetItem*, int)));

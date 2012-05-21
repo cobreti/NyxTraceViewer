@@ -5,6 +5,8 @@
 #include <NyxMsgHandler.hpp>
 #include "TracesViewSet.hpp"
 #include "TracesPool.hpp"
+#include "ViewSettings.hpp"
+
 
 class CViewItemsModulesMgr;
 class CTracesViewCoreRepositoryObserver;
@@ -28,9 +30,13 @@ public:
 
     Nyx::CMemoryPool*               MemoryPool() const              { return m_refMemoryPool; }
 
+    const CViewSettings&            ViewSettings() const            { return m_ViewSettings; }
+    CViewSettings&                  ViewSettings()                  { return m_ViewSettings; }
+
     Nyx::CMsgHandler* GetViewItemsMsgHandler();
 
     void AddView( CTracesView* pView );
+    void RemoveView( CTracesView* pView );
 
     CTracesViewSetIterator GetViewsIterator() const;
 
@@ -55,6 +61,7 @@ protected:
     CTracesViewCoreRepositoryObserver*                      m_pRepositoryObserver;
     size_t                                                  m_NextLineId;
     CTracesViewSet                                          m_Views;
+    CViewSettings                                           m_ViewSettings;
 };
 
 

@@ -7,6 +7,9 @@
 #include <set>
 
 
+class CViewItemsModulesMgr;
+
+
 /**
  *
  */
@@ -25,7 +28,7 @@ typedef         std::set<SessionViewItemsID>       SessionViewItemsIDSet;
 class CSessionViewItems
 {
 public:
-    CSessionViewItems(Nyx::CMemoryPool* pPool);
+    CSessionViewItems(CViewItemsModulesMgr& rMgr);
     virtual ~CSessionViewItems();
 
     const CViewItems&           Items() const       { return m_Items; }
@@ -37,11 +40,14 @@ public:
     const Nyx::CMFString&       Name() const        { return m_Name; }
     Nyx::CMFString&             Name()              { return m_Name; }
 
+    CViewItemsModulesMgr&       Mgr() const         { return m_rMgr; }
+
 protected:
 
-    CViewItems              m_Items;
-    SessionViewItemsID      m_Id;
-    Nyx::CMFString          m_Name;
+    CViewItems                      m_Items;
+    SessionViewItemsID              m_Id;
+    Nyx::CMFString                  m_Name;
+    CViewItemsModulesMgr&           m_rMgr;
 };
 
 

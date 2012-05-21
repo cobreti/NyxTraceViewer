@@ -40,6 +40,8 @@ public:
     void AttachWalker( CViewItemsWalkerCore* pWalker );
     void DetachWalker( CViewItemsWalkerCore* pWalker );
 
+    Nyx::CMemoryPool*                   MemoryPool() const  { return m_pPool; }
+
 protected:
 
     typedef     std::vector<CViewItemsWalkerCore*>              ViewItemsWalkerArray;
