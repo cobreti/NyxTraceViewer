@@ -5,7 +5,7 @@
 #include "ViewItemPos.hpp"
 #include "ViewItems.hpp"
 #include "TracesViewCoreRepositoryObserver.hpp"
-#include "TraceClientApp.hpp"
+#include "TraceClientApp.h"
 
 
 /**

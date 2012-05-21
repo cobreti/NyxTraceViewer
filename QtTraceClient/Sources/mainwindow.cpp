@@ -7,7 +7,7 @@
 #include "MainWindow/ViewPage.hpp"
 #include "PipeTraceFeeder.hpp"
 #include "PoolsUpdateClock.hpp"
-#include "TraceClientApp.hpp"
+#include "TraceClientApp.h"
 
 #include <QCloseEvent>
 #include <QDesktopWidget>

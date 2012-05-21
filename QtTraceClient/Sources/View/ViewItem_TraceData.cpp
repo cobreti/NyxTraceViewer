@@ -1,6 +1,6 @@
 #include "ViewItem_TraceData.hpp"
 #include "TracesPool.hpp"
-#include "TraceClientApp.hpp"
+#include "TraceClientApp.h"
 
 
 /**

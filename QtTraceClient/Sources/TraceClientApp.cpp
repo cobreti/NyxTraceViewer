@@ -2,7 +2,7 @@
 #include <QtGui>
 #include <QtGui/QApplication>
 
-#include "TraceClientApp.hpp"
+#include "TraceClientApp.h"
 #include "MainWindow.h"
 #include "TracesWindow.hpp"
 #include "View/ViewItemBackgroundPainter.hpp"

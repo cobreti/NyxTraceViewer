@@ -1,7 +1,7 @@
 #include "ViewPage.hpp"
 #include "ui_ViewPage.h"
 #include "TracesView.h"
-#include "TraceClientApp.hpp"
+#include "TraceClientApp.h"
 #include "MainWindow.h"
 #include "MainWindow/PipesMgntPage.hpp"
 

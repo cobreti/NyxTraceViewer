@@ -7,7 +7,7 @@
 
 #include "TraceClientCoreModule.hpp"
 #include "PipeTraceFeeder.hpp"
-#include "TraceClientApp.hpp"
+#include "TraceClientApp.h"
 
 #include "StatusUpdaters/UISensorsFactory.hpp"
 
