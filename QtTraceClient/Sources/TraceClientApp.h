@@ -1,7 +1,7 @@
 #ifndef _TRACECLIENTAPP_HPP_
 #define _TRACECLIENTAPP_HPP_
 
-#include <QtGui>
+//#include <QtGui>
 
 #include "AppSettings.hpp"
 #include "TracesWindows.hpp"

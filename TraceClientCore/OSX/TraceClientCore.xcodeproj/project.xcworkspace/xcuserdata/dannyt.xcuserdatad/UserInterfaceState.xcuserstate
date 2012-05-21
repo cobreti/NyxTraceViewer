@@ -3927,7 +3927,7 @@
 			</dict>
 		</dict>
 		<string>file://localhost/Users/dannyt/dev/JavaForge/TraceViewer/TraceClientCore/OSX/TraceClientCore.xcodeproj/</string>
-		<real>359047255.04776102</real>
+		<real>359310326.11287498</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6670,7 +6670,7 @@
 		<string>IDEDeviceLocation</string>
 		<string>IDEDeviceArchitecture</string>
 		<string>dvtdevice-local-computer:localhost</string>
-		<string>x86_64</string>
+		<string>i386</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6693,7 +6693,7 @@
 			</array>
 		</dict>
 		<string>IDENameString</string>
-		<string>Release 64</string>
+		<string>Release 32</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6842,7 +6842,7 @@
 		</dict>
 		<real>4</real>
 		<string>: </string>
-		<string>Release 64</string>
+		<string>Release 32</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -6991,7 +6991,7 @@
 				<integer>556</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>359047251.06348598</real>
+			<real>359310321.11226797</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -7002,7 +7002,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 11:20 AM</string>
+		<string>Today at 12:25 PM</string>
 		<integer>234</integer>
 		<dict>
 			<key>$class</key>
@@ -28990,7 +28990,7 @@
 			</array>
 		</dict>
 		<real>260</real>
-		<string>{{899, 231}, {1326, 901}}</string>
+		<string>{{1136, 443}, {1326, 901}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -39806,7 +39806,7 @@
 				<integer>2309</integer>
 			</dict>
 		</dict>
-		<real>359047255.05243802</real>
+		<real>359310326.11729503</real>
 		<dict>
 			<key>$class</key>
 			<dict>

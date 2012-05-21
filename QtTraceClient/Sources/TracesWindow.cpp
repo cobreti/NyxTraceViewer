@@ -6,6 +6,7 @@
 #include "ui_TracesWindow.h"
 
 #include <QToolButton>
+#include <QCloseEvent>
 
 
 /**

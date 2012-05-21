@@ -1,4 +1,3 @@
-#include <QtGui/QApplication>
 //#include "mainwindow.h"
 
 #include <Nyx.hpp>
@@ -12,6 +11,8 @@
 #include "StatusUpdaters/UISensorsFactory.hpp"
 
 #include <NyxLocalTime.hpp>
+
+#include <QtGui/QApplication>
 
 #define NYXTRACE(filter, output)    { Nyx::CTraceStream stream(filter); stream << output; }
 

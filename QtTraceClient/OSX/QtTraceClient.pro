@@ -67,7 +67,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Walkers/ViewItemsWalker.cpp \
     ../Sources/View/TracesViewSet.cpp \
     ../Sources/View/ViewItemsModulesListeners.cpp \
-    ../Sources/TracesWindow.cpp
+    ../Sources/TracesWindow.cpp \
+    ../Sources/TracesWindows.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/mainwindow.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
@@ -136,7 +137,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Walkers/IViewItemsWalkerMethods.hpp \
     ../Sources/View/TracesViewSet.hpp \
     ../Sources/View/ViewItemsModulesListeners.hpp \
-    ../Sources/TracesWindow.hpp
+    ../Sources/TracesWindow.hpp \
+    ../Sources/TracesWindows.hpp \
+    ../Sources/TraceClientApp.h
 FORMS += ../UI/TracesView.ui \
     ../UI/mainwindow.ui \
     ../UI/NewViewDlg.ui \

@@ -1,8 +1,10 @@
-#include <Nyx.hpp>
 #include <QtGui>
 #include <QtGui/QApplication>
 
 #include "TraceClientApp.h"
+
+#include <Nyx.hpp>
+
 #include "MainWindow.h"
 #include "TracesWindow.hpp"
 #include "View/ViewItemBackgroundPainter.hpp"

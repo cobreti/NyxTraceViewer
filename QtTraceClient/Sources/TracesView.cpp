@@ -1,11 +1,12 @@
+#include <Nyx.hpp>
+#include <NyxAnsiFile.hpp>
+
 #include "TracesView.h"
 #include "ui_TracesView.h"
 #include "TraceClientApp.h"
 #include "MainWindow.h"
 #include "View/ViewHeader.hpp"
 
-#include <Nyx.hpp>
-#include <NyxAnsiFile.hpp>
 
 #include "View/ViewItem_TraceData.hpp"
 #include "View/ViewItemDataPainter.hpp"
