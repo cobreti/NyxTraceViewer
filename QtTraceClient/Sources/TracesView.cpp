@@ -4,7 +4,6 @@
 #include "TracesView.h"
 #include "ui_TracesView.h"
 #include "TraceClientApp.h"
-#include "MainWindow.h"
 #include "View/ViewHeader.hpp"
 
 

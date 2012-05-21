@@ -439,36 +439,6 @@
 				Name="MainWindow"
 				>
 				<File
-					RelativePath="..\Sources\mainwindow.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\Sources\mainwindow.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\mainwindow.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DQT_NO_DEBUG -DNDEBUG -D_WINDOWS -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_DLL -DQT_XML_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_THREAD_SUPPORT  &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; &quot;-I.\..\UI&quot; &quot;..\Sources\mainwindow.h&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath="..\Sources\MainWindow\PipesMgntPage.cpp"
 					>
 				</File>
@@ -1199,29 +1169,6 @@
 				SourceControlFiles="false"
 				>
 				<File
-					RelativePath=".\moc\debug\moc_MainWindow.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\$(InputName)1.obj"
-							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							ObjectFile="$(IntDir)\$(InputName)1.obj"
-							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
 					RelativePath=".\moc\debug\moc_NewDocumentDlg.cpp"
 					>
 					<FileConfiguration
@@ -1493,18 +1440,6 @@
 				Filter="cpp;moc"
 				SourceControlFiles="false"
 				>
-				<File
-					RelativePath=".\moc\release\moc_MainWindow.cpp"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						ExcludedFromBuild="true"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-						/>
-					</FileConfiguration>
-				</File>
 				<File
 					RelativePath=".\moc\release\moc_NewDocumentDlg.cpp"
 					>

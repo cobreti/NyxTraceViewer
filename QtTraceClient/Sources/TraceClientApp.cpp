@@ -5,7 +5,6 @@
 
 #include <Nyx.hpp>
 
-#include "MainWindow.h"
 #include "TracesWindow.hpp"
 #include "View/ViewItemBackgroundPainter.hpp"
 #include "View/ViewItemModuleNamePainter.hpp"
@@ -15,6 +14,7 @@
 #include "View/ViewItemLineNumberPainter.hpp"
 #include "PoolsUpdateClock.hpp"
 
+#include "TraceClientCoreModule.hpp"
 
 /**
  *
