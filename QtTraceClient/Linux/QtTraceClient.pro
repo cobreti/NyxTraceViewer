@@ -71,8 +71,6 @@ HEADERS += \
     ../Sources/View/Walkers/ViewItemsModuleWalkerNode.hpp \
     ../Sources/View/Walkers/FileWriterViewItemsWalker.hpp \
     ../Sources/TracesView.h \
-    ../Sources/TraceClientApp.hpp \
-    ../Sources/MainWindow.h \
     ../Sources/AppSettings.hpp \
     ../Sources/MainWindow/PipesMgntPageItemDelegate.hpp \
     ../Sources/View/TracesViewSet.hpp \
@@ -81,7 +79,8 @@ HEADERS += \
     ../Sources/View/ViewItemsModulesListeners.hpp \
     ../Sources/View/Walkers/ViewItemsWalkerCore.hpp \
     ../Sources/TracesWindow.hpp \
-    ../Sources/TracesWindows.hpp
+    ../Sources/TracesWindows.hpp \
+    ../Sources/TraceClientApp.h
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -137,7 +136,6 @@ SOURCES += \
     ../Sources/View/Walkers/FileWriterViewItemsWalker.cpp \
     ../Sources/TracesView.cpp \
     ../Sources/TraceClientApp.cpp \
-    ../Sources/MainWindow.cpp \
     ../Sources/main.cpp \
     ../Sources/AppSettings.cpp \
     ../Sources/MainWindow/PipesMgntPageItemDelegate.cpp \
