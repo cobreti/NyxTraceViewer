@@ -5,7 +5,6 @@ QT += xml
 TARGET = TraceViewer
 TEMPLATE = app
 SOURCES += ../Sources/TracesView.cpp \
-    ../Sources/mainwindow.cpp \
     ../Sources/main.cpp \
     ../Sources/Dialogs/NewViewDlg.cpp \
     ../Sources/Dialogs/NewPoolDlg.cpp \
@@ -70,7 +69,6 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/TracesWindow.cpp \
     ../Sources/TracesWindows.cpp
 HEADERS += ../Sources/TracesView.h \
-    ../Sources/mainwindow.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
     ../Sources/Dialogs/NewDocumentDlg.hpp \
