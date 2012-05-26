@@ -38,6 +38,8 @@ m_pItemDelegate(NULL)
     ui->m_PoolsTree->setColumnWidth(1, 48 );
     ui->m_PoolsTree->setColumnWidth(2, 48 );
 
+    ui->m_btnRemove->hide();
+
 
     m_pItemDelegate = new CPipesMgntPageItemDelegate();
     m_pItemDelegate->SetTreeWidget( ui->m_PoolsTree );

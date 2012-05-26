@@ -38,6 +38,16 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Pools</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QTreeWidget" name="m_PoolsTree">
        <property name="enabled">
         <bool>true</bool>
@@ -76,79 +86,90 @@
        </column>
       </widget>
      </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QPushButton" name="m_btnAdd">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../QTraceClient.qrc">
-           <normaloff>:/MainWindow/Icons/add-icon.png</normaloff>
-           <normalon>:/MainWindow/Icons/add-icon.png</normalon>:/MainWindow/Icons/add-icon.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>10</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="m_btnRemove">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="../QTraceClient.qrc">
-           <normaloff>:/MainWindow/Icons/delete-icon.png</normaloff>
-           <normalon>:/MainWindow/Icons/delete-icon.png</normalon>:/MainWindow/Icons/delete-icon.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
     </layout>
    </item>
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnAdd">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../QTraceClient.qrc">
+         <normaloff>:/MainWindow/Icons/add-icon.png</normaloff>
+         <normalon>:/MainWindow/Icons/add-icon.png</normalon>:/MainWindow/Icons/add-icon.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="m_btnRemove">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../QTraceClient.qrc">
+         <normaloff>:/MainWindow/Icons/delete-icon.png</normaloff>
+         <normalon>:/MainWindow/Icons/delete-icon.png</normalon>:/MainWindow/Icons/delete-icon.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
