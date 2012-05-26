@@ -1,5 +1,6 @@
-LIBBASEDIR := ../../NyxLibs/Lib/Linux
-NYXINC := ../../NyxLibs/include
+BASE_NYXLIB := ../../../Nyx/Lib/Linux
+NYXINC := ../../../Nyx/include
+BASE_LIBDIR := ../../Lib/Linux
 
 ifndef Config
 	Config := Debug
@@ -8,11 +9,13 @@ endif
 
 ifeq ($(Config),Release)
 	OBJDIR := Release
-	LIBDIR := $(LIBBASEDIR)/Release
+	NYXLIB := $(BASE_NYXLIB)/Release
+	LIBDIR := $(BASE_LIBDIR)/Release
 	CONFIG_CFLAGS := -O3
 else
 	OBJDIR := Debug
-	LIBDIR := $(LIBBASEDIR)/Debug
+	NYXLIB := $(BASE_NYXLIB)/Debug
+	LIBDIR := $(BASE_LIBDIR)/Debug
 	CONFIG_CFLAGS := -O0 -g
 endif
 
@@ -29,7 +32,7 @@ CXX_CFLAGS := 	-I $(NYXINC) \
 				-I $(NYXINC)/NyxNet \
 				-I ./include \
 				-I ../Source \
-				-L $(LIBDIR) \
+				-L $(NYXLIB) \
 				-I /usr/include \
 				-v $(CONFIG_CFLAGS)
 
@@ -45,7 +48,7 @@ $(OBJDIR)/%.o: ../Source/%.cpp
 	g++ -c -fPIC -o $@ $(CXX_CFLAGS) -c $^
 
 $(LIBDIR)/TraceClientLink.so: $(OBJS)	
-	g++ $(CXX_CFLAGS) $(OBJS) -shared -lpthread -lNyxNet -lNyxBase -o $(Config)/libTraceClientLink.so
+	g++ $(CXX_CFLAGS) $(OBJS) -shared -lpthread -lNyxNet -lNyxBase -o $(LIBDIR)/libTraceClientLink.so
 
 
 all: 	$(LIBDIR)/TraceClientLink.so
@@ -53,5 +56,7 @@ all: 	$(LIBDIR)/TraceClientLink.so
 clean:
 	-$(RM) Debug
 	-$(RM) Release
+	-$(RM) $(BASE_LIBDIR)/Release/libTraceClientLink.so
+	-$(RM) $(BASE_LIBDIR)/Debug/libTraceClientLink.so
 
 

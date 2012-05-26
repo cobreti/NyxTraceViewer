@@ -1,4 +1,4 @@
-LIBBASEDIR := ../../lib/Linux
+BASE_LIBDIR := ../../Lib/Linux
 NYXPATH := ../../../Nyx
 
 ifndef Config
@@ -8,11 +8,11 @@ endif
 
 ifeq ($(Config),Release)
 	OBJDIR := Release
-	LIBDIR := $(LIBBASEDIR)/Release
+	LIBDIR := $(BASE_LIBDIR)/Release
 	CONFIG_CFLAGS := -O3
 else
 	OBJDIR := Debug
-	LIBDIR := $(LIBBASEDIR)/Debug
+	LIBDIR := $(BASE_LIBDIR)/Debug
 	CONFIG_CFLAGS := -O0 -g
 endif
 
@@ -65,7 +65,7 @@ all: 	$(LIBDIR)/libTraceClientCore.a \
 clean:
 	-$(RM) Debug
 	-$(RM) Release
-	-$(RM) $(LIBBASEDIR)/Release/*.a
-	-$(RM) $(LIBBASEDIR)/Debug/*.a
+	-$(RM) $(BASE_LIBDIR)/Release/libTraceClientCore.a
+	-$(RM) $(BASE_LIBDIR)/Debug/libTraceClientCore.a
 
 

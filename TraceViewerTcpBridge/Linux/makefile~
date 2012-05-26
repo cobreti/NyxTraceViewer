@@ -13,7 +13,7 @@ ifeq ($(Config),Release)
 else
 	OBJDIR := Debug
 	LIBDIR := $(LIBBASEDIR)/Debug
-	CONFIG_CFLAGS := -O0 -fexceptions
+	CONFIG_CFLAGS := -O0 -g
 endif
 
 
@@ -28,7 +28,7 @@ CXX_CFLAGS := 	-I ../include \
 				-I $(NYXPATH)/include \
 				-I $(NYXPATH)/include/Linux \
 				-I $(NYXPATH)/include/NyxNet \
-				-L ../../NyxLibs/Lib/Linux/$(Config) \
+				-L $(NYXPATH)/Lib/Linux/$(Config) \
 				-I ../Sources \
 				-I /usr/include \
 				-v $(CONFIG_CFLAGS)

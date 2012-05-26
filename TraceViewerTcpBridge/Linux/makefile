@@ -1,4 +1,4 @@
-LIBBASEDIR := ../../lib/Linux
+LIBBASEDIR := ../../Lib/Linux
 NYXPATH := ../../../Nyx
 
 ifndef Config

@@ -158,11 +158,11 @@ INCLUDEPATH += $$NYXPATH/include/NyxNet
 INCLUDEPATH += $$NYXPATH/include/Linux
 INCLUDEPATH += ../../TraceClientCore/include
 CONFIG(debug, debug|release) {
-    PRE_TARGETDEPS += ../../lib/Linux/Debug/libTraceClientCore.a
+    PRE_TARGETDEPS += ../../Lib/Linux/Debug/libTraceClientCore.a
     PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Debug/libNyxBase.a
     PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Debug/libNyxNet.a
     LIBS += -lTraceClientCore \
-        -L../../lib/Linux/Debug
+        -L../../Lib/Linux/Debug
     LIBS += -lNyxNet \
         -L$$NYXPATH/Lib/Linux/Debug
     LIBS += -lNyxBase \
@@ -172,11 +172,11 @@ CONFIG(debug, debug|release) {
     DEFINES += _DEBUG
 }
 else {
-    PRE_TARGETDEPS += ../../lib/Linux/Release/libTraceClientCore.a
+    PRE_TARGETDEPS += ../../Lib/Linux/Release/libTraceClientCore.a
     PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Release/libNyxBase.a
     PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Release/libNyxNet.a
     LIBS += -lTraceClientCore \
-        -L../../lib/Linux/Release
+        -L../../Lib/Linux/Release
     LIBS += -lNyxNet \
         -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lNyxBase \
