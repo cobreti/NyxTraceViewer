@@ -139,7 +139,6 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/TracesWindows.hpp \
     ../Sources/TraceClientApp.h
 FORMS += ../UI/TracesView.ui \
-    ../UI/mainwindow.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
     ../UI/NewDocumentDlg.ui \

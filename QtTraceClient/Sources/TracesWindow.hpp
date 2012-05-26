@@ -31,6 +31,7 @@ public slots:
     void OnSourceFeedsBtnClicked();
     void OnNewView();
     void OnCloneView();
+    void OnSaveAs();
 
 protected:
 
@@ -45,6 +46,7 @@ protected:
     QToolButton*            m_pBtn_SourceFeeds;
     QToolButton*            m_pBtn_NewView;
     QToolButton*            m_pBtn_CloneView;
+    QToolButton*            m_pBtn_SaveAs;
 
     CPipesMgntPage*         m_pPipesMgntPage;
 };
