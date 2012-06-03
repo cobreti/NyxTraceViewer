@@ -44,7 +44,7 @@ void CPipesMgntPageItemDelegate::paint ( QPainter * painter, const QStyleOptionV
     {
         case 1:
             {
-                QIcon   StateIcon(":/MainWindow/Icons/PipeSource-icon.png");
+                QIcon   StateIcon(":/TracesWindow/Icons/PipeSource-icon.png");
 
                 QItemDelegate::paint(painter, option, index);
 
@@ -56,8 +56,8 @@ void CPipesMgntPageItemDelegate::paint ( QPainter * painter, const QStyleOptionV
             {
                 MainWindow::CPoolTreeItem*      pItem = static_cast<MainWindow::CPoolTreeItem*>( m_pTreeWidget->topLevelItem(index.row()) );
 
-                QIcon   StartStateIcon(":/MainWindow/Icons/StartPipe-icon.png");
-                QIcon   StopStateIcon(":/MainWindow/Icons/StopPipe-icon.png");
+                QIcon   StartStateIcon(":/TracesWindow/Icons/StartPipe-icon.png");
+                QIcon   StopStateIcon(":/TracesWindow/Icons/StopPipe-icon.png");
 
                 QItemDelegate::paint(painter, option, index);
 

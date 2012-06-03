@@ -29,16 +29,20 @@ m_pItemDelegate(NULL)
 	connect(ui->m_PoolsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemClicked(QTreeWidgetItem*, int)));
     connect(ui->m_PoolsTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnPoolItemDoubleClicked(QTreeWidgetItem*, int)));
 
-    ui->m_btnRemove->setEnabled(false);
 
-    QIcon                                       PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
-    QIcon                                       StateIcon(":/MainWindow/Icons/StartPipe-icon.png");
+    QIcon                                       PipeSourceIcon(":/TracesWindow/Icons/PipeSource-icon.png");
+    QIcon                                       StateIcon(":/TracesWindow/Icons/StartPipe-icon.png");
+    QIcon                                       PipeAddIcon(":/TracesWindow/Icons/add-icon.png");
 
     ui->m_PoolsTree->setColumnWidth(0, 48);
     ui->m_PoolsTree->setColumnWidth(1, 48 );
     ui->m_PoolsTree->setColumnWidth(2, 48 );
 
+    ui->m_btnRemove->setEnabled(false);
     ui->m_btnRemove->hide();
+
+    ui->m_btnAdd->setIcon( PipeAddIcon );
+    ui->m_btnAdd->setIconSize( QSize(16, 16) );
 
 
     m_pItemDelegate = new CPipesMgntPageItemDelegate();
@@ -94,8 +98,6 @@ void CPipesMgntPage::OnNewPool()
 	MainWindow::CPoolTreeItem*					pItem = new MainWindow::CPoolTreeItem();
     TraceClientCore::CPipeTraceFeeder*          pPipeTraceFeeder = NULL;
 	TraceClientCore::CModule&					rModule = TraceClientCore::CModule::Instance();
-    QIcon                                       PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
-    QIcon                                       StateIcon(":/MainWindow/Icons/StartPipe-icon.png");
 
     //
     // Add pool
@@ -128,8 +130,6 @@ void CPipesMgntPage::OnNewPool()
     pItem->SetChannel(pChannel);
     pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
-    //pItem->setIcon(0, PipeSourceIcon);
-    //pItem->setIcon(1, StateIcon);
     ui->m_PoolsTree->insertTopLevelItem(ui->m_PoolsTree->topLevelItemCount(), pItem );
     ui->m_PoolsTree->clearSelection();
     pItem->setSelected(true);
@@ -223,7 +223,6 @@ void CPipesMgntPage::OnPoolItemDoubleClicked( QTreeWidgetItem* pItem, int column
 void CPipesMgntPage::FillPoolsList()
 {
     TraceClientCore::CModule&                               rModule = TraceClientCore::CModule::Instance();
-    QIcon                                                   PipeSourceIcon(":/MainWindow/Icons/PipeSource-icon.png");
     TraceClientCore::CTraceChannelsList                     ChannelsList;
     TraceClientCore::CTraceChannelsList::const_iterator     ChannelPos;
 
@@ -239,7 +238,6 @@ void CPipesMgntPage::FillPoolsList()
         pItem->SetChannel( &rChannel );
 	    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
 	    pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
-        pItem->setIcon(0, PipeSourceIcon);
 
         if ( rChannel.Feeder().Valid() )
         {

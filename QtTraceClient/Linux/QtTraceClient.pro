@@ -16,7 +16,6 @@ RESOURCES += \
 HEADERS += \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
-    ../Sources/MainWindow/ViewTreeItem.hpp \
     ../Sources/MainWindow/ViewPage.hpp \
     ../Sources/MainWindow/PoolTreeItem.hpp \
     ../Sources/MainWindow/PipesMgntPage.hpp \
@@ -85,7 +84,6 @@ HEADERS += \
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
     ../Sources/Dialogs/NewPoolDlg.cpp \
-    ../Sources/MainWindow/ViewTreeItem.cpp \
     ../Sources/MainWindow/ViewPage.cpp \
     ../Sources/MainWindow/PoolTreeItem.cpp \
     ../Sources/MainWindow/PipesMgntPage.cpp \

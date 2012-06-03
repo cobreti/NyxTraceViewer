@@ -41,7 +41,6 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->gridLayout->addWidget(m_pTracesView);
 
     m_pBtn_SourceFeeds = new QToolButton();
-    m_pBtn_SourceFeeds->setIconSize( QSize(32, 32) );
     m_pBtn_SourceFeeds->setIcon(PipeSourceIcon);
     m_pBtn_SourceFeeds->setCheckable(true);
 
@@ -60,6 +59,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->toolBar->addWidget(m_pBtn_CloneView);
     ui->toolBar->addSeparator();
     ui->toolBar->addWidget(m_pBtn_SaveAs);
+    ui->toolBar->setIconSize( QSize(16, 16) );
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));

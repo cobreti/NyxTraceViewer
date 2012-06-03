@@ -1,23 +1,13 @@
 <RCC>
-    <qresource prefix="/MainWindow">
-        <file>Icons/Document-icon.png</file>
-        <file>Icons/File-View-icon.png</file>
-        <file>Icons/New-Document-icon.png</file>
-        <file>Icons/View-icon.png</file>
-        <file>Icons/add-icon.png</file>
-        <file>Icons/DeleteDocView-icon.png</file>
-        <file>Icons/delete-icon.png</file>
-        <file>Icons/PipeSource-icon.png</file>
-        <file>Icons/StartPipe-icon.png</file>
-        <file>Icons/StopPipe-icon.png</file>
-        <file>Icons/View-Copy-icon.png</file>
-        <file>Icons/SaveAs.png</file>
-    </qresource>
     <qresource prefix="/TracesWindow">
         <file>Icons/View-Copy-icon.png</file>
         <file>Icons/View-icon.png</file>
         <file>Icons/PipeSource-icon.png</file>
         <file>Icons/SaveAs.png</file>
+        <file>Icons/StartPipe-icon.png</file>
+        <file>Icons/StopPipe-icon.png</file>
+        <file>Icons/add-icon.png</file>
+        <file>Icons/delete-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>
