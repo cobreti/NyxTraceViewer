@@ -1,6 +1,7 @@
 #include "TracesWindow.hpp"
 #include "TracesView.h"
 #include "MainWindow/PipesMgntPage.hpp"
+#include "MainWindow/MainWindow.hpp"
 #include "TraceClientApp.h"
 
 #include "ui_TracesWindow.h"
@@ -8,6 +9,10 @@
 #include <QToolButton>
 #include <QCloseEvent>
 #include <QFileDialog>
+
+
+QMainWindow*        CTracesWindow::s_pDummyWnd = NULL;
+
 
 /**
  *
@@ -22,6 +27,13 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pPipesMgntPage(NULL)
 {
     ui->setupUi(this);
+
+    if ( s_pDummyWnd == NULL )
+    {
+        s_pDummyWnd = new QMainWindow();
+    }
+
+    setParent( s_pDummyWnd, Qt::Window );
 
     QIcon               PipeSourceIcon(":/TracesWindow/Icons/PipeSource-icon.png");
     QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");

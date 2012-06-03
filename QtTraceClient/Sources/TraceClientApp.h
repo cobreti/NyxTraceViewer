@@ -37,6 +37,8 @@ public:
     const CTracesWindows&   TracesWindows() const       { return m_TracesWindows; }
     CTracesWindows&         TracesWindows()             { return m_TracesWindows; }
 
+    CMainWindow*            MainWindow() const          { return m_pMainWindow; }
+
     const char* GetVersion() const;
 
 public: // ITracesWindowsListener methods
@@ -58,6 +60,7 @@ protected:
     int                 m_AppReturnValue;
     CAppSettings        m_AppSettings;
 
+    CMainWindow*        m_pMainWindow;
     CTracesWindow*      m_pTracesWindow;
     CTracesWindows      m_TracesWindows;
 

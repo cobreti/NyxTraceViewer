@@ -5,6 +5,7 @@
 
 #include <Nyx.hpp>
 
+#include "MainWindow/MainWindow.hpp"
 #include "TracesWindow.hpp"
 #include "View/ViewItemBackgroundPainter.hpp"
 #include "View/ViewItemModuleNamePainter.hpp"
@@ -37,7 +38,8 @@ CTraceClientApp& CTraceClientApp::Instance()
 CTraceClientApp::CTraceClientApp() : QObject(),
     m_pQtApplication(NULL),
     m_AppReturnValue(-1),
-    m_pTracesWindow(NULL)
+    m_pTracesWindow(NULL),
+    m_pMainWindow(NULL)
 {
     s_pInstance = this;
 }
@@ -62,6 +64,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pQtApplication = new QApplication(argc, argv);
 
     initDefaultSettings();
+
+    m_pMainWindow = new CMainWindow();
+    m_pMainWindow->show();
 
     m_pTracesWindow = new CTracesWindow(NULL);
     m_pTracesWindow->show();
@@ -109,7 +114,7 @@ const char* CTraceClientApp::GetVersion() const
  */
 void CTraceClientApp::OnTracesWindows_Empty()
 {
-    m_pQtApplication->quit();
+    //m_pQtApplication->quit();
 }
 
 

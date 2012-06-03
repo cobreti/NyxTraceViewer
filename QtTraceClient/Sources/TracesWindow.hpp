@@ -49,6 +49,8 @@ protected:
     QToolButton*            m_pBtn_SaveAs;
 
     CPipesMgntPage*         m_pPipesMgntPage;
+
+    static QMainWindow*     s_pDummyWnd;
 };
 
 
