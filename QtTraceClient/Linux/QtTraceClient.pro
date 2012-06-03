@@ -7,8 +7,8 @@ FORMS += \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
     ../UI/NewDocumentDlg.ui \
-    ../UI/mainwindow.ui \
-    ../UI/TracesWindow.ui
+    ../UI/TracesWindow.ui \
+    ../UI/MainWindow.ui
 
 RESOURCES += \
     ../QTraceClient.qrc
@@ -79,7 +79,8 @@ HEADERS += \
     ../Sources/View/Walkers/ViewItemsWalkerCore.hpp \
     ../Sources/TracesWindow.hpp \
     ../Sources/TracesWindows.hpp \
-    ../Sources/TraceClientApp.h
+    ../Sources/TraceClientApp.h \
+    ../Sources/MainWindow/MainWindow.hpp
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -143,7 +144,8 @@ SOURCES += \
     ../Sources/View/ViewItemsModulesListeners.cpp \
     ../Sources/View/Walkers/ViewItemsWalkerCore.cpp \
     ../Sources/TracesWindow.cpp \
-    ../Sources/TracesWindows.cpp
+    ../Sources/TracesWindows.cpp \
+    ../Sources/MainWindow/MainWindow.cpp
 
 
 ICON=../Icons/AppLinux.icns
