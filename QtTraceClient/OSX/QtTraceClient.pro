@@ -41,7 +41,6 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/ViewItemInserter.cpp \
     ../Sources/View/ViewItemLineNumberPainter.cpp \
     ../Sources/View/ViewItemsNodeObjectsPool.cpp \
-    ../Sources/MainWindow/ViewTreeItem.cpp \
     ../Sources/TraceClientApp.cpp \
     ../Sources/View/SettingsToolBar.cpp \
     ../Sources/View/SessionViewItems.cpp \
@@ -67,7 +66,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/TracesViewSet.cpp \
     ../Sources/View/ViewItemsModulesListeners.cpp \
     ../Sources/TracesWindow.cpp \
-    ../Sources/TracesWindows.cpp
+    ../Sources/TracesWindows.cpp \
+    ../Sources/MainWindow/MainWindow.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -107,7 +107,6 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/ViewItemInserter.hpp \
     ../Sources/View/ViewItemLineNumberPainter.hpp \
     ../Sources/View/ViewItemsNodeObjectsPool.hpp \
-    ../Sources/MainWindow/ViewTreeItem.hpp \
     ../Sources/TraceClientApp.hpp \
     ../Sources/View/SettingsToolBar.hpp \
     ../Sources/View/SessionViewItems.hpp \
@@ -137,14 +136,16 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/ViewItemsModulesListeners.hpp \
     ../Sources/TracesWindow.hpp \
     ../Sources/TracesWindows.hpp \
-    ../Sources/TraceClientApp.h
+    ../Sources/TraceClientApp.h \
+    ../Sources/MainWindow/MainWindow.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
     ../UI/NewDocumentDlg.ui \
     ../UI/PipesMgntPage.ui \
     ../UI/ViewPage.ui \
-    ../UI/TracesWindow.ui
+    ../UI/TracesWindow.ui \
+    ../UI/MainWindow.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI
