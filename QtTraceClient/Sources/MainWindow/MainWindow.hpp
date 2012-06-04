@@ -24,12 +24,14 @@ public:
 public slots:
 
     void OnNewTracesWindow();
+    void OnChannelsMgnt();
 
 protected:
 
     Ui::MainWindow*     ui;
 
     QToolButton*        m_pBtn_NewView;
+    QToolButton*        m_pBtn_Channels;
 };
 
 

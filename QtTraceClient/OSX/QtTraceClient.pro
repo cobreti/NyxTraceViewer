@@ -67,7 +67,10 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/ViewItemsModulesListeners.cpp \
     ../Sources/TracesWindow.cpp \
     ../Sources/TracesWindows.cpp \
-    ../Sources/MainWindow/MainWindow.cpp
+    ../Sources/MainWindow/MainWindow.cpp \
+    ../Sources/ChannelsMgnt/ChannelsMgnt.cpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItem.cpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -137,7 +140,11 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/TracesWindow.hpp \
     ../Sources/TracesWindows.hpp \
     ../Sources/TraceClientApp.h \
-    ../Sources/MainWindow/MainWindow.hpp
+    ../Sources/MainWindow/MainWindow.hpp \
+    ../Sources/MainWindow/ChannelsMgnt.hpp \
+    ../Sources/ChannelsMgnt/ChannelsMgnt.hpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItem.hpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -145,7 +152,8 @@ FORMS += ../UI/TracesView.ui \
     ../UI/PipesMgntPage.ui \
     ../UI/ViewPage.ui \
     ../UI/TracesWindow.ui \
-    ../UI/MainWindow.ui
+    ../UI/MainWindow.ui \
+    ../UI/ChannelsMgnt.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI

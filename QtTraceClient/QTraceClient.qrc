@@ -16,5 +16,6 @@
     </qresource>
     <qresource prefix="/MainWindow">
         <file>Icons/View-icon.png</file>
+        <file>Icons/PipeSource-icon.png</file>
     </qresource>
 </RCC>
