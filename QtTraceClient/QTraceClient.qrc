@@ -14,4 +14,7 @@
         <file>Images/VGradientInner.png</file>
         <file alias="pinwhite">Icons/Pin-white-icon.png</file>
     </qresource>
+    <qresource prefix="/MainWindow">
+        <file>Icons/View-icon.png</file>
+    </qresource>
 </RCC>

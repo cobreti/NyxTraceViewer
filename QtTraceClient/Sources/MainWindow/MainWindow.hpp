@@ -4,6 +4,9 @@
 #include <QMainWindow>
 
 
+class QToolButton;
+
+
 namespace Ui
 {
     class MainWindow;
@@ -18,9 +21,15 @@ public:
     CMainWindow();
     virtual ~CMainWindow();
 
+public slots:
+
+    void OnNewTracesWindow();
+
 protected:
 
     Ui::MainWindow*     ui;
+
+    QToolButton*        m_pBtn_NewView;
 };
 
 
