@@ -26,11 +26,23 @@
    </item>
    <item>
     <widget class="QTreeWidget" name="ChannelsTreeWidget">
+     <property name="itemsExpandable">
+      <bool>false</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="expandsOnDoubleClick">
+      <bool>false</bool>
+     </property>
      <property name="columnCount">
-      <number>4</number>
+      <number>5</number>
      </property>
      <attribute name="headerVisible">
       <bool>false</bool>
+     </attribute>
+     <attribute name="headerMinimumSectionSize">
+      <number>4</number>
      </attribute>
      <column>
       <property name="text">
@@ -52,10 +64,56 @@
        <string notr="true">4</string>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string notr="true">5</string>
+      </property>
+     </column>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnAddChannel">
+       <property name="text">
+        <string>Add</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../QTraceClient.qrc">
+         <normaloff>:/ChannelsMgnt/AddChannel</normaloff>:/ChannelsMgnt/AddChannel</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnClearChannel">
+       <property name="text">
+        <string>Empty</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../QTraceClient.qrc">
+         <normaloff>:/ChannelsMgnt/EmptyChannel</normaloff>:/ChannelsMgnt/EmptyChannel</iconset>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../QTraceClient.qrc"/>
+ </resources>
  <connections/>
 </ui>

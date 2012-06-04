@@ -27,7 +27,7 @@ CChannelTreeItemDelegate::~CChannelTreeItemDelegate()
  */
 QWidget* CChannelTreeItemDelegate::createEditor ( QWidget * parent, const QStyleOptionViewItem & option, const QModelIndex & index ) const
 {
-    if ( index.column() == 3 )
+    if ( index.column() == 2 )
         return QItemDelegate::createEditor(parent, option, index);
 
     return NULL;
@@ -43,9 +43,9 @@ void CChannelTreeItemDelegate::paint ( QPainter * painter, const QStyleOptionVie
 
     switch ( index.column() )
     {
-        case 1:
+        case 0:
             {
-                QIcon   StateIcon(":/TracesWindow/Icons/PipeSource-icon.png");
+                QIcon   StateIcon(":/ChannelsMgnt/Channel");
 
                 QItemDelegate::paint(painter, option, index);
 
@@ -53,12 +53,12 @@ void CChannelTreeItemDelegate::paint ( QPainter * painter, const QStyleOptionVie
             }
             break;
 
-        case 2:
+        case 3:
             {
                 CChannelTreeItem*      pItem = static_cast<CChannelTreeItem*>( m_pTreeWidget->topLevelItem(index.row()) );
 
-                QIcon   StartStateIcon(":/TracesWindow/Icons/StartPipe-icon.png");
-                QIcon   StopStateIcon(":/TracesWindow/Icons/StopPipe-icon.png");
+                QIcon   StartStateIcon(":/ChannelsMgnt/StartChannel");
+                QIcon   StopStateIcon(":/ChannelsMgnt/StopChannel");
 
                 QItemDelegate::paint(painter, option, index);
 
@@ -68,5 +68,15 @@ void CChannelTreeItemDelegate::paint ( QPainter * painter, const QStyleOptionVie
                     StartStateIcon.paint( painter, option.rect );
             }
             break;
+
+        case 4:
+        {
+            QIcon   StateIcon(":/ChannelsMgnt/EmptyChannel");
+
+            QItemDelegate::paint(painter, option, index);
+
+            StateIcon.paint( painter, option.rect );
+        }
+        break;
     };
 }

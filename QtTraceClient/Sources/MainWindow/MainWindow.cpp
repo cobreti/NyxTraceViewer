@@ -59,10 +59,9 @@ void CMainWindow::OnNewTracesWindow()
  */
 void CMainWindow::OnChannelsMgnt()
 {
-    CChannelsMgnt*      pChannelsMgntWnd = new CChannelsMgnt(this);
     QPoint              pt( m_pBtn_Channels->frameGeometry().left(), m_pBtn_Channels->frameGeometry().bottom() );
 
     pt = mapToGlobal(pt);
 
-    pChannelsMgntWnd->Show(pt.x(), pt.y());
+    CChannelsMgnt::Show(this, pt);
 }

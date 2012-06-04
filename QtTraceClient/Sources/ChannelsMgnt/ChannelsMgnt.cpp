@@ -1,25 +1,42 @@
 #include "TraceClientCoreModule.hpp"
+#include "PipeTraceFeeder.hpp"
+#include "PoolsUpdateClock.hpp"
+#include "DataStruct/PoolsList.hpp"
+#include "View/TracesViewCore.hpp"
 
 #include "ui_ChannelsMgnt.h"
 #include "ChannelsMgnt.hpp"
 #include "ChannelsMgnt/CChannelTreeItem.hpp"
 #include "ChannelsMgnt/CChannelTreeItemDelegate.hpp"
 
+
+CChannelsMgnt*  CChannelsMgnt::s_pInstance = NULL;
+
+
 /**
  *
  */
-CChannelsMgnt::CChannelsMgnt(QWidget *parent) :
-    QWidget(parent),
+void CChannelsMgnt::Show( QWidget* pParent, const QPoint& pt, CTracesViewCore* pViewCore )
+{
+    if ( NULL == s_pInstance )
+        s_pInstance = new CChannelsMgnt();
+
+    s_pInstance->Init(pParent, pt, pViewCore);
+}
+
+
+/**
+ *
+ */
+CChannelsMgnt::CChannelsMgnt() :
+    QWidget(NULL),
     ui(new Ui::ChannelsMgnt),
-    m_pChannelTreeItemDelegate(NULL)
+    m_pChannelTreeItemDelegate(NULL),
+    m_pViewCore(NULL)
 {
     ui->setupUi(this);
 
     setWindowFlags( Qt::Popup );
-
-    ui->ChannelsTreeWidget->setColumnWidth(0, 48);
-    ui->ChannelsTreeWidget->setColumnWidth(1, 48 );
-    ui->ChannelsTreeWidget->setColumnWidth(2, 48 );
 
     m_pChannelTreeItemDelegate = new CChannelTreeItemDelegate();
     m_pChannelTreeItemDelegate->SetTreeWidget( ui->ChannelsTreeWidget );
@@ -27,6 +44,12 @@ CChannelsMgnt::CChannelsMgnt(QWidget *parent) :
     ui->ChannelsTreeWidget->setItemDelegateForColumn(1, m_pChannelTreeItemDelegate);
     ui->ChannelsTreeWidget->setItemDelegateForColumn(2, m_pChannelTreeItemDelegate);
     ui->ChannelsTreeWidget->setItemDelegateForColumn(3, m_pChannelTreeItemDelegate);
+    ui->ChannelsTreeWidget->setItemDelegateForColumn(4, m_pChannelTreeItemDelegate);
+
+    connect(ui->btnAddChannel, SIGNAL(clicked()), this, SLOT(OnNewChannel()));
+    connect(ui->ChannelsTreeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnChannelItemChanged(QTreeWidgetItem*, int)));
+    connect(ui->ChannelsTreeWidget, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(OnChannelItemClicked(QTreeWidgetItem*, int)));
+    connect(ui->ChannelsTreeWidget, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), this, SLOT(OnChannelItemDoubleClicked(QTreeWidgetItem*, int)));
 }
 
 
@@ -42,11 +65,146 @@ CChannelsMgnt::~CChannelsMgnt()
 /**
  *
  */
-void CChannelsMgnt::Show(int x, int y)
+void CChannelsMgnt::OnNewChannel()
 {
+    TraceClientCore::CTracesPoolRef				refPool;
+    CChannelTreeItem*                           pItem = new CChannelTreeItem();
+    TraceClientCore::CPipeTraceFeeder*          pPipeTraceFeeder = NULL;
+    TraceClientCore::CModule&					rModule = TraceClientCore::CModule::Instance();
+
+    //
+    // Add pool
+    //
+
+    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), L"new pool");
+    rModule.TracesPools().Add(refPool);
+    rModule.PoolsUpdateClock().Insert(refPool);
+
+
+    //
+    // Add channel
+    //
+
+    TraceClientCore::CTraceChannel*      pChannel = new TraceClientCore::CTraceChannel(refPool);
+    pChannel->Name() = refPool->Name();
+    rModule.TraceChannels().Add(pChannel);
+
+    //
+    // Add Pipe Feeder
+    //
+
+    pPipeTraceFeeder = new TraceClientCore::CPipeTraceFeeder( pChannel );
+    pChannel->Feeder() = pPipeTraceFeeder;
+
+    //
+    // Add gui item
+    //
+
+    pItem->SetChannel(pChannel);
+    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+    pItem->setForeground( 2, QBrush(QColor(150, 0, 0)) );
+    ui->ChannelsTreeWidget->insertTopLevelItem(ui->ChannelsTreeWidget->topLevelItemCount(), pItem );
+    ui->ChannelsTreeWidget->clearSelection();
+
+    if ( m_pViewCore != NULL )
+    {
+        pItem->setSelected(true);
+        pItem->setCheckState(1, Qt::Checked);
+
+        m_pViewCore->AddRepository(*refPool);
+    }
+}
+
+
+/**
+ *
+ */
+void CChannelsMgnt::OnChannelItemChanged( QTreeWidgetItem* pItem, int )
+{
+    CChannelTreeItem*       pChannelItem = static_cast<CChannelTreeItem*>(pItem);
+
+    if ( pChannelItem->TraceChannel() && pChannelItem->TraceChannel()->Name() != pItem->text(2).toStdString().c_str() )
+    {
+        Nyx::CAString            AnsiName( pItem->text(2).toStdString().c_str() );
+        Nyx::CWString            WName;
+
+        WName = AnsiName;
+
+        pChannelItem->TraceChannel()->Name() = AnsiName;
+
+        TraceClientCore::CModule&			rModule = TraceClientCore::CModule::Instance();
+        rModule.TraceChannels().Update( pChannelItem->TraceChannel() );
+
+        pChannelItem->TraceChannel()->Pool()->SetName( WName.c_str() );
+        rModule.TracesPools().Update(pChannelItem->TraceChannel()->Pool());
+    }
+}
+
+
+/**
+ *
+ */
+void CChannelsMgnt::OnChannelItemClicked( QTreeWidgetItem* pItem, int column )
+{
+    CChannelTreeItem*		pChannelItem = static_cast<CChannelTreeItem*>(pItem);
+
+    if ( column == 0 )
+    {
+        if ( pChannelItem->checkState(1) == Qt::Checked )
+        {
+            if ( m_pViewCore != NULL && !m_pViewCore->Contains( *pChannelItem->TraceChannel()->Pool() ) )
+                m_pViewCore->AddRepository(*pChannelItem->TraceChannel()->Pool());
+        }
+        else if ( pChannelItem->checkState(1) == Qt::Unchecked )
+        {
+            if ( m_pViewCore != NULL && m_pViewCore->Contains( *pChannelItem->TraceChannel()->Pool() ) )
+                m_pViewCore->RemoveRepository(*pChannelItem->TraceChannel()->Pool());
+        }
+    }
+}
+
+
+/**
+ *
+ */
+void CChannelsMgnt::OnChannelItemDoubleClicked( QTreeWidgetItem* pItem, int column )
+{
+    CChannelTreeItem*		pChannelItem = static_cast<CChannelTreeItem*>(pItem);
+
+    if ( column == 3 )
+    {
+        TraceClientCore::CTraceChannel*     pChannel = pChannelItem->TraceChannel();
+
+        if ( pChannel->Feeder().Valid() )
+        {
+            if ( pChannel->Feeder()->IsRunning() )
+            {
+                pChannel->Feeder()->Stop();
+                pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+                pItem->setForeground(2, QBrush(QColor(150, 0, 0)));
+            }
+            else
+            {
+                pChannel->Feeder()->Start();
+                pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
+                pItem->setForeground(2, QBrush(QColor(0, 150, 0)));
+            }
+        }
+    }
+}
+
+
+/**
+ *
+ */
+void CChannelsMgnt::Init( QWidget* pParent, const QPoint& pt, CTracesViewCore* pViewCore )
+{
+    m_pViewCore = pViewCore;
+    setParent(pParent);
+    setWindowFlags(Qt::Popup);
     LoadChannels();
 
-    move(x, y);
+    move(pt);
     show();
 }
 
@@ -66,33 +224,66 @@ void CChannelsMgnt::LoadChannels()
 
     for ( ChannelPos = ChannelsList.begin(); ChannelPos != ChannelsList.end(); ++ ChannelPos )
     {
-//        MainWindow::CPoolTreeItem*                  pItem = new MainWindow::CPoolTreeItem();
         CChannelTreeItem*                           pItem = new CChannelTreeItem();
         TraceClientCore::CTraceChannel&             rChannel = (*ChannelPos).Channel();
 
         pItem->SetChannel( &rChannel );
-//        pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
-        pItem->setForeground( 0, QBrush(QColor(150, 0, 0)) );
+        pItem->setForeground( 2, QBrush(QColor(150, 0, 0)) );
 
         if ( rChannel.Feeder().Valid() )
         {
             if ( rChannel.Feeder()->IsRunning() )
             {
                 pItem->setFlags( pItem->flags() & ~Qt::ItemIsEditable );
-                pItem->setForeground(0, QBrush(QColor(0, 150, 0)));
+                pItem->setForeground(2, QBrush(QColor(0, 150, 0)));
             }
             else
             {
-//                pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
-                pItem->setForeground(0, QBrush(QColor(150, 0, 0)));
+                if ( m_pViewCore != NULL )
+                    pItem->setFlags( Qt::ItemIsEditable | pItem->flags() );
+
+                pItem->setForeground(2, QBrush(QColor(150, 0, 0)));
             }
         }
 
-//        if ( m_pViewCore->Contains(*rChannel.Pool()) )
-//            pItem->setCheckState(0, Qt::Checked );
-//        else
-//            pItem->setCheckState(0, Qt::Unchecked );
+        if ( m_pViewCore != NULL )
+        {
+            if ( m_pViewCore->Contains(*rChannel.Pool()) )
+                pItem->setCheckState(1, Qt::Checked );
+            else
+                pItem->setCheckState(1, Qt::Unchecked );
+        }
 
         ui->ChannelsTreeWidget->insertTopLevelItem(ui->ChannelsTreeWidget->topLevelItemCount(), pItem );
     }
+}
+
+
+/**
+ *
+ */
+void CChannelsMgnt::showEvent(QShowEvent *pEvent)
+{
+    QRect       rcRow = ui->ChannelsTreeWidget->rect();
+
+    int         ChannelIconWidth = 32;
+    int         CheckStatusIconWidth = 48;
+    int         TextWidth = 200;
+    int         StartStopIconWidth = 32;
+    int         EmptyIconWidth = 32;
+
+    if ( m_pViewCore == NULL )
+        CheckStatusIconWidth = 0;
+
+    TextWidth = rcRow.width()
+                - ChannelIconWidth
+                - CheckStatusIconWidth
+                - StartStopIconWidth
+                - EmptyIconWidth;
+
+    ui->ChannelsTreeWidget->setColumnWidth(0, ChannelIconWidth);
+    ui->ChannelsTreeWidget->setColumnWidth(1, CheckStatusIconWidth );
+    ui->ChannelsTreeWidget->setColumnWidth(2, TextWidth );
+    ui->ChannelsTreeWidget->setColumnWidth(3, StartStopIconWidth );
+    ui->ChannelsTreeWidget->setColumnWidth(4, EmptyIconWidth );
 }

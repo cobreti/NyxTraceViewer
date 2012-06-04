@@ -5,6 +5,7 @@
 #include "TraceClientApp.h"
 
 #include "ui_TracesWindow.h"
+#include "ChannelsMgnt/ChannelsMgnt.hpp"
 
 #include <QToolButton>
 #include <QCloseEvent>
@@ -54,7 +55,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_SourceFeeds = new QToolButton();
     m_pBtn_SourceFeeds->setIcon(PipeSourceIcon);
-    m_pBtn_SourceFeeds->setCheckable(true);
+//    m_pBtn_SourceFeeds->setCheckable(true);
 
     m_pBtn_NewView = new QToolButton();
     m_pBtn_NewView->setIcon(NewViewIcon);
@@ -96,16 +97,22 @@ CTracesWindow::~CTracesWindow()
  */
 void CTracesWindow::OnSourceFeedsBtnClicked()
 {
-    if ( m_pBtn_SourceFeeds->isChecked() )
-    {
-        m_pPipesMgntPage->show(m_pTracesView->ViewCore());
-        //m_pTracesView->hide();
-    }
-    else
-    {
-        m_pPipesMgntPage->hide();
-        //m_pTracesView->show();
-    }
+    QPoint              pt( m_pBtn_SourceFeeds->frameGeometry().left(), m_pBtn_SourceFeeds->frameGeometry().bottom() );
+
+    pt = mapToGlobal(pt);
+
+    CChannelsMgnt::Show(this, pt, m_pTracesView->ViewCore());
+
+    //    if ( m_pBtn_SourceFeeds->isChecked() )
+//    {
+//        m_pPipesMgntPage->show(m_pTracesView->ViewCore());
+//        //m_pTracesView->hide();
+//    }
+//    else
+//    {
+//        m_pPipesMgntPage->hide();
+//        //m_pTracesView->show();
+//    }
 }
 
 

@@ -9,6 +9,7 @@
 CChannelTreeItem::CChannelTreeItem() : QTreeWidgetItem(),
     m_pChannel(NULL)
 {
+    setCheckState(1, Qt::Unchecked);
 }
 
 
@@ -29,5 +30,5 @@ void CChannelTreeItem::SetChannel( TraceClientCore::CTraceChannel* pChannel )
 
     QString     name = pChannel->Name().c_str();
 
-    setText(3, name);
+    setText(2, name);
 }
