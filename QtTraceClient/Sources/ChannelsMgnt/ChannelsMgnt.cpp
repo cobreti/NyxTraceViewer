@@ -8,6 +8,8 @@
 #include "ChannelsMgnt.hpp"
 #include "ChannelsMgnt/CChannelTreeItem.hpp"
 #include "ChannelsMgnt/CChannelTreeItemDelegate.hpp"
+#include "ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp"
+
 
 
 CChannelsMgnt*  CChannelsMgnt::s_pInstance = NULL;
@@ -191,6 +193,11 @@ void CChannelsMgnt::OnChannelItemDoubleClicked( QTreeWidgetItem* pItem, int colu
             }
         }
     }
+    else if ( column == 4 )
+    {
+//        emit sigEmptyChannel(pChannelItem->TraceChannel());
+        EmptyChannel(pChannelItem->TraceChannel());
+    }
 }
 
 
@@ -287,3 +294,32 @@ void CChannelsMgnt::showEvent(QShowEvent *pEvent)
     ui->ChannelsTreeWidget->setColumnWidth(3, StartStopIconWidth );
     ui->ChannelsTreeWidget->setColumnWidth(4, EmptyIconWidth );
 }
+
+
+/**
+ *
+ */
+void CChannelsMgnt::EmptyChannel(TraceClientCore::CTraceChannel* pChannel)
+{
+    CClearChannelContentConfirmationDlg     dlg(NULL);
+
+    dlg.exec();
+
+    if ( CClearChannelContentConfirmationDlg::eDlgRes_Empty == dlg.Result() )
+    {
+        bool bWasRunning = pChannel->Feeder().Valid() && pChannel->Feeder()->IsRunning();
+
+        if ( bWasRunning )
+            pChannel->Feeder()->Stop();
+
+        TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
+
+        pChannel->Clear();
+
+        TraceClientCore::CModule::Instance().PoolsUpdateClock().Start();
+
+        if ( bWasRunning )
+            pChannel->Feeder()->Start();
+    }
+}
+

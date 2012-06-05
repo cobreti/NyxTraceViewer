@@ -36,6 +36,30 @@ namespace TraceClientCore
     {
         m_Traces.push_back(pTraceData);
     }
+    
+    
+    /**
+     *
+     */
+    void CTraceDataRepository::Clear(const Nyx::CAString& ModuleName)
+    {
+        m_Traces.clear();
+
+        {
+            Nyx::TLock<Nyx::CMutex>                 ObserversLock(m_refObserversMutex, true);
+            ObserverDataTable::iterator             srcPos = m_Observers.begin();
+            
+            while ( srcPos != m_Observers.end() )
+            {
+                CRepositoryObserver*    pObserver = srcPos->first;
+                
+                srcPos->second.StartPos() = m_Traces.end();
+                pObserver->Clear(ModuleName);
+                
+                ++ srcPos;
+            }
+        }
+    }
 
 
     /**

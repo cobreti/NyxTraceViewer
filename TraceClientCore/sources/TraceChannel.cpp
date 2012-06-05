@@ -36,6 +36,15 @@ namespace TraceClientCore
     /**
      *
      */
+    void CTraceChannel::Clear()
+    {
+        m_pPool->Repository().Clear(m_Name);
+    }
+    
+    
+    /**
+     *
+     */
     void CTraceChannel::Stop()
     {
         if ( m_refFeeder.Valid() && m_refFeeder->IsRunning() )

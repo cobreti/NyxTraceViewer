@@ -15,6 +15,7 @@ CTracesViewCoreRepositoryObserver::CTracesViewCoreRepositoryObserver( CTracesVie
 
     m_refActiveObject = Nyx::CActiveObject::Alloc();
     m_refActiveObject->Handlers().Add(0, m_rViewCore.GetViewItemsMsgHandler());
+    m_refActiveObject->Handlers().Add(1, m_rViewCore.GetViewItemsMsgHandler());
     m_refActiveObject->Start();
 }
 
@@ -61,6 +62,18 @@ void CTracesViewCoreRepositoryObserver::Insert( TraceClientCore::CTraceData* pTr
     }
 }
 
+
+/**
+ *
+ */
+void CTracesViewCoreRepositoryObserver::Clear(const Nyx::CAString& ModuleName)
+{
+    Nyx::TMsgBucket<CClearItemsMsg>   MsgBucket;
+
+    MsgBucket->ModuleName() = ModuleName;
+
+    m_refActiveObject->Post(MsgBucket);
+}
 
 
 /**

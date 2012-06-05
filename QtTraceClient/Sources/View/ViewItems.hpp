@@ -53,4 +53,24 @@ protected:
 };
 
 
+/**
+ *
+ */
+class CClearItemsMsg : public Nyx::CMsg
+{
+public:
+    CClearItemsMsg() {}
+    virtual ~CClearItemsMsg() {}
+
+    virtual const Nyx::MsgIdentifier Id() const { return 1; }
+
+    const Nyx::CAString& ModuleName() const { return m_ModuleName; }
+    Nyx::CAString& ModuleName()             { return m_ModuleName; }
+
+protected:
+
+    Nyx::CAString       m_ModuleName;
+};
+
+
 #endif // __VIEWITEMS_HPP__

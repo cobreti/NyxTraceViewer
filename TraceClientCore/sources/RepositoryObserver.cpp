@@ -48,6 +48,15 @@ namespace TraceClientCore
     {
     }
 
+    
+    /**
+     *
+     */
+    void CRepositoryObserver::Clear(const Nyx::CAString& ModuleName)
+    {
+        
+    }
+    
 
     /**
      *

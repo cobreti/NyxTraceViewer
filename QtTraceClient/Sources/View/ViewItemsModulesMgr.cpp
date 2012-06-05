@@ -43,6 +43,20 @@ CModuleViewItems* CViewItemsModulesMgr::CreateNewModule(const Nyx::CWString& Mod
 /**
  *
  */
+void CViewItemsModulesMgr::ClearModule(const Nyx::CWString &ModuleName)
+{
+    ModulesViewItemsTable::iterator     pos = m_Modules.find(ModuleName);
+
+    if ( pos == m_Modules.end() )
+        return;
+
+    CModuleViewItems* pModule = pos->second;
+    pModule->ClearSessions();
+}
+
+/**
+ *
+ */
 CModuleViewItems* CViewItemsModulesMgr::operator [] (const Nyx::CWString& ModuleName)
 {
     if ( m_Modules.count(ModuleName) > 0 )
@@ -66,6 +80,7 @@ void CViewItemsModulesMgr::GetModules( ModulesViewItemsPtrArray& ModulesArray )
     {
         ModulesArray[index] = pos->second;
         ++index;
+        ++ pos;
     }
 }
 

@@ -8,7 +8,10 @@ class QToolButton;
 class CTracesView;
 class CPipesMgntPage;
 
-
+namespace TraceClientCore
+{
+    class CTraceChannel;
+}
 
 namespace Ui
 {
@@ -32,6 +35,7 @@ public slots:
     void OnNewView();
     void OnCloneView();
     void OnSaveAs();
+    void OnEmptyChannel( TraceClientCore::CTraceChannel* pChannel );
 
 protected:
 

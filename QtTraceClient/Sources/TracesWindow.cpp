@@ -3,9 +3,13 @@
 #include "MainWindow/PipesMgntPage.hpp"
 #include "MainWindow/MainWindow.hpp"
 #include "TraceClientApp.h"
+#include "TraceChannel.hpp"
+#include "TraceClientCoreModule.hpp"
+#include "PoolsUpdateClock.hpp"
 
 #include "ui_TracesWindow.h"
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
+#include "ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp"
 
 #include <QToolButton>
 #include <QCloseEvent>
@@ -152,6 +156,34 @@ void CTracesWindow::OnSaveAs()
         QString     file = fileDlg.selectedFiles()[0];
 
         m_pTracesView->Save(file);
+    }
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnEmptyChannel(TraceClientCore::CTraceChannel *pChannel)
+{
+    CClearChannelContentConfirmationDlg     dlg(this);
+
+    dlg.exec();
+
+    if ( CClearChannelContentConfirmationDlg::eDlgRes_Empty == dlg.Result() )
+    {
+        bool bWasRunning = pChannel->Feeder().Valid() && pChannel->Feeder()->IsRunning();
+
+        if ( bWasRunning )
+            pChannel->Feeder()->Stop();
+
+        TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
+
+        pChannel->Clear();
+
+        TraceClientCore::CModule::Instance().PoolsUpdateClock().Start();
+
+        if ( bWasRunning )
+            pChannel->Feeder()->Start();
     }
 }
 

@@ -19,6 +19,7 @@ namespace TraceClientCore
         virtual void BeginUpdate();
         virtual void EndUpdate();
         virtual void Insert( CTraceData* pTraceData );
+        virtual void Clear( const Nyx::CAString& ModuleName );
 
 	protected:
 

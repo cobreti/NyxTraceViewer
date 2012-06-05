@@ -8,8 +8,14 @@ class CChannelTreeItemDelegate;
 class QTreeWidgetItem;
 class CTracesViewCore;
 
-namespace Ui {
-class ChannelsMgnt;
+namespace Ui
+{
+    class ChannelsMgnt;
+}
+
+namespace TraceClientCore
+{
+    class CTraceChannel;
 }
 
 class CChannelsMgnt : public QWidget
@@ -27,6 +33,10 @@ public slots:
     void OnChannelItemClicked( QTreeWidgetItem* pItem, int column );
     void OnChannelItemDoubleClicked( QTreeWidgetItem* pItem, int column );
 
+signals:
+
+//    void sigEmptyChannel(TraceClientCore::CTraceChannel* pChannel);
+
 protected:
 
     explicit CChannelsMgnt();
@@ -36,6 +46,8 @@ protected:
     void LoadChannels();
 
     void showEvent(QShowEvent *pEvent);
+
+    void EmptyChannel(TraceClientCore::CTraceChannel* pChannel);
 
 private:
     Ui::ChannelsMgnt *ui;

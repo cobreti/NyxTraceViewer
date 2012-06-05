@@ -46,7 +46,7 @@ public:
 
 public: // CMsgHandler
 
-    virtual Nyx::MsgIdentifier Id() const { return 0; }
+//    virtual Nyx::MsgIdentifier Id() const { return 0; }
     virtual void HandleMessage( Nyx::CMsg& msg );
 
 protected:
@@ -54,6 +54,7 @@ protected:
     void Init();
 
     void OnNewTraces( CViewItems* pViewItems );
+    void OnClearTraces(const Nyx::CAString& ModuleName);
 
 protected:
     Nyx::CMemoryPoolRef                                     m_refMemoryPool;

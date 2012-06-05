@@ -58,6 +58,22 @@ SessionViewItemsID CModuleViewItems::CreateNewSession()
 /**
  *
  */
+void CModuleViewItems::ClearSessions()
+{
+    SessionsTable::iterator     pos;
+
+    for (pos = m_Sessions.begin(); pos != m_Sessions.end(); ++pos)
+        delete pos->second;
+
+    m_Sessions.clear();
+
+    m_pActiveSession = NULL;
+}
+
+
+/**
+ *
+ */
 void CModuleViewItems::GetIDs( SessionViewItemsIDSet& IDSet) const
 {
     SessionsTable::const_iterator       pos;
@@ -94,19 +110,5 @@ void CModuleViewItems::InsertItem( CViewItem* pItem )
 }
 
 
-/**
- *
- */
-void CModuleViewItems::ClearSessions()
-{
-    SessionsTable::iterator     pos;
-
-    for (pos = m_Sessions.begin(); pos != m_Sessions.end(); ++pos)
-    {
-        delete pos->second;
-    }
-
-    m_pActiveSession = NULL;
-}
 
 

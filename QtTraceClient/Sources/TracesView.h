@@ -52,6 +52,7 @@ public:
 
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
     virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
+    virtual void OnModuleRemoved( const Nyx::CAString& ModuleName );
 
     void Save( const QString& filename );
 

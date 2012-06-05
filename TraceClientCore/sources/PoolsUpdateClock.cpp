@@ -95,18 +95,18 @@ namespace TraceClientCore
                 Nyx::TLock<Nyx::CMutex>     PoolsLock(m_refMutex, true);
 
                 pools = m_Pools;
+
+                PoolsList::iterator     pos;
+
+                for ( pos = pools.begin(); pos != pools.end(); ++pos)
+                    (*pos)->Repository().BeginUpdate();
+
+                for ( pos = pools.begin(); pos != pools.end(); ++pos)
+                    (*pos)->Repository().Update();
+
+                for ( pos = pools.begin(); pos != pools.end(); ++pos)
+                    (*pos)->Repository().EndUpdate();
             }
-
-            PoolsList::iterator     pos;
-
-            for ( pos = pools.begin(); pos != pools.end(); ++pos)
-                (*pos)->Repository().BeginUpdate();
-
-            for ( pos = pools.begin(); pos != pools.end(); ++pos)
-                (*pos)->Repository().Update();
-
-            for ( pos = pools.begin(); pos != pools.end(); ++pos)
-                (*pos)->Repository().EndUpdate();
 
             res = m_refEvent->WaitSignaled(1000);
         }

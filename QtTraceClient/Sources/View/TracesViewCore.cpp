@@ -101,7 +101,16 @@ bool CTracesViewCore::Contains(const TraceClientCore::CTracesPool &rPool)
  */
 void CTracesViewCore::HandleMessage( Nyx::CMsg& msg )
 {
-    OnNewTraces( static_cast<CViewItemsMsg&>(msg).ViewItems() );
+    switch ( msg.Id() )
+    {
+        case 0:
+            OnNewTraces( static_cast<CViewItemsMsg&>(msg).ViewItems() );
+            break;
+        case 1:
+            OnClearTraces( static_cast<CClearItemsMsg&>(msg).ModuleName() );
+            break;
+    };
+
 }
 
 
@@ -144,13 +153,29 @@ void CTracesViewCore::OnNewTraces(CViewItems *pViewItems)
         ViewIter.MoveToNext();
     }
 
-//    TracesViewList::iterator        pos = m_Views.begin();
-
-//    while ( pos != m_Views.end() )
-//    {
-//        (*pos)->OnNewTraces();
-//        ++pos;
-//    }
-
     delete pViewItems;
 }
+
+
+/**
+ *
+ */
+void CTracesViewCore::OnClearTraces(const Nyx::CAString& ModuleName)
+{
+    Nyx::CWString   wModuleName;
+
+    wModuleName = ModuleName;
+
+    m_pViewItemsModulesMgr->ClearModule(wModuleName);
+
+    CTracesViewSetIterator      ViewPos(m_Views);
+
+    ViewPos.MoveToFirst();
+
+    while ( ViewPos.Valid() )
+    {
+        ViewPos.View()->OnModuleRemoved(ModuleName);
+        ViewPos.MoveToNext();
+    }
+}
+

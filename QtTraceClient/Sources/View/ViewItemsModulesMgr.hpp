@@ -26,6 +26,7 @@ public:
     ~CViewItemsModulesMgr();
 
     CModuleViewItems* CreateNewModule( const Nyx::CWString& ModuleName );
+    void ClearModule( const Nyx::CWString& ModuleName );
 
     CModuleViewItems* operator [] (const Nyx::CWString& ModuleName);
 

@@ -70,7 +70,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/MainWindow/MainWindow.cpp \
     ../Sources/ChannelsMgnt/ChannelsMgnt.cpp \
     ../Sources/ChannelsMgnt/CChannelTreeItem.cpp \
-    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.cpp
+    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.cpp \
+    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -144,7 +145,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/MainWindow/ChannelsMgnt.hpp \
     ../Sources/ChannelsMgnt/ChannelsMgnt.hpp \
     ../Sources/ChannelsMgnt/CChannelTreeItem.hpp \
-    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp
+    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp \
+    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -153,7 +155,8 @@ FORMS += ../UI/TracesView.ui \
     ../UI/ViewPage.ui \
     ../UI/TracesWindow.ui \
     ../UI/MainWindow.ui \
-    ../UI/ChannelsMgnt.ui
+    ../UI/ChannelsMgnt.ui \
+    ../UI/CClearChannelContentConfirmationDlg.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI

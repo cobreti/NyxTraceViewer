@@ -25,6 +25,7 @@ public:
     CSessionViewItems*      Session( const SessionViewItemsID& id);
 
     SessionViewItemsID CreateNewSession();
+    void ClearSessions();
 
     void GetIDs( SessionViewItemsIDSet& IDSet) const;
 
@@ -41,8 +42,6 @@ protected:
     typedef     std::map<SessionViewItemsID, CSessionViewItems*>        SessionsTable;
 
 protected:
-
-    void ClearSessions();
 
 protected:
 
