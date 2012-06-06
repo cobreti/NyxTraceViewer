@@ -67,6 +67,7 @@ protected:
     CViewItemsModuleWalkerNode* GetNodeWithModule( CModuleViewItems* pModule ) const;
     void CopyDataFrom(const CViewItemsWalkerCore& walker);
     void ClearModuleNodes();
+    void InitFromModulesMgr();
 
 protected:
 

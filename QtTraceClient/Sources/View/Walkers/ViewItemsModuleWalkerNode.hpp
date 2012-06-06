@@ -77,6 +77,8 @@ protected:
     void MoveToPrevious( CViewItemsModuleWalkerNodePos& pos );
     void MoveToBegin( CViewItemsModuleWalkerNodePos& pos );
 
+    void InitFromViewItems();
+
 protected:
 
     CModuleViewItems*                       m_pModuleViewItems;

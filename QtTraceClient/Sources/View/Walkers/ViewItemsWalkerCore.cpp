@@ -15,6 +15,7 @@ CViewItemsWalkerCore::CViewItemsWalkerCore(CViewItemsModulesMgr& rViewItemsModul
     m_rViewItemsModulesMgr(rViewItemsModulesMgr)
 {
     m_rViewItemsModulesMgr.AttachWalker(this);
+    InitFromModulesMgr();
 }
 
 
@@ -448,4 +449,24 @@ void CViewItemsWalkerCore::ClearModuleNodes()
 {
     for (size_t index = 0; index < m_Nodes.size(); ++index)
         delete m_Nodes[index];
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalkerCore::InitFromModulesMgr()
+{
+    ModulesViewItemsPtrArray        ModulesArray;
+
+    m_rViewItemsModulesMgr.GetModules(ModulesArray);
+
+    for (size_t index = 0; index < ModulesArray.size(); ++index)
+    {
+        CViewItemsModuleWalkerNode*     pNode = new CViewItemsModuleWalkerNode(ModulesArray[index]);
+
+        m_Nodes.push_back(pNode);
+    }
+
+    MoveToBegin();
 }

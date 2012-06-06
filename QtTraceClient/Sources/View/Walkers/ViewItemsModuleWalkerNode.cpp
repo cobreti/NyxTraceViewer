@@ -12,6 +12,7 @@ CViewItemsModuleWalkerNode::CViewItemsModuleWalkerNode(CModuleViewItems* pModule
     m_pModuleViewItems(pModuleViewItems),
     m_State(eVIMWNS_Unitinialized)
 {
+    InitFromViewItems();
 }
 
 
@@ -333,3 +334,23 @@ void CViewItemsModuleWalkerNode::MoveToBegin( CViewItemsModuleWalkerNodePos& pos
         pos.SessionNodeId() = 0;
 }
 
+
+/**
+ *
+ */
+void CViewItemsModuleWalkerNode::InitFromViewItems()
+{
+    SessionViewItemsIDSet                   idsSet;
+    SessionViewItemsIDSet::const_iterator   pos;
+
+    m_pModuleViewItems->GetIDs(idsSet);
+
+    pos = idsSet.begin();
+    while ( pos != idsSet.end() )
+    {
+        CViewItemsSessionWalkerNode*        pSessionWalkerNode = new CViewItemsSessionWalkerNode(m_pModuleViewItems->Session(*pos));
+
+        AddNode( pSessionWalkerNode );
+        ++ pos;
+    }
+}
