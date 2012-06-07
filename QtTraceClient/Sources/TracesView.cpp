@@ -131,7 +131,8 @@ void CTracesView::OnModuleRemoved( const Nyx::CAString& ModuleName )
     delete m_pItemsWalker;
     m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
 
-    update();
+    m_bViewDirty = true;
+    RefreshDisplay();
 }
 
 

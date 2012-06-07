@@ -31,8 +31,10 @@ public:
     CSessionViewItems(CViewItemsModulesMgr& rMgr);
     virtual ~CSessionViewItems();
 
+    void Add( CViewItem* pItem );
+
     const CViewItems&           Items() const       { return m_Items; }
-    CViewItems&                 Items()             { return m_Items; }
+//    CViewItems&                 Items()             { return m_Items; }
 
     const SessionViewItemsID&   Id() const          { return m_Id; }
     SessionViewItemsID&         Id()                { return m_Id; }
@@ -42,12 +44,15 @@ public:
 
     CViewItemsModulesMgr&       Mgr() const         { return m_rMgr; }
 
+    float                       Height() const      { return m_Height; }
+
 protected:
 
     CViewItems                      m_Items;
     SessionViewItemsID              m_Id;
     Nyx::CMFString                  m_Name;
     CViewItemsModulesMgr&           m_rMgr;
+    float                           m_Height;
 };
 
 

@@ -37,6 +37,8 @@ public:
     const CViewItemsModulesMgr&             Mgr() const                 { return m_rMgr; }
     CViewItemsModulesMgr&                   Mgr()                       { return m_rMgr; }
 
+    float CalculateHeight() const;
+
 protected:
 
     typedef     std::map<SessionViewItemsID, CSessionViewItems*>        SessionsTable;

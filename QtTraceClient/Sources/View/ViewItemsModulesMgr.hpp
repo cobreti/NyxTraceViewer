@@ -43,6 +43,8 @@ public:
 
     Nyx::CMemoryPool*                   MemoryPool() const  { return m_pPool; }
 
+    float CalculateHeight() const;
+
 protected:
 
     typedef     std::vector<CViewItemsWalkerCore*>              ViewItemsWalkerArray;

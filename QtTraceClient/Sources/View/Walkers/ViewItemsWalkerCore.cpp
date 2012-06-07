@@ -468,5 +468,7 @@ void CViewItemsWalkerCore::InitFromModulesMgr()
         m_Nodes.push_back(pNode);
     }
 
+    m_Height = m_rViewItemsModulesMgr.CalculateHeight();
+
     MoveToBegin();
 }

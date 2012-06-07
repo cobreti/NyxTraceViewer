@@ -106,9 +106,23 @@ void CModuleViewItems::InsertItem( CViewItem* pItem )
 
 //    pItem->dbgOutputInfo();
 
-    ActiveSession()->Items().Add(pItem);
+    ActiveSession()->Add(pItem);
 }
 
 
+/**
+ *
+ */
+float CModuleViewItems::CalculateHeight() const
+{
+    float                               height = 0.0f;
+    SessionsTable::const_iterator       pos = m_Sessions.begin();
 
+    while ( pos != m_Sessions.end() )
+    {
+        height += pos->second->Height();
+        ++ pos;
+    }
 
+    return height;
+}

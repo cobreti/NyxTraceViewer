@@ -160,3 +160,19 @@ void CViewItemsModulesMgr::DetachWalker( CViewItemsWalkerCore* pWalker )
 }
 
 
+/**
+ *
+ */
+float CViewItemsModulesMgr::CalculateHeight() const
+{
+    float                                       height = 0.0f;
+    ModulesViewItemsTable::const_iterator       pos = m_Modules.begin();
+
+    while ( pos != m_Modules.end() )
+    {
+        height += pos->second->CalculateHeight();
+        ++ pos;
+    }
+
+    return height;
+}
