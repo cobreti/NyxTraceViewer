@@ -8,7 +8,9 @@ FORMS += \
     ../UI/NewPoolDlg.ui \
     ../UI/NewDocumentDlg.ui \
     ../UI/TracesWindow.ui \
-    ../UI/MainWindow.ui
+    ../UI/MainWindow.ui \
+    ../UI/ChannelsMgnt.ui \
+    ../UI/CClearChannelContentConfirmationDlg.ui
 
 RESOURCES += \
     ../QTraceClient.qrc
@@ -80,7 +82,11 @@ HEADERS += \
     ../Sources/TracesWindow.hpp \
     ../Sources/TracesWindows.hpp \
     ../Sources/TraceClientApp.h \
-    ../Sources/MainWindow/MainWindow.hpp
+    ../Sources/MainWindow/MainWindow.hpp \
+    ../Sources/ChannelsMgnt/ChannelsMgnt.hpp \
+    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItem.hpp
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -145,7 +151,11 @@ SOURCES += \
     ../Sources/View/Walkers/ViewItemsWalkerCore.cpp \
     ../Sources/TracesWindow.cpp \
     ../Sources/TracesWindows.cpp \
-    ../Sources/MainWindow/MainWindow.cpp
+    ../Sources/MainWindow/MainWindow.cpp \
+    ../Sources/ChannelsMgnt/ChannelsMgnt.cpp \
+    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.cpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.cpp \
+    ../Sources/ChannelsMgnt/CChannelTreeItem.cpp
 
 
 ICON=../Icons/AppLinux.icns

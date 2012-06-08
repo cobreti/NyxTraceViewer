@@ -207,7 +207,7 @@ void CChannelsMgnt::OnChannelItemDoubleClicked( QTreeWidgetItem* pItem, int colu
 void CChannelsMgnt::Init( QWidget* pParent, const QPoint& pt, CTracesViewCore* pViewCore )
 {
     m_pViewCore = pViewCore;
-    setParent(pParent);
+//    setParent(pParent);
     setWindowFlags(Qt::Popup);
     LoadChannels();
 
