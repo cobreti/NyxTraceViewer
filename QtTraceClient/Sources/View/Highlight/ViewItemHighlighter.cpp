@@ -21,24 +21,29 @@ void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettin
     if ( !m_refPattern.Valid() )
         return;
 
-    Nyx::CRange         range = m_refPattern->Match(text);
+    long                startIndex = 0;
 
-    if ( range.IsEmpty() )
-        return;
+    Nyx::CRange         range = m_refPattern->Match(text, startIndex);
 
-    QPainter&           rPainter = rState.Painter();
-    QBrush              brush(Qt::GlobalColor::yellow);
-    QRectF              rcTextBefore = rMetrics.boundingRect( text.left(range.Start()) );
-    QRectF              rcTextSelection = rMetrics.boundingRect( text.mid(range.Start(), range.Length()) );
-    QRectF              rcTextWithSel = rMetrics.boundingRect( text.left(range.Start() + range.Length()) );
-    QRectF              rcText = rMetrics.boundingRect( text );
-    float               fStartPos = rcTextWithSel.width() - rcTextSelection.width();
-    QRectF              rcArea( rState.TextPos().x() + rColumnSettings.Margins().left() + fStartPos, 
-                                rState.TextPos().y() + rColumnSettings.Margins().top(),
-                                rcTextSelection.width(), 
-                                rcText.height() - rColumnSettings.Margins().height() );
+    while ( !range.IsEmpty() )
+    {
+        long                textOffset = startIndex + range.Start();
+        QPainter&           rPainter = rState.Painter();
+        QBrush              brush(Qt::GlobalColor::yellow);
+        QRectF              rcTextSelection = rMetrics.boundingRect( text.mid(range.Start(), range.Length()) );
+        QRectF              rcTextWithSel = rMetrics.boundingRect( text.left(range.Start() + range.Length()) );
+        QRectF              rcText = rMetrics.boundingRect( text );
+        float               fStartPos = rcTextWithSel.width() - rcTextSelection.width();
+        QRectF              rcArea( rState.TextPos().x() + rColumnSettings.Margins().left() + fStartPos, 
+                                    rState.TextPos().y() + rColumnSettings.Margins().top(),
+                                    rcTextSelection.width(), 
+                                    rcText.height() - rColumnSettings.Margins().height() );
 
-    rPainter.fillRect(rcArea, brush);
+        rPainter.fillRect(rcArea, brush);
+
+        startIndex = textOffset + 1;
+        range = m_refPattern->Match(text, startIndex);
+    }
 }
 
 

@@ -15,7 +15,7 @@ class CViewItemPattern_Text : public CViewItemPattern
 public:
     CViewItemPattern_Text();
 
-    virtual Nyx::CRange Match( const QString& text );
+    virtual Nyx::CRange Match( const QString& text,  const long& startIndex );
 
     const QString&  TextToMatch() const     { return m_TextToMatch; }
     QString&        TextToMatch()           { return m_TextToMatch; }

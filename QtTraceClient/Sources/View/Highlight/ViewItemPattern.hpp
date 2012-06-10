@@ -17,7 +17,7 @@ class CViewItemPattern : public Nyx::CRefCount_Impl<>
 public:
     CViewItemPattern();
 
-    virtual Nyx::CRange Match( const QString& text ) = 0;
+    virtual Nyx::CRange Match( const QString& text, const long& startIndex ) = 0;
 
 protected:
     virtual ~CViewItemPattern();
