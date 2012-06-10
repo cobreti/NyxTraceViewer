@@ -102,6 +102,7 @@ void CTracesView::RefreshDisplay()
     }
 }
 
+
 /**
  *
  */
@@ -153,6 +154,17 @@ void CTracesView::Save( const QString& filename )
         refFile->Close();
     }
 }
+
+
+/**
+ *
+ */
+void CTracesView::SetHighlightText( const QString& text )
+{
+    m_refSearchPattern->TextToMatch() = text;
+    m_bViewDirty = true;
+}
+
 
 
 /**
@@ -397,7 +409,7 @@ void CTracesView::Init(CTracesView* pBase)
     
     CViewItemHighlighterRef     refSearchHighlighter = new CViewItemHighlighter();
     refSearchHighlighter->Pattern() = (CViewItemPattern*)m_refSearchPattern;
-    m_refSearchPattern->TextToMatch() = "st";
+    //m_refSearchPattern->TextToMatch() = "st";
     m_refHighlighters->Add( refSearchHighlighter );
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
@@ -411,7 +423,7 @@ void CTracesView::Init(CTracesView* pBase)
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
 
-    m_RefreshTimer.start(1000);
+    m_RefreshTimer.start(250);
 
     if ( pBase )
         update();

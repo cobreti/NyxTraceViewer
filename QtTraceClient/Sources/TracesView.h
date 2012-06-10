@@ -57,6 +57,7 @@ public:
     virtual void OnModuleRemoved( const Nyx::CAString& ModuleName );
 
     void Save( const QString& filename );
+    void SetHighlightText( const QString& text );
 
 public slots:
 

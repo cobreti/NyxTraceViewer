@@ -88,6 +88,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
     connect( m_pBtn_CloneView, SIGNAL(clicked()), this, SLOT(OnCloneView()));
     connect( m_pBtn_SaveAs, SIGNAL(clicked()), this, SLOT(OnSaveAs()));
+    connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
 }
@@ -191,6 +192,15 @@ void CTracesWindow::OnEmptyChannel(TraceClientCore::CTraceChannel *pChannel)
         if ( bWasRunning )
             pChannel->Feeder()->Start();
     }
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnSearchTextChanged( const QString& text )
+{
+    m_pTracesView->SetHighlightText(text);
 }
 
 

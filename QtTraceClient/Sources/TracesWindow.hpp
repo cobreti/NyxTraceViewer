@@ -37,6 +37,7 @@ public slots:
     void OnCloneView();
     void OnSaveAs();
     void OnEmptyChannel( TraceClientCore::CTraceChannel* pChannel );
+    void OnSearchTextChanged( const QString& text );
 
 protected:
 
