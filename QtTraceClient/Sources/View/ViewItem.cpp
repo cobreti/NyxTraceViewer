@@ -87,7 +87,6 @@ void CViewItem::Display(CViewSettings& settings, CDrawViewItemState &drawstate)
     size_t                      index = 0;
     CViewItemPainter*           pPainter = NULL;
 
-    //pPainter = m_Painters[ CViewItemPainter::ePId_Row ];
     pPainter = settings.DrawSettings()->Painter(CViewItemPainter::ePId_Row);
     if ( pPainter )
         pPainter->Display(settings, drawstate, *this);
@@ -98,7 +97,6 @@ void CViewItem::Display(CViewSettings& settings, CDrawViewItemState &drawstate)
 
         if ( rColSettings.GetVisible() )
         {
-//            pPainter = m_Painters[ rColSettings.GetPainterId() ];
             pPainter = settings.DrawSettings()->Painter( rColSettings.GetPainterId() );
 
             if ( pPainter )

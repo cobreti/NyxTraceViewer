@@ -1078,6 +1078,42 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Highlight"
+					>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemHighlighter.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemHighlighter.hpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemHighlightersSet.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemHighlightersSet.hpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemPattern.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemPattern.hpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemPattern_Text.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemPattern_Text.hpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="ChannelsMgnt"

@@ -2,7 +2,7 @@
 #define __DRAWVIEWITEMSTATE_HPP__
 
 #include <QPainter>
-
+#include "View/highlight/ViewItemHighlighter.hpp"
 
 /**
  *
@@ -30,14 +30,18 @@ public:
     const size_t&   LineNumber() const      { return m_LineNumber; }
     size_t&         LineNumber()            { return m_LineNumber; }
 
+    CViewItemHighlighterRef     Highlighter() const     { return m_refHighlighter; }
+    CViewItemHighlighterRef&    Highlighter()           { return m_refHighlighter; }
+
 protected:
 
-    QPainter*       m_pPainter;
-    QRectF          m_ViewRect;
-    QPointF         m_TextPos;
-    QSizeF          m_LineSize;
-    bool			m_bMarked;
-    size_t          m_LineNumber;
+    QPainter*                   m_pPainter;
+    QRectF                      m_ViewRect;
+    QPointF                     m_TextPos;
+    QSizeF                      m_LineSize;
+    bool			            m_bMarked;
+    size_t                      m_LineNumber;
+    CViewItemHighlighterRef     m_refHighlighter;
 };
 
 #endif // __DRAWVIEWITEMSTATE_HPP__

@@ -7,6 +7,7 @@
 class QToolButton;
 class CTracesView;
 class CPipesMgntPage;
+class QLineEdit;
 
 namespace TraceClientCore
 {
@@ -51,6 +52,7 @@ protected:
     QToolButton*            m_pBtn_NewView;
     QToolButton*            m_pBtn_CloneView;
     QToolButton*            m_pBtn_SaveAs;
+    QLineEdit*              m_pSearchText;
 
     CPipesMgntPage*         m_pPipesMgntPage;
 

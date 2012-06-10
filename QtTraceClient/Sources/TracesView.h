@@ -1,8 +1,6 @@
 #ifndef TRACESVIEW_H
 #define TRACESVIEW_H
 
-//#include <QtGUI>
-
 #include <QWidget>
 #include <QToolBar>
 #include <QPushButton>
@@ -11,6 +9,8 @@
 #include "View/ViewSettings.hpp"
 #include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
+#include "View/highlight/ViewItemHighlightersSet.hpp"
+#include "View/Highlight/ViewItemPattern_Text.hpp"
 
 
 namespace Ui
@@ -43,6 +43,8 @@ public:
 
     const CViewSettings&		Settings() const		{ return ViewCore()->ViewSettings(); }
     CViewSettings&				Settings()				{ return ViewCore()->ViewSettings(); }
+
+    CViewItemHighlightersSetRef Highlighters() const    { return m_refHighlighters; }
 
     CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
@@ -98,6 +100,9 @@ protected:
     CViewItemsWalker*                   m_pItemsWalker;
     QTimer                              m_RefreshTimer;
     CTracesViewCoreRef                  m_refViewCore;
+
+    CViewItemHighlightersSetRef         m_refHighlighters;
+    CViewItemPattern_TextRef            m_refSearchPattern;
 };
 
 #endif // TRACESVIEW_H

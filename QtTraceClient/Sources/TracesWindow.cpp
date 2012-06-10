@@ -14,6 +14,7 @@
 #include <QToolButton>
 #include <QCloseEvent>
 #include <QFileDialog>
+#include <QLineEdit>
 
 
 QMainWindow*        CTracesWindow::s_pDummyWnd = NULL;
@@ -29,6 +30,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_NewView(NULL),
     m_pBtn_CloneView(NULL),
     m_pBtn_SaveAs(NULL),
+    m_pSearchText(NULL),
     m_pPipesMgntPage(NULL)
 {
     ui->setupUi(this);
@@ -70,13 +72,17 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SaveAs = new QToolButton();
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
 
-    ui->toolBar->addWidget(m_pBtn_SourceFeeds);
-    ui->toolBar->addSeparator();
-    ui->toolBar->addWidget(m_pBtn_NewView);
-    ui->toolBar->addWidget(m_pBtn_CloneView);
-    ui->toolBar->addSeparator();
-    ui->toolBar->addWidget(m_pBtn_SaveAs);
-    ui->toolBar->setIconSize( QSize(16, 16) );
+    m_pSearchText = new QLineEdit();
+
+    ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
+    ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_NewView);
+    ui->MainToolBar->addWidget(m_pBtn_CloneView);
+    ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_SaveAs);
+    ui->MainToolBar->setIconSize( QSize(16, 16) );
+
+    ui->SearchToolBar->addWidget(m_pSearchText);
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));

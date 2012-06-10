@@ -26,10 +26,10 @@ CMainWindow::CMainWindow() : QMainWindow(),
     m_pBtn_Channels = new QToolButton();
     m_pBtn_Channels->setIcon(ChannelsIcon);
 
-    ui->toolBar->addWidget(m_pBtn_Channels);
-    ui->toolBar->addSeparator();
-    ui->toolBar->addWidget(m_pBtn_NewView);
-    ui->toolBar->setIconSize( QSize(16, 16) );
+    ui->MainToolBar->addWidget(m_pBtn_Channels);
+    ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_NewView);
+    ui->MainToolBar->setIconSize( QSize(16, 16) );
 
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewTracesWindow()));
     connect( m_pBtn_Channels, SIGNAL(clicked()), this, SLOT(OnChannelsMgnt()));

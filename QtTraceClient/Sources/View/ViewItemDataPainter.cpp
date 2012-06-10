@@ -1,6 +1,7 @@
 #include "ViewItemDataPainter.hpp"
 #include "ViewItem_TraceData.hpp"
 #include "ViewItemSettings.hpp"
+#include "ViewSettings.hpp"
 
 
 CViewItemPainterRef     CViewItemDataPainter::s_refPainter;
@@ -55,11 +56,18 @@ void CViewItemDataPainter::Display( const CViewSettings &settings,
                                             CDrawViewItemState &drawstate,
                                             CViewItem &item )
 {
-    CViewItem_TraceData&        rItemData = static_cast<CViewItem_TraceData&>(item);
-    QString                     text = QString().fromWCharArray(rItemData.TraceData()->Data().c_str());
-    const Nyx::CRange&          range = rItemData.TextRange();
+    const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
+    CViewItem_TraceData&            rItemData = static_cast<CViewItem_TraceData&>(item);
+    QString                         full_text = QString().fromWCharArray(rItemData.TraceData()->Data().c_str());
+    const Nyx::CRange&              range = rItemData.TextRange();
+    QString                         text = full_text.mid(range.Start(), range.Length());
+    QFontMetricsF                   Metrics(Font());
 
-    CViewItemTextPainter::Display(settings, drawstate, item, text.mid(range.Start(), range.Length()));
+    drawstate.Highlighter()->OnPreItemDisplay(settings, rColSettings, drawstate, Metrics, text);
+
+    CViewItemTextPainter::Display(settings, drawstate, item, text);
+
+    drawstate.Highlighter()->OnPostItemDisplay(settings, rColSettings, drawstate, Metrics, text);
 }
 
 

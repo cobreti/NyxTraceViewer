@@ -18,6 +18,7 @@
 #include "View/ViewItemsModulesMgr.hpp"
 #include "View/Walkers/FileWriterViewItemsWalker.hpp"
 #include "View/Walkers/ViewItemsWalker.hpp"
+#include "View/Highlight/ViewItemPattern_Text.hpp"
 
 
 /**
@@ -224,6 +225,8 @@ void CTracesView::paintEvent(QPaintEvent*)
                                     ClientRect().width()+ui->m_HorzScrollbar->value(), 
                                     ClientRect().height()+ui->m_VertScrollbar->value());
 
+    drawstate.Highlighter() = (CViewItemHighlighter*)Highlighters();
+
     while ( bContinue && refMethods->ValidPos() && drawstate.TextPos().y() < ViewHeight )
     {
         drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
@@ -388,6 +391,14 @@ void CTracesView::Init(CTracesView* pBase)
 
         Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
     }
+
+    m_refHighlighters = new CViewItemHighlightersSet();
+    m_refSearchPattern = new CViewItemPattern_Text();
+    
+    CViewItemHighlighterRef     refSearchHighlighter = new CViewItemHighlighter();
+    refSearchHighlighter->Pattern() = (CViewItemPattern*)m_refSearchPattern;
+    m_refSearchPattern->TextToMatch() = "st";
+    m_refHighlighters->Add( refSearchHighlighter );
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
     m_pHeader->InitDefaultWidth();
