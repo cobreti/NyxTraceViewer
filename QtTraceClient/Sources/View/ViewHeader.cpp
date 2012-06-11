@@ -67,7 +67,7 @@ void CViewHeader::InitDefaultWidth()
 /**
  *
  */
-void CViewHeader::paintEvent(QPaintEvent*)
+void CViewHeader::paintEvent(QPaintEvent* pEvent)
 {
     QPainter        painter(this);
 
@@ -81,6 +81,11 @@ void CViewHeader::paintEvent(QPaintEvent*)
     if ( m_pBkgndImage )
         painter.drawImage( QRect(0, 0, size().width(), size().height()),
                            *m_pBkgndImage );
+    else
+    {
+        QBrush  bkgndBrush = palette().base();
+        painter.fillRect(pEvent->rect(), bkgndBrush);
+    }
 
     for (size_t index = 0; index < ColsCount && x < ClientWidth; ++index)
     {

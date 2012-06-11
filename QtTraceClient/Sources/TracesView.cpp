@@ -214,7 +214,7 @@ void CTracesView::resizeEvent(QResizeEvent *event)
 }
 
 
-void CTracesView::paintEvent(QPaintEvent*)
+void CTracesView::paintEvent(QPaintEvent* pEvent)
 {
     QPainter                                painter(this);
     CDrawViewItemState                      drawstate(&painter);
@@ -238,6 +238,9 @@ void CTracesView::paintEvent(QPaintEvent*)
                                     ClientRect().height()+ui->m_VertScrollbar->value());
 
     drawstate.Highlighter() = (CViewItemHighlighter*)Highlighters();
+
+    QBrush  bkgndBrush = palette().base();
+    painter.fillRect(pEvent->rect(), bkgndBrush);
 
     while ( bContinue && refMethods->ValidPos() && drawstate.TextPos().y() < ViewHeight )
     {
