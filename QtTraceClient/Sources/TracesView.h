@@ -10,7 +10,6 @@
 #include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
 #include "View/highlight/ViewItemHighlightersSet.hpp"
-#include "View/Highlight/ViewItemPattern_Text.hpp"
 
 
 namespace Ui
@@ -57,7 +56,12 @@ public:
     virtual void OnModuleRemoved( const Nyx::CAString& ModuleName );
 
     void Save( const QString& filename );
-    void SetHighlightText( const QString& text );
+
+    CViewItemsWalker*           ItemsWalker()               { return m_pItemsWalker; }
+
+    const QRectF                ViewRect() const;
+
+    void Invalidate(bool dirty);
 
 public slots:
 
@@ -103,7 +107,6 @@ protected:
     CTracesViewCoreRef                  m_refViewCore;
 
     CViewItemHighlightersSetRef         m_refHighlighters;
-    CViewItemPattern_TextRef            m_refSearchPattern;
 };
 
 #endif // TRACESVIEW_H

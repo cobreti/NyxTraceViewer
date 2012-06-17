@@ -4,10 +4,8 @@
         <file>Icons/View-icon.png</file>
         <file>Icons/PipeSource-icon.png</file>
         <file>Icons/SaveAs.png</file>
-        <file>Icons/StartPipe-icon.png</file>
-        <file>Icons/StopPipe-icon.png</file>
-        <file>Icons/add-icon.png</file>
-        <file>Icons/delete-icon.png</file>
+        <file alias="SearchNext">Icons/Actions-go-down-icon.png</file>
+        <file alias="SearchPrevious">Icons/Actions-go-up-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

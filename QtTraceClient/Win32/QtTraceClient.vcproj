@@ -778,6 +778,14 @@
 					RelativePath="..\Sources\View\ViewItemsModulesListeners.hpp"
 					>
 				</File>
+				<File
+					RelativePath="..\Sources\View\ViewSearchEngine.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Sources\View\ViewSearchEngine.h"
+					>
+				</File>
 				<Filter
 					Name="ViewItems"
 					>
@@ -1087,6 +1095,14 @@
 					</File>
 					<File
 						RelativePath="..\Sources\View\Highlight\ViewItemHighlighter.hpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemHighlighter_SearchedLine.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewItemHighlighter_SearchedLine.hpp"
 						>
 					</File>
 					<File
@@ -2134,7 +2150,87 @@
 			ParseFiles="false"
 			>
 			<File
+				RelativePath="..\Icons\Actions-go-down-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Icons\Actions-go-up-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\Icons\add-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Icons\Channels\AddChannel.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Icons\Channels\Channel.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2194,6 +2290,26 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath="..\Icons\Document-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\UI\Icons\Document-icon.png"
 				>
 				<FileConfiguration
@@ -2214,7 +2330,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\Document-icon.png"
+				RelativePath="..\Icons\Channels\EmptyChannel.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2362,9 +2478,9 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o ..\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);..\Icons\Document-icon.png;..\Icons\File-View-icon.png;..\Icons\New-Document-icon.png;..\Icons\View-icon.png;..\Icons\add-icon.png;..\Icons\DeleteDocView-icon.png;..\Icons\delete-icon.png;..\Icons\PipeSource-icon.png;..\Icons\StartPipe-icon.png;..\Icons\StopPipe-icon.png;..\Images\VGradientOuter.png;..\Images\VGradientInner.png;..\Icons\Pin-white-icon.png"
-						Outputs="..\GeneratedFiles\qrc_$(InputName).cpp"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\..\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputPath);..\Icons\View-Copy-icon.png;..\Icons\View-icon.png;..\Icons\PipeSource-icon.png;..\Icons\SaveAs.png;..\Icons\Actions-go-down-icon.png;..\Icons\Actions-go-up-icon.png;..\Images\VGradientOuter.png;..\Images\VGradientInner.png;..\Icons\Pin-white-icon.png;..\Icons\View-icon.png;..\Icons\PipeSource-icon.png;..\Icons\Channels\Channel.png;..\Icons\Channels\RemoveChannel.png;..\Icons\Channels\AddChannel.png;..\Icons\Channels\StopChannel.png;..\Icons\Channels\EmptyChannel.png;..\Icons\Channels\StartChannel.png"
+						Outputs=".\..\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
 				<FileConfiguration
@@ -2373,9 +2489,9 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Rcc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o ..\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
-						AdditionalDependencies="$(InputPath);..\Icons\Document-icon.png;..\Icons\File-View-icon.png;..\Icons\New-Document-icon.png;..\Icons\View-icon.png;..\Icons\add-icon.png;..\Icons\DeleteDocView-icon.png;..\Icons\delete-icon.png;..\Icons\PipeSource-icon.png;..\Icons\StartPipe-icon.png;..\Icons\StopPipe-icon.png;..\Images\VGradientOuter.png;..\Images\VGradientInner.png;..\Icons\Pin-white-icon.png"
-						Outputs="..\GeneratedFiles\qrc_$(InputName).cpp"
+						CommandLine="&quot;$(QTDIR)\bin\rcc.exe&quot; -name &quot;$(InputName)&quot; -no-compress &quot;$(InputPath)&quot; -o .\..\GeneratedFiles\qrc_$(InputName).cpp&#x0D;&#x0A;"
+						AdditionalDependencies="$(InputPath);..\Icons\View-Copy-icon.png;..\Icons\View-icon.png;..\Icons\PipeSource-icon.png;..\Icons\SaveAs.png;..\Icons\Actions-go-down-icon.png;..\Icons\Actions-go-up-icon.png;..\Images\VGradientOuter.png;..\Images\VGradientInner.png;..\Icons\Pin-white-icon.png;..\Icons\View-icon.png;..\Icons\PipeSource-icon.png;..\Icons\Channels\Channel.png;..\Icons\Channels\RemoveChannel.png;..\Icons\Channels\AddChannel.png;..\Icons\Channels\StopChannel.png;..\Icons\Channels\EmptyChannel.png;..\Icons\Channels\StartChannel.png"
+						Outputs=".\..\GeneratedFiles\qrc_$(InputName).cpp"
 					/>
 				</FileConfiguration>
 			</File>
@@ -2384,7 +2500,87 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Icons\Channels\RemoveChannel.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Icons\SaveAs.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Icons\Channels\StartChannel.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\Icons\StartPipe-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Icons\Channels\StopChannel.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2464,7 +2660,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\View-icon.png"
+				RelativePath="..\Icons\View-Copy-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2485,6 +2681,26 @@
 			</File>
 			<File
 				RelativePath="..\Icons\View-icon.png"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\UI\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
