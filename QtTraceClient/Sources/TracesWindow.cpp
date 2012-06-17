@@ -12,9 +12,12 @@
 #include "ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp"
 #include "View/ViewSearchEngine.h"
 
+#include "Color/ColorBtn.h"
+
 #include <QToolButton>
 #include <QCloseEvent>
 #include <QFileDialog>
+#include <QColorDialog>
 #include <QLineEdit>
 
 
@@ -34,6 +37,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pSearchText(NULL),
     m_pBtn_SearchNext(NULL),
     m_pBtn_SearchPrevious(NULL),
+    m_pBtn_HighlightColor(NULL),
     m_pPipesMgntPage(NULL),
     m_pSearchEngine(NULL)
 {
@@ -88,6 +92,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SearchPrevious->setEnabled(false);
     m_pBtn_SearchPrevious->setIcon(SearchPreviousIcon);
 
+    m_pBtn_HighlightColor = new CColorBtn();
+
     ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_NewView);
@@ -96,6 +102,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
+    ui->SearchToolBar->addWidget(m_pBtn_HighlightColor);
     ui->SearchToolBar->addWidget(m_pSearchText);
     ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
@@ -108,6 +115,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
     connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
     connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
+    connect( m_pBtn_HighlightColor, SIGNAL(clicked()), this, SLOT(OnChooseHighlightColor()));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
 
@@ -246,6 +254,24 @@ void CTracesWindow::OnSearchNext()
 void CTracesWindow::OnSearchPrevious()
 {
     m_pSearchEngine->Previous();
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnChooseHighlightColor()
+{
+    QColorDialog        dlg(m_pBtn_HighlightColor->Color(), this);
+    int                 customColorsCount = QColorDialog::customCount();
+
+    if ( QDialog::Accepted == dlg.exec() )
+    {
+        m_pBtn_HighlightColor->Color() = dlg.selectedColor();
+        m_pBtn_HighlightColor->update();
+        m_pSearchEngine->Highlighter()->HighlightColor() = dlg.selectedColor();
+        m_pTracesView->update();
+    }
 }
 
 

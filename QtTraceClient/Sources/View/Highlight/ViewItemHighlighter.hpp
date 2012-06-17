@@ -6,6 +6,7 @@
 
 #include <QString>
 #include <QFontMetricsF>
+#include <QColor>
 
 #include "View/Highlight/ViewItemPattern.hpp"
 
@@ -43,12 +44,16 @@ public:
     CViewItemPatternRef         Pattern() const         { return m_refPattern; }
     CViewItemPatternRef&        Pattern()               { return m_refPattern; }
 
+    const QColor&   HighlightColor() const              { return m_HighlightColor; }
+    QColor&         HighlightColor()                    { return m_HighlightColor; }
+
 protected:
     virtual ~CViewItemHighlighter();
 
 protected:
 
     CViewItemPatternRef     m_refPattern;
+    QColor                  m_HighlightColor;
 };
 
 

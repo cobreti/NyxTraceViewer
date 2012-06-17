@@ -7,11 +7,15 @@
 /**
  *
  */
-CViewItemHighlighter::CViewItemHighlighter()
+CViewItemHighlighter::CViewItemHighlighter() :
+    m_HighlightColor(Qt::GlobalColor::yellow)
 {
 }
 
 
+/**
+ *
+ */
 void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettings,
                                                 const CViewColumnSettings& rColumnSettings,
                                                 CDrawViewItemState& rState,
@@ -29,7 +33,7 @@ void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettin
     {
         long                textOffset = startIndex + range.Start();
         QPainter&           rPainter = rState.Painter();
-        QBrush              brush(Qt::GlobalColor::yellow);
+        QBrush              brush(m_HighlightColor);
         QRectF              rcTextSelection = rMetrics.boundingRect( text.mid(range.Start(), range.Length()) );
         QRectF              rcTextWithSel = rMetrics.boundingRect( text.left(range.Start() + range.Length()) );
         QRectF              rcText = rMetrics.boundingRect( text );

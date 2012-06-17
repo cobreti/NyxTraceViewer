@@ -9,6 +9,7 @@ class CTracesView;
 class CPipesMgntPage;
 class QLineEdit;
 class CViewSearchEngine;
+class CColorBtn;
 
 
 namespace TraceClientCore
@@ -42,6 +43,7 @@ public slots:
     void OnSearchTextChanged( const QString& text );
     void OnSearchNext();
     void OnSearchPrevious();
+    void OnChooseHighlightColor();
 
 protected:
 
@@ -61,6 +63,7 @@ protected:
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_SearchNext;
     QToolButton*            m_pBtn_SearchPrevious;
+    CColorBtn*              m_pBtn_HighlightColor;
 
     CPipesMgntPage*         m_pPipesMgntPage;
 
