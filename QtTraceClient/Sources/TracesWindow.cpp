@@ -10,6 +10,7 @@
 #include "ui_TracesWindow.h"
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
 #include "ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp"
+#include "View/ViewSearchEngine.h"
 
 #include <QToolButton>
 #include <QCloseEvent>
@@ -31,7 +32,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_CloneView(NULL),
     m_pBtn_SaveAs(NULL),
     m_pSearchText(NULL),
-    m_pPipesMgntPage(NULL)
+    m_pBtn_SearchNext(NULL),
+    m_pBtn_SearchPrevious(NULL),
+    m_pPipesMgntPage(NULL),
+    m_pSearchEngine(NULL)
 {
     ui->setupUi(this);
 
@@ -46,6 +50,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");
     QIcon               CloneViewIcon(":/TracesWindow/Icons/View-Copy-icon.png");
     QIcon               SaveAsIcon(":/TracesWindow/Icons/SaveAs.png");
+    QIcon               SearchNextIcon(":/TracesWindow/SearchNext");
+    QIcon               SearchPreviousIcon(":/TracesWindow/SearchPrevious");
 
     CTracesView* pBase = NULL;
 
@@ -73,6 +79,14 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
 
     m_pSearchText = new QLineEdit();
+    
+    m_pBtn_SearchNext = new QToolButton();
+    m_pBtn_SearchNext->setEnabled(false);
+    m_pBtn_SearchNext->setIcon(SearchNextIcon);
+
+    m_pBtn_SearchPrevious = new QToolButton();
+    m_pBtn_SearchPrevious->setEnabled(false);
+    m_pBtn_SearchPrevious->setIcon(SearchPreviousIcon);
 
     ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
     ui->MainToolBar->addSeparator();
@@ -83,14 +97,21 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
     ui->SearchToolBar->addWidget(m_pSearchText);
+    ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
+    ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
+    ui->SearchToolBar->setIconSize( QSize(16, 16) );
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
     connect( m_pBtn_CloneView, SIGNAL(clicked()), this, SLOT(OnCloneView()));
     connect( m_pBtn_SaveAs, SIGNAL(clicked()), this, SLOT(OnSaveAs()));
     connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
+    connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
+    connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
+
+    m_pSearchEngine = new CViewSearchEngine(*m_pTracesView);
 }
 
 
@@ -99,6 +120,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
  */
 CTracesWindow::~CTracesWindow()
 {
+    delete m_pSearchEngine;
+
     CTraceClientApp::Instance().TracesWindows().Remove(this);
 }
 
@@ -200,7 +223,29 @@ void CTracesWindow::OnEmptyChannel(TraceClientCore::CTraceChannel *pChannel)
  */
 void CTracesWindow::OnSearchTextChanged( const QString& text )
 {
-    m_pTracesView->SetHighlightText(text);
+    m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
+    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
+
+    m_pSearchEngine->SetText(text);
+    m_pTracesView->update();
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnSearchNext()
+{
+    m_pSearchEngine->Next();
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnSearchPrevious()
+{
+    m_pSearchEngine->Previous();
 }
 
 

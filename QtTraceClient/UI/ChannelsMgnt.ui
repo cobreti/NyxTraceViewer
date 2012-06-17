@@ -115,17 +115,6 @@
           </property>
          </spacer>
         </item>
-        <item>
-         <widget class="QPushButton" name="btnClearChannel">
-          <property name="text">
-           <string>Empty</string>
-          </property>
-          <property name="icon">
-           <iconset resource="../QTraceClient.qrc">
-            <normaloff>:/ChannelsMgnt/EmptyChannel</normaloff>:/ChannelsMgnt/EmptyChannel</iconset>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
      </layout>

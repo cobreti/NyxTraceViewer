@@ -159,12 +159,31 @@ void CTracesView::Save( const QString& filename )
 /**
  *
  */
-void CTracesView::SetHighlightText( const QString& text )
+const QRectF CTracesView::ViewRect() const
 {
-    m_refSearchPattern->TextToMatch() = text;
-    m_bViewDirty = true;
+    return QRectF(  0, 
+                    0,
+                    ClientRect().width(), 
+                    ClientRect().height() - HeaderSize().height());
 }
 
+
+/**
+ *
+ */
+void CTracesView::Invalidate(bool dirty)
+{
+    float       ScrollBarPos = 0.0f;
+
+    {
+        CViewItemsWalker::MethodsInterfaceRef       refWalkerMethods(ItemsWalker());
+        ScrollBarPos = refWalkerMethods->ItemYPos();
+    }
+
+    ui->m_VertScrollbar->setValue(ScrollBarPos);
+    m_bViewDirty = dirty;
+    RefreshDisplay();
+}
 
 
 /**
@@ -408,12 +427,6 @@ void CTracesView::Init(CTracesView* pBase)
     }
 
     m_refHighlighters = new CViewItemHighlightersSet();
-    m_refSearchPattern = new CViewItemPattern_Text();
-    
-    CViewItemHighlighterRef     refSearchHighlighter = new CViewItemHighlighter();
-    refSearchHighlighter->Pattern() = (CViewItemPattern*)m_refSearchPattern;
-    //m_refSearchPattern->TextToMatch() = "st";
-    m_refHighlighters->Add( refSearchHighlighter );
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
     m_pHeader->InitDefaultWidth();
