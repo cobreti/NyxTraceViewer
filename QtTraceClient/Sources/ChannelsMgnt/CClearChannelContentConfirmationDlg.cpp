@@ -5,12 +5,14 @@
 /**
  *
  */
-CClearChannelContentConfirmationDlg::CClearChannelContentConfirmationDlg(QWidget *parent) :
+CClearChannelContentConfirmationDlg::CClearChannelContentConfirmationDlg(const QString& channelName, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CClearChannelContentConfirmationDlg),
     m_eDlgResult(eDlgRes_Cancel)
 {
     ui->setupUi(this);
+
+    ui->labelChannelName->setText(channelName);
 }
 
 

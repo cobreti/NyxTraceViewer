@@ -27,7 +27,7 @@ public:
     };
 
 public:
-    explicit CClearChannelContentConfirmationDlg(QWidget *parent = 0);
+    explicit CClearChannelContentConfirmationDlg(const QString& channelName, QWidget *parent = 0);
     virtual ~CClearChannelContentConfirmationDlg();
     
     EDlgResult      Result() const      { return m_eDlgResult; }

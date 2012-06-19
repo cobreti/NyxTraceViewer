@@ -195,7 +195,6 @@ void CChannelsMgnt::OnChannelItemDoubleClicked( QTreeWidgetItem* pItem, int colu
     }
     else if ( column == 4 )
     {
-//        emit sigEmptyChannel(pChannelItem->TraceChannel());
         EmptyChannel(pChannelItem->TraceChannel());
     }
 }
@@ -207,7 +206,6 @@ void CChannelsMgnt::OnChannelItemDoubleClicked( QTreeWidgetItem* pItem, int colu
 void CChannelsMgnt::Init( QWidget* pParent, const QPoint& pt, CTracesViewCore* pViewCore )
 {
     m_pViewCore = pViewCore;
-//    setParent(pParent);
     setWindowFlags(Qt::Popup);
     LoadChannels();
 
@@ -301,7 +299,7 @@ void CChannelsMgnt::showEvent(QShowEvent *pEvent)
  */
 void CChannelsMgnt::EmptyChannel(TraceClientCore::CTraceChannel* pChannel)
 {
-    CClearChannelContentConfirmationDlg     dlg(NULL);
+    CClearChannelContentConfirmationDlg     dlg(QString::fromAscii(pChannel->Name().c_str()), this);
 
     dlg.exec();
 

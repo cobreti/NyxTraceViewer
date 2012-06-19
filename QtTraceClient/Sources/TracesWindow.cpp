@@ -9,7 +9,6 @@
 
 #include "ui_TracesWindow.h"
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
-#include "ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp"
 #include "View/ViewSearchEngine.h"
 
 #include "Color/ColorBtn.h"
@@ -144,17 +143,6 @@ void CTracesWindow::OnSourceFeedsBtnClicked()
     pt = mapToGlobal(pt);
 
     CChannelsMgnt::Show(this, pt, m_pTracesView->ViewCore());
-
-    //    if ( m_pBtn_SourceFeeds->isChecked() )
-//    {
-//        m_pPipesMgntPage->show(m_pTracesView->ViewCore());
-//        //m_pTracesView->hide();
-//    }
-//    else
-//    {
-//        m_pPipesMgntPage->hide();
-//        //m_pTracesView->show();
-//    }
 }
 
 
@@ -194,34 +182,6 @@ void CTracesWindow::OnSaveAs()
         QString     file = fileDlg.selectedFiles()[0];
 
         m_pTracesView->Save(file);
-    }
-}
-
-
-/**
- *
- */
-void CTracesWindow::OnEmptyChannel(TraceClientCore::CTraceChannel *pChannel)
-{
-    CClearChannelContentConfirmationDlg     dlg(this);
-
-    dlg.exec();
-
-    if ( CClearChannelContentConfirmationDlg::eDlgRes_Empty == dlg.Result() )
-    {
-        bool bWasRunning = pChannel->Feeder().Valid() && pChannel->Feeder()->IsRunning();
-
-        if ( bWasRunning )
-            pChannel->Feeder()->Stop();
-
-        TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
-
-        pChannel->Clear();
-
-        TraceClientCore::CModule::Instance().PoolsUpdateClock().Start();
-
-        if ( bWasRunning )
-            pChannel->Feeder()->Start();
     }
 }
 
