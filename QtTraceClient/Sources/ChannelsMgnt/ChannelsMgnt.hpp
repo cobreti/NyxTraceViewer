@@ -54,6 +54,7 @@ private:
 
     CChannelTreeItemDelegate*   m_pChannelTreeItemDelegate;
     CTracesViewCore*            m_pViewCore;
+    int                         m_NextChannelNumber;
 
     static CChannelsMgnt*       s_pInstance;
 };

@@ -34,7 +34,8 @@ CChannelsMgnt::CChannelsMgnt() :
     QWidget(NULL),
     ui(new Ui::ChannelsMgnt),
     m_pChannelTreeItemDelegate(NULL),
-    m_pViewCore(NULL)
+    m_pViewCore(NULL),
+    m_NextChannelNumber(1)
 {
     ui->setupUi(this);
 
@@ -73,12 +74,16 @@ void CChannelsMgnt::OnNewChannel()
     CChannelTreeItem*                           pItem = new CChannelTreeItem();
     TraceClientCore::CPipeTraceFeeder*          pPipeTraceFeeder = NULL;
     TraceClientCore::CModule&					rModule = TraceClientCore::CModule::Instance();
+    Nyx::CWString                               channelName(50);
+
+    channelName.Format(L"Channel_%i", m_NextChannelNumber);
+    ++m_NextChannelNumber;
 
     //
     // Add pool
     //
 
-    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), L"new pool");
+    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), channelName.c_str());
     rModule.TracesPools().Add(refPool);
     rModule.PoolsUpdateClock().Insert(refPool);
 
