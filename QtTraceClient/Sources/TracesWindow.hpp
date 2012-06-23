@@ -43,6 +43,7 @@ public slots:
     void OnSearchNext();
     void OnSearchPrevious();
     void OnChooseHighlightColor();
+    void OnAbout();
 
 protected:
 
@@ -58,6 +59,7 @@ protected:
     QToolButton*            m_pBtn_NewView;
     QToolButton*            m_pBtn_CloneView;
     QToolButton*            m_pBtn_SaveAs;
+    QToolButton*            m_pBtn_About;
 
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_SearchNext;

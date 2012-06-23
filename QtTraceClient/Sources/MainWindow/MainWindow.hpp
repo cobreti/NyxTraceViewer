@@ -25,6 +25,7 @@ public slots:
 
     void OnNewTracesWindow();
     void OnChannelsMgnt();
+    void OnAbout();
 
 protected:
 
@@ -32,6 +33,7 @@ protected:
 
     QToolButton*        m_pBtn_NewView;
     QToolButton*        m_pBtn_Channels;
+    QToolButton*        m_pBtn_About;
 };
 
 

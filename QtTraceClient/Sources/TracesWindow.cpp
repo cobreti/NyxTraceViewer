@@ -10,6 +10,7 @@
 #include "ui_TracesWindow.h"
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
 #include "View/ViewSearchEngine.h"
+#include "Dialogs/AboutDlg.h"
 
 #include "Color/ColorBtn.h"
 
@@ -33,6 +34,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_NewView(NULL),
     m_pBtn_CloneView(NULL),
     m_pBtn_SaveAs(NULL),
+    m_pBtn_About(NULL),
     m_pSearchText(NULL),
     m_pBtn_SearchNext(NULL),
     m_pBtn_SearchPrevious(NULL),
@@ -53,6 +55,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");
     QIcon               CloneViewIcon(":/TracesWindow/Icons/View-Copy-icon.png");
     QIcon               SaveAsIcon(":/TracesWindow/Icons/SaveAs.png");
+    QIcon               AboutIcon(":/TracesWindow/About");
     QIcon               SearchNextIcon(":/TracesWindow/SearchNext");
     QIcon               SearchPreviousIcon(":/TracesWindow/SearchPrevious");
 
@@ -81,6 +84,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SaveAs = new QToolButton();
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
 
+    m_pBtn_About = new QToolButton();
+    m_pBtn_About->setIcon(AboutIcon);
+
     m_pSearchText = new QLineEdit();
     
     m_pBtn_SearchNext = new QToolButton();
@@ -99,6 +105,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->addWidget(m_pBtn_CloneView);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
+    ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
     ui->SearchToolBar->addWidget(m_pBtn_HighlightColor);
@@ -115,6 +123,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
     connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
     connect( m_pBtn_HighlightColor, SIGNAL(clicked()), this, SLOT(OnChooseHighlightColor()));
+    connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
 
@@ -171,7 +180,7 @@ void CTracesWindow::OnCloneView()
  */
 void CTracesWindow::OnSaveAs()
 {
-    QFileDialog     fileDlg;
+    QFileDialog     fileDlg(this);
 
     fileDlg.setNameFilter(tr("text (*.txt)"));
     fileDlg.setAcceptMode( QFileDialog::AcceptSave );
@@ -233,6 +242,18 @@ void CTracesWindow::OnChooseHighlightColor()
         m_pTracesView->update();
     }
 }
+
+
+/**
+ *
+ */
+void CTracesWindow::OnAbout()
+{
+    CAboutDlg   dlg(this);
+
+    dlg.exec();
+}
+
 
 
 /**

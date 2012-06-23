@@ -6,6 +6,8 @@
         <file>Icons/SaveAs.png</file>
         <file alias="SearchNext">Icons/Actions-go-down-icon.png</file>
         <file alias="SearchPrevious">Icons/Actions-go-up-icon.png</file>
+        <file alias="ColorSelection">Icons/Color-Meter-icon.png</file>
+        <file alias="About">Icons/FAQ-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>
@@ -15,6 +17,7 @@
     <qresource prefix="/MainWindow">
         <file>Icons/View-icon.png</file>
         <file>Icons/PipeSource-icon.png</file>
+        <file alias="About">Icons/FAQ-icon.png</file>
     </qresource>
     <qresource prefix="/ChannelsMgnt">
         <file alias="Channel">Icons/Channels/Channel.png</file>
@@ -23,5 +26,8 @@
         <file alias="StopChannel">Icons/Channels/StopChannel.png</file>
         <file alias="EmptyChannel">Icons/Channels/EmptyChannel.png</file>
         <file alias="StartChannel">Icons/Channels/StartChannel.png</file>
+    </qresource>
+    <qresource prefix="/App">
+        <file alias="TraceViewer">Icons/App-icon.png</file>
     </qresource>
 </RCC>
