@@ -287,6 +287,36 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath="..\Sources\Dialogs\HighlightColorsSelectionDlg.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\Sources\Dialogs\HighlightColorsSelectionDlg.h"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCustomBuildTool"
+							Description="Moc&apos;ing $(InputFileName)..."
+							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath="..\Sources\Dialogs\NewDocumentDlg.cpp"
 					>
 				</File>
@@ -1120,6 +1150,30 @@
 					Name="Highlight"
 					>
 					<File
+						RelativePath="..\Sources\View\Highlight\HighlightBrush.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\HighlightBrush.hpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\HighlightBrushesSet.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\HighlightBrushesSet.hpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewHighlightSettings.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\ViewHighlightSettings.hpp"
+						>
+					</File>
+					<File
 						RelativePath="..\Sources\View\Highlight\ViewItemHighlighter.cpp"
 						>
 					</File>
@@ -1274,36 +1328,6 @@
 						/>
 					</FileConfiguration>
 				</File>
-				<File
-					RelativePath="..\Sources\Color\ColorsSelectionDlg.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\Sources\Color\ColorsSelectionDlg.h"
-					>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCustomBuildTool"
-							Description="Moc&apos;ing $(InputFileName)..."
-							CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
-							AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
-							Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
-						/>
-					</FileConfiguration>
-				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -1348,7 +1372,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\UI\ui_ColorsSelectionDlg.h"
+				RelativePath="..\UI\ui_HighlightColorsSelectionDlg.h"
 				>
 			</File>
 			<File
@@ -1481,7 +1505,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\moc\debug\moc_ColorsSelectionDlg.cpp"
+					RelativePath=".\moc\debug\moc_HighlightColorsSelectionDlg.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
@@ -1847,7 +1871,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\moc\release\moc_ColorsSelectionDlg.cpp"
+					RelativePath=".\moc\release\moc_HighlightColorsSelectionDlg.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -1855,6 +1879,17 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
 						/>
 					</FileConfiguration>
 				</File>
@@ -2135,7 +2170,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\ColorsSelectionDlg.ui"
+				RelativePath="..\UI\HighlightColorsSelectionDlg.ui"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

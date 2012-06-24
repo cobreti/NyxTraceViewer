@@ -6,7 +6,7 @@
         <file>Icons/SaveAs.png</file>
         <file alias="SearchNext">Icons/Actions-go-down-icon.png</file>
         <file alias="SearchPrevious">Icons/Actions-go-up-icon.png</file>
-        <file alias="ColorSelection">Icons/Color-Meter-icon.png</file>
+        <file alias="HighlightColorSelection">Icons/Color-Meter-icon.png</file>
         <file alias="About">Icons/FAQ-icon.png</file>
     </qresource>
     <qresource prefix="/View">

@@ -11,13 +11,13 @@
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
 #include "View/ViewSearchEngine.h"
 #include "Dialogs/AboutDlg.h"
+#include "Dialogs/HighlightColorsSelectionDlg.h"
 
 #include "Color/ColorBtn.h"
 
 #include <QToolButton>
 #include <QCloseEvent>
 #include <QFileDialog>
-#include <QColorDialog>
 #include <QLineEdit>
 
 
@@ -33,6 +33,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SourceFeeds(NULL),
     m_pBtn_NewView(NULL),
     m_pBtn_CloneView(NULL),
+    m_pBtn_HighlightColorSelection(NULL),
     m_pBtn_SaveAs(NULL),
     m_pBtn_About(NULL),
     m_pSearchText(NULL),
@@ -58,6 +59,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               AboutIcon(":/TracesWindow/About");
     QIcon               SearchNextIcon(":/TracesWindow/SearchNext");
     QIcon               SearchPreviousIcon(":/TracesWindow/SearchPrevious");
+    QIcon               HighlightColorSelectionIcon(":/TracesWindow/HighlightColorSelection");
 
     CTracesView* pBase = NULL;
 
@@ -80,6 +82,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_CloneView = new QToolButton();
     m_pBtn_CloneView->setIcon(CloneViewIcon);
+
+    m_pBtn_HighlightColorSelection = new QToolButton();
+    m_pBtn_HighlightColorSelection->setIcon(HighlightColorSelectionIcon);
 
     m_pBtn_SaveAs = new QToolButton();
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
@@ -104,6 +109,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->addWidget(m_pBtn_NewView);
     ui->MainToolBar->addWidget(m_pBtn_CloneView);
     ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
+    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
@@ -122,8 +129,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
     connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
     connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
-    connect( m_pBtn_HighlightColor, SIGNAL(clicked()), this, SLOT(OnChooseHighlightColor()));
+    connect( m_pBtn_HighlightColor, SIGNAL(OnColorChanged(CColorBtn*)), this, SLOT(OnHighlightColorChanged(CColorBtn*)));
     connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
+    connect( m_pBtn_HighlightColorSelection, SIGNAL(clicked()), this, SLOT(OnHighlightColorSelection()));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
 
@@ -229,18 +237,10 @@ void CTracesWindow::OnSearchPrevious()
 /**
  *
  */
-void CTracesWindow::OnChooseHighlightColor()
+void CTracesWindow::OnHighlightColorChanged(CColorBtn* pBtn)
 {
-    QColorDialog        dlg(m_pBtn_HighlightColor->Color(), this);
-    int                 customColorsCount = QColorDialog::customCount();
-
-    if ( QDialog::Accepted == dlg.exec() )
-    {
-        m_pBtn_HighlightColor->Color() = dlg.selectedColor();
-        m_pBtn_HighlightColor->update();
-        m_pSearchEngine->Highlighter()->HighlightColor() = dlg.selectedColor();
-        m_pTracesView->update();
-    }
+    m_pSearchEngine->Highlighter()->HighlightColor() = pBtn->Color();
+    m_pTracesView->update();
 }
 
 
@@ -254,6 +254,16 @@ void CTracesWindow::OnAbout()
     dlg.exec();
 }
 
+
+/**
+ *
+ */
+void CTracesWindow::OnHighlightColorSelection()
+{
+    CHighlightColorsSelectionDlg        dlg(CTraceClientApp::Instance().AppSettings().ViewHighlightSettings(), this);
+
+    dlg.exec();
+}
 
 
 /**

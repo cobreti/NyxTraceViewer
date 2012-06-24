@@ -18,6 +18,14 @@ public:
     const QColor& Color() const         { return m_Color; }
     QColor& Color()                     { return m_Color; }
 
+signals:
+
+    void OnColorChanged(CColorBtn* pBtn);
+
+public slots:
+
+    void OnChooseColor();
+
 protected:
 
     virtual void paintEvent(QPaintEvent*);
