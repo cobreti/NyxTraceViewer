@@ -8,6 +8,7 @@
         <file alias="SearchPrevious">Icons/Actions-go-up-icon.png</file>
         <file alias="HighlightColorSelection">Icons/Color-Meter-icon.png</file>
         <file alias="About">Icons/FAQ-icon.png</file>
+        <file alias="Search">Icons/search-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>
@@ -29,5 +30,9 @@
     </qresource>
     <qresource prefix="/App">
         <file alias="TraceViewer">Icons/App-icon.png</file>
+    </qresource>
+    <qresource prefix="/HighlightsMgrWnd">
+        <file alias="SearchNext">Icons/Actions-go-down-icon.png</file>
+        <file alias="SearchPrevious">Icons/Actions-go-up-icon.png</file>
     </qresource>
 </RCC>

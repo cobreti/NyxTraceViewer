@@ -1,0 +1,82 @@
+#include "HighlightsMgrWnd.h"
+#include "HighlightTreeItemDelegate.hpp"
+#include "HighlightTreeItem.hpp"
+
+#include "ui_HighlightsMgrWnd.h"
+
+/**
+ *
+ */
+CHighlightsMgrWnd::CHighlightsMgrWnd(CTracesView* pView, QWidget* parent) : QWidget(parent),
+ui(new Ui::HighlightsMgrWnd),
+m_pView(pView),
+m_pTreeItemDelegate(NULL)
+{
+    ui->setupUi(this);
+
+    hide();
+    setWindowFlags( Qt::Tool );
+
+    m_pTreeItemDelegate = new CHighlightTreeItemDelegate(ui->treeWidget);
+    ui->treeWidget->setItemDelegateForColumn(0, m_pTreeItemDelegate);
+    ui->treeWidget->setItemDelegateForColumn(1, m_pTreeItemDelegate);
+    ui->treeWidget->setItemDelegateForColumn(2, m_pTreeItemDelegate);
+    ui->treeWidget->setItemDelegateForColumn(3, m_pTreeItemDelegate);
+
+    ui->treeWidget->addTopLevelItem(new CHighlightTreeItem());
+    ui->treeWidget->addTopLevelItem(new CHighlightTreeItem());
+    ui->treeWidget->addTopLevelItem(new CHighlightTreeItem());
+}
+
+
+/**
+ *
+ */
+CHighlightsMgrWnd::~CHighlightsMgrWnd()
+{
+    delete m_pTreeItemDelegate;
+}
+
+
+/**
+ *
+ */
+void CHighlightsMgrWnd::Show(const QPoint& pt, const QSize& size)
+{
+    //setWindowFlags(Qt::Popup);
+
+    QSize   orgSize = this->size();
+
+    move(pt);
+    resize(orgSize.width(), size.height());
+    show();
+}
+
+
+/**
+ *
+ */
+void CHighlightsMgrWnd::showEvent(QShowEvent* pShowEvent)
+{
+    QRect       rcRow = ui->treeWidget->rect();
+
+    ui->treeWidget->setColumnWidth(0, 32);
+    ui->treeWidget->setColumnWidth(1, rcRow.width() - 32*3 - ui->treeWidget->indentation() );
+    ui->treeWidget->setColumnWidth(2, 32);
+    ui->treeWidget->setColumnWidth(3, 32);    
+}
+
+
+/**
+ *
+ */
+void CHighlightsMgrWnd::resizeEvent(QResizeEvent*)
+{
+    QRect       rcRow = ui->treeWidget->rect();
+
+    ui->treeWidget->setColumnWidth(0, 32);
+    ui->treeWidget->setColumnWidth(1, rcRow.width() - 32*3 );
+    ui->treeWidget->setColumnWidth(2, 32);
+    ui->treeWidget->setColumnWidth(3, 32);    
+}
+

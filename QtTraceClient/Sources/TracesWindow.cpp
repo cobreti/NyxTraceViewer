@@ -12,6 +12,7 @@
 #include "View/ViewSearchEngine.h"
 #include "Dialogs/AboutDlg.h"
 #include "Dialogs/HighlightColorsSelectionDlg.h"
+#include "View/Highlight/HighlightsMgrWnd.h"
 
 #include "Color/ColorBtn.h"
 
@@ -33,6 +34,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SourceFeeds(NULL),
     m_pBtn_NewView(NULL),
     m_pBtn_CloneView(NULL),
+    m_pBtn_Search(NULL),
     m_pBtn_HighlightColorSelection(NULL),
     m_pBtn_SaveAs(NULL),
     m_pBtn_About(NULL),
@@ -41,7 +43,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SearchPrevious(NULL),
     m_pBtn_HighlightColor(NULL),
     m_pPipesMgntPage(NULL),
-    m_pSearchEngine(NULL)
+    m_pSearchEngine(NULL),
+    m_pHighlightsMgrWnd(NULL)
 {
     ui->setupUi(this);
 
@@ -60,6 +63,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               SearchNextIcon(":/TracesWindow/SearchNext");
     QIcon               SearchPreviousIcon(":/TracesWindow/SearchPrevious");
     QIcon               HighlightColorSelectionIcon(":/TracesWindow/HighlightColorSelection");
+    QIcon               SearchIcon(":/TracesWindow/Search");
 
     CTracesView* pBase = NULL;
 
@@ -82,6 +86,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_CloneView = new QToolButton();
     m_pBtn_CloneView->setIcon(CloneViewIcon);
+
+    m_pBtn_Search = new QToolButton();
+    m_pBtn_Search->setIcon(SearchIcon);
 
     m_pBtn_HighlightColorSelection = new QToolButton();
     m_pBtn_HighlightColorSelection->setIcon(HighlightColorSelectionIcon);
@@ -109,6 +116,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->addWidget(m_pBtn_NewView);
     ui->MainToolBar->addWidget(m_pBtn_CloneView);
     ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_Search);
     ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
@@ -132,10 +140,13 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_HighlightColor, SIGNAL(OnColorChanged(CColorBtn*)), this, SLOT(OnHighlightColorChanged(CColorBtn*)));
     connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
     connect( m_pBtn_HighlightColorSelection, SIGNAL(clicked()), this, SLOT(OnHighlightColorSelection()));
+    connect( m_pBtn_Search, SIGNAL(clicked()), this, SLOT(OnSearch()));
 
     CTraceClientApp::Instance().TracesWindows().Insert(this);
 
     m_pSearchEngine = new CViewSearchEngine(*m_pTracesView);
+
+    m_pHighlightsMgrWnd = new CHighlightsMgrWnd(m_pTracesView, this);
 }
 
 
@@ -144,6 +155,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
  */
 CTracesWindow::~CTracesWindow()
 {
+    delete m_pHighlightsMgrWnd;
     delete m_pSearchEngine;
 
     CTraceClientApp::Instance().TracesWindows().Remove(this);
@@ -263,6 +275,20 @@ void CTracesWindow::OnHighlightColorSelection()
     CHighlightColorsSelectionDlg        dlg(CTraceClientApp::Instance().AppSettings().ViewHighlightSettings(), this);
 
     dlg.exec();
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnSearch()
+{
+    //QPoint              pt( m_pBtn_SourceFeeds->frameGeometry().left(), m_pBtn_SourceFeeds->frameGeometry().bottom() );
+    QPoint              pt( frameGeometry().right()+1, frameGeometry().top() );
+
+    //pt = mapToGlobal(pt);
+
+    m_pHighlightsMgrWnd->Show(pt, QSize(0, frameGeometry().height()));
 }
 
 

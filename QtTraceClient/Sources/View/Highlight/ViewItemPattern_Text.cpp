@@ -14,6 +14,9 @@ CViewItemPattern_Text::CViewItemPattern_Text() : CViewItemPattern()
  */
 Nyx::CRange CViewItemPattern_Text::Match( const QString& text, const long& startIndex )
 {
+    if ( m_TextToMatch.isEmpty() )
+        return Nyx::CRange();
+
     Nyx::CRange     res;
 
     res.Start() = text.indexOf(m_TextToMatch, startIndex);

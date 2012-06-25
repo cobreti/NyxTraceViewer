@@ -51,6 +51,9 @@ void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettin
 }
 
 
+/**
+ *
+ */
 void CViewItemHighlighter::OnPostItemDisplay(   const CViewSettings& rViewSettings,
                                                 const CViewColumnSettings& rColumnSettings,
                                                 CDrawViewItemState& rState,

@@ -10,6 +10,7 @@ class CPipesMgntPage;
 class QLineEdit;
 class CViewSearchEngine;
 class CColorBtn;
+class CHighlightsMgrWnd;
 
 
 namespace TraceClientCore
@@ -45,6 +46,7 @@ public slots:
     void OnHighlightColorChanged(CColorBtn* pBtn);
     void OnAbout();
     void OnHighlightColorSelection();
+    void OnSearch();
 
 protected:
 
@@ -59,6 +61,7 @@ protected:
     QToolButton*            m_pBtn_SourceFeeds;
     QToolButton*            m_pBtn_NewView;
     QToolButton*            m_pBtn_CloneView;
+    QToolButton*            m_pBtn_Search;
     QToolButton*            m_pBtn_HighlightColorSelection;
     QToolButton*            m_pBtn_SaveAs;
     QToolButton*            m_pBtn_About;
@@ -71,6 +74,7 @@ protected:
     CPipesMgntPage*         m_pPipesMgntPage;
 
     CViewSearchEngine*      m_pSearchEngine;
+    CHighlightsMgrWnd*      m_pHighlightsMgrWnd;
 
     static QMainWindow*     s_pDummyWnd;
 };
