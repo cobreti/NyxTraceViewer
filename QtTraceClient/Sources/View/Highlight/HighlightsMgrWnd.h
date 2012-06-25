@@ -2,6 +2,7 @@
 #define _HIGHLIGHTSMGRWND_H_
 
 #include <QWidget>
+#include <QTreeWidgetItem>
 
 namespace Ui
 {
@@ -10,6 +11,7 @@ namespace Ui
 
 class CTracesView;
 class CHighlightTreeItemDelegate;
+class QTreeWidgetItem;
 
 
 /**
@@ -17,11 +19,17 @@ class CHighlightTreeItemDelegate;
  */
 class CHighlightsMgrWnd : public QWidget
 {
+    Q_OBJECT
+
 public:
     CHighlightsMgrWnd(CTracesView* pView, QWidget* parent);
     virtual ~CHighlightsMgrWnd();
 
     void Show(const QPoint& pt, const QSize& size);
+
+public slots:
+
+    void OnItemChanged(QTreeWidgetItem* pItem, int column);
 
 protected:
 

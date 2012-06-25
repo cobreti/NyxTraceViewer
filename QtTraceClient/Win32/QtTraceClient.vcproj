@@ -1166,12 +1166,64 @@
 						>
 					</File>
 					<File
+						RelativePath="..\Sources\View\Highlight\HighlightColorsPopup.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\HighlightColorsPopup.h"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing $(InputFileName)..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing $(InputFileName)..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
 						RelativePath="..\Sources\View\Highlight\HighlightsMgrWnd.cpp"
 						>
 					</File>
 					<File
 						RelativePath="..\Sources\View\Highlight\HighlightsMgrWnd.h"
 						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing $(InputFileName)..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing $(InputFileName)..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
 					</File>
 					<File
 						RelativePath="..\Sources\View\Highlight\HighlightTreeItem.cpp"
@@ -1187,6 +1239,36 @@
 					</File>
 					<File
 						RelativePath="..\Sources\View\Highlight\HighlightTreeItemDelegate.hpp"
+						>
+						<FileConfiguration
+							Name="Debug|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing $(InputFileName)..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+						<FileConfiguration
+							Name="Release|Win32"
+							>
+							<Tool
+								Name="VCCustomBuildTool"
+								Description="Moc&apos;ing $(InputFileName)..."
+								CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;  &quot;$(InputPath)&quot; -o &quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I$(QTDIR)\include\ActiveQt&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;-I$(QTDIR)\include\QtXml&quot; &quot;-I$(QTDIR)\mkspecs\win32-msvc2005&quot; &quot;-I.\..\..\..\Nyx\include&quot; &quot;-I.\..\..\..\Nyx\include\NyxNet&quot; &quot;-I.\..\..\..\Nyx\include\Win32&quot; &quot;-I.\..\..\TraceClientCore\include&quot; &quot;-I.\..\Sources&quot; &quot;-I.\..\UI&quot; &quot;-I.\MOC\$(ConfigurationName)\.&quot; -D_WINDOWS -DNDEBUG -DQT_CORE_LIB -DQT_DLL -DQT_GUI_LIB -DQT_LARGEFILE_SUPPORT -DQT_NO_DEBUG -DQT_THREAD_SUPPORT -DQT_XML_LIB -DUNICODE -DWIN32&#x0D;&#x0A;"
+								AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
+								Outputs="&quot;.\MOC\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
+							/>
+						</FileConfiguration>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\HighlightTreeItemEventsConnection.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\Sources\View\Highlight\HighlightTreeItemEventsConnection.h"
 						>
 						<FileConfiguration
 							Name="Debug|Win32"
@@ -1418,6 +1500,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\UI\ui_HighlightColorsPopup.h"
+				>
+			</File>
+			<File
 				RelativePath="..\UI\ui_HighlightColorsSelectionDlg.h"
 				>
 			</File>
@@ -1555,6 +1641,18 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\moc\debug\moc_HighlightColorsPopup.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\moc\debug\moc_HighlightColorsSelectionDlg.cpp"
 					>
 					<FileConfiguration
@@ -1567,7 +1665,31 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\moc\debug\moc_HighlightsMgrWnd.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\moc\debug\moc_HighlightTreeItemDelegate.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\moc\debug\moc_HighlightTreeItemEventsConnection.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
@@ -1933,6 +2055,18 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\moc\release\moc_HighlightColorsPopup.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\moc\release\moc_HighlightColorsSelectionDlg.cpp"
 					>
 					<FileConfiguration
@@ -1956,7 +2090,31 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\moc\release\moc_HighlightsMgrWnd.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\moc\release\moc_HighlightTreeItemDelegate.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						ExcludedFromBuild="true"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\moc\release\moc_HighlightTreeItemEventsConnection.cpp"
 					>
 					<FileConfiguration
 						Name="Debug|Win32"
@@ -2219,6 +2377,32 @@
 			</File>
 			<File
 				RelativePath="..\UI\ChannelsMgnt.ui"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\..\UI\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;.\..\UI\ui_$(InputName).h&quot;"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Uic&apos;ing $(InputFileName)..."
+						CommandLine="&quot;$(QTDIR)\bin\uic.exe&quot; -o &quot;.\..\UI\ui_$(InputName).h&quot; &quot;$(InputPath)&quot;&#x0D;&#x0A;"
+						AdditionalDependencies="$(QTDIR)\bin\uic.exe"
+						Outputs="&quot;.\..\UI\ui_$(InputName).h&quot;"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\UI\HighlightColorsPopup.ui"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2691,7 +2875,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\Document-icon.png"
+				RelativePath="..\UI\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2711,7 +2895,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\Document-icon.png"
+				RelativePath="..\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2771,7 +2955,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\File-View-icon.png"
+				RelativePath="..\UI\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2791,7 +2975,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\File-View-icon.png"
+				RelativePath="..\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -3121,7 +3305,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\View-icon.png"
+				RelativePath="..\UI\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -3141,7 +3325,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\View-icon.png"
+				RelativePath="..\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"

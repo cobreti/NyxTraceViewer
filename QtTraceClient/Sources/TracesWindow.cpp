@@ -109,7 +109,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SearchPrevious->setEnabled(false);
     m_pBtn_SearchPrevious->setIcon(SearchPreviousIcon);
 
-    m_pBtn_HighlightColor = new CColorBtn();
+    m_pBtn_HighlightColor = new CChooseColorBtn();
 
     ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
     ui->MainToolBar->addSeparator();
@@ -288,7 +288,7 @@ void CTracesWindow::OnSearch()
 
     //pt = mapToGlobal(pt);
 
-    m_pHighlightsMgrWnd->Show(pt, QSize(0, frameGeometry().height()));
+    m_pHighlightsMgrWnd->Show(pt, QSize(0, rect().height()));
 }
 
 

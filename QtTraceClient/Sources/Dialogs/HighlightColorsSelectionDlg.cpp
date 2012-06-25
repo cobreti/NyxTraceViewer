@@ -69,7 +69,7 @@ void CHighlightColorsSelectionDlg::InitFrame( QFrame& rFrame, ColorButtonsTable&
 
     for (size_t index = 0; index < count; ++index)
     {
-        CColorBtn*      pBtn = new CColorBtn();
+        CColorBtn*      pBtn = new CChooseColorBtn();
         ButtonsTable[index] = pBtn;
         pBtn->Color() = brushes[index]->Color();
         rFrame.layout()->addWidget(pBtn);

@@ -1,6 +1,7 @@
 #include "HighlightsMgrWnd.h"
 #include "HighlightTreeItemDelegate.hpp"
 #include "HighlightTreeItem.hpp"
+#include "TracesView.h"
 
 #include "ui_HighlightsMgrWnd.h"
 
@@ -23,9 +24,10 @@ m_pTreeItemDelegate(NULL)
     ui->treeWidget->setItemDelegateForColumn(2, m_pTreeItemDelegate);
     ui->treeWidget->setItemDelegateForColumn(3, m_pTreeItemDelegate);
 
-    ui->treeWidget->addTopLevelItem(new CHighlightTreeItem());
-    ui->treeWidget->addTopLevelItem(new CHighlightTreeItem());
-    ui->treeWidget->addTopLevelItem(new CHighlightTreeItem());
+    for (size_t index = 0; index < 10; ++index)
+        ui->treeWidget->addTopLevelItem(new CHighlightTreeItem(m_pView));
+
+    bool bRet = connect( ui->treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnItemChanged(QTreeWidgetItem*, int)));
 }
 
 
@@ -78,5 +80,20 @@ void CHighlightsMgrWnd::resizeEvent(QResizeEvent*)
     ui->treeWidget->setColumnWidth(1, rcRow.width() - 32*3 );
     ui->treeWidget->setColumnWidth(2, 32);
     ui->treeWidget->setColumnWidth(3, 32);    
+}
+
+
+/**
+ *
+ */
+void CHighlightsMgrWnd::OnItemChanged(QTreeWidgetItem* pItem, int column)
+{
+    if ( column == 1 )
+    {
+        CHighlightTreeItem*     pHighlightItem = static_cast<CHighlightTreeItem*>(pItem);
+
+        pHighlightItem->Pattern()->TextToMatch() = pItem->text(1);
+        m_pView->update();
+    }
 }
 

@@ -3,6 +3,7 @@
 
 #include <QToolButton>
 
+class CHighlightColorsPopup;
 
 /**
  *
@@ -21,10 +22,11 @@ public:
 signals:
 
     void OnColorChanged(CColorBtn* pBtn);
+    void OnColorSelected(CColorBtn* pBtn);
 
 public slots:
 
-    void OnChooseColor();
+    virtual void OnClicked();
 
 protected:
 
@@ -35,5 +37,43 @@ protected:
     QColor      m_Color;
 };
 
+
+/**
+ *
+ */
+class CChooseColorBtn : public CColorBtn
+{
+    Q_OBJECT
+
+public:
+    CChooseColorBtn();
+    virtual ~CChooseColorBtn();
+
+public slots:
+
+    virtual void OnClicked();
+};
+
+
+/**
+ *
+ */
+class CWordHighlightColorBtn : public CColorBtn
+{
+    Q_OBJECT
+
+public:
+    CWordHighlightColorBtn();
+    virtual ~CWordHighlightColorBtn();
+
+public slots:
+
+    virtual void OnClicked();
+    void OnChooseColor(const QColor& color);
+
+protected:
+
+    CHighlightColorsPopup*      m_pPopup;
+};
 
 #endif // _COLORBTN_H_
