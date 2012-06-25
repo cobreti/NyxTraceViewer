@@ -129,6 +129,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
     ui->SearchToolBar->setIconSize( QSize(16, 16) );
+    ui->SearchToolBar->setEnabled(false);
+    ui->SearchToolBar->hide();
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
@@ -146,7 +148,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pSearchEngine = new CViewSearchEngine(*m_pTracesView);
 
-    m_pHighlightsMgrWnd = new CHighlightsMgrWnd(m_pTracesView, this);
+    m_pHighlightsMgrWnd = new CHighlightsMgrWnd(m_pSearchEngine, this);
 }
 
 
@@ -220,10 +222,10 @@ void CTracesWindow::OnSaveAs()
  */
 void CTracesWindow::OnSearchTextChanged( const QString& text )
 {
-    m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
-    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
+    //m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
+    //m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
 
-    m_pSearchEngine->SetText(text);
+    //m_pSearchEngine->SetText(text);
     m_pTracesView->update();
 }
 

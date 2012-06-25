@@ -58,21 +58,23 @@ public:
     virtual ~CViewSearchEngine();
 
     const CViewItemHighlighterRef   Highlighter() const             { return m_refHighlighter; }
-    CViewItemHighlighterRef         Highlighter()                   { return m_refHighlighter; }
+    CViewItemHighlighterRef&         Highlighter()                  { return m_refHighlighter; }
 
     const XFindPos&     FoundPos() const            { return m_FoundPos; }
 
-    void SetText(const QString& text);
+    //void SetText(const QString& text);
 
     void Next();
     void Previous();
+
+    CTracesView&    View()      { return m_rView; }
 
 protected:
 
     CTracesView&                            m_rView;
     XFindPos                                m_FoundPos;
 
-    CViewItemPattern_TextRef                m_refSearchPattern;
+    //CViewItemPattern_TextRef                m_refSearchPattern;
     CViewItemHighlighterRef                 m_refHighlighter;
 
     CViewItemHighlighter_SearchedLineRef    m_refSearchedLineHighlighter;

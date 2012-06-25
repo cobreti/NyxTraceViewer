@@ -11,13 +11,13 @@
 CViewSearchEngine::CViewSearchEngine( CTracesView& rView  ) :
     m_rView(rView)
 {
-    m_refSearchPattern = new CViewItemPattern_Text();
-    m_refHighlighter = new CViewItemHighlighter();
-    m_refHighlighter->Pattern() = (CViewItemPattern*)m_refSearchPattern;
+    //m_refSearchPattern = new CViewItemPattern_Text();
+    //m_refHighlighter = new CViewItemHighlighter();
+    //m_refHighlighter->Pattern() = (CViewItemPattern*)m_refSearchPattern;
 
     m_refSearchedLineHighlighter = new CViewItemHighlighter_SearchedLine(this);
 
-    m_rView.Highlighters()->Add( m_refHighlighter );
+    //m_rView.Highlighters()->Add( m_refHighlighter );
     m_rView.Highlighters()->Add( m_refSearchedLineHighlighter );
 }
 
@@ -33,11 +33,11 @@ CViewSearchEngine::~CViewSearchEngine()
 /**
  *
  */
-void CViewSearchEngine::SetText( const QString& text )
-{
-    m_refSearchPattern->TextToMatch() = text;
-    m_FoundPos = XFindPos();
-}
+//void CViewSearchEngine::SetText( const QString& text )
+//{
+//    m_refSearchPattern->TextToMatch() = text;
+//    m_FoundPos = XFindPos();
+//}
 
 
 /**
@@ -78,7 +78,7 @@ void CViewSearchEngine::Next()
                 pFoundItem = static_cast<CViewItem_TraceData*>( refWalkerMethods->Item() );
 
                 QString     text = QString::fromStdWString( pFoundItem->TraceData()->Data().c_str() );
-                if ( m_refSearchPattern->Match(text, 0).Length() > 0 )
+                if ( m_refHighlighter->Pattern()->Match(text, 0).Length() > 0 )
                 {
                     m_FoundPos = refWalkerMethods->LineNumber();
                     itemYPos = refWalkerMethods->ItemYPos();
@@ -157,7 +157,7 @@ void CViewSearchEngine::Previous()
                 pFoundItem = static_cast<CViewItem_TraceData*>( refWalkerMethods->Item() );
 
                 QString     text = QString::fromStdWString( pFoundItem->TraceData()->Data().c_str() );
-                if ( m_refSearchPattern->Match(text, 0).Length() > 0 )
+                if ( m_refHighlighter->Pattern()->Match(text, 0).Length() > 0 )
                 {
                     m_FoundPos = refWalkerMethods->LineNumber();
                     itemYPos = refWalkerMethods->ItemYPos();

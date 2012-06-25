@@ -2,15 +2,16 @@
 #include "HighlightTreeItemDelegate.hpp"
 #include "HighlightTreeItem.hpp"
 #include "TracesView.h"
+#include "View/ViewSearchEngine.h"
 
 #include "ui_HighlightsMgrWnd.h"
 
 /**
  *
  */
-CHighlightsMgrWnd::CHighlightsMgrWnd(CTracesView* pView, QWidget* parent) : QWidget(parent),
+CHighlightsMgrWnd::CHighlightsMgrWnd(CViewSearchEngine* pSearchEngine, QWidget* parent) : QWidget(parent),
 ui(new Ui::HighlightsMgrWnd),
-m_pView(pView),
+m_pSearchEngine(pSearchEngine),
 m_pTreeItemDelegate(NULL)
 {
     ui->setupUi(this);
@@ -25,7 +26,7 @@ m_pTreeItemDelegate(NULL)
     ui->treeWidget->setItemDelegateForColumn(3, m_pTreeItemDelegate);
 
     for (size_t index = 0; index < 10; ++index)
-        ui->treeWidget->addTopLevelItem(new CHighlightTreeItem(m_pView));
+        ui->treeWidget->addTopLevelItem(new CHighlightTreeItem(m_pSearchEngine));
 
     bool bRet = connect( ui->treeWidget, SIGNAL(itemChanged(QTreeWidgetItem*, int)), this, SLOT(OnItemChanged(QTreeWidgetItem*, int)));
 }
@@ -93,7 +94,7 @@ void CHighlightsMgrWnd::OnItemChanged(QTreeWidgetItem* pItem, int column)
         CHighlightTreeItem*     pHighlightItem = static_cast<CHighlightTreeItem*>(pItem);
 
         pHighlightItem->Pattern()->TextToMatch() = pItem->text(1);
-        m_pView->update();
+        m_pSearchEngine->View().update();
     }
 }
 

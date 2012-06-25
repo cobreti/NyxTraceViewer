@@ -1,15 +1,16 @@
 #include "HighlightTreeItem.hpp"
 #include "HighlightTreeItemEventsConnection.h"
 #include "TracesView.h"
+#include "View/ViewSearchEngine.h"
 
 /**
  *
  */
-CHighlightTreeItem::CHighlightTreeItem(CTracesView* pView) : QTreeWidgetItem(),
+CHighlightTreeItem::CHighlightTreeItem(CViewSearchEngine* pSearchEngine) : QTreeWidgetItem(),
     m_pColorBtn(NULL),
     m_pBtnSearchNext(NULL),
     m_pBtnSearchPrevious(NULL),
-    m_pView(pView),
+    m_pSearchEngine(pSearchEngine),
     m_pEventsConnector(NULL)
 {
     m_refTextPattern = new CViewItemPattern_Text();
@@ -17,7 +18,7 @@ CHighlightTreeItem::CHighlightTreeItem(CTracesView* pView) : QTreeWidgetItem(),
     m_refHighlighter = new CViewItemHighlighter();
     m_refHighlighter->Pattern() = (CViewItemPattern*)m_refTextPattern;
 
-    m_pView->Highlighters()->Add( (CViewItemHighlighter*)m_refHighlighter );
+    m_pSearchEngine->View().Highlighters()->Add( (CViewItemHighlighter*)m_refHighlighter );
 
     m_pColorBtn = new CWordHighlightColorBtn();
 
@@ -35,6 +36,10 @@ CHighlightTreeItem::CHighlightTreeItem(CTracesView* pView) : QTreeWidgetItem(),
     
     m_pEventsConnector->connect(    m_pColorBtn, SIGNAL(OnColorChanged(CColorBtn*)),
                                     m_pEventsConnector, SLOT(OnColorChanged(CColorBtn*)));
+    m_pEventsConnector->connect(    m_pBtnSearchNext, SIGNAL(clicked()),
+                                    m_pEventsConnector, SLOT(OnSearchNext()));
+    m_pEventsConnector->connect(    m_pBtnSearchPrevious, SIGNAL(clicked()),
+                                    m_pEventsConnector, SLOT(OnSearchPrevious()));
 }
 
 

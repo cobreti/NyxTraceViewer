@@ -20,6 +20,8 @@ public:
 public slots:
 
     void OnColorChanged(CColorBtn* pBtn);
+    void OnSearchNext();
+    void OnSearchPrevious();
 
 protected:
 

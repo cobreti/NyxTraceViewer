@@ -8,6 +8,7 @@
 #include <QTreeWidgetItem>
 
 class CTracesView;
+class CViewSearchEngine;
 
 /**
  *
@@ -17,7 +18,7 @@ class CHighlightTreeItem : public QTreeWidgetItem
     friend class CHighlightTreeItemEventsConnection;
 
 public:
-    CHighlightTreeItem(CTracesView* pView);
+    CHighlightTreeItem(CViewSearchEngine* pSearchEngine);
     virtual ~CHighlightTreeItem();
 
     const CViewItemHighlighterRef       Highlighter() const         { return m_refHighlighter; }
@@ -36,7 +37,7 @@ protected:
     CColorBtn*                              m_pColorBtn;
     QToolButton*                            m_pBtnSearchNext;
     QToolButton*                            m_pBtnSearchPrevious;
-    CTracesView*                            m_pView;
+    CViewSearchEngine*                      m_pSearchEngine;
     CHighlightTreeItemEventsConnection*     m_pEventsConnector;
 };
 

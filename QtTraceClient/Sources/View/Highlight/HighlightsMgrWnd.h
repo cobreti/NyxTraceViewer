@@ -12,6 +12,7 @@ namespace Ui
 class CTracesView;
 class CHighlightTreeItemDelegate;
 class QTreeWidgetItem;
+class CViewSearchEngine;
 
 
 /**
@@ -22,7 +23,7 @@ class CHighlightsMgrWnd : public QWidget
     Q_OBJECT
 
 public:
-    CHighlightsMgrWnd(CTracesView* pView, QWidget* parent);
+    CHighlightsMgrWnd(CViewSearchEngine* pSearchEngine, QWidget* parent);
     virtual ~CHighlightsMgrWnd();
 
     void Show(const QPoint& pt, const QSize& size);
@@ -39,7 +40,7 @@ protected:
 protected:
 
     Ui::HighlightsMgrWnd*           ui;
-    CTracesView*                    m_pView;
+    CViewSearchEngine*              m_pSearchEngine;
     CHighlightTreeItemDelegate*     m_pTreeItemDelegate;
 };
 
