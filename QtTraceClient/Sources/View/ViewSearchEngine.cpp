@@ -11,13 +11,8 @@
 CViewSearchEngine::CViewSearchEngine( CTracesView& rView  ) :
     m_rView(rView)
 {
-    //m_refSearchPattern = new CViewItemPattern_Text();
-    //m_refHighlighter = new CViewItemHighlighter();
-    //m_refHighlighter->Pattern() = (CViewItemPattern*)m_refSearchPattern;
-
     m_refSearchedLineHighlighter = new CViewItemHighlighter_SearchedLine(this);
 
-    //m_rView.Highlighters()->Add( m_refHighlighter );
     m_rView.Highlighters()->Add( m_refSearchedLineHighlighter );
 }
 
@@ -28,16 +23,6 @@ CViewSearchEngine::CViewSearchEngine( CTracesView& rView  ) :
 CViewSearchEngine::~CViewSearchEngine()
 {
 }
-
-
-/**
- *
- */
-//void CViewSearchEngine::SetText( const QString& text )
-//{
-//    m_refSearchPattern->TextToMatch() = text;
-//    m_FoundPos = XFindPos();
-//}
 
 
 /**

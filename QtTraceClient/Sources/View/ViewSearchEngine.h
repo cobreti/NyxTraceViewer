@@ -62,8 +62,6 @@ public:
 
     const XFindPos&     FoundPos() const            { return m_FoundPos; }
 
-    //void SetText(const QString& text);
-
     void Next();
     void Previous();
 
@@ -73,10 +71,7 @@ protected:
 
     CTracesView&                            m_rView;
     XFindPos                                m_FoundPos;
-
-    //CViewItemPattern_TextRef                m_refSearchPattern;
     CViewItemHighlighterRef                 m_refHighlighter;
-
     CViewItemHighlighter_SearchedLineRef    m_refSearchedLineHighlighter;
 
 };

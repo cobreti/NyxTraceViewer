@@ -2,6 +2,8 @@
 #define _TRACESWINDOW_HPP_
 
 #include <QMainWindow>
+#include "View/Highlight/ViewItemPattern_Text.hpp"
+#include "View/Highlight/ViewItemHighlighter.hpp"
 
 
 class QToolButton;
@@ -73,8 +75,10 @@ protected:
 
     CPipesMgntPage*         m_pPipesMgntPage;
 
-    CViewSearchEngine*      m_pSearchEngine;
-    CHighlightsMgrWnd*      m_pHighlightsMgrWnd;
+    CViewSearchEngine*          m_pSearchEngine;
+    CHighlightsMgrWnd*          m_pHighlightsMgrWnd;
+    CViewItemHighlighterRef     m_refHighlighter;
+    CViewItemPattern_TextRef    m_refTextPattern;
 
     static QMainWindow*     s_pDummyWnd;
 };

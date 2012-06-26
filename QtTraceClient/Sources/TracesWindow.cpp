@@ -129,8 +129,6 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
     ui->SearchToolBar->setIconSize( QSize(16, 16) );
-    ui->SearchToolBar->setEnabled(false);
-    ui->SearchToolBar->hide();
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
@@ -149,6 +147,12 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pSearchEngine = new CViewSearchEngine(*m_pTracesView);
 
     m_pHighlightsMgrWnd = new CHighlightsMgrWnd(m_pSearchEngine, this);
+
+    m_refHighlighter = new CViewItemHighlighter();
+    m_refTextPattern = new CViewItemPattern_Text();
+    m_refHighlighter->Pattern() = (CViewItemPattern*)m_refTextPattern;
+
+    m_pTracesView->Highlighters()->Add( m_refHighlighter );
 }
 
 
@@ -222,10 +226,10 @@ void CTracesWindow::OnSaveAs()
  */
 void CTracesWindow::OnSearchTextChanged( const QString& text )
 {
-    //m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
-    //m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
+    m_refTextPattern->TextToMatch() = text;
+    m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
+    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
 
-    //m_pSearchEngine->SetText(text);
     m_pTracesView->update();
 }
 
@@ -235,6 +239,8 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
  */
 void CTracesWindow::OnSearchNext()
 {
+    m_pSearchEngine->Highlighter() = m_refHighlighter;
+
     m_pSearchEngine->Next();
 }
 
@@ -244,6 +250,8 @@ void CTracesWindow::OnSearchNext()
  */
 void CTracesWindow::OnSearchPrevious()
 {
+    m_pSearchEngine->Highlighter() = m_refHighlighter;
+
     m_pSearchEngine->Previous();
 }
 
@@ -253,7 +261,7 @@ void CTracesWindow::OnSearchPrevious()
  */
 void CTracesWindow::OnHighlightColorChanged(CColorBtn* pBtn)
 {
-    m_pSearchEngine->Highlighter()->HighlightColor() = pBtn->Color();
+    m_refHighlighter->HighlightColor() = pBtn->Color();
     m_pTracesView->update();
 }
 
