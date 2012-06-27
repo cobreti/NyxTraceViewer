@@ -22,6 +22,9 @@ public:
 
     void InitDefaultWidth();
 
+    const QRectF&       Margins() const     { return m_Margins; }
+    QRectF&             Margins()           { return m_Margins; }
+
 signals:
 
 public slots:
@@ -36,8 +39,8 @@ protected:
     CViewColumnsSettings&       m_rColumnsSettings;
     int                         m_HorzOffset;
     QFont*                      m_pFont;
-    QRect                       m_Margins;
     QImage*                     m_pBkgndImage;
+    QRectF                      m_Margins;
 };
 
 #endif // VIEWHEADER_HPP

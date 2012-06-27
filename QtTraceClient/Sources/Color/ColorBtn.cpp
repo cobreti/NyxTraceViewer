@@ -1,5 +1,6 @@
 #include "ColorBtn.h"
 #include "View/Highlight/HighlightColorsPopup.h"
+#include "View/Highlight/HighlightBrush.hpp"
 #include "TraceClientApp.h"
 
 #include <QtGui>
@@ -96,7 +97,8 @@ void CChooseColorBtn::OnClicked()
  *
  */
 CWordHighlightColorBtn::CWordHighlightColorBtn() : CColorBtn(),
-    m_pPopup(NULL)
+    m_pPopup(NULL),
+    m_pBrush(NULL)
 {
     //connect(this, SIGNAL(clicked()), this, SLOT(OnClicked()));
 }
@@ -126,7 +128,7 @@ void CWordHighlightColorBtn::OnClicked()
         delete m_pPopup;
     
     m_pPopup = new CHighlightColorsPopup();
-    connect( m_pPopup, SIGNAL(OnChooseColor(const QColor&)), this, SLOT(OnChooseColor(const QColor&)));
+    connect( m_pPopup, SIGNAL(OnChooseBrush(CHighlightBrush*)), this, SLOT(OnChooseBrush(CHighlightBrush*)));
 
     m_pPopup->Show(pt, CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().WordHighlights());
 }
@@ -135,8 +137,50 @@ void CWordHighlightColorBtn::OnClicked()
 /**
  *
  */
-void CWordHighlightColorBtn::OnChooseColor(const QColor &color)
+void CWordHighlightColorBtn::OnChooseBrush(CHighlightBrush *pBrush)
 {
-    Color() = color;
-    emit OnColorChanged(this);
+    m_pBrush = pBrush;
+    Color() = pBrush->Color();
+    emit OnWordHighlightChanged(this);
+}
+
+
+//=====================================================================
+
+
+/**
+ *
+ */
+CHighlightBrushBtn::CHighlightBrushBtn() : CColorBtn(),
+    m_pBrush(NULL)
+{
+}
+
+
+/**
+ *
+ */
+CHighlightBrushBtn::~CHighlightBrushBtn()
+{
+}
+
+
+/**
+ *
+ */
+void CHighlightBrushBtn::SetBrush(CHighlightBrush *pBrush)
+{
+    m_pBrush = pBrush;
+    if ( m_pBrush )
+        Color() = pBrush->Color();
+}
+
+
+/**
+ *
+ */
+void CHighlightBrushBtn::OnClicked()
+{
+    if ( m_pBrush )
+        emit OnBrushSelected(this);
 }

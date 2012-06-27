@@ -87,6 +87,8 @@ void CViewHeader::paintEvent(QPaintEvent* pEvent)
         painter.fillRect(pEvent->rect(), bkgndBrush);
     }
 
+    painter.setClipRect(m_Margins.left(), 0.0, rect().width(), rect().height());
+
     for (size_t index = 0; index < ColsCount && x < ClientWidth; ++index)
     {
         EViewColumnId                   id  = m_rColumnsSettings.Order()[index];

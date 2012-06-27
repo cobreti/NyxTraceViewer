@@ -4,6 +4,7 @@
 #include <QObject>
 
 class CHighlightTreeItem;
+class CWordHighlightColorBtn;
 class CColorBtn;
 
 /**
@@ -19,7 +20,7 @@ public:
 
 public slots:
 
-    void OnColorChanged(CColorBtn* pBtn);
+    void OnWordHighlightChanged(CWordHighlightColorBtn* pBtn);
     void OnSearchNext();
     void OnSearchPrevious();
 

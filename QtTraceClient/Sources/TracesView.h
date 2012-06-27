@@ -22,6 +22,8 @@ class QToolButton;
 class CModuleViewItems;
 class CSessionViewItems;
 class CViewItemsWalker;
+class CHighlightBrush;
+class CHighlightColorsPopup;
 class QFile;
 
 
@@ -68,6 +70,7 @@ public slots:
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
     void RefreshDisplay();
+    void OnChooseHighlightBrush( CHighlightBrush* pBrush );
 
 protected:
 
@@ -90,11 +93,11 @@ protected:
 
 protected:
 
-    enum
-    {
-        kPanel_LeftMargin = 50,
-        kPanel_RightMargin = 50
-    };
+    //enum
+    //{
+    //    kPanel_LeftMargin = 50,
+    //    kPanel_RightMargin = 50
+    //};
 
     Ui::CTracesView*			        ui;
     QString								m_Name;
@@ -107,6 +110,11 @@ protected:
     CTracesViewCoreRef                  m_refViewCore;
 
     CViewItemHighlightersSetRef         m_refHighlighters;
+
+    CViewItem*                          m_pLastSelectedItem;
+    CHighlightBrush*                    m_pLastSelectedBrush;
+
+    CHighlightColorsPopup*              m_pHighlightColorsPopup;
 };
 
 #endif // TRACESVIEW_H

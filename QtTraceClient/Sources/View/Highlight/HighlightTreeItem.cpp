@@ -34,8 +34,8 @@ CHighlightTreeItem::CHighlightTreeItem(CViewSearchEngine* pSearchEngine) : QTree
 
     m_pEventsConnector = new CHighlightTreeItemEventsConnection(this);
     
-    m_pEventsConnector->connect(    m_pColorBtn, SIGNAL(OnColorChanged(CColorBtn*)),
-                                    m_pEventsConnector, SLOT(OnColorChanged(CColorBtn*)));
+    m_pEventsConnector->connect(    m_pColorBtn, SIGNAL(OnWordHighlightChanged(CWordHighlightColorBtn*)),
+                                    m_pEventsConnector, SLOT(OnWordHighlightChanged(CWordHighlightColorBtn*)));
     m_pEventsConnector->connect(    m_pBtnSearchNext, SIGNAL(clicked()),
                                     m_pEventsConnector, SLOT(OnSearchNext()));
     m_pEventsConnector->connect(    m_pBtnSearchPrevious, SIGNAL(clicked()),

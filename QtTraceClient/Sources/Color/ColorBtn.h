@@ -4,6 +4,7 @@
 #include <QToolButton>
 
 class CHighlightColorsPopup;
+class CHighlightBrush;
 
 /**
  *
@@ -66,14 +67,50 @@ public:
     CWordHighlightColorBtn();
     virtual ~CWordHighlightColorBtn();
 
+    CHighlightBrush*        Brush() const       { return m_pBrush; }
+
+signals:
+
+    void OnWordHighlightChanged( CWordHighlightColorBtn* pBtn );
+
 public slots:
 
     virtual void OnClicked();
-    void OnChooseColor(const QColor& color);
+    void OnChooseBrush(CHighlightBrush* pBrush);
 
 protected:
 
     CHighlightColorsPopup*      m_pPopup;
+    CHighlightBrush*            m_pBrush;
 };
+
+
+/**
+ *
+ */
+class CHighlightBrushBtn : public CColorBtn
+{
+    Q_OBJECT
+
+public:
+    CHighlightBrushBtn();
+    virtual ~CHighlightBrushBtn();
+
+    CHighlightBrush*        Brush() const       { return m_pBrush; }
+    void SetBrush( CHighlightBrush* pBrush );
+
+signals:
+
+    void OnBrushSelected( CHighlightBrushBtn* pBtn );
+
+public slots:
+
+    virtual void OnClicked();
+
+protected:
+
+    CHighlightBrush*        m_pBrush;
+};
+
 
 #endif // _COLORBTN_H_

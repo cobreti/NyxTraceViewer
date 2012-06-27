@@ -35,11 +35,12 @@ void CHighlightColorsPopup::Show(const QPoint& pt, const CHighlightBrushesSet& B
 {
     for (size_t index = 0; index < BrushesSet.Size(); ++index)
     {
-        CColorBtn*  pBtn = new CColorBtn();
-        pBtn->Color() = BrushesSet[index]->Color();
+        CHighlightBrushBtn*  pBtn = new CHighlightBrushBtn();
+        pBtn->SetBrush( BrushesSet[index] );
+        //pBtn->Color() = BrushesSet[index]->Color();
         layout()->addWidget(pBtn);
 
-        connect( pBtn, SIGNAL(OnColorSelected(CColorBtn*)), this, SLOT(OnColorSelected(CColorBtn*)));
+        connect( pBtn, SIGNAL(OnBrushSelected(CHighlightBrushBtn*)), this, SLOT(OnBrushSelected(CHighlightBrushBtn*)));
     }
 
     setWindowFlags(Qt::Popup);
@@ -52,8 +53,8 @@ void CHighlightColorsPopup::Show(const QPoint& pt, const CHighlightBrushesSet& B
 /**
  *
  */
-void CHighlightColorsPopup::OnColorSelected(CColorBtn* pBtn)
+void CHighlightColorsPopup::OnBrushSelected(CHighlightBrushBtn* pBtn)
 {
-    emit OnChooseColor(pBtn->Color());
+    emit OnChooseBrush(pBtn->Brush());
     close();
 }

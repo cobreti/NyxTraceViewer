@@ -9,6 +9,7 @@
 
 class CDrawViewItemState;
 class CViewSettings;
+class CHighlightBrush;
 
 
 typedef     size_t          ViewItemID;
@@ -73,6 +74,9 @@ public:
     void SetOwner( CViewItem* pOwner )          { m_pOwner = pOwner; }
     CViewItem* GetOwner() const                 { return m_pOwner; }
 
+    CHighlightBrush*        HighlightBrush() const          { return m_pHighlightBrush; }
+    CHighlightBrush*&       HighlightBrush()                { return m_pHighlightBrush; }
+
 protected:
 
     typedef     std::bitset<eVIF_Count>         FlagsSet;
@@ -83,6 +87,7 @@ protected:
     FlagsSet                        m_Flags;
     size_t                          m_Id;
     CViewItem*                      m_pOwner;
+    CHighlightBrush*                m_pHighlightBrush;
 };
 
 

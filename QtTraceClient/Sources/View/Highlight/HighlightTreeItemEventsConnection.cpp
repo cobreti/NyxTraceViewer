@@ -3,6 +3,7 @@
 #include "Color/ColorBtn.h"
 #include "TracesView.h"
 #include "View/ViewSearchEngine.h"
+#include "View/Highlight/HighlightBrush.hpp"
 
 
 /**
@@ -25,7 +26,7 @@ CHighlightTreeItemEventsConnection::~CHighlightTreeItemEventsConnection()
 /**
  *
  */
-void CHighlightTreeItemEventsConnection::OnColorChanged(CColorBtn* pBtn)
+void CHighlightTreeItemEventsConnection::OnWordHighlightChanged(CWordHighlightColorBtn* pBtn)
 {
     m_pOwner->m_refHighlighter->HighlightColor() = pBtn->Color();
     m_pOwner->m_pSearchEngine->View().update();

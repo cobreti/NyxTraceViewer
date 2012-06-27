@@ -19,6 +19,7 @@
 #include "View/Walkers/FileWriterViewItemsWalker.hpp"
 #include "View/Walkers/ViewItemsWalker.hpp"
 #include "View/Highlight/ViewItemPattern_Text.hpp"
+#include "View/Highlight/HighlightColorsPopup.h"
 
 
 /**
@@ -30,7 +31,9 @@ CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
     m_bViewDirty(false),
     m_bKeepAtEnd(true),
     m_pHeader(NULL),
-    m_pItemsWalker(NULL)
+    m_pItemsWalker(NULL),
+    m_pLastSelectedItem(NULL),
+    m_pHighlightColorsPopup(NULL)
 {
     Init(pBase);
 }
@@ -40,6 +43,7 @@ CTracesView::~CTracesView()
 {
     delete m_pHeader;
     delete m_pItemsWalker;
+    delete m_pHighlightColorsPopup;
 }
 
 
@@ -100,6 +104,21 @@ void CTracesView::RefreshDisplay()
 
         m_bViewDirty = false;
     }
+}
+
+
+/**
+ *
+ */
+void CTracesView::OnChooseHighlightBrush( CHighlightBrush* pBrush )
+{
+    if ( m_pLastSelectedItem )
+        m_pLastSelectedItem->HighlightBrush() = pBrush;
+
+    m_pLastSelectedBrush = pBrush;
+    m_pLastSelectedItem = NULL;
+
+    update();
 }
 
 
@@ -249,6 +268,13 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 	painter.setClipping(true);
     painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
 
+    QBrush  bkgndBrush = palette().base();
+    painter.fillRect(pEvent->rect(), bkgndBrush);
+
+    painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
+
+    painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
+
     drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
 
     drawstate.ViewRect() = QRectF(  ui->m_HorzScrollbar->value(), 
@@ -258,12 +284,10 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     drawstate.Highlighter() = (CViewItemHighlighter*)Highlighters();
 
-    QBrush  bkgndBrush = palette().base();
-    painter.fillRect(pEvent->rect(), bkgndBrush);
 
     while ( bContinue && refMethods->ValidPos() && drawstate.TextPos().y() < ViewHeight )
     {
-        drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
+        drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value() + m_Margins.left();
 
         pItem = refMethods->Item();
 
@@ -349,7 +373,7 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 {
     CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    if ( Qt::ControlModifier == event->modifiers() && event->pos().y() > m_pHeader->size().height() )
+    if ( event->pos().x() < m_Margins.left() && event->pos().y() > m_pHeader->size().height() )
 	{
         float       y = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
         bool        bContinue = true;
@@ -362,7 +386,34 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
             CViewItem*      pItem = refMethods->Item();
 
             if ( event->pos().y() >= y && event->pos().y() <= y + pItem->GetSize().height() )
-                pItem->SetFlag(CViewItem::eVIF_Marked, !pItem->HasFlag(CViewItem::eVIF_Marked));
+            {
+                if ( event->button() == Qt::MouseButton::LeftButton )
+                {
+                    if ( pItem->HasFlag(CViewItem::eVIF_Marked) )
+                    {
+                        pItem->SetFlag(CViewItem::eVIF_Marked, false);
+                        pItem->HighlightBrush() = NULL;
+                    }
+                    else
+                    {
+                        pItem->SetFlag(CViewItem::eVIF_Marked, true);
+                        pItem->HighlightBrush() = m_pLastSelectedBrush;
+                    }
+                }
+                else if ( event->button() == Qt::MouseButton::RightButton )
+                {
+                    pItem->SetFlag(CViewItem::eVIF_Marked, true);
+                    m_pLastSelectedItem = pItem;
+
+                    if ( m_pHighlightColorsPopup != NULL )
+                        delete m_pHighlightColorsPopup;
+
+                    m_pHighlightColorsPopup = new CHighlightColorsPopup();
+                    connect(    m_pHighlightColorsPopup, SIGNAL(OnChooseBrush( CHighlightBrush*)),
+                                this, SLOT(OnChooseHighlightBrush( CHighlightBrush*)));
+                    m_pHighlightColorsPopup->Show( mapToGlobal(event->pos()), CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights() );
+                }
+            }
 
             y += pItem->GetSize().height();
 
@@ -430,9 +481,14 @@ void CTracesView::Init(CTracesView* pBase)
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
     m_pHeader->InitDefaultWidth();
+    m_pHeader->Margins() = m_Margins;
 
     m_refViewCore->AddView(this);
     m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
+
+    m_pLastSelectedBrush = CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights()[0];
+
+    m_pHighlightColorsPopup = new CHighlightColorsPopup();
 
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));

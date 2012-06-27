@@ -9,7 +9,10 @@ namespace Ui
 }
 
 class CHighlightBrushesSet;
+class CHighlightBrush;
 class CColorBtn;
+class CHighlightBrushBtn;
+
 
 /**
  *
@@ -26,11 +29,12 @@ public:
 
 signals:
 
-    void OnChooseColor( const QColor& color );
+    //void OnChooseColor( const QColor& color );
+    void OnChooseBrush( CHighlightBrush* pBrush );
 
 public slots:
 
-    void OnColorSelected(CColorBtn* pBtn);
+    void OnBrushSelected(CHighlightBrushBtn* pBtn);
 
 protected:
 

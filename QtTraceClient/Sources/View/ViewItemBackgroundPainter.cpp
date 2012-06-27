@@ -1,5 +1,6 @@
 #include "ViewItemBackgroundPainter.hpp"
 #include "ViewItem.hpp"
+#include "View/Highlight/HighlightBrush.hpp"
 
 
 CViewItemPainterRef     CViewItemBackgroundPainter::s_refPainter;
@@ -43,13 +44,14 @@ void CViewItemBackgroundPainter::Display(const CViewSettings&, CDrawViewItemStat
 {
     QPainter&       rPainter = drawstate.Painter();
 
-    if ( item.HasFlag(CViewItem::eVIF_Marked) )
+    if ( item.HasFlag(CViewItem::eVIF_Marked) && item.HighlightBrush() != NULL )
     {
-        QRectF      rcBkgnd( drawstate.TextPos().x(), drawstate.TextPos().y(),
+        QRectF      rcBkgnd(    drawstate.TextPos().x(), drawstate.TextPos().y(),
                                 drawstate.ViewRect().width(),
                                 item.GetSize().height() );
 
-        rPainter.drawImage( rcBkgnd, *m_pBkgndImage );
+        rPainter.fillRect( rcBkgnd, item.HighlightBrush()->Brush() );
+        //rPainter.drawImage( rcBkgnd, *m_pBkgndImage );
     }
 }
 
