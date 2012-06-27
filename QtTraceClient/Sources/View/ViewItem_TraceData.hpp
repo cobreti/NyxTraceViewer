@@ -28,6 +28,8 @@ public:
     const Nyx::CRange&      TextRange() const           { return m_TextRange; }
     Nyx::CRange&            TextRange()                 { return m_TextRange; }
 
+    virtual const QString GetItemString(const EItemIndex& itemIndex) const;
+
 protected:
 
     void ApproximateHeight();

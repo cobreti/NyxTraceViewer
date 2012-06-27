@@ -1,5 +1,5 @@
 #include "ViewItemModuleNamePainter.hpp"
-#include "ViewItem_TraceData.hpp"
+#include "ViewItem.hpp"
 #include "ViewSettings.hpp"
 #include "ViewColumnsSettings.hpp"
 #include "ViewColumnSettings.hpp"
@@ -43,16 +43,7 @@ CViewItemModuleNamePainter::~CViewItemModuleNamePainter()
  */
 void CViewItemModuleNamePainter::EvaluateSize(CViewSettings &settings, CViewItem &item)
 {
-    CViewItem_TraceData&                rItemData = static_cast<CViewItem_TraceData&>(item);
-    TraceClientCore::CTracesPool*       pOwnerPool = rItemData.TraceData()->OwnerPool();
-    QString                             text;
-
-    if ( pOwnerPool )
-        text = QString().fromWCharArray( pOwnerPool->Name().c_str() );
-    else
-        text = "unknown";
-
-    CViewItemTextPainter::EvaluateSize(settings, item, text);
+    CViewItemTextPainter::EvaluateSize(settings, item, item.GetItemString(CViewItem::eII_Module) );
 }
 
 
@@ -61,18 +52,9 @@ void CViewItemModuleNamePainter::EvaluateSize(CViewSettings &settings, CViewItem
  */
 void CViewItemModuleNamePainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem &item)
 {
-    CViewItem_TraceData&                rItemData = static_cast<CViewItem_TraceData&>(item);
-    TraceClientCore::CTracesPool*       pOwnerPool = rItemData.TraceData()->OwnerPool();
-    QString                             text;
-
-    if ( pOwnerPool )
-        text = QString().fromWCharArray( pOwnerPool->Name().c_str() );
-    else
-        text = "unknown";
-
     if ( item.GetOwner() == &item )
     {
-        CViewItemTextPainter::Display(settings, drawstate, item, text);
+        CViewItemTextPainter::Display(settings, drawstate, item, item.GetItemString(CViewItem::eII_Module) );
     }
     else
     {

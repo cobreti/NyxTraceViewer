@@ -86,10 +86,37 @@ const Nyx::CWString& CViewItem_TraceData::TickCount() const
 /**
  *
  */
+const QString CViewItem_TraceData::GetItemString(const EItemIndex& itemIndex) const
+{
+    QString     str;
+
+    switch (itemIndex)
+    {
+        case eII_Module:
+            str = QString::fromWCharArray( m_pTraceData->OwnerPool()->Name().c_str() );
+            break;
+        case eII_ThreadId:
+            str = QString::fromWCharArray( m_pTraceData->ThreadId().c_str() );
+            break;
+        case eII_TimeStamp:
+            str = QString::fromWCharArray( m_pTraceData->TickCount().c_str() );
+            break;
+        case eII_TraceData:
+            str = QString::fromWCharArray( m_pTraceData->Data().c_str() ).mid( m_TextRange.Start(), m_TextRange.Length() );
+            break;
+    };
+
+    return str;
+}
+
+
+
+/**
+ *
+ */
 void CViewItem_TraceData::ApproximateHeight()
 {
-//    size_t      CRCount = m_pTraceData->Data().CountOccurencesOf(L'\n') + 1;
-    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() /** CRCount*/ );
+    m_Size.setHeight( CTraceClientApp::Instance().AppSettings().DefaultDrawSettings().SingleLineHeight() );
 }
 
 

@@ -1,5 +1,5 @@
 #include "ViewItemThreadIdPainter.hpp"
-#include "ViewItem_TraceData.hpp"
+#include "ViewItem.hpp"
 #include "ViewSettings.hpp"
 #include "ViewColumnsSettings.hpp"
 #include "ViewColumnSettings.hpp"
@@ -40,10 +40,7 @@ CViewItemThreadIdPainter::~CViewItemThreadIdPainter()
  */
 void CViewItemThreadIdPainter::EvaluateSize(CViewSettings &settings, CViewItem &item)
 {
-    const CViewItem_TraceData&      rDataItem = static_cast<const CViewItem_TraceData&>(item);
-    QString                         text = QString().fromWCharArray(rDataItem.TraceData()->ThreadId().c_str());
-
-    CViewItemTextPainter::EvaluateSize(settings, item, text);
+    CViewItemTextPainter::EvaluateSize(settings, item, item.GetItemString(CViewItem::eII_ThreadId) );
 }
 
 
@@ -52,23 +49,9 @@ void CViewItemThreadIdPainter::EvaluateSize(CViewSettings &settings, CViewItem &
  */
 void CViewItemThreadIdPainter::Display(const CViewSettings &settings, CDrawViewItemState &drawstate, CViewItem &item)
 {
-    const CViewItem_TraceData&      rDataItem = static_cast<const CViewItem_TraceData&>(item);
+    QString     text = item.GetItemString( CViewItem::eII_ThreadId );
 
-    if ( rDataItem.TraceData()->Type() == TraceClientCore::CTraceData::eTT_User )
-    {
-        if ( item.GetOwner() == &item )
-        {
-            QString                         text = QString().fromWCharArray(rDataItem.TraceData()->ThreadId().c_str());
-
-            CViewItemTextPainter::Display(settings, drawstate, item, text);
-        }
-        else
-        {
-            const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_ThreadId];
-            drawstate.TextPos().rx() += rColSettings.GetWidth();
-        }
-    }
-    else
+    if ( text.isEmpty() )
     {
         const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_ThreadId];
         QPainter&                       rPainter = drawstate.Painter();
@@ -78,6 +61,15 @@ void CViewItemThreadIdPainter::Display(const CViewSettings &settings, CDrawViewI
                             drawstate.TextPos().x() + rColSettings.GetWidth() - rColSettings.Margins().width(),
                             drawstate.TextPos().y() + item.GetSize().height() / 2 );
 
+        drawstate.TextPos().rx() += rColSettings.GetWidth();
+    }
+    else if ( item.GetOwner() == &item )
+    {
+        CViewItemTextPainter::Display(settings, drawstate, item, text);
+    }
+    else
+    {
+        const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[eVCI_ThreadId];
         drawstate.TextPos().rx() += rColSettings.GetWidth();
     }
 }

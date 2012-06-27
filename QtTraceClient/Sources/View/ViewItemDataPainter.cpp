@@ -1,5 +1,5 @@
 #include "ViewItemDataPainter.hpp"
-#include "ViewItem_TraceData.hpp"
+#include "ViewItem.hpp"
 #include "ViewItemSettings.hpp"
 #include "ViewSettings.hpp"
 
@@ -41,11 +41,7 @@ CViewItemDataPainter::~CViewItemDataPainter()
  */
 void CViewItemDataPainter::EvaluateSize(CViewSettings &settings, CViewItem &item)
 {
-    CViewItem_TraceData&        rItemData = static_cast<CViewItem_TraceData&>(item);
-    QString                     text = QString().fromWCharArray(rItemData.TraceData()->Data().c_str());
-    const Nyx::CRange&          range = rItemData.TextRange();
-
-    CViewItemTextPainter::EvaluateSize(settings, item, text.mid(range.Start(), range.Length()));
+    CViewItemTextPainter::EvaluateSize(settings, item, item.GetItemString(CViewItem::eII_TraceData));
 }
 
 
@@ -53,14 +49,11 @@ void CViewItemDataPainter::EvaluateSize(CViewSettings &settings, CViewItem &item
  *
  */
 void CViewItemDataPainter::Display( const CViewSettings &settings,
-                                            CDrawViewItemState &drawstate,
-                                            CViewItem &item )
+                                    CDrawViewItemState &drawstate,
+                                    CViewItem &item )
 {
     const CViewColumnSettings&      rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
-    CViewItem_TraceData&            rItemData = static_cast<CViewItem_TraceData&>(item);
-    QString                         full_text = QString().fromWCharArray(rItemData.TraceData()->Data().c_str());
-    const Nyx::CRange&              range = rItemData.TextRange();
-    QString                         text = full_text.mid(range.Start(), range.Length());
+    QString                         text = item.GetItemString( CViewItem::eII_TraceData );
     QFontMetricsF                   Metrics(Font());
 
     drawstate.Highlighter()->OnPreItemDisplay(settings, rColSettings, drawstate, Metrics, text);

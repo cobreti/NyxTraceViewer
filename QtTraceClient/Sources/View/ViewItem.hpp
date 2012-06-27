@@ -2,6 +2,7 @@
 #define __VIEWITEM_HPP__
 
 #include <QSizeF>
+#include <QString>
 #include <Nyx.hpp>
 #include <bitset>
 #include "ViewItemPainterCollection.hpp"
@@ -33,6 +34,14 @@ public:
         eVIF_Count
     };
 
+    enum EItemIndex
+    {
+        eII_Module = 0,
+        eII_ThreadId = 1,
+        eII_TimeStamp = 2,
+        eII_TraceData = 3
+    };
+
 public:
     CViewItem();
     virtual ~CViewItem();
@@ -50,9 +59,6 @@ public:
     virtual void EvaluateSize(CViewSettings& settings);
     virtual void Display( CViewSettings& settings, CDrawViewItemState& drawstate );
 
-//    CViewItemPainterCollection&         Painters()              { return m_Painters; }
-//    const CViewItemPainterCollection&   Painters() const        { return m_Painters; }
-
     virtual void SetFlag( EViewItemFlags flag, bool status = true );
     virtual void RemoveFlag( EViewItemFlags flag );
     virtual bool HasFlag( EViewItemFlags flag ) const;
@@ -61,6 +67,8 @@ public:
     ViewItemID&         Id()                    { return m_Id; }
 
     virtual const Nyx::CWString& TickCount() const;
+
+    virtual const QString GetItemString(const EItemIndex&) const       { return ""; }
 
     void SetOwner( CViewItem* pOwner )          { m_pOwner = pOwner; }
     CViewItem* GetOwner() const                 { return m_pOwner; }
@@ -72,7 +80,6 @@ protected:
 protected:
 
     QSizeF                          m_Size;
-//    CViewItemPainterCollection      m_Painters;
     FlagsSet                        m_Flags;
     size_t                          m_Id;
     CViewItem*                      m_pOwner;
@@ -91,7 +98,6 @@ public:
     virtual ~CViewItemMemPoolObj() {}
 };
 
-//typedef     Nyx::CMemPoolObj<CViewItem>     ViewItemMemPoolObj;
 
 
 #endif // __VIEWITEM_HPP__

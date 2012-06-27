@@ -19,7 +19,7 @@ Nyx::CRange CViewItemPattern_Text::Match( const QString& text, const long& start
 
     Nyx::CRange     res;
 
-    res.Start() = text.indexOf(m_TextToMatch, startIndex);
+    res.Start() = text.indexOf(m_TextToMatch, startIndex, Qt::CaseInsensitive);
     if ( res.Start() > -1 )
         res.Length() = m_TextToMatch.length();
 

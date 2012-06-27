@@ -59,7 +59,6 @@ void CViewItem::EvaluateSize(CViewSettings& settings)
 
         if ( rColSettings.GetVisible() )
         {
-            //CViewItemPainter*           pPainter = m_Painters[ rColSettings.GetPainterId() ];
             CViewItemPainter*   pPainter = settings.DrawSettings()->Painter(rColSettings.GetPainterId());
 
             if ( pPainter )
