@@ -48,8 +48,8 @@ void CHighlightTreeItemDelegate::paint ( QPainter * painter, const QStyleOptionV
             {
                 CColorBtn*  pBtn = pItem->ColorBtn();
                 pBtn->setParent(m_pTreeWidget);
-                pBtn->move(option.rect.left(), option.rect.top());
-                pBtn->resize(option.rect.width(), option.rect.height());
+                pBtn->move(option.rect.left()+1, option.rect.top()+1);
+                pBtn->resize(option.rect.width()-2, option.rect.height()-2);
                 pBtn->show();
             }
             break;
@@ -58,8 +58,8 @@ void CHighlightTreeItemDelegate::paint ( QPainter * painter, const QStyleOptionV
             {
                 QToolButton*  pBtn = pItem->SearchNextBtn();
                 pBtn->setParent(m_pTreeWidget);
-                pBtn->move(option.rect.left(), option.rect.top());
-                pBtn->resize(option.rect.width(), option.rect.height());
+                pBtn->move(option.rect.left()+1, option.rect.top()+1);
+                pBtn->resize(option.rect.width()-2, option.rect.height()-2);
                 pBtn->show();
 
                 pBtn->setEnabled( !pItem->text(1).isEmpty() );
@@ -70,8 +70,8 @@ void CHighlightTreeItemDelegate::paint ( QPainter * painter, const QStyleOptionV
             {
                 QToolButton*  pBtn = pItem->SearchPreviousBtn();
                 pBtn->setParent(m_pTreeWidget);
-                pBtn->move(option.rect.left(), option.rect.top());
-                pBtn->resize(option.rect.width(), option.rect.height());
+                pBtn->move(option.rect.left()+1, option.rect.top()+1);
+                pBtn->resize(option.rect.width()-2, option.rect.height()-2);
                 pBtn->show();
 
                 pBtn->setEnabled( !pItem->text(1).isEmpty() );
