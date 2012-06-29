@@ -1,4 +1,5 @@
 #include "AboutDlg.h"
+#include "TraceClientApp.h"
 
 #include "ui_AboutDlg.h"
 
@@ -13,6 +14,11 @@ CAboutDlg::CAboutDlg(QWidget* parent) : QDialog(parent),
     ui->setupUi(this);
 
     connect( ui->CloseBtn, SIGNAL(clicked()), this, SLOT(OnClose()));
+
+    QString     version = "v";
+    version += CTraceClientApp::Instance().GetVersion();
+    ui->labelVersion->setText(version);
+
 }
 
 

@@ -2,6 +2,7 @@
 #include "TracesWindow.hpp"
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
 #include "Dialogs/AboutDlg.h"
+#include "TraceClientApp.h"
 
 #include <QToolButton>
 
@@ -42,6 +43,11 @@ CMainWindow::CMainWindow() : QMainWindow(),
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewTracesWindow()));
     connect( m_pBtn_Channels, SIGNAL(clicked()), this, SLOT(OnChannelsMgnt()));
     connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
+
+    QString     title = windowTitle();
+    title += "     v";
+    title += CTraceClientApp::Instance().GetVersion();
+    setWindowTitle(title);
 }
 
 

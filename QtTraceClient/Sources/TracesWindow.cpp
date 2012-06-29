@@ -153,6 +153,11 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_refHighlighter->Pattern() = (CViewItemPattern*)m_refTextPattern;
 
     m_pTracesView->Highlighters()->Add( m_refHighlighter );
+
+    QString     title = windowTitle();
+    title += "     v";
+    title += CTraceClientApp::Instance().GetVersion();
+    setWindowTitle(title);
 }
 
 
