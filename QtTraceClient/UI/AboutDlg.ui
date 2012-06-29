@@ -46,7 +46,7 @@
         </font>
        </property>
        <property name="text">
-        <string>TraceViewer</string>
+        <string>NyxTraceViewer</string>
        </property>
       </widget>
      </item>

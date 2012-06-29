@@ -155,7 +155,7 @@ void CChannelsMgnt::OnChannelItemClicked( QTreeWidgetItem* pItem, int column )
 {
     CChannelTreeItem*		pChannelItem = static_cast<CChannelTreeItem*>(pItem);
 
-    if ( column == 0 )
+    if ( column == 1 )
     {
         if ( pChannelItem->checkState(1) == Qt::Checked )
         {
