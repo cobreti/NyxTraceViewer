@@ -1,3 +1,4 @@
+TARGET = NyxTraceViewer
 NYXPATH = ../../../Nyx
 
 FORMS += \
