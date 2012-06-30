@@ -3492,9 +3492,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>362772641.02488297</real>
-		<string>{3457, 2535}</string>
-		<string>{1652, 0}</string>
+		<real>362789463.15877599</real>
+		<string>{600, 2338}</string>
+		<string>{1217, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3540,7 +3540,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>362772641.024966</real>
+		<real>362789463.15885699</real>
 		<string>{1225, 1784}</string>
 		<string>{1680, 13}</string>
 		<dict>
@@ -27103,7 +27103,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>362772641.02686399</real>
+		<real>362789463.16092199</real>
 		<string>{1225, 1784}</string>
 		<string>{1680, 13}</string>
 		<string>TraceClientCore::CPipeTraceFeeder::HandleStream( NyxNet::INxStreamRW&amp; rStream )</string>
@@ -54112,9 +54112,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>362772641.02746701</real>
-		<string>{3457, 2535}</string>
-		<string>{1652, 0}</string>
+		<real>362789463.16146803</real>
+		<string>{600, 2338}</string>
+		<string>{1217, 0}</string>
 		<string>CTraceNxStreamReader::Read( Nyx::UInt32 SectionsCount, NyxNet::CNxStreamReader&amp; Reader )</string>
 		<dict>
 			<key>$class</key>
@@ -54299,7 +54299,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>532</real>
+		<real>531</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -54329,7 +54329,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>533</real>
+		<real>534</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -54398,7 +54398,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>532</real>
+		<real>531</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -54428,7 +54428,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>533</real>
+		<real>534</real>
 		<dict>
 			<key>$class</key>
 			<dict>

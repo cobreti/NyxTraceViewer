@@ -28,6 +28,10 @@ public:
 
 	virtual void Write( const char* szData, ... );
     virtual void Write( const wchar_t* wszData, ... );
+    
+protected:
+    
+    bool LoadConnectionModule();
 
 protected:
 

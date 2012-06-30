@@ -38,8 +38,6 @@ protected:
     Nyx::CTraceCompositorRef				m_refTraceCompositor;
     TraceCompositorsMap						m_TraceCompositorsTable;
     unsigned int							m_NextAvailID;
-//    char                                    m_AnsiBuffer[kBufferSize];
-//    wchar_t                                 m_WCharBuffer[kBufferSize];
 
     Nyx::CAString							m_AnsiBuffer;
     Nyx::CWString							m_WCharBuffer;

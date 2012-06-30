@@ -6,21 +6,8 @@
 CTraceLink*		g_pTraceLink = NULL;
 
 
-//static void Init() __attribute__((__constructor__));
-//static void Init()
-//{
-//	g_pTraceLink = new CTraceLink();
-//}
-//
-//static void Uninit() __attribute__((__destructor__));
-//static void Uninit()
-//{
-//	delete g_pTraceLink;
-//}
-
 int main()
 {
-//    printf("trace client link\n");
     
 	return 0;
 }

@@ -144,18 +144,7 @@ m_pfctWriteTraceA(NULL),
 m_pfctWriteTraceW(NULL),
 m_id(0)
 {
-    m_pModule = dlopen("./libTraceClientLink.dylib", RTLD_NOW);
-	if ( m_pModule )
-	{
-        m_pfctInitModule = (PFCTInitModule)dlsym(m_pModule, "InitModule");
-        m_pfctTerminateModule = (PFCTTerminateModule)dlsym(m_pModule, "TerminateModule");
-        m_pfctCreateTraceLink = (PFCTCreateTraceLink)dlsym(m_pModule, "CreateTraceLink");
-		m_pfctReleaseTraceLink = (PFCTReleaseTraceLink)dlsym(m_pModule, "ReleaseTraceLink");
-		m_pfctWriteTraceA = (PFCTWriteTraceA)dlsym(m_pModule, "WriteTraceA");
-		m_pfctWriteTraceW = (PFCTWriteTraceW)dlsym(m_pModule, "WriteTraceW");
-	}
-
-    m_pfctInitModule();
+    LoadConnectionModule();
 
 	if ( m_pfctCreateTraceLink && m_pfctReleaseTraceLink )
 		m_id = m_pfctCreateTraceLink(szTraceLinkName, charType);
@@ -205,4 +194,24 @@ void CTraceClientLink_Impl::Write( const wchar_t* wszData, ... )
 		m_pfctWriteTraceW(m_id, wszData, args);
         va_end(args);
     }
+}
+
+
+/**
+ *
+ */
+bool CTraceClientLink_Impl::LoadConnectionModule()
+{
+    m_pModule = dlopen("./libTraceClientLink.dylib", RTLD_NOW);
+	if ( m_pModule )
+	{
+        m_pfctInitModule = (PFCTInitModule)dlsym(m_pModule, "InitModule");
+        m_pfctTerminateModule = (PFCTTerminateModule)dlsym(m_pModule, "TerminateModule");
+        m_pfctCreateTraceLink = (PFCTCreateTraceLink)dlsym(m_pModule, "CreateTraceLink");
+		m_pfctReleaseTraceLink = (PFCTReleaseTraceLink)dlsym(m_pModule, "ReleaseTraceLink");
+		m_pfctWriteTraceA = (PFCTWriteTraceA)dlsym(m_pModule, "WriteTraceA");
+		m_pfctWriteTraceW = (PFCTWriteTraceW)dlsym(m_pModule, "WriteTraceW");
+	}
+    
+    m_pfctInitModule();
 }
