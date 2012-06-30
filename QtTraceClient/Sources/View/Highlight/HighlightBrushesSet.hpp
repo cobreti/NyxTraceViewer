@@ -1,6 +1,7 @@
 #ifndef _HIGHLIGHTBRUSHESSET_HPP_
 #define _HIGHLIGHTBRUSHESSET_HPP_
 
+#include <Nyx.hpp>
 
 #include <vector>
 

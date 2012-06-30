@@ -1,4 +1,4 @@
-#include "View/highlight/ViewItemHighlighter_SearchedLine.hpp"
+#include "View/Highlight/ViewItemHighlighter_SearchedLine.hpp"
 #include "View/ViewSearchEngine.h"
 #include "View/DrawViewItemState.hpp"
 #include "View/ViewColumnSettings.hpp"

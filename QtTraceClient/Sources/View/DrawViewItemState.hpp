@@ -2,7 +2,7 @@
 #define __DRAWVIEWITEMSTATE_HPP__
 
 #include <QPainter>
-#include "View/highlight/ViewItemHighlighter.hpp"
+#include "View/Highlight/ViewItemHighlighter.hpp"
 
 /**
  *

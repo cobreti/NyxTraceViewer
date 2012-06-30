@@ -2,8 +2,8 @@
 #define _VIEWSEARCHENGINE_H_
 
 #include "View/Highlight/ViewItemPattern_Text.hpp"
-#include "View/highlight/ViewItemHighlighter.hpp"
-#include "View/highlight/ViewItemHighlighter_SearchedLine.hpp"
+#include "View/Highlight/ViewItemHighlighter.hpp"
+#include "View/Highlight/ViewItemHighlighter_SearchedLine.hpp"
 
 
 class CTracesView;

@@ -10,7 +10,11 @@ FORMS += \
     ../UI/TracesWindow.ui \
     ../UI/MainWindow.ui \
     ../UI/ChannelsMgnt.ui \
-    ../UI/CClearChannelContentConfirmationDlg.ui
+    ../UI/CClearChannelContentConfirmationDlg.ui \
+    ../UI/AboutDlg.ui \
+    ../UI/HighlightsMgrWnd.ui \
+    ../UI/HighlightColorsSelectionDlg.ui \
+    ../UI/HighlightColorsPopup.ui
 
 RESOURCES += \
     ../QTraceClient.qrc
@@ -86,7 +90,24 @@ HEADERS += \
     ../Sources/ChannelsMgnt/ChannelsMgnt.hpp \
     ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp \
     ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp \
-    ../Sources/ChannelsMgnt/CChannelTreeItem.hpp
+    ../Sources/ChannelsMgnt/CChannelTreeItem.hpp \
+    ../Sources/Dialogs/HighlightColorsSelectionDlg.h \
+    ../Sources/Dialogs/AboutDlg.h \
+    ../Sources/View/ViewSearchEngine.h \
+    ../Sources/View/Highlight/ViewItemPattern.hpp \
+    ../Sources/View/Highlight/ViewItemPattern_Text.hpp \
+    ../Sources/View/Highlight/ViewItemHighlightersSet.hpp \
+    ../Sources/View/Highlight/ViewItemHighlighter.hpp \
+    ../Sources/View/Highlight/ViewItemHighlighter_SearchedLine.hpp \
+    ../Sources/View/Highlight/ViewHighlightSettings.hpp \
+    ../Sources/View/Highlight/HighlightTreeItemEventsConnection.h \
+    ../Sources/View/Highlight/HighlightTreeItemDelegate.hpp \
+    ../Sources/View/Highlight/HighlightTreeItem.hpp \
+    ../Sources/View/Highlight/HighlightsMgrWnd.h \
+    ../Sources/View/Highlight/HighlightColorsPopup.h \
+    ../Sources/View/Highlight/HighlightBrushesSet.hpp \
+    ../Sources/View/Highlight/HighlightBrush.hpp \
+    ../Sources/Color/ColorBtn.h
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -155,7 +176,24 @@ SOURCES += \
     ../Sources/ChannelsMgnt/ChannelsMgnt.cpp \
     ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.cpp \
     ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.cpp \
-    ../Sources/ChannelsMgnt/CChannelTreeItem.cpp
+    ../Sources/ChannelsMgnt/CChannelTreeItem.cpp \
+    ../Sources/Dialogs/HighlightColorsSelectionDlg.cpp \
+    ../Sources/Dialogs/AboutDlg.cpp \
+    ../Sources/View/ViewSearchEngine.cpp \
+    ../Sources/View/Highlight/ViewItemPattern.cpp \
+    ../Sources/View/Highlight/ViewItemPattern_Text.cpp \
+    ../Sources/View/Highlight/ViewItemHighlightersSet.cpp \
+    ../Sources/View/Highlight/ViewItemHighlighter.cpp \
+    ../Sources/View/Highlight/ViewItemHighlighter_SearchedLine.cpp \
+    ../Sources/View/Highlight/ViewHighlightSettings.cpp \
+    ../Sources/View/Highlight/HighlightTreeItemEventsConnection.cpp \
+    ../Sources/View/Highlight/HighlightTreeItemDelegate.cpp \
+    ../Sources/View/Highlight/HighlightTreeItem.cpp \
+    ../Sources/View/Highlight/HighlightsMgrWnd.cpp \
+    ../Sources/View/Highlight/HighlightColorsPopup.cpp \
+    ../Sources/View/Highlight/HighlightBrushesSet.cpp \
+    ../Sources/View/Highlight/HighlightBrush.cpp \
+    ../Sources/Color/ColorBtn.cpp
 
 
 ICON=../Icons/AppLinux.icns

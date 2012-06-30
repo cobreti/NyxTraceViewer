@@ -9,7 +9,7 @@
 #include "View/ViewSettings.hpp"
 #include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
-#include "View/highlight/ViewItemHighlightersSet.hpp"
+#include "View/Highlight/ViewItemHighlightersSet.hpp"
 
 
 namespace Ui
