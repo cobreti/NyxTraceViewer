@@ -38,10 +38,10 @@ void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettin
         QRectF              rcTextWithSel = rMetrics.boundingRect( text.left(range.Start() + range.Length()) );
         QRectF              rcText = rMetrics.boundingRect( text );
         float               fStartPos = rcTextWithSel.width() - rcTextSelection.width();
-        QRectF              rcArea( rState.TextPos().x() + rColumnSettings.Margins().left() + fStartPos, 
-                                    rState.TextPos().y() + rColumnSettings.Margins().top(),
-                                    rcTextSelection.width(), 
-                                    rcText.height() - rColumnSettings.Margins().height() );
+        QRectF              rcArea( rState.TextPos().x() + rColumnSettings.Margins().left() + fStartPos + 1, 
+                                    rState.TextPos().y() + rColumnSettings.Margins().top() + 1,
+                                    rcTextSelection.width() - 1, 
+                                    rcText.height() - rColumnSettings.Margins().height() - 1 );
 
         rPainter.fillRect(rcArea, brush);
 

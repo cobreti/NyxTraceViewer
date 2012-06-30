@@ -110,18 +110,18 @@ void CFileWriterViewItemsWalker::WriteData(Nyx::CAnsiFileRef refFile, CViewItem_
     if ( len > 0 )
         refFile->Write(ptr, len);
 
-    while ( *p != 0 )
-    {
-        for ( ; *p < 0x20; ++p );
-        for ( ptr = p, len = 0; !(*p < 0x20); ++p, ++len);
+    //while ( *p != 0 )
+    //{
+    //    for ( ; *p < 0x20; ++p );
+    //    for ( ptr = p, len = 0; !(*p < 0x20); ++p, ++len);
 
-        if ( len > 0 )
-        {
-            refFile->WriteEOL();
-            WriteSpaces(refFile, indent);
-            refFile->Write(ptr, len);
-        }
-    }
+    //    if ( len > 0 )
+    //    {
+    //        refFile->WriteEOL();
+    //        WriteSpaces(refFile, indent);
+    //        refFile->Write(ptr, len);
+    //    }
+    //}
 
     //refFile->Write( m_AnsiBuffer );
     refFile->WriteEOL();
