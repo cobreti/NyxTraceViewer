@@ -6,7 +6,7 @@
  */
 CHighlightBrush::CHighlightBrush()
 {
-    SetColor( Qt::GlobalColor::yellow );
+    SetColor( Qt::yellow );
 }
 
 

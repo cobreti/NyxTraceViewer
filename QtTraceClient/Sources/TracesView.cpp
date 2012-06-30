@@ -387,7 +387,7 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 
             if ( event->pos().y() >= y && event->pos().y() <= y + pItem->GetSize().height() )
             {
-                if ( event->button() == Qt::MouseButton::LeftButton )
+                if ( event->button() == Qt::LeftButton )
                 {
                     if ( pItem->HasFlag(CViewItem::eVIF_Marked) )
                     {
@@ -400,7 +400,7 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
                         pItem->HighlightBrush() = m_pLastSelectedBrush;
                     }
                 }
-                else if ( event->button() == Qt::MouseButton::RightButton )
+                else if ( event->button() == Qt::RightButton )
                 {
                     pItem->SetFlag(CViewItem::eVIF_Marked, true);
                     m_pLastSelectedItem = pItem;

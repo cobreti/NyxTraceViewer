@@ -9,6 +9,7 @@
 
 class CTracesView;
 class CViewSearchEngine;
+class CHighlightTreeItemEventsConnection;
 
 /**
  *

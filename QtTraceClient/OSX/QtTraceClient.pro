@@ -71,7 +71,24 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/ChannelsMgnt/ChannelsMgnt.cpp \
     ../Sources/ChannelsMgnt/CChannelTreeItem.cpp \
     ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.cpp \
-    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.cpp
+    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.cpp \
+    ../Sources/Dialogs/HighlightColorsSelectionDlg.cpp \
+    ../Sources/Dialogs/AboutDlg.cpp \
+    ../Sources/Color/ColorBtn.cpp \
+    ../Sources/View/Highlight/ViewItemPattern.cpp \
+    ../Sources/View/Highlight/ViewItemHighlightersSet.cpp \
+    ../Sources/View/Highlight/ViewItemHighlighter_SearchedLine.cpp \
+    ../Sources/View/Highlight/ViewHighlightSettings.cpp \
+    ../Sources/View/Highlight/HighlightBrushesSet.cpp \
+    ../Sources/View/Highlight/HighlightBrush.cpp \
+    ../Sources/View/Highlight/HighlightsMgrWnd.cpp \
+    ../Sources/View/Highlight/ViewItemPattern_Text.cpp \
+    ../Sources/View/Highlight/ViewItemHighlighter.cpp \
+    ../Sources/View/Highlight/HighlightTreeItemEventsConnection.cpp \
+    ../Sources/View/Highlight/HighlightTreeItemDelegate.cpp \
+    ../Sources/View/Highlight/HighlightTreeItem.cpp \
+    ../Sources/View/Highlight/HighlightColorsPopup.cpp \
+    ../Sources/View/ViewSearchEngine.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -146,7 +163,24 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/ChannelsMgnt/ChannelsMgnt.hpp \
     ../Sources/ChannelsMgnt/CChannelTreeItem.hpp \
     ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp \
-    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp
+    ../Sources/ChannelsMgnt/CClearChannelContentConfirmationDlg.hpp \
+    ../Sources/Dialogs/AboutDlg.h \
+    ../Sources/Dialogs/HighlightColorsSelectionDlg.h \
+    ../Sources/Color/ColorBtn.h \
+    ../Sources/View/Highlight/ViewItemPattern.hpp \
+    ../Sources/View/Highlight/ViewItemPattern_Text.hpp \
+    ../Sources/View/Highlight/ViewItemHighlightersSet.hpp \
+    ../Sources/View/Highlight/ViewItemHighlighter_SearchedLine.hpp \
+    ../Sources/View/Highlight/ViewItemHighlighter.hpp \
+    ../Sources/View/Highlight/ViewHighlightSettings.hpp \
+    ../Sources/View/Highlight/HighlightBrushesSet.hpp \
+    ../Sources/View/Highlight/HighlightBrush.hpp \
+    ../Sources/View/Highlight/HighlightTreeItemDelegate.hpp \
+    ../Sources/View/Highlight/HighlightTreeItem.hpp \
+    ../Sources/View/Highlight/HighlightsMgrWnd.h \
+    ../Sources/View/Highlight/HighlightTreeItemEventsConnection.h \
+    ../Sources/View/Highlight/HighlightColorsPopup.h \
+    ../Sources/View/ViewSearchEngine.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -156,7 +190,11 @@ FORMS += ../UI/TracesView.ui \
     ../UI/TracesWindow.ui \
     ../UI/MainWindow.ui \
     ../UI/ChannelsMgnt.ui \
-    ../UI/CClearChannelContentConfirmationDlg.ui
+    ../UI/CClearChannelContentConfirmationDlg.ui \
+    ../UI/HighlightsMgrWnd.ui \
+    ../UI/HighlightColorsSelectionDlg.ui \
+    ../UI/HighlightColorsPopup.ui \
+    ../UI/AboutDlg.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI

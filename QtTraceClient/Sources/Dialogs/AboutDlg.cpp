@@ -1,8 +1,8 @@
-#include "AboutDlg.h"
 #include "TraceClientApp.h"
 
 #include "ui_AboutDlg.h"
 
+#include "AboutDlg.h"
 #include <QtGui>
 
 /**

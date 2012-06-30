@@ -8,7 +8,7 @@
  *
  */
 CViewItemHighlighter::CViewItemHighlighter() :
-    m_HighlightColor(Qt::GlobalColor::yellow)
+    m_HighlightColor(Qt::yellow)
 {
 }
 

@@ -1,7 +1,7 @@
+#include "TraceClientApp.h"
 #include "ColorBtn.h"
 #include "View/Highlight/HighlightColorsPopup.h"
 #include "View/Highlight/HighlightBrush.hpp"
-#include "TraceClientApp.h"
 
 #include <QtGui>
 #include <QColorDialog>
@@ -11,7 +11,7 @@
  *
  */
 CColorBtn::CColorBtn() : QToolButton(),
-    m_Color( Qt::GlobalColor::yellow )
+    m_Color( Qt::yellow )
 {
     connect(this, SIGNAL(clicked()), this, SLOT(OnClicked()));
 }
