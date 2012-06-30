@@ -312,9 +312,9 @@ void CTracesWindow::OnSearch()
  */
 void CTracesWindow::closeEvent(QCloseEvent *event)
 {
-    m_pTracesView->close();
-    delete m_pTracesView;
+    CTraceClientApp::Instance().TracesWindows().Remove(this);
 
     event->accept();
+    destroy();
     delete this;
 }
