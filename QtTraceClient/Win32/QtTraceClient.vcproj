@@ -75,7 +75,7 @@
 				IgnoreImportLibrary="true"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; &quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
 				AdditionalDependencies="QtCored4.lib QtGuid4.lib qtmaind.lib QtXmld4.lib TraceClientCore.lib NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
-				OutputFile="Debug\TraceViewer.exe"
+				OutputFile="Debug\NyxTraceViewer.exe"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;..\..\lib\win32\debug;..\..\..\Nyx\lib\win32\debug"
 				GenerateDebugInformation="true"
@@ -168,7 +168,7 @@
 				IgnoreImportLibrary="true"
 				AdditionalOptions="&quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot; &quot;/MANIFESTDEPENDENCY:type=&apos;win32&apos; name=&apos;Microsoft.Windows.Common-Controls&apos; version=&apos;6.0.0.0&apos; publicKeyToken=&apos;6595b64144ccf1df&apos; language=&apos;*&apos; processorArchitecture=&apos;*&apos;&quot;"
 				AdditionalDependencies="QtCore4.lib QtGui4.lib qtmain.lib QtXml4.lib TraceClientCore.lib NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
-				OutputFile="release\TraceViewer.exe"
+				OutputFile="release\NyxTraceViewer.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="true"
 				AdditionalLibraryDirectories="&quot;$(QTDIR)\lib&quot;;..\..\lib\win32\release;..\..\..\Nyx\lib\win32\release"
@@ -2875,7 +2875,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\Document-icon.png"
+				RelativePath="..\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2895,7 +2895,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\Document-icon.png"
+				RelativePath="..\UI\Icons\Document-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2955,7 +2955,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\File-View-icon.png"
+				RelativePath="..\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -2975,7 +2975,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\File-View-icon.png"
+				RelativePath="..\UI\Icons\File-View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -3305,7 +3305,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\UI\Icons\View-icon.png"
+				RelativePath="..\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -3325,7 +3325,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\Icons\View-icon.png"
+				RelativePath="..\UI\Icons\View-icon.png"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
