@@ -17,7 +17,8 @@ public:
     enum ETracesAPI
     {
         eTAPI_Unknown,
-        eTAPI_Nyx,
+        eTAPI_NyxPipe,
+        eTAPI_NyxTcpIp,
         eTAPI_External,
         eTAPI_Dll
     };
@@ -46,6 +47,10 @@ public:
     CFeederSource*          FeederSource() const                { return m_pFeederSource; }
     CFeederSource*&         FeederSource()                      { return m_pFeederSource; }
 
+    const Nyx::CAString&    TcpIpAddress() const                { return m_TcpIpAddress; }
+    Nyx::CAString&          TcpIpAddress()                      { return m_TcpIpAddress; }
+
+
     const CFeederSettings& operator = (const CFeederSettings& settings);
 
 protected:
@@ -56,6 +61,7 @@ protected:
     Nyx::UInt32             m_TracesPerBlock;
     Nyx::UInt32             m_IntervalBetweenBlocks;
     CFeederSource*          m_pFeederSource;
+    Nyx::CAString           m_TcpIpAddress;
 };
 
 

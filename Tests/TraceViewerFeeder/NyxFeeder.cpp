@@ -1,5 +1,6 @@
 #include <NyxNet.hpp>
 #include <NyxNetPipeTraceOutput.hpp>
+#include <NyxNetTcpIpTraceOutput.hpp>
 #include <NyxAnsiFile.hpp>
 
 #include "NyxFeeder.hpp"
@@ -33,7 +34,17 @@ void CNyxFeeder::OnBegin()
 	name = Settings().Name();
 
 	m_refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_WideChar, false);
-    m_refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc(name.c_str()) );
+
+    switch ( Settings().ApiType() )
+    {
+        case CFeederSettings::eTAPI_NyxPipe:
+            m_refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc(name.c_str()) );
+            break;
+
+        case CFeederSettings::eTAPI_NyxTcpIp:
+            m_refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(name.c_str(), Settings().TcpIpAddress().c_str()) );
+            break;
+    };
 }
 
 

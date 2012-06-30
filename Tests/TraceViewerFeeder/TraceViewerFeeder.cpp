@@ -28,6 +28,14 @@ CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WFlags flags)
                 this, SLOT(OnUseFilenameClicked()));
     connect(    ui.m_btnBrowseFile, SIGNAL(clicked()),
                 this, SLOT(OnBrowseForFile()));
+    connect(    ui.btnNyxPipeAPISource, SIGNAL(clicked()),
+                this, SLOT(OnNyxPipeClicked()));
+    connect(    ui.btnNyxTcpIpAPISource, SIGNAL(clicked()),
+                this, SLOT(OnNyxTcpIpClicked()));
+    connect(    ui.btnExternalAPISource, SIGNAL(clicked()),
+                this, SLOT(OnExternalClicked()));
+    connect(    ui.btnDllSource, SIGNAL(clicked()),
+                this, SLOT(OnDllFeederClicked()));
 
     ui.btnAddChannel->setEnabled(true);
     ui.btnRemoveChannel->setEnabled(false);
@@ -118,8 +126,13 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
     settings.IntervalBetweenBlocks() = ui.IntervalBetweenBlocksSpinBox->value();
     settings.Name() = pItem->text().toStdWString().c_str();
 
-    if ( ui.btnNyxAPISource->isChecked() )
-        settings.ApiType() = CFeederSettings::eTAPI_Nyx;
+    if ( ui.btnNyxPipeAPISource->isChecked() )
+        settings.ApiType() = CFeederSettings::eTAPI_NyxPipe;
+    else if ( ui.btnNyxTcpIpAPISource->isChecked() )
+    {
+        settings.ApiType() = CFeederSettings::eTAPI_NyxTcpIp;
+        settings.TcpIpAddress() = ui.editTcpIpAddress->text().toStdString().c_str();
+    }
     else if ( ui.btnExternalAPISource->isChecked() )
         settings.ApiType() = CFeederSettings::eTAPI_External;
     else if ( ui.btnDllSource->isChecked() )
@@ -202,6 +215,42 @@ void CTraceViewerFeeder::OnUseFilenameClicked()
 /**
  *
  */
+void CTraceViewerFeeder::OnNyxPipeClicked()
+{
+    ui.editTcpIpAddress->setEnabled(false);
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::OnNyxTcpIpClicked()
+{
+    ui.editTcpIpAddress->setEnabled(true);
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::OnExternalClicked()
+{
+    ui.editTcpIpAddress->setEnabled(false);
+}
+
+
+/**
+ *
+ */
+void CTraceViewerFeeder::OnDllFeederClicked()
+{
+    ui.editTcpIpAddress->setEnabled(false);
+}
+
+
+/**
+ *
+ */
 void CTraceViewerFeeder::OnBrowseForFile()
 {
     QString         filename = QFileDialog::getOpenFileName(this);
@@ -223,6 +272,8 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
 
     ui.btnStartStop->setText("Start");
 
+    ui.editTcpIpAddress->setEnabled(false);
+
     if ( pEntry )
     {
         ui.TracesPerBlockSpinBox->setValue(pEntry->Settings().TracesPerBlock());
@@ -230,8 +281,13 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
 
         switch (pEntry->Settings().ApiType())
         {
-        case CFeederSettings::eTAPI_Nyx:
-            ui.btnNyxAPISource->setChecked(true);
+        case CFeederSettings::eTAPI_NyxPipe:
+            ui.btnNyxPipeAPISource->setChecked(true);
+            break;
+        case CFeederSettings::eTAPI_NyxTcpIp:
+            ui.btnNyxTcpIpAPISource->setChecked(true);
+            ui.editTcpIpAddress->setEnabled(true);
+            ui.editTcpIpAddress->setText( pEntry->Settings().TcpIpAddress().c_str() );
             break;
         case CFeederSettings::eTAPI_External:
             ui.btnExternalAPISource->setChecked(true);
@@ -261,7 +317,8 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
     }
     else
     {
-        ui.btnNyxAPISource->setChecked(false);
+        ui.btnNyxPipeAPISource->setChecked(false);
+        ui.btnNyxTcpIpAPISource->setChecked(false);
         ui.btnExternalAPISource->setChecked(false);
         ui.btnDllSource->setChecked(false);
         ui.TracesPerBlockSpinBox->setValue(0);
@@ -272,7 +329,8 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
 
     ui.TracesPerBlockSpinBox->setEnabled(bFieldsEnabled);
     ui.IntervalBetweenBlocksSpinBox->setEnabled(bFieldsEnabled);
-    ui.btnNyxAPISource->setEnabled(bFieldsEnabled);
+    ui.btnNyxPipeAPISource->setEnabled(bFieldsEnabled);
+    ui.btnNyxTcpIpAPISource->setEnabled(bFieldsEnabled);
     ui.btnExternalAPISource->setEnabled(bFieldsEnabled);
 
 #if defined(WIN32)

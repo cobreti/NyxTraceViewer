@@ -31,6 +31,10 @@ public slots:
     void OnChannelSelectionChanged( QListWidgetItem* pCurrent, QListWidgetItem* pPrevious );
     void OnUseTextClicked();
     void OnUseFilenameClicked();
+    void OnNyxPipeClicked();
+    void OnNyxTcpIpClicked();
+    void OnExternalClicked();
+    void OnDllFeederClicked();
     void OnBrowseForFile();
 
 protected:

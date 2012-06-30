@@ -39,7 +39,8 @@ void CFeederEntry::Start()
         m_pFeeder = new CDllFeeder();
         break;
 #endif
-    case CFeederSettings::eTAPI_Nyx:
+    case CFeederSettings::eTAPI_NyxPipe:
+    case CFeederSettings::eTAPI_NyxTcpIp:
         m_pFeeder = new CNyxFeeder();
         break;
     };
