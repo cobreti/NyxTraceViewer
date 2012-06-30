@@ -2,7 +2,7 @@
 # Project created by QtCreator 2010-02-12T21:15:19
 # -------------------------------------------------
 QT += xml
-TARGET = TraceViewer
+TARGET = NyxTraceViewer
 TEMPLATE = app
 SOURCES += ../Sources/TracesView.cpp \
     ../Sources/main.cpp \
