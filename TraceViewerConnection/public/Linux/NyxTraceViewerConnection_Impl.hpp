@@ -1,44 +1,106 @@
-#ifndef _TRACECLIENTLINK_IMPL_HPP_
-#define _TRACECLIENTLINK_IMPL_HPP_
+#ifndef _NYXTRACEVIEWERCONNECTION_IMPL_HPP_
+#define _NYXTRACEVIEWERCONNECTION_IMPL_HPP_
 
 #include <dlfcn.h>
 #include <stdarg.h>
-#include "TraceClientLink.hpp"
+#include "NyxTraceViewerConnection.hpp"
 
-
-class CTraceClientLink_Impl : public CTraceClientLink
+namespace Nyx
 {
-	typedef unsigned int (*PFCTCreateTraceLink)( const char* szName, int nType );
-	typedef void (*PFCTReleaseTraceLink)( const unsigned int& id );
-	typedef void (*PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
-	typedef void (*PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
+    /**
+     *
+     */
+    class CTraceViewerConnection_Impl : public CTraceViewerConnection
+    {
+        friend class CTraceViewerConnection;
+        
+    public:
 
-public:
+        static void ReleaseInstance();
+        static CTraceViewerConnection& Instance();
 
-	static void CreateInstance(const char* szTraceLinkName, ECharType charType);
-	static void ReleaseInstance();
-	static void CreateInstance(void* pModule, const char* szTraceLinkName);
-    static CTraceClientLink& Instance();
+    public:
+        CTraceViewerConnection_Impl();
+        virtual ~CTraceViewerConnection_Impl();
 
-public:
-	CTraceClientLink_Impl(const char* szTraceLinkName, ECharType charType);
-	virtual ~CTraceClientLink_Impl();
+        virtual void Write( const char* szData, ... );
+        virtual void Write( const wchar_t* wszData, ... );
+        
+    protected:
+        
+        bool LoadConnectionModule();
+        bool Loaded() const     { return m_bLoaded; }
 
-	virtual void Write( const char* szData, ... );
-    virtual void Write( const wchar_t* wszData, ... );
+    protected:
+        typedef void (*PFCTReleaseTraceLink)( const unsigned int& id );
+        typedef void (*PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
+        typedef void (*PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
+        
+    protected:
 
-protected:
+        void*								m_pModule;
+        PFCTReleaseTraceLink				m_pfctReleaseTraceLink;
+        PFCTWriteTraceA						m_pfctWriteTraceA;
+        PFCTWriteTraceW						m_pfctWriteTraceW;
+        unsigned int						m_id;
+        bool                                m_bLoaded;
 
-    void*								m_pModule;
-	PFCTCreateTraceLink				    m_pfctCreateTraceLink;
-	PFCTReleaseTraceLink				m_pfctReleaseTraceLink;
-	PFCTWriteTraceA						m_pfctWriteTraceA;
-	PFCTWriteTraceW						m_pfctWriteTraceW;
-	unsigned int						m_id;
+        static CTraceViewerConnection_Impl*		s_pInstance;
+    };
+    
+    
+    /**
+     *
+     */
+    class CTraceViewerConnection_Pipe_Ansi_Impl : public CTraceViewerConnection_Impl
+    {
+    public:
+        static void CreateInstance(const char* ModuleName);
+        
+    public:
+        CTraceViewerConnection_Pipe_Ansi_Impl(const char* ModuleName);
+    };
+    
+    
+    /**
+     *
+     */
+    class CTraceViewerConnection_Pipe_WChar_Impl : public CTraceViewerConnection_Impl
+    {
+    public:
+        static void CreateInstance(const char* ModuleName);
+        
+    public:
+        CTraceViewerConnection_Pipe_WChar_Impl(const char* ModuleName);
+    };
 
-	static CTraceClientLink_Impl*		s_pInstance;
-};
+
+    /**
+     *
+     */
+    class CTraceViewerConnection_TcpIp_Ansi_Impl : public CTraceViewerConnection_Impl
+    {
+    public:
+        static void CreateInstance(const char* ModuleName, const char* addr);
+        
+    public:
+        CTraceViewerConnection_TcpIp_Ansi_Impl(const char* ModuleName, const char* addr);
+    };
+    
 
 
-#endif // _TRACECLIENTLINK_LINUX_HPP_
+    /**
+     *
+     */
+    class CTraceViewerConnection_TcpIp_WChar_Impl : public CTraceViewerConnection_Impl
+    {
+    public:
+        static void CreateInstance(const char* ModuleName, const char* addr);
+        
+    public:
+        CTraceViewerConnection_TcpIp_WChar_Impl(const char* ModuleName, const char* addr);
+    };
+}
+
+#endif // _NYXTRACEVIEWERCONNECTION_IMPL_HPP_
 

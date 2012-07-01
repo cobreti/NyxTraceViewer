@@ -29,9 +29,36 @@ extern "C"
 	/**
 	 *
 	 */
-	unsigned int CreateTraceLink( const char* szName, int nType )
+	unsigned int CreateTraceLink_PipeAnsi(const char* szName)
 	{
-		return g_pTraceLink->CreateTraceLink(szName, nType);
+		return g_pTraceLink->CreateTraceLink_PipeAnsi(szName);
+	}
+
+
+	/**
+	 *
+	 */
+	unsigned int CreateTraceLink_PipeWChar(const char* szName)
+	{
+		return g_pTraceLink->CreateTraceLink_PipeWChar(szName);
+	}
+
+
+	/**
+	 *
+	 */
+	unsigned int CreateTraceLink_TcpAnsi(const char* szName, const char* addr)
+	{
+		return g_pTraceLink->CreateTraceLink_TcpAnsi(szName, addr);
+	}
+
+
+	/**
+	 *
+	 */
+	unsigned int CreateTraceLink_TcpWChar(const char* szName, const char* addr)
+	{
+		return g_pTraceLink->CreateTraceLink_TcpWChar(szName, addr);
 	}
 
 

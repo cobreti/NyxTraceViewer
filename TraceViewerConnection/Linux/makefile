@@ -47,16 +47,16 @@ $(OBJDIR)/%.o: %.cpp
 $(OBJDIR)/%.o: ../Source/%.cpp
 	g++ -c -fPIC -o $@ $(CXX_CFLAGS) -c $^
 
-$(LIBDIR)/TraceClientLink.so: $(OBJS)	
-	g++ $(CXX_CFLAGS) $(OBJS) -shared -lpthread -lNyxNet -lNyxBase -o $(LIBDIR)/libTraceClientLink.so
+$(LIBDIR)/NyxTraceViewerConnection.so: $(OBJS)	
+	g++ $(CXX_CFLAGS) $(OBJS) -shared -lpthread -lNyxNet -lNyxBase -o $(LIBDIR)/libNyxTraceViewerConnection.so
 
 
-all: 	$(LIBDIR)/TraceClientLink.so
+all: 	$(LIBDIR)/NyxTraceViewerConnection.so
 
 clean:
 	-$(RM) Debug
 	-$(RM) Release
-	-$(RM) $(BASE_LIBDIR)/Release/libTraceClientLink.so
-	-$(RM) $(BASE_LIBDIR)/Debug/libTraceClientLink.so
+	-$(RM) $(BASE_LIBDIR)/Release/libNyxTraceViewerConnection.so
+	-$(RM) $(BASE_LIBDIR)/Debug/libNyxTraceViewerConnection.so
 
 
