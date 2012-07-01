@@ -1,4 +1,4 @@
-#include "TraceViewerConnection_Impl.hpp"
+#include "NyxTraceViewerConnection_Impl.hpp"
 
 #include <stdio.h>
 
