@@ -15,12 +15,17 @@ int main()
 
 extern "C"
 {
-    unsigned int CreateTraceLink( const char* szName, int nType );
-    void ReleaseTraceLink( const unsigned int& id );
-    void WriteTraceA( const unsigned int& id, const char* szData, va_list args );
-    void WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );
     void InitModule();
     void TerminateModule();
+
+    unsigned int CreateTraceLink_PipeAnsi( const char* szName );
+    unsigned int CreateTraceLink_PipeWChar( const char* szName );
+    unsigned int CreateTraceLink_TcpAnsi( const char* szName, const char* addr );
+    unsigned int CreateTraceLink_TcpWChar( const char* szName, const char* addr );
+    void ReleaseTraceLink( const unsigned int& id );
+    
+    void WriteTraceA( const unsigned int& id, const char* szData, va_list args );
+    void WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );
     
     
     /**
@@ -41,16 +46,43 @@ extern "C"
         g_pTraceLink = NULL;
     }
     
+        
+    /**
+     *
+     */
+    unsigned int CreateTraceLink_PipeAnsi(const char* szName)
+    {
+        return g_pTraceLink->CreateTraceLink_PipeAnsi(szName);
+    }
     
-	/**
-	 *
-	 */
-	unsigned int CreateTraceLink( const char* szName, int nType )
-	{
-		return g_pTraceLink->CreateTraceLink(szName, nType);
-	}
 
-
+    /**
+     *
+     */
+    unsigned int CreateTraceLink_PipeWChar(const char* szName)
+    {
+        return g_pTraceLink->CreateTraceLink_PipeWChar(szName);
+    }
+    
+    
+    /**
+     *
+     */
+    unsigned int CreateTraceLink_TcpAnsi(const char* szName, const char* addr)
+    {
+        return g_pTraceLink->CreateTraceLink_TcpAnsi(szName, addr);
+    }
+    
+    
+    /**
+     *
+     */
+    unsigned int CreateTraceLink_TcpWChar(const char* szName, const char* addr)
+    {
+        return g_pTraceLink->CreateTraceLink_TcpWChar(szName, addr);
+    }
+    
+    
 	/**
 	 *
 	 */

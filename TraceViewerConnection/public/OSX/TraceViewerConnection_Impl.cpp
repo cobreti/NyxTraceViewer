@@ -1,217 +1,303 @@
-#include "TraceClientLink_Impl.hpp"
+#include "TraceViewerConnection_Impl.hpp"
 
 #include <stdio.h>
 #include <stdarg.h>
 
 
-/**
- *
- */
-void TraceClientLinkDll_Init(const char* szTraceLinkName, int charType)
+namespace Nyx
 {
-    CTraceClientLink::CreateInstance(szTraceLinkName, (CTraceClientLink::ECharType)charType);
-}
-
-void  TraceClientLinkDll_Release()
-{
-   CTraceClientLink::ReleaseInstance();
-}
-
-
-class CDummyTraceClientLink : public CTraceClientLink
-{
-public:
-   CDummyTraceClientLink() {};
-   virtual ~CDummyTraceClientLink() {};
-
-   virtual void Write( const char* szData, ... ) {}
-   virtual void Write( const wchar_t* wszData, ... ) {}
-
-};
-
-
-
-/**
- *
- */
-CTraceClientLink_Impl*			CTraceClientLink_Impl::s_pInstance = NULL;
-
-static CDummyTraceClientLink  s_DummyTraceClientLink;
-
-
-/**
- *
- */
-void CTraceClientLink::CreateInstance(const char* szTraceLinkName, CTraceClientLink::ECharType charType)
-{
-	CTraceClientLink_Impl::CreateInstance(szTraceLinkName, charType);
-}
-
-/**
- *
- */
-void CTraceClientLink::CreateDllInstance(void* pModule, const char* szTraceLinkName, CTraceClientLink::ECharType charType)
-{
-   typedef void (*TraceClientLinkDll_InitProc)(const char* szTraceLinkName, int);
-
-   TraceClientLinkDll_InitProc         InitProc = (TraceClientLinkDll_InitProc)dlsym(pModule, "_TraceClientLinkDll_Init");
-
-   if ( NULL == InitProc )
-        InitProc = (TraceClientLinkDll_InitProc)dlsym(pModule, "TraceClientLinkDll_Init");
-
-   if ( InitProc != NULL )
-      InitProc(szTraceLinkName, charType);
-}
-
-
-/**
- *
- */
-void CTraceClientLink::ReleaseDllInstance(void* pModule)
-{
-   typedef void (*TraceClientLinkDll_ReleaseProc)();
-
-   TraceClientLinkDll_ReleaseProc         ReleaseProc = (TraceClientLinkDll_ReleaseProc)dlsym(pModule, "_TraceClientLinkDll_Release");
-
-   if ( ReleaseProc != NULL )
-      ReleaseProc();
-}
-
-
-/**
- *
- */
-void CTraceClientLink::ReleaseInstance()
-{
-	CTraceClientLink_Impl::ReleaseInstance();
-}
-
-
-/**
- *
- */
-CTraceClientLink& CTraceClientLink::Instance()
-{
-	return CTraceClientLink_Impl::Instance();
-}
-
-
-/**
- *
- */
-void CTraceClientLink_Impl::CreateInstance(const char* szTraceLinkName, CTraceClientLink::ECharType charType)
-{
-   if ( s_pInstance == NULL )
-	   s_pInstance = new CTraceClientLink_Impl(szTraceLinkName, charType);
-}
-
-
-/**
- *
- */
-void CTraceClientLink_Impl::ReleaseInstance()
-{
-   if ( s_pInstance != NULL )
-   {
-	   delete s_pInstance;
-      s_pInstance = NULL;
-   }
-}
-
-
-/**
- *
- */
-CTraceClientLink& CTraceClientLink_Impl::Instance()
-{
-   if ( s_pInstance != NULL )
-       return *s_pInstance;
-
-   return s_DummyTraceClientLink;
-}
-
-
-/**
- *
- */
-CTraceClientLink_Impl::CTraceClientLink_Impl(const char* szTraceLinkName, ECharType charType) :
-m_pModule(NULL),
-m_pfctInitModule(NULL),
-m_pfctTerminateModule(NULL),
-m_pfctCreateTraceLink(NULL),
-m_pfctReleaseTraceLink(NULL),
-m_pfctWriteTraceA(NULL),
-m_pfctWriteTraceW(NULL),
-m_id(0)
-{
-    LoadConnectionModule();
-
-	if ( m_pfctCreateTraceLink && m_pfctReleaseTraceLink )
-		m_id = m_pfctCreateTraceLink(szTraceLinkName, charType);
-}
-
-
-/**
- *
- */
-CTraceClientLink_Impl::~CTraceClientLink_Impl()
-{
-	if ( m_id > 0 && m_pfctReleaseTraceLink )
-		m_pfctReleaseTraceLink(m_id);
-
-	if ( m_pModule )
+    /**
+     *
+     */
+    class CDummyTraceViewerConnection : public CTraceViewerConnection
     {
-        m_pfctTerminateModule();
-		dlclose(m_pModule);
-    }
-}
+    public:
+       CDummyTraceViewerConnection() {};
+       virtual ~CDummyTraceViewerConnection() {};
+
+       virtual void Write( const char* szData, ... ) {}
+       virtual void Write( const wchar_t* wszData, ... ) {}
+
+    };
 
 
-/**
- *
- */
-void CTraceClientLink_Impl::Write(const char* szData, ...)
-{
-	if ( m_id > 0 && m_pfctWriteTraceA )
+    /**
+     *
+     */
+    CTraceViewerConnection_Impl*			CTraceViewerConnection_Impl::s_pInstance = NULL;
+
+    static CDummyTraceViewerConnection      s_DummyTraceViewerConnection;
+
+
+    /**
+     *
+     */
+    void CTraceViewerConnection_Pipe_Ansi::CreateInstance(const char* ModuleName)
     {
-        va_list args;
-        va_start(args, szData);
-		m_pfctWriteTraceA(m_id, szData, args);
-        va_end(args);
+        CTraceViewerConnection_Pipe_Ansi_Impl::CreateInstance(ModuleName);
     }
-}
-
-
-/**
- *
- */
-void CTraceClientLink_Impl::Write( const wchar_t* wszData, ... )
-{
-	if ( m_id > 0 && m_pfctWriteTraceW )
-    {
-        va_list args;
-        va_start(args, wszData);
-		m_pfctWriteTraceW(m_id, wszData, args);
-        va_end(args);
-    }
-}
-
-
-/**
- *
- */
-bool CTraceClientLink_Impl::LoadConnectionModule()
-{
-    m_pModule = dlopen("./libTraceClientLink.dylib", RTLD_NOW);
-	if ( m_pModule )
-	{
-        m_pfctInitModule = (PFCTInitModule)dlsym(m_pModule, "InitModule");
-        m_pfctTerminateModule = (PFCTTerminateModule)dlsym(m_pModule, "TerminateModule");
-        m_pfctCreateTraceLink = (PFCTCreateTraceLink)dlsym(m_pModule, "CreateTraceLink");
-		m_pfctReleaseTraceLink = (PFCTReleaseTraceLink)dlsym(m_pModule, "ReleaseTraceLink");
-		m_pfctWriteTraceA = (PFCTWriteTraceA)dlsym(m_pModule, "WriteTraceA");
-		m_pfctWriteTraceW = (PFCTWriteTraceW)dlsym(m_pModule, "WriteTraceW");
-	}
     
-    m_pfctInitModule();
+
+    /**
+     *
+     */
+    void CTraceViewerConnection_Pipe_WChar::CreateInstance(const char* ModuleName)
+    {
+        CTraceViewerConnection_Pipe_WChar_Impl::CreateInstance(ModuleName);
+    }
+    
+    
+    /**
+     *
+     */
+    void CTraceViewerConnection_TcpIp_Ansi::CreateInstance(const char* ModuleName, const char* addr)
+    {
+        CTraceViewerConnection_TcpIp_Ansi_Impl::CreateInstance(ModuleName, addr);
+    }
+    
+    
+    /**
+     *
+     */
+    void CTraceViewerConnection_TcpIp_WChar::CreateInstance(const char* ModuleName, const char* addr)
+    {
+        CTraceViewerConnection_TcpIp_WChar_Impl::CreateInstance(ModuleName, addr);
+    }
+    
+    
+    /**
+     *
+     */
+    void CTraceViewerConnection::ReleaseInstance()
+    {
+        CTraceViewerConnection_Impl::ReleaseInstance();
+    }
+
+
+    /**
+     *
+     */
+    CTraceViewerConnection& CTraceViewerConnection::Instance()
+    {
+        return CTraceViewerConnection_Impl::Instance();
+    }
+
+
+    /**
+     *
+     */
+    void CTraceViewerConnection_Impl::ReleaseInstance()
+    {
+       if ( s_pInstance != NULL )
+       {
+           delete s_pInstance;
+          s_pInstance = NULL;
+       }
+    }
+
+
+    /**
+     *
+     */
+    CTraceViewerConnection& CTraceViewerConnection_Impl::Instance()
+    {
+       if ( s_pInstance != NULL )
+           return *s_pInstance;
+
+       return s_DummyTraceViewerConnection;
+    }
+
+
+    /**
+     *
+     */
+    CTraceViewerConnection_Impl::CTraceViewerConnection_Impl() :
+    m_pModule(NULL),
+    m_pfctInitModule(NULL),
+    m_pfctTerminateModule(NULL),
+    m_pfctReleaseTraceLink(NULL),
+    m_pfctWriteTraceA(NULL),
+    m_pfctWriteTraceW(NULL),
+    m_id(0),
+    m_bLoaded(false)
+    {
+        LoadConnectionModule();
+    }
+
+
+    /**
+     *
+     */
+    CTraceViewerConnection_Impl::~CTraceViewerConnection_Impl()
+    {
+        if ( m_id > 0 && m_pfctReleaseTraceLink )
+            m_pfctReleaseTraceLink(m_id);
+
+        if ( m_pModule )
+        {
+            m_pfctTerminateModule();
+            dlclose(m_pModule);
+        }
+    }
+
+
+    /**
+     *
+     */
+    void CTraceViewerConnection_Impl::Write(const char* szData, ...)
+    {
+        if ( m_id > 0 && m_pfctWriteTraceA )
+        {
+            va_list args;
+            va_start(args, szData);
+            m_pfctWriteTraceA(m_id, szData, args);
+            va_end(args);
+        }
+    }
+
+
+    /**
+     *
+     */
+    void CTraceViewerConnection_Impl::Write( const wchar_t* wszData, ... )
+    {
+        if ( m_id > 0 && m_pfctWriteTraceW )
+        {
+            va_list args;
+            va_start(args, wszData);
+            m_pfctWriteTraceW(m_id, wszData, args);
+            va_end(args);
+        }
+    }
+
+
+    /**
+     *
+     */
+    bool CTraceViewerConnection_Impl::LoadConnectionModule()
+    {
+        m_pModule = dlopen("./libTraceViewerConnection.dylib", RTLD_NOW);
+        if ( m_pModule )
+        {
+            m_pfctInitModule = (PFCTInitModule)dlsym(m_pModule, "InitModule");
+            m_pfctTerminateModule = (PFCTTerminateModule)dlsym(m_pModule, "TerminateModule");
+            m_pfctReleaseTraceLink = (PFCTReleaseTraceLink)dlsym(m_pModule, "ReleaseTraceLink");
+            m_pfctWriteTraceA = (PFCTWriteTraceA)dlsym(m_pModule, "WriteTraceA");
+            m_pfctWriteTraceW = (PFCTWriteTraceW)dlsym(m_pModule, "WriteTraceW");
+        }
+        
+        if ( m_pfctInitModule )
+        {
+            m_pfctInitModule();
+            m_bLoaded = true;
+        }
+    }
+    
+    
+    /**
+     *
+     */
+    void CTraceViewerConnection_Pipe_Ansi_Impl::CreateInstance(const char* ModuleName)
+    {
+        if ( s_pInstance == NULL )
+            s_pInstance = new CTraceViewerConnection_Pipe_Ansi_Impl(ModuleName);
+    }
+
+    
+    /**
+     *
+     */
+    CTraceViewerConnection_Pipe_Ansi_Impl::CTraceViewerConnection_Pipe_Ansi_Impl(const char* ModuleName) : CTraceViewerConnection_Impl()
+    {
+        typedef unsigned int (*PFCTCreateConnection)(const char* szName);
+        
+        if ( Loaded() )
+        {
+            PFCTCreateConnection  pfctCreateConnection = (PFCTCreateConnection)dlsym(m_pModule, "CreateTraceLink_PipeAnsi");
+
+            if ( pfctCreateConnection )
+                m_id = pfctCreateConnection(ModuleName);
+        }
+    }
+
+    
+    /**
+     *
+     */
+    void CTraceViewerConnection_Pipe_WChar_Impl::CreateInstance(const char* ModuleName)
+    {
+        if ( s_pInstance == NULL )
+            s_pInstance = new CTraceViewerConnection_Pipe_WChar_Impl(ModuleName);
+    }
+    
+    
+    /**
+     *
+     */
+    CTraceViewerConnection_Pipe_WChar_Impl::CTraceViewerConnection_Pipe_WChar_Impl(const char* ModuleName) : CTraceViewerConnection_Impl()
+    {
+        typedef unsigned int (*PFCTCreateConnection)(const char* szName);
+        
+        if ( Loaded() )
+        {
+            PFCTCreateConnection  pfctCreateConnection = (PFCTCreateConnection)dlsym(m_pModule, "CreateTraceLink_PipeWChar");
+            
+            if ( pfctCreateConnection )
+                m_id = pfctCreateConnection(ModuleName);
+        }
+    }
+    
+
+    /**
+     *
+     */
+    void CTraceViewerConnection_TcpIp_Ansi_Impl::CreateInstance(const char* ModuleName, const char* addr)
+    {
+        if ( s_pInstance == NULL )
+            s_pInstance = new CTraceViewerConnection_TcpIp_Ansi_Impl(ModuleName, addr);
+    }
+    
+    
+    /**
+     *
+     */
+    CTraceViewerConnection_TcpIp_Ansi_Impl::CTraceViewerConnection_TcpIp_Ansi_Impl(const char* ModuleName, const char* addr) : CTraceViewerConnection_Impl()
+    {
+        typedef unsigned int (*PFCTCreateConnection)(const char* szName, const char* addr);
+        
+        if ( Loaded() )
+        {
+            PFCTCreateConnection  pfctCreateConnection = (PFCTCreateConnection)dlsym(m_pModule, "CreateTraceLink_TcpAnsi");
+            
+            if ( pfctCreateConnection )
+                m_id = pfctCreateConnection(ModuleName, addr);
+        }
+    }
+
+    
+    /**
+     *
+     */
+    void CTraceViewerConnection_TcpIp_WChar_Impl::CreateInstance(const char* ModuleName, const char* addr)
+    {
+        if ( s_pInstance == NULL )
+            s_pInstance = new CTraceViewerConnection_TcpIp_WChar_Impl(ModuleName, addr);
+    }
+    
+    
+    /**
+     *
+     */
+    CTraceViewerConnection_TcpIp_WChar_Impl::CTraceViewerConnection_TcpIp_WChar_Impl(const char* ModuleName, const char* addr) : CTraceViewerConnection_Impl()
+    {
+        typedef unsigned int (*PFCTCreateConnection)(const char* szName, const char* addr);
+        
+        if ( Loaded() )
+        {
+            PFCTCreateConnection  pfctCreateConnection = (PFCTCreateConnection)dlsym(m_pModule, "CreateTraceLink_TcpWChar");
+            
+            if ( pfctCreateConnection )
+                m_id = pfctCreateConnection(ModuleName, addr);
+        }
+    }
 }

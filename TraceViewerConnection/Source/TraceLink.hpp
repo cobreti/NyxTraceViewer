@@ -3,7 +3,6 @@
 
 #include "Nyx.hpp"
 #include "NyxNet.hpp"
-#include "NyxNetPipeTraceOutput.hpp"
 
 #include <map>
 
@@ -16,7 +15,11 @@ public:
     CTraceLink();
     ~CTraceLink();
 
-    unsigned int CreateTraceLink( const char* szName, int nType );
+    unsigned int CreateTraceLink_PipeAnsi( const char* szName );
+    unsigned int CreateTraceLink_PipeWChar( const char* szName );
+    unsigned int CreateTraceLink_TcpAnsi( const char* szName, const char* szAddr );
+    unsigned int CreateTraceLink_TcpWChar( const char* szName, const char* szAddr );
+    
     void ReleaseTraceLink( const unsigned int& id );
     void WriteTraceA( const unsigned int& id, const char* szData, va_list args );
     void WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );

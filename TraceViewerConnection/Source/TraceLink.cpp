@@ -1,6 +1,9 @@
 #include "TraceLink.hpp"
 #include <stdarg.h>
 
+#include <NyxNetPipeTraceOutput.hpp>
+#include <NyxNetTcpIpTraceOutput.hpp>
+
 
 /**
  *
@@ -31,22 +34,72 @@ CTraceLink::~CTraceLink()
 /**
  *
  */
-unsigned int CTraceLink::CreateTraceLink( const char* szName, int nType )
+unsigned int CTraceLink::CreateTraceLink_PipeAnsi( const char* szName )
 {
-    Nyx::ETraceCompositorCharSet    eCharSet = Nyx::eTCCS_Ansi;
 	Nyx::CTraceCompositorRef		refTraceCompositor;
 	unsigned int					id = m_NextAvailID ++;
-
-    if ( nType != 0 )
-        eCharSet = Nyx::eTCCS_WideChar;
-
-    refTraceCompositor = Nyx::CTraceCompositor::Alloc(eCharSet, false);
-
+    
+    refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_Ansi, false);
+    
 	m_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
 	
 	refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc(szName) );
+    
+	return id;   
+}
 
-	return id;
+
+/**
+ *
+ */
+unsigned int CTraceLink::CreateTraceLink_PipeWChar( const char* szName )
+{
+	Nyx::CTraceCompositorRef		refTraceCompositor;
+	unsigned int					id = m_NextAvailID ++;
+    
+    refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_WideChar, false);
+    
+	m_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
+	
+	refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc(szName) );
+    
+	return id;   
+}
+
+
+/**
+ *
+ */
+unsigned int CTraceLink::CreateTraceLink_TcpAnsi( const char* szName, const char* addr )
+{
+	Nyx::CTraceCompositorRef		refTraceCompositor;
+	unsigned int					id = m_NextAvailID ++;
+    
+    refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_Ansi, false);
+    
+	m_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
+	
+	refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(szName, addr) );
+    
+	return id;   
+}
+
+
+/**
+ *
+ */
+unsigned int CTraceLink::CreateTraceLink_TcpWChar( const char* szName, const char* addr )
+{
+	Nyx::CTraceCompositorRef		refTraceCompositor;
+	unsigned int					id = m_NextAvailID ++;
+    
+    refTraceCompositor = Nyx::CTraceCompositor::Alloc(Nyx::eTCCS_WideChar, false);
+    
+	m_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
+	
+	refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(szName, addr) );
+    
+	return id;   
 }
 
 

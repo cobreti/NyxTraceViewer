@@ -218,7 +218,7 @@
 				EXECUTABLE_PREFIX = lib;
 				MACH_O_TYPE = mh_dylib;
 				NyxPath = ../../../Nyx;
-				PRODUCT_NAME = TraceClientLink;
+				PRODUCT_NAME = TraceViewerConnection;
 			};
 			name = Debug;
 		};
@@ -227,7 +227,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				NyxPath = ../../../Nyx;
-				PRODUCT_NAME = TraceClientLink;
+				PRODUCT_NAME = TraceViewerConnection;
 			};
 			name = Release;
 		};
