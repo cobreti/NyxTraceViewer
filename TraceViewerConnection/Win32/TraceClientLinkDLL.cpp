@@ -5,7 +5,10 @@
 #include "TraceClientLinkDLL.h"
 #include "TraceLink.hpp"
 
+#include <NyxNet.hpp>
+
 CTraceLink*                             g_pTraceLink = NULL;
+NyxNet::CModuleRef                      g_refNetModule;
 
 
 void OnProcessAttach();
@@ -45,6 +48,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 void OnProcessAttach()
 {
     g_pTraceLink = new CTraceLink();
+    g_refNetModule = NyxNet::CModule::Alloc();
 }
 
 
@@ -55,6 +59,8 @@ void OnProcessDetach()
 {
     delete g_pTraceLink;
     g_pTraceLink = NULL;
+
+    g_refNetModule = NULL;
 }
 
 

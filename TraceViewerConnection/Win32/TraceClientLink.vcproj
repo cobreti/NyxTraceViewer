@@ -63,7 +63,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
-				OutputFile="..\libs\win32\debug\TraceViewerConnection.dll"
+				OutputFile="..\libs\win32\debug\NyxTraceViewerConnection.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(NyxLibs)\lib\win32\debug&quot;"
 				GenerateDebugInformation="true"
@@ -141,7 +141,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
-				OutputFile="..\libs\win32\release\TraceViewerConnection.dll"
+				OutputFile="..\libs\win32\release\NyxTraceViewerConnection.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(NyxLibs)\lib\win32\release&quot;"
 				GenerateDebugInformation="true"
@@ -249,24 +249,64 @@
 			Name="public"
 			>
 			<File
-				RelativePath="..\public\Win32\TraceClientLink.hpp"
-				>
-			</File>
-			<File
-				RelativePath="..\public\Win32\TraceClientLink_Impl.cpp"
+				RelativePath="..\public\Win32\TraceViewerConnection.hpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
+					ExcludedFromBuild="true"
 					>
 					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
 					/>
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath="..\public\Win32\TraceClientLink_Impl.hpp"
+				RelativePath="..\public\Win32\TraceViewerConnection_Impl.cpp"
 				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\public\Win32\TraceViewerConnection_Impl.hpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 		</Filter>
 		<File
