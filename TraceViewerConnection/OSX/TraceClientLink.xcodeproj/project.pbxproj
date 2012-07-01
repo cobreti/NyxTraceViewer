@@ -15,7 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1674EDDA15336A9A00969EB0 /* libTraceClientLink.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libTraceClientLink.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		1674EDDA15336A9A00969EB0 /* libTraceClientLink.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; name = libTraceClientLink.dylib; path = libTraceViewerConnection.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		1674EDDE15336BCA00969EB0 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = SOURCE_ROOT; };
 		1674EDF915336C6200969EB0 /* TraceLink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceLink.cpp; path = ../Source/TraceLink.cpp; sourceTree = "<group>"; };
 		1674EDFA15336C6200969EB0 /* TraceLink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceLink.hpp; path = ../Source/TraceLink.hpp; sourceTree = "<group>"; };
@@ -218,7 +218,7 @@
 				EXECUTABLE_PREFIX = lib;
 				MACH_O_TYPE = mh_dylib;
 				NyxPath = ../../../Nyx;
-				PRODUCT_NAME = TraceViewerConnection;
+				PRODUCT_NAME = NyxTraceViewerConnection;
 			};
 			name = Debug;
 		};
@@ -227,7 +227,7 @@
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
 				NyxPath = ../../../Nyx;
-				PRODUCT_NAME = TraceViewerConnection;
+				PRODUCT_NAME = NyxTraceViewerConnection;
 			};
 			name = Release;
 		};

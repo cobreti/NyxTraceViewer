@@ -1,9 +1,9 @@
-#ifndef _TRACEVIEWERCONNECTION_IMPL_HPP_
-#define _TRACEVIEWERCONNECTION_IMPL_HPP_
+#ifndef _NYXTRACEVIEWERCONNECTION_IMPL_HPP_
+#define _NYXTRACEVIEWERCONNECTION_IMPL_HPP_
 
 #include <dlfcn.h>
 #include <stdarg.h>
-#include "TraceViewerConnection.hpp"
+#include "NyxTraceViewerConnection.hpp"
 
 namespace Nyx
 {
@@ -106,5 +106,5 @@ namespace Nyx
     };
 }
 
-#endif // _TRACEVIEWERCONNECTION_IMPL_HPP_
+#endif // _NYXTRACEVIEWERCONNECTION_IMPL_HPP_
 

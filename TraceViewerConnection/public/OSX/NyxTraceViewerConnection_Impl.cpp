@@ -1,4 +1,4 @@
-#include "TraceViewerConnection_Impl.hpp"
+#include "NyxTraceViewerConnection_Impl.hpp"
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -176,7 +176,7 @@ namespace Nyx
      */
     bool CTraceViewerConnection_Impl::LoadConnectionModule()
     {
-        m_pModule = dlopen("./libTraceViewerConnection.dylib", RTLD_NOW);
+        m_pModule = dlopen("./libNyxTraceViewerConnection.dylib", RTLD_NOW);
         if ( m_pModule )
         {
             m_pfctInitModule = (PFCTInitModule)dlsym(m_pModule, "InitModule");

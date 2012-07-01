@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1674EDD915336A9A00969EB0"
-               BuildableName = "libTraceClientLink.dylib"
+               BuildableName = "libTraceViewerConnection.dylib"
                BlueprintName = "TraceClientLink"
                ReferencedContainer = "container:TraceClientLink.xcodeproj">
             </BuildableReference>
@@ -39,7 +39,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1674EDD915336A9A00969EB0"
-            BuildableName = "libTraceClientLink.dylib"
+            BuildableName = "libTraceViewerConnection.dylib"
             BlueprintName = "TraceClientLink"
             ReferencedContainer = "container:TraceClientLink.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1674EDD915336A9A00969EB0"
-            BuildableName = "libTraceClientLink.dylib"
+            BuildableName = "libTraceViewerConnection.dylib"
             BlueprintName = "TraceClientLink"
             ReferencedContainer = "container:TraceClientLink.xcodeproj">
          </BuildableReference>
