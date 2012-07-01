@@ -63,7 +63,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
-				OutputFile="..\libs\win32\debug\$(ProjectName).dll"
+				OutputFile="..\libs\win32\debug\TraceViewerConnection.dll"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(NyxLibs)\lib\win32\debug&quot;"
 				GenerateDebugInformation="true"
@@ -141,7 +141,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="NyxBase.lib NyxNet.lib ws2_32.lib winmm.lib"
-				OutputFile="..\libs\win32\release\$(ProjectName).dll"
+				OutputFile="..\libs\win32\release\TraceViewerConnection.dll"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(NyxLibs)\lib\win32\release&quot;"
 				GenerateDebugInformation="true"

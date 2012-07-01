@@ -67,9 +67,36 @@ void OnProcessDetach()
 /**
  *
  */
-unsigned int __cdecl CreateTraceLink( const char* szName, int nType )
+unsigned int __cdecl CreateTraceLink_PipeAnsi( const char* szName )
 {
-    return g_pTraceLink->CreateTraceLink(szName, nType);
+    return g_pTraceLink->CreateTraceLink_PipeAnsi(szName);
+}
+
+
+/**
+ *
+ */
+unsigned int __cdecl CreateTraceLink_PipeWChar( const char* szName )
+{
+    return g_pTraceLink->CreateTraceLink_PipeWChar(szName);
+}
+
+
+/**
+ *
+ */
+unsigned int __cdecl CreateTraceLink_TcpAnsi( const char* szName, const char* szAddr )
+{
+    return g_pTraceLink->CreateTraceLink_TcpAnsi(szName, szAddr);
+}
+
+
+/**
+ *
+ */
+unsigned int __cdecl CreateTraceLink_TcpWChar( const char* szName, const char* szAddr )
+{
+    return g_pTraceLink->CreateTraceLink_TcpWChar(szName, szAddr);
 }
 
 
