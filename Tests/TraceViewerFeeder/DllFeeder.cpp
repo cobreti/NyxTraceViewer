@@ -1,5 +1,5 @@
 #include "DllFeeder.hpp"
-#include "TraceClientLink.hpp"
+#include "NyxTraceViewerConnection.hpp"
 #include "FeederSettings.hpp"
 
 #include <Nyx.hpp>
@@ -38,7 +38,7 @@ void CDllFeeder::OnBegin()
         Nyx::CAString     name;
         name = Settings().Name();
 
-        CTraceClientLink::CreateDllInstance(m_refExternalModule->GetHandle(), name.c_str(), CTraceClientLink::eCT_WideChar);
+//        CTraceClientLink::CreateDllInstance(m_refExternalModule->GetHandle(), name.c_str(), CTraceClientLink::eCT_WideChar);
 
         PFCTAllocDllFeedObject      pfctAlloc = (PFCTAllocDllFeedObject)m_refExternalModule->GetFct("AllocDllFeedObject");
         
@@ -65,7 +65,7 @@ void CDllFeeder::OnEnd()
 
     if ( m_refExternalModule->Valid() )
     {
-        CTraceClientLink::ReleaseDllInstance( m_refExternalModule->GetHandle() );
+//        CTraceClientLink::ReleaseDllInstance( m_refExternalModule->GetHandle() );
         m_refExternalModule->Unload();
     }
 }

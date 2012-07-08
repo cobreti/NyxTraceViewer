@@ -1,7 +1,7 @@
 #include "ExternalFeeder.hpp"
 #include "FeederSettings.hpp"
 
-#include "TraceClientLink.hpp"
+#include "NyxTraceViewerConnection.hpp"
 #include "FeederSettings.hpp"
 #include "FeederSource.hpp"
 
@@ -29,7 +29,8 @@ void CExternalFeeder::OnBegin()
 {
     Nyx::CAString     name;
     name = Settings().Name().c_str();
-    CTraceClientLink::CreateInstance(name.c_str(), CTraceClientLink::eCT_Ansi);
+    Nyx::CTraceViewerConnection_Pipe_Ansi::CreateInstance(name.c_str());
+//    CTraceClientLink::CreateInstance(name.c_str(), CTraceClientLink::eCT_Ansi);
 }
 
 
@@ -38,7 +39,7 @@ void CExternalFeeder::OnBegin()
  */
 void CExternalFeeder::OnEnd()
 {
-    CTraceClientLink::ReleaseInstance();
+    Nyx::CTraceViewerConnection::ReleaseInstance();
 }
 
 
@@ -58,7 +59,8 @@ void CExternalFeeder::OnSendTrace()
 
         Atext = text;
 
-        CTraceClientLink::Instance().Write(Atext.c_str());
+        Nyx::CTraceViewerConnection::Instance().Write(Atext.c_str());
+//        CTraceClientLink::Instance().Write(Atext.c_str());
         //CTraceClientLink::Instance().Write(L"Test with parameters : str = '%s' and value = %i (%Xh)", L"string value", i, i);
     }
 }
