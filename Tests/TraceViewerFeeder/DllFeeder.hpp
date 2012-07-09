@@ -3,7 +3,7 @@
 
 #include <NyxExternalModule.hpp>
 #include "FeederBase.hpp"
-#include "Win32\DllFeed\DllFeedObject.hpp"
+//#include "Win32\DllFeed\DllFeedObject.hpp"
 
 class CDllFeeder : public CFeederBase
 {
@@ -18,7 +18,7 @@ protected:
 
 protected:
 
-    CDllFeedObject*             m_pFeedObject;
+//    CDllFeedObject*             m_pFeedObject;
     Nyx::CExternalModuleRef     m_refExternalModule;
 };
 

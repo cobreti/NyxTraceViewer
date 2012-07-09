@@ -39,6 +39,7 @@ namespace TraceClientCore
     void CTraceChannel::Clear()
     {
         m_pPool->Repository().Clear(m_Name);
+		m_pPool->MemoryPool()->Clear();
     }
     
     

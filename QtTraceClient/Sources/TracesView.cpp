@@ -147,7 +147,18 @@ void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionView
 /**
  *
  */
-void CTracesView::OnModuleRemoved( const Nyx::CAString& ModuleName )
+void CTracesView::OnBeginClearModule( const Nyx::CAString& ModuleName )
+{
+    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+
+    refMethods->Lock();
+}
+
+
+/**
+ *
+ */
+void CTracesView::OnEndClearModule( const Nyx::CAString& ModuleName )
 {
     delete m_pItemsWalker;
     m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());

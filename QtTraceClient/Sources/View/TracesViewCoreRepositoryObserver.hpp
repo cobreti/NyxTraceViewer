@@ -20,7 +20,8 @@ public:
     virtual ~CTracesViewCoreRepositoryObserver();
 
     virtual void Insert( TraceClientCore::CTraceData* pTraceData );
-    virtual void Clear(const Nyx::CAString& ModuleName);
+    virtual void BeginClear(const Nyx::CAString& ModuleName);
+    virtual void EndClear(const Nyx::CAString& ModuleName);
 
 protected:
 

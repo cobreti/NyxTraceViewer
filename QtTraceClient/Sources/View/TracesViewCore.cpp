@@ -107,7 +107,10 @@ void CTracesViewCore::HandleMessage( Nyx::CMsg& msg )
             OnNewTraces( static_cast<CViewItemsMsg&>(msg).ViewItems() );
             break;
         case 1:
-            OnClearTraces( static_cast<CClearItemsMsg&>(msg).ModuleName() );
+            OnBeginClearModule( static_cast<CBeginClearItemsMsg&>(msg).ModuleName() );
+            break;
+        case 2:
+            OnEndClearModule( static_cast<CEndClearItemsMsg&>(msg).ModuleName() );
             break;
     };
 
@@ -160,7 +163,7 @@ void CTracesViewCore::OnNewTraces(CViewItems *pViewItems)
 /**
  *
  */
-void CTracesViewCore::OnClearTraces(const Nyx::CAString& ModuleName)
+void CTracesViewCore::OnBeginClearModule(const Nyx::CAString& ModuleName)
 {
     Nyx::CWString   wModuleName;
 
@@ -174,7 +177,30 @@ void CTracesViewCore::OnClearTraces(const Nyx::CAString& ModuleName)
 
     while ( ViewPos.Valid() )
     {
-        ViewPos.View()->OnModuleRemoved(ModuleName);
+        ViewPos.View()->OnBeginClearModule(ModuleName);
+        ViewPos.MoveToNext();
+    }
+}
+
+
+/**
+ *
+ */
+void CTracesViewCore::OnEndClearModule(const Nyx::CAString& ModuleName)
+{
+    Nyx::CWString   wModuleName;
+
+    wModuleName = ModuleName;
+
+    m_pViewItemsModulesMgr->ClearModule(wModuleName);
+
+    CTracesViewSetIterator      ViewPos(m_Views);
+
+    ViewPos.MoveToFirst();
+
+    while ( ViewPos.Valid() )
+    {
+        ViewPos.View()->OnEndClearModule(ModuleName);
         ViewPos.MoveToNext();
     }
 }

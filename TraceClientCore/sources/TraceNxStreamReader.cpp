@@ -51,7 +51,7 @@ namespace TraceClientCore
         Nyx::UInt32                     ModuleTimeRefInSeconds = 0;
         Nyx::UInt32                     ModuleTickCountRef = 0;
         
-        NYXTRACE(0x0, L"client module time reference : " << CModule::Instance().TraceTimeReference());
+        //NYXTRACE(0x0, L"client module time reference : " << CModule::Instance().TraceTimeReference());
 
         const Nyx::CTraceTimeReference&   rTimeRef = CModule::Instance().TraceTimeReference();
 
@@ -130,9 +130,9 @@ namespace TraceClientCore
                 pTraceData->TickCount() = m_ReadBuffer.GetBufferAs<char>();
             }
 
-            NYXTRACE(0x0, L"Time Ref in seconds : " << (int)TimeRefInSeconds << L" - tick count ref : " << (int)TickCountRef );
-            NYXTRACE(0x0, L"Module time ref in seconds : " << (int)ModuleTimeRefInSeconds << L" - module tick count ref : " << (int)ModuleTickCountRef );
-            NYXTRACE(0x0, L"Trace tick count : " << pTraceData->TickCount().c_str() );
+            //NYXTRACE(0x0, L"Time Ref in seconds : " << (int)TimeRefInSeconds << L" - tick count ref : " << (int)TickCountRef );
+            //NYXTRACE(0x0, L"Module time ref in seconds : " << (int)ModuleTimeRefInSeconds << L" - module tick count ref : " << (int)ModuleTickCountRef );
+            //NYXTRACE(0x0, L"Trace tick count : " << pTraceData->TickCount().c_str() );
             
             // data
             {

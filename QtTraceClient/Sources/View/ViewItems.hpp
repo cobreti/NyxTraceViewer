@@ -56,11 +56,11 @@ protected:
 /**
  *
  */
-class CClearItemsMsg : public Nyx::CMsg
-{
+class CBeginClearItemsMsg : public Nyx::CMsg
+{   
 public:
-    CClearItemsMsg() {}
-    virtual ~CClearItemsMsg() {}
+    CBeginClearItemsMsg() {}
+    virtual ~CBeginClearItemsMsg() {}
 
     virtual const Nyx::MsgIdentifier Id() const { return 1; }
 
@@ -72,5 +72,24 @@ protected:
     Nyx::CAString       m_ModuleName;
 };
 
+
+/**
+ *
+ */
+class CEndClearItemsMsg : public Nyx::CMsg
+{
+public:
+    CEndClearItemsMsg() {}
+    virtual ~CEndClearItemsMsg() {}
+
+    virtual const Nyx::MsgIdentifier Id() const { return 2; }
+
+    const Nyx::CAString& ModuleName() const { return m_ModuleName; }
+    Nyx::CAString& ModuleName()             { return m_ModuleName; }
+
+protected:
+
+    Nyx::CAString       m_ModuleName;
+};
 
 #endif // __VIEWITEMS_HPP__

@@ -83,7 +83,7 @@ void CChannelsMgnt::OnNewChannel()
     // Add pool
     //
 
-    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), channelName.c_str());
+    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(10 * 1024*1024), channelName.c_str());
     rModule.TracesPools().Add(refPool);
     rModule.PoolsUpdateClock().Insert(refPool);
 

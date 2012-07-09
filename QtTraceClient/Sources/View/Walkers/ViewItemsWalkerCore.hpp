@@ -48,6 +48,9 @@ public:
     virtual const float& Height() const;
     virtual const float& Width() const;
 
+    virtual void Lock();
+    virtual void Unlock();
+
 protected:
 
     enum EDirection
@@ -69,6 +72,8 @@ protected:
     void ClearModuleNodes();
     void InitFromModulesMgr();
 
+    bool Locked() const     { return m_LockedCount > 0; }
+
 protected:
 
     ViewItemsModuleWalkerNodeArray          m_Nodes;
@@ -85,6 +90,8 @@ protected:
     float                                   m_Width;
 
     CViewItemsModulesMgr&                   m_rViewItemsModulesMgr;
+
+    int                                     m_LockedCount;
 };
 
 #endif // VIEWITEMSWALKER_HPP

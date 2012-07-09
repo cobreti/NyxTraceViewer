@@ -54,7 +54,8 @@ protected:
     void Init();
 
     void OnNewTraces( CViewItems* pViewItems );
-    void OnClearTraces(const Nyx::CAString& ModuleName);
+    void OnBeginClearModule(const Nyx::CAString& ModuleName);
+    void OnEndClearModule(const Nyx::CAString& ModuleName);
 
 protected:
     Nyx::CMemoryPoolRef                                     m_refMemoryPool;

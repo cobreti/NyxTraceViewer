@@ -36,6 +36,9 @@ public:
 
     virtual const float& Height() const = 0;
     virtual const float& Width() const = 0;
+
+    virtual void Lock() = 0;
+    virtual void Unlock() = 0;
 };
 
 

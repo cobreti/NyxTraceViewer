@@ -21,6 +21,7 @@ public:
 
     virtual void* AllocMem(size_t size)         { return m_refObjectsPool->AllocMem(size); }
     virtual void FreeMem(void* pBlock)          { m_refObjectsPool->FreeMem(pBlock); }
+    virtual void Clear()                        { m_refObjectsPool->Clear(); }
 
 
 protected:

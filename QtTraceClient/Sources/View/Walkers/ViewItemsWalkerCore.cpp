@@ -4,6 +4,8 @@
 #include "../ViewItem.hpp"
 #include "../ViewItemsModulesMgr.hpp"
 
+#include <NyxDbg.hpp>
+
 /**
  *
  */
@@ -12,7 +14,8 @@ CViewItemsWalkerCore::CViewItemsWalkerCore(CViewItemsModulesMgr& rViewItemsModul
     m_LineNumber(0),
     m_Height(0.0f),
     m_Width(0.0f),
-    m_rViewItemsModulesMgr(rViewItemsModulesMgr)
+    m_rViewItemsModulesMgr(rViewItemsModulesMgr),
+    m_LockedCount(0)
 {
     m_rViewItemsModulesMgr.AttachWalker(this);
     InitFromModulesMgr();
@@ -27,6 +30,8 @@ CViewItemsWalkerCore::CViewItemsWalkerCore(const CViewItemsWalkerCore& walker) :
     m_Width(walker.m_Width),
     m_rViewItemsModulesMgr(walker.m_rViewItemsModulesMgr)
 {
+    NYXASSERT( !walker.Locked(), "WARNING attempting to copy a locked walker" );
+
     m_rViewItemsModulesMgr.AttachWalker(this);
 
     CopyDataFrom(walker);
@@ -297,7 +302,7 @@ bool CViewItemsWalkerCore::MoveTo(const float& y)
  */
 bool CViewItemsWalkerCore::ValidPos() const
 {
-    return m_Pos.Valid();
+    return !Locked() && m_Pos.Valid();
 }
 
 
@@ -401,6 +406,24 @@ const float& CViewItemsWalkerCore::Height() const
 const float& CViewItemsWalkerCore::Width() const
 {
     return m_Width;
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalkerCore::Lock()
+{
+    ++ m_LockedCount;
+}
+
+
+/**
+ *
+ */
+void CViewItemsWalkerCore::Unlock()
+{
+    -- m_LockedCount;
 }
 
 
