@@ -200,7 +200,7 @@ namespace Nyx
      */
     CTraceViewerConnection_Pipe_Ansi_Impl::CTraceViewerConnection_Pipe_Ansi_Impl(const char* ModuleName) : CTraceViewerConnection_Impl()
     {
-        typedef unsigned int (*PFCTCreateConnection)(const char* szName);
+        typedef unsigned int (__cdecl *PFCTCreateConnection)(const char* szName);
         
         if ( Loaded() )
         {
@@ -227,7 +227,7 @@ namespace Nyx
      */
     CTraceViewerConnection_Pipe_WChar_Impl::CTraceViewerConnection_Pipe_WChar_Impl(const char* ModuleName) : CTraceViewerConnection_Impl()
     {
-        typedef unsigned int (*PFCTCreateConnection)(const char* szName);
+        typedef unsigned int (__cdecl *PFCTCreateConnection)(const char* szName);
         
         if ( Loaded() )
         {
@@ -254,7 +254,7 @@ namespace Nyx
      */
     CTraceViewerConnection_TcpIp_Ansi_Impl::CTraceViewerConnection_TcpIp_Ansi_Impl(const char* ModuleName, const char* addr) : CTraceViewerConnection_Impl()
     {
-        typedef unsigned int (*PFCTCreateConnection)(const char* szName, const char* addr);
+        typedef unsigned int (__cdecl *PFCTCreateConnection)(const char* szName, const char* addr);
         
         if ( Loaded() )
         {
@@ -281,7 +281,7 @@ namespace Nyx
      */
     CTraceViewerConnection_TcpIp_WChar_Impl::CTraceViewerConnection_TcpIp_WChar_Impl(const char* ModuleName, const char* addr) : CTraceViewerConnection_Impl()
     {
-        typedef unsigned int (*PFCTCreateConnection)(const char* szName, const char* addr);
+        typedef unsigned int (__cdecl *PFCTCreateConnection)(const char* szName, const char* addr);
         
         if ( Loaded() )
         {

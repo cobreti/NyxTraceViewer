@@ -31,9 +31,9 @@ namespace Nyx
         bool Loaded() const     { return m_bLoaded; }
 
     protected:
-        typedef void (*PFCTReleaseTraceLink)( const unsigned int& id );
-        typedef void (*PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
-        typedef void (*PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
+        typedef void (__cdecl *PFCTReleaseTraceLink)( const unsigned int& id );
+        typedef void (__cdecl *PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
+        typedef void (__cdecl *PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
         
     protected:
 
