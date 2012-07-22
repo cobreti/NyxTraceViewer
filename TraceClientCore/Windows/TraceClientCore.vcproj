@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="TraceClientCore"
 	ProjectGUID="{25483872-8D29-414A-A694-FC0EBA4F38E8}"
 	RootNamespace="TraceClientCore"
 	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -17,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\Lib\Windows\x86\$(ConfigurationName)"
+			IntermediateDirectory="objs\x86\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\TraceClientCore.vsprops"
 			CharacterSet="1"
@@ -47,7 +48,7 @@
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
-				ProgramDataBaseFileName="../../lib/win32/debug/TraceClientCore.pdb"
+				ProgramDataBaseFileName="$(OutDir)\TraceClientCore.pdb"
 				BrowseInformation="1"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -64,7 +65,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../../lib/win32/debug/TraceClientCore.lib"
+				OutputFile="$(OutDir)\TraceClientCore.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -84,8 +85,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="..\..\Lib\Windows\x86\$(ConfigurationName)"
+			IntermediateDirectory="objs\x86\$(ConfigurationName)"
 			ConfigurationType="4"
 			InheritedPropertySheets=".\TraceClientCore.vsprops"
 			CharacterSet="1"
@@ -127,7 +128,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="../../lib/win32/release/TraceClientCore.lib"
+				OutputFile="$(OutDir)\TraceClientCore.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
