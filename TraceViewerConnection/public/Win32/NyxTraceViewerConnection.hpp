@@ -11,13 +11,6 @@ namespace Nyx
     {
     public:
 
-        enum ECharType
-        {
-            eCT_Ansi = 0,
-            eCT_WideChar
-        };
-
-        //static void CreateInstance(const char* szTraceLinkName, ECharType charType);
         static void ReleaseInstance();
         static CTraceViewerConnection& Instance();
 
