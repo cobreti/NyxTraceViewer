@@ -53,7 +53,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
         s_pDummyWnd = new QMainWindow();
     }
 
-    setParent( s_pDummyWnd, Qt::Window );
+//    setParent( s_pDummyWnd, Qt::Window );
 
     QIcon               PipeSourceIcon(":/TracesWindow/Icons/PipeSource-icon.png");
     QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");
@@ -155,7 +155,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pTracesView->Highlighters()->Add( m_refHighlighter );
 
     QString     title = windowTitle();
-    title += "     v";
+    title += " - ";
+    title += QString::number(CTraceClientApp::Instance().TracesWindows().GetWindowNo());
+    title += " -      v";
     title += CTraceClientApp::Instance().GetVersion();
     setWindowTitle(title);
 }

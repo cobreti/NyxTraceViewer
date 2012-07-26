@@ -5,6 +5,7 @@
 #include "TraceClientApp.h"
 
 #include <QToolButton>
+#include <QCloseEvent>
 
 #include "ui_MainWindow.h"
 
@@ -91,3 +92,14 @@ void CMainWindow::OnAbout()
 
     dlg.exec();
 }
+
+
+/**
+ *
+ */
+void CMainWindow::closeEvent(QCloseEvent* pEvent)
+{
+    if ( CTraceClientApp::Instance().TracesWindows().Count() > 0 )
+        pEvent->ignore();
+}
+

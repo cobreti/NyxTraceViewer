@@ -29,6 +29,10 @@ public slots:
 
 protected:
 
+    virtual void closeEvent(QCloseEvent *);
+
+protected:
+
     Ui::MainWindow*     ui;
 
     QToolButton*        m_pBtn_NewView;

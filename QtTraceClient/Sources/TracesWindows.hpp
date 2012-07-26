@@ -19,8 +19,11 @@ public:
 
     void Insert( CTracesWindow* pWindow );
     void Remove( CTracesWindow* pWindow );
+    size_t Count() const;
 
     void SetListener( ITracesWindowsListener* pListener );
+
+    const unsigned int GetWindowNo();
 
 protected:
 
@@ -30,6 +33,8 @@ protected:
 
     XTracesWindowSet            m_Windows;
     ITracesWindowsListener*     m_pListener;
+
+    unsigned int                m_WindowNo;
 };
 
 

@@ -8,7 +8,8 @@
  *
  */
 CTracesWindows::CTracesWindows() :
-    m_pListener(NULL)
+    m_pListener(NULL),
+    m_WindowNo(0)
 {
 }
 
@@ -45,7 +46,26 @@ void CTracesWindows::Remove(CTracesWindow *pWindow)
 /**
  *
  */
+size_t CTracesWindows::Count() const
+{
+    return m_Windows.size();
+}
+
+
+/**
+ *
+ */
 void CTracesWindows::SetListener(ITracesWindowsListener *pListener)
 {
     m_pListener = pListener;
 }
+
+
+/**
+ *
+ */
+const unsigned int CTracesWindows::GetWindowNo()
+{
+    return ++m_WindowNo;
+}
+
