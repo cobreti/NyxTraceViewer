@@ -49,6 +49,7 @@ public slots:
     void OnAbout();
     void OnHighlightColorSelection();
     void OnSearch();
+    void OnHideSearch();
 
 protected:
 
@@ -69,6 +70,7 @@ protected:
     QToolButton*            m_pBtn_About;
 
     QLineEdit*              m_pSearchText;
+    QToolButton*            m_pBtn_HideSearch;
     QToolButton*            m_pBtn_SearchNext;
     QToolButton*            m_pBtn_SearchPrevious;
     CColorBtn*              m_pBtn_HighlightColor;

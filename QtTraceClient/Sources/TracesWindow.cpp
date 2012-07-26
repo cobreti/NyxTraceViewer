@@ -20,6 +20,7 @@
 #include <QCloseEvent>
 #include <QFileDialog>
 #include <QLineEdit>
+#include <QKeyEvent>
 
 
 QMainWindow*        CTracesWindow::s_pDummyWnd = NULL;
@@ -39,6 +40,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SaveAs(NULL),
     m_pBtn_About(NULL),
     m_pSearchText(NULL),
+    m_pBtn_HideSearch(NULL),
     m_pBtn_SearchNext(NULL),
     m_pBtn_SearchPrevious(NULL),
     m_pBtn_HighlightColor(NULL),
@@ -64,6 +66,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               SearchPreviousIcon(":/TracesWindow/SearchPrevious");
     QIcon               HighlightColorSelectionIcon(":/TracesWindow/HighlightColorSelection");
     QIcon               SearchIcon(":/TracesWindow/Search");
+    QIcon               HideSearchIcon(":/TracesWindow/HideSearch");
 
     CTracesView* pBase = NULL;
 
@@ -109,6 +112,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SearchPrevious->setEnabled(false);
     m_pBtn_SearchPrevious->setIcon(SearchPreviousIcon);
 
+    m_pBtn_HideSearch = new QToolButton();
+    m_pBtn_HideSearch->setIcon(HideSearchIcon);
+    m_pBtn_HideSearch->setEnabled(false);
+
     m_pBtn_HighlightColor = new CChooseColorBtn();
 
     ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
@@ -128,6 +135,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->SearchToolBar->addWidget(m_pSearchText);
     ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
+    ui->SearchToolBar->addWidget(m_pBtn_HideSearch);
     ui->SearchToolBar->setIconSize( QSize(16, 16) );
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
@@ -137,6 +145,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
     connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
     connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
+    connect( m_pBtn_HideSearch, SIGNAL(clicked()), this, SLOT(OnHideSearch()));
     connect( m_pBtn_HighlightColor, SIGNAL(OnColorChanged(CColorBtn*)), this, SLOT(OnHighlightColorChanged(CColorBtn*)));
     connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
     connect( m_pBtn_HighlightColorSelection, SIGNAL(clicked()), this, SLOT(OnHighlightColorSelection()));
@@ -249,6 +258,8 @@ void CTracesWindow::OnSearchNext()
     m_pSearchEngine->Highlighter() = m_refHighlighter;
 
     m_pSearchEngine->Next();
+
+    m_pBtn_HideSearch->setEnabled(true);
 }
 
 
@@ -260,6 +271,8 @@ void CTracesWindow::OnSearchPrevious()
     m_pSearchEngine->Highlighter() = m_refHighlighter;
 
     m_pSearchEngine->Previous();
+
+    m_pBtn_HideSearch->setEnabled(true);
 }
 
 
@@ -300,12 +313,20 @@ void CTracesWindow::OnHighlightColorSelection()
  */
 void CTracesWindow::OnSearch()
 {
-    //QPoint              pt( m_pBtn_SourceFeeds->frameGeometry().left(), m_pBtn_SourceFeeds->frameGeometry().bottom() );
     QPoint              pt( frameGeometry().right()+1, frameGeometry().top() );
 
-    //pt = mapToGlobal(pt);
-
     m_pHighlightsMgrWnd->Show(pt, QSize(0, rect().height()));
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::OnHideSearch()
+{
+    m_pSearchEngine->Clear();
+
+    m_pBtn_HideSearch->setEnabled(false);
 }
 
 
@@ -320,3 +341,4 @@ void CTracesWindow::closeEvent(QCloseEvent *event)
     destroy();
     delete this;
 }
+

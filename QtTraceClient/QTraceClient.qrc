@@ -9,6 +9,7 @@
         <file alias="HighlightColorSelection">Icons/Color-Meter-icon.png</file>
         <file alias="About">Icons/FAQ-icon.png</file>
         <file alias="Search">Icons/search-icon.png</file>
+        <file alias="HideSearch">Icons/search-remove-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

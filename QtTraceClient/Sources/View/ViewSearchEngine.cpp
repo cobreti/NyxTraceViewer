@@ -181,3 +181,14 @@ void CViewSearchEngine::Previous()
     if ( pFoundItem != NULL )
         m_rView.Invalidate(true);
 }
+
+
+/**
+ *
+ */
+void CViewSearchEngine::Clear()
+{
+    m_FoundPos = 0;
+    m_rView.Invalidate(true);
+}
+

@@ -64,6 +64,7 @@ public:
 
     void Next();
     void Previous();
+    void Clear();
 
     CTracesView&    View()      { return m_rView; }
 
