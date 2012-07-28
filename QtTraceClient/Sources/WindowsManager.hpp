@@ -8,7 +8,7 @@
 class CMainWindow;
 
 /**
- *
+ * @brief The CWindowsManager class
  */
 class CWindowsManager
 {
@@ -34,19 +34,55 @@ public:
 
     void OnWindowClosing( CTracesWindow* pWindow );
 
+    void OnWindowMoved( CTracesWindow* pWindow, const QPoint& newPos );
+
     void AddTracesWindow( CTracesWindow* pWnd );
     void RemoveTracesWindow( CTracesWindow* pWnd );
+
+protected:
+
+    /**
+     * @brief The XTopLevelWndInfo class
+     */
+    class XTopLevelWndInfo
+    {
+    public:
+        XTopLevelWndInfo() : m_pWnd(NULL) {}
+        XTopLevelWndInfo( CTracesWindow* pWnd, const QPoint& pos ) :
+            m_pWnd(pWnd), m_WndPos(pos) {}
+        XTopLevelWndInfo(const XTopLevelWndInfo& info) :
+            m_pWnd(info.m_pWnd), m_WndPos(info.m_WndPos) {}
+        ~XTopLevelWndInfo() {}
+
+        CTracesWindow*  Window() const      { return m_pWnd; }
+        CTracesWindow*& Window()            { return m_pWnd; }
+
+        const QPoint&   WindowPos() const   { return m_WndPos; }
+        QPoint&         WindowPos()         { return m_WndPos; }
+
+        const XTopLevelWndInfo& operator = (const XTopLevelWndInfo& info)
+        {
+            m_pWnd = info.m_pWnd;
+            m_WndPos = info.m_WndPos;
+            return *this;
+        }
+
+        bool Valid() const      { return m_pWnd != NULL; }
+        void Clear()            { m_pWnd = NULL; m_WndPos = QPoint(); }
+
+    protected:
+
+        CTracesWindow*      m_pWnd;
+        QPoint              m_WndPos;
+    };
 
 protected:
 
     CTracesWindows      m_TracesWindows;
     QMainWindow*        m_pDummyParentWindow;
 
-    struct
-    {
-        CTracesWindow*      pWindow;
-        QPoint              pos;
-    }                   m_LastTopLevel;
+    XTopLevelWndInfo    m_CurrentTopLevel;
+    XTopLevelWndInfo    m_LastTopLevel;
 };
 
 #endif // WINDOWSMANAGER_HPP_

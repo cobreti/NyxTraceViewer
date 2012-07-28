@@ -216,7 +216,7 @@ void CTracesWindow::OnSourceFeedsBtnClicked()
 void CTracesWindow::OnNewView()
 {
     CTracesWindow* pWnd =  new CTracesWindow(NULL);
-    pWnd->show();
+    pWnd->showNormal();
 }
 
 
@@ -226,7 +226,7 @@ void CTracesWindow::OnNewView()
 void CTracesWindow::OnCloneView()
 {
     CTracesWindow* pWnd = new CTracesWindow(this);
-    pWnd->show();
+    pWnd->showNormal();
 }
 
 
@@ -348,7 +348,7 @@ void CTracesWindow::OnHideSearch()
  */
 void CTracesWindow::OnShowMainWindow()
 {
-    CTraceClientApp::Instance().MainWindow()->show();
+    CTraceClientApp::Instance().MainWindow()->showNormal();
     CTraceClientApp::Instance().MainWindow()->activateWindow();
 }
 
@@ -358,11 +358,10 @@ void CTracesWindow::OnShowMainWindow()
  */
 void CTracesWindow::closeEvent(QCloseEvent *event)
 {
-//    CWindowsManager::Instance().RemoveTracesWindow(this);
+    NYXTRACE(0x0, L"CTracesWindow::closeEvent");
 
     CWindowsManager::Instance().OnWindowClosing(this);
 
-//    event->accept();
     destroy();
     delete this;
 }
@@ -373,11 +372,16 @@ void CTracesWindow::closeEvent(QCloseEvent *event)
  */
 void CTracesWindow::showEvent(QShowEvent *)
 {
-    CWindowsManager::Instance().OnShowWindow(this);
-//    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
-//    QWidget*            pActiveWnd = pApp->activeWindow();
+    if ( isMinimized() )
+    {
+        NYXTRACE(0x0, L"CTracesWindow::showEvent - minimized");
+    }
+    else
+    {
+        NYXTRACE(0x0, L"CTracesWindow::showEvent");
+    }
 
-//    NYXTRACE(0x0, L"CTracesWindow show event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
+    CWindowsManager::Instance().OnShowWindow(this);
 }
 
 
@@ -386,10 +390,23 @@ void CTracesWindow::showEvent(QShowEvent *)
  */
 void CTracesWindow::hideEvent(QHideEvent *)
 {
-    CWindowsManager::Instance().OnHideWindow(this);
-//    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
-//    QWidget*            pActiveWnd = pApp->activeWindow();
+    if ( isMinimized() )
+    {
+        NYXTRACE(0x0, L"CTracesWindow::hideEvent - minimized");
+    }
+    else
+    {
+        NYXTRACE(0x0, L"CTracesWindow::hideEvent");
+    }
 
-//    NYXTRACE(0x0, L"CTracesWindow hide event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
+    CWindowsManager::Instance().OnHideWindow(this);
 }
 
+
+/**
+ *
+ */
+void CTracesWindow::moveEvent(QMoveEvent* pEvent)
+{
+    CWindowsManager::Instance().OnWindowMoved(this, pEvent->pos());
+}

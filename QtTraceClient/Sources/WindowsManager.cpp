@@ -20,7 +20,6 @@ CWindowsManager& CWindowsManager::Instance()
 CWindowsManager::CWindowsManager() :
     m_pDummyParentWindow(NULL)
 {
-    m_LastTopLevel.pWindow = NULL;
 }
 
 
@@ -56,27 +55,35 @@ void CWindowsManager::Terminate()
  */
 void CWindowsManager::OnShowWindow(CMainWindow *pWindow)
 {
-    if ( m_LastTopLevel.pWindow != NULL )
-    {
-        m_LastTopLevel.pWindow->setParent(m_pDummyParentWindow, Qt::Window);
-        m_LastTopLevel.pWindow->show();
-        m_LastTopLevel.pWindow->move( m_LastTopLevel.pos );
-    }
+//    if ( m_CurrentTopLevel.Valid() )
+//    {
+////        m_CurrentTopLevel.Window()->setParent(m_pDummyParentWindow, Qt::Window);
+//        m_CurrentTopLevel.Window()->showNormal();
+//        m_CurrentTopLevel.Window()->move( m_CurrentTopLevel.WindowPos() );
+
+//        m_LastTopLevel = m_CurrentTopLevel;
+//        m_CurrentTopLevel.Clear();
+//    }
 }
 
 
 /**
- *
+ * @brief CWindowsManager::OnShowWindow
+ * @param pWindow
  */
 void CWindowsManager::OnShowWindow(CTracesWindow *pWindow)
 {
-    CMainWindow*        pMainWindow = CTraceClientApp::Instance().MainWindow();
+//    if ( pWindow->isMinimized() )
+//    {
+//        return;
+//    }
 
-    if ( m_LastTopLevel.pWindow == NULL && pMainWindow->isHidden() )
-    {
-        m_LastTopLevel.pWindow = pWindow;
-        m_LastTopLevel.pos = pWindow->pos();
-    }
+//    CMainWindow*        pMainWindow = CTraceClientApp::Instance().MainWindow();
+
+//    if ( !m_CurrentTopLevel.Valid() && pMainWindow->isHidden() )
+//    {
+//        m_CurrentTopLevel = XTopLevelWndInfo(pWindow, pWindow->pos());
+//    }
 }
 
 
@@ -85,22 +92,27 @@ void CWindowsManager::OnShowWindow(CTracesWindow *pWindow)
  */
 void CWindowsManager::OnHideWindow(CMainWindow *pWindow)
 {
-    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
-    QWidget*        pActiveWindow = pApp->activeWindow();
-    CTracesWindow*  pTracesWindow = TracesWindows().FindRelatedTracesWindow(pActiveWindow);
+//    if ( pWindow->isMinimized() )
+//    {
+//        return;
+//    }
 
-    if ( pTracesWindow == NULL )
-        pTracesWindow = TracesWindows().GetTopWindow();
+//    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
+//    QWidget*        pActiveWindow = pApp->activeWindow();
+//    CTracesWindow*  pTracesWindow = TracesWindows().FindRelatedTracesWindow(pActiveWindow);
 
-    m_LastTopLevel.pWindow = pTracesWindow;
+//    if ( pTracesWindow == NULL )
+//        pTracesWindow = TracesWindows().GetTopWindow();
 
-    if ( pTracesWindow != NULL )
-    {
-        m_LastTopLevel.pos = pTracesWindow->pos();
-        pTracesWindow->setParent(NULL, Qt::Window);
-        pTracesWindow->show();
-        pTracesWindow->move( m_LastTopLevel.pos );
-    }
+//    if ( pTracesWindow != NULL )
+//    {
+//        m_CurrentTopLevel = XTopLevelWndInfo(pTracesWindow, pTracesWindow->pos());
+////        m_CurrentTopLevel.Window()->setParent(NULL, Qt::Window);
+//        m_CurrentTopLevel.Window()->showNormal();
+//        m_CurrentTopLevel.Window()->move( m_CurrentTopLevel.WindowPos() );
+//    }
+//    else
+//        m_CurrentTopLevel.Clear();
 }
 
 
@@ -109,23 +121,32 @@ void CWindowsManager::OnHideWindow(CMainWindow *pWindow)
  */
 void CWindowsManager::OnHideWindow(CTracesWindow *pWindow)
 {
-    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
-    QWidget*        pMainWindow = CTraceClientApp::Instance().MainWindow();
+//    if ( pWindow->isMinimized() )
+//    {
+////        if ( pWindow != m_CurrentTopLevel.Window() )
+////            pWindow->setParent(NULL, Qt::Window);
 
-    if ( pWindow == m_LastTopLevel.pWindow && pMainWindow->isHidden() )
-    {
-         CTracesWindow* pTracesWindow = TracesWindows().GetTopWindow();
+//        return;
+//    }
 
-        m_LastTopLevel.pWindow = pTracesWindow;
+//    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
+//    QWidget*        pMainWindow = CTraceClientApp::Instance().MainWindow();
 
-        if ( pTracesWindow != NULL )
-        {
-            m_LastTopLevel.pos = pTracesWindow->pos();
-            pTracesWindow->setParent(NULL, Qt::Window);
-            pTracesWindow->show();
-            pTracesWindow->move( m_LastTopLevel.pos );
-        }
-    }
+//    if ( m_CurrentTopLevel.Valid() && m_CurrentTopLevel.Window() == pWindow )
+//    {
+//        CTracesWindow* pTracesWindow = TracesWindows().GetTopWindow();
+
+//        if ( pTracesWindow != NULL )
+//        {
+//            m_CurrentTopLevel = XTopLevelWndInfo(pTracesWindow, pTracesWindow->pos());
+////            m_CurrentTopLevel.Window()->setParent(NULL, Qt::Window);
+//            m_CurrentTopLevel.Window()->showNormal();
+//            m_CurrentTopLevel.Window()->move( m_CurrentTopLevel.WindowPos() );
+//        }
+//        else
+//            m_CurrentTopLevel.Clear();
+
+//    }
 }
 
 
@@ -136,16 +157,18 @@ void CWindowsManager::OnWindowClosing(CTracesWindow *pWindow)
 {
     RemoveTracesWindow(pWindow);
 
-    if ( pWindow == m_LastTopLevel.pWindow )
+    if ( pWindow == m_CurrentTopLevel.Window() )
     {
-        m_LastTopLevel.pWindow = NULL;
+        m_CurrentTopLevel.Clear();
 
         if ( TracesWindows().Count() > 0 )
         {
-            m_LastTopLevel.pWindow = TracesWindows().GetTopWindow();
-            m_LastTopLevel.pos = m_LastTopLevel.pWindow->pos();
-            m_LastTopLevel.pWindow->setParent(NULL, Qt::Window);
-            m_LastTopLevel.pWindow->show();
+//            CTracesWindow* pWnd = TracesWindows().GetTopWindow();
+
+//            m_CurrentTopLevel = XTopLevelWndInfo(pWnd, pWnd->pos());
+
+////            m_CurrentTopLevel.Window()->setParent(NULL, Qt::Window);
+//            m_CurrentTopLevel.Window()->showNormal();
         }
         else
         {
@@ -158,11 +181,21 @@ void CWindowsManager::OnWindowClosing(CTracesWindow *pWindow)
 /**
  *
  */
+void CWindowsManager::OnWindowMoved( CTracesWindow* pWindow, const QPoint& newPos )
+{
+    if ( pWindow == m_CurrentTopLevel.Window() )
+        m_CurrentTopLevel.WindowPos() = newPos;
+}
+
+
+/**
+ *
+ */
 void CWindowsManager::AddTracesWindow(CTracesWindow *pWnd)
 {
     TracesWindows().Insert(pWnd);
 
-    pWnd->setParent( m_pDummyParentWindow, Qt::Window );
+//    pWnd->setParent( m_pDummyParentWindow, Qt::Window );
 }
 
 
