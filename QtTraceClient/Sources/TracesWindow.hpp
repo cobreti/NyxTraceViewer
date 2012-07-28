@@ -50,10 +50,13 @@ public slots:
     void OnHighlightColorSelection();
     void OnSearch();
     void OnHideSearch();
+    void OnShowMainWindow();
 
 protected:
 
     virtual void closeEvent(QCloseEvent *);
+    virtual void showEvent(QShowEvent *);
+    virtual void hideEvent(QHideEvent *);
 
 protected:
 
@@ -61,6 +64,7 @@ protected:
 
     CTracesView*            m_pTracesView;
 
+    QToolButton*            m_pBtn_MainWindow;
     QToolButton*            m_pBtn_SourceFeeds;
     QToolButton*            m_pBtn_NewView;
     QToolButton*            m_pBtn_CloneView;
@@ -82,7 +86,9 @@ protected:
     CViewItemHighlighterRef     m_refHighlighter;
     CViewItemPattern_TextRef    m_refTextPattern;
 
-    static QMainWindow*     s_pDummyWnd;
+    QString                 m_WndName;
+
+//    static QMainWindow*     s_pDummyWnd;
 };
 
 

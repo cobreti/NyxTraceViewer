@@ -30,6 +30,8 @@ public slots:
 protected:
 
     virtual void closeEvent(QCloseEvent *);
+    virtual void showEvent(QShowEvent *);
+    virtual void hideEvent(QHideEvent *);
 
 protected:
 

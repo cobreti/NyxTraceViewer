@@ -5,6 +5,7 @@
 
 
 class CTracesWindow;
+class QWidget;
 class ITracesWindowsListener;
 
 
@@ -24,6 +25,9 @@ public:
     void SetListener( ITracesWindowsListener* pListener );
 
     const unsigned int GetWindowNo();
+
+    CTracesWindow* FindRelatedTracesWindow( QWidget* pWidget );
+    CTracesWindow* GetTopWindow();
 
 protected:
 

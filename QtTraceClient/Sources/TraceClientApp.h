@@ -4,7 +4,8 @@
 //#include <QtGui>
 
 #include "AppSettings.hpp"
-#include "TracesWindows.hpp"
+//#include "TracesWindows.hpp"
+#include "WindowsManager.hpp"
 
 #include "View/ViewItemsNodeObjectsPool.hpp"
 #include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
@@ -34,10 +35,13 @@ public:
     const CAppSettings&     AppSettings() const         { return m_AppSettings; }
     CAppSettings&           AppSettings()               { return m_AppSettings; }
 
-    const CTracesWindows&   TracesWindows() const       { return m_TracesWindows; }
-    CTracesWindows&         TracesWindows()             { return m_TracesWindows; }
+//    const CTracesWindows&   TracesWindows() const       { return m_TracesWindows; }
+//    CTracesWindows&         TracesWindows()             { return m_TracesWindows; }
 
     CMainWindow*            MainWindow() const          { return m_pMainWindow; }
+
+    CWindowsManager&        WindowsManager()            { return m_WindowsManager; }
+    const CWindowsManager&  WindowsManager() const      { return m_WindowsManager; }
 
     const char* GetVersion() const;
 
@@ -60,9 +64,11 @@ protected:
     int                 m_AppReturnValue;
     CAppSettings        m_AppSettings;
 
+    CWindowsManager     m_WindowsManager;
+
     CMainWindow*        m_pMainWindow;
     CTracesWindow*      m_pTracesWindow;
-    CTracesWindows      m_TracesWindows;
+//    CTracesWindows      m_TracesWindows;
 
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
     CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;

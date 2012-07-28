@@ -3,6 +3,7 @@
 #include "MainWindow/PipesMgntPage.hpp"
 #include "MainWindow/MainWindow.hpp"
 #include "TraceClientApp.h"
+#include "WindowsManager.hpp"
 #include "TraceChannel.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "PoolsUpdateClock.hpp"
@@ -23,7 +24,7 @@
 #include <QKeyEvent>
 
 
-QMainWindow*        CTracesWindow::s_pDummyWnd = NULL;
+//QMainWindow*        CTracesWindow::s_pDummyWnd = NULL;
 
 
 /**
@@ -32,6 +33,7 @@ QMainWindow*        CTracesWindow::s_pDummyWnd = NULL;
 CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui( new Ui::TracesWindow() ),
     m_pTracesView(NULL),
+    m_pBtn_MainWindow(NULL),
     m_pBtn_SourceFeeds(NULL),
     m_pBtn_NewView(NULL),
     m_pBtn_CloneView(NULL),
@@ -50,13 +52,14 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 {
     ui->setupUi(this);
 
-    if ( s_pDummyWnd == NULL )
-    {
-        s_pDummyWnd = new QMainWindow();
-    }
+//    if ( s_pDummyWnd == NULL )
+//    {
+//        s_pDummyWnd = new QMainWindow();
+//    }
 
 //    setParent( s_pDummyWnd, Qt::Window );
 
+    QIcon               MainWindowIcon(":/TracesWindow/MainWindow");
     QIcon               PipeSourceIcon(":/TracesWindow/Icons/PipeSource-icon.png");
     QIcon               NewViewIcon(":/TracesWindow/Icons/View-icon.png");
     QIcon               CloneViewIcon(":/TracesWindow/Icons/View-Copy-icon.png");
@@ -79,6 +82,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     ui->gridLayout->addWidget(m_pPipesMgntPage);
     ui->gridLayout->addWidget(m_pTracesView);
+
+    m_pBtn_MainWindow = new QToolButton();
+    m_pBtn_MainWindow->setIcon(MainWindowIcon);
 
     m_pBtn_SourceFeeds = new QToolButton();
     m_pBtn_SourceFeeds->setIcon(PipeSourceIcon);
@@ -118,6 +124,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_HighlightColor = new CChooseColorBtn();
 
+    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
+    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_NewView);
@@ -150,8 +158,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
     connect( m_pBtn_HighlightColorSelection, SIGNAL(clicked()), this, SLOT(OnHighlightColorSelection()));
     connect( m_pBtn_Search, SIGNAL(clicked()), this, SLOT(OnSearch()));
+    connect( m_pBtn_MainWindow, SIGNAL(clicked()), this, SLOT(OnShowMainWindow()));
 
-    CTraceClientApp::Instance().TracesWindows().Insert(this);
+    CWindowsManager::Instance().AddTracesWindow(this);
 
     m_pSearchEngine = new CViewSearchEngine(*m_pTracesView);
 
@@ -163,12 +172,16 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pTracesView->Highlighters()->Add( m_refHighlighter );
 
-    QString     title = windowTitle();
-    title += " - ";
-    title += QString::number(CTraceClientApp::Instance().TracesWindows().GetWindowNo());
+    m_WndName = QString::number(CWindowsManager::Instance().TracesWindows().GetWindowNo());
+
+    QString     title;
+    title += "NyxTracesViewer - ";
+    title += m_WndName;
     title += " -      v";
     title += CTraceClientApp::Instance().GetVersion();
     setWindowTitle(title);
+
+    m_pHighlightsMgrWnd->setWindowTitle( "Highlights - " + m_WndName);
 }
 
 
@@ -180,7 +193,7 @@ CTracesWindow::~CTracesWindow()
     delete m_pHighlightsMgrWnd;
     delete m_pSearchEngine;
 
-    CTraceClientApp::Instance().TracesWindows().Remove(this);
+    CWindowsManager::Instance().TracesWindows().Remove(this);
 }
 
 
@@ -333,12 +346,50 @@ void CTracesWindow::OnHideSearch()
 /**
  *
  */
+void CTracesWindow::OnShowMainWindow()
+{
+    CTraceClientApp::Instance().MainWindow()->show();
+    CTraceClientApp::Instance().MainWindow()->activateWindow();
+}
+
+
+/**
+ *
+ */
 void CTracesWindow::closeEvent(QCloseEvent *event)
 {
-    CTraceClientApp::Instance().TracesWindows().Remove(this);
+//    CWindowsManager::Instance().RemoveTracesWindow(this);
 
-    event->accept();
+    CWindowsManager::Instance().OnWindowClosing(this);
+
+//    event->accept();
     destroy();
     delete this;
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::showEvent(QShowEvent *)
+{
+    CWindowsManager::Instance().OnShowWindow(this);
+//    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
+//    QWidget*            pActiveWnd = pApp->activeWindow();
+
+//    NYXTRACE(0x0, L"CTracesWindow show event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
+}
+
+
+/**
+ *
+ */
+void CTracesWindow::hideEvent(QHideEvent *)
+{
+    CWindowsManager::Instance().OnHideWindow(this);
+//    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
+//    QWidget*            pActiveWnd = pApp->activeWindow();
+
+//    NYXTRACE(0x0, L"CTracesWindow hide event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
 }
 

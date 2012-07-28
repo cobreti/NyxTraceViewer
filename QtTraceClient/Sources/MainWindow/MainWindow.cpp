@@ -99,7 +99,37 @@ void CMainWindow::OnAbout()
  */
 void CMainWindow::closeEvent(QCloseEvent* pEvent)
 {
-    if ( CTraceClientApp::Instance().TracesWindows().Count() > 0 )
+    if ( CWindowsManager::Instance().TracesWindows().Count() > 0 )
+    {
+        hide();
         pEvent->ignore();
+    }
+}
+
+
+/**
+ *
+ */
+void CMainWindow::showEvent(QShowEvent *)
+{
+    CWindowsManager::Instance().OnShowWindow(this);
+//    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
+//    QWidget*            pActiveWnd = pApp->activeWindow();
+
+//    NYXTRACE(0x0, L"main window show event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
+}
+
+
+/**
+ *
+ */
+void CMainWindow::hideEvent(QHideEvent *)
+{
+    CWindowsManager::Instance().OnHideWindow(this);
+
+//    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
+//    QWidget*            pActiveWnd = pApp->activeWindow();
+
+//    NYXTRACE(0x0, L"main window hide event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
 }
 

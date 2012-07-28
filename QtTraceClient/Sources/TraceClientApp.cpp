@@ -59,16 +59,23 @@ CTraceClientApp::~CTraceClientApp()
  */
 void CTraceClientApp::Init(int &argc, char **argv)
 {
-    m_TracesWindows.SetListener( static_cast<ITracesWindowsListener*>(this) );
+    WindowsManager().TracesWindows().SetListener( static_cast<ITracesWindowsListener*>(this) );
 
     m_pQtApplication = new QApplication(argc, argv);
 
+    WindowsManager().Init();
+
     initDefaultSettings();
 
+    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
+    QRect           rcScreen = pApp->desktop()->availableGeometry();
+
     m_pMainWindow = new CMainWindow();
-    m_pMainWindow->show();
+    m_pMainWindow->move( rcScreen.left(), rcScreen.top() );
+//    m_pMainWindow->show();
 
     m_pTracesWindow = new CTracesWindow(NULL);
+    m_pTracesWindow->setParent(NULL, Qt::Window);
     m_pTracesWindow->show();
 
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start();
@@ -97,6 +104,8 @@ void CTraceClientApp::Destroy()
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
+
+    WindowsManager().Terminate();
 }
 
 
