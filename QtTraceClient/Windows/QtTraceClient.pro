@@ -88,7 +88,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Highlight/HighlightTreeItemDelegate.cpp \
     ../Sources/View/Highlight/HighlightTreeItem.cpp \
     ../Sources/View/Highlight/HighlightColorsPopup.cpp \
-    ../Sources/View/ViewSearchEngine.cpp
+    ../Sources/View/ViewSearchEngine.cpp \
+    ../Sources/WindowsManager.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -180,7 +181,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Highlight/HighlightsMgrWnd.h \
     ../Sources/View/Highlight/HighlightTreeItemEventsConnection.h \
     ../Sources/View/Highlight/HighlightColorsPopup.h \
-    ../Sources/View/ViewSearchEngine.h
+    ../Sources/View/ViewSearchEngine.h \
+    ../Sources/WindowsManager.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
