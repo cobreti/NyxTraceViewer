@@ -1,6 +1,8 @@
 #ifndef _TRACESWINDOWS_H_
 #define _TRACESWINDOWS_H_
 
+#include <Nyx.hpp>
+
 #include <set>
 
 

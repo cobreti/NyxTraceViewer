@@ -1,6 +1,7 @@
 #include "WindowsManager.hpp"
 #include "TraceClientApp.h"
 #include "TracesWindow.hpp"
+#include "TracesWindows.hpp"
 #include "MainWindow/MainWindow.hpp"
 
 #include <QApplication>

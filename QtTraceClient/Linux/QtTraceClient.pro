@@ -108,7 +108,8 @@ HEADERS += \
     ../Sources/View/Highlight/HighlightColorsPopup.h \
     ../Sources/View/Highlight/HighlightBrushesSet.hpp \
     ../Sources/View/Highlight/HighlightBrush.hpp \
-    ../Sources/Color/ColorBtn.h
+    ../Sources/Color/ColorBtn.h \
+    ../Sources/WindowsManager.hpp
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -194,7 +195,8 @@ SOURCES += \
     ../Sources/View/Highlight/HighlightColorsPopup.cpp \
     ../Sources/View/Highlight/HighlightBrushesSet.cpp \
     ../Sources/View/Highlight/HighlightBrush.cpp \
-    ../Sources/Color/ColorBtn.cpp
+    ../Sources/Color/ColorBtn.cpp \
+    ../Sources/WindowsManager.cpp
 
 
 ICON=../Icons/AppLinux.icns
