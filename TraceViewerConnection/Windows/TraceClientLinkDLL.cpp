@@ -131,3 +131,15 @@ void __cdecl WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_lis
 {
     g_pTraceLink->WriteTraceW(id, wszData, args);
 }
+
+
+/**
+ *
+ */
+void __cdecl WriteTraceW_WithThreadId(	const unsigned int& id,
+										const unsigned int& threadid,
+										const unsigned int& mthreadid,
+										const wchar_t* wszData, va_list args )
+{
+	g_pTraceLink->WriteTraceW_WithThreadId(id, threadid, mthreadid, wszData, args);
+}

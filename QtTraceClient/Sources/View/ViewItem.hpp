@@ -5,7 +5,6 @@
 #include <QString>
 #include <Nyx.hpp>
 #include <bitset>
-#include "ViewItemPainterCollection.hpp"
 
 class CDrawViewItemState;
 class CViewSettings;

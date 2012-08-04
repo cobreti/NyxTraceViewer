@@ -18,6 +18,10 @@ namespace Nyx
 
         virtual void Write( const char* szData, ... ) = 0;
         virtual void Write( const wchar_t* wszData, ... ) = 0;
+		virtual void WriteWithThreadId( const unsigned int& threadid,
+										const unsigned int& mthreadid,
+										const wchar_t* wszData,
+										... ) = 0;
     };
     
     

@@ -24,6 +24,10 @@ namespace Nyx
 
         virtual void Write( const char* szData, ... );
         virtual void Write( const wchar_t* wszData, ... );
+		virtual void WriteWithThreadId( const unsigned int& threadid,
+										const unsigned int& mthreadid,
+										const wchar_t* wszData,
+										... );
         
     protected:
         
@@ -34,6 +38,10 @@ namespace Nyx
         typedef void (__cdecl *PFCTReleaseTraceLink)( const unsigned int& id );
         typedef void (__cdecl *PFCTWriteTraceA)( const unsigned int& id, const char* szData, va_list args );
         typedef void (__cdecl *PFCTWriteTraceW)( const unsigned int& id, const wchar_t* wszData, va_list args );
+        typedef void (__cdecl *PFCTWriteTraceW_WithThreadId)(	const unsigned int& id, 
+																const unsigned int& threadid,
+																const unsigned int& mthreadid,
+																const wchar_t* wszData, va_list args );
         
     protected:
 
@@ -41,6 +49,7 @@ namespace Nyx
         PFCTReleaseTraceLink				m_pfctReleaseTraceLink;
         PFCTWriteTraceA						m_pfctWriteTraceA;
         PFCTWriteTraceW						m_pfctWriteTraceW;
+		PFCTWriteTraceW_WithThreadId		m_pfctWriteTraceW_WithThreadId;
         unsigned int						m_id;
         bool                                m_bLoaded;
 

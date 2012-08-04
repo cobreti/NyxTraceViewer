@@ -17,3 +17,7 @@ extern "C" __declspec( dllexport ) unsigned int __cdecl CreateTraceLink_TcpWChar
 extern "C" __declspec( dllexport ) void __cdecl ReleaseTraceLink( const unsigned int& id );
 extern "C" __declspec( dllexport ) void __cdecl WriteTraceA( const unsigned int& id, const char* szData, va_list args );
 extern "C" __declspec( dllexport ) void __cdecl WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );
+extern "C" __declspec( dllexport ) void __cdecl WriteTraceW_WithThreadId(	const unsigned int& id,
+																			const unsigned int& threadid,
+																			const unsigned int& mthreadid,
+																			const wchar_t* wszData, va_list args );

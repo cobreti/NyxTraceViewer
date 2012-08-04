@@ -7,12 +7,12 @@ using namespace System::Runtime::InteropServices;
 #include <vcclr.h>
 
 
-namespace TraceViewerProxy
+namespace NyxTraceViewer
 {
 	/**
 	 *
 	 */
-	void TraceViewerConnection::ReleaseInstance()
+	void ClrConnection::ReleaseInstance()
 	{
 		if ( s_Instance != nullptr )
 		{
@@ -25,16 +25,16 @@ namespace TraceViewerProxy
 	/**
 	 *
 	 */
-	void TraceViewerConnection::CreateInstance( System::String^ name )
+	void ClrConnection::CreateInstance( System::String^ name )
 	{
-		s_Instance = gcnew TraceViewerConnection(name);
+		s_Instance = gcnew ClrConnection(name);
 	}
 
 
 	/**
 	 *
 	 */
-	TraceViewerConnection^ TraceViewerConnection::Instance()
+	ClrConnection^ ClrConnection::Instance()
 	{
 		return s_Instance;
 	}
@@ -43,7 +43,7 @@ namespace TraceViewerProxy
 	/**
 	 *
 	 */
-	TraceViewerConnection::TraceViewerConnection( System::String^ name )
+	ClrConnection::ClrConnection( System::String^ name )
 	{
 		IntPtr p = Marshal::StringToHGlobalAnsi(name);
 		//pin_ptr<const char>	inner_str = &(name->ToCharArray()[0]);
@@ -58,7 +58,7 @@ namespace TraceViewerProxy
 	/**
 	 *
 	 */
-	TraceViewerConnection::!TraceViewerConnection()
+	ClrConnection::!ClrConnection()
 	{
 		Nyx::CTraceViewerConnection::ReleaseInstance();
 	}
@@ -67,7 +67,7 @@ namespace TraceViewerProxy
 	/**
 	 *
 	 */
-	TraceViewerConnection::~TraceViewerConnection()
+	ClrConnection::~ClrConnection()
 	{
 	}
 
@@ -75,10 +75,13 @@ namespace TraceViewerProxy
 	/**
 	 *
 	 */
-	void TraceViewerConnection::Write( System::String^ text )
+	void ClrConnection::Write( System::String^ text )
 	{
+		int id = System::Threading::Thread::CurrentThread->ManagedThreadId;
+		int sysid = System::AppDomain::GetCurrentThreadId();
+
 		pin_ptr<const wchar_t>	wszText = PtrToStringChars(text);
-		Nyx::CTraceViewerConnection::Instance().Write(wszText);
+		Nyx::CTraceViewerConnection::Instance().WriteWithThreadId(sysid, id, wszText);
 	}
 }
 

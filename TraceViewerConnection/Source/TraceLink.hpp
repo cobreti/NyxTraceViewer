@@ -23,6 +23,11 @@ public:
     void ReleaseTraceLink( const unsigned int& id );
     void WriteTraceA( const unsigned int& id, const char* szData, va_list args );
     void WriteTraceW( const unsigned int& id, const wchar_t* wszData, va_list args );
+	void WriteTraceW_WithThreadId(	const unsigned int& id,
+									const unsigned int& threadId,
+									const unsigned int& mthreadId,
+									const wchar_t* wszData,
+									va_list args );
 
 protected:
 

@@ -16,6 +16,10 @@ namespace Nyx
 
        virtual void Write( const char* szData, ... ) {}
        virtual void Write( const wchar_t* wszData, ... ) {}
+	   virtual void WriteWithThreadId( const unsigned int& threadid,
+										const unsigned int& mthreadid,
+										const wchar_t* wszData,
+										... ) {}
 
     };
 
@@ -115,6 +119,7 @@ namespace Nyx
     m_pfctReleaseTraceLink(NULL),
     m_pfctWriteTraceA(NULL),
     m_pfctWriteTraceW(NULL),
+	m_pfctWriteTraceW_WithThreadId(NULL),
     m_id(0),
     m_bLoaded(false)
     {
@@ -167,7 +172,25 @@ namespace Nyx
     }
 
 
-    /**
+	/**
+	 *
+	 */
+	void CTraceViewerConnection_Impl::WriteWithThreadId(	const unsigned int& threadid,
+															const unsigned int& mthreadid,
+															const wchar_t* wszData,
+															... )
+	{
+        if ( m_id > 0 && m_pfctWriteTraceW )
+        {
+            va_list args;
+            va_start(args, wszData);
+            m_pfctWriteTraceW_WithThreadId(m_id, threadid, mthreadid, wszData, args);
+            va_end(args);
+        }
+	}
+
+
+	/**
      *
      */
     bool CTraceViewerConnection_Impl::LoadConnectionModule()
@@ -178,6 +201,7 @@ namespace Nyx
             m_pfctReleaseTraceLink = (PFCTReleaseTraceLink)::GetProcAddress(m_hModule, "ReleaseTraceLink");
             m_pfctWriteTraceA = (PFCTWriteTraceA)::GetProcAddress(m_hModule, "WriteTraceA");
             m_pfctWriteTraceW = (PFCTWriteTraceW)::GetProcAddress(m_hModule, "WriteTraceW");
+			m_pfctWriteTraceW_WithThreadId = (PFCTWriteTraceW_WithThreadId)::GetProcAddress(m_hModule, "WriteTraceW_WithThreadId");
             m_bLoaded = true;
         }
 

@@ -4,25 +4,25 @@
 
 using namespace System;
 
-namespace TraceViewerProxy 
+namespace NyxTraceViewer 
 {
 
-	public ref class TraceViewerConnection
+	public ref class ClrConnection
 	{
 	public:
 
 		static void CreateInstance( System::String^ name );
 		static void ReleaseInstance();
-        static TraceViewerConnection^ Instance();
+        static ClrConnection^ Instance();
 
-		TraceViewerConnection( System::String^ name );
-		!TraceViewerConnection();
-		~TraceViewerConnection();
+		ClrConnection( System::String^ name );
+		!ClrConnection();
+		~ClrConnection();
 
 		virtual void Write( System::String^ text );
 
 	private:
 		
-		static TraceViewerConnection^ s_Instance = nullptr;
+		static ClrConnection^ s_Instance = nullptr;
 	};
 }
