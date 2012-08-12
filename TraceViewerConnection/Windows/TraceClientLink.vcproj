@@ -247,6 +247,14 @@
 			RelativePath=".\ReadMe.txt"
 			>
 		</File>
+		<File
+			RelativePath=".\resource.h"
+			>
+		</File>
+		<File
+			RelativePath=".\TraceViewerConnection.rc"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

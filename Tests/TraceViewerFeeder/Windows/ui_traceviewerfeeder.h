@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'traceviewerfeeder.ui'
 **
-** Created: Sun Jul 8 15:58:51 2012
+** Created: Sun Aug 5 15:48:54 2012
 **      by: Qt User Interface Compiler version 4.8.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

@@ -61,6 +61,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
+				OutputFile="$(OutDir)\NyxTraceViewerConnectionCLR.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
@@ -88,6 +89,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="sn -Ra Debug/NyxTraceViewerConnectionCLR.dll WindowsCLRProxy.snk"
 			/>
 		</Configuration>
 		<Configuration
@@ -135,6 +137,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="$(NoInherit)"
+				OutputFile="$(OutDir)\NyxTraceViewerConnectionCLR.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
@@ -160,6 +163,7 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				CommandLine="sn -Ra Release/NyxTraceViewerConnectionCLR.dll WindowsCLRProxy.snk"
 			/>
 		</Configuration>
 	</Configurations>
@@ -251,7 +255,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\app.rc"
+				RelativePath=".\WindowsCLRProxy.rc"
 				>
 			</File>
 		</Filter>
