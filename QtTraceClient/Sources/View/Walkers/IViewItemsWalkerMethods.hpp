@@ -24,11 +24,13 @@ public:
     virtual bool MoveToBegin() = 0;
     virtual bool MoveToNext() = 0;
     virtual bool MoveToPrevious() = 0;
-    virtual bool MoveTo(const float& y) = 0;
+//    virtual bool MoveTo(const float& y) = 0;
+    virtual bool MoveToLine(size_t lineNo) = 0;
 
     virtual bool ValidPos() const = 0;
     virtual CViewItem* Item() const = 0;
-    virtual const float& ItemYPos() const = 0;
+//    virtual const float& ItemYPos() const = 0;
+    virtual const size_t LineNo() const = 0;
     virtual const size_t LineNumber() const = 0;
 
     virtual void PushState() = 0;

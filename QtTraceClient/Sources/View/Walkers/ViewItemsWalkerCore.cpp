@@ -114,6 +114,7 @@ bool CViewItemsWalkerCore::MoveToBegin()
         return false;
 
     m_Pos = CViewItemsWalkerPos();
+    m_Pos.LineNo() = 0;
 
     size_t          index = 0;
 
@@ -209,6 +210,7 @@ bool CViewItemsWalkerCore::MoveToNext()
     if ( pos.Valid() )
     {
         pos.Y() = m_Pos.Y() + CurrentLineHeight;
+        pos.LineNo() = ++ m_Pos.LineNo();
 
         CViewItem*  pNewItem = pos.Item();
 
@@ -268,6 +270,7 @@ bool CViewItemsWalkerCore::MoveToPrevious()
     if ( pos.Valid() )
     {
         pos.Y() = m_Pos.Y() - m_Pos.Item()->GetSize().height();
+        pos.LineNo() = -- m_Pos.LineNo();
 
         CViewItem*  pNewItem = pos.Item();
 
@@ -300,6 +303,24 @@ bool CViewItemsWalkerCore::MoveTo(const float& y)
 /**
  *
  */
+bool CViewItemsWalkerCore::MoveToLine(size_t lineNo)
+{
+    while (     m_Pos.Valid() &&
+                m_Pos.LineNo() < lineNo &&
+                MoveToNext() );
+
+    while (     m_Pos.Valid() &&
+                m_Pos.LineNo() > lineNo &&
+                MoveToPrevious() );
+
+    return (    m_Pos.Valid() &&
+                m_Pos.LineNo() == lineNo );
+}
+
+
+/**
+ *
+ */
 bool CViewItemsWalkerCore::ValidPos() const
 {
     return !Locked() && m_Pos.Valid();
@@ -323,6 +344,14 @@ const float& CViewItemsWalkerCore::ItemYPos() const
     return m_Pos.Y();
 }
 
+
+/**
+ *
+ */
+const size_t CViewItemsWalkerCore::LineNo() const
+{
+    return m_Pos.LineNo();
+}
 
 /**
  *

@@ -176,3 +176,21 @@ float CViewItemsModulesMgr::CalculateHeight() const
 
     return height;
 }
+
+
+/**
+ *
+ */
+size_t CViewItemsModulesMgr::LinesCount() const
+{
+    size_t                                      count = 0;
+    ModulesViewItemsTable::const_iterator       pos = m_Modules.begin();
+
+    while ( pos != m_Modules.end() )
+    {
+        count += pos->second->LinesCount();
+        ++ pos;
+    }
+
+    return count;
+}

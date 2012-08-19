@@ -33,10 +33,12 @@ public:
     virtual bool MoveToNext();
     virtual bool MoveToPrevious();
     virtual bool MoveTo(const float& y);
+    virtual bool MoveToLine(size_t lineNo);
 
     virtual bool ValidPos() const;
     virtual CViewItem* Item() const;
     virtual const float& ItemYPos() const;
+    virtual const size_t LineNo() const;
     virtual const size_t LineNumber() const;
 
     virtual void PushState();

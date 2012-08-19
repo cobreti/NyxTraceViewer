@@ -44,6 +44,7 @@ public:
     Nyx::CMemoryPool*                   MemoryPool() const  { return m_pPool; }
 
     float CalculateHeight() const;
+    size_t LinesCount() const;
 
 protected:
 

@@ -15,7 +15,7 @@ FORMS += \
 
 INCLUDEPATH += $(NyxPath)/include
 INCLUDEPATH += $(NyxPath)/include/NyxNet
-INCLUDEPATH += ../../../TraceClientLink/public/OSX
+INCLUDEPATH += ../../../TraceViewerConnection/public/OSX
 mac:INCLUDEPATH += $(NyxPath)/include/OSX
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
@@ -52,8 +52,7 @@ HEADERS += \
     ../FeederSource.hpp \
     ../FeederSource_UserText.hpp \
     ../FeederSource_TextFile.hpp \
-    ../ExternalFeeder.hpp \
-    ../../../TraceClientLink/public/OSX/TraceClientLink.hpp
+    ../ExternalFeeder.hpp
 
 SOURCES += \
     ../TraceViewerFeeder.cpp \
@@ -67,5 +66,5 @@ SOURCES += \
     ../FeederSource_UserText.cpp \
     ../FeederSource_TextFile.cpp \
     ../ExternalFeeder.cpp \
-    ../../../TraceClientLink/public/OSX/TraceClientLink_impl.cpp
+    ../../../TraceViewerConnection/public/OSX/NyxTraceViewerConnection_Impl.cpp
 

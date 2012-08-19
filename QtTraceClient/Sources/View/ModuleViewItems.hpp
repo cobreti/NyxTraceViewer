@@ -39,6 +39,8 @@ public:
 
     float CalculateHeight() const;
 
+    size_t LinesCount() const;
+
 protected:
 
     typedef     std::map<SessionViewItemsID, CSessionViewItems*>        SessionsTable;

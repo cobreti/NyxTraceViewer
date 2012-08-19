@@ -46,8 +46,8 @@ namespace TraceClientCore
         CTraceData*						pTraceData = NULL;
         NyxNet::CTraceFlags             flags;
         Nyx::NyxResult                  res;
-        Nyx::UInt32                     TimeRefInSeconds = 0;
-        Nyx::UInt32                     TickCountRef = 0;
+//        Nyx::UInt32                     TimeRefInSeconds = 0;
+//        Nyx::UInt32                     TickCountRef = 0;
         Nyx::UInt32                     ModuleTimeRefInSeconds = 0;
         Nyx::UInt32                     ModuleTickCountRef = 0;
         
@@ -56,7 +56,7 @@ namespace TraceClientCore
         const Nyx::CTraceTimeReference&   rTimeRef = CModule::Instance().TraceTimeReference();
 
         ModuleTimeRefInSeconds = rTimeRef.Time().Hours() * 3600 + rTimeRef.Time().Minutes() * 60 + rTimeRef.Time().Seconds();
-        sscanf( CModule::Instance().TraceTimeReference().TickCount().c_str(), "%lu.", &ModuleTickCountRef);
+        sscanf( CModule::Instance().TraceTimeReference().TickCount().c_str(), "%u.", &ModuleTickCountRef);
 
         if ( Reader.Valid() )
         {

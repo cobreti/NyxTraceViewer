@@ -77,18 +77,6 @@ void CTracesView::OnNewTraces()
 /**
  *
  */
-void CTracesView::UpdateVisibleLines(const CViewSettings& settings)
-{
-    if (m_bViewDirty && this->isVisible() )
-    {
-//        UpdateVisibleLines();
-    }
-}
-
-
-/**
- *
- */
 void CTracesView::RefreshDisplay()
 {
     if (m_bViewDirty && this->isVisible() )
@@ -201,13 +189,26 @@ const QRectF CTracesView::ViewRect() const
 /**
  *
  */
+int CTracesView::NumberOfLinesVisibles() const
+{
+    int                 height = ViewRect().height();
+    CViewSettings&      rSettings = ViewCore()->ViewSettings();
+    int                 NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
+
+    return (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+}
+
+/**
+ *
+ */
 void CTracesView::Invalidate(bool dirty)
 {
     float       ScrollBarPos = 0.0f;
 
     {
         CViewItemsWalker::MethodsInterfaceRef       refWalkerMethods(ItemsWalker());
-        ScrollBarPos = refWalkerMethods->ItemYPos();
+        ScrollBarPos = refWalkerMethods->LineNo();
+//        ScrollBarPos = refWalkerMethods->ItemYPos();
     }
 
     ui->m_VertScrollbar->setValue(ScrollBarPos);
@@ -223,7 +224,7 @@ void CTracesView::OnVertSliderPosChanged(int value)
 {
     CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    if ( refMethods->MoveTo(value) )
+    if ( refMethods->MoveToLine(value) )
     {
         m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
         //update();
@@ -286,7 +287,8 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
-    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
+//    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
+    drawstate.TextPos().ry() = HeaderSize().height();// - ui->m_VertScrollbar->value();
 
     drawstate.ViewRect() = QRectF(  ui->m_HorzScrollbar->value(), 
                                     ui->m_VertScrollbar->value(),
@@ -324,15 +326,19 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
     CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
     CViewSettings&                          rSettings = ViewCore()->ViewSettings();
+    int                                     NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
+    int                                     NumberOfDisplayedLines = (rcClient.height() - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
 
-    int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
+    //int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
+    int nScrollHeight = Nyx::Max( NumberOfLines - NumberOfDisplayedLines, 0 );
     int nScrollWidth = Nyx::Max((int)(rSettings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
     ui->m_VertScrollbar->setMaximum( nScrollHeight );
     ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
-	ui->m_VertScrollbar->setPageStep( rcClient.height() );
+//    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
+    ui->m_VertScrollbar->setSingleStep( 1 );
+    ui->m_VertScrollbar->setPageStep( NumberOfDisplayedLines );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 }
@@ -386,49 +392,45 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 
     if ( event->pos().x() < m_Margins.left() && event->pos().y() > m_pHeader->size().height() )
 	{
-        float       y = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
-        bool        bContinue = true;
-        qreal       ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
+//        float       y = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
+        bool            bContinue = true;
+        CViewSettings&  rSettings = ViewCore()->ViewSettings();
+        qreal           ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
+        size_t          VisibleLineNo = (event->pos().y() - HeaderSize().height()) / rSettings.DrawSettings()->SingleLineHeight();
+        size_t          LineNo = refMethods->LineNo() + VisibleLineNo;
 
         refMethods->PushState();
 
-        while ( bContinue && refMethods->ValidPos() && y < ViewHeight )
+        if ( refMethods->MoveToLine(LineNo) )
         {
             CViewItem*      pItem = refMethods->Item();
 
-            if ( event->pos().y() >= y && event->pos().y() <= y + pItem->GetSize().height() )
+            if ( event->button() == Qt::LeftButton )
             {
-                if ( event->button() == Qt::LeftButton )
+                if ( pItem->HasFlag(CViewItem::eVIF_Marked) )
                 {
-                    if ( pItem->HasFlag(CViewItem::eVIF_Marked) )
-                    {
-                        pItem->SetFlag(CViewItem::eVIF_Marked, false);
-                        pItem->HighlightBrush() = NULL;
-                    }
-                    else
-                    {
-                        pItem->SetFlag(CViewItem::eVIF_Marked, true);
-                        pItem->HighlightBrush() = m_pLastSelectedBrush;
-                    }
+                    pItem->SetFlag(CViewItem::eVIF_Marked, false);
+                    pItem->HighlightBrush() = NULL;
                 }
-                else if ( event->button() == Qt::RightButton )
+                else
                 {
                     pItem->SetFlag(CViewItem::eVIF_Marked, true);
-                    m_pLastSelectedItem = pItem;
-
-                    if ( m_pHighlightColorsPopup != NULL )
-                        delete m_pHighlightColorsPopup;
-
-                    m_pHighlightColorsPopup = new CHighlightColorsPopup();
-                    connect(    m_pHighlightColorsPopup, SIGNAL(OnChooseBrush( CHighlightBrush*)),
-                                this, SLOT(OnChooseHighlightBrush( CHighlightBrush*)));
-                    m_pHighlightColorsPopup->Show( mapToGlobal(event->pos()), CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights() );
+                    pItem->HighlightBrush() = m_pLastSelectedBrush;
                 }
             }
+            else if ( event->button() == Qt::RightButton )
+            {
+                pItem->SetFlag(CViewItem::eVIF_Marked, true);
+                m_pLastSelectedItem = pItem;
 
-            y += pItem->GetSize().height();
+                if ( m_pHighlightColorsPopup != NULL )
+                    delete m_pHighlightColorsPopup;
 
-            bContinue = refMethods->MoveToNext();
+                m_pHighlightColorsPopup = new CHighlightColorsPopup();
+                connect(    m_pHighlightColorsPopup, SIGNAL(OnChooseBrush( CHighlightBrush*)),
+                            this, SLOT(OnChooseHighlightBrush( CHighlightBrush*)));
+                m_pHighlightColorsPopup->Show( mapToGlobal(event->pos()), CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights() );
+            }
         }
 
         refMethods->PopState();
@@ -446,8 +448,8 @@ void CTracesView::wheelEvent(QWheelEvent* event)
     int numDegrees = event->delta() / 8;
     int numSteps = numDegrees / 15;
 
-	int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
-	ui->m_VertScrollbar->setValue( value );
+    int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
+    ui->m_VertScrollbar->setValue( value );
 }
 
 
@@ -536,45 +538,4 @@ QSize CTracesView::HeaderSize() const
         size += m_pHeader->size();
 
     return size;
-}
-
-
-/**
- *
- */
-bool CTracesView::UpdateVisibleLines()
-{
-    CDrawViewItemState                      drawstate(NULL);
-    qreal                                   ViewHeight = (qreal) this->rect().height();
-    CViewItem*                              pItem = NULL;
-    bool                                    bContinue = true;
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(*m_pItemsWalker);
-
-    refMethods->PushState();
-
-    drawstate.TextPos() = QPointF(0.0, 0.0);
-
-    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value();
-
-    while ( bContinue && refMethods->ValidPos() && !(drawstate.TextPos().y() > ViewHeight+20) )
-    {
-        drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value();
-
-        pItem = refMethods->Item();
-
-        if ( pItem->HasFlag(CViewItem::eVIF_ApproxSize) )
-        {
-            pItem->EvaluateSize(Settings());
-
-            m_refViewCore->ViewItemsModulesMgr().OnItemWidthChanged(pItem);
-
-            pItem->RemoveFlag(CViewItem::eVIF_ApproxSize);
-        }
-
-        bContinue = refMethods->MoveToNext();
-    }
-
-    refMethods->PopState();
-
-    return true;
 }

@@ -126,3 +126,22 @@ float CModuleViewItems::CalculateHeight() const
 
     return height;
 }
+
+
+/**
+ *
+ */
+size_t CModuleViewItems::LinesCount() const
+{
+    size_t                              count = 0;
+    SessionsTable::const_iterator       pos = m_Sessions.begin();
+
+    while ( pos != m_Sessions.end() )
+    {
+        count += pos->second->LinesCount();
+        ++ pos;
+    }
+
+    return count;
+}
+

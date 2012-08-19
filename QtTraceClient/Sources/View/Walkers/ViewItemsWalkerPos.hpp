@@ -33,6 +33,9 @@ public:
     const float&                    Y() const                           { return m_Y; }
     float&                          Y()                                 { return m_Y; }
 
+    size_t                          LineNo() const                      { return m_LineNo; }
+    size_t&                         LineNo()                            { return m_LineNo; }
+
     const CViewItemsWalkerPos& operator = (const CViewItemsWalkerPos& pos);
     const CViewItemsWalkerPos& operator = (const CViewItemsModuleWalkerNodePos& pos);
 
@@ -42,6 +45,7 @@ protected:
 
 
     ViewItemsNodeId                 m_ModuleNodeId;
+    size_t                          m_LineNo;
 
     float                           m_Y;
 };

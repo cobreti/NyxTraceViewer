@@ -51,7 +51,7 @@ public:
 
     void OnNewTraces();
 
-    void UpdateVisibleLines( const CViewSettings& settings );
+//    void UpdateVisibleLines( const CViewSettings& settings );
 
     virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
     virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
@@ -63,6 +63,7 @@ public:
     CViewItemsWalker*           ItemsWalker()               { return m_pItemsWalker; }
 
     const QRectF                ViewRect() const;
+    int                         NumberOfLinesVisibles() const;
 
     void Invalidate(bool dirty);
 
@@ -90,7 +91,7 @@ protected:
     virtual QRect ClientRect( const QRect& rcWnd ) const;
     virtual QSize HeaderSize() const;
 
-    virtual bool UpdateVisibleLines();
+//    virtual bool UpdateVisibleLines();
 
 protected:
 

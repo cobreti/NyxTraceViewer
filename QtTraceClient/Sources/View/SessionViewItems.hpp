@@ -45,6 +45,7 @@ public:
     CViewItemsModulesMgr&       Mgr() const         { return m_rMgr; }
 
     float                       Height() const      { return m_Height; }
+    size_t                      LinesCount() const  { return m_Items.ItemsCount(); }
 
 protected:
 
