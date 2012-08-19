@@ -32,20 +32,17 @@ public:
     virtual bool MoveToBegin();
     virtual bool MoveToNext();
     virtual bool MoveToPrevious();
-    virtual bool MoveTo(const float& y);
     virtual bool MoveToLine(size_t lineNo);
 
     virtual bool ValidPos() const;
     virtual CViewItem* Item() const;
-    virtual const float& ItemYPos() const;
     virtual const size_t LineNo() const;
-    virtual const size_t LineNumber() const;
+    virtual const size_t ItemNumber() const;
 
     virtual void PushState();
     virtual void PopState();
 
     virtual void Clone( const CViewItemsWalkerCore& walker );
-//    const CViewItemsWalkerCore& operator = (const CViewItemsWalkerCore& walker);
 
     virtual const float& Height() const;
     virtual const float& Width() const;
@@ -65,7 +62,7 @@ protected:
     typedef     std::vector<CViewItemsModuleWalkerNode*>        ViewItemsModuleWalkerNodeArray;
     typedef     std::vector<CViewItemsWalkerPos>                TWalkerPosStack;
     typedef     std::vector<EDirection>                         TDirectionStack;
-    typedef     std::vector<size_t>                             TLineNumberStack;
+    typedef     std::vector<size_t>                             TItemNumberStack;
 
 protected:
 
@@ -82,11 +79,11 @@ protected:
 
     CViewItemsWalkerPos                     m_Pos;
     EDirection                              m_Direction;
-    size_t                                  m_LineNumber;
+    size_t                                  m_ItemNumber;
 
     TWalkerPosStack                         m_PositionStack;
     TDirectionStack                         m_DirectionStack;
-    TLineNumberStack                        m_LineNumberStack;
+    TItemNumberStack                        m_ItemNumberStack;
 
     float                                   m_Height;
     float                                   m_Width;

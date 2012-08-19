@@ -44,13 +44,13 @@ void CViewSearchEngine::Next()
         // move pass last found occurence
         if ( m_FoundPos )
         {
-            while ( refWalkerMethods->ValidPos() && refWalkerMethods->LineNumber() <= m_FoundPos.LineNumber()  )
+            while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() <= m_FoundPos.ItemNumber()  )
             {
                 if ( !refWalkerMethods->MoveToNext() )
                     refWalkerMethods->MoveToBegin();
             }
 
-            while ( refWalkerMethods->ValidPos() && refWalkerMethods->LineNumber() > m_FoundPos.LineNumber()+1  )
+            while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() > m_FoundPos.ItemNumber()+1  )
                 !refWalkerMethods->MoveToPrevious();
         }
 
@@ -65,7 +65,7 @@ void CViewSearchEngine::Next()
                 QString     text = QString::fromStdWString( pFoundItem->TraceData()->Data().c_str() );
                 if ( m_refHighlighter->Pattern()->Match(text, 0).Length() > 0 )
                 {
-                    m_FoundPos = refWalkerMethods->LineNumber();
+                    m_FoundPos = refWalkerMethods->ItemNumber();
                     LineNo = refWalkerMethods->LineNo();
                 }
                 else
@@ -127,10 +127,10 @@ void CViewSearchEngine::Previous()
         // move pass last found occurence
         if ( m_FoundPos )
         {
-            while ( refWalkerMethods->ValidPos() && refWalkerMethods->LineNumber() < m_FoundPos.LineNumber()-1  )
+            while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() < m_FoundPos.ItemNumber()-1  )
                 refWalkerMethods->MoveToNext();
 
-            while ( refWalkerMethods->ValidPos() && refWalkerMethods->LineNumber() >= m_FoundPos.LineNumber()  )
+            while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() >= m_FoundPos.ItemNumber()  )
                 refWalkerMethods->MoveToPrevious();
         }
 
@@ -145,7 +145,7 @@ void CViewSearchEngine::Previous()
                 QString     text = QString::fromStdWString( pFoundItem->TraceData()->Data().c_str() );
                 if ( m_refHighlighter->Pattern()->Match(text, 0).Length() > 0 )
                 {
-                    m_FoundPos = refWalkerMethods->LineNumber();
+                    m_FoundPos = refWalkerMethods->ItemNumber();
                     LineNo = refWalkerMethods->LineNo();
                 }
                 else

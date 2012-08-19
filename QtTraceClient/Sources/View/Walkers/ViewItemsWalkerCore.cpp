@@ -11,7 +11,7 @@
  */
 CViewItemsWalkerCore::CViewItemsWalkerCore(CViewItemsModulesMgr& rViewItemsModulesMgr) :
     m_Direction(eD_Undefined),
-    m_LineNumber(0),
+    m_ItemNumber(0),
     m_Height(0.0f),
     m_Width(0.0f),
     m_rViewItemsModulesMgr(rViewItemsModulesMgr),
@@ -26,6 +26,7 @@ CViewItemsWalkerCore::CViewItemsWalkerCore(CViewItemsModulesMgr& rViewItemsModul
  *
  */
 CViewItemsWalkerCore::CViewItemsWalkerCore(const CViewItemsWalkerCore& walker) :
+    m_ItemNumber(walker.m_ItemNumber),
     m_Height(walker.m_Height),
     m_Width(walker.m_Width),
     m_rViewItemsModulesMgr(walker.m_rViewItemsModulesMgr)
@@ -139,7 +140,7 @@ bool CViewItemsWalkerCore::MoveToBegin()
     }
 
     m_Direction = eD_Undefined;
-    m_LineNumber = 1;
+    m_ItemNumber = 1;
 
     if ( m_Pos.Valid() )
     {
@@ -169,8 +170,6 @@ bool CViewItemsWalkerCore::MoveToNext()
     size_t                      index = 0;
     CViewItemsWalkerPos         pos;
 
-    float CurrentLineHeight = m_Pos.Item()->GetSize().height();
-
     for ( index = 0; index < m_Nodes.size(); ++index)
     {
         CViewItemsModuleWalkerNode* pNode = m_Nodes[index];
@@ -187,8 +186,7 @@ bool CViewItemsWalkerCore::MoveToNext()
 
         while ( pNode->UpperPos().Valid() && pNode->UpperPos().IsBefore(m_Pos) )
         {
-            m_Pos.Y() += pNode->LowerPos().Item()->GetSize().height();
-            ++ m_LineNumber;
+            ++ m_ItemNumber;
             pNode->MoveToNext();
         }
 
@@ -209,13 +207,12 @@ bool CViewItemsWalkerCore::MoveToNext()
 
     if ( pos.Valid() )
     {
-        pos.Y() = m_Pos.Y() + CurrentLineHeight;
         pos.LineNo() = ++ m_Pos.LineNo();
 
         CViewItem*  pNewItem = pos.Item();
 
         if ( pNewItem->GetOwner() != Item()->GetOwner() )
-            ++ m_LineNumber;
+            ++ m_ItemNumber;
 
         m_Pos = pos;
 
@@ -269,18 +266,16 @@ bool CViewItemsWalkerCore::MoveToPrevious()
 
     if ( pos.Valid() )
     {
-        pos.Y() = m_Pos.Y() - m_Pos.Item()->GetSize().height();
         pos.LineNo() = -- m_Pos.LineNo();
 
         CViewItem*  pNewItem = pos.Item();
 
         if ( pNewItem->GetOwner() != Item()->GetOwner() )
-            -- m_LineNumber;
+            -- m_ItemNumber;
 
         m_Pos = pos;
 
         m_Nodes[pos.ModuleNodeId()]->MoveToPrevious();
-//        -- m_LineNumber;
         return true;
     }
 
@@ -291,27 +286,15 @@ bool CViewItemsWalkerCore::MoveToPrevious()
 /**
  *
  */
-bool CViewItemsWalkerCore::MoveTo(const float& y)
-{
-    while ( m_Pos.Valid() && m_Pos.Y() + m_Pos.Item()->GetSize().height() < y && MoveToNext() );
-    while ( m_Pos.Valid() && m_Pos.Y() > y && MoveToPrevious() );
-
-    return ( m_Pos.Valid() && m_Pos.Y() <= y && m_Pos.Y() + m_Pos.Item()->GetSize().height() >= y );
-}
-
-
-/**
- *
- */
 bool CViewItemsWalkerCore::MoveToLine(size_t lineNo)
 {
     while (     m_Pos.Valid() &&
                 m_Pos.LineNo() < lineNo &&
-                MoveToNext() );
+                MoveToNext() ) {};
 
     while (     m_Pos.Valid() &&
                 m_Pos.LineNo() > lineNo &&
-                MoveToPrevious() );
+                MoveToPrevious() ) {};
 
     return (    m_Pos.Valid() &&
                 m_Pos.LineNo() == lineNo );
@@ -339,15 +322,6 @@ CViewItem* CViewItemsWalkerCore::Item() const
 /**
  *
  */
-const float& CViewItemsWalkerCore::ItemYPos() const
-{
-    return m_Pos.Y();
-}
-
-
-/**
- *
- */
 const size_t CViewItemsWalkerCore::LineNo() const
 {
     return m_Pos.LineNo();
@@ -356,9 +330,9 @@ const size_t CViewItemsWalkerCore::LineNo() const
 /**
  *
  */
-const size_t CViewItemsWalkerCore::LineNumber() const
+const size_t CViewItemsWalkerCore::ItemNumber() const
 {
-    return m_LineNumber;
+    return m_ItemNumber;
 }
 
 
@@ -372,7 +346,7 @@ void CViewItemsWalkerCore::PushState()
 
     m_PositionStack.push_back(m_Pos);
     m_DirectionStack.push_back(m_Direction);
-    m_LineNumberStack.push_back(m_LineNumber);
+    m_ItemNumberStack.push_back(m_ItemNumber);
 }
 
 
@@ -396,10 +370,10 @@ void CViewItemsWalkerCore::PopState()
         m_DirectionStack.pop_back();
     }
 
-    if ( !m_LineNumberStack.empty())
+    if ( !m_ItemNumberStack.empty())
     {
-        m_LineNumber = m_LineNumberStack.back();
-        m_LineNumberStack.pop_back();
+        m_ItemNumber = m_ItemNumberStack.back();
+        m_ItemNumberStack.pop_back();
     }
 }
 
@@ -407,7 +381,6 @@ void CViewItemsWalkerCore::PopState()
 /**
  *
  */
-//const CViewItemsWalkerCore& CViewItemsWalkerCore::operator = (const CViewItemsWalkerCore& walker)
 void CViewItemsWalkerCore::Clone(const CViewItemsWalkerCore& walker)
 {
     if ( this == &walker )
@@ -415,8 +388,6 @@ void CViewItemsWalkerCore::Clone(const CViewItemsWalkerCore& walker)
 
     ClearModuleNodes();
     CopyDataFrom(walker);
-
-//    return *this;
 }
 
 
@@ -485,7 +456,7 @@ void CViewItemsWalkerCore::CopyDataFrom(const CViewItemsWalkerCore& walker)
     m_Direction = walker.m_Direction;
     m_Nodes.resize(walker.m_Nodes.size());
     m_Pos = walker.m_Pos;
-    m_LineNumber = walker.m_LineNumber;
+    m_ItemNumber = walker.m_ItemNumber;
 
     for (size_t index = 0; index < walker.m_Nodes.size(); ++index)
     {

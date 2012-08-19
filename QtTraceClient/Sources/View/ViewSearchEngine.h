@@ -29,27 +29,27 @@ public:
         const XFindPos& operator = (const XFindPos& pos)
         {
             m_bValid = pos.m_bValid;
-            m_LineNumber = pos.m_LineNumber;
+            m_ItemNumber = pos.m_ItemNumber;
 
             return *this;
         }
 
-        const XFindPos& operator = (const size_t LineNumber)
+        const XFindPos& operator = (const size_t ItemNumber)
         {
-            m_LineNumber = LineNumber;
+            m_ItemNumber = ItemNumber;
             m_bValid = true;
 
             return *this;
         }
 
 
-        const size_t LineNumber() const     { return m_LineNumber; }
+        const size_t ItemNumber() const     { return m_ItemNumber; }
 
 
 
     protected:
 
-        size_t      m_LineNumber;
+        size_t      m_ItemNumber;
         bool        m_bValid;
     };
 

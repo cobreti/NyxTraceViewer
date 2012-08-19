@@ -56,7 +56,7 @@ void CViewItemLineNumberPainter::Display( const CViewSettings &settings,
 {
     if ( item.GetOwner() == &item )
     {
-        QString                     text = QString::number(drawstate.LineNumber());
+        QString                     text = QString::number(drawstate.ItemNumber());
 
         CViewItemTextPainter::Display(settings, drawstate, item, text);
     }

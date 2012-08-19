@@ -8,8 +8,7 @@
 CViewItemsWalkerPos::CViewItemsWalkerPos() :
     CViewItemsModuleWalkerNodePos(),
     m_ModuleNodeId(kInvalidNodeId),
-    m_LineNo(-1),
-    m_Y(0.0f)
+    m_LineNo(-1)
 {
 }
 
@@ -20,8 +19,7 @@ CViewItemsWalkerPos::CViewItemsWalkerPos() :
 CViewItemsWalkerPos::CViewItemsWalkerPos(const CViewItemsWalkerPos &pos) :
     CViewItemsModuleWalkerNodePos(pos),
     m_ModuleNodeId(pos.m_ModuleNodeId),
-    m_LineNo(pos.m_LineNo),
-    m_Y(pos.m_Y)
+    m_LineNo(pos.m_LineNo)
 {
 }
 
@@ -43,7 +41,6 @@ const CViewItemsWalkerPos& CViewItemsWalkerPos::operator = (const CViewItemsWalk
 
     m_ModuleNodeId = pos.m_ModuleNodeId;
     m_LineNo = pos.m_LineNo;
-    m_Y = pos.m_Y;
 
     return *this;
 }
