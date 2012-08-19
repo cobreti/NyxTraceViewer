@@ -35,8 +35,6 @@ void CViewSearchEngine::Next()
     {
         CViewItemsWalker::MethodsInterfaceRef       refWalkerMethods(m_rView.ItemsWalker());
         size_t                                      StartLineNo = refWalkerMethods->LineNo();
-//        float                                       StartYPos = refWalkerMethods->ItemYPos();
-//        float                                       itemYPos = 0.0f;
         size_t                                      LineNo = 0;
         bool                                        bEndReached = false;
         CViewItem*                                  pStartItem = refWalkerMethods->Item();
@@ -69,7 +67,6 @@ void CViewSearchEngine::Next()
                 {
                     m_FoundPos = refWalkerMethods->LineNumber();
                     LineNo = refWalkerMethods->LineNo();
-//                    itemYPos = refWalkerMethods->ItemYPos();
                 }
                 else
                 {
@@ -103,18 +100,6 @@ void CViewSearchEngine::Next()
 
                 refWalkerMethods->MoveToLine(LineNo);
             }
-//            QRectF      rcView = m_rView.ViewRect();
-
-//            if ( (itemYPos < StartYPos) || (itemYPos - StartYPos > rcView.height()) )
-//            {
-//                float       height = rcView.height();
-//                float       fNewStartPos = itemYPos - height / 2.0f;
-
-//                if ( fNewStartPos < 0.0f )
-//                    refWalkerMethods->MoveToBegin();
-//                else
-//                    refWalkerMethods->MoveTo( fNewStartPos );
-//            }
         }
     }
 
@@ -132,8 +117,6 @@ void CViewSearchEngine::Previous()
 
     {
         CViewItemsWalker::MethodsInterfaceRef       refWalkerMethods(m_rView.ItemsWalker());
-//        float                                       StartYPos = refWalkerMethods->ItemYPos();
-//        float                                       itemYPos = 0.0f;
         size_t                                      StartLineNo = refWalkerMethods->LineNo();
         size_t                                      LineNo = 0;
         bool                                        bEndReached = false;
@@ -164,7 +147,6 @@ void CViewSearchEngine::Previous()
                 {
                     m_FoundPos = refWalkerMethods->LineNumber();
                     LineNo = refWalkerMethods->LineNo();
-//                    itemYPos = refWalkerMethods->ItemYPos();
                 }
                 else
                 {
@@ -182,7 +164,6 @@ void CViewSearchEngine::Previous()
         // make sure item is visible
         if ( pFoundItem )
         {
-//            QRectF      rcView = m_rView.ViewRect();
             int VisibleLinesCount = m_rView.NumberOfLinesVisibles();
 
             if ( (LineNo < StartLineNo) || (LineNo > StartLineNo + VisibleLinesCount - 1) )
@@ -196,17 +177,6 @@ void CViewSearchEngine::Previous()
 
                 refWalkerMethods->MoveToLine(LineNo);
             }
-
-//            if ( (itemYPos < StartYPos) || (itemYPos - StartYPos > rcView.height()) )
-//            {
-//                float       height = rcView.height();
-//                float       fNewStartPos = itemYPos - height / 2.0f;
-
-//                if ( fNewStartPos < 0.0f )
-//                    refWalkerMethods->MoveToBegin();
-//                else
-//                    refWalkerMethods->MoveTo( fNewStartPos );
-//            }
         }
     }
 

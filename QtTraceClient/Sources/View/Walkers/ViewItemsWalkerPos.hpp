@@ -30,9 +30,6 @@ public:
     ViewItemsNodeId                     ModuleNodeId() const            { return m_ModuleNodeId; }
     ViewItemsNodeId&                    ModuleNodeId()                  { return m_ModuleNodeId; }
 
-    const float&                    Y() const                           { return m_Y; }
-    float&                          Y()                                 { return m_Y; }
-
     size_t                          LineNo() const                      { return m_LineNo; }
     size_t&                         LineNo()                            { return m_LineNo; }
 
@@ -46,8 +43,6 @@ protected:
 
     ViewItemsNodeId                 m_ModuleNodeId;
     size_t                          m_LineNo;
-
-    float                           m_Y;
 };
 
 #endif // VIEWITEMSWALKERPOS_HPP
