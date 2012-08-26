@@ -304,7 +304,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
         pItem = refMethods->Item();
 
-        drawstate.LineNumber() = refMethods->LineNumber();
+        drawstate.ItemNumber() = refMethods->ItemNumber();
         pItem->Display(Settings(), drawstate);
 
         bContinue = refMethods->MoveToNext();

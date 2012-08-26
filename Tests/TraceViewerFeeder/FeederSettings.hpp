@@ -50,6 +50,9 @@ public:
     const Nyx::CAString&    TcpIpAddress() const                { return m_TcpIpAddress; }
     Nyx::CAString&          TcpIpAddress()                      { return m_TcpIpAddress; }
 
+    const Nyx::UInt32&      PortNumber() const                  { return m_PortNumber; }
+    Nyx::UInt32&            PortNumber()                        { return m_PortNumber; }
+
 
     const CFeederSettings& operator = (const CFeederSettings& settings);
 
@@ -62,6 +65,7 @@ protected:
     Nyx::UInt32             m_IntervalBetweenBlocks;
     CFeederSource*          m_pFeederSource;
     Nyx::CAString           m_TcpIpAddress;
+    Nyx::UInt32             m_PortNumber;
 };
 
 

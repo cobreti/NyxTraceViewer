@@ -27,8 +27,8 @@ public:
     bool			Marked() const			{ return m_bMarked; }
     bool&			Marked()				{ return m_bMarked; }
 
-    const size_t&   LineNumber() const      { return m_LineNumber; }
-    size_t&         LineNumber()            { return m_LineNumber; }
+    const size_t&   ItemNumber() const      { return m_ItemNumber; }
+    size_t&         ItemNumber()            { return m_ItemNumber; }
 
     CViewItemHighlighterRef     Highlighter() const     { return m_refHighlighter; }
     CViewItemHighlighterRef&    Highlighter()           { return m_refHighlighter; }
@@ -40,7 +40,7 @@ protected:
     QPointF                     m_TextPos;
     QSizeF                      m_LineSize;
     bool			            m_bMarked;
-    size_t                      m_LineNumber;
+    size_t                      m_ItemNumber;
     CViewItemHighlighterRef     m_refHighlighter;
 };
 

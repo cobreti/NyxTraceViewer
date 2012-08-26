@@ -22,7 +22,9 @@ CFeederSettings::CFeederSettings(const CFeederSettings& settings) :
     m_ApiType(settings.m_ApiType),
     m_TracesPerBlock(settings.m_TracesPerBlock),
     m_IntervalBetweenBlocks(settings.m_IntervalBetweenBlocks),
-    m_pFeederSource(settings.m_pFeederSource)
+    m_pFeederSource(settings.m_pFeederSource),
+    m_TcpIpAddress(settings.m_TcpIpAddress),
+    m_PortNumber(settings.m_PortNumber)
 {
 }
 
@@ -48,6 +50,8 @@ const CFeederSettings& CFeederSettings::operator = (const CFeederSettings& setti
         m_TracesPerBlock = settings.m_TracesPerBlock;
         m_IntervalBetweenBlocks = settings.m_IntervalBetweenBlocks;
         m_pFeederSource = settings.m_pFeederSource;
+        m_TcpIpAddress = settings.m_TcpIpAddress;
+        m_PortNumber = settings.m_PortNumber;
     }
 
     return *this;

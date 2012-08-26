@@ -3,11 +3,42 @@
 #include "ChannelsMgnt/ChannelsMgnt.hpp"
 #include "Dialogs/AboutDlg.h"
 #include "TraceClientApp.h"
+#include "TraceClientCoreModule.hpp"
+
 
 #include <QToolButton>
 #include <QCloseEvent>
 
 #include "ui_MainWindow.h"
+
+
+class CReceiversListenerBridge : public Nyx::CObject_Impl<TraceClientCore::ITcpTracesReceiversListener>
+{
+public:
+    CReceiversListenerBridge( CMainWindow& rMainWindow ) :
+        m_rMainWindow(rMainWindow)
+    {
+    }
+
+    ~CReceiversListenerBridge()
+    {
+    }
+
+    virtual void OnReceiversStarted()
+    {
+        m_rMainWindow.UpdateTcpIpStartStopButton();
+    }
+
+    virtual void OnReceiversStopped()
+    {
+        m_rMainWindow.UpdateTcpIpStartStopButton();
+    }
+
+protected:
+
+    CMainWindow&                                m_rMainWindow;
+};
+
 
 
 /**
@@ -17,7 +48,8 @@ CMainWindow::CMainWindow() : QMainWindow(),
     ui( new Ui::MainWindow()),
     m_pBtn_NewView(NULL),
     m_pBtn_Channels(NULL),
-    m_pBtn_About(NULL)
+    m_pBtn_About(NULL),
+    m_pReceiversListenerBridge(NULL)
 {
     ui->setupUi(this);
 
@@ -44,11 +76,14 @@ CMainWindow::CMainWindow() : QMainWindow(),
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewTracesWindow()));
     connect( m_pBtn_Channels, SIGNAL(clicked()), this, SLOT(OnChannelsMgnt()));
     connect( m_pBtn_About, SIGNAL(clicked()), this, SLOT(OnAbout()));
+    connect( ui->m_btnStartStop, SIGNAL(clicked()), this, SLOT(OnStartStopReceivers()));
 
     QString     title = windowTitle();
     title += "     v";
     title += CTraceClientApp::Instance().GetVersion();
     setWindowTitle(title);
+
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Listeners()->Add( new CReceiversListenerBridge(*this) );
 }
 
 
@@ -97,6 +132,23 @@ void CMainWindow::OnAbout()
 /**
  *
  */
+void CMainWindow::OnStartStopReceivers()
+{
+    TraceClientCore::CTcpTracesReceivers&   rTracesReceivers = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers();
+
+    ui->m_btnStartStop->setEnabled(false);
+
+    if ( rTracesReceivers.IsRunning() )
+        rTracesReceivers.Stop();
+    else
+        rTracesReceivers.Start();
+
+}
+
+
+/**
+ *
+ */
 void CMainWindow::closeEvent(QCloseEvent* pEvent)
 {
     if ( CWindowsManager::Instance().TracesWindows().Count() > 0 )
@@ -113,6 +165,8 @@ void CMainWindow::closeEvent(QCloseEvent* pEvent)
 void CMainWindow::showEvent(QShowEvent *)
 {
     CWindowsManager::Instance().OnShowWindow(this);
+
+    UpdateTcpIpStartStopButton();
 //    QApplication*       pApp = static_cast<QApplication*>(QApplication::instance());
 //    QWidget*            pActiveWnd = pApp->activeWindow();
 
@@ -133,3 +187,19 @@ void CMainWindow::hideEvent(QHideEvent *)
 //    NYXTRACE(0x0, L"main window hide event : " << Nyx::CTF_Ptr(this) << L" / active window : " << Nyx::CTF_Ptr(pActiveWnd) );
 }
 
+
+/**
+ *
+ */
+void CMainWindow::UpdateTcpIpStartStopButton()
+{
+    QIcon               StopIcon(":/MainWindow/Stop");
+    QIcon               StartIcon(":/MainWindow/Start");
+
+    if ( TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().IsRunning() )
+        ui->m_btnStartStop->setIcon(StopIcon);
+    else
+        ui->m_btnStartStop->setIcon(StartIcon);
+
+    ui->m_btnStartStop->setEnabled(true);
+}

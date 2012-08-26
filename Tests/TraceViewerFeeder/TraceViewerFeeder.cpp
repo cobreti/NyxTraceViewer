@@ -132,6 +132,7 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
     {
         settings.ApiType() = CFeederSettings::eTAPI_NyxTcpIp;
         settings.TcpIpAddress() = ui.editTcpIpAddress->text().toStdString().c_str();
+        settings.PortNumber() = ui.editPortNumber->text().toInt();
     }
     else if ( ui.btnExternalAPISource->isChecked() )
         settings.ApiType() = CFeederSettings::eTAPI_External;
@@ -218,6 +219,7 @@ void CTraceViewerFeeder::OnUseFilenameClicked()
 void CTraceViewerFeeder::OnNyxPipeClicked()
 {
     ui.editTcpIpAddress->setEnabled(false);
+    ui.editPortNumber->setEnabled(false);
 }
 
 
@@ -227,6 +229,7 @@ void CTraceViewerFeeder::OnNyxPipeClicked()
 void CTraceViewerFeeder::OnNyxTcpIpClicked()
 {
     ui.editTcpIpAddress->setEnabled(true);
+    ui.editPortNumber->setEnabled(true);
 }
 
 
@@ -236,6 +239,7 @@ void CTraceViewerFeeder::OnNyxTcpIpClicked()
 void CTraceViewerFeeder::OnExternalClicked()
 {
     ui.editTcpIpAddress->setEnabled(false);
+    ui.editPortNumber->setEnabled(false);
 }
 
 
@@ -245,6 +249,7 @@ void CTraceViewerFeeder::OnExternalClicked()
 void CTraceViewerFeeder::OnDllFeederClicked()
 {
     ui.editTcpIpAddress->setEnabled(false);
+    ui.editPortNumber->setEnabled(false);
 }
 
 
@@ -273,6 +278,7 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
     ui.btnStartStop->setText("Start");
 
     ui.editTcpIpAddress->setEnabled(false);
+    ui.editPortNumber->setEnabled(false);
 
     if ( pEntry )
     {
@@ -288,6 +294,8 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
             ui.btnNyxTcpIpAPISource->setChecked(true);
             ui.editTcpIpAddress->setEnabled(true);
             ui.editTcpIpAddress->setText( pEntry->Settings().TcpIpAddress().c_str() );
+            ui.editPortNumber->setEnabled(true);
+            ui.editPortNumber->setText( QString::number(pEntry->Settings().PortNumber()));
             break;
         case CFeederSettings::eTAPI_External:
             ui.btnExternalAPISource->setChecked(true);

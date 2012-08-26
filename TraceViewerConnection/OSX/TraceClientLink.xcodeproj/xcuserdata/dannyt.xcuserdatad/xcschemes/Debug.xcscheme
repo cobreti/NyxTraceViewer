@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1674EDD915336A9A00969EB0"
-               BuildableName = "libTraceViewerConnection.dylib"
+               BuildableName = "libNyxTraceViewerConnection.dylib"
                BlueprintName = "TraceClientLink"
                ReferencedContainer = "container:TraceClientLink.xcodeproj">
             </BuildableReference>
@@ -34,12 +34,15 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug">
+      buildConfiguration = "Debug"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1674EDD915336A9A00969EB0"
-            BuildableName = "libTraceViewerConnection.dylib"
+            BuildableName = "libNyxTraceViewerConnection.dylib"
             BlueprintName = "TraceClientLink"
             ReferencedContainer = "container:TraceClientLink.xcodeproj">
          </BuildableReference>
@@ -51,12 +54,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug">
+      buildConfiguration = "Debug"
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1674EDD915336A9A00969EB0"
-            BuildableName = "libTraceViewerConnection.dylib"
+            BuildableName = "libNyxTraceViewerConnection.dylib"
             BlueprintName = "TraceClientLink"
             ReferencedContainer = "container:TraceClientLink.xcodeproj">
          </BuildableReference>

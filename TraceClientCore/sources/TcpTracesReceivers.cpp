@@ -7,9 +7,34 @@ namespace TraceClientCore
     /**
      *
      */
+    class CServerListenerBridge : public Nyx::CObject_Impl<NyxNet::IServerListener>
+    {
+    public:
+        CServerListenerBridge( CTcpTracesReceivers& rReceivers ) : m_rReceivers(rReceivers) {}
+        virtual ~CServerListenerBridge() {}
+
+        virtual void OnServerStarted( NyxNet::CServer* pServer )
+        {
+            m_rReceivers.Listeners()->OnReceiversStarted();
+        }
+        
+        virtual void OnServerStopped( NyxNet::CServer* pServer )
+        {
+            m_rReceivers.Listeners()->OnReceiversStopped();
+        }
+        
+    protected:
+        
+        CTcpTracesReceivers&        m_rReceivers;
+    };
+    
+    
+    /**
+     *
+     */
     CTcpTracesReceivers::CTcpTracesReceivers()
     {
-        
+        m_refListeners = new CTcpTracesReceiversListeners();
     }
     
     
@@ -33,6 +58,7 @@ namespace TraceClientCore
         m_refNxConnection->SetConnectionHandler( static_cast<NyxNet::INxConnectionHandler*>(this) );
         
         m_refServer = NyxNet::CTcpIpServer::Alloc();
+        m_refServer->Listeners()->Add( new CServerListenerBridge(*this) );
         res = m_refServer->Create(  8500,
                                     100,
                                     m_refNxConnection );
@@ -48,6 +74,18 @@ namespace TraceClientCore
     {
         if ( m_refServer.Valid() && m_refServer->IsRunning() )
             m_refServer->Stop();
+    }
+    
+    
+    /**
+     *
+     */
+    bool CTcpTracesReceivers::IsRunning()
+    {
+        if ( m_refServer.Valid() )
+            return m_refServer->IsRunning();
+        
+        return false;
     }
     
     

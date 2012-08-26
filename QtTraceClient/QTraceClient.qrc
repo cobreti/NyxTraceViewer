@@ -21,6 +21,8 @@
         <file>Icons/View-icon.png</file>
         <file>Icons/PipeSource-icon.png</file>
         <file alias="About">Icons/FAQ-icon.png</file>
+        <file alias="Stop">Icons/Channels/StopChannel.png</file>
+        <file alias="Start">Icons/Channels/StartChannel.png</file>
     </qresource>
     <qresource prefix="/ChannelsMgnt">
         <file alias="Channel">Icons/Channels/Channel.png</file>

@@ -90,6 +90,8 @@ void CTraceClientApp::Run()
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Start();
 
     m_AppReturnValue = m_pQtApplication->exec();
+
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Listeners()->Clear();
 }
 
 

@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		1604112911B1C57E00E3F6AF /* PipeTraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PipeTraceFeeder.hpp; path = ../include/PipeTraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		1604112C11B1C71E00E3F6AF /* PipeTraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PipeTraceFeeder.cpp; path = ../sources/PipeTraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
+		162E4F1E15E9A93E00142CC9 /* TcpTracesReceiversListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TcpTracesReceiversListener.hpp; path = ../include/TcpTracesReceiversListener.hpp; sourceTree = "<group>"; };
 		165976FE1127103C00CC718B /* TracesPoolCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPoolCollection.cpp; path = ../Sources/TracesPoolCollection.cpp; sourceTree = SOURCE_ROOT; };
 		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
@@ -133,6 +134,7 @@
 				16A563C514BA36E900466A23 /* TraceChannels.cpp */,
 				16A563C714BA3CB800466A23 /* TraceChannel.hpp */,
 				16A563C914BA3CF100466A23 /* TraceChannel.cpp */,
+				162E4F1E15E9A93E00142CC9 /* TcpTracesReceiversListener.hpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
