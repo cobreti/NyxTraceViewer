@@ -78,7 +78,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTracesWindow->setParent(NULL, Qt::Window);
     m_pTracesWindow->show();
 
-    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start();
+    TraceClientCore::CTcpTracesReceivers::CSettings     settings;
+    settings.PortNumber() = 8500;
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start(settings);
 }
 
 

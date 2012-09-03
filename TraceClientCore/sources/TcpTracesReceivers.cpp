@@ -50,16 +50,18 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceivers::Start()
+    void CTcpTracesReceivers::Start(const CSettings& settings)
     {
         Nyx::NyxResult      res;
+        
+        m_Settings = settings;
         
         m_refNxConnection = NyxNet::CNxConnection::Alloc();
         m_refNxConnection->SetConnectionHandler( static_cast<NyxNet::INxConnectionHandler*>(this) );
         
         m_refServer = NyxNet::CTcpIpServer::Alloc();
         m_refServer->Listeners()->Add( new CServerListenerBridge(*this) );
-        res = m_refServer->Create(  8500,
+        res = m_refServer->Create(  m_Settings.PortNumber(),
                                     100,
                                     m_refNxConnection );
         m_refServer->Start();

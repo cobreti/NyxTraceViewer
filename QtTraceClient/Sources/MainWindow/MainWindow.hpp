@@ -11,7 +11,7 @@ namespace Ui
     class MainWindow;
 }
 
-class CReceiversListenerBridge;
+class CTcpIpSettingsPanel;
 
 /**
  * @brief The CMainWindow class
@@ -19,8 +19,6 @@ class CReceiversListenerBridge;
 class CMainWindow : public QMainWindow
 {
     Q_OBJECT
-
-    friend class CReceiversListenerBridge;
 
 public:
     CMainWindow();
@@ -31,15 +29,12 @@ public slots:
     void OnNewTracesWindow();
     void OnChannelsMgnt();
     void OnAbout();
-    void OnStartStopReceivers();
 
 protected:
 
     virtual void closeEvent(QCloseEvent *);
     virtual void showEvent(QShowEvent *);
     virtual void hideEvent(QHideEvent *);
-
-    void UpdateTcpIpStartStopButton();
 
 protected:
 
@@ -49,7 +44,7 @@ protected:
     QToolButton*        m_pBtn_Channels;
     QToolButton*        m_pBtn_About;
 
-    CReceiversListenerBridge*    m_pReceiversListenerBridge;
+    CTcpIpSettingsPanel*        m_pTcpIpSettingsPanel;
 };
 
 
