@@ -30,6 +30,7 @@ public slots:
 
     void OnStartStop();
     void OnTcpReceiversStateChanged();
+    void OnPortNumberChanged( const QString& text );
     
 protected:
 

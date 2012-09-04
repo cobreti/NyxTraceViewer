@@ -52,8 +52,12 @@ CTcpIpSettingsPanel::CTcpIpSettingsPanel(QWidget *parent) :
         m_Settings = rReceivers.Settings();
     }
 
-    connect( ui->m_btnStartStop, SIGNAL(clicked()), this, SLOT(OnStartStop()) );
-    connect( this, SIGNAL(TcpReceiversStateChanged()), this, SLOT(OnTcpReceiversStateChanged()) );
+    connect( ui->m_btnStartStop, SIGNAL(clicked()),
+             this, SLOT(OnStartStop()) );
+    connect( this, SIGNAL(TcpReceiversStateChanged()),
+             this, SLOT(OnTcpReceiversStateChanged()) );
+    connect( ui->m_editTcpIpPortNumber, SIGNAL(textChanged(QString)),
+             this, SLOT(OnPortNumberChanged(QString)));
 }
 
 
@@ -82,6 +86,18 @@ void CTcpIpSettingsPanel::OnStartStop()
 void CTcpIpSettingsPanel::OnTcpReceiversStateChanged()
 {
     UpdateStartStopButtons();
+}
+
+
+/**
+ *
+ */
+void CTcpIpSettingsPanel::OnPortNumberChanged( const QString& text )
+{
+    bool    bValid;
+    int     PortValue = text.toInt(&bValid);
+
+    ui->m_btnStartStop->setEnabled(bValid && PortValue >= 0 && PortValue <= 65535);
 }
 
 
