@@ -94,7 +94,7 @@ void CViewHeader::paintEvent(QPaintEvent* pEvent)
         EViewColumnId                   id  = m_rColumnsSettings.Order()[index];
         const CViewColumnSettings&      rSettings = m_rColumnsSettings[id];
 
-        painter.drawText( QRectF(x + m_Margins.left(), m_Margins.top(), rSettings.GetWidth() - m_Margins.width(), headerHeight - m_Margins.height()),
+        painter.drawText( QRectF(x + m_Margins.left() + rSettings.Margins().left(), m_Margins.top(), rSettings.GetWidth() - m_Margins.width(), headerHeight - m_Margins.height()),
                           Qt::AlignLeft, rSettings.GetTitle() );
         x += rSettings.GetWidth();
     }

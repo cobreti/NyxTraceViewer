@@ -21,7 +21,9 @@ class CTcpIpSettingsPanel : public QWidget
 
 public:
     explicit CTcpIpSettingsPanel(QWidget *parent = 0);
-    
+
+    void SetTracesReceiversSvr( TraceClientCore::CTcpTracesReceiversSvr* pSvr );
+
 signals:
     
     void TcpReceiversStateChanged();
@@ -42,7 +44,8 @@ protected:
 
     Ui::TcpIpSettingsPanel*     ui;
 
-    TraceClientCore::CTcpTracesReceiversSvr::CSettings     m_Settings;
+    TraceClientCore::CTcpTracesReceiversSvr*                m_pReceiversSvr;
+    TraceClientCore::CTcpTracesReceiversSvr::CSettings      m_Settings;
 };
 
 #endif // TCPIPSETTINGSPANEL_H

@@ -32,6 +32,9 @@ public slots:
 
 protected:
 
+    void AddHandshakeTcpSettingsPanel();
+    void AddNoHandshakeTcpSettingsPanel();
+
     virtual void closeEvent(QCloseEvent *);
     virtual void showEvent(QShowEvent *);
     virtual void hideEvent(QHideEvent *);

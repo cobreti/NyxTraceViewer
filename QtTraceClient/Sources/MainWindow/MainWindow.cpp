@@ -53,8 +53,9 @@ CMainWindow::CMainWindow() : QMainWindow(),
     title += CTraceClientApp::Instance().GetVersion();
     setWindowTitle(title);
 
-    m_pTcpIpSettingsPanel = new CTcpIpSettingsPanel();
-    ui->m_ContentLayout->addWidget(m_pTcpIpSettingsPanel);
+    AddHandshakeTcpSettingsPanel();
+    AddNoHandshakeTcpSettingsPanel();
+
 }
 
 
@@ -97,6 +98,36 @@ void CMainWindow::OnAbout()
     CAboutDlg       dlg(this);
 
     dlg.exec();
+}
+
+
+/**
+ * @brief CMainWindow::AddHandshakeTcpSettingsPanel
+ */
+void CMainWindow::AddHandshakeTcpSettingsPanel()
+{
+    m_pTcpIpSettingsPanel = new CTcpIpSettingsPanel();
+    m_pTcpIpSettingsPanel->SetTracesReceiversSvr( &TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(0) );
+    ui->WithHandshakeGrpLayout->addWidget(m_pTcpIpSettingsPanel);
+
+    QSize panelSize = m_pTcpIpSettingsPanel->size();
+    QSize grpSize = ui->TcpWithHandshake->size();
+    ui->TcpWithHandshake->setMinimumSize( panelSize.width(), panelSize.height() + grpSize.height() );
+}
+
+
+/**
+ * @brief CMainWindow::AddNoHandshakeTcpSettingsPanel
+ */
+void CMainWindow::AddNoHandshakeTcpSettingsPanel()
+{
+    m_pTcpIpSettingsPanel = new CTcpIpSettingsPanel();
+    m_pTcpIpSettingsPanel->SetTracesReceiversSvr( &TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1) );
+    ui->WithoutHandshakeGrpLayout->addWidget(m_pTcpIpSettingsPanel);
+
+    QSize panelSize = m_pTcpIpSettingsPanel->size();
+    QSize grpSize = ui->TcpWithoutHandshake->size();
+    ui->TcpWithoutHandshake->setMinimumSize( panelSize.width(), panelSize.height() + grpSize.height() );
 }
 
 

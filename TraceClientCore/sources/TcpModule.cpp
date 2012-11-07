@@ -6,9 +6,11 @@ namespace TraceClientCore
     /**
      *
      */
-    CTcpModule::CTcpModule() : m_pTcpTracesReceiversSvr(NULL)
+    CTcpModule::CTcpModule()
     {
-        m_pTcpTracesReceiversSvr = new CTcpTracesReceiversSvr(*this);
+        m_TracesReceiversSvrTable.push_back(new CTcpTracesReceiversSvr(*this));
+        m_TracesReceiversSvrTable.push_back(new CTcpTracesReceiversSvr(*this));
+//        m_pTcpTracesReceiversSvr = new CTcpTracesReceiversSvr(*this);
     }
     
     
@@ -17,6 +19,10 @@ namespace TraceClientCore
      */
     CTcpModule::~CTcpModule()
     {
-        delete m_pTcpTracesReceiversSvr;
+        for (size_t index = 0; index < m_TracesReceiversSvrTable.size(); ++index)
+        {
+            delete m_TracesReceiversSvrTable[index];
+        }
+//        delete m_pTcpTracesReceiversSvr;
     }
 }

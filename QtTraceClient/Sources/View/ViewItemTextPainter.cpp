@@ -26,7 +26,7 @@ CViewItemTextPainter::~CViewItemTextPainter()
  */
 void CViewItemTextPainter::EvaluateSize(CViewSettings &settings, CViewItem &item, const QString &text)
 {
-    const qreal                 safeTextMargins = 5.0;
+    const qreal                 safeTextMargins = 0.0;
     CViewColumnSettings&        rColSettings = settings.ColumnsSettings()[ CViewItemPainter::PainterId2ColumnId(Id()) ];
     QStringList                 TextLines = text.split('\n');
     QSizeF                      size;
