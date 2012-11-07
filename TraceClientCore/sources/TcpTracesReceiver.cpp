@@ -2,7 +2,7 @@
 #include "TraceChannel.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "TraceNxStreamReader.hpp"
-#include "TcpTracesReceivers.hpp"
+#include "TcpTracesReceiversSvr.hpp"
 #include "TcpTracesReceiversTable.hpp"
 
 namespace TraceClientCore
@@ -10,7 +10,7 @@ namespace TraceClientCore
     /**
      *
      */
-    CTcpTracesReceiver::CTcpTracesReceiver(CTcpTracesReceivers* pSvr, NyxNet::IConnection* pConnection) :
+    CTcpTracesReceiver::CTcpTracesReceiver(CTcpTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection) :
     m_pConnection(pConnection),
     m_pServer(pSvr),
     m_pChannel(NULL)

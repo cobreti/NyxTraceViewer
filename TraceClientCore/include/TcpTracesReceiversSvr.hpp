@@ -14,7 +14,7 @@ namespace TraceClientCore
     /**
      *
      */
-    class CTcpTracesReceivers : public NyxNet::INxConnectionHandler
+    class CTcpTracesReceiversSvr : public NyxNet::INxConnectionHandler
     {
     public:
         
@@ -42,8 +42,8 @@ namespace TraceClientCore
         };
         
     public:
-        CTcpTracesReceivers( CTcpModule& rTcpModule );
-        virtual ~CTcpTracesReceivers();
+        CTcpTracesReceiversSvr( CTcpModule& rTcpModule );
+        virtual ~CTcpTracesReceiversSvr();
         
         CTcpTracesReceiversListenersRef     Listeners()     { return m_refListeners; }
         

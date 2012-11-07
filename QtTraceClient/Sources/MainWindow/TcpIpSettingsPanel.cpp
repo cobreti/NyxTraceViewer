@@ -46,10 +46,10 @@ CTcpIpSettingsPanel::CTcpIpSettingsPanel(QWidget *parent) :
     ui->setupUi(this);
 
     {
-        TraceClientCore::CTcpTracesReceivers&   rReceivers = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers();
+        TraceClientCore::CTcpTracesReceiversSvr&   rReceiversSvr = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr();
 
-        rReceivers.Listeners()->Add( new CReceiversListenerBridge(*this) );
-        m_Settings = rReceivers.Settings();
+        rReceiversSvr.Listeners()->Add( new CReceiversListenerBridge(*this) );
+        m_Settings = rReceiversSvr.Settings();
     }
 
     connect( ui->m_btnStartStop, SIGNAL(clicked()),
@@ -66,16 +66,16 @@ CTcpIpSettingsPanel::CTcpIpSettingsPanel(QWidget *parent) :
  */
 void CTcpIpSettingsPanel::OnStartStop()
 {
-    TraceClientCore::CTcpTracesReceivers&   rTracesReceivers = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers();
+    TraceClientCore::CTcpTracesReceiversSvr&   rTracesReceiversSvr = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr();
 
     ui->m_btnStartStop->setEnabled(false);
 
-    if ( rTracesReceivers.IsRunning() )
-        rTracesReceivers.Stop();
+    if ( rTracesReceiversSvr.IsRunning() )
+        rTracesReceiversSvr.Stop();
     else
     {
         m_Settings.PortNumber() = ui->m_editTcpIpPortNumber->text().toInt();
-        rTracesReceivers.Start(m_Settings);
+        rTracesReceiversSvr.Start(m_Settings);
     }
 }
 
@@ -124,11 +124,11 @@ void CTcpIpSettingsPanel::UpdateStartStopButtons()
 
     ui->m_editTcpIpPortNumber->setText(portNumber);
 
-    if ( TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().IsRunning() )
+    if ( TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr().IsRunning() )
     {
         ui->m_btnStartStop->setIcon(StopIcon);
         ui->m_editTcpIpPortNumber->setEnabled(false);
-        m_Settings = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Settings();
+        m_Settings = TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr().Settings();
     }
     else
     {

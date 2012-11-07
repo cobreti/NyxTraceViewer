@@ -78,9 +78,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTracesWindow->setParent(NULL, Qt::Window);
     m_pTracesWindow->show();
 
-    TraceClientCore::CTcpTracesReceivers::CSettings     settings;
+    TraceClientCore::CTcpTracesReceiversSvr::CSettings     settings;
     settings.PortNumber() = 8500;
-    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Start(settings);
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr().Start(settings);
 }
 
 
@@ -93,7 +93,7 @@ void CTraceClientApp::Run()
 
     m_AppReturnValue = m_pQtApplication->exec();
 
-    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Listeners()->Clear();
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr().Listeners()->Clear();
 }
 
 
@@ -106,7 +106,7 @@ void CTraceClientApp::Destroy()
     m_pQtApplication = NULL;
 
     TraceClientCore::CModule::Instance().PoolsUpdateClock().Stop();
-    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceivers().Stop();
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr().Stop();
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
     WindowsManager().Terminate();

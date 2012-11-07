@@ -6,13 +6,13 @@
 
 namespace TraceClientCore
 {
-    class CTcpTracesReceivers;
+    class CTcpTracesReceiversSvr;
     class CTraceChannel;
     
     class CTcpTracesReceiver : public NyxNet::INxConnectionHandler
     {
     public:
-        CTcpTracesReceiver(CTcpTracesReceivers* pSvr, NyxNet::IConnection* pConnection);
+        CTcpTracesReceiver(CTcpTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection);
         virtual ~CTcpTracesReceiver();
 
         CTraceChannel*  LastChannel() const     { return m_pChannel; }
@@ -29,7 +29,7 @@ namespace TraceClientCore
         
         NyxNet::IConnection*            m_pConnection;
         Nyx::TBuffer<Nyx::Byte>         m_Buffer;
-        CTcpTracesReceivers*            m_pServer;
+        CTcpTracesReceiversSvr*         m_pServer;
         CTraceChannel*                  m_pChannel;
     };
 }

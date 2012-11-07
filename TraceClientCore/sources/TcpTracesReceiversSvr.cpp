@@ -1,4 +1,4 @@
-#include "TcpTracesReceivers.hpp"
+#include "TcpTracesReceiversSvr.hpp"
 #include "TcpTracesReceiver.hpp"
 
 
@@ -10,7 +10,7 @@ namespace TraceClientCore
     class CServerListenerBridge : public Nyx::CObject_Impl<NyxNet::IServerListener>
     {
     public:
-        CServerListenerBridge( CTcpTracesReceivers& rReceivers ) : m_rReceivers(rReceivers) {}
+        CServerListenerBridge( CTcpTracesReceiversSvr& rReceivers ) : m_rReceivers(rReceivers) {}
         virtual ~CServerListenerBridge() {}
 
         virtual void OnServerStarted( NyxNet::CServer* pServer )
@@ -25,14 +25,14 @@ namespace TraceClientCore
         
     protected:
         
-        CTcpTracesReceivers&        m_rReceivers;
+        CTcpTracesReceiversSvr&        m_rReceivers;
     };
     
     
     /**
      *
      */
-    CTcpTracesReceivers::CTcpTracesReceivers( CTcpModule& rTcpModule ) : m_rTcpModule(rTcpModule)
+    CTcpTracesReceiversSvr::CTcpTracesReceiversSvr( CTcpModule& rTcpModule ) : m_rTcpModule(rTcpModule)
     {
         m_refListeners = new CTcpTracesReceiversListeners();
         
@@ -43,7 +43,7 @@ namespace TraceClientCore
     /**
      *
      */
-    CTcpTracesReceivers::~CTcpTracesReceivers()
+    CTcpTracesReceiversSvr::~CTcpTracesReceiversSvr()
     {
         NYXTRACE(0x0, L"Receivers destroyed : " << Nyx::CTF_Ptr(this) );        
     }
@@ -52,7 +52,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceivers::Start(const CSettings& settings)
+    void CTcpTracesReceiversSvr::Start(const CSettings& settings)
     {
         Nyx::NyxResult      res;
         
@@ -74,7 +74,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceivers::Stop()
+    void CTcpTracesReceiversSvr::Stop()
     {
         if ( m_refServer.Valid() && m_refServer->IsRunning() )
             m_refServer->Stop();
@@ -84,7 +84,7 @@ namespace TraceClientCore
     /**
      *
      */
-    bool CTcpTracesReceivers::IsRunning()
+    bool CTcpTracesReceiversSvr::IsRunning()
     {
         if ( m_refServer.Valid() )
             return m_refServer->IsRunning();
@@ -96,7 +96,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceivers::HandleStream( NyxNet::INxStreamRW& rStream )
+    void CTcpTracesReceiversSvr::HandleStream( NyxNet::INxStreamRW& rStream )
     {
     }
 
@@ -104,7 +104,7 @@ namespace TraceClientCore
     /**
      *
      */
-    Nyx::NyxResult CTcpTracesReceivers::OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler )
+    Nyx::NyxResult CTcpTracesReceiversSvr::OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler )
     {
         CTcpTracesReceiver* pReceiver = new CTcpTracesReceiver(this, pConnection);
         pCloneHandler = static_cast<NyxNet::INxConnectionHandler*>(pReceiver);
@@ -116,7 +116,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceivers::OnConnectionTerminated( NyxNet::IConnection* pConnection )
+    void CTcpTracesReceiversSvr::OnConnectionTerminated( NyxNet::IConnection* pConnection )
     {
         
     }

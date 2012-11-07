@@ -3,7 +3,7 @@
 
 #include <Nyx.hpp>
 
-#include "TcpTracesReceivers.hpp"
+#include "TcpTracesReceiversSvr.hpp"
 
 namespace TraceClientCore
 {
@@ -16,12 +16,12 @@ namespace TraceClientCore
         CTcpModule();
         virtual ~CTcpModule();
         
-        const CTcpTracesReceivers&      TcpTracesReceivers() const      { return *m_pTcpTracesReceivers; }
-        CTcpTracesReceivers&            TcpTracesReceivers()            { return *m_pTcpTracesReceivers; }
+        const CTcpTracesReceiversSvr&      TcpTracesReceiversSvr() const      { return *m_pTcpTracesReceiversSvr; }
+        CTcpTracesReceiversSvr&            TcpTracesReceiversSvr()            { return *m_pTcpTracesReceiversSvr; }
         
     protected:
         
-        CTcpTracesReceivers*    m_pTcpTracesReceivers;
+        CTcpTracesReceiversSvr*    m_pTcpTracesReceiversSvr;
     };
 }
 

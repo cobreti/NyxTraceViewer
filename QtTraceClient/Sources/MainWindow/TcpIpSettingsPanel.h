@@ -42,7 +42,7 @@ protected:
 
     Ui::TcpIpSettingsPanel*     ui;
 
-    TraceClientCore::CTcpTracesReceivers::CSettings     m_Settings;
+    TraceClientCore::CTcpTracesReceiversSvr::CSettings     m_Settings;
 };
 
 #endif // TCPIPSETTINGSPANEL_H
