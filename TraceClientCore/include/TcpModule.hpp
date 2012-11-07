@@ -16,12 +16,12 @@ namespace TraceClientCore
         CTcpModule();
         virtual ~CTcpModule();
         
-        const CTcpTracesReceivers&      TcpTracesReceivers() const      { return m_TcpTracesReceivers; }
-        CTcpTracesReceivers&            TcpTracesReceivers()            { return m_TcpTracesReceivers; }
+        const CTcpTracesReceivers&      TcpTracesReceivers() const      { return *m_pTcpTracesReceivers; }
+        CTcpTracesReceivers&            TcpTracesReceivers()            { return *m_pTcpTracesReceivers; }
         
     protected:
         
-        CTcpTracesReceivers     m_TcpTracesReceivers;
+        CTcpTracesReceivers*    m_pTcpTracesReceivers;
     };
 }
 

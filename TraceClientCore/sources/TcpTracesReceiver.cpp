@@ -2,16 +2,22 @@
 #include "TraceChannel.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "TraceNxStreamReader.hpp"
+#include "TcpTracesReceivers.hpp"
+#include "TcpTracesReceiversTable.hpp"
 
 namespace TraceClientCore
 {
     /**
      *
      */
-    CTcpTracesReceiver::CTcpTracesReceiver(NyxNet::IConnection* pConnection) :
-    m_pConnection(pConnection)
+    CTcpTracesReceiver::CTcpTracesReceiver(CTcpTracesReceivers* pSvr, NyxNet::IConnection* pConnection) :
+    m_pConnection(pConnection),
+    m_pServer(pSvr),
+    m_pChannel(NULL)
     {
+        CTcpTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
         
+        refMethods->Insert(this);
     }
     
     
@@ -20,7 +26,9 @@ namespace TraceClientCore
      */
     CTcpTracesReceiver::~CTcpTracesReceiver()
     {
+        CTcpTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
         
+        refMethods->Remove(this);
     }
     
     
@@ -66,6 +74,8 @@ namespace TraceClientCore
             
             if ( pChannel )
             {
+                m_pChannel = pChannel;
+                
                 CTraceNxStreamReader        TraceReader( pChannel->Pool() );
                 CTraceData*                 pTrace = NULL;
                 
@@ -90,7 +100,7 @@ namespace TraceClientCore
             Nyx::CTraceStream(0x0).Write("Error reading from pipe");
         }
         
-        Nyx::CTraceStream(0x0).Write(L"Read %i data", TotalSize);
+//        Nyx::CTraceStream(0x0).Write(L"Read %i data", TotalSize);
     }
     
     
@@ -108,7 +118,7 @@ namespace TraceClientCore
      *
      */
     void CTcpTracesReceiver::OnConnectionTerminated( NyxNet::IConnection* pConnection )
-    {
+    {        
         delete this;
     }
 }

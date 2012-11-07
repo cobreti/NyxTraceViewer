@@ -5,9 +5,12 @@
 #include <NyxNet.hpp>
 
 #include "TcpTracesReceiversListener.hpp"
+#include "TcpTracesReceiversTable.hpp"
 
 namespace TraceClientCore
 {
+    class CTcpModule;
+
     /**
      *
      */
@@ -39,7 +42,7 @@ namespace TraceClientCore
         };
         
     public:
-        CTcpTracesReceivers();
+        CTcpTracesReceivers( CTcpModule& rTcpModule );
         virtual ~CTcpTracesReceivers();
         
         CTcpTracesReceiversListenersRef     Listeners()     { return m_refListeners; }
@@ -49,6 +52,8 @@ namespace TraceClientCore
         virtual bool IsRunning();
         
         const CSettings&        Settings() const    { return m_Settings; }
+        
+        CTcpTracesReceiversTable& ReceiversTable()  { return m_ReceiversTable; }
         
         //
         // INxConnectionHandler methods
@@ -60,10 +65,12 @@ namespace TraceClientCore
         
     protected:
         
+        CTcpModule&                         m_rTcpModule;
         NyxNet::CNxConnectionRef            m_refNxConnection;
         NyxNet::CTcpIpServerRef             m_refServer;
         CTcpTracesReceiversListenersRef     m_refListeners;
         CSettings                           m_Settings;
+        CTcpTracesReceiversTable            m_ReceiversTable;
     };
 }
 

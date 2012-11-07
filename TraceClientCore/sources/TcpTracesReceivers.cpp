@@ -32,9 +32,11 @@ namespace TraceClientCore
     /**
      *
      */
-    CTcpTracesReceivers::CTcpTracesReceivers()
+    CTcpTracesReceivers::CTcpTracesReceivers( CTcpModule& rTcpModule ) : m_rTcpModule(rTcpModule)
     {
         m_refListeners = new CTcpTracesReceiversListeners();
+        
+        NYXTRACE(0x0, L"Receivers created : " << Nyx::CTF_Ptr(this) );
     }
     
     
@@ -43,7 +45,7 @@ namespace TraceClientCore
      */
     CTcpTracesReceivers::~CTcpTracesReceivers()
     {
-        
+        NYXTRACE(0x0, L"Receivers destroyed : " << Nyx::CTF_Ptr(this) );        
     }
     
     
@@ -104,7 +106,7 @@ namespace TraceClientCore
      */
     Nyx::NyxResult CTcpTracesReceivers::OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler )
     {
-        CTcpTracesReceiver* pReceiver = new CTcpTracesReceiver(pConnection);
+        CTcpTracesReceiver* pReceiver = new CTcpTracesReceiver(this, pConnection);
         pCloneHandler = static_cast<NyxNet::INxConnectionHandler*>(pReceiver);
         
         return Nyx::kNyxRes_Success;
