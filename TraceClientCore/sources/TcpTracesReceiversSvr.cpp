@@ -60,6 +60,7 @@ namespace TraceClientCore
         
         m_refNxConnection = NyxNet::CNxConnection::Alloc();
         m_refNxConnection->SetConnectionHandler( static_cast<NyxNet::INxConnectionHandler*>(this) );
+        m_refNxConnection->SetUseHandshake(settings.UseHandshake());
         
         m_refServer = NyxNet::CTcpIpServer::Alloc();
         m_refServer->Listeners()->Add( new CServerListenerBridge(*this) );

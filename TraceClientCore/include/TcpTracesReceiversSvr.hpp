@@ -24,21 +24,28 @@ namespace TraceClientCore
         class CSettings
         {
         public:
-            CSettings() : m_PortNumber(0) {}
-            CSettings(const CSettings& settings ) : m_PortNumber(settings.m_PortNumber) {}
+            CSettings() : m_PortNumber(0), m_bUseHandshake(true) {}
+            CSettings(const CSettings& settings ) :
+                m_PortNumber(settings.m_PortNumber),
+                m_bUseHandshake(settings.m_bUseHandshake) {}
             ~CSettings() {}
             
             const CSettings& operator = (const CSettings& settings)
             {
                 m_PortNumber = settings.m_PortNumber;
+                m_bUseHandshake = settings.m_bUseHandshake;
                 return *this;
             }
             
             const Nyx::UInt32&  PortNumber() const      { return m_PortNumber; }
             Nyx::UInt32&        PortNumber()            { return m_PortNumber; }
             
+            const bool          UseHandshake() const    { return m_bUseHandshake; }
+            bool&               UseHandshake()          { return m_bUseHandshake; }
+            
         protected:
             Nyx::UInt32     m_PortNumber;
+            bool            m_bUseHandshake;
         };
         
     public:
