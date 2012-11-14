@@ -44,7 +44,8 @@ void CNyxFeeder::OnBegin()
         case CFeederSettings::eTAPI_NyxTcpIp:
             m_refTraceCompositor->SetOutput(    NyxNet::CTcpIpTraceOutput::Alloc(name.c_str(),
                                                 Settings().TcpIpAddress().c_str(),
-                                                Settings().PortNumber() ) );
+                                                Settings().PortNumber(),
+                                                false ) );
             break;
     };
 }

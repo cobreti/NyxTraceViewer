@@ -2,3 +2,5 @@
 *.a
 moc_*
 ui_*
+/Tests/JavaFeeder/nbproject/private/
+/Tests/JavaFeeder/build/

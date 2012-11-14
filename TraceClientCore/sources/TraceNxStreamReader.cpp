@@ -46,8 +46,6 @@ namespace TraceClientCore
         CTraceData*						pTraceData = NULL;
         NyxNet::CTraceFlags             flags;
         Nyx::NyxResult                  res;
-//        Nyx::UInt32                     TimeRefInSeconds = 0;
-//        Nyx::UInt32                     TickCountRef = 0;
         Nyx::UInt32                     ModuleTimeRefInSeconds = 0;
         Nyx::UInt32                     ModuleTickCountRef = 0;
         
@@ -198,6 +196,32 @@ namespace TraceClientCore
         }
     
         return pTraceData;
+    }
+    
+    
+    /**
+     *
+     */
+    CTraceData* CTraceNxStreamReader::ReadTxtTrace( NyxNet::CNxStreamReader& Reader )
+    {
+        Nyx::NyxResult                  res;
+
+        {
+            NyxNet::CNxSectionStreamReader		SectionReader(Reader);
+            
+            m_ReadBuffer.Resize(SectionReader.Size());
+            res = SectionReader.Read(m_ReadBuffer, SectionReader.Size());
+            if ( Nyx::Failed(res) )
+                throw Nyx::CException("failure to read thread id");
+            
+            char* pText = m_ReadBuffer.GetBufferAs<char>();
+            
+            NYXTRACE(0x0, L"trace text : " << Nyx::CTF_AnsiText(pText) );
+            
+//            pTraceData->ThreadId() = m_ReadBuffer.GetBufferAs<char>();
+        }
+
+        return NULL;
     }
     
 }

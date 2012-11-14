@@ -44,6 +44,18 @@ namespace TraceClientCore
         
         if ( !Reader.Valid() )
             return;
+        
+        if ( Reader.DataType() == NyxNet::eNxDT_TxtTraceData )
+        {
+            CModule&                    rModule = CModule::Instance();
+//            CTraceChannel*              pChannel = rModule.TraceChannels().Get(Name);
+            CTraceNxStreamReader        TraceReader( NULL /*pChannel->Pool()*/ );
+            CTraceData*                 pTraceData = NULL;
+            
+            pTraceData = TraceReader.ReadTxtTrace(Reader);
+            
+            return;
+        }
 
         try
         {
