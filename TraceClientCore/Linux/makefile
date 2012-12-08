@@ -50,7 +50,8 @@ OBJS := $(OBJDIR)/PipeTraceFeeder.o \
 		$(OBJDIR)/TraceNxStreamReader.o \
 		$(OBJDIR)/TcpModule.o \
 		$(OBJDIR)/TcpTracesReceiver.o \
-		$(OBJDIR)/TcpTracesReceivers.o
+		$(OBJDIR)/TcpTracesReceiversSvr.o \
+		$(OBJDIR)/TcpTracesReceiversTable.o
 
 
 $(OBJDIR)/%.o: ../sources/%.cpp

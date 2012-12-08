@@ -15,7 +15,8 @@ FORMS += \
     ../UI/AboutDlg.ui \
     ../UI/HighlightsMgrWnd.ui \
     ../UI/HighlightColorsSelectionDlg.ui \
-    ../UI/HighlightColorsPopup.ui
+    ../UI/HighlightColorsPopup.ui \
+    ../UI/TcpIpSettingsPanel.ui
 
 RESOURCES += \
     ../QTraceClient.qrc
@@ -109,7 +110,8 @@ HEADERS += \
     ../Sources/View/Highlight/HighlightBrushesSet.hpp \
     ../Sources/View/Highlight/HighlightBrush.hpp \
     ../Sources/Color/ColorBtn.h \
-    ../Sources/WindowsManager.hpp
+    ../Sources/WindowsManager.hpp \
+    ../Sources/MainWindow/TcpIpSettingsPanel.h
 
 SOURCES += \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -196,7 +198,8 @@ SOURCES += \
     ../Sources/View/Highlight/HighlightBrushesSet.cpp \
     ../Sources/View/Highlight/HighlightBrush.cpp \
     ../Sources/Color/ColorBtn.cpp \
-    ../Sources/WindowsManager.cpp
+    ../Sources/WindowsManager.cpp \
+    ../Sources/MainWindow/TcpIpSettingsPanel.cpp
 
 
 ICON=../Icons/AppLinux.icns
