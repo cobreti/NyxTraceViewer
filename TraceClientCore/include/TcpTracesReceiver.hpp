@@ -27,6 +27,11 @@ namespace TraceClientCore
         
     protected:
         
+        virtual void HandleTraceStream( NyxNet::CNxStreamReader& rStreamReader );
+        virtual void HandleTxtTraceStream( NyxNet::CNxStreamReader& rStreamReader );
+        
+    protected:
+        
         NyxNet::IConnection*            m_pConnection;
         Nyx::TBuffer<Nyx::Byte>         m_Buffer;
         CTcpTracesReceiversSvr*         m_pServer;

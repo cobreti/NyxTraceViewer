@@ -16,7 +16,7 @@ public class Trace {
     
     public Trace( String module, String text ) {
         
-        m_DataSize = Integer.SIZE/8 + Integer.SIZE/8 + text.length();
+//        m_DataSize = Integer.SIZE/8 + Integer.SIZE/8 + text.length();
         m_Text = text;
         m_Module = module;
     }   
@@ -27,6 +27,8 @@ public class Trace {
         try
         {
             ByteBuffer      buff = ByteBuffer.allocate(4096);
+            byte            endChar = 0;
+            String          tickCount = Integer.toString(m_TickCount);
             
             int dataSize =  Integer.SIZE/8 + 
                     
@@ -34,10 +36,16 @@ public class Trace {
                             Integer.SIZE/8 +
                     
                             Integer.SIZE/8 +
-                            m_Module.length() +
+                            m_Module.length() + 1 +
+                    
+                            Integer.SIZE/8 +
+                            m_ThreadId.length() + 1 +
+                    
+                            Integer.SIZE/8 +
+                            tickCount.length() + 1 +
                     
                             Integer.SIZE/8 + 
-                            m_Text.length();
+                            m_Text.length() + 1;
             
 //            buff.putInt(Integer.reverseBytes(0xFFFE));
             buff.putInt(0xFFFE);
@@ -45,13 +53,23 @@ public class Trace {
             buff.putInt(m_DataType);
             
             buff.putInt(4);
-            buff.putInt(2);
+            buff.putInt(4);
             
-            buff.putInt(m_Module.length());
+            buff.putInt(m_Module.length()+1);
             buff.put(m_Module.getBytes());
+            buff.put(endChar);
             
-            buff.putInt(m_Text.length());
+            buff.putInt(m_ThreadId.length()+1);
+            buff.put(m_ThreadId.getBytes());
+            buff.put(endChar);
+
+            buff.putInt(tickCount.length()+1);
+            buff.put(tickCount.getBytes());
+            buff.put(endChar);
+
+            buff.putInt(m_Text.length()+1);
             buff.put(m_Text.getBytes());
+            buff.put(endChar);
             
 //            buff.putInt(Integer.reverseBytes(m_DataSize));
 //            buff.putInt(Integer.reverseBytes(m_DataType));
@@ -80,4 +98,6 @@ public class Trace {
     int         m_DataType = 3;
     String      m_Text;
     String      m_Module;
+    String      m_ThreadId = "0001";
+    int         m_TickCount = 56;
 }
