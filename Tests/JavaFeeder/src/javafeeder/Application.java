@@ -24,7 +24,7 @@ public class Application {
             
             System.out.println("socket connection successful");
             
-            Trace t = new Trace("hello world");
+            Trace t = new Trace("TestApp", "hello world");
             t.Send(sock);
             
             Thread.sleep(5000);
