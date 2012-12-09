@@ -4,6 +4,7 @@
 #include "TraceNxStreamReader.hpp"
 #include "TcpTracesReceiversSvr.hpp"
 #include "TcpTracesReceiversTable.hpp"
+#include <NyxSwap.hpp>
 
 namespace TraceClientCore
 {
@@ -52,7 +53,44 @@ namespace TraceClientCore
             CTraceNxStreamReader        TraceReader( NULL /*pChannel->Pool()*/ );
             CTraceData*                 pTraceData = NULL;
             
-            pTraceData = TraceReader.ReadTxtTrace(Reader);
+            // read sections count
+            {
+                NyxNet::CNxSectionStreamReader        SectionReader(Reader);
+
+                m_Buffer.Resize(SectionReader.Size());
+                SectionReader.Read(m_Buffer, SectionReader.Size());
+
+                SectionsCount = *m_Buffer.GetBufferAs<Nyx::UInt32>();
+
+                if ( SectionReader.RequiresBytesSwap() )
+                    SectionsCount = Nyx::Swap_UInt32(SectionsCount);
+            }
+
+            // read module name
+            {
+                NyxNet::CNxSectionStreamReader      SectionReader(Reader);
+
+                m_Buffer.Resize(SectionReader.Size());
+                SectionReader.Read(m_Buffer, SectionReader.Size());
+
+                Name = m_Buffer.GetBufferAs<const char>();
+
+                NYXTRACE(0x0, L"module name : " << Nyx::CTF_AnsiText(Name.c_str()) );
+            }
+
+            // read text
+            {
+                NyxNet::CNxSectionStreamReader      SectionReader(Reader);
+
+                m_Buffer.Resize(SectionReader.Size());
+                SectionReader.Read(m_Buffer, SectionReader.Size());
+
+                const char* pText = m_Buffer.GetBufferAs<const char>();
+
+                NYXTRACE(0x0, L"trace text : " << Nyx::CTF_AnsiText(pText) );
+            }
+
+//            pTraceData = TraceReader.ReadTxtTrace(Reader);
             
             return;
         }

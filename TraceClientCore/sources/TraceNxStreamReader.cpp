@@ -215,9 +215,9 @@ namespace TraceClientCore
                 throw Nyx::CException("failure to read thread id");
             
             char* pText = m_ReadBuffer.GetBufferAs<char>();
-            
-            NYXTRACE(0x0, L"trace text : " << Nyx::CTF_AnsiText(pText) );
-            
+
+			NYXTRACE(0x0, L"trace text : " << Nyx::CTF_AnsiText(pText) );
+
 //            pTraceData->ThreadId() = m_ReadBuffer.GetBufferAs<char>();
         }
 
