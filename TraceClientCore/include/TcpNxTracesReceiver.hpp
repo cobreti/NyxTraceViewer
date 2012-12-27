@@ -1,19 +1,19 @@
-#ifndef _TCPTRACESRECEIVER_HPP_
-#define _TCPTRACESRECEIVER_HPP_
+#ifndef _TCPNXTRACESRECEIVER_HPP_
+#define _TCPNXTRACESRECEIVER_HPP_
 
 #include <Nyx.hpp>
 #include <NyxNet.hpp>
 
 namespace TraceClientCore
 {
-    class CTcpTracesReceiversSvr;
+    class CTcpNxTracesReceiversSvr;
     class CTraceChannel;
     
-    class CTcpTracesReceiver : public NyxNet::INxConnectionHandler
+    class CTcpNxTracesReceiver : public NyxNet::INxConnectionHandler
     {
     public:
-        CTcpTracesReceiver(CTcpTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection);
-        virtual ~CTcpTracesReceiver();
+        CTcpNxTracesReceiver(CTcpNxTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection);
+        virtual ~CTcpNxTracesReceiver();
 
         CTraceChannel*  LastChannel() const     { return m_pChannel; }
         
@@ -34,10 +34,10 @@ namespace TraceClientCore
         
         NyxNet::IConnection*            m_pConnection;
         Nyx::TBuffer<Nyx::Byte>         m_Buffer;
-        CTcpTracesReceiversSvr*         m_pServer;
+        CTcpNxTracesReceiversSvr*       m_pServer;
         CTraceChannel*                  m_pChannel;
     };
 }
 
 
-#endif // _TCPTRACESRECEIVER_HPP_
+#endif // _TCPNXTRACESRECEIVER_HPP_

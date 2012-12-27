@@ -14,7 +14,7 @@ namespace TraceClientCore
     /**
      *
      */
-    class CTcpTracesReceiversSvr : public NyxNet::INxConnectionHandler
+    class CTcpTracesReceiversSvr // : public NyxNet::INxConnectionHandler
     {
     public:
         
@@ -54,30 +54,30 @@ namespace TraceClientCore
         
         CTcpTracesReceiversListenersRef     Listeners()     { return m_refListeners; }
         
-        virtual void Start(const CSettings& settings);
-        virtual void Stop();
-        virtual bool IsRunning();
+        virtual void Start(const CSettings& settings) = 0;
+        virtual void Stop() = 0;
+        virtual bool IsRunning() = 0;
         
         const CSettings&        Settings() const    { return m_Settings; }
         
-        CTcpTracesReceiversTable& ReceiversTable()  { return m_ReceiversTable; }
+//        CTcpTracesReceiversTable& ReceiversTable()  { return m_ReceiversTable; }
         
-        //
-        // INxConnectionHandler methods
-        //
-        
-		virtual void HandleStream( NyxNet::INxStreamRW& rStream );
-		virtual Nyx::NyxResult OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler );
-		virtual void OnConnectionTerminated( NyxNet::IConnection* pConnection );
+//        //
+//        // INxConnectionHandler methods
+//        //
+//
+//		virtual void HandleStream( NyxNet::INxStreamRW& rStream );
+//		virtual Nyx::NyxResult OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler );
+//		virtual void OnConnectionTerminated( NyxNet::IConnection* pConnection );
         
     protected:
         
         CTcpModule&                         m_rTcpModule;
-        NyxNet::CNxConnectionRef            m_refNxConnection;
-        NyxNet::CTcpIpServerRef             m_refServer;
+//        NyxNet::CNxConnectionRef            m_refNxConnection;
+//        NyxNet::CTcpIpServerRef             m_refServer;
         CTcpTracesReceiversListenersRef     m_refListeners;
         CSettings                           m_Settings;
-        CTcpTracesReceiversTable            m_ReceiversTable;
+//        CTcpTracesReceiversTable            m_ReceiversTable;
     };
 }
 

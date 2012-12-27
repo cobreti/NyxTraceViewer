@@ -1,4 +1,4 @@
-#include "TcpTracesReceiver.hpp"
+#include "TcpNxTracesReceiver.hpp"
 #include "TraceChannel.hpp"
 #include "TraceClientCoreModule.hpp"
 #include "TraceNxStreamReader.hpp"
@@ -11,32 +11,32 @@ namespace TraceClientCore
     /**
      *
      */
-    CTcpTracesReceiver::CTcpTracesReceiver(CTcpTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection) :
+    CTcpNxTracesReceiver::CTcpNxTracesReceiver(CTcpNxTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection) :
     m_pConnection(pConnection),
     m_pServer(pSvr),
     m_pChannel(NULL)
     {
-        CTcpTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
-        
-        refMethods->Insert(this);
+//        CTcpNxTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
+//
+//        refMethods->Insert(this);
     }
     
     
     /**
      *
      */
-    CTcpTracesReceiver::~CTcpTracesReceiver()
+    CTcpNxTracesReceiver::~CTcpNxTracesReceiver()
     {
-        CTcpTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
-        
-        refMethods->Remove(this);
+//        CTcpNxTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
+//
+//        refMethods->Remove(this);
     }
     
     
     /**
      *
      */
-    void CTcpTracesReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
+    void CTcpNxTracesReceiver::HandleStream( NyxNet::INxStreamRW& rStream )
     {
         NyxNet::CNxStreamReader     Reader(rStream);
         
@@ -58,7 +58,7 @@ namespace TraceClientCore
     /**
      *
      */
-    Nyx::NyxResult CTcpTracesReceiver::OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler )
+    Nyx::NyxResult CTcpNxTracesReceiver::OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::INxConnectionHandler*& pCloneHandler )
     {
         
         return Nyx::kNyxRes_Success;
@@ -68,7 +68,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceiver::OnConnectionTerminated( NyxNet::IConnection* pConnection )
+    void CTcpNxTracesReceiver::OnConnectionTerminated( NyxNet::IConnection* pConnection )
     {        
         delete this;
     }
@@ -77,7 +77,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceiver::HandleTraceStream(NyxNet::CNxStreamReader& rStreamReader )
+    void CTcpNxTracesReceiver::HandleTraceStream(NyxNet::CNxStreamReader& rStreamReader )
     {
         NyxNet::NxDataSize          TotalSize = 0;
         Nyx::UInt32                 SectionsCount = 0;
@@ -143,7 +143,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTcpTracesReceiver::HandleTxtTraceStream( NyxNet::CNxStreamReader& rStreamReader )
+    void CTcpNxTracesReceiver::HandleTxtTraceStream( NyxNet::CNxStreamReader& rStreamReader )
     {
         NyxNet::NxDataSize          TotalSize = 0;
         Nyx::UInt32                 SectionsCount = 0;

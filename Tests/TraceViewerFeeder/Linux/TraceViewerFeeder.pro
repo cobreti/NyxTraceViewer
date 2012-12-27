@@ -62,5 +62,5 @@ SOURCES += \
     ../FeederSource.cpp \
     ../FeederSource_UserText.cpp \
     ../FeederSource_TextFile.cpp \
-    ../TraceClientLink_public/TraceClientLink_Impl.cpp \
+    ../TraceClientLink_public/NyxTraceViewerConnection_Impl.cpp \
     ../ExternalFeeder.cpp

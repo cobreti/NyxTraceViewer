@@ -79,7 +79,7 @@ unsigned int CTraceLink::CreateTraceLink_TcpAnsi( const char* szName, const char
     
 	m_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
 	
-	refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(szName, addr) );
+	refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(szName, addr, 8500, false) );
     
 	return id;   
 }
@@ -97,7 +97,7 @@ unsigned int CTraceLink::CreateTraceLink_TcpWChar( const char* szName, const cha
     
 	m_TraceCompositorsTable.insert( std::make_pair(id, refTraceCompositor) );
 	
-	refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(szName, addr) );
+	refTraceCompositor->SetOutput( NyxNet::CTcpIpTraceOutput::Alloc(szName, addr, 8500, false) );
     
 	return id;   
 }

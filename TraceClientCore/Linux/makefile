@@ -49,8 +49,11 @@ OBJS := $(OBJDIR)/PipeTraceFeeder.o \
 		$(OBJDIR)/TraceChannels.o \
 		$(OBJDIR)/TraceNxStreamReader.o \
 		$(OBJDIR)/TcpModule.o \
-		$(OBJDIR)/TcpTracesReceiver.o \
+		$(OBJDIR)/TcpNxTracesReceiver.o \
+		$(OBJDIR)/TcpTxtTracesReceiver.o \
 		$(OBJDIR)/TcpTracesReceiversSvr.o \
+		$(OBJDIR)/TcpNxTracesReceiversSvr.o \
+		$(OBJDIR)/TcpTxtTracesReceiversSvr.o \
 		$(OBJDIR)/TcpTracesReceiversTable.o
 
 
