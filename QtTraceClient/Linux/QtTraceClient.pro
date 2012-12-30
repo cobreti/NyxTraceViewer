@@ -221,6 +221,10 @@ CONFIG(debug, debug|release) {
         -L$$NYXPATH/Lib/Linux/Debug
     LIBS += -lNyxBase \
         -L$$NYXPATH/Nyx/Lib/Linux/Debug
+    LIBS += -lssl \
+        -L../../openssl
+    LIBS += -lcrypto \
+        -L../../openssl
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
