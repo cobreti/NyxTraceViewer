@@ -239,6 +239,10 @@ else {
         -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lNyxBase \
         -L$$NYXPATH/Lib/Linux/Release
+    LIBS += -lssl \
+        -L../../openssl
+    LIBS += -lcrypto \
+        -L../../openssl
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }

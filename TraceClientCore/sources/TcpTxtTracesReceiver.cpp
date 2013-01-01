@@ -6,6 +6,7 @@
 #include "NyxStreamRW.hpp"
 #include "NyxSwap.hpp"
 #include <NyxSwap.hpp>
+#include "TracesReceiverProtocol_WebSocket.hpp"
 
 #include "openssl/sha.h"
 #include <openssl/hmac.h>
@@ -64,7 +65,8 @@ namespace TraceClientCore
     m_pConnection(pConnection),
     m_pServer(pSvr),
     m_pChannel(NULL),
-    m_bWebSocketConnected(false)
+    m_bWebSocketConnected(false),
+    m_pProtocol(NULL)
     {
     	m_Buffer.Resize(4096);
 //        CTcpTxtTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
@@ -95,89 +97,96 @@ namespace TraceClientCore
 
     	do
     	{
-    		::memset(m_Buffer, 0, m_Buffer.FreeSize());
-    		res = rStream.Read( m_Buffer, m_Buffer.FreeSize(), readSize );
-
-    		if ( Nyx::Succeeded(res) )
+    		if ( m_pProtocol )
     		{
-                char* szStr = m_Buffer.GetBufferAs<char>();
-
-                for (int i = 0; i < readSize; ++i)
-                {
-                	int v  = szStr[i];
-                	NYXTRACE(0x0, Nyx::CTF_Hex(v) );
-                }
-
-                if ( !m_bWebSocketConnected && NULL != strstr(szStr, "Upgrade: websocket") && NULL != strstr(szStr, "HTTP/") )
-                {
-                    NYXTRACE(0x0, szStr);
-                    SendWebSocketAnswer(szStr, rStream);
-                    continue;
-                }
-                else if ( m_bWebSocketConnected )
-                {
-                	Nyx::UInt8*	pBytes = m_Buffer.GetBufferAs<Nyx::UInt8>();
-
-                	bool bEndFrame = pBytes[0] & 0x1;
-                	bool bMask = pBytes[1] & 0x80;
-                    Nyx::UInt32 len = pBytes[1] & 0x7F;
-
-                    if ( bMask )
-                    {
-                        Nyx::UInt8 Mask[4] = { pBytes[2], pBytes[3], pBytes[4], pBytes[5] };
-
-                        Nyx::UInt8* pValues = pBytes + 6;
-
-                        char szLine[4096];
-
-                        int i = 0;
-                        while (i < len )
-                        {
-                        	Nyx::UInt8 value = pValues[i] ^ Mask[i % 4];
-                        	NYXTRACE(0x0, "final value : " << Nyx::CTF_Hex(value));
-                            szLine[i] = value;
-
-                        	++ i;
-                        }
-
-                        szLine[i] = '\0';
-
-                        NYXTRACE(0x0, "line : '" << szLine << "'");
-                    }
-
-                	continue;
-                }
-
-    			m_Buffer.addDataSize(readSize);
+    			res = m_pProtocol->HandleStream(rStream);
     		}
-
-    		if ( Nyx::Succeeded(res) && m_Buffer.DataSize() > 0 )
+    		else
     		{
-				char* szText = m_Buffer.GetBufferAs<char>();
-				char* pChar = szText;
-				StringEndPos = 0;
+				::memset(m_Buffer, 0, m_Buffer.FreeSize());
+				res = rStream.Read( m_Buffer, m_Buffer.FreeSize(), readSize );
 
-				while ( StringEndPos < m_Buffer.DataSize() )
+				if ( Nyx::Succeeded(res) )
 				{
-					if ( *pChar == '\0' )
-					{
-						HandleRawTraceLine(szText, StringEndPos+1);
+					char* szStr = m_Buffer.GetBufferAs<char>();
+//
+//					for (int i = 0; i < readSize; ++i)
+//					{
+//						int v  = szStr[i];
+//						NYXTRACE(0x0, Nyx::CTF_Hex(v) );
+//					}
 
-						m_Buffer.ReadData(NULL, StringEndPos+1);
-						szText = m_Buffer.GetBufferAs<char>();
-						pChar = szText;
-						StringEndPos = 0;
-					}
-					else
+					if (  NULL != strstr(szStr, "Upgrade: websocket") && NULL != strstr(szStr, "HTTP/") )
 					{
-						++ pChar;
-						++ StringEndPos;
+						NYXTRACE(0x0, szStr);
+						SendWebSocketAnswer(szStr, rStream);
+						continue;
 					}
+//					else if ( m_bWebSocketConnected )
+//					{
+//						Nyx::UInt8*	pBytes = m_Buffer.GetBufferAs<Nyx::UInt8>();
+//
+//						bool bEndFrame = pBytes[0] & 0x1;
+//						bool bMask = pBytes[1] & 0x80;
+//						Nyx::UInt32 len = pBytes[1] & 0x7F;
+//
+//						if ( bMask )
+//						{
+//							Nyx::UInt8 Mask[4] = { pBytes[2], pBytes[3], pBytes[4], pBytes[5] };
+//
+//							Nyx::UInt8* pValues = pBytes + 6;
+//
+//							char szLine[4096];
+//
+//							int i = 0;
+//							while (i < len )
+//							{
+//								Nyx::UInt8 value = pValues[i] ^ Mask[i % 4];
+//								NYXTRACE(0x0, "final value : " << Nyx::CTF_Hex(value));
+//								szLine[i] = value;
+//
+//								++ i;
+//							}
+//
+//							szLine[i] = '\0';
+//
+//							NYXTRACE(0x0, "line : '" << szLine << "'");
+//						}
+//
+//						continue;
+//					}
+
+					m_Buffer.addDataSize(readSize);
 				}
 
-    		}
+				if ( Nyx::Succeeded(res) && m_Buffer.DataSize() > 0 )
+				{
+					char* szText = m_Buffer.GetBufferAs<char>();
+					char* pChar = szText;
+					StringEndPos = 0;
 
-    		readSize = 0;
+					while ( StringEndPos < m_Buffer.DataSize() )
+					{
+						if ( *pChar == '\0' )
+						{
+							HandleRawTraceLine(szText, StringEndPos+1);
+
+							m_Buffer.ReadData(NULL, StringEndPos+1);
+							szText = m_Buffer.GetBufferAs<char>();
+							pChar = szText;
+							StringEndPos = 0;
+						}
+						else
+						{
+							++ pChar;
+							++ StringEndPos;
+						}
+					}
+
+				}
+
+//				readSize = 0;
+    		}
     	}
     	while ( res == Nyx::kNyxRes_Success );
     }
@@ -198,6 +207,14 @@ namespace TraceClientCore
      */
     void CTcpTxtTracesReceiver::OnConnectionTerminated( NyxNet::IConnection* pConnection )
     {
+    	NYXTRACE(0x0, "Txt Traces Receiver connection terminated");
+
+    	if ( m_pProtocol )
+    	{
+    		delete m_pProtocol;
+    		m_pProtocol = NULL;
+    	}
+
         delete this;
     }
 
@@ -332,6 +349,11 @@ namespace TraceClientCore
 
     	rStream.Write(szResponseContent, strlen(szResponseContent), sizeWritten);
     	m_bWebSocketConnected = true;
+
+    	if ( m_pProtocol )
+    		delete m_pProtocol;
+
+    	m_pProtocol = new CTracesReceiverProtocol_WebSocket();
     }
 
 }

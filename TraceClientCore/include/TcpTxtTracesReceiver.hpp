@@ -8,6 +8,7 @@ namespace TraceClientCore
 {
     class CTcpTxtTracesReceiversSvr;
     class CTraceChannel;
+    class CTracesReceiverProtocol;
     
     class CTcpTxtTracesReceiver : public NyxNet::IConnectionHandler
     {
@@ -38,6 +39,7 @@ namespace TraceClientCore
         CTcpTxtTracesReceiversSvr*      m_pServer;
         CTraceChannel*                  m_pChannel;
         bool							m_bWebSocketConnected;
+        CTracesReceiverProtocol*		m_pProtocol;
     };
 }
 
