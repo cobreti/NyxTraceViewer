@@ -40,38 +40,72 @@ namespace TraceClientCore
 		{
 //			char* szStr = m_Buffer.GetBufferAs<char>();
 
-			Nyx::UInt8*	pBytes = m_Buffer.GetBufferAs<Nyx::UInt8>();
+			Nyx::UInt8*		pBytes = m_Buffer.GetBufferAs<Nyx::UInt8>();
+			Nyx::UInt8 		Mask[4] = {0, 0, 0, 0};
 
-			bool bEndFrame = pBytes[0] & 0x80;
-			Nyx::UInt8 opCode = pBytes[0] & 0x0F;
-			bool bMask = pBytes[1] & 0x80;
-			Nyx::UInt32 len = pBytes[1] & 0x7F;
+			bool bEndFrame = *pBytes & 0x80;
+			Nyx::UInt8 opCode = *pBytes & 0x0F;
 
 			if ( opCode & 0x8 ) // closing connection
 				return Nyx::kNyxRes_Failure;
 
+			++ pBytes;
+
+			bool bMask = *pBytes & 0x80;
+			Nyx::UInt32 len = *pBytes & 0x7F;
+			Nyx::UInt32 headerSize = 2;
+
+
+			++ pBytes;
+
+			if ( len == 126 )
+			{
+                len = *pBytes << 8;
+                ++ pBytes;
+                len |= *pBytes;
+                ++ pBytes;
+
+                headerSize += 2;
+			}
+			else if ( len == 127 ) // cannot handle 64 bits length for now
+				return Nyx::kNyxRes_Success;
+
 			if ( bMask )
 			{
-				Nyx::UInt8 Mask[4] = { pBytes[2], pBytes[3], pBytes[4], pBytes[5] };
-
-				Nyx::UInt8* pValues = pBytes + 6;
-
-				char szLine[4096];
-
-				int i = 0;
-				while (i < len )
+//				Nyx::UInt8 Mask[4] = { pBytes[2], pBytes[3], pBytes[4], pBytes[5] };
+				for (int i = 0; i < 4; ++i)
 				{
-					Nyx::UInt8 value = pValues[i] ^ Mask[i % 4];
-//					NYXTRACE(0x0, "final value : " << Nyx::CTF_Hex(value));
-					szLine[i] = value;
-
-					++ i;
+					Mask[i] = *pBytes;
+					++ pBytes;
 				}
 
-				szLine[i] = '\0';
-
-				NYXTRACE(0x0, "line : '" << szLine << "'");
+				headerSize += 4;
 			}
+
+//			Nyx::UInt8* pValues = pBytes;
+
+//			len -= headerSize;
+
+			char szLine[4096];
+
+			int i = 0;
+			while (i < len )
+			{
+				Nyx::UInt8 value = *pBytes;
+
+				if ( bMask )
+					value ^= Mask[i % 4];
+
+//					NYXTRACE(0x0, "final value : " << Nyx::CTF_Hex(value));
+				szLine[i] = value;
+
+				++ i;
+				++ pBytes;
+			}
+
+			szLine[i] = '\0';
+
+			NYXTRACE(0x0, "line : '" << szLine << "'");
 		}
 
 		return res;
