@@ -65,7 +65,6 @@ namespace TraceClientCore
     m_pConnection(pConnection),
     m_pServer(pSvr),
     m_pChannel(NULL),
-    m_bWebSocketConnected(false),
     m_pProtocol(NULL)
     {
     	m_Buffer.Resize(4096);
@@ -109,12 +108,6 @@ namespace TraceClientCore
 				if ( Nyx::Succeeded(res) )
 				{
 					char* szStr = m_Buffer.GetBufferAs<char>();
-//
-//					for (int i = 0; i < readSize; ++i)
-//					{
-//						int v  = szStr[i];
-//						NYXTRACE(0x0, Nyx::CTF_Hex(v) );
-//					}
 
 					if (  NULL != strstr(szStr, "Upgrade: websocket") && NULL != strstr(szStr, "HTTP/") )
 					{
@@ -122,39 +115,6 @@ namespace TraceClientCore
 						SendWebSocketAnswer(szStr, rStream);
 						continue;
 					}
-//					else if ( m_bWebSocketConnected )
-//					{
-//						Nyx::UInt8*	pBytes = m_Buffer.GetBufferAs<Nyx::UInt8>();
-//
-//						bool bEndFrame = pBytes[0] & 0x1;
-//						bool bMask = pBytes[1] & 0x80;
-//						Nyx::UInt32 len = pBytes[1] & 0x7F;
-//
-//						if ( bMask )
-//						{
-//							Nyx::UInt8 Mask[4] = { pBytes[2], pBytes[3], pBytes[4], pBytes[5] };
-//
-//							Nyx::UInt8* pValues = pBytes + 6;
-//
-//							char szLine[4096];
-//
-//							int i = 0;
-//							while (i < len )
-//							{
-//								Nyx::UInt8 value = pValues[i] ^ Mask[i % 4];
-//								NYXTRACE(0x0, "final value : " << Nyx::CTF_Hex(value));
-//								szLine[i] = value;
-//
-//								++ i;
-//							}
-//
-//							szLine[i] = '\0';
-//
-//							NYXTRACE(0x0, "line : '" << szLine << "'");
-//						}
-//
-//						continue;
-//					}
 
 					m_Buffer.addDataSize(readSize);
 				}
@@ -184,8 +144,6 @@ namespace TraceClientCore
 					}
 
 				}
-
-//				readSize = 0;
     		}
     	}
     	while ( res == Nyx::kNyxRes_Success );
@@ -299,21 +257,6 @@ namespace TraceClientCore
 
     	char* base64output = base64(outbuf, strlen((char*)outbuf));
 
-
-
-//        strcat(szResponse, "HTTP/1.1 200 OK\n");
-//        strcat(szResponse, "Date: Thu, 19 Feb 2009 12:27:04 GMT\n");
-//        strcat(szResponse, "Server: Apache/2.2.3\n");
-//        strcat(szResponse, "ETag: \"56d-9989200-1132c580\"\n");
-//        strcat(szResponse, "Content-Type: text/plain\n");
-//        strcat(szResponse, "Content-Length: 0\n");
-//        strcat(szResponse, "Accept-Ranges: bytes\n");
-//        strcat(szResponse, "Connection: open\n");
-//        strcat(szResponse, "\n");
-//
-//        rStream.Write(reply, strlen(reply), sizeWritten);
-
-
         strcat(szResponseContent, "HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
     	strcat(szResponseContent, "Upgrade: WebSocket\r\n");
     	strcat(szResponseContent, "Connection: Upgrade\r\n");
@@ -322,33 +265,13 @@ namespace TraceClientCore
     	strcat(szResponseContent, base64output);
     	strcat(szResponseContent, "\r\n");
 
-//    	strcat(szResponseContent, "Access-Control-Allow-Headers: content-type\r\n");
-//    	strcat(szResponseContent, "Access-Control-Allow-Origin: null\r\n");
-//    	strcat(szResponseContent, "Access-Control-Allow-Credentials: true\r\n");
-//    	strcat(szResponseContent, "Server: NyxTraceViewer\n");
-//        strcat(szResponseContent, "Date: Sat, 29 Dec 2012 21:32:58 GMT\n");
     	strcat(szResponseContent, "\r\n");
-
-//    	char responseLen[100];
-//    	sprintf(responseLen, "%i", strlen(szResponseContent));
-//
-//    	strcpy(szResponse, "");
-//        strcat(szResponse, "HTTP/1.1 200 OK\n");
-//        strcat(szResponse, "Date: Thu, 19 Feb 2009 12:27:04 GMT\n");
-//		strcat(szResponse, "Content-Length: ");
-//		strcat(szResponse, responseLen);
-//		strcat(szResponse, "\n\n");
-//        strcat(szResponse, szResponseContent);
-////        strcat(szResponse, "Sec-WebSocket-Version: 13\n");
-////        strcat(szResponse, "Sec-WebSocket-Extensions: x-webkit-deflate-frame\n");
-//        strcat(szResponse, "\n");
 
     	::free(base64output);
 
     	NYXTRACE(0x0, szResponseContent);
 
     	rStream.Write(szResponseContent, strlen(szResponseContent), sizeWritten);
-    	m_bWebSocketConnected = true;
 
     	if ( m_pProtocol )
     		delete m_pProtocol;

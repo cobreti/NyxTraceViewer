@@ -103,56 +103,16 @@ namespace TraceClientCore
 				++ pBytes;
 			}
 
-			szLine[i] = '\0';
+			szLine[i++] = '\0';
 
 			NYXTRACE(0x0, "line : '" << szLine << "'");
+
+			m_TextTraceHandler.ParseRawTraceLine(szLine, i);
 		}
 
 		return res;
 	}
 
 
-    /**
-     *
-     */
-    void CTracesReceiverProtocol_WebSocket::HandleRawTraceLine(char* szLine, const Nyx::NyxSize& size)
-    {
-    	char*	pSrcPos = szLine;
-        char*   pThreadPos = NULL;
-
-    	while ( *pSrcPos != '\0' )
-    	{
-            if ( *pSrcPos == ',' )
-            {
-            	if ( pThreadPos == NULL )
-            		pThreadPos = pSrcPos+1;
-
-                *pSrcPos = '\0';
-            }
-            else if ( *pSrcPos == '/' )
-    		{
-    			*pSrcPos = '\0';
-    			++ pSrcPos;
-                HandleTraceLine(szLine, pThreadPos, pSrcPos);
-    			break;
-    		}
-
-    		++ pSrcPos;
-    	}
-    }
-
-
-    /**
-     *
-     */
-    void CTracesReceiverProtocol_WebSocket::HandleTraceLine(char* szHeader, char* pThread, char* szContent)
-    {
-    	NYXTRACE(0x0, "trace line module : '" << Nyx::CTF_AnsiText(szHeader) << Nyx::CTF_AnsiText("'") );
-
-    	if ( pThread != NULL )
-    		NYXTRACE(0x0, "trace line thread : '" << Nyx::CTF_AnsiText(pThread) << Nyx::CTF_AnsiText("'") );
-
-    	NYXTRACE(0x0, "trace line content : '" << Nyx::CTF_AnsiText(szContent) << Nyx::CTF_AnsiText("'") );
-    }
 }
 

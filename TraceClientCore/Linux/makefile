@@ -59,7 +59,8 @@ OBJS := $(OBJDIR)/PipeTraceFeeder.o \
 		$(OBJDIR)/TcpTxtTracesReceiversSvr.o \
 		$(OBJDIR)/TcpTracesReceiversTable.o \
 		$(OBJDIR)/TracesReceiverProtocol.o \
-		$(OBJDIR)/TracesReceiverProtocol_WebSocket.o
+		$(OBJDIR)/TracesReceiverProtocol_WebSocket.o \
+		$(OBJDIR)/TextTraceHandler.o
 
 
 $(OBJDIR)/%.o: ../sources/%.cpp

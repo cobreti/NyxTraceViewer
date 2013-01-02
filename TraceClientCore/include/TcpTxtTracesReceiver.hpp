@@ -38,7 +38,6 @@ namespace TraceClientCore
         Nyx::TBuffer<Nyx::Byte>         m_Buffer;
         CTcpTxtTracesReceiversSvr*      m_pServer;
         CTraceChannel*                  m_pChannel;
-        bool							m_bWebSocketConnected;
         CTracesReceiverProtocol*		m_pProtocol;
     };
 }
