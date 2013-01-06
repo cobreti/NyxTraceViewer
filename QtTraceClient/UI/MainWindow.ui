@@ -26,7 +26,7 @@
          </sizepolicy>
         </property>
         <property name="title">
-         <string>Tcp With Handshaking</string>
+         <string>Tcp Nx</string>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -60,7 +60,7 @@
          </sizepolicy>
         </property>
         <property name="title">
-         <string>Tcp</string>
+         <string>Tcp Text</string>
         </property>
         <property name="flat">
          <bool>true</bool>
@@ -92,7 +92,7 @@
      <x>0</x>
      <y>0</y>
      <width>657</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

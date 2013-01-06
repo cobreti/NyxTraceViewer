@@ -4,6 +4,8 @@
 #include "TraceData.hpp"
 #include "TracesPool.hpp"
 
+#include <NyxUtf8String.hpp>
+
 namespace TraceClientCore
 {
 	/**
@@ -79,10 +81,12 @@ namespace TraceClientCore
 
     	if ( pChannel )
     	{
+    		Nyx::CUtf8String	content(szContent);
+
     		CTraceData*		pTraceData = new (pChannel->Pool()->MemoryPool())CTraceData(pChannel->Pool()->MemoryPool());
     		pTraceData->ThreadId() = pThread;
     		pTraceData->TickCount() = Buffer;
-    		pTraceData->Data().AssignUTF8( szContent );
+    		pTraceData->Data() = content;
     		pTraceData->OwnerPool() = pChannel->Pool();
 
     		pChannel->Insert(pTraceData);
