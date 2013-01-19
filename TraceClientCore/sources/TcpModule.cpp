@@ -1,4 +1,6 @@
 #include "TcpModule.hpp"
+#include "TcpNxTracesReceiversSvr.hpp"
+#include "TcpTxtTracesReceiversSvr.hpp"
 
 
 namespace TraceClientCore
@@ -8,8 +10,8 @@ namespace TraceClientCore
      */
     CTcpModule::CTcpModule()
     {
-        m_TracesReceiversSvrTable.push_back(new CTcpTracesReceiversSvr(*this));
-        m_TracesReceiversSvrTable.push_back(new CTcpTracesReceiversSvr(*this));
+        m_TracesReceiversSvrTable.push_back(new CTcpNxTracesReceiversSvr(*this));
+        m_TracesReceiversSvrTable.push_back(new CTcpTxtTracesReceiversSvr(*this));
 //        m_pTcpTracesReceiversSvr = new CTcpTracesReceiversSvr(*this);
     }
     

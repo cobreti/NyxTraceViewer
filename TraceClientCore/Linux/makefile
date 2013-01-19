@@ -30,6 +30,9 @@ CXX_CFLAGS := 	-I ../include \
 				-I $(NYXPATH)/include/NyxNet \
 				-I ./Source \
 				-I /usr/include \
+				-I ../../openssl/include/openssl \
+				-I ../../openssl/include \
+				-I ../.. \
 				-v $(CONFIG_CFLAGS)
 
 
@@ -49,9 +52,15 @@ OBJS := $(OBJDIR)/PipeTraceFeeder.o \
 		$(OBJDIR)/TraceChannels.o \
 		$(OBJDIR)/TraceNxStreamReader.o \
 		$(OBJDIR)/TcpModule.o \
-		$(OBJDIR)/TcpTracesReceiver.o \
+		$(OBJDIR)/TcpNxTracesReceiver.o \
+		$(OBJDIR)/TcpTxtTracesReceiver.o \
 		$(OBJDIR)/TcpTracesReceiversSvr.o \
-		$(OBJDIR)/TcpTracesReceiversTable.o
+		$(OBJDIR)/TcpNxTracesReceiversSvr.o \
+		$(OBJDIR)/TcpTxtTracesReceiversSvr.o \
+		$(OBJDIR)/TcpTracesReceiversTable.o \
+		$(OBJDIR)/TracesReceiverProtocol.o \
+		$(OBJDIR)/TracesReceiverProtocol_WebSocket.o \
+		$(OBJDIR)/TextTraceHandler.o
 
 
 $(OBJDIR)/%.o: ../sources/%.cpp
