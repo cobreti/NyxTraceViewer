@@ -64,8 +64,8 @@ namespace TraceClientCore
     	Nyx::NyxSize			len = strlen(TickCount.GetAnsiText());
     	char					Buffer[30];
 
-    	strncpy(Buffer, TickCount.GetAnsiText()+2, len-4);
-    	Buffer[len-4] = '\0';
+    	strncpy(Buffer, TickCount.GetAnsiText()+2, len-Nyx::NyxSize(4));
+    	Buffer[len-Nyx::NyxSize(4)] = '\0';
 
     	NYXTRACE(0x0, "trace line module : '" << Nyx::CTF_AnsiText(szModule) << Nyx::CTF_AnsiText("'") );
 

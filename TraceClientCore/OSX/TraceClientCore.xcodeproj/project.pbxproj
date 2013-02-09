@@ -21,10 +21,8 @@
 		16A2773F14B24888002D6924 /* TraceNxStreamReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773E14B24888002D6924 /* TraceNxStreamReader.cpp */; };
 		16A2774114B24DAE002D6924 /* TcpModule.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2774014B24DAE002D6924 /* TcpModule.hpp */; };
 		16A2774314B24E48002D6924 /* TcpModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2774214B24E48002D6924 /* TcpModule.cpp */; };
-		16A2774514B24F9D002D6924 /* TcpTracesReceiver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2774414B24F9C002D6924 /* TcpTracesReceiver.hpp */; };
 		16A2774714B24FDF002D6924 /* TcpTracesReceiversSvr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2774614B24FDF002D6924 /* TcpTracesReceiversSvr.hpp */; };
 		16A2774914B2504A002D6924 /* TcpTracesReceiversSvr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2774814B2504A002D6924 /* TcpTracesReceiversSvr.cpp */; };
-		16A2774B14B254B3002D6924 /* TcpTracesReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2774A14B254B3002D6924 /* TcpTracesReceiver.cpp */; };
 		16A563C414BA36A500466A23 /* TraceChannels.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A563C314BA36A500466A23 /* TraceChannels.hpp */; };
 		16A563C614BA36E900466A23 /* TraceChannels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A563C514BA36E900466A23 /* TraceChannels.cpp */; };
 		16A563C814BA3CB800466A23 /* TraceChannel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A563C714BA3CB800466A23 /* TraceChannel.hpp */; };
@@ -32,6 +30,20 @@
 		16AE9AF111A9D74A0064A5F9 /* TraceFeeder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */; };
 		16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */; };
 		16AE9B1A11A9E7FD0064A5F9 /* TraceInserter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */; };
+		16B09BC416AC3C80006638DC /* TcpTxtTracesReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BC216AC3C80006638DC /* TcpTxtTracesReceiver.cpp */; };
+		16B09BC516AC3C80006638DC /* TcpTxtTracesReceiversSvr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BC316AC3C80006638DC /* TcpTxtTracesReceiversSvr.cpp */; };
+		16B09BC816AC3C8C006638DC /* TcpNxTracesReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BC616AC3C8C006638DC /* TcpNxTracesReceiver.cpp */; };
+		16B09BC916AC3C8C006638DC /* TcpNxTracesReceiversSvr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BC716AC3C8C006638DC /* TcpNxTracesReceiversSvr.cpp */; };
+		16B09BCE16AC3CA9006638DC /* TcpNxTracesReceiver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BCA16AC3CA9006638DC /* TcpNxTracesReceiver.hpp */; };
+		16B09BCF16AC3CA9006638DC /* TcpNxTracesReceiversSvr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BCB16AC3CA9006638DC /* TcpNxTracesReceiversSvr.hpp */; };
+		16B09BD016AC3CA9006638DC /* TcpTxtTracesReceiver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BCC16AC3CA9006638DC /* TcpTxtTracesReceiver.hpp */; };
+		16B09BD116AC3CA9006638DC /* TcpTxtTracesReceiversSvr.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BCD16AC3CA9006638DC /* TcpTxtTracesReceiversSvr.hpp */; };
+		16B09BD316ACEBFD006638DC /* TracesReceiverProtocol_WebSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BD216ACEBFD006638DC /* TracesReceiverProtocol_WebSocket.cpp */; };
+		16B09BD516ACEC09006638DC /* TracesReceiverProtocol_WebSocket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BD416ACEC09006638DC /* TracesReceiverProtocol_WebSocket.hpp */; };
+		16B09BD716ACEC30006638DC /* TextTraceHandler.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BD616ACEC30006638DC /* TextTraceHandler.hpp */; };
+		16B09BD916ACEC42006638DC /* TextTraceHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BD816ACEC42006638DC /* TextTraceHandler.cpp */; };
+		16B09BDB16ACEC7C006638DC /* TracesReceiverProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16B09BDA16ACEC7C006638DC /* TracesReceiverProtocol.cpp */; };
+		16B09BDD16ACEC8A006638DC /* TracesReceiverProtocol.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16B09BDC16ACEC8A006638DC /* TracesReceiverProtocol.hpp */; };
 		16DF357E138CA19D008C3E30 /* PoolsUpdateClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */; };
 		16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */; };
 		16E93BF514BBDBAB002B3C9C /* PoolsList.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16E93BF414BBDBAB002B3C9C /* PoolsList.hpp */; };
@@ -62,10 +74,8 @@
 		16A2773E14B24888002D6924 /* TraceNxStreamReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceNxStreamReader.cpp; path = ../sources/TraceNxStreamReader.cpp; sourceTree = "<group>"; };
 		16A2774014B24DAE002D6924 /* TcpModule.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpModule.hpp; path = ../include/TcpModule.hpp; sourceTree = "<group>"; };
 		16A2774214B24E48002D6924 /* TcpModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpModule.cpp; path = ../sources/TcpModule.cpp; sourceTree = "<group>"; };
-		16A2774414B24F9C002D6924 /* TcpTracesReceiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpTracesReceiver.hpp; path = ../include/TcpTracesReceiver.hpp; sourceTree = "<group>"; };
 		16A2774614B24FDF002D6924 /* TcpTracesReceiversSvr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpTracesReceiversSvr.hpp; path = ../include/TcpTracesReceiversSvr.hpp; sourceTree = "<group>"; };
 		16A2774814B2504A002D6924 /* TcpTracesReceiversSvr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceiversSvr.cpp; path = ../sources/TcpTracesReceiversSvr.cpp; sourceTree = "<group>"; };
-		16A2774A14B254B3002D6924 /* TcpTracesReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceiver.cpp; path = ../sources/TcpTracesReceiver.cpp; sourceTree = "<group>"; };
 		16A563C314BA36A500466A23 /* TraceChannels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceChannels.hpp; path = ../include/TraceChannels.hpp; sourceTree = "<group>"; };
 		16A563C514BA36E900466A23 /* TraceChannels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceChannels.cpp; path = ../sources/TraceChannels.cpp; sourceTree = "<group>"; };
 		16A563C714BA3CB800466A23 /* TraceChannel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceChannel.hpp; path = ../include/TraceChannel.hpp; sourceTree = "<group>"; };
@@ -73,6 +83,20 @@
 		16AE9AF011A9D74A0064A5F9 /* TraceFeeder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceFeeder.hpp; path = ../include/TraceFeeder.hpp; sourceTree = SOURCE_ROOT; };
 		16AE9AF911A9DABA0064A5F9 /* TraceFeeder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceFeeder.cpp; path = ../sources/TraceFeeder.cpp; sourceTree = SOURCE_ROOT; };
 		16AE9B1911A9E7FD0064A5F9 /* TraceInserter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceInserter.hpp; path = ../include/TraceInserter.hpp; sourceTree = SOURCE_ROOT; };
+		16B09BC216AC3C80006638DC /* TcpTxtTracesReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTxtTracesReceiver.cpp; path = ../sources/TcpTxtTracesReceiver.cpp; sourceTree = "<group>"; };
+		16B09BC316AC3C80006638DC /* TcpTxtTracesReceiversSvr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTxtTracesReceiversSvr.cpp; path = ../sources/TcpTxtTracesReceiversSvr.cpp; sourceTree = "<group>"; };
+		16B09BC616AC3C8C006638DC /* TcpNxTracesReceiver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpNxTracesReceiver.cpp; path = ../sources/TcpNxTracesReceiver.cpp; sourceTree = "<group>"; };
+		16B09BC716AC3C8C006638DC /* TcpNxTracesReceiversSvr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpNxTracesReceiversSvr.cpp; path = ../sources/TcpNxTracesReceiversSvr.cpp; sourceTree = "<group>"; };
+		16B09BCA16AC3CA9006638DC /* TcpNxTracesReceiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpNxTracesReceiver.hpp; path = ../include/TcpNxTracesReceiver.hpp; sourceTree = "<group>"; };
+		16B09BCB16AC3CA9006638DC /* TcpNxTracesReceiversSvr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpNxTracesReceiversSvr.hpp; path = ../include/TcpNxTracesReceiversSvr.hpp; sourceTree = "<group>"; };
+		16B09BCC16AC3CA9006638DC /* TcpTxtTracesReceiver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpTxtTracesReceiver.hpp; path = ../include/TcpTxtTracesReceiver.hpp; sourceTree = "<group>"; };
+		16B09BCD16AC3CA9006638DC /* TcpTxtTracesReceiversSvr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TcpTxtTracesReceiversSvr.hpp; path = ../include/TcpTxtTracesReceiversSvr.hpp; sourceTree = "<group>"; };
+		16B09BD216ACEBFD006638DC /* TracesReceiverProtocol_WebSocket.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesReceiverProtocol_WebSocket.cpp; path = ../sources/TracesReceiverProtocol_WebSocket.cpp; sourceTree = "<group>"; };
+		16B09BD416ACEC09006638DC /* TracesReceiverProtocol_WebSocket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesReceiverProtocol_WebSocket.hpp; path = ../include/TracesReceiverProtocol_WebSocket.hpp; sourceTree = "<group>"; };
+		16B09BD616ACEC30006638DC /* TextTraceHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TextTraceHandler.hpp; path = ../include/TextTraceHandler.hpp; sourceTree = "<group>"; };
+		16B09BD816ACEC42006638DC /* TextTraceHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextTraceHandler.cpp; path = ../sources/TextTraceHandler.cpp; sourceTree = "<group>"; };
+		16B09BDA16ACEC7C006638DC /* TracesReceiverProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesReceiverProtocol.cpp; path = ../sources/TracesReceiverProtocol.cpp; sourceTree = "<group>"; };
+		16B09BDC16ACEC8A006638DC /* TracesReceiverProtocol.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesReceiverProtocol.hpp; path = ../include/TracesReceiverProtocol.hpp; sourceTree = "<group>"; };
 		16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsUpdateClock.cpp; path = ../sources/PoolsUpdateClock.cpp; sourceTree = "<group>"; };
 		16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsUpdateClock.hpp; path = ../include/PoolsUpdateClock.hpp; sourceTree = "<group>"; };
 		16E93BF414BBDBAB002B3C9C /* PoolsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PoolsList.hpp; path = ../include/DataStruct/PoolsList.hpp; sourceTree = "<group>"; };
@@ -129,10 +153,22 @@
 				16A2773A14B23597002D6924 /* PoolsList.cpp */,
 				16A2774014B24DAE002D6924 /* TcpModule.hpp */,
 				16A2774214B24E48002D6924 /* TcpModule.cpp */,
-				16A2774414B24F9C002D6924 /* TcpTracesReceiver.hpp */,
-				16A2774A14B254B3002D6924 /* TcpTracesReceiver.cpp */,
+				16B09BCA16AC3CA9006638DC /* TcpNxTracesReceiver.hpp */,
+				16B09BCB16AC3CA9006638DC /* TcpNxTracesReceiversSvr.hpp */,
+				16B09BCC16AC3CA9006638DC /* TcpTxtTracesReceiver.hpp */,
+				16B09BCD16AC3CA9006638DC /* TcpTxtTracesReceiversSvr.hpp */,
 				16A2774614B24FDF002D6924 /* TcpTracesReceiversSvr.hpp */,
 				16A2774814B2504A002D6924 /* TcpTracesReceiversSvr.cpp */,
+				16B09BDC16ACEC8A006638DC /* TracesReceiverProtocol.hpp */,
+				16B09BDA16ACEC7C006638DC /* TracesReceiverProtocol.cpp */,
+				16B09BD416ACEC09006638DC /* TracesReceiverProtocol_WebSocket.hpp */,
+				16B09BD216ACEBFD006638DC /* TracesReceiverProtocol_WebSocket.cpp */,
+				16B09BD616ACEC30006638DC /* TextTraceHandler.hpp */,
+				16B09BD816ACEC42006638DC /* TextTraceHandler.cpp */,
+				16B09BC616AC3C8C006638DC /* TcpNxTracesReceiver.cpp */,
+				16B09BC716AC3C8C006638DC /* TcpNxTracesReceiversSvr.cpp */,
+				16B09BC216AC3C80006638DC /* TcpTxtTracesReceiver.cpp */,
+				16B09BC316AC3C80006638DC /* TcpTxtTracesReceiversSvr.cpp */,
 				16A563C314BA36A500466A23 /* TraceChannels.hpp */,
 				16A563C514BA36E900466A23 /* TraceChannels.cpp */,
 				16A563C714BA3CB800466A23 /* TraceChannel.hpp */,
@@ -195,11 +231,17 @@
 				16DF3580138CA1A5008C3E30 /* PoolsUpdateClock.hpp in Headers */,
 				16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */,
 				16A2774114B24DAE002D6924 /* TcpModule.hpp in Headers */,
-				16A2774514B24F9D002D6924 /* TcpTracesReceiver.hpp in Headers */,
 				16A2774714B24FDF002D6924 /* TcpTracesReceiversSvr.hpp in Headers */,
 				16A563C414BA36A500466A23 /* TraceChannels.hpp in Headers */,
 				16A563C814BA3CB800466A23 /* TraceChannel.hpp in Headers */,
 				16E93BF514BBDBAB002B3C9C /* PoolsList.hpp in Headers */,
+				16B09BCE16AC3CA9006638DC /* TcpNxTracesReceiver.hpp in Headers */,
+				16B09BCF16AC3CA9006638DC /* TcpNxTracesReceiversSvr.hpp in Headers */,
+				16B09BD016AC3CA9006638DC /* TcpTxtTracesReceiver.hpp in Headers */,
+				16B09BD116AC3CA9006638DC /* TcpTxtTracesReceiversSvr.hpp in Headers */,
+				16B09BD516ACEC09006638DC /* TracesReceiverProtocol_WebSocket.hpp in Headers */,
+				16B09BD716ACEC30006638DC /* TextTraceHandler.hpp in Headers */,
+				16B09BDD16ACEC8A006638DC /* TracesReceiverProtocol.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,10 +312,16 @@
 				16A2773F14B24888002D6924 /* TraceNxStreamReader.cpp in Sources */,
 				16A2774314B24E48002D6924 /* TcpModule.cpp in Sources */,
 				16A2774914B2504A002D6924 /* TcpTracesReceiversSvr.cpp in Sources */,
-				16A2774B14B254B3002D6924 /* TcpTracesReceiver.cpp in Sources */,
 				16A563C614BA36E900466A23 /* TraceChannels.cpp in Sources */,
 				16A563CA14BA3CF100466A23 /* TraceChannel.cpp in Sources */,
 				16736F291649A28D0033DDC1 /* TcpTracesReceiversTable.cpp in Sources */,
+				16B09BC416AC3C80006638DC /* TcpTxtTracesReceiver.cpp in Sources */,
+				16B09BC516AC3C80006638DC /* TcpTxtTracesReceiversSvr.cpp in Sources */,
+				16B09BC816AC3C8C006638DC /* TcpNxTracesReceiver.cpp in Sources */,
+				16B09BC916AC3C8C006638DC /* TcpNxTracesReceiversSvr.cpp in Sources */,
+				16B09BD316ACEBFD006638DC /* TracesReceiverProtocol_WebSocket.cpp in Sources */,
+				16B09BD916ACEC42006638DC /* TextTraceHandler.cpp in Sources */,
+				16B09BDB16ACEC7C006638DC /* TracesReceiverProtocol.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

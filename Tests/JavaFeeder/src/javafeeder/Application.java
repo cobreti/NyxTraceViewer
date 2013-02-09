@@ -19,13 +19,19 @@ public class Application {
         
         try
         {
-            Socket  sock = new Socket("127.0.0.1", 8501);
+            Socket  sock = new Socket("192.168.1.122", 8501);
             sock.setSendBufferSize(4096);
             
             System.out.println("socket connection successful");
             
-            Trace t = new Trace("TestApp", "hello world");
-            t.Send(sock);
+            String s = new String("JavaTest/hello world\0");
+
+            sock.getOutputStream().write(s.getBytes());
+            
+            sock.getOutputStream().write( new String("JavaTest,threadid/another test\0").getBytes() );
+            
+//            Trace t = new Trace("TestApp", "hello world");
+//            t.Send(sock);
             
             Thread.sleep(5000);
             

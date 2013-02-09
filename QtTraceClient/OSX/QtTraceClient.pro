@@ -222,6 +222,11 @@ CONFIG(Debug_64) {
         -L$(NyxPath)/Lib/OSX/Debug_64
     mac:LIBS += -lNyxNet \
         -L$(NyxPath)/Lib/OSX/Debug_64
+    mac:LIBS += -lssl \
+        -L../../lib/openssl
+    mac:LIBS += -lcrypto \
+        -L../../lib/openssl
+    mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Debug_64
     OBJECTS_DIR = ./Debug_64
     DEFINES += _DEBUG

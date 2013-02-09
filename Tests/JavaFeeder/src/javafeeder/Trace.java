@@ -47,7 +47,6 @@ public class Trace {
                             Integer.SIZE/8 + 
                             m_Text.length() + 1;
             
-//            buff.putInt(Integer.reverseBytes(0xFFFE));
             buff.putInt(0xFFFE);
             buff.putInt(dataSize);
             buff.putInt(m_DataType);
@@ -70,11 +69,6 @@ public class Trace {
             buff.putInt(m_Text.length()+1);
             buff.put(m_Text.getBytes());
             buff.put(endChar);
-            
-//            buff.putInt(Integer.reverseBytes(m_DataSize));
-//            buff.putInt(Integer.reverseBytes(m_DataType));
-//            buff.putInt(Integer.reverseBytes(m_Text.length()));
-
             
 
             for (int pos = 0; pos < buff.position(); ++pos)
