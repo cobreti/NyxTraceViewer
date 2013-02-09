@@ -222,9 +222,9 @@ CONFIG(debug, debug|release) {
     LIBS += -lNyxBase \
         -L$$NYXPATH/Nyx/Lib/Linux/Debug
     LIBS += -lssl \
-        -L../../openssl
+        -L../../openssl-1.0.1c
     LIBS += -lcrypto \
-        -L../../openssl
+        -L../../openssl-1.0.1c
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
@@ -240,9 +240,9 @@ else {
     LIBS += -lNyxBase \
         -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lssl \
-        -L../../openssl
+        -L../../openssl-1.0.1c
     LIBS += -lcrypto \
-        -L../../openssl
+        -L../../openssl-1.0.1c
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }
