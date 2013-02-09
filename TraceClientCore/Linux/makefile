@@ -30,8 +30,8 @@ CXX_CFLAGS := 	-I ../include \
 				-I $(NYXPATH)/include/NyxNet \
 				-I ./Source \
 				-I /usr/include \
-				-I ../../openssl/include/openssl \
-				-I ../../openssl/include \
+				-I ../../openssl-1.0.1c/include/openssl \
+				-I ../../openssl-1.0.1c/include \
 				-I ../.. \
 				-v $(CONFIG_CFLAGS)
 
