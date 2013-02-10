@@ -84,7 +84,13 @@ namespace TraceClientCore
     		Nyx::CUtf8String	content(szContent);
 
     		CTraceData*		pTraceData = new (pChannel->Pool()->MemoryPool())CTraceData(pChannel->Pool()->MemoryPool());
-    		pTraceData->ThreadId() = pThread;
+
+    		if ( pThread == NULL )
+    			pTraceData->ThreadId() = "default";
+    		else
+    			pTraceData->ThreadId() = pThread;
+
+
     		pTraceData->TickCount() = Buffer;
     		pTraceData->Data() = content;
     		pTraceData->OwnerPool() = pChannel->Pool();

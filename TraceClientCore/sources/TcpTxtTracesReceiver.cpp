@@ -129,7 +129,8 @@ namespace TraceClientCore
 					{
 						if ( *pChar == '\0' )
 						{
-							HandleRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
+							m_TextTraceHandler.ParseRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
+//							HandleRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
 
 							m_Buffer.ReadData(NULL, StringEndPos + Nyx::NyxSize(1));
 							szText = m_Buffer.GetBufferAs<char>();

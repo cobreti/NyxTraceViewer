@@ -3,6 +3,7 @@
 
 #include <Nyx.hpp>
 #include <NyxNet.hpp>
+#include <TextTraceHandler.hpp>
 
 namespace TraceClientCore
 {
@@ -39,6 +40,7 @@ namespace TraceClientCore
         CTcpTxtTracesReceiversSvr*      m_pServer;
         CTraceChannel*                  m_pChannel;
         CTracesReceiverProtocol*		m_pProtocol;
+        CTextTraceHandler				m_TextTraceHandler;
     };
 }
 
