@@ -67,14 +67,14 @@ namespace TraceClientCore
     	strncpy(Buffer, TickCount.GetAnsiText()+2, len-Nyx::NyxSize(4));
     	Buffer[len-Nyx::NyxSize(4)] = '\0';
 
-    	NYXTRACE(0x0, "trace line module : '" << Nyx::CTF_AnsiText(szModule) << Nyx::CTF_AnsiText("'") );
+//    	NYXTRACE(0x0, "trace line module : '" << Nyx::CTF_AnsiText(szModule) << Nyx::CTF_AnsiText("'") );
 
-    	if ( pThread != NULL )
-    		NYXTRACE(0x0, "trace line thread : '" << Nyx::CTF_AnsiText(pThread) << Nyx::CTF_AnsiText("'") );
+//    	if ( pThread != NULL )
+//    		NYXTRACE(0x0, "trace line thread : '" << Nyx::CTF_AnsiText(pThread) << Nyx::CTF_AnsiText("'") );
 
-    	NYXTRACE(0x0, "trace tickcount : " << Nyx::CTF_AnsiText(Buffer) );
+//    	NYXTRACE(0x0, "trace tickcount : " << Nyx::CTF_AnsiText(Buffer) );
 
-    	NYXTRACE(0x0, "trace line content : '" << Nyx::CTF_AnsiText(szContent) << Nyx::CTF_AnsiText("'") );
+//    	NYXTRACE(0x0, "trace line content : '" << Nyx::CTF_AnsiText(szContent) << Nyx::CTF_AnsiText("'") );
 
     	CModule&		rModule = CModule::Instance();
     	CTraceChannel*	pChannel = rModule.TraceChannels().Get( Nyx::CAString(szModule) );

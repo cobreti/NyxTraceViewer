@@ -101,6 +101,8 @@ bool CTracesViewCore::Contains(const TraceClientCore::CTracesPool &rPool)
  */
 void CTracesViewCore::HandleMessage( Nyx::CMsg& msg )
 {
+    NYXTRACE(0x0, L"CTracesViewCore handle message : " << Nyx::CTF_Int(msg.Id()) );
+
     switch ( msg.Id() )
     {
         case 0:
@@ -165,6 +167,8 @@ void CTracesViewCore::OnNewTraces(CViewItems *pViewItems)
  */
 void CTracesViewCore::OnBeginClearModule(const Nyx::CAString& ModuleName)
 {
+    NYXTRACE(0x0, "OnBeginClearModule");
+
     Nyx::CWString   wModuleName;
 
     wModuleName = ModuleName;
@@ -180,6 +184,8 @@ void CTracesViewCore::OnBeginClearModule(const Nyx::CAString& ModuleName)
         ViewPos.View()->OnBeginClearModule(ModuleName);
         ViewPos.MoveToNext();
     }
+
+    NYXTRACE(0x0, "OnBeginClearModule - end");
 }
 
 

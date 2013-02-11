@@ -69,11 +69,15 @@ void CTracesViewCoreRepositoryObserver::Insert( TraceClientCore::CTraceData* pTr
  */
 void CTracesViewCoreRepositoryObserver::BeginClear(const Nyx::CAString& ModuleName)
 {
+    NYXTRACE(0x0, "BeginClear begin");
+
     CBeginClearItemsMsg     Msg;
 
     Msg.ModuleName() = ModuleName;
 
     m_refActiveObject->Send(Msg);
+
+    NYXTRACE(0x0, "BeginClear end");
 }
 
 
