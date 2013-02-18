@@ -242,6 +242,11 @@ CONFIG(Release_64) {
         -L$(NyxPath)/Lib/OSX/Release_64
     mac:LIBS += -lNyxNet \
         -L$(NyxPath)/Lib/OSX/Release_64
+    mac:LIBS += -lssl \
+        -L../../lib/openssl
+    mac:LIBS += -lcrypto \
+        -L../../lib/openssl
+    mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Release_64
     OBJECTS_DIR = ./Release_64
 }
