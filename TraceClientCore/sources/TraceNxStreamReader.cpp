@@ -185,10 +185,22 @@ namespace TraceClientCore
                     }
 
                     pTraceData->Data() = (wchar_t*)pBuffer;
+                    
+                    for (size_t index = 0; index < pTraceData->Data().length(); ++index)
+                    {
+                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+                            pTraceData->Data()[index] = 32;
+                    }
                 }
                 else if ( flags.IsAnsi() )
                 {
                     pTraceData->Data() = m_ReadBuffer.GetBufferAs<char>();
+
+                    for (size_t index = 0; index < pTraceData->Data().length(); ++index)
+                    {
+                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+                            pTraceData->Data()[index] = 32;
+                    }
                 }
             }
                             

@@ -95,6 +95,12 @@ namespace TraceClientCore
     		pTraceData->Data() = content;
     		pTraceData->OwnerPool() = pChannel->Pool();
 
+            for (size_t index = 0; index < pTraceData->Data().length(); ++index)
+            {
+                if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+                    pTraceData->Data()[index] = 32;
+            }
+
     		pChannel->Insert(pTraceData);
     	}
     }
