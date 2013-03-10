@@ -27,6 +27,7 @@ CONFIG(debug, debug|release) {
         -L$(NyxPath)/Lib/OSX/Debug_64
     mac:LIBS += -lNyxNet \
         -L$(NyxPath)/Lib/OSX/Debug_64
+    mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
