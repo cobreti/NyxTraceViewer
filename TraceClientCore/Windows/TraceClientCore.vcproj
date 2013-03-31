@@ -87,69 +87,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release|Win32"
-			OutputDirectory="..\..\Lib\Windows\x86\$(ConfigurationName)"
-			IntermediateDirectory="objs\x86\$(ConfigurationName)"
-			ConfigurationType="4"
-			InheritedPropertySheets=".\TraceClientCore.vsprops"
-			CharacterSet="1"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="../include;&quot;$(NyxLibs)/include&quot;;&quot;$(NyxLibs)/include/win32&quot;;&quot;$(nyxLibs)/include/NyxNet&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="2"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\TraceClientCore.lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Debug|x64"
 			OutputDirectory="..\..\Lib\Windows\x64\$(ConfigurationName)"
 			IntermediateDirectory="objs\x64\$(ConfigurationName)"
@@ -185,6 +122,69 @@
 				ProgramDataBaseFileName="$(OutDir)\TraceClientCore.pdb"
 				BrowseInformation="1"
 				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\TraceClientCore.lib"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="..\..\Lib\Windows\x86\$(ConfigurationName)"
+			IntermediateDirectory="objs\x86\$(ConfigurationName)"
+			ConfigurationType="4"
+			InheritedPropertySheets=".\TraceClientCore.vsprops"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="../include;&quot;$(NyxLibs)/include&quot;;&quot;$(NyxLibs)/include/win32&quot;;&quot;$(nyxLibs)/include/NyxNet&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -321,19 +321,31 @@
 				>
 			</File>
 			<File
-				RelativePath="..\sources\TcpTracesReceiver.cpp"
+				RelativePath="..\sources\TcpNxTracesReceiver.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\include\TcpTracesReceiver.hpp"
+				RelativePath="..\sources\TcpNxTracesReceiversSvr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\sources\TcpTracesReceivers.cpp"
+				RelativePath="..\sources\TcpTracesReceiversSvr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\include\TcpTracesReceivers.hpp"
+				RelativePath="..\sources\TcpTracesReceiversTable.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TcpTxtTracesReceiver.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TcpTxtTracesReceiversSvr.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TextTraceHandler.cpp"
 				>
 			</File>
 			<File
@@ -414,6 +426,14 @@
 			</File>
 			<File
 				RelativePath="..\include\TracesPoolCollection.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TracesReceiverProtocol.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sources\TracesReceiverProtocol_WebSocket.cpp"
 				>
 			</File>
 			<Filter

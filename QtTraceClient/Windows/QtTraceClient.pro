@@ -89,7 +89,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Highlight/HighlightTreeItem.cpp \
     ../Sources/View/Highlight/HighlightColorsPopup.cpp \
     ../Sources/View/ViewSearchEngine.cpp \
-    ../Sources/WindowsManager.cpp
+    ../Sources/WindowsManager.cpp \
+    ../Sources/MainWindow/TcpIpSettingsPanel.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -182,7 +183,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Highlight/HighlightTreeItemEventsConnection.h \
     ../Sources/View/Highlight/HighlightColorsPopup.h \
     ../Sources/View/ViewSearchEngine.h \
-    ../Sources/WindowsManager.hpp
+    ../Sources/WindowsManager.hpp \
+    ../Sources/MainWindow/TcpIpSettingsPanel.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -196,7 +198,8 @@ FORMS += ../UI/TracesView.ui \
     ../UI/HighlightsMgrWnd.ui \
     ../UI/HighlightColorsSelectionDlg.ui \
     ../UI/HighlightColorsPopup.ui \
-    ../UI/AboutDlg.ui
+    ../UI/AboutDlg.ui \
+    ../UI/TcpIpSettingsPanel.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI
@@ -218,6 +221,11 @@ CONFIG(Debug) {
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
     LIBS += -lNyxNet \
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
+    LIBS += -lssleay32 \
+        -LL$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
+    LIBS += -llibeay32 \
+        -LL$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
+    LIBS += -lwinmm
     DESTDIR = ./bin/$(PLATFORM)/Debug
     OBJECTS_DIR = ./objs/$(PLATFORM)/Debug
     DEFINES += _DEBUG
@@ -230,6 +238,11 @@ CONFIG(Release) {
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Release
     LIBS += -lNyxNet \
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Release
+    LIBS += -lssleay32 \
+        -LL$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
+    LIBS += -llibeay32 \
+        -LL$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
+    LIBS += -lwinmm
     DESTDIR = ./bin/$(PLATFORM)/Release
     OBJECTS_DIR = ./objs/$(PLATFORM)/Release
 }
