@@ -1,0 +1,128 @@
+/* Footnote styling */
+.annie_notes {
+	margin: 10px 0;
+	padding: 10px 0 10px 0;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+/* Add two tags here, one to override Tippy styles if Tippy is used. */
+a.annie_footnoteRef, a.annie_footnoteRef.tippy_link {
+	font-size: .85em;
+	vertical-align: super;
+	border-bottom: none;
+	color: blue;
+}
+
+.annie_noteHeader {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.annie_note_container {
+	margin-bottom: 15px;
+}
+
+/* Highlighter styling */
+.annie_hilight_yellow {
+	background-color: #ffff99;
+}
+
+.annie_hilight_red {
+	background-color: red;
+	color: white;
+}
+
+.annie_hilight_green {
+	background-color: green;
+	color: white;
+}
+
+.annie_hilight_blue {
+	background-color: blue;
+	color: white;
+}
+
+.annie_hilight_yellow_underline {
+	border-bottom: 1px solid yellow;
+}
+
+.annie_hilight_red_underline {
+	border-bottom: 1px solid red;
+}
+
+.annie_hilight_green_underline {
+	border-bottom: 1px solid green;
+}
+
+.annie_hilight_blue_underline {
+	border-bottom: 1px solid blue;
+}
+
+#annieOverlay {
+	z-index: 1000;
+	display: none;
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	
+	background-color: #000;
+	opacity: .75;
+}
+
+#annie_toolbox {
+	position: fixed;
+	bottom: 5px;
+	left: 5px;
+	
+	height: 25px;
+	min-height: 25px;
+	border: 1px solid #555;
+	background-color: #ccc;
+	padding-left: 5px;
+}
+
+#annie_toolbox_toggle {
+	display: inline-block;
+	margin-left: 5px;
+	border-left: 1px solid #555;
+	padding: 0 2px;
+	line-height: 25px;
+	font-size: 18px;
+	color: #555;
+	cursor: pointer;
+}
+
+#annie_toolbox_toggle:hover {
+	background-color: #eee;
+}
+
+a.annie_toggle {
+	cursor: pointer;
+	line-height: 25px;
+	margin-left: 5px;
+}
+
+#annie_highlightTextBox {
+	width: 500px;
+	height: 500px;
+	min-height: 500px;
+	max-height: 500px;
+	overflow: scroll;
+	margin: 0 auto;
+	padding: 15px;
+	border: 1px solid #ccc;
+	background-color: white;
+	display: none;
+	color: black;
+	font-size: 14px;
+	line-height: 18px;
+	text-align: left;
+}
+
+#annie_highlightTextBoxHeader {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 12px;
+}
