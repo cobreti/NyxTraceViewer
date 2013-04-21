@@ -176,6 +176,15 @@ namespace TraceClientCore
 
         delete this;
     }
+    
+    
+    /**
+     *
+     */
+    void CTcpTxtTracesReceiver::CloseConnection( NyxNet::IConnection* pConnection )
+    {
+        
+    }
 
 
     /**

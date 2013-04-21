@@ -33,6 +33,7 @@ namespace TraceClientCore
         virtual void HandleStream( Nyx::IStreamRW& rStream );
 		virtual Nyx::NyxResult OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::IConnectionHandler*& pCloneHandler );
 		virtual void OnConnectionTerminated( NyxNet::IConnection* pConnection );
+        virtual void CloseConnection( NyxNet::IConnection* pConnection );
         
     protected:
         

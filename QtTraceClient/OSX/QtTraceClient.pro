@@ -209,6 +209,7 @@ INCLUDEPATH += $(NyxPath)/include/
 INCLUDEPATH += $(NyxPath)/include/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
 mac:INCLUDEPATH += $(NyxPath)/include/OSX
+mac:INCLUDEPATH += $(NyxPath)/include/OSX/NyxNet
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 
@@ -223,9 +224,9 @@ CONFIG(Debug_64) {
     mac:LIBS += -lNyxNet \
         -L$(NyxPath)/Lib/OSX/Debug_64
     mac:LIBS += -lssl \
-        -L../../lib/openssl
+        -L$(NyxPath)/Lib/OSX/OpenSSL_64
     mac:LIBS += -lcrypto \
-        -L../../lib/openssl
+        -L$(NyxPath)/Lib/OSX/OpenSSL_64
     mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Debug_64
     OBJECTS_DIR = ./Debug_64
@@ -243,9 +244,9 @@ CONFIG(Release_64) {
     mac:LIBS += -lNyxNet \
         -L$(NyxPath)/Lib/OSX/Release_64
     mac:LIBS += -lssl \
-        -L../../lib/openssl
+        -L$(NyxPath)/Lib/OSX/OpenSSL_64
     mac:LIBS += -lcrypto \
-        -L../../lib/openssl
+        -L$(NyxPath)/Lib/OSX/OpenSSL_64
     mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Release_64
     OBJECTS_DIR = ./Release_64
