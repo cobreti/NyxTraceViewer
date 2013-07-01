@@ -14,6 +14,11 @@
 
 #include <QtGui/QApplication>
 
+#include <openssl/bio.h>
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+#include <openssl/crypto.h>
+
 #define NYXTRACE(filter, output)    { Nyx::CTraceStream stream(filter); stream << output; }
 
 
@@ -38,6 +43,12 @@ int main(int argc, char *argv[])
     refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
 //    refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceViewer"));
 #endif
+
+    CRYPTO_malloc_init(); // Initialize malloc, free, etc for OpenSSL's use
+    SSL_library_init(); // Initialize OpenSSL's SSL libraries
+    SSL_load_error_strings(); // Load SSL error strings
+    ERR_load_BIO_strings(); // Load BIO error strings
+    OpenSSL_add_all_algorithms(); // Load all available encryption algorithms
 
     Nyx::CLocalTime     ltime = Nyx::CLocalTime::Get();
 
