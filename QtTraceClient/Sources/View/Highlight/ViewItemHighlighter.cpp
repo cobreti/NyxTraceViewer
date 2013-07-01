@@ -26,6 +26,7 @@ void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettin
         return;
 
     long                startIndex = 0;
+    int                 patternLength = m_refPattern->PatternLength();
 
     Nyx::CRange         range = m_refPattern->Match(text, startIndex);
 
@@ -45,7 +46,7 @@ void CViewItemHighlighter::OnPreItemDisplay(    const CViewSettings& rViewSettin
 
         rPainter.fillRect(rcArea, brush);
 
-        startIndex = textOffset + 1;
+        startIndex = textOffset + patternLength;
         range = m_refPattern->Match(text, startIndex);
     }
 }

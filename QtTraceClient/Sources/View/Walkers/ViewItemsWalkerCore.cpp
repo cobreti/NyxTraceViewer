@@ -180,8 +180,8 @@ bool CViewItemsWalkerCore::MoveToNext()
         {
             if ( pNode->LowerPos().Valid() )
                 pNode->MoveToNext();
-            else
-                pNode->MoveToBegin();
+//            else
+//                pNode->MoveToBegin();
         }
 
         while ( pNode->UpperPos().Valid() && pNode->UpperPos().IsBefore(m_Pos) )

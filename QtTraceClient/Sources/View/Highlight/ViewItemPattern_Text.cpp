@@ -30,6 +30,15 @@ Nyx::CRange CViewItemPattern_Text::Match( const QString& text, const long& start
 /**
  *
  */
+int CViewItemPattern_Text::PatternLength() const
+{
+    return m_TextToMatch.length();
+}
+
+
+/**
+ *
+ */
 CViewItemPattern_Text::~CViewItemPattern_Text()
 {
 }
