@@ -4,6 +4,7 @@
 #include <Nyx.hpp>
 #include <NyxNet.hpp>
 #include <TextTraceHandler.hpp>
+#include <NyxWebSvr/ConnHttpHandler.hpp>
 
 namespace TraceClientCore
 {
@@ -44,6 +45,7 @@ namespace TraceClientCore
         CTraceChannel*                  m_pChannel;
         CTracesReceiverProtocol*		m_pProtocol;
         CTextTraceHandler				m_TextTraceHandler;
+        NyxWebSvr::CConnHttpHandlerRef  m_refHttpConnHandler;
     };
 }
 

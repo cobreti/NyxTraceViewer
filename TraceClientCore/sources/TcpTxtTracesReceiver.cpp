@@ -71,6 +71,8 @@ namespace TraceClientCore
 //        CTcpTxtTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
 //
 //        refMethods->Insert(this);
+        
+        m_refHttpConnHandler = NyxWebSvr::CConnHttpHandler::Alloc();
     }
     
     
@@ -104,7 +106,7 @@ namespace TraceClientCore
                 {
                     NYXTRACE(0x0, "protocol failure return");
                 }
-}
+            }
     		else
     		{
                 ::memset(m_Buffer.getWritePos(), 0, m_Buffer.FreeSize());
@@ -129,7 +131,8 @@ namespace TraceClientCore
                         }
                         else if ( NULL != strstr(szStr, "GET") && NULL != strstr(szStr, "HTTP/") )
                         {
-                            SendHttpAnswer(szStr, rStream);
+//                            SendHttpAnswer(szStr, rStream);
+                            m_refHttpConnHandler->HandleStream(szStr, rStream);
                             return;
                         }
                     }
