@@ -67,7 +67,7 @@ namespace TraceClientCore
     m_pChannel(NULL),
     m_pProtocol(NULL)
     {
-    	m_Buffer.Resize(4096);
+    	m_Buffer.Resize(1024 * 1024);
 //        CTcpTxtTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
 //
 //        refMethods->Insert(this);
@@ -99,50 +99,76 @@ namespace TraceClientCore
     		if ( m_pProtocol )
     		{
     			res = m_pProtocol->HandleStream(rStream);
-    		}
+
+                if ( Nyx::Failed(res) )
+                {
+                    NYXTRACE(0x0, "protocol failure return");
+                }
+}
     		else
     		{
-				::memset(m_Buffer, 0, m_Buffer.FreeSize());
-				res = rStream.Read( m_Buffer, m_Buffer.FreeSize(), readSize );
+                ::memset(m_Buffer.getWritePos(), 0, m_Buffer.FreeSize());
+				res = rStream.Read( m_Buffer.getWritePos(), m_Buffer.FreeSize(), readSize );
+                
+                if ( Nyx::Failed(res) )
+                {
+                    NYXTRACE(0x0, "rStream failure return");
+                }
 
-				if ( Nyx::Succeeded(res) )
+				if ( Nyx::Succeeded(res) && readSize > 0 )
 				{
 					char* szStr = m_Buffer.GetBufferAs<char>();
 
-					if (  NULL != strstr(szStr, "Upgrade: websocket") && NULL != strstr(szStr, "HTTP/") )
-					{
-						NYXTRACE(0x0, szStr);
-						SendWebSocketAnswer(szStr, rStream);
-						continue;
-					}
-
-					m_Buffer.addDataSize(readSize);
+                    if ( NULL != strstr(szStr, "\n") )
+                    {
+                        if (  NULL != strstr(szStr, "Upgrade: websocket") && NULL != strstr(szStr, "HTTP/") )
+                        {
+                            NYXTRACE(0x0, szStr);
+                            SendWebSocketAnswer(szStr, rStream);
+                            continue;
+                        }
+                        else if ( NULL != strstr(szStr, "GET") && NULL != strstr(szStr, "HTTP/") )
+                        {
+                            SendHttpAnswer(szStr, rStream);
+                            return;
+                        }
+                    }
+                    
+                    m_Buffer.addDataSize(readSize);
 				}
+                else if ( m_pProtocol == NULL )
+                {
+                    res = Nyx::kNyxRes_Failure;
+                }
 
 				if ( Nyx::Succeeded(res) && m_Buffer.DataSize() > 0 )
 				{
 					char* szText = m_Buffer.GetBufferAs<char>();
-					char* pChar = szText;
-					StringEndPos = 0;
+                    
+                    if ( NULL != strstr(szText, "\0") )
+                    {
+                        char* pChar = szText;
+                        StringEndPos = 0;
 
-					while ( StringEndPos < m_Buffer.DataSize() )
-					{
-						if ( *pChar == '\0' )
-						{
-							m_TextTraceHandler.ParseRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
-//							HandleRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
+                        while ( StringEndPos < m_Buffer.DataSize() )
+                        {
+                            if ( *pChar == '\0' )
+                            {
+                                m_TextTraceHandler.ParseRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
+    //							HandleRawTraceLine(szText, StringEndPos + Nyx::NyxSize(1));
 
-							m_Buffer.ReadData(NULL, StringEndPos + Nyx::NyxSize(1));
-							szText = m_Buffer.GetBufferAs<char>();
-							pChar = szText;
-							StringEndPos = 0;
-						}
-						else
-						{
-							++ pChar;
-							++ StringEndPos;
-						}
-					}
+                                m_Buffer.ReadData(NULL, StringEndPos + Nyx::NyxSize(1));
+                                szText = m_Buffer.GetBufferAs<char>();
+                                pChar = szText;
+                                StringEndPos = 0;
+                            }
+                            else
+                            {
+                                ++ pChar;
+                                ++ StringEndPos;
+                            }
+                        }
+                    }
 
 				}
     		}
@@ -287,6 +313,33 @@ namespace TraceClientCore
     		delete m_pProtocol;
 
     	m_pProtocol = new CTracesReceiverProtocol_WebSocket();
+    }
+    
+    
+    /**
+     *
+     */
+    void CTcpTxtTracesReceiver::SendHttpAnswer(char* szInHeader, Nyx::IStreamRW& rStream)
+    {
+        Nyx::CAString content;
+        Nyx::CAString header;
+        Nyx::NyxSize writtenSize = 0;
+        
+        header =    "HTTP/1.1 200 OK\r\n"
+        "Content-Type: text/html; charset=utf-8\r\n"
+        //                    "set-Cookie: test;\r\n"
+        "Content-Length: 82\r\n\r\n";
+        //                "Server: NyxWebServer\n";
+        
+        content =   "<html>\r\n"
+        "<title>WebTraceSvr</title>\r\n"
+        "<body>"
+        "<h1>Web Trace Server</h1>\r\n"
+        "</body>\r\n"
+        "</html>\r\n";
+
+        rStream.Write(header.BufferPtr(), header.length(), writtenSize);
+        rStream.Write(content.BufferPtr(), content.length(), writtenSize );
     }
 
 }

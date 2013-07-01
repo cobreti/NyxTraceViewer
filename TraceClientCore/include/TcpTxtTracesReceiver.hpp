@@ -34,6 +34,7 @@ namespace TraceClientCore
 		virtual void HandleRawTraceLine(char* szLine, const Nyx::NyxSize& size);
 		virtual void HandleTraceLine(char* szHeader, char* pThread, char* szContent);
 		virtual void SendWebSocketAnswer(char* szInHeader, Nyx::IStreamRW& rStream);
+		virtual void SendHttpAnswer(char* szInHeader, Nyx::IStreamRW& rStream);
 
     protected:
         

@@ -60,6 +60,7 @@ namespace TraceClientCore
 //        m_refNxConnection->SetUseHandshake(settings.UseHandshake());
         
         m_refServer = NyxNet::CTcpIpServer::Alloc();
+        m_refServer->SetUseSSL();
         m_refServer->Listeners()->Add( new CTxtServerListenerBridge(*this) );
         res = m_refServer->Create(  m_Settings.PortNumber(),
                                     100,

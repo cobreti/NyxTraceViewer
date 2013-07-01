@@ -36,6 +36,11 @@ namespace TraceClientCore
 		::memset(m_Buffer, 0, m_Buffer.FreeSize());
 		res = rStream.Read( m_Buffer, m_Buffer.FreeSize(), readSize );
 
+        if ( Nyx::Failed(res) )
+        {
+            NYXTRACE(0x0, "protocol rStream failure returned");
+        }
+        
 		if ( Nyx::Succeeded(res) )
 		{
 //			char* szStr = m_Buffer.GetBufferAs<char>();
@@ -46,9 +51,28 @@ namespace TraceClientCore
 			bool bEndFrame = *pBytes & 0x80;
 			Nyx::UInt8 opCode = *pBytes & 0x0F;
 
-			if ( opCode & 0x8 ) // closing connection
+            if ( opCode == 0x09 ) // ping frame
+            {
+                NYXTRACE(0x0, "ping frame received");
+                Nyx::UInt8  pong[4] = { 0x8A, 0, 0, 0 };
+                Nyx::NyxSize    writtenSize;
+                
+                rStream.Write(&pong[0], sizeof(pong[0]), writtenSize);
+                rStream.Write(&pong[1], sizeof(pong[0]), writtenSize);
+                rStream.Write(&pong[2], sizeof(pong[0]), writtenSize);
+                rStream.Write(&pong[3], sizeof(pong[0]), writtenSize);
+                return Nyx::kNyxRes_Success;
+            }
+            
+			if ( opCode == 0x08 ) // closing connection
+            {
+                NYXTRACE(0x0, "protocol closing connection");
 				return Nyx::kNyxRes_Failure;
+            }
 
+            if ( opCode != 0x01 )
+                return Nyx::kNyxRes_Success;
+            
 			++ pBytes;
 
 			bool bMask = *pBytes & 0x80;
