@@ -29,6 +29,8 @@ namespace TraceClientCore
 		virtual void OnConnectionTerminated( NyxNet::IConnection* pConnection );
         virtual void CloseConnection( NyxNet::IConnection* pConnection );
         
+        virtual void OnGetRequest_Trace( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams );
+        virtual void OnPostRequest_Trace( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams );
         
     protected:
 

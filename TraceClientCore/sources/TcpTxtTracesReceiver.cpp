@@ -58,6 +58,28 @@ namespace TraceClientCore
 	  return buffer;
 	}
 
+    
+    class CHttpHandlerCB : public Nyx::CRefCount_Impl<NyxWebSvr::CHttpHandler>
+    {
+    public:
+        CHttpHandlerCB( CTcpTxtTracesReceiver& rReceiver ) : m_rReceiver(rReceiver) {}
+        
+        virtual void OnGetRequest( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams )
+        {
+            m_rReceiver.OnGetRequest_Trace(rConnHttpHandler, szPath, szParams);
+        }
+        
+        virtual void OnPostRequest( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams )
+        {
+            m_rReceiver.OnPostRequest_Trace(rConnHttpHandler, szPath, szParams);
+        }
+        
+    protected:
+        
+        CTcpTxtTracesReceiver&  m_rReceiver;
+    };
+    
+    
 	/**
      *
      */
@@ -73,6 +95,7 @@ namespace TraceClientCore
 //        refMethods->Insert(this);
         
         m_refHttpConnHandler = NyxWebSvr::CConnHttpHandler::Alloc();
+        m_refHttpConnHandler->Handlers()->Set("/Trace", new CHttpHandlerCB(*this));
     }
     
     
@@ -132,6 +155,12 @@ namespace TraceClientCore
                         else if ( NULL != strstr(szStr, "GET") && NULL != strstr(szStr, "HTTP/") )
                         {
 //                            SendHttpAnswer(szStr, rStream);
+                            m_refHttpConnHandler->HandleStream(szStr, rStream);
+                            return;
+                        }
+                        else if ( NULL != strstr(szStr, "POST") && NULL != strstr(szStr, "HTTP/") )
+                        {
+                            //                            SendHttpAnswer(szStr, rStream);
                             m_refHttpConnHandler->HandleStream(szStr, rStream);
                             return;
                         }
@@ -215,6 +244,48 @@ namespace TraceClientCore
         
     }
 
+    
+    /**
+     *
+     */
+    void CTcpTxtTracesReceiver::OnGetRequest_Trace( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams )
+    {
+        char* code =    "if ( window.$Nyx == undefined ) {\r\n"
+                        "   $Nyx = {\r\n"
+                        "       msgQueue: [],\r\n"
+                        "       Trace: function(module, text) {\r\n"
+                        "           $Nyx.msgQueue.push(module + '/' + text + '\\0');\r\n"
+                        "           if ( $Nyx.msgQueue.length == 1 ) {\r\n"
+                        "               setTimeout( $Nyx.processMsg, 1 );\r\n"
+                        "           }\r\n"
+                        "       },\r\n"
+                        "       processMsg: function() {\r\n"
+                        "           var msg = $Nyx.msgQueue.shift();\r\n"
+                        "           if ( $Nyx.connection != undefined && $Nyx.connection.readyState == 1 )\r\n"
+                        "               $Nyx.connection.send(msg);\r\n"
+                        "           if ( $Nyx.msgQueue.length > 0 ) {\r\n"
+                        "               setTimeout( $Nyx.processMsg, 1 );\r\n"
+                        "           }\r\n"
+                        "       }\r\n"
+                        "   };\r\n"
+                        "   $Nyx.connection = new WebSocket('wss://localhost:8501');\r\n"
+                        "   $Nyx.connection.onclose = function() { delete $Nyx.connection; }\r\n"
+                        "}\r\n";
+        
+        rConnHttpHandler.Write("text/javascript", code, strlen(code));
+    }
+
+    
+    /**
+     *
+     */
+    void CTcpTxtTracesReceiver::OnPostRequest_Trace( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams )
+    {
+        char* szMsg = strstr(szParams, "\r\n\r\n") + 4;
+
+        m_TextTraceHandler.ParseRawTraceLine(szMsg, strlen(szMsg));
+    }
+    
 
     /**
      *
