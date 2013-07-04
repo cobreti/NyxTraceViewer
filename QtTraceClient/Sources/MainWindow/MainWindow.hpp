@@ -34,6 +34,7 @@ protected:
 
     void AddHandshakeTcpSettingsPanel();
     void AddNoHandshakeTcpSettingsPanel();
+    void AddSSLTcpSettingsPanel();
 
     virtual void closeEvent(QCloseEvent *);
     virtual void showEvent(QShowEvent *);

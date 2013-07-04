@@ -55,7 +55,7 @@ CMainWindow::CMainWindow() : QMainWindow(),
 
     AddHandshakeTcpSettingsPanel();
     AddNoHandshakeTcpSettingsPanel();
-
+    AddSSLTcpSettingsPanel();
 }
 
 
@@ -128,6 +128,21 @@ void CMainWindow::AddNoHandshakeTcpSettingsPanel()
     QSize panelSize = m_pTcpIpSettingsPanel->size();
     QSize grpSize = ui->TcpWithoutHandshake->size();
     ui->TcpWithoutHandshake->setMinimumSize( panelSize.width(), panelSize.height() + grpSize.height() );
+}
+
+
+/**
+ * @brief CMainWindow::AddSSLTcpSettingsPanel
+ */
+void CMainWindow::AddSSLTcpSettingsPanel()
+{
+    m_pTcpIpSettingsPanel = new CTcpIpSettingsPanel();
+    m_pTcpIpSettingsPanel->SetTracesReceiversSvr( &TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(2) );
+    ui->WithSSLGrpLayout->addWidget(m_pTcpIpSettingsPanel);
+
+    QSize panelSize = m_pTcpIpSettingsPanel->size();
+    QSize grpSize = ui->TcpSSL->size();
+    ui->TcpSSL->setMinimumSize( panelSize.width(), panelSize.height() + grpSize.height() );
 }
 
 

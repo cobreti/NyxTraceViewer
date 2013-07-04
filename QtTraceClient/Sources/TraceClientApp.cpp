@@ -86,6 +86,11 @@ void CTraceClientApp::Init(int &argc, char **argv)
     settings.PortNumber() = 8501;
     settings.UseHandshake() = false;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
+
+    settings.PortNumber() = 8502;
+    settings.UseHandshake() = false;
+    settings.UseSSL() = true;
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(2).Start(settings);
 }
 
 
