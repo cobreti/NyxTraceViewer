@@ -13,6 +13,7 @@
 #include <NyxLocalTime.hpp>
 
 #include <QtGui/QApplication>
+#include <QDir>
 
 #include <openssl/bio.h>
 #include <openssl/ssl.h>
@@ -179,6 +180,8 @@ int main(int argc, char *argv[])
     refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
 //    refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceViewer"));
 #endif
+
+    QDir currentFolder = QDir::current();
 
     CRYPTO_malloc_init(); // Initialize malloc, free, etc for OpenSSL's use
     SSL_library_init(); // Initialize OpenSSL's SSL libraries

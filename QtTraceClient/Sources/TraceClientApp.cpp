@@ -70,6 +70,20 @@ void CTraceClientApp::Init(int &argc, char **argv)
     QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
     QRect           rcScreen = pApp->desktop()->availableGeometry();
 
+    QString path = pApp->applicationDirPath();
+    std::string strPath = path.toStdString();
+
+    NYXTRACE(0x0, L"current path : " << Nyx::CTF_AnsiText(strPath.c_str()) );
+
+    Nyx::CAString      certificateFile( strPath.c_str() );
+    certificateFile += "/SSL/certificate.pem";
+
+    Nyx::CAString       privKeyFile( strPath.c_str() );
+    privKeyFile += "/SSL/privkey.pem";
+
+    Nyx::CAString       bioFile( strPath.c_str() );
+    bioFile += "/SSL/dh1024.pem";
+
     m_pMainWindow = new CMainWindow();
     m_pMainWindow->move( rcScreen.left(), rcScreen.top() );
 //    m_pMainWindow->show();
@@ -90,6 +104,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
     settings.PortNumber() = 8502;
     settings.UseHandshake() = false;
     settings.UseSSL() = true;
+    settings.CertificateFile() = certificateFile;
+    settings.PrivKeyFile() = privKeyFile;
+    settings.DhFile() = bioFile;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(2).Start(settings);
 }
 
