@@ -25,6 +25,7 @@ namespace TraceClientCore
         virtual void Start(const CSettings& settings);
         virtual void Stop();
         virtual bool IsRunning();
+        virtual bool GetUseSSL() const;
 
         //
         // INxConnectionHandler methods

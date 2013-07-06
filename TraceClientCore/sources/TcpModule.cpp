@@ -12,6 +12,7 @@ namespace TraceClientCore
     {
         m_TracesReceiversSvrTable.push_back(new CTcpNxTracesReceiversSvr(*this));
         m_TracesReceiversSvrTable.push_back(new CTcpTxtTracesReceiversSvr(*this));
+        m_TracesReceiversSvrTable.push_back(new CTcpTxtTracesReceiversSvr(*this));
 //        m_pTcpTracesReceiversSvr = new CTcpTracesReceiversSvr(*this);
     }
     

@@ -1,6 +1,7 @@
 #include "TcpTxtTracesReceiver.hpp"
 #include "TraceChannel.hpp"
 #include "TraceClientCoreModule.hpp"
+#include "TcpTxtTracesReceiversSvr.hpp"
 #include "TcpTracesReceiversSvr.hpp"
 #include "TcpTracesReceiversTable.hpp"
 #include "NyxStreamRW.hpp"
@@ -161,7 +162,7 @@ namespace TraceClientCore
                         else if ( NULL != strstr(szStr, "POST") && NULL != strstr(szStr, "HTTP/") )
                         {
                             //                            SendHttpAnswer(szStr, rStream);
-                            m_refHttpConnHandler->HandleStream(szStr, rStream);
+//                            m_refHttpConnHandler->HandleStream(szStr, rStream);
                             return;
                         }
                     }
@@ -250,29 +251,43 @@ namespace TraceClientCore
      */
     void CTcpTxtTracesReceiver::OnGetRequest_Trace( NyxWebSvr::CConnHttpHandler& rConnHttpHandler, char* szPath, char* szParams )
     {
-        char* code =    "if ( window.$Nyx == undefined ) {\r\n"
-                        "   $Nyx = {\r\n"
-                        "       msgQueue: [],\r\n"
-                        "       Trace: function(module, text) {\r\n"
-                        "           $Nyx.msgQueue.push(module + '/' + text + '\\0');\r\n"
-                        "           if ( $Nyx.msgQueue.length == 1 ) {\r\n"
-                        "               setTimeout( $Nyx.processMsg, 1 );\r\n"
-                        "           }\r\n"
-                        "       },\r\n"
-                        "       processMsg: function() {\r\n"
-                        "           var msg = $Nyx.msgQueue.shift();\r\n"
-                        "           if ( $Nyx.connection != undefined && $Nyx.connection.readyState == 1 )\r\n"
-                        "               $Nyx.connection.send(msg);\r\n"
-                        "           if ( $Nyx.msgQueue.length > 0 ) {\r\n"
-                        "               setTimeout( $Nyx.processMsg, 1 );\r\n"
-                        "           }\r\n"
-                        "       }\r\n"
-                        "   };\r\n"
-                        "   $Nyx.connection = new WebSocket('wss://localhost:8501');\r\n"
-                        "   $Nyx.connection.onclose = function() { delete $Nyx.connection; }\r\n"
-                        "}\r\n";
+        char    szCode[16000];
+        char    szPort[20];
+    
+        sprintf(szPort, "%i", m_pServer->Settings().PortNumber());
         
-        rConnHttpHandler.Write("text/javascript", code, strlen(code));
+        strcpy(szCode, "if ( window.$Nyx == undefined ) {\r\n");
+        strcat(szCode, "   $Nyx = {\r\n");
+        strcat(szCode, "       msgQueue: [],\r\n");
+        strcat(szCode, "       Trace: function(module, text) {\r\n");
+        strcat(szCode, "           $Nyx.msgQueue.push(module + '/' + text + '\\0');\r\n");
+        strcat(szCode, "           if ( $Nyx.msgQueue.length == 1 ) {\r\n");
+        strcat(szCode, "               setTimeout( $Nyx.processMsg, 1 );\r\n");
+        strcat(szCode, "           }\r\n");
+        strcat(szCode, "       },\r\n");
+        strcat(szCode, "       processMsg: function() {\r\n");
+        strcat(szCode, "           var msg = $Nyx.msgQueue.shift();\r\n");
+        strcat(szCode, "           if ( $Nyx.connection != undefined && $Nyx.connection.readyState == 1 )\r\n");
+        strcat(szCode, "               $Nyx.connection.send(msg);\r\n");
+        strcat(szCode, "           if ( $Nyx.msgQueue.length > 0 ) {\r\n");
+        strcat(szCode, "               setTimeout( $Nyx.processMsg, 1 );\r\n");
+        strcat(szCode, "           }\r\n");
+        strcat(szCode, "       }\r\n");
+        strcat(szCode, "   };\r\n");
+        
+        if ( m_pServer->GetUseSSL() )
+            strcat(szCode, "   $Nyx.connection = new WebSocket('wss://localhost:");
+        else
+            strcat(szCode, "   $Nyx.connection = new WebSocket('ws://localhost:");
+
+        NYXTRACE(0x0, L"code len : " << Nyx::CTF_Int(strlen(szCode)));
+                
+        strcat(szCode, szPort);
+        strcat(szCode, "');\r\n");
+        strcat(szCode, "   $Nyx.connection.onclose = function() { delete $Nyx.connection; }\r\n");
+        strcat(szCode, "}\r\n");
+                
+        rConnHttpHandler.Write( (char*)"text/javascript", szCode, strlen(szCode));
     }
 
     

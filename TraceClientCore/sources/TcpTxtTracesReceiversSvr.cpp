@@ -1,7 +1,6 @@
 #include "TcpTxtTracesReceiversSvr.hpp"
 #include "TcpTxtTracesReceiver.hpp"
 
-
 namespace TraceClientCore
 {
     /**
@@ -60,7 +59,13 @@ namespace TraceClientCore
 //        m_refNxConnection->SetUseHandshake(settings.UseHandshake());
         
         m_refServer = NyxNet::CTcpIpServer::Alloc();
-        m_refServer->SetUseSSL();
+        
+        if ( settings.UseSSL() )
+        {
+            m_refServer->SetUseSSL();
+            m_refServer->SetSSLFiles(settings.PrivKeyFile(), settings.CertificateFile(), settings.DhFile());
+        }
+        
         m_refServer->Listeners()->Add( new CTxtServerListenerBridge(*this) );
         res = m_refServer->Create(  m_Settings.PortNumber(),
                                     100,
@@ -91,6 +96,15 @@ namespace TraceClientCore
         return false;
     }
 
+    
+    /**
+     *
+     */
+    bool CTcpTxtTracesReceiversSvr::GetUseSSL() const
+    {
+        return m_refServer->GetUseSSL();
+    }
+    
     
     /**
      *

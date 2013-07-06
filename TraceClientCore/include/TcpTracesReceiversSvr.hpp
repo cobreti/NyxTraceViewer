@@ -24,16 +24,18 @@ namespace TraceClientCore
         class CSettings
         {
         public:
-            CSettings() : m_PortNumber(0), m_bUseHandshake(true) {}
+            CSettings() : m_PortNumber(0), m_bUseHandshake(true), m_bUseSSL(false) {}
             CSettings(const CSettings& settings ) :
                 m_PortNumber(settings.m_PortNumber),
-                m_bUseHandshake(settings.m_bUseHandshake) {}
+                m_bUseHandshake(settings.m_bUseHandshake),
+                m_bUseSSL(settings.m_bUseSSL) {}
             ~CSettings() {}
             
             const CSettings& operator = (const CSettings& settings)
             {
                 m_PortNumber = settings.m_PortNumber;
                 m_bUseHandshake = settings.m_bUseHandshake;
+                m_bUseSSL = settings.m_bUseSSL;
                 return *this;
             }
             
@@ -43,9 +45,25 @@ namespace TraceClientCore
             const bool          UseHandshake() const    { return m_bUseHandshake; }
             bool&               UseHandshake()          { return m_bUseHandshake; }
             
+            const bool          UseSSL() const          { return m_bUseSSL; }
+            bool&               UseSSL()                { return m_bUseSSL; }
+            
+            const Nyx::CAString&    CertificateFile() const         { return m_certificateFile; }
+            Nyx::CAString&          CertificateFile()               { return m_certificateFile; }
+            
+            const Nyx::CAString&    PrivKeyFile() const             { return m_privKeyFile; }
+            Nyx::CAString&          PrivKeyFile()                   { return m_privKeyFile; }
+            
+            const Nyx::CAString&    DhFile() const                  { return m_dhFile; }
+            Nyx::CAString&          DhFile()                        { return m_dhFile; }
+
         protected:
             Nyx::UInt32     m_PortNumber;
             bool            m_bUseHandshake;
+            bool            m_bUseSSL;
+            Nyx::CAString   m_certificateFile;
+            Nyx::CAString   m_privKeyFile;
+            Nyx::CAString   m_dhFile;
         };
         
     public:
