@@ -84,14 +84,6 @@ void CTraceClientApp::Init(int &argc, char **argv)
     Nyx::CAString       bioFile( strPath.c_str() );
     bioFile += "/SSL/dh1024.pem";
 
-    m_pMainWindow = new CMainWindow();
-    m_pMainWindow->move( rcScreen.left(), rcScreen.top() );
-//    m_pMainWindow->show();
-
-    m_pTracesWindow = new CTracesWindow(NULL);
-    m_pTracesWindow->setParent(NULL, Qt::Window);
-    m_pTracesWindow->show();
-
     TraceClientCore::CTcpTracesReceiversSvr::CSettings     settings;
     settings.PortNumber() = 8500;
     settings.UseHandshake() = true;
@@ -108,6 +100,14 @@ void CTraceClientApp::Init(int &argc, char **argv)
     settings.PrivKeyFile() = privKeyFile;
     settings.DhFile() = bioFile;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(2).Start(settings);
+
+    m_pMainWindow = new CMainWindow();
+    m_pMainWindow->move( rcScreen.left(), rcScreen.top() );
+//    m_pMainWindow->show();
+
+    m_pTracesWindow = new CTracesWindow(NULL);
+    m_pTracesWindow->setParent(NULL, Qt::Window);
+    m_pTracesWindow->show();
 }
 
 
