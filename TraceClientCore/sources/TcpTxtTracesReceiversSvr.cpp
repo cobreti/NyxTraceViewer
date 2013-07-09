@@ -63,6 +63,9 @@ namespace TraceClientCore
         if ( settings.UseSSL() )
         {
             m_refServer->SetUseSSL();
+            NYXTRACE(0x0, L"PrivKey File : " << Nyx::CTF_AnsiText(settings.PrivKeyFile().c_str()) );
+            NYXTRACE(0x0, L"Certificate File : " << Nyx::CTF_AnsiText(settings.CertificateFile().c_str()) );
+            NYXTRACE(0x0, L"Dh File : " << Nyx::CTF_AnsiText(settings.DhFile().c_str()) );
             m_refServer->SetSSLFiles(settings.PrivKeyFile(), settings.CertificateFile(), settings.DhFile());
         }
         

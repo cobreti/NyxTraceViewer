@@ -28,7 +28,11 @@ namespace TraceClientCore
             CSettings(const CSettings& settings ) :
                 m_PortNumber(settings.m_PortNumber),
                 m_bUseHandshake(settings.m_bUseHandshake),
-                m_bUseSSL(settings.m_bUseSSL) {}
+                m_bUseSSL(settings.m_bUseSSL),
+                m_certificateFile(settings.m_certificateFile),
+                m_privKeyFile(settings.m_privKeyFile),
+                m_dhFile(settings.m_dhFile)
+            {}
             ~CSettings() {}
             
             const CSettings& operator = (const CSettings& settings)
@@ -36,6 +40,9 @@ namespace TraceClientCore
                 m_PortNumber = settings.m_PortNumber;
                 m_bUseHandshake = settings.m_bUseHandshake;
                 m_bUseSSL = settings.m_bUseSSL;
+                m_certificateFile = settings.m_certificateFile;
+                m_privKeyFile = settings.m_privKeyFile;
+                m_dhFile = settings.m_dhFile;
                 return *this;
             }
             
