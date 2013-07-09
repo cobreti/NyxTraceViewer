@@ -245,6 +245,8 @@ CONFIG(Release_64) {
         -L$(NyxPath)/Lib/OSX/Release_64
     mac:LIBS += -lNyxNet \
         -L$(NyxPath)/Lib/OSX/Release_64
+    mac:LIBS += -lNyxWebSvr \
+        -L$(NyxPath)/Lib/OSX/Release_64
     mac:LIBS += -lssl \
         -L$(NyxPath)/Lib/OSX/OpenSSL_64
     mac:LIBS += -lcrypto \

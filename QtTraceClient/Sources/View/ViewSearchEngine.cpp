@@ -45,13 +45,13 @@ void CViewSearchEngine::Next()
         // move pass last found occurence
         if ( m_FoundPos )
         {
-            lastItemNumber = m_FoundPos.ItemNumber();
+            lastItemNumber = refWalkerMethods->ItemNumber();
 
             while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() <= m_FoundPos.ItemNumber()  )
             {
                 if ( !refWalkerMethods->MoveToNext() )
                 {
-                    refWalkerMethods->MoveToBegin();
+//                    refWalkerMethods->MoveToBegin();
                     break;
                 }
 
@@ -86,7 +86,10 @@ void CViewSearchEngine::Next()
             }
 
             if ( !refWalkerMethods->MoveToNext() )
-                refWalkerMethods->MoveToBegin();
+            {
+                break;
+//                refWalkerMethods->MoveToBegin();
+            }
 
             if ( pStartItem == refWalkerMethods->Item() )
                 break;
@@ -111,6 +114,10 @@ void CViewSearchEngine::Next()
 
                 refWalkerMethods->MoveToLine(LineNo);
             }
+        }
+        else
+        {
+            m_FoundPos = XFindPos();
         }
     }
 
@@ -201,7 +208,7 @@ void CViewSearchEngine::Previous()
  */
 void CViewSearchEngine::Clear()
 {
-    m_FoundPos = 0;
+    m_FoundPos = XFindPos();
     m_rView.Invalidate(true);
 }
 

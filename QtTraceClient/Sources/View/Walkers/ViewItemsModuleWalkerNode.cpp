@@ -172,7 +172,10 @@ void CViewItemsModuleWalkerNode::PopState()
     {
         m_LowerPos = m_LowerPosStack.back();
         m_LowerPosStack.pop_back();
+    }
 
+    if ( !m_UpperPosStack.empty() )
+    {
         m_UpperPos = m_UpperPosStack.back();
         m_UpperPosStack.pop_back();
     }

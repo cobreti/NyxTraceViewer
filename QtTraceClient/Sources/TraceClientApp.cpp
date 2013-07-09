@@ -145,7 +145,7 @@ void CTraceClientApp::Destroy()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return "1.0.8x";
+    return "1.0.9x";
 }
 
 
