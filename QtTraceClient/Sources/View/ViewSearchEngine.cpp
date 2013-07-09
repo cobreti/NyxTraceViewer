@@ -38,15 +38,12 @@ void CViewSearchEngine::Next()
         size_t                                      LineNo = 0;
         bool                                        bEndReached = false;
         CViewItem*                                  pStartItem = refWalkerMethods->Item();
-        size_t                                      lastItemNumber;
 
         refWalkerMethods->PushState();
 
         // move pass last found occurence
         if ( m_FoundPos )
         {
-            lastItemNumber = refWalkerMethods->ItemNumber();
-
             while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() <= m_FoundPos.ItemNumber()  )
             {
                 if ( !refWalkerMethods->MoveToNext() )
@@ -54,11 +51,6 @@ void CViewSearchEngine::Next()
 //                    refWalkerMethods->MoveToBegin();
                     break;
                 }
-
-                if ( refWalkerMethods->ItemNumber() == lastItemNumber )
-                    break;
-
-                lastItemNumber = refWalkerMethods->ItemNumber();
             }
 
             while ( refWalkerMethods->ValidPos() && refWalkerMethods->ItemNumber() > m_FoundPos.ItemNumber()+1  )
