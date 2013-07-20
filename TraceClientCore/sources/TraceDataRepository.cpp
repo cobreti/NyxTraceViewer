@@ -90,7 +90,17 @@ namespace TraceClientCore
 
         Nyx::TLock<Nyx::CMutex>     ObserversLock(m_refObserversMutex, true);
 
-        m_Observers[pObserver] = ObserverData;
+        ObserverDataTable::iterator     pos = m_ObserversSuspended.find(pObserver);
+     
+        if ( pos != m_ObserversSuspended.end() )
+        {
+            m_Observers[pObserver] = pos->second;
+            m_ObserversSuspended.erase(pos);
+        }
+        else
+        {
+            m_Observers[pObserver] = ObserverData;
+        }
     }
 
 
@@ -103,7 +113,11 @@ namespace TraceClientCore
 
         ObserverDataTable::iterator     pos = m_Observers.find(pObserver);
         if ( pos != m_Observers.end() )
+        {
+            m_ObserversSuspended[pObserver] = pos->second;
+//            pos->second.Enabled() = false;s
             m_Observers.erase(pos);
+        }
     }
 
 
@@ -132,7 +146,10 @@ namespace TraceClientCore
 
             while ( srcPos != m_Observers.end() )
             {
-                m_ObserversToUpdate[srcPos->first] = srcPos->second;
+                if ( srcPos->second.Enabled() )
+                {
+                    m_ObserversToUpdate[srcPos->first] = srcPos->second;
+                }
                 ++ srcPos;
             }
         }

@@ -41,21 +41,26 @@ namespace TraceClientCore
         class XObserverData
         {
         public:
-            XObserverData() {};
-            XObserverData(const XObserverData& data) : m_StartPos(data.m_StartPos) {}
+            XObserverData() : m_bEnabled(true) {};
+            XObserverData(const XObserverData& data) : m_StartPos(data.m_StartPos), m_bEnabled(data.m_bEnabled) {}
             ~XObserverData() {};
 
             TraceDataList::const_iterator&      StartPos() { return m_StartPos; }
+            
+            bool&                               Enabled()   { return m_bEnabled; }
+            bool                                Enabled() const     { return m_bEnabled; }
 
             const XObserverData& operator = (const XObserverData& data)
             {
                 m_StartPos = data.m_StartPos;
+                m_bEnabled = data.m_bEnabled;
                 return *this;
             }
 
         protected:
 
             TraceDataList::const_iterator       m_StartPos;
+            bool                                m_bEnabled;
         };
 
 
@@ -66,6 +71,7 @@ namespace TraceClientCore
 
         TraceDataList                       m_Traces;
         ObserverDataTable                   m_Observers;
+        ObserverDataTable                   m_ObserversSuspended;
         ObserverDataTable                   m_ObserversToUpdate; // map of observers used in the update process
         Nyx::CMutexRef                      m_refObserversMutex;
 	};	
