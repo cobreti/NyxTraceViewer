@@ -27,6 +27,7 @@ MKDIR := mkdir
 CXX_CFLAGS := 	-I ../include \
 				-I $(NYXPATH)/include \
 				-I $(NYXPATH)/include/Linux \
+				-I $(NYXPATH)/include/Linux/NyxNet \
 				-I $(NYXPATH)/include/NyxNet \
 				-I ./Source \
 				-I /usr/include \
