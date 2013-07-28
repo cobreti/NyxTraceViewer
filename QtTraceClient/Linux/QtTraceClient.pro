@@ -1,6 +1,8 @@
 TARGET = NyxTraceViewer
 NYXPATH = ../../../Nyx
 
+QT += widgets
+
 FORMS += \
     ../UI/ViewPage.ui \
     ../UI/TracesView.ui \
@@ -210,6 +212,7 @@ INCLUDEPATH += ../UI
 INCLUDEPATH += $$NYXPATH/include/
 INCLUDEPATH += $$NYXPATH/include/NyxNet
 INCLUDEPATH += $$NYXPATH/include/Linux
+INCLUDEPATH += $$NYXPATH/include/Linux/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
 CONFIG(debug, debug|release) {
     PRE_TARGETDEPS += ../../Lib/Linux/Debug/libTraceClientCore.a
@@ -217,14 +220,17 @@ CONFIG(debug, debug|release) {
     PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Debug/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../Lib/Linux/Debug
+    LIBS += -lNyxWebSvr \
+        -L$$NYXPATH/Nyx/Lib/Linux/Debug
     LIBS += -lNyxNet \
         -L$$NYXPATH/Lib/Linux/Debug
     LIBS += -lNyxBase \
         -L$$NYXPATH/Nyx/Lib/Linux/Debug
     LIBS += -lssl \
-        -L../../openssl-1.0.1c
+        -L$(NyxPath)/Lib/Linux/OpenSSL_64
     LIBS += -lcrypto \
-        -L../../openssl-1.0.1c
+        -L$(NyxPath)/Lib/Linux/OpenSSL_64
+    LIBS += -ldl
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
     DEFINES += _DEBUG
@@ -235,14 +241,17 @@ else {
     PRE_TARGETDEPS += $$NYXPATH/Lib/Linux/Release/libNyxNet.a
     LIBS += -lTraceClientCore \
         -L../../Lib/Linux/Release
+    LIBS += -lNyxWebSvr \
+        -L$$NYXPATH/Nyx/Lib/Linux/Release
     LIBS += -lNyxNet \
         -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lNyxBase \
         -L$$NYXPATH/Lib/Linux/Release
     LIBS += -lssl \
-        -L../../openssl-1.0.1c
+        -L$(NyxPath)/Lib/Linux/OpenSSL_64
     LIBS += -lcrypto \
-        -L../../openssl-1.0.1c
+        -L$(NyxPath)/Lib/Linux/OpenSSL_64
+    LIBS += -ldl
     DESTDIR = ./Release
     OBJECTS_DIR = ./Release
 }

@@ -1,5 +1,6 @@
 #include <QtGui>
-#include <QtGui/QApplication>
+#include <QApplication>
+#include <QDesktopWidget>
 
 #include "TraceClientApp.h"
 

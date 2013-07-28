@@ -12,7 +12,7 @@
 
 #include <NyxLocalTime.hpp>
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QDir>
 
 #include <openssl/bio.h>

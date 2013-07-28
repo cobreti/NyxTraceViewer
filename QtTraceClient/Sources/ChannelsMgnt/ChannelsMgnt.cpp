@@ -304,7 +304,7 @@ void CChannelsMgnt::showEvent(QShowEvent *pEvent)
  */
 void CChannelsMgnt::EmptyChannel(TraceClientCore::CTraceChannel* pChannel)
 {
-    CClearChannelContentConfirmationDlg     dlg(QString::fromAscii(pChannel->Name().c_str()), this);
+    CClearChannelContentConfirmationDlg     dlg(QString::fromLocal8Bit(pChannel->Name().c_str()), this);
 
     dlg.exec();
 
