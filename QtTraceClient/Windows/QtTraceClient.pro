@@ -2,6 +2,7 @@
 # Project created by QtCreator 2010-02-12T21:15:19
 # -------------------------------------------------
 QT += xml
+QT += widgets
 TARGET = NyxTraceViewer
 TEMPLATE = app
 SOURCES += ../Sources/TracesView.cpp \
@@ -209,6 +210,8 @@ INCLUDEPATH += $(NYXPATH)/include/
 INCLUDEPATH += $(NYXPATH)/include/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
 INCLUDEPATH += $(NYXPATH)/include/Win32
+INCLUDEPATH += $(NYXPATH)/include/Win32/NyxNet
+INCLUDEPATH += $(NYXPATH)/include/Win32/openssl
 win32:RC_FILE = ../QtTraceClient.rc
 
 LIBS += User32.lib
@@ -220,6 +223,8 @@ CONFIG(Debug) {
     LIBS += -lNyxBase \
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
     LIBS += -lNyxNet \
+        -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
+    LIBS += -lNyxWebSvr \
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
     LIBS += -lssleay32 \
         -LL$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
