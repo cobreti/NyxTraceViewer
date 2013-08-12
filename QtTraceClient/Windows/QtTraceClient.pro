@@ -243,6 +243,8 @@ CONFIG(Release) {
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Release
     LIBS += -lNyxNet \
         -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Release
+    LIBS += -lNyxWebSvr \
+        -L$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
     LIBS += -lssleay32 \
         -LL$(NYXPATH)/Lib/Windows/$(PLATFORM)/Debug
     LIBS += -llibeay32 \
