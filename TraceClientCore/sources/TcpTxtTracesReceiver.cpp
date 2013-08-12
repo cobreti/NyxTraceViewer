@@ -20,6 +20,52 @@
 
 namespace TraceClientCore
 {
+	//char* base64( const unsigned char *input, int length )
+	//{
+	//	// bio is simply a class that wraps BIO* and it free the BIO in the destructor.
+
+	//	BIO* b64(BIO_f_base64()); // create BIO to perform base64
+	//	BIO_set_flags(b64,BIO_FLAGS_BASE64_NO_NL);
+
+	//	BIO mem(BIO_s_mem()); // create BIO that holds the result
+
+	//	// chain base64 with mem, so writing to b64 will encode base64 and write to mem.
+	//	BIO_push(b64, mem);
+
+	//	// write data
+	//	bool done = false;
+	//	int res = 0;
+	//	while(!done)
+	//	{
+	//		res = BIO_write(b64, data.data, (int)data.size);
+
+	//		if(res <= 0) // if failed
+	//		{
+	//			if(BIO_should_retry(b64)){
+	//				continue;
+	//			}
+	//			else // encoding failed
+	//			{
+	//				/* Handle Error!!! */
+	//			}
+	//		}
+	//		else // success!
+	//			done = true;
+	//	}
+
+	//	BIO_flush(b64);
+
+	//	// get a pointer to mem's data
+	//	char* dt;
+	//	long len = BIO_get_mem_data(mem, &dt);
+
+	//	// assign data to output
+	//	std::string s(dt, len);
+
+	//	return buffer(s.length()+sizeof(char), (byte*)s.c_str());
+	//}
+
+
 	char *base64(const unsigned char *input, int length)
 	{
 	  BIO *bmem, *b64;
@@ -28,17 +74,63 @@ namespace TraceClientCore
 	  b64 = BIO_new(BIO_f_base64());
 	  bmem = BIO_new(BIO_s_mem());
 	  b64 = BIO_push(b64, bmem);
-	  BIO_write(b64, input, length);
-	  BIO_flush(b64);
-	  BIO_get_mem_ptr(b64, &bptr);
 
-	  char *buff = (char *)malloc(bptr->length);
-	  memcpy(buff, bptr->data, bptr->length-1);
-	  buff[bptr->length-1] = 0;
+		bool done = false;
+		int res = 0;
+		while(!done)
+		{
+			res = BIO_write(b64, input, length);
 
-	  BIO_free_all(b64);
+			if(res <= 0) // if failed
+			{
+				if(BIO_should_retry(b64)){
+					continue;
+				}
+				else // encoding failed
+				{
+					/* Handle Error!!! */
+				}
+			}
+			else // success!
+				done = true;
+		}
 
-	  return buff;
+		BIO_flush(b64);
+
+		// get a pointer to mem's data
+		char* dt;
+		long len = BIO_get_mem_data(bmem, &dt);
+
+		char* buff = (char*)malloc(len);
+		memcpy(buff, dt, len-1);
+		buff[len-1] = 0;
+
+		BIO_free_all(b64);
+
+		return buff;
+
+		// assign data to output
+		//std::string s(dt, len);
+
+		//return buffer(s.length()+sizeof(char), (byte*)s.c_str());
+
+		//BIO_write(b64, input, length);
+	  //BIO_flush(b64);
+	  //BIO_get_mem_ptr(b64, &bptr);
+
+	  //size_t l = bptr->length;
+
+	  //char *buff = (char *)malloc(bptr->length);
+
+   //   if ( !(bptr->length > 0) )
+   //       return NULL;
+
+	  //memcpy(buff, bptr->data, bptr->length-1);
+	  //buff[bptr->length-1] = 0;
+
+	  //BIO_free_all(b64);
+
+	  //return buff;
 	}
 
 	char *decode64(unsigned char *input, int length)

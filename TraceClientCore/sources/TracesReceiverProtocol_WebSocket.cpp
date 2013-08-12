@@ -32,21 +32,39 @@ namespace TraceClientCore
     	Nyx::NyxResult	res = Nyx::kNyxRes_Failure;
     	Nyx::NyxSize	readSize = 0;
     	Nyx::NyxSize	StringEndPos = 0;
+		Nyx::NyxSize	frameSize = 2;
 
-		::memset(m_Buffer, 0, m_Buffer.FreeSize());
-		res = rStream.Read( m_Buffer, m_Buffer.FreeSize(), readSize );
+		//::memset(m_Buffer, 0, m_Buffer.FreeSize());
+		res = rStream.Read( m_Buffer.getWritePos(), m_Buffer.FreeSize(), readSize );
 
         if ( Nyx::Failed(res) )
         {
             NYXTRACE(0x0, "protocol rStream failure returned");
         }
-        
+
 		if ( Nyx::Succeeded(res) )
 		{
+			m_Buffer.addDataSize(readSize);
+
+			if ( m_Buffer.DataSize() < frameSize )
+				return Nyx::kNyxRes_Success;
+
 //			char* szStr = m_Buffer.GetBufferAs<char>();
 
 			Nyx::UInt8*		pBytes = m_Buffer.GetBufferAs<Nyx::UInt8>();
 			Nyx::UInt8 		Mask[4] = {0, 0, 0, 0};
+
+			NYXTRACE(0x0, L"new buffer input");
+
+			//size_t			size = m_Buffer.DataSize();
+			//Nyx::UInt8*		pDataBytes = pBytes;
+			//while ( size > 0 )
+			//{
+			//	NYXTRACE(0x0, L"byte " << Nyx::CTF_Int(size) << L" --> " << Nyx::CTF_Hex(*pDataBytes));
+
+			//	++ pDataBytes;
+			//	-- size;
+			//}
 
 			bool bEndFrame = *pBytes & 0x80;
 			Nyx::UInt8 opCode = *pBytes & 0x0F;
@@ -61,6 +79,8 @@ namespace TraceClientCore
                 rStream.Write(&pong[1], sizeof(pong[0]), writtenSize);
                 rStream.Write(&pong[2], sizeof(pong[0]), writtenSize);
                 rStream.Write(&pong[3], sizeof(pong[0]), writtenSize);
+
+				m_Buffer.ReadData(NULL, frameSize);
                 return Nyx::kNyxRes_Success;
             }
             
@@ -70,10 +90,11 @@ namespace TraceClientCore
 				return Nyx::kNyxRes_Failure;
             }
 
-            if ( opCode != 0x01 )
+            if ( opCode & 0x01 != 0x01 )
                 return Nyx::kNyxRes_Success;
             
 			++ pBytes;
+			++ frameSize;
 
 			bool bMask = *pBytes & 0x80;
 			Nyx::UInt32 len = *pBytes & 0x7F;
@@ -81,13 +102,16 @@ namespace TraceClientCore
 
 
 			++ pBytes;
+			++ frameSize;
 
 			if ( len == 126 )
 			{
                 len = *pBytes << 8;
                 ++ pBytes;
+				++ frameSize;
                 len |= *pBytes;
                 ++ pBytes;
+				++ frameSize;
 
                 headerSize += 2;
 			}
@@ -101,6 +125,7 @@ namespace TraceClientCore
 				{
 					Mask[i] = *pBytes;
 					++ pBytes;
+					++ frameSize;
 				}
 
 				headerSize += 4;
@@ -125,7 +150,10 @@ namespace TraceClientCore
 
 				++ i;
 				++ pBytes;
+				++ frameSize;
 			}
+
+			m_Buffer.ReadData(NULL, frameSize);
 
 			szLine[i++] = '\0';
 
