@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		165D73DD17BD98220024CB1F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 165D73DC17BD98220024CB1F /* Cocoa.framework */; };
+		165D73E717BD98220024CB1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 165D73E517BD98220024CB1F /* InfoPlist.strings */; };
+		165D73E917BD98220024CB1F /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73E817BD98220024CB1F /* main.mm */; };
+		165D73ED17BD98220024CB1F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 165D73EB17BD98220024CB1F /* Credits.rtf */; };
+		165D73F317BD98220024CB1F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D73F117BD98220024CB1F /* MainMenu.xib */; };
+		165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73EF17BD98220024CB1F /* AppDelegate.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		165D73D917BD98220024CB1F /* NyxTraceViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyxTraceViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		165D73DC17BD98220024CB1F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		165D73DF17BD98220024CB1F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		165D73E017BD98220024CB1F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		165D73E117BD98220024CB1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		165D73E417BD98220024CB1F /* NyxTraceViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NyxTraceViewer-Info.plist"; sourceTree = "<group>"; };
+		165D73E617BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		165D73E817BD98220024CB1F /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		165D73EA17BD98220024CB1F /* NyxTraceViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NyxTraceViewer-Prefix.pch"; sourceTree = "<group>"; };
+		165D73EC17BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		165D73EE17BD98220024CB1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		165D73EF17BD98220024CB1F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		165D73F217BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		165D73D617BD98220024CB1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165D73DD17BD98220024CB1F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		165D73D017BD98220024CB1F = {
+			isa = PBXGroup;
+			children = (
+				165D73E217BD98220024CB1F /* NyxTraceViewer */,
+				165D73DB17BD98220024CB1F /* Frameworks */,
+				165D73DA17BD98220024CB1F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		165D73DA17BD98220024CB1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				165D73D917BD98220024CB1F /* NyxTraceViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		165D73DB17BD98220024CB1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				165D73DC17BD98220024CB1F /* Cocoa.framework */,
+				165D73DE17BD98220024CB1F /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		165D73DE17BD98220024CB1F /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				165D73DF17BD98220024CB1F /* AppKit.framework */,
+				165D73E017BD98220024CB1F /* CoreData.framework */,
+				165D73E117BD98220024CB1F /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		165D73E217BD98220024CB1F /* NyxTraceViewer */ = {
+			isa = PBXGroup;
+			children = (
+				165D73EE17BD98220024CB1F /* AppDelegate.h */,
+				165D73EF17BD98220024CB1F /* AppDelegate.mm */,
+				165D73F117BD98220024CB1F /* MainMenu.xib */,
+				165D73E317BD98220024CB1F /* Supporting Files */,
+			);
+			path = NyxTraceViewer;
+			sourceTree = "<group>";
+		};
+		165D73E317BD98220024CB1F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				165D73E417BD98220024CB1F /* NyxTraceViewer-Info.plist */,
+				165D73E517BD98220024CB1F /* InfoPlist.strings */,
+				165D73E817BD98220024CB1F /* main.mm */,
+				165D73EA17BD98220024CB1F /* NyxTraceViewer-Prefix.pch */,
+				165D73EB17BD98220024CB1F /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		165D73D817BD98220024CB1F /* NyxTraceViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 165D73F617BD98220024CB1F /* Build configuration list for PBXNativeTarget "NyxTraceViewer" */;
+			buildPhases = (
+				165D73D517BD98220024CB1F /* Sources */,
+				165D73D617BD98220024CB1F /* Frameworks */,
+				165D73D717BD98220024CB1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NyxTraceViewer;
+			productName = NyxTraceViewer;
+			productReference = 165D73D917BD98220024CB1F /* NyxTraceViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		165D73D117BD98220024CB1F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Danny Thibaudeau";
+			};
+			buildConfigurationList = 165D73D417BD98220024CB1F /* Build configuration list for PBXProject "NyxTraceViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 165D73D017BD98220024CB1F;
+			productRefGroup = 165D73DA17BD98220024CB1F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				165D73D817BD98220024CB1F /* NyxTraceViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		165D73D717BD98220024CB1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165D73E717BD98220024CB1F /* InfoPlist.strings in Resources */,
+				165D73ED17BD98220024CB1F /* Credits.rtf in Resources */,
+				165D73F317BD98220024CB1F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		165D73D517BD98220024CB1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165D73E917BD98220024CB1F /* main.mm in Sources */,
+				165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		165D73E517BD98220024CB1F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165D73E617BD98220024CB1F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		165D73EB17BD98220024CB1F /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165D73EC17BD98220024CB1F /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		165D73F117BD98220024CB1F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165D73F217BD98220024CB1F /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		165D73F417BD98220024CB1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		165D73F517BD98220024CB1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		165D73F717BD98220024CB1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = ./build/debug_64;
+				CONFIGURATION_TEMP_DIR = ./build/debug_64;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NyxTraceViewer/NyxTraceViewer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					$NyxPath/include,
+					$NyxPath/include/NyxNet,
+					$NyxPath/include/NyxWebSvr,
+					$NyxPath/include/OSX,
+					$NyxPath/include/OSX/NyxNet,
+				);
+				INFOPLIST_FILE = "NyxTraceViewer/NyxTraceViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					$NyxPath/Lib/OSX/Debug_64,
+					$NyxPath/Lib/OSX/OpenSSL_64,
+					../../Lib/OSX/Debug_64,
+				);
+				NyxPath = ../../../Nyx;
+				OBJROOT = ./build/debug_64;
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+					"-lNyxWebSvr",
+					"-lTraceClientCore",
+					"-lcrypto",
+					"-lssl",
+					"-liconv",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ./build/debug_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		165D73F817BD98220024CB1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NyxTraceViewer/NyxTraceViewer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					$NyxPath/include,
+					$NyxPath/include/NyxNet,
+					$NyxPath/include/NyxWebSvr,
+					$NyxPath/include/OSX,
+					$NyxPath/include/OSX/NyxNet,
+				);
+				INFOPLIST_FILE = "NyxTraceViewer/NyxTraceViewer-Info.plist";
+				NyxPath = ../../../Nyx;
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+					"-lNyxWebSvr",
+					"-lTraceClientCore",
+					"-lcrypto",
+					"-lssl",
+					"-liconv",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		165D73D417BD98220024CB1F /* Build configuration list for PBXProject "NyxTraceViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165D73F417BD98220024CB1F /* Debug */,
+				165D73F517BD98220024CB1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		165D73F617BD98220024CB1F /* Build configuration list for PBXNativeTarget "NyxTraceViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165D73F717BD98220024CB1F /* Debug */,
+				165D73F817BD98220024CB1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 165D73D117BD98220024CB1F /* Project object */;
+}
