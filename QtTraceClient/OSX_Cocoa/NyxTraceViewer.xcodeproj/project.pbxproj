@@ -13,6 +13,7 @@
 		165D73ED17BD98220024CB1F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 165D73EB17BD98220024CB1F /* Credits.rtf */; };
 		165D73F317BD98220024CB1F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D73F117BD98220024CB1F /* MainMenu.xib */; };
 		165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73EF17BD98220024CB1F /* AppDelegate.mm */; };
+		16FD8D4017C907BE00718001 /* App-icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D3F17C907BE00718001 /* App-icon.iconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		165D73EE17BD98220024CB1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		165D73EF17BD98220024CB1F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		165D73F217BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		16FD8D3F17C907BE00718001 /* App-icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = "App-icon.iconset"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		165D73E217BD98220024CB1F /* NyxTraceViewer */ = {
 			isa = PBXGroup;
 			children = (
+				16FD8D3A17C903E100718001 /* icons */,
 				165D73EE17BD98220024CB1F /* AppDelegate.h */,
 				165D73EF17BD98220024CB1F /* AppDelegate.mm */,
 				165D73F117BD98220024CB1F /* MainMenu.xib */,
@@ -100,6 +103,14 @@
 				165D73EB17BD98220024CB1F /* Credits.rtf */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		16FD8D3A17C903E100718001 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				16FD8D3F17C907BE00718001 /* App-icon.iconset */,
+			);
+			name = icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +167,7 @@
 				165D73E717BD98220024CB1F /* InfoPlist.strings in Resources */,
 				165D73ED17BD98220024CB1F /* Credits.rtf in Resources */,
 				165D73F317BD98220024CB1F /* MainMenu.xib in Resources */,
+				16FD8D4017C907BE00718001 /* App-icon.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
