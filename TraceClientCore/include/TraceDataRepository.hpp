@@ -74,7 +74,12 @@ namespace TraceClientCore
         ObserverDataTable                   m_ObserversSuspended;
         ObserverDataTable                   m_ObserversToUpdate; // map of observers used in the update process
         Nyx::CMutexRef                      m_refObserversMutex;
-	};	
+        
+        Nyx::UInt32                         m_RepositoryId;
+        Nyx::UInt32                         m_NextTraceId;
+        
+        static Nyx::UInt32                  s_NextRepositoryId;
+	};
 }
 
 

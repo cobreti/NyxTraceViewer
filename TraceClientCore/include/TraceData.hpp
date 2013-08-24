@@ -52,6 +52,12 @@ namespace TraceClientCore
         
         const NyxNet::CTraceFlags& Flags() const            { return m_Flags; }
         NyxNet::CTraceFlags& Flags()                        { return m_Flags; }
+        
+        const Nyx::UInt32& RepositoryId() const             { return m_RepositoryId; }
+        Nyx::UInt32& RepositoryId()                         { return m_RepositoryId; }
+        
+        const Nyx::UInt32& TraceId() const                  { return m_TraceId; }
+        Nyx::UInt32& TraceId()                              { return m_TraceId; }
 		
 	protected:
 	
@@ -64,6 +70,8 @@ namespace TraceClientCore
 		CTracesPool*				m_pOwnerPool;
         ETraceType					m_eType;
         NyxNet::CTraceFlags         m_Flags;
+        Nyx::UInt32                 m_RepositoryId;
+        Nyx::UInt32                 m_TraceId;
 	};
 }
 

@@ -219,7 +219,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -251,7 +251,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -284,6 +284,7 @@
 					$NyxPath/include/NyxWebSvr,
 					$NyxPath/include/OSX,
 					$NyxPath/include/OSX/NyxNet,
+					../../TraceClientCore/include,
 				);
 				INFOPLIST_FILE = "NyxTraceViewer/NyxTraceViewer-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -320,6 +321,7 @@
 					$NyxPath/include/NyxWebSvr,
 					$NyxPath/include/OSX,
 					$NyxPath/include/OSX/NyxNet,
+					../../TraceClientCore/include,
 				);
 				INFOPLIST_FILE = "NyxTraceViewer/NyxTraceViewer-Info.plist";
 				NyxPath = ../../../Nyx;

@@ -79,6 +79,11 @@ namespace TraceClientCore
     	CModule&		rModule = CModule::Instance();
     	CTraceChannel*	pChannel = rModule.TraceChannels().Get( Nyx::CAString(szModule) );
 
+        if ( !pChannel )
+        {
+            NYXTRACE(0x0, L"received trace from new channel : " << Nyx::CTF_AnsiText(szModule));
+        }
+        
     	if ( pChannel )
     	{
     		Nyx::CUtf8String	content(szContent);

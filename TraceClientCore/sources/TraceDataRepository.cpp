@@ -12,10 +12,14 @@
 
 namespace TraceClientCore
 {
+    Nyx::UInt32 CTraceDataRepository::s_NextRepositoryId = 1;
+    
     /**
      *
      */
-    CTraceDataRepository::CTraceDataRepository()
+    CTraceDataRepository::CTraceDataRepository() :
+    m_RepositoryId( CTraceDataRepository::s_NextRepositoryId ),
+    m_NextTraceId(1)
     {
         m_refObserversMutex = Nyx::CMutex::Alloc();
     }
@@ -34,7 +38,11 @@ namespace TraceClientCore
      */
     void CTraceDataRepository::Insert(TraceClientCore::CTraceData* pTraceData)
     {
+        pTraceData->RepositoryId() = m_RepositoryId;
+        pTraceData->TraceId() = m_NextTraceId;
         m_Traces.push_back(pTraceData);
+        
+        ++ m_NextTraceId;
     }
     
     

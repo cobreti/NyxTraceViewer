@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#include "TraceClientCoreModule.hpp"
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -16,7 +18,13 @@
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{    
+{
+    TraceClientCore::CTcpTracesReceiversSvr::CSettings       settings;
+    
+    settings.PortNumber() = 8501;
+    settings.UseHandshake() = false;
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
+
     NYXTRACE(0x0, L"application starting");
 }
 
