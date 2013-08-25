@@ -15,4 +15,6 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
+
 @end

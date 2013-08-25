@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "TracesWindowController.h"
 
 #include "TraceClientCoreModule.hpp"
 
@@ -19,18 +20,26 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    NYXTRACE(0x0, L"application starting");
+
     TraceClientCore::CTcpTracesReceiversSvr::CSettings       settings;
     
     settings.PortNumber() = 8501;
     settings.UseHandshake() = false;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
 
-    NYXTRACE(0x0, L"application starting");
+    CTracesWindowController*    pWndController = [[CTracesWindowController alloc] initWithWindowNibName:@"TracesWindow"];
+    [pWndController showWindow:self];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
     NYXTRACE(0x0, L"application terminating");
+}
+
+- (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
+{
+    return YES;
 }
 
 @end
