@@ -18,6 +18,8 @@
 		16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D4617CA2FC000718001 /* TracesWindowController.mm */; };
 		16FD8D4A17CA7E0A00718001 /* channels_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4817CA7E0A00718001 /* channels_hidden.png */; };
 		16FD8D4B17CA7E0A00718001 /* channels_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4917CA7E0A00718001 /* channels_visible.png */; };
+		16FD8D4F17CAD44600718001 /* TracesGroupView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D4E17CAD44600718001 /* TracesGroupView.mm */; };
+		16FD8D5717CADF4200718001 /* GroupsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D5617CADF4200718001 /* GroupsView.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,10 @@
 		16FD8D4617CA2FC000718001 /* TracesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TracesWindowController.mm; sourceTree = "<group>"; };
 		16FD8D4817CA7E0A00718001 /* channels_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = channels_hidden.png; path = icons/channels_hidden.png; sourceTree = SOURCE_ROOT; };
 		16FD8D4917CA7E0A00718001 /* channels_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = channels_visible.png; path = icons/channels_visible.png; sourceTree = SOURCE_ROOT; };
+		16FD8D4D17CAD44600718001 /* TracesGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupView.h; path = TracesGroupsView/TracesGroupView.h; sourceTree = "<group>"; };
+		16FD8D4E17CAD44600718001 /* TracesGroupView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupView.mm; path = TracesGroupsView/TracesGroupView.mm; sourceTree = "<group>"; };
+		16FD8D5517CADF4200718001 /* GroupsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupsView.h; path = TracesGroupsView/GroupsView.h; sourceTree = "<group>"; };
+		16FD8D5617CADF4200718001 /* GroupsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GroupsView.mm; path = TracesGroupsView/GroupsView.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,7 @@
 		165D73E217BD98220024CB1F /* NyxTraceViewer */ = {
 			isa = PBXGroup;
 			children = (
+				16FD8D4C17CAD3FC00718001 /* TracesGroupsView */,
 				16FD8D3A17C903E100718001 /* icons */,
 				165D73EE17BD98220024CB1F /* AppDelegate.h */,
 				165D73EF17BD98220024CB1F /* AppDelegate.mm */,
@@ -125,6 +132,17 @@
 				16FD8D3F17C907BE00718001 /* App-icon.iconset */,
 			);
 			name = icons;
+			sourceTree = "<group>";
+		};
+		16FD8D4C17CAD3FC00718001 /* TracesGroupsView */ = {
+			isa = PBXGroup;
+			children = (
+				16FD8D5517CADF4200718001 /* GroupsView.h */,
+				16FD8D5617CADF4200718001 /* GroupsView.mm */,
+				16FD8D4D17CAD44600718001 /* TracesGroupView.h */,
+				16FD8D4E17CAD44600718001 /* TracesGroupView.mm */,
+			);
+			name = TracesGroupsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +216,8 @@
 				165D73E917BD98220024CB1F /* main.mm in Sources */,
 				165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */,
 				16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */,
+				16FD8D4F17CAD44600718001 /* TracesGroupView.mm in Sources */,
+				16FD8D5717CADF4200718001 /* GroupsView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

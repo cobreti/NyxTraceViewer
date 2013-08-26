@@ -17,6 +17,7 @@ INCLUDEPATH += $(NyxPath)/include
 INCLUDEPATH += $(NyxPath)/include/NyxNet
 INCLUDEPATH += ../../../TraceViewerConnection/public/OSX
 mac:INCLUDEPATH += $(NyxPath)/include/OSX
+mac:INCLUDEPATH += $(NyxPath)/include/OSX/NyxNet
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 
