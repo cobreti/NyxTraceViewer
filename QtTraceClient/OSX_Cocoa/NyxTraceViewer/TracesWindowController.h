@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CTracesWindowController : NSWindowController <NSToolbarDelegate>
+@interface CTracesWindowController : NSWindowController <NSToolbarDelegate, NSWindowDelegate>
 {
     CGFloat     m_LastChannelsPanelWidth;
 }
@@ -18,4 +18,5 @@
 - (IBAction)onChannelsShowHide:(id)sender;
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
 - (NSArray*)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar;
+- (void)windowWillClose:(NSNotification *)notification;
 @end

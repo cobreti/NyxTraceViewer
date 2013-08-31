@@ -20,6 +20,11 @@
 		16FD8D4B17CA7E0A00718001 /* channels_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4917CA7E0A00718001 /* channels_visible.png */; };
 		16FD8D4F17CAD44600718001 /* TracesGroupView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D4E17CAD44600718001 /* TracesGroupView.mm */; };
 		16FD8D5717CADF4200718001 /* GroupsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D5617CADF4200718001 /* GroupsView.mm */; };
+		16FD8D5A17CD79FA00718001 /* TracesGroupCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D5917CD79FA00718001 /* TracesGroupCell.mm */; };
+		16FD8D5D17CEDF1500718001 /* TracesGroupItemCtrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D5C17CEDF1500718001 /* TracesGroupItemCtrl.m */; };
+		16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */; };
+		16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */; };
+		16FD8D6817D2794200718001 /* RepositoryListCtrlCell.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D6717D2794200718001 /* RepositoryListCtrlCell.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,16 @@
 		16FD8D4E17CAD44600718001 /* TracesGroupView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupView.mm; path = TracesGroupsView/TracesGroupView.mm; sourceTree = "<group>"; };
 		16FD8D5517CADF4200718001 /* GroupsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupsView.h; path = TracesGroupsView/GroupsView.h; sourceTree = "<group>"; };
 		16FD8D5617CADF4200718001 /* GroupsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GroupsView.mm; path = TracesGroupsView/GroupsView.mm; sourceTree = "<group>"; };
+		16FD8D5817CD79FA00718001 /* TracesGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupCell.h; path = TracesGroupsView/TracesGroupCell.h; sourceTree = "<group>"; };
+		16FD8D5917CD79FA00718001 /* TracesGroupCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupCell.mm; path = TracesGroupsView/TracesGroupCell.mm; sourceTree = "<group>"; };
+		16FD8D5B17CEDF1500718001 /* TracesGroupItemCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupItemCtrl.h; path = TracesGroupsView/TracesGroupItemCtrl.h; sourceTree = "<group>"; };
+		16FD8D5C17CEDF1500718001 /* TracesGroupItemCtrl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TracesGroupItemCtrl.m; path = TracesGroupsView/TracesGroupItemCtrl.m; sourceTree = "<group>"; };
+		16FD8D6017D234E900718001 /* RepositoriesListCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoriesListCtrl.h; path = Controls/RepositoriesList/RepositoriesListCtrl.h; sourceTree = "<group>"; };
+		16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoriesListCtrl.mm; path = Controls/RepositoriesList/RepositoriesListCtrl.mm; sourceTree = "<group>"; };
+		16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepositoryInfo.cpp; sourceTree = "<group>"; };
+		16FD8D6417D23A6400718001 /* RepositoryInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepositoryInfo.hpp; sourceTree = "<group>"; };
+		16FD8D6617D2794200718001 /* RepositoryListCtrlCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryListCtrlCell.h; path = Controls/RepositoriesList/RepositoryListCtrlCell.h; sourceTree = "<group>"; };
+		16FD8D6717D2794200718001 /* RepositoryListCtrlCell.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoryListCtrlCell.mm; path = Controls/RepositoriesList/RepositoryListCtrlCell.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +114,7 @@
 		165D73E217BD98220024CB1F /* NyxTraceViewer */ = {
 			isa = PBXGroup;
 			children = (
+				16FD8D5E17D234C200718001 /* Controls */,
 				16FD8D4C17CAD3FC00718001 /* TracesGroupsView */,
 				16FD8D3A17C903E100718001 /* icons */,
 				165D73EE17BD98220024CB1F /* AppDelegate.h */,
@@ -141,8 +157,33 @@
 				16FD8D5617CADF4200718001 /* GroupsView.mm */,
 				16FD8D4D17CAD44600718001 /* TracesGroupView.h */,
 				16FD8D4E17CAD44600718001 /* TracesGroupView.mm */,
+				16FD8D5817CD79FA00718001 /* TracesGroupCell.h */,
+				16FD8D5917CD79FA00718001 /* TracesGroupCell.mm */,
+				16FD8D5B17CEDF1500718001 /* TracesGroupItemCtrl.h */,
+				16FD8D5C17CEDF1500718001 /* TracesGroupItemCtrl.m */,
 			);
 			name = TracesGroupsView;
+			sourceTree = "<group>";
+		};
+		16FD8D5E17D234C200718001 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				16FD8D5F17D234C800718001 /* RepositoriesList */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		16FD8D5F17D234C800718001 /* RepositoriesList */ = {
+			isa = PBXGroup;
+			children = (
+				16FD8D6017D234E900718001 /* RepositoriesListCtrl.h */,
+				16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */,
+				16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */,
+				16FD8D6417D23A6400718001 /* RepositoryInfo.hpp */,
+				16FD8D6617D2794200718001 /* RepositoryListCtrlCell.h */,
+				16FD8D6717D2794200718001 /* RepositoryListCtrlCell.mm */,
+			);
+			name = RepositoriesList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +259,11 @@
 				16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */,
 				16FD8D4F17CAD44600718001 /* TracesGroupView.mm in Sources */,
 				16FD8D5717CADF4200718001 /* GroupsView.mm in Sources */,
+				16FD8D5A17CD79FA00718001 /* TracesGroupCell.mm in Sources */,
+				16FD8D5D17CEDF1500718001 /* TracesGroupItemCtrl.m in Sources */,
+				16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */,
+				16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */,
+				16FD8D6817D2794200718001 /* RepositoryListCtrlCell.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

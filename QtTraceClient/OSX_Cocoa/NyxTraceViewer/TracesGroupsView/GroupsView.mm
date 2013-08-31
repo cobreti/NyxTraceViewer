@@ -7,17 +7,31 @@
 //
 
 #import "GroupsView.h"
+#import "TracesGroupItemCtrl.h"
 
 @implementation CGroupsView
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code here.
+    if (self)
+    {
+        
+        NSRect  rc = NSMakeRect(10, 10, 100, 20);
+        
+        TracesGroupItemCtrl* pCtrl = [[TracesGroupItemCtrl alloc] initWithFrame:rc];
+        [pCtrl setHidden: NO];
+        
+        [self addSubView: pCtrl];
+        [pCtrl release];
     }
     
     return self;
+}
+
+- (void)dealloc
+{
+    [super dealloc];
 }
 
 -(BOOL)isFlipped
@@ -27,14 +41,13 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-    // Drawing code here.
-
-    [[NSColor blueColor] set];
-    NSRect          rc = [self frame];
-    NSBezierPath*   path = [NSBezierPath bezierPath];
     
-    [path appendBezierPathWithOvalInRect: rc];
-    [path fill];
+//    [[NSColor blueColor] set];
+//    NSRect          rc = [self frame];
+//    NSBezierPath*   path = [NSBezierPath bezierPath];
+//    
+//    [path appendBezierPathWithOvalInRect: rc];
+//    [path fill];
 }
 
 @end

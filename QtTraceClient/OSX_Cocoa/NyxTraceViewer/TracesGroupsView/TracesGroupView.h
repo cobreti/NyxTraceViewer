@@ -8,14 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface CTracesGroupView : NSView
+@class CRepositoriesListCtrl;
+
+@interface CTracesGroupView : NSScrollView
 {
-    NSSplitView*        m_SplitView;
-    NSView*             m_GroupsView;
-    NSView*             m_RepositoriesView;
+//    NSSplitView*        m_SplitView;
+//    NSView*             m_GroupsView;
+//    NSView*             m_RepositoriesView;
+    
+    CRepositoriesListCtrl*      mCtrl;
 }
 
 - (BOOL)isFlipped;
 - (void)awakeFromNib;
+- (void)dealloc;
 
 @end

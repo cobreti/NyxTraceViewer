@@ -7,7 +7,9 @@
 //
 
 #import "TracesGroupView.h"
-#import "GroupsView.h"
+#import "../Controls/RepositoriesList/RepositoriesListCtrl.h"
+
+#include <Nyx.hpp>
 
 
 @implementation CTracesGroupView
@@ -17,6 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code here.
+        
     }
     
     return self;
@@ -28,40 +31,65 @@
 }
 
 
+- (void)dealloc
+{
+//    [m_SplitView release];
+//    [m_GroupsView release];
+//    [m_RepositoriesView release];
+    
+    [mCtrl release];
+    
+    NYXTRACE(0x0, L"TracesGroupView dealloc");
+    [super dealloc];
+}
+
 - (void)drawRect:(NSRect)dirtyRect
 {
-    // Drawing code here.
- 
-    [[NSColor redColor] set];
-    NSRect          rc = [self frame];
-    NSBezierPath*   path = [NSBezierPath bezierPath];
+//    [[NSColor redColor] set];
+//    NSRect          rc = [self frame];
+//    NSBezierPath*   path = [NSBezierPath bezierPath];
+//    
+//    [path appendBezierPathWithOvalInRect: rc];
+//    [path stroke];
+
+    [[NSColor whiteColor] set];
     
-    [path appendBezierPathWithOvalInRect: rc];
-    [path stroke];
+    NSBezierPath*   path = [NSBezierPath bezierPath];
+    [path setLineWidth: 1];
+    [path appendBezierPathWithRect: [self frame]];
+    [path fill];
 }
 
 - (void)awakeFromNib
 {
     NSRect rc = [self frame];
     
-    m_SplitView = [[NSSplitView alloc] initWithFrame: rc];
-    [self addSubview:m_SplitView];
+    [self setHasHorizontalScroller: YES];
+    [self setHasVerticalScroller: YES];
     
-    [self setAutoresizesSubviews: YES];
+    mCtrl = [[CRepositoriesListCtrl alloc] initWithFrame: [self frame]];
+    [mCtrl setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+    [self setDocumentView: mCtrl];
+    [mCtrl calcSize];
     
-    m_GroupsView = [[CGroupsView alloc] initWithFrame: rc];
-    m_RepositoriesView = [[NSView alloc] initWithFrame: rc];
-    
-    [m_GroupsView setHidden: NO];
-    [m_GroupsView setAutoresizingMask: NSViewHeightSizable];
-
-    [m_RepositoriesView setHidden: NO];
-    
-    [m_SplitView setHidden: NO];
-    [m_SplitView setVertical: YES];
-    [m_SplitView setAutoresizingMask: NSViewHeightSizable];
-    [m_SplitView addSubview: m_GroupsView ];
-    [m_SplitView addSubview: m_RepositoriesView ];
+//    m_SplitView = [[NSSplitView alloc] initWithFrame: rc];
+//    [self addSubview:m_SplitView];
+//    
+//    [self setAutoresizesSubviews: YES];
+//    
+//    m_GroupsView = [[CGroupsView alloc] initWithFrame: rc];
+//    m_RepositoriesView = [[NSView alloc] initWithFrame: rc];
+//    
+//    [m_GroupsView setHidden: NO];
+//    [m_GroupsView setAutoresizingMask: NSViewHeightSizable];
+//
+//    [m_RepositoriesView setHidden: NO];
+//    
+//    [m_SplitView setHidden: NO];
+//    [m_SplitView setVertical: YES];
+//    [m_SplitView setAutoresizingMask: NSViewHeightSizable];
+//    [m_SplitView addSubview: m_GroupsView ];
+//    [m_SplitView addSubview: m_RepositoriesView ];
 }
 
 

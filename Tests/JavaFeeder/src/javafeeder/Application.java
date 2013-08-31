@@ -19,7 +19,7 @@ public class Application {
         
         try
         {
-            Socket  sock = new Socket("192.168.1.122", 8501);
+            Socket  sock = new Socket("127.0.0.1", 8501);
             sock.setSendBufferSize(4096);
             
             System.out.println("socket connection successful");

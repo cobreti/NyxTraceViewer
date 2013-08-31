@@ -8,6 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+
 @interface CGroupsView : NSView
+{
+}
 
 @end
