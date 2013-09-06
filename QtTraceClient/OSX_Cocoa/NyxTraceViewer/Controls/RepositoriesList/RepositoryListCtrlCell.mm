@@ -17,6 +17,13 @@
 {
     m_pInfo = info;
     m_pText = [[NSString alloc] initWithCString: info->Name().c_str() encoding: NSMacOSRomanStringEncoding ];
+    
+    NSString* uncheckedImageName = [[NSBundle mainBundle] pathForResource:@"Unchecked-checkbox-icon" ofType:@"png"];
+    
+    m_UncheckedImg = [[NSImage alloc] initWithContentsOfFile:uncheckedImageName];
+    
+//    m_UncheckedImg = [[NSImage alloc] initByReferencingFile:@"Unchecked-checkbox-icon.png"];
+    
     return self;
 }
 
@@ -31,12 +38,16 @@
         [path fill];
     }
 
+    NSSize imgSize = [m_UncheckedImg size];
+    
+    CGFloat imgY = (cellFrame.size.height - imgSize.height) / 2;
     NSColor* color = [NSColor blueColor];
     NSFont* font = [NSFont fontWithName:@"arial" size:12];
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys: color, NSForegroundColorAttributeName, font, NSFontAttributeName, nil];
 
-    [m_pText drawInRect:NSMakeRect(cellFrame.origin.x + 5, cellFrame.origin.y + 3, cellFrame.size.width - 10, cellFrame.size.height-6) withAttributes:attributes];
-    
+    [m_pText drawInRect:NSMakeRect(cellFrame.origin.x + imgSize.width + 5, cellFrame.origin.y + 3, cellFrame.size.width - 10, cellFrame.size.height-6) withAttributes:attributes];
+
+    [m_UncheckedImg drawInRect:NSMakeRect(cellFrame.origin.x, cellFrame.origin.y + imgY, imgSize.width, imgSize.height) fromRect:NSMakeRect(0, 0, imgSize.width, imgSize.height) operation:NSCompositeSourceOver fraction:1.0];
 
 }
 

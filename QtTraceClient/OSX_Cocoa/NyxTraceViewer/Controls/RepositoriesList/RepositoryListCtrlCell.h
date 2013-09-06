@@ -15,6 +15,7 @@ class CRepositoryInfo;
     CRepositoryInfo*        m_pInfo;
     NSString*               m_pText;
     NSSize                  m_Size;
+    NSImage*                m_UncheckedImg;
     bool                    m_bSelected;
 }
 

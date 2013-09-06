@@ -13,6 +13,9 @@
 		165D73ED17BD98220024CB1F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 165D73EB17BD98220024CB1F /* Credits.rtf */; };
 		165D73F317BD98220024CB1F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D73F117BD98220024CB1F /* MainMenu.xib */; };
 		165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73EF17BD98220024CB1F /* AppDelegate.mm */; };
+		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
+		16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */; };
+		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
 		16FD8D4017C907BE00718001 /* App-icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D3F17C907BE00718001 /* App-icon.iconset */; };
 		16FD8D4217CA2E1B00718001 /* TracesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4117CA2E1B00718001 /* TracesWindow.xib */; };
 		16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D4617CA2FC000718001 /* TracesWindowController.mm */; };
@@ -41,6 +44,10 @@
 		165D73EE17BD98220024CB1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		165D73EF17BD98220024CB1F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		165D73F217BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
+		16D0254C17DA695D00C4FD48 /* RepositoryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryListItem.h; path = Controls/RepositoriesList/RepositoryListItem.h; sourceTree = "<group>"; };
+		16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoryListItem.mm; path = Controls/RepositoriesList/RepositoryListItem.mm; sourceTree = "<group>"; };
+		16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checked-checkbox-icon.png"; path = "icons/Checked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16FD8D3F17C907BE00718001 /* App-icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = "App-icon.iconset"; sourceTree = SOURCE_ROOT; };
 		16FD8D4117CA2E1B00718001 /* TracesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TracesWindow.xib; sourceTree = "<group>"; };
 		16FD8D4517CA2FC000718001 /* TracesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracesWindowController.h; sourceTree = "<group>"; };
@@ -143,6 +150,8 @@
 		16FD8D3A17C903E100718001 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */,
+				16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */,
 				16FD8D4817CA7E0A00718001 /* channels_hidden.png */,
 				16FD8D4917CA7E0A00718001 /* channels_visible.png */,
 				16FD8D3F17C907BE00718001 /* App-icon.iconset */,
@@ -182,6 +191,8 @@
 				16FD8D6417D23A6400718001 /* RepositoryInfo.hpp */,
 				16FD8D6617D2794200718001 /* RepositoryListCtrlCell.h */,
 				16FD8D6717D2794200718001 /* RepositoryListCtrlCell.mm */,
+				16D0254C17DA695D00C4FD48 /* RepositoryListItem.h */,
+				16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */,
 			);
 			name = RepositoriesList;
 			sourceTree = "<group>";
@@ -244,6 +255,8 @@
 				16FD8D4217CA2E1B00718001 /* TracesWindow.xib in Resources */,
 				16FD8D4A17CA7E0A00718001 /* channels_hidden.png in Resources */,
 				16FD8D4B17CA7E0A00718001 /* channels_visible.png in Resources */,
+				16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */,
+				16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +277,7 @@
 				16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */,
 				16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */,
 				16FD8D6817D2794200718001 /* RepositoryListCtrlCell.mm in Sources */,
+				16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
