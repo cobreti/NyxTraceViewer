@@ -11,6 +11,9 @@
 @interface CTracesWindowController : NSWindowController <NSToolbarDelegate, NSWindowDelegate>
 {
     CGFloat     m_LastChannelsPanelWidth;
+    
+    NSImage*    m_channelsVisible;
+    NSImage*    m_channelsHidden;
 }
 
 @property (assign) IBOutlet NSSplitView *m_SplitView;

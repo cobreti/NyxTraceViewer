@@ -24,6 +24,22 @@
     return self;
 }
 
+- (id)initWithWindowNibName:(NSString *)windowNibName
+{
+    self = [super initWithWindowNibName:windowNibName];
+    if (self)
+    {
+        NSString* channelsHidden = [[NSBundle mainBundle] pathForResource:@"channels_hidden" ofType:@"png"];
+        m_channelsHidden = [[NSImage alloc] initWithContentsOfFile:channelsHidden];
+
+        NSString* channelsVisible = [[NSBundle mainBundle] pathForResource:@"channels_visible" ofType:@"png"];
+        m_channelsVisible = [[NSImage alloc] initWithContentsOfFile:channelsVisible];
+        
+    }
+    
+    return self;
+}
+
 - (void)windowDidLoad
 {
     [super windowDidLoad];
@@ -73,6 +89,8 @@
         [pRightView display];
         [pLeftView display];
         [self.m_SplitView display];
+        
+        [pItem setImage: m_channelsVisible];
     }
     else
     {
@@ -85,7 +103,9 @@
 //        [pRightView setFrameSize:NSMakeSize(overallFrame.size.width, overallFrame.size.height)];
         [pRightView setFrame:rightFrame];
         [pRightView display];
-        [self.m_SplitView display];        
+        [self.m_SplitView display];
+        
+        [pItem setImage: m_channelsHidden];
     }
 }
 
