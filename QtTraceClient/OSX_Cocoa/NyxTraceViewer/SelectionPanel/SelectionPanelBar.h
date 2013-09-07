@@ -8,6 +8,23 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SelectionPanelBar : NSControl
+#include <map>
+
+@class CToggleFlatBtn;
+
+typedef std::map<int, NSCell*>      TCellsMap;
+typedef std::map<int, CToggleFlatBtn*>      TToggleFlatBtnsMap;
+
+@interface CSelectionPanelBar : NSControl
+{
+    TToggleFlatBtnsMap      m_Btns;
+    TCellsMap               m_Cells;
+}
+
+- (void)calcSize;
+- (void)dealloc;
+- (BOOL)isFlipped;
+- (void)viewDidEndLiveResize;
+- (void)onSourcesSelected: (id)sender;
 
 @end

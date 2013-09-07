@@ -8,6 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SelectionPanel : NSView
+@class CSelectionPanelBar;
+
+@interface CSelectionPanel : NSView
+{
+    CSelectionPanelBar*     m_Bar;
+}
+
+- (BOOL)isFlipped;
+- (void)dealloc;
 
 @end
