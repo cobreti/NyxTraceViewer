@@ -29,5 +29,6 @@ enum {
 - (void)mouseUp:(NSEvent *)theEvent;
 - (void)setAction:(SEL)aSelector;
 - (void)setTarget:(id)anObject;
+- (void)dealloc;
 
 @end

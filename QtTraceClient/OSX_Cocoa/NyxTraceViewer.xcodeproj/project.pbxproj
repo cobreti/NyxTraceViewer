@@ -21,6 +21,7 @@
 		16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0255717DB66A400C4FD48 /* SelectionPanel.mm */; };
 		16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */; };
 		16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */; };
+		16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0256317DBC12800C4FD48 /* SelectionBar.mm */; };
 		16FD8D4017C907BE00718001 /* App-icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D3F17C907BE00718001 /* App-icon.iconset */; };
 		16FD8D4217CA2E1B00718001 /* TracesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4117CA2E1B00718001 /* TracesWindow.xib */; };
 		16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D4617CA2FC000718001 /* TracesWindowController.mm */; };
@@ -57,6 +58,8 @@
 		16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionPanelBar.mm; path = SelectionPanel/SelectionPanelBar.mm; sourceTree = "<group>"; };
 		16D0255F17DB7A2400C4FD48 /* ToggleFlatBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleFlatBtn.h; path = Controls/ToggleFlatBtn.h; sourceTree = "<group>"; };
 		16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ToggleFlatBtn.mm; path = Controls/ToggleFlatBtn.mm; sourceTree = "<group>"; };
+		16D0256217DBC12800C4FD48 /* SelectionBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionBar.h; path = Controls/SelectionBar.h; sourceTree = "<group>"; };
+		16D0256317DBC12800C4FD48 /* SelectionBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionBar.mm; path = Controls/SelectionBar.mm; sourceTree = "<group>"; };
 		16FD8D3F17C907BE00718001 /* App-icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = "App-icon.iconset"; sourceTree = SOURCE_ROOT; };
 		16FD8D4117CA2E1B00718001 /* TracesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TracesWindow.xib; sourceTree = "<group>"; };
 		16FD8D4517CA2FC000718001 /* TracesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracesWindowController.h; sourceTree = "<group>"; };
@@ -189,6 +192,8 @@
 				16FD8D5F17D234C800718001 /* RepositoriesList */,
 				16D0255F17DB7A2400C4FD48 /* ToggleFlatBtn.h */,
 				16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */,
+				16D0256217DBC12800C4FD48 /* SelectionBar.h */,
+				16D0256317DBC12800C4FD48 /* SelectionBar.mm */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */,
 				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
 				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
+				16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

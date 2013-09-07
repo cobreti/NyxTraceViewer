@@ -99,7 +99,9 @@
     if ( m_Cells[state] != NULL )
         [m_Cells[state] release];
     
-    m_Cells[state] = [[NSCell alloc] initImageCell: img];    
+    m_Cells[state] = [[NSCell alloc] initImageCell: img];
+    
+    [img release];
 }
 
 - (void)setState: (int)state
@@ -113,7 +115,10 @@
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    m_State = 1 - m_State;
+    if ( m_State == 1 )
+        return;
+    
+    m_State = 1;
     [self setNeedsDisplay: YES];
     
     [self sendAction: m_TargetSelector to:m_Target];
@@ -127,6 +132,23 @@
 - (void)setTarget:(id)anObject
 {
     m_Target = anObject;
+}
+
+- (void)dealloc
+{
+    int     index = 0;
+    
+    while (index < kToggleFlatBtn_StatesCount)
+    {
+        NSCell* cell = m_Cells[index];
+        if (cell)
+        {
+            [cell release];
+        }
+        ++ index;
+    }
+    
+    [super dealloc];
 }
 
 

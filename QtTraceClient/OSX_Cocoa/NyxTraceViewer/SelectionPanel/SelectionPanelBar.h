@@ -7,18 +7,20 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "../Controls/SelectionBar.h"
 
 #include <map>
 
 @class CToggleFlatBtn;
 
-typedef std::map<int, NSCell*>      TCellsMap;
-typedef std::map<int, CToggleFlatBtn*>      TToggleFlatBtnsMap;
+//typedef std::map<int, NSCell*>      TCellsMap;
+//typedef std::map<int, CToggleFlatBtn*>      TToggleFlatBtnsMap;
 
 @interface CSelectionPanelBar : NSControl
 {
-    TToggleFlatBtnsMap      m_Btns;
-    TCellsMap               m_Cells;
+    CSelectionBar*          m_SelectionBar;
+//    TToggleFlatBtnsMap      m_Btns;
+//    TCellsMap               m_Cells;
 }
 
 - (void)calcSize;
