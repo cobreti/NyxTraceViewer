@@ -226,20 +226,19 @@
 							<array class="NSMutableArray" key="NSSubviews">
 								<object class="NSCustomView" id="297753698">
 									<reference key="NSNextResponder" ref="902745619"/>
-									<int key="NSvFlags">256</int>
 									<array class="NSMutableArray" key="NSSubviews"/>
-									<string key="NSFrameSize">{209, 291}</string>
+									<string key="NSFrameSize">{212, 291}</string>
 									<reference key="NSSuperview" ref="902745619"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="513265225"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
-									<string key="NSClassName">CTracesGroupView</string>
+									<string key="NSClassName">CSelectionPanel</string>
 								</object>
 								<object class="NSCustomView" id="513265225">
 									<reference key="NSNextResponder" ref="902745619"/>
 									<int key="NSvFlags">256</int>
 									<array class="NSMutableArray" key="NSSubviews"/>
-									<string key="NSFrame">{{219, 0}, {330, 291}}</string>
+									<string key="NSFrame">{{213, 0}, {336, 291}}</string>
 									<reference key="NSSuperview" ref="902745619"/>
 									<reference key="NSWindow"/>
 									<string key="NSReuseIdentifierKey">_NS:13</string>
@@ -252,7 +251,7 @@
 							<reference key="NSNextKeyView" ref="297753698"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="NSIsVertical">YES</bool>
-							<int key="NSDividerStyle">3</int>
+							<int key="NSDividerStyle">2</int>
 							<object class="NSMutableDictionary" key="NSHoldingPriorities">
 								<integer value="0" key="NS.key.0"/>
 								<real value="250" key="NS.object.0"/>
@@ -407,49 +406,6 @@
 						<reference key="parent" ref="1005"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">3</int>
-						<reference key="object" ref="249639594"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="585279786"/>
-							<reference ref="287047773"/>
-							<reference ref="407268874"/>
-							<reference ref="493633123"/>
-							<reference ref="718750603"/>
-							<reference ref="586191579"/>
-						</array>
-						<reference key="parent" ref="1005"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">4</int>
-						<reference key="object" ref="585279786"/>
-						<reference key="parent" ref="249639594"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="287047773"/>
-						<reference key="parent" ref="249639594"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">6</int>
-						<reference key="object" ref="407268874"/>
-						<reference key="parent" ref="249639594"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">7</int>
-						<reference key="object" ref="493633123"/>
-						<reference key="parent" ref="249639594"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">8</int>
-						<reference key="object" ref="718750603"/>
-						<reference key="parent" ref="249639594"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">10</int>
-						<reference key="object" ref="586191579"/>
-						<reference key="parent" ref="249639594"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">14</int>
 						<reference key="object" ref="249824117"/>
 						<reference key="parent" ref="0"/>
@@ -480,12 +436,6 @@
 						<reference key="parent" ref="902745619"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">25</int>
-						<reference key="object" ref="513265225"/>
-						<array class="NSMutableArray" key="children"/>
-						<reference key="parent" ref="902745619"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
 						<reference key="object" ref="698477114"/>
 						<reference key="parent" ref="1006"/>
@@ -494,6 +444,55 @@
 						<int key="objectID">34</int>
 						<reference key="object" ref="368095453"/>
 						<reference key="parent" ref="1006"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">25</int>
+						<reference key="object" ref="513265225"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="902745619"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">3</int>
+						<reference key="object" ref="249639594"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="585279786"/>
+							<reference ref="287047773"/>
+							<reference ref="407268874"/>
+							<reference ref="493633123"/>
+							<reference ref="718750603"/>
+							<reference ref="586191579"/>
+						</array>
+						<reference key="parent" ref="1005"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="586191579"/>
+						<reference key="parent" ref="249639594"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">8</int>
+						<reference key="object" ref="718750603"/>
+						<reference key="parent" ref="249639594"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">7</int>
+						<reference key="object" ref="493633123"/>
+						<reference key="parent" ref="249639594"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">6</int>
+						<reference key="object" ref="407268874"/>
+						<reference key="parent" ref="249639594"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">5</int>
+						<reference key="object" ref="287047773"/>
+						<reference key="parent" ref="249639594"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">4</int>
+						<reference key="object" ref="585279786"/>
+						<reference key="parent" ref="249639594"/>
 					</object>
 				</array>
 			</object>
@@ -533,16 +532,16 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">205</int>
+			<int key="maxID">336</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">CTracesGroupView</string>
+					<string key="className">CSelectionPanel</string>
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CTracesGroupView.h</string>
+						<string key="minorKey">./Classes/CSelectionPanel.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

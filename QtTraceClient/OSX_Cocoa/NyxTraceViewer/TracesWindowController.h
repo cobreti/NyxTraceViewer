@@ -18,6 +18,7 @@
 
 @property (assign) IBOutlet NSSplitView *m_SplitView;
 
+
 - (IBAction)onChannelsShowHide:(id)sender;
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
 - (NSArray*)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar;
