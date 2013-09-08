@@ -10,12 +10,8 @@
 
 @class CRepositoriesListCtrl;
 
-@interface CTracesGroupView : NSScrollView
-{
-//    NSSplitView*        m_SplitView;
-//    NSView*             m_GroupsView;
-//    NSView*             m_RepositoriesView;
-    
+@interface CSourcesView : NSScrollView
+{   
     CRepositoriesListCtrl*      mCtrl;
 }
 

@@ -8,7 +8,7 @@
 
 #import "SelectionPanel.h"
 #import "SelectionPanelBar.h"
-#import "../TracesGroupsView/TracesGroupView.h"
+#import "SourcesView/SourcesView.h"
 
 @implementation CSelectionPanel
 
@@ -21,7 +21,7 @@
         [m_Bar setPanelSelectionChangedHandler: CActionHandlerInfo(@selector(onPanelSelectionChanged:), self)];
         [self addSubview: m_Bar];
         
-        m_SourcesView = [[CTracesGroupView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
+        m_SourcesView = [[CSourcesView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
         [self addSubview: m_SourcesView];
         [m_SourcesView setHidden: NO];
         

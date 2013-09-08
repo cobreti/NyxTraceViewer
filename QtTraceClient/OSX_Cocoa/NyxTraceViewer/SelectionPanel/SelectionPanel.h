@@ -9,12 +9,12 @@
 #import <Cocoa/Cocoa.h>
 
 @class CSelectionPanelBar;
-@class CTracesGroupView;
+@class CSourcesView;
 
 @interface CSelectionPanel : NSView
 {
     CSelectionPanelBar*     m_Bar;
-    CTracesGroupView*       m_SourcesView;
+    CSourcesView*           m_SourcesView;
 }
 
 - (BOOL)isFlipped;
