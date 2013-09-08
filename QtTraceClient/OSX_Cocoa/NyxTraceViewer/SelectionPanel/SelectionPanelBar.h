@@ -9,24 +9,33 @@
 #import <Cocoa/Cocoa.h>
 #import "../Controls/SelectionBar.h"
 
+#include "../Controls/ActionHandlerInfo.h"
 #include <map>
 
 @class CToggleFlatBtn;
 
-//typedef std::map<int, NSCell*>      TCellsMap;
-//typedef std::map<int, CToggleFlatBtn*>      TToggleFlatBtnsMap;
+
+enum {
+    kSelectionPanelBar_SourcesPanel = 1,
+    kSelectionPanelBar_ChannelsPanel = 2
+};
+
 
 @interface CSelectionPanelBar : NSControl
 {
     CSelectionBar*          m_SelectionBar;
-//    TToggleFlatBtnsMap      m_Btns;
-//    TCellsMap               m_Cells;
+    CActionHandlerInfo      m_PanelSelectionChangedHandler;
 }
+
+- (IBAction) onSelectionBarSelectedBtnChanged: (id)sender;
 
 - (void)calcSize;
 - (void)dealloc;
 - (BOOL)isFlipped;
 - (void)viewDidEndLiveResize;
 - (void)onSourcesSelected: (id)sender;
+- (void)setPanelSelectionChangedHandler: (const CActionHandlerInfo&)handler;
+- (int)selectedPanel;
+
 
 @end

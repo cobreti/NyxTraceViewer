@@ -29,6 +29,18 @@
 }
 
 
+- (int)getId
+{
+    return m_id;
+}
+
+
+- (void)setId:(int)identifier
+{
+    m_id = identifier;
+}
+
+
 - (BOOL)isFlipped
 {
     return YES;
@@ -113,6 +125,13 @@
     }
 }
 
+
+- (int)state
+{
+    return m_State;
+}
+
+
 - (void)mouseUp:(NSEvent *)theEvent
 {
     if ( m_State == 1 )
@@ -121,17 +140,8 @@
     m_State = 1;
     [self setNeedsDisplay: YES];
     
-    [self sendAction: m_TargetSelector to:m_Target];
-}
-
-- (void)setAction:(SEL)aSelector
-{
-    m_TargetSelector = aSelector;
-}
-
-- (void)setTarget:(id)anObject
-{
-    m_Target = anObject;
+    if (m_SelectedActionHandler.Valid())
+        [self sendAction: m_SelectedActionHandler.Selector() to:m_SelectedActionHandler.Target()];
 }
 
 - (void)dealloc
@@ -149,6 +159,11 @@
     }
     
     [super dealloc];
+}
+
+- (void)setSelectedActionHandler: (const CActionHandlerInfo&)info
+{
+    m_SelectedActionHandler = info;
 }
 
 

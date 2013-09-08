@@ -18,7 +18,14 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code here.
+
+        [self setHasHorizontalScroller: YES];
+        [self setHasVerticalScroller: YES];
+        
+        mCtrl = [[CRepositoriesListCtrl alloc] initWithFrame: [self frame]];
+        [mCtrl setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+        [self setDocumentView: mCtrl];
+        [mCtrl calcSize];
         
     }
     

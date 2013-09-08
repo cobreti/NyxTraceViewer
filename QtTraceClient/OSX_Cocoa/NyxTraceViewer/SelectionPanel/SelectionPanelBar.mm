@@ -35,15 +35,18 @@ enum {
     if (self) {
 
         m_SelectionBar = [[CSelectionBar alloc] initWithFrame: NSZeroRect];
+        [m_SelectionBar setBtnSelectionChangedHandler: CActionHandlerInfo(@selector(onSelectionBarSelectedBtnChanged:), self)];
         [self addSubview: m_SelectionBar];
         
         CToggleFlatBtn* pChannelsBtn = [[CToggleFlatBtn alloc] initWithFrame: NSZeroRect];
         [pChannelsBtn setStateImg:kToggleFlatBtn_OffState withResourceImage:@"channels_hidden" withSize:NSMakeSize(16, 16)];
         [pChannelsBtn setStateImg:kToggleFlatBtn_OnState withResourceImage:@"channels_visible" withSize:NSMakeSize(16, 16)];
+        [pChannelsBtn setId: kSelectionPanelBar_ChannelsPanel];
 
         CToggleFlatBtn* pSourcesBtn = [[CToggleFlatBtn alloc] initWithFrame: NSZeroRect];
         [pSourcesBtn setStateImg:kToggleFlatBtn_OffState withResourceImage:@"sources_hidden" withSize:NSMakeSize(16, 16)];
         [pSourcesBtn setStateImg:kToggleFlatBtn_OnState withResourceImage:@"sources_visible" withSize:NSMakeSize(16, 16)];
+        [pSourcesBtn setId: kSelectionPanelBar_SourcesPanel];
                 
         [pSourcesBtn setState: kToggleFlatBtn_OnState];
         [m_SelectionBar addBtn: pSourcesBtn];
@@ -92,6 +95,13 @@ enum {
     [path fill];
 }
 
+- (IBAction) onSelectionBarSelectedBtnChanged: (id)sender
+{
+    if (m_PanelSelectionChangedHandler.Valid())
+        [self sendAction: m_PanelSelectionChangedHandler.Selector() to:m_PanelSelectionChangedHandler.Target()];
+}
+
+
 - (void)calcSize
 {
 }
@@ -116,6 +126,24 @@ enum {
 {
     NYXTRACE(0x0, L"sources button clicked");
 }
+
+
+- (void)setPanelSelectionChangedHandler: (const CActionHandlerInfo&)handler
+{
+    m_PanelSelectionChangedHandler = handler;
+}
+
+- (int)selectedPanel
+{
+    CToggleFlatBtn* pBtn = [m_SelectionBar activeBtn];
+    
+    if (pBtn)
+        return [pBtn getId];
+    
+    return 0;
+}
+
+
 
 @end
 

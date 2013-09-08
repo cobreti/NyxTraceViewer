@@ -13,6 +13,7 @@
 		165D73ED17BD98220024CB1F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 165D73EB17BD98220024CB1F /* Credits.rtf */; };
 		165D73F317BD98220024CB1F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D73F117BD98220024CB1F /* MainMenu.xib */; };
 		165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73EF17BD98220024CB1F /* AppDelegate.mm */; };
+		168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
 		16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */; };
 		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
@@ -46,6 +47,8 @@
 		165D73EE17BD98220024CB1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		165D73EF17BD98220024CB1F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		165D73F217BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActionHandlerInfo.cpp; path = Controls/ActionHandlerInfo.cpp; sourceTree = "<group>"; };
+		168F943D17DCABC3006AA407 /* ActionHandlerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionHandlerInfo.h; path = Controls/ActionHandlerInfo.h; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0254C17DA695D00C4FD48 /* RepositoryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryListItem.h; path = Controls/RepositoriesList/RepositoryListItem.h; sourceTree = "<group>"; };
 		16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoryListItem.mm; path = Controls/RepositoriesList/RepositoryListItem.mm; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */,
 				16D0256217DBC12800C4FD48 /* SelectionBar.h */,
 				16D0256317DBC12800C4FD48 /* SelectionBar.mm */,
+				168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */,
+				168F943D17DCABC3006AA407 /* ActionHandlerInfo.h */,
 			);
 			name = Controls;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
 				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
 				16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */,
+				168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

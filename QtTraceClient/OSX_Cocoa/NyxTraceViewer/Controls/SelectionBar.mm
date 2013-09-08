@@ -41,10 +41,9 @@ enum {
     [self addSubview: btn];
     
     btn.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [btn setTarget: self];
-    [btn setAction: NSSelectorFromString(@"onBtnClicked:")];
 
+    [btn setSelectedActionHandler: CActionHandlerInfo(@selector(onBtnClicked:), self) ];
+    
     [self addConstraint: [NSLayoutConstraint constraintWithItem:btn
                                                       attribute: NSLayoutAttributeTop
                                                       relatedBy: NSLayoutRelationEqual
@@ -77,6 +76,26 @@ enum {
     }
     
     m_Btns.push_back(btn);   
+}
+
+
+- (CToggleFlatBtn*)activeBtn
+{
+    CToggleFlatBtn* pBtn = NULL;
+
+    int index = 0;
+    while (index < m_Btns.size())
+    {
+        if ( [m_Btns[index] state] == kToggleFlatBtn_OnState )
+        {
+            pBtn = m_Btns[index];
+            break;
+        }
+            
+        ++ index;
+    }
+    
+    return pBtn;
 }
 
 
@@ -127,6 +146,9 @@ enum {
         }
         ++ pos;
     }
+    
+    if (m_BtnSelectionChangedHandler.Valid())
+        [self sendAction: m_BtnSelectionChangedHandler.Selector() to:m_BtnSelectionChangedHandler.Target()];
 }
 
 - (void)dealloc
@@ -141,6 +163,13 @@ enum {
     
     [super dealloc];
 }
+
+
+- (void)setBtnSelectionChangedHandler: (const CActionHandlerInfo&)handler
+{
+    m_BtnSelectionChangedHandler = handler;
+}
+
 
 @end
 
