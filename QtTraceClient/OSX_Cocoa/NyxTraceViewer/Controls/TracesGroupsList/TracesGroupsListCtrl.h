@@ -12,15 +12,18 @@
 
 class CTracesGroupInfo;
 @class CVerticalCellsLayout;
+@class CTracesGroupLayoutRow;
 
 @interface CTracesGroupsListCtrl : NSControl
 {
     CVerticalCellsLayout*   m_Layout;
+    CTracesGroupLayoutRow*  m_SelectedRow;
 }
 
 - (void)calcSize;
 - (NSSize)intrinsicContentSize;
 - (BOOL)isFlipped;
 - (void)addTracesGroup: (CTracesGroupInfo*) info;
+- (void)mouseDown:(NSEvent *)theEvent;
 
 @end

@@ -36,9 +36,10 @@ inline SCellsLayoutMargins  MakeLayoutMargins(CGFloat left, CGFloat top, CGFloat
 - (id)init;
 - (void)addItem: (CCellsLayout*)item;
 - (void)update: (NSPoint)pt;
-- (void)drawInView: (NSView*)view;
+- (void)drawInView: (NSView*)view withRect: (NSRect)frame;
 - (NSRect)layoutRect;
 - (void)setMargins: (SCellsLayoutMargins)margins;
 - (SCellsLayoutMargins)margins;
+- (void)pick: (NSMutableArray*)items atPoint: (NSPoint)pt;
 
 @end

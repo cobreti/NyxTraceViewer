@@ -8,6 +8,19 @@
 
 #import "HorizontalCellsLayout.h"
 
+class CTracesGroupInfo;
+
 @interface CTracesGroupLayoutRow : CHorizontalCellsLayout
+{
+    BOOL                    m_Selected;
+    CTracesGroupInfo*       m_GroupInfo;
+}
+
+- (id)init;
+- (void)setSelected: (BOOL)selected;
+- (BOOL)selected;
+- (void)drawInView: (NSView*)view withRect: (NSRect)frame;
+- (void)setTracesGroupInfo: (CTracesGroupInfo*)info;
+- (CTracesGroupInfo*) tracesGroupInfo;
 
 @end

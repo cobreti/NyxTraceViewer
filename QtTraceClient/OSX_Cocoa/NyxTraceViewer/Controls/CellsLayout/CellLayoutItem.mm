@@ -31,7 +31,7 @@
 }
 
 
-- (void)drawInView: (NSView*)view
+- (void)drawInView: (NSView*)view withRect: (NSRect)frame
 {
     NSRect  cellFrame = m_Rect;
     

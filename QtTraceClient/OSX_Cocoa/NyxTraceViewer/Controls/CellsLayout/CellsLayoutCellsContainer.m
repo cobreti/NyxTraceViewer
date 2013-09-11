@@ -22,8 +22,8 @@
 }
 
 - (void)addItem: (CCellsLayout*)item
-{    
-    [m_Items insertObject:item atIndex:[m_Items count]];
+{
+    [m_Items addObject: item];
 }
 
 - (void)update: (NSPoint)pt
@@ -32,7 +32,7 @@
 }
 
 
-- (void)drawInView: (NSView*)view
+- (void)drawInView: (NSView*)view withRect: (NSRect)frame
 {
     NSInteger       index = 0;
     NSInteger       count = [m_Items count];
@@ -40,12 +40,26 @@
     while (index < count )
     {
         CCellLayoutItem* item = [m_Items objectAtIndex:index];
-        [item drawInView: view];
+        [item drawInView: view withRect:frame];
         
         ++ index;
     }
 }
 
+
+- (void)pick: (NSMutableArray*)items atPoint: (NSPoint)pt
+{
+    [super pick: items atPoint: pt];
+    
+    NSInteger       index = 0;
+    NSInteger       count  = [m_Items count];
+    
+    while (index < count)
+    {
+        [[m_Items objectAtIndex:index] pick:items atPoint: pt];
+        ++ index;
+    }
+}
 
 
 @end

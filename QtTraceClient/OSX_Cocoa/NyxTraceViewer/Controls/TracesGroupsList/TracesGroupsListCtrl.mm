@@ -23,6 +23,7 @@
     if (self) {
         
         m_Layout = [[CVerticalCellsLayout alloc] init];
+        m_SelectedRow = nil;
         
         [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("first group"))];
         [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("second group"))];
@@ -37,13 +38,25 @@
 {
     [super drawRect: dirtyRect];
     
-    [m_Layout drawInView: self];
+    NSRect      parentFrame = [[self superview] frame];
+    NSRect      rc = [self frame];
+    
+    rc.size.width = MAX(rc.size.width, parentFrame.size.width);
+    
+    [m_Layout drawInView: self withRect: rc];
 }
 
 - (void)calcSize
 {
+    NSRect      parentFrame = [[self superview] frame];
+    NSRect      frame;
+    
     [m_Layout update: NSZeroPoint];
-    [self setFrame: [m_Layout layoutRect]];
+    
+    frame = [m_Layout layoutRect];
+    frame.size.width = MAX(frame.size.width, parentFrame.size.width);
+    
+    [self setFrame: frame];
 }
 
 - (NSSize)intrinsicContentSize
@@ -67,9 +80,39 @@
     
     [layoutRow addItem: [[CCellLayoutItem alloc] initWithCell:nameCell] ];
     [layoutRow setMargins: MakeLayoutMargins(22, 5, 22, 5)];
+    [layoutRow setTracesGroupInfo: info];
     [m_Layout addItem: layoutRow];
 }
 
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    NSMutableArray*     pickResult = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    [m_Layout pick:pickResult atPoint: [self convertPoint:[theEvent locationInWindow] fromView: nil] ];
+    
+    NSInteger   pickCount = [pickResult count];
+    
+    if ( pickCount > 2 )
+    {
+        if ( m_SelectedRow != nil )
+        {
+            [m_SelectedRow setSelected:NO];
+            m_SelectedRow = nil;
+        }
+
+        m_SelectedRow = [pickResult objectAtIndex:pickCount-2];
+        [m_SelectedRow setSelected: YES];
+        
+        CTracesGroupInfo*   info = [m_SelectedRow tracesGroupInfo];
+        NSString* name = [[NSString alloc] initWithCString: info->Name().c_str() encoding:NSMacOSRomanStringEncoding];
+        [[self window] setTitle: name];
+    }
+    
+    [pickResult release];
+    
+    [self setNeedsDisplay: YES];
+}
 
 @end
 

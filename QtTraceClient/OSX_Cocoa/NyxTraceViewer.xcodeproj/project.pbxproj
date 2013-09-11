@@ -23,7 +23,7 @@
 		168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */; };
 		168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946517DFD59B006AA407 /* CellLayoutItem.mm */; };
 		168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */; };
-		168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.m */; };
+		168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */; };
 		168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F947117E0014A006AA407 /* HorizontalCellsLayout.m */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
 		16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */; };
@@ -78,7 +78,7 @@
 		168F946A17DFFCE6006AA407 /* CellsLayoutCellsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellsLayoutCellsContainer.h; path = Controls/CellsLayout/CellsLayoutCellsContainer.h; sourceTree = "<group>"; };
 		168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellsLayoutCellsContainer.m; path = Controls/CellsLayout/CellsLayoutCellsContainer.m; sourceTree = "<group>"; };
 		168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupLayoutRow.h; path = Controls/TracesGroupsList/TracesGroupLayoutRow.h; sourceTree = "<group>"; };
-		168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TracesGroupLayoutRow.m; path = Controls/TracesGroupsList/TracesGroupLayoutRow.m; sourceTree = "<group>"; };
+		168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupLayoutRow.mm; path = Controls/TracesGroupsList/TracesGroupLayoutRow.mm; sourceTree = "<group>"; };
 		168F947017E0014A006AA407 /* HorizontalCellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalCellsLayout.h; path = Controls/CellsLayout/HorizontalCellsLayout.h; sourceTree = "<group>"; };
 		168F947117E0014A006AA407 /* HorizontalCellsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalCellsLayout.m; path = Controls/CellsLayout/HorizontalCellsLayout.m; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
@@ -194,7 +194,7 @@
 				168F944E17DE0CD2006AA407 /* TracesGroupItem.h */,
 				168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */,
 				168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */,
-				168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.m */,
+				168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */,
 			);
 			name = TracesGroupsList;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 				168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */,
 				168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */,
 				168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */,
-				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.m in Sources */,
+				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */,
 				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

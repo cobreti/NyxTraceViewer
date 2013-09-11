@@ -31,7 +31,7 @@
 }
 
 
-- (void)drawInView: (NSView*)view
+- (void)drawInView: (NSView*)view withRect: (NSRect)frame
 {
 }
 
@@ -50,6 +50,14 @@
 - (SCellsLayoutMargins)margins
 {
     return m_Margins;
+}
+
+- (void)pick: (NSMutableArray*)items atPoint: (NSPoint)pt
+{
+    if ( NSPointInRect(pt, m_Rect) )
+    {
+        [items addObject: self];
+    }
 }
 
 

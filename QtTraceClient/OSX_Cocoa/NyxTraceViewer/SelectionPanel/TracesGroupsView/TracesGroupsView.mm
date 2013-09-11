@@ -39,6 +39,14 @@
     m_GroupsListCtrl = [[CTracesGroupsListCtrl alloc] initWithFrame: [self frame]];
     [self setDocumentView: m_GroupsListCtrl];
     [m_GroupsListCtrl calcSize];    
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_GroupsListCtrl
+                                                      attribute: NSLayoutAttributeWidth
+                                                      relatedBy: NSLayoutRelationGreaterThanOrEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeWidth
+                                                     multiplier: 1
+                                                       constant: 0 ]];
 }
 
 @end
