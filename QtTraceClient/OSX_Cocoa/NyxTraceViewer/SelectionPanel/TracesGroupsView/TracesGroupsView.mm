@@ -38,7 +38,9 @@
 {
     m_GroupsListCtrl = [[CTracesGroupsListCtrl alloc] initWithFrame: [self frame]];
     [self setDocumentView: m_GroupsListCtrl];
-    [m_GroupsListCtrl calcSize];    
+    [m_GroupsListCtrl calcSize];
+    
+    m_GroupsListCtrl.translatesAutoresizingMaskIntoConstraints = NO;
 
     [self addConstraint: [NSLayoutConstraint constraintWithItem: m_GroupsListCtrl
                                                       attribute: NSLayoutAttributeWidth
