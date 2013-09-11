@@ -10,7 +10,6 @@
 
 @interface CHorizontalCellsLayout : CCellsLayoutCellsContainer
 {
-    NSInteger           m_Spacing;
 }
 
 - (id)init;

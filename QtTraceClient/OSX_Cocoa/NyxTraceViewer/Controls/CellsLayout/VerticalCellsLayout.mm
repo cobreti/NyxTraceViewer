@@ -13,9 +13,7 @@
 - (id)init
 {
     [super init];
-    
-    m_Spacing = 10;
-    
+        
     return self;
 }
 
@@ -29,6 +27,9 @@
     m_Rect.origin = pt;
     m_Rect.size = NSZeroSize;
     
+    p.x += m_Margins.left;
+    p.y += m_Margins.top;
+    
     while (index < count)
     {
         CCellsLayout*    item = [m_Items objectAtIndex:index];
@@ -36,13 +37,16 @@
         [item update: p];
         NSRect itemRect = [item layoutRect];
         
-        p.y += itemRect.size.height + m_Spacing;;
+        p.y += itemRect.size.height;
         
-        m_Rect.size.height += itemRect.size.height + m_Spacing;
+        m_Rect.size.height += itemRect.size.height;
         m_Rect.size.width = MAX(m_Rect.size.width, itemRect.size.width);
         
         ++ index;
     }
+    
+    m_Rect.size.width += (m_Margins.left + m_Margins.right);
+    m_Rect.size.height += (m_Margins.top + m_Margins.bottom);
 }
 
 @end

@@ -16,6 +16,7 @@
     [super init];
     
     m_Rect = NSZeroRect;
+    m_Margins = MakeLayoutMargins(0, 0, 0, 0);
     
     return self;
 }
@@ -38,6 +39,17 @@
 - (NSRect)layoutRect
 {
     return m_Rect;
+}
+
+- (void)setMargins: (SCellsLayoutMargins)margins
+{
+    m_Margins = margins;
+}
+
+
+- (SCellsLayoutMargins)margins
+{
+    return m_Margins;
 }
 
 

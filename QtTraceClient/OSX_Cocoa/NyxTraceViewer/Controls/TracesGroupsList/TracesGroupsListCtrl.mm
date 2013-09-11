@@ -66,6 +66,7 @@
     CTracesGroupLayoutRow* layoutRow = [[CTracesGroupLayoutRow alloc] init];
     
     [layoutRow addItem: [[CCellLayoutItem alloc] initWithCell:nameCell] ];
+    [layoutRow setMargins: MakeLayoutMargins(22, 5, 22, 5)];
     [m_Layout addItem: layoutRow];
 }
 
