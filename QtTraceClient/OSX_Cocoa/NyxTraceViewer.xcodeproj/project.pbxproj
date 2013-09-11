@@ -15,6 +15,16 @@
 		165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73EF17BD98220024CB1F /* AppDelegate.mm */; };
 		168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */; };
 		168F944317DCDC9B006AA407 /* SourcesView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944217DCDC9B006AA407 /* SourcesView.mm */; };
+		168F944717DCF760006AA407 /* TracesGroupsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944617DCF760006AA407 /* TracesGroupsView.mm */; };
+		168F944A17DD0611006AA407 /* TracesGroupsListCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */; };
+		168F944D17DE0A7E006AA407 /* TracesGroupInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */; };
+		168F945017DE0CD2006AA407 /* TracesGroupItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */; };
+		168F946017DFD4EB006AA407 /* CellsLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F945F17DFD4EB006AA407 /* CellsLayout.mm */; };
+		168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */; };
+		168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946517DFD59B006AA407 /* CellLayoutItem.mm */; };
+		168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */; };
+		168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.m */; };
+		168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F947117E0014A006AA407 /* HorizontalCellsLayout.m */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
 		16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */; };
 		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
@@ -51,6 +61,26 @@
 		168F943D17DCABC3006AA407 /* ActionHandlerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionHandlerInfo.h; path = Controls/ActionHandlerInfo.h; sourceTree = "<group>"; };
 		168F944117DCDC9B006AA407 /* SourcesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SourcesView.h; path = SelectionPanel/SourcesView/SourcesView.h; sourceTree = "<group>"; };
 		168F944217DCDC9B006AA407 /* SourcesView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SourcesView.mm; path = SelectionPanel/SourcesView/SourcesView.mm; sourceTree = "<group>"; };
+		168F944517DCF760006AA407 /* TracesGroupsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupsView.h; path = SelectionPanel/TracesGroupsView/TracesGroupsView.h; sourceTree = "<group>"; };
+		168F944617DCF760006AA407 /* TracesGroupsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupsView.mm; path = SelectionPanel/TracesGroupsView/TracesGroupsView.mm; sourceTree = "<group>"; };
+		168F944817DD0611006AA407 /* TracesGroupsListCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupsListCtrl.h; path = Controls/TracesGroupsList/TracesGroupsListCtrl.h; sourceTree = "<group>"; };
+		168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupsListCtrl.mm; path = Controls/TracesGroupsList/TracesGroupsListCtrl.mm; sourceTree = "<group>"; };
+		168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesGroupInfo.cpp; path = Controls/TracesGroupsList/TracesGroupInfo.cpp; sourceTree = "<group>"; };
+		168F944C17DE0A7E006AA407 /* TracesGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupInfo.h; path = Controls/TracesGroupsList/TracesGroupInfo.h; sourceTree = "<group>"; };
+		168F944E17DE0CD2006AA407 /* TracesGroupItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupItem.h; path = Controls/TracesGroupsList/TracesGroupItem.h; sourceTree = "<group>"; };
+		168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupItem.mm; path = Controls/TracesGroupsList/TracesGroupItem.mm; sourceTree = "<group>"; };
+		168F945E17DFD4EB006AA407 /* CellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellsLayout.h; path = Controls/CellsLayout/CellsLayout.h; sourceTree = "<group>"; };
+		168F945F17DFD4EB006AA407 /* CellsLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CellsLayout.mm; path = Controls/CellsLayout/CellsLayout.mm; sourceTree = "<group>"; };
+		168F946117DFD52B006AA407 /* VerticalCellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalCellsLayout.h; path = Controls/CellsLayout/VerticalCellsLayout.h; sourceTree = "<group>"; };
+		168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VerticalCellsLayout.mm; path = Controls/CellsLayout/VerticalCellsLayout.mm; sourceTree = "<group>"; };
+		168F946417DFD59B006AA407 /* CellLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellLayoutItem.h; path = Controls/CellsLayout/CellLayoutItem.h; sourceTree = "<group>"; };
+		168F946517DFD59B006AA407 /* CellLayoutItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CellLayoutItem.mm; path = Controls/CellsLayout/CellLayoutItem.mm; sourceTree = "<group>"; };
+		168F946A17DFFCE6006AA407 /* CellsLayoutCellsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellsLayoutCellsContainer.h; path = Controls/CellsLayout/CellsLayoutCellsContainer.h; sourceTree = "<group>"; };
+		168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellsLayoutCellsContainer.m; path = Controls/CellsLayout/CellsLayoutCellsContainer.m; sourceTree = "<group>"; };
+		168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupLayoutRow.h; path = Controls/TracesGroupsList/TracesGroupLayoutRow.h; sourceTree = "<group>"; };
+		168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TracesGroupLayoutRow.m; path = Controls/TracesGroupsList/TracesGroupLayoutRow.m; sourceTree = "<group>"; };
+		168F947017E0014A006AA407 /* HorizontalCellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalCellsLayout.h; path = Controls/CellsLayout/HorizontalCellsLayout.h; sourceTree = "<group>"; };
+		168F947117E0014A006AA407 /* HorizontalCellsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalCellsLayout.m; path = Controls/CellsLayout/HorizontalCellsLayout.m; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0254C17DA695D00C4FD48 /* RepositoryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryListItem.h; path = Controls/RepositoriesList/RepositoryListItem.h; sourceTree = "<group>"; };
 		16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoryListItem.mm; path = Controls/RepositoriesList/RepositoryListItem.mm; sourceTree = "<group>"; };
@@ -157,6 +187,14 @@
 		168F943F17DCD981006AA407 /* TracesGroupsList */ = {
 			isa = PBXGroup;
 			children = (
+				168F944817DD0611006AA407 /* TracesGroupsListCtrl.h */,
+				168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */,
+				168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */,
+				168F944C17DE0A7E006AA407 /* TracesGroupInfo.h */,
+				168F944E17DE0CD2006AA407 /* TracesGroupItem.h */,
+				168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */,
+				168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */,
+				168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.m */,
 			);
 			name = TracesGroupsList;
 			sourceTree = "<group>";
@@ -170,9 +208,36 @@
 			name = SourcesView;
 			sourceTree = "<group>";
 		};
+		168F944417DCDFE5006AA407 /* TracesGroupsView */ = {
+			isa = PBXGroup;
+			children = (
+				168F944517DCF760006AA407 /* TracesGroupsView.h */,
+				168F944617DCF760006AA407 /* TracesGroupsView.mm */,
+			);
+			name = TracesGroupsView;
+			sourceTree = "<group>";
+		};
+		168F945D17DFD4B5006AA407 /* CellsLayout */ = {
+			isa = PBXGroup;
+			children = (
+				168F945E17DFD4EB006AA407 /* CellsLayout.h */,
+				168F945F17DFD4EB006AA407 /* CellsLayout.mm */,
+				168F946117DFD52B006AA407 /* VerticalCellsLayout.h */,
+				168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */,
+				168F946417DFD59B006AA407 /* CellLayoutItem.h */,
+				168F946517DFD59B006AA407 /* CellLayoutItem.mm */,
+				168F946A17DFFCE6006AA407 /* CellsLayoutCellsContainer.h */,
+				168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */,
+				168F947017E0014A006AA407 /* HorizontalCellsLayout.h */,
+				168F947117E0014A006AA407 /* HorizontalCellsLayout.m */,
+			);
+			name = CellsLayout;
+			sourceTree = "<group>";
+		};
 		16D0255517DB663600C4FD48 /* SelectionPanel */ = {
 			isa = PBXGroup;
 			children = (
+				168F944417DCDFE5006AA407 /* TracesGroupsView */,
 				168F944017DCDAAA006AA407 /* SourcesView */,
 				16D0255617DB66A400C4FD48 /* SelectionPanel.h */,
 				16D0255717DB66A400C4FD48 /* SelectionPanel.mm */,
@@ -199,6 +264,7 @@
 		16FD8D5E17D234C200718001 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				168F945D17DFD4B5006AA407 /* CellsLayout */,
 				168F943F17DCD981006AA407 /* TracesGroupsList */,
 				16FD8D5F17D234C800718001 /* RepositoriesList */,
 				16D0255F17DB7A2400C4FD48 /* ToggleFlatBtn.h */,
@@ -308,6 +374,16 @@
 				16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */,
 				168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */,
 				168F944317DCDC9B006AA407 /* SourcesView.mm in Sources */,
+				168F944717DCF760006AA407 /* TracesGroupsView.mm in Sources */,
+				168F944A17DD0611006AA407 /* TracesGroupsListCtrl.mm in Sources */,
+				168F944D17DE0A7E006AA407 /* TracesGroupInfo.cpp in Sources */,
+				168F945017DE0CD2006AA407 /* TracesGroupItem.mm in Sources */,
+				168F946017DFD4EB006AA407 /* CellsLayout.mm in Sources */,
+				168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */,
+				168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */,
+				168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */,
+				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.m in Sources */,
+				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

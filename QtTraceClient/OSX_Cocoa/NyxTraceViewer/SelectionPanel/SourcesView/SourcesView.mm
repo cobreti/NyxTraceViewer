@@ -23,7 +23,7 @@
         [self setHasVerticalScroller: YES];
         
         mCtrl = [[CRepositoriesListCtrl alloc] initWithFrame: [self frame]];
-        [mCtrl setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
+//        [mCtrl setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
         [self setDocumentView: mCtrl];
         [mCtrl calcSize];
         
@@ -48,13 +48,7 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-
-    [[NSColor whiteColor] set];
-    
-    NSBezierPath*   path = [NSBezierPath bezierPath];
-    [path setLineWidth: 1];
-    [path appendBezierPathWithRect: [self frame]];
-    [path fill];
+    [super drawRect: dirtyRect];
 }
 
 - (void)awakeFromNib

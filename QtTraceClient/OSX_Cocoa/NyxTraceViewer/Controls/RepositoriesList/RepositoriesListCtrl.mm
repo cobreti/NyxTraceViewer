@@ -52,7 +52,6 @@
 - (void)calcSize
 {
     NSRect                                  itemFrame;
-//    NSRect                                  frame = [self frame];
     CGFloat                                 y = 0;
     RepositoryListItems::const_iterator     pos = m_Items.begin();
     NSSize                                  size = NSMakeSize(0, 0);
@@ -122,7 +121,7 @@
 
 - (void)viewDidEndLiveResize
 {
-    [self calcSize];
+//    [self calcSize];
 }
 
 

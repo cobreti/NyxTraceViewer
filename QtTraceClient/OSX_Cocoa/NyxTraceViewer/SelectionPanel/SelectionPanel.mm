@@ -9,6 +9,7 @@
 #import "SelectionPanel.h"
 #import "SelectionPanelBar.h"
 #import "SourcesView/SourcesView.h"
+#import "TracesGroupsView/TracesGroupsView.h"
 
 @implementation CSelectionPanel
 
@@ -16,68 +17,9 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
-        m_Bar = [[CSelectionPanelBar alloc] initWithFrame: NSMakeRect(0, 0, 200,50)];
-        [m_Bar setPanelSelectionChangedHandler: CActionHandlerInfo(@selector(onPanelSelectionChanged:), self)];
-        [self addSubview: m_Bar];
-        
-        m_SourcesView = [[CSourcesView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
-        [self addSubview: m_SourcesView];
-        [m_SourcesView setHidden: NO];
-        
-        [m_Bar calcSize];
-
-        m_SourcesView.translatesAutoresizingMaskIntoConstraints = NO;
-        m_Bar.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [self addConstraint: [NSLayoutConstraint constraintWithItem: m_Bar
-                                                          attribute: NSLayoutAttributeTop
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self
-                                                          attribute: NSLayoutAttributeTop
-                                                         multiplier: 1
-                                                           constant: 0 ]];
-
-        [self addConstraint: [NSLayoutConstraint constraintWithItem: m_Bar
-                                                          attribute: NSLayoutAttributeWidth
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self
-                                                          attribute: NSLayoutAttributeWidth
-                                                         multiplier: 1
-                                                           constant: 10 ]];
-
-        [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
-                                                          attribute: NSLayoutAttributeTop
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: m_Bar
-                                                          attribute: NSLayoutAttributeBottom
-                                                         multiplier: 1
-                                                           constant: 0 ]];
-        
-        [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
-                                                          attribute: NSLayoutAttributeBottom
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self
-                                                          attribute: NSLayoutAttributeBottom
-                                                         multiplier: 1
-                                                           constant: 0 ]];
-
-        [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
-                                                          attribute: NSLayoutAttributeLeft
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self
-                                                          attribute: NSLayoutAttributeLeft
-                                                         multiplier: 1
-                                                           constant: 0 ]];
-
-        [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
-                                                          attribute: NSLayoutAttributeWidth
-                                                          relatedBy: NSLayoutRelationEqual
-                                                             toItem: self
-                                                          attribute: NSLayoutAttributeWidth
-                                                         multiplier: 1
-                                                           constant: 0 ]];
-
+        [self createSelectionBar];
+        [self createSourcesView];
+        [self createTracesGroupsView];
     }
     
     return self;
@@ -91,6 +33,8 @@
 - (void) dealloc
 {
     [m_Bar release];
+    [m_SourcesView release];
+    [m_TracesGroupsView release];
     
     [super dealloc];
 }
@@ -104,11 +48,13 @@
         case kSelectionPanelBar_SourcesPanel:
             {
                 [m_SourcesView setHidden: NO];
+                [m_TracesGroupsView setHidden: YES];
             }
             break;
         case kSelectionPanelBar_ChannelsPanel:
             {
                 [m_SourcesView setHidden: YES];
+                [m_TracesGroupsView setHidden: NO];
             }
             break;
     };
@@ -118,5 +64,119 @@
 {
     // Drawing code here.
 }
+
+
+- (void)createSelectionBar
+{
+    
+    m_Bar = [[CSelectionPanelBar alloc] initWithFrame: NSMakeRect(0, 0, 200,50)];
+    [m_Bar setPanelSelectionChangedHandler: CActionHandlerInfo(@selector(onPanelSelectionChanged:), self)];
+    [self addSubview: m_Bar];
+    
+    [m_Bar calcSize];
+    
+    m_Bar.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_Bar
+                                                      attribute: NSLayoutAttributeTop
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeTop
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_Bar
+                                                      attribute: NSLayoutAttributeWidth
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeWidth
+                                                     multiplier: 1
+                                                       constant: 10 ]];
+}
+
+
+- (void)createSourcesView
+{
+    m_SourcesView = [[CSourcesView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
+    [self addSubview: m_SourcesView];
+    [m_SourcesView setHidden: NO];
+    
+    m_SourcesView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
+                                                      attribute: NSLayoutAttributeTop
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: m_Bar
+                                                      attribute: NSLayoutAttributeBottom
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
+                                                      attribute: NSLayoutAttributeBottom
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeBottom
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
+                                                      attribute: NSLayoutAttributeLeft
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeLeft
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_SourcesView
+                                                      attribute: NSLayoutAttributeWidth
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeWidth
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+}
+
+
+- (void)createTracesGroupsView
+{
+    m_TracesGroupsView = [[CTracesGroupsView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
+    [self addSubview: m_TracesGroupsView];
+    [m_TracesGroupsView setHidden: YES];
+    
+    m_TracesGroupsView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesGroupsView
+                                                      attribute: NSLayoutAttributeTop
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: m_Bar
+                                                      attribute: NSLayoutAttributeBottom
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesGroupsView
+                                                      attribute: NSLayoutAttributeBottom
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeBottom
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesGroupsView
+                                                      attribute: NSLayoutAttributeLeft
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeLeft
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+    
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesGroupsView
+                                                      attribute: NSLayoutAttributeWidth
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeWidth
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+}
+
 
 @end

@@ -10,11 +10,13 @@
 
 @class CSelectionPanelBar;
 @class CSourcesView;
+@class CTracesGroupsView;
 
 @interface CSelectionPanel : NSView
 {
     CSelectionPanelBar*     m_Bar;
     CSourcesView*           m_SourcesView;
+    CTracesGroupsView*      m_TracesGroupsView;
 }
 
 - (BOOL)isFlipped;
