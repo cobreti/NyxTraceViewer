@@ -7,19 +7,23 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "RepositoryListItem.h"
+//#import "RepositoryListItem.h"
 
 #include "RepositoryInfo.hpp"
 
-typedef std::list<CRepositoryListItem*>     RepositoryListItems;
+@class CVerticalCellsLayout;
+
+//typedef std::list<CRepositoryListItem*>     RepositoryListItems;
 
 @interface CRepositoriesListCtrl : NSControl
 {
+    CVerticalCellsLayout*       m_Layout;
     RepositoryInfoList          m_RepositoriesInfo;
-    RepositoryListItems         m_Items;
+//    RepositoryListItems         m_Items;
 }
 
 - (void) addRepositoryInfo: (CRepositoryInfo*) repInfo;
 - (void)viewDidEndLiveResize;
+- (void)mouseDown:(NSEvent *)theEvent;
 
 @end

@@ -25,8 +25,8 @@
 		168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */; };
 		168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */; };
 		168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F947117E0014A006AA407 /* HorizontalCellsLayout.m */; };
+		168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
-		16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */; };
 		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
 		16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255117DB654600C4FD48 /* sources_hidden.png */; };
 		16D0255417DB654600C4FD48 /* sources_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255217DB654600C4FD48 /* sources_visible.png */; };
@@ -81,9 +81,9 @@
 		168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupLayoutRow.mm; path = Controls/TracesGroupsList/TracesGroupLayoutRow.mm; sourceTree = "<group>"; };
 		168F947017E0014A006AA407 /* HorizontalCellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalCellsLayout.h; path = Controls/CellsLayout/HorizontalCellsLayout.h; sourceTree = "<group>"; };
 		168F947117E0014A006AA407 /* HorizontalCellsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalCellsLayout.m; path = Controls/CellsLayout/HorizontalCellsLayout.m; sourceTree = "<group>"; };
+		168F947317E34115006AA407 /* RepositoriesListLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoriesListLayoutRow.h; path = Controls/RepositoriesList/RepositoriesListLayoutRow.h; sourceTree = "<group>"; };
+		168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoriesListLayoutRow.mm; path = Controls/RepositoriesList/RepositoriesListLayoutRow.mm; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
-		16D0254C17DA695D00C4FD48 /* RepositoryListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoryListItem.h; path = Controls/RepositoriesList/RepositoryListItem.h; sourceTree = "<group>"; };
-		16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoryListItem.mm; path = Controls/RepositoriesList/RepositoryListItem.mm; sourceTree = "<group>"; };
 		16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checked-checkbox-icon.png"; path = "icons/Checked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0255117DB654600C4FD48 /* sources_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_hidden.png; path = icons/sources_hidden.png; sourceTree = SOURCE_ROOT; };
 		16D0255217DB654600C4FD48 /* sources_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_visible.png; path = icons/sources_visible.png; sourceTree = SOURCE_ROOT; };
@@ -282,10 +282,10 @@
 			children = (
 				16FD8D6017D234E900718001 /* RepositoriesListCtrl.h */,
 				16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */,
-				16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */,
 				16FD8D6417D23A6400718001 /* RepositoryInfo.hpp */,
-				16D0254C17DA695D00C4FD48 /* RepositoryListItem.h */,
-				16D0254D17DA695D00C4FD48 /* RepositoryListItem.mm */,
+				16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */,
+				168F947317E34115006AA407 /* RepositoriesListLayoutRow.h */,
+				168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */,
 			);
 			name = RepositoriesList;
 			sourceTree = "<group>";
@@ -367,7 +367,6 @@
 				16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */,
 				16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */,
 				16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */,
-				16D0254E17DA695D00C4FD48 /* RepositoryListItem.mm in Sources */,
 				16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */,
 				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
 				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
@@ -384,6 +383,7 @@
 				168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */,
 				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */,
 				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
+				168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

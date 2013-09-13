@@ -7,7 +7,10 @@
 //
 
 #import "RepositoriesListCtrl.h"
-#import "RepositoryListItem.h"
+#import "../CellsLayout/VerticalCellsLayout.h"
+#import "../CellsLayout/HorizontalCellsLayout.h"
+#import "../CellsLayout/CellLayoutItem.h"
+#import "RepositoriesListLayoutRow.h"
 
 @implementation CRepositoriesListCtrl
 
@@ -15,6 +18,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        m_Layout = [[CVerticalCellsLayout alloc] init];
         
         [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("first repository") )];
         [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("second repository") )];
@@ -51,45 +56,20 @@
 
 - (void)calcSize
 {
-    NSRect                                  itemFrame;
-    CGFloat                                 y = 0;
-    RepositoryListItems::const_iterator     pos = m_Items.begin();
-    NSSize                                  size = NSMakeSize(0, 0);
-    NSView*                                 superView = [self superview];
-    NSRect                                  superViewFrame = [superView frame];
+    NSRect  parentFrame = [[self superview] frame];
+    NSRect  frame;
     
-    while (pos != m_Items.end())
-    {
-        CRepositoryListItem*    item = *pos;
-        [item calcSize];
-        itemFrame = [item frame];
-        
-        [item setFrame: NSMakeRect(0, y, itemFrame.size.width, itemFrame.size.height)];
-        y += itemFrame.size.height;
-        
-        size.height += itemFrame.size.height;
-
-        if ( itemFrame.size.width > size.width )
-            size.width = itemFrame.size.width;
-
-        ++ pos;
-    }
+    [m_Layout update:NSZeroPoint];
     
-    if ( size.width < superViewFrame.size.width )
-        size.width = superViewFrame.size.width;
-
-    [self setFrame: NSMakeRect(0, 0, size.width, size.height)];
+    frame = [m_Layout layoutRect];
+    frame.size.width = MAX(frame.size.width, parentFrame.size.width);
+    
+    [self setFrame: frame];
 }
 
 
 - (void) dealloc
-{
-    while (!m_Items.empty())
-    {
-        [m_Items.front() release];
-        m_Items.pop_front();
-    }
-    
+{    
     [super dealloc];
 }
 
@@ -98,7 +78,14 @@
 {
     [super drawRect: dirtyRect];
     
-//    NSRect          superViewFrame = [superView frame];
+    NSRect      parentFrame = [[self superview] frame];
+    NSRect      rc = [self frame];
+    
+    rc.size.width = MAX(rc.size.width, parentFrame.size.width);
+    
+    [m_Layout drawInView: self withRect: rc];
+
+    //    NSRect          superViewFrame = [superView frame];
 //    CGFloat         horzPos = [[superView horizontalScroller] doubleValue];
 //    CGFloat         vertPos = [[superView verticalScroller] doubleValue];
 }
@@ -106,16 +93,8 @@
 - (void) addRepositoryInfo: (CRepositoryInfo*) repInfo
 {
     m_RepositoriesInfo.push_back(repInfo);
-    
-    NSRect                  itemFrame = [self bounds];
-    itemFrame.origin.y = 0;
-    itemFrame.size.height = 20;
-    CRepositoryListItem*    item = [[CRepositoryListItem alloc] initWithFrame: itemFrame];
-    [item setRepositoryInfo: repInfo];
-    [item setFont: [NSFont fontWithName:@"arial" size:12]];
-    
-    [self addSubview: item];
-    m_Items.push_back(item);
+        
+    [m_Layout addItem: [[CRepositoriesListLayoutRow alloc] init: repInfo]];
 }
 
 
@@ -124,5 +103,30 @@
 //    [self calcSize];
 }
 
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+    NSMutableArray*         pickResult = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    [m_Layout pick: pickResult atPoint: [self convertPoint:[theEvent locationInWindow] fromView:nil]];
+    
+    NSInteger       count = [pickResult count];
+    
+    if (count > 2)
+    {
+        CRepositoriesListLayoutRow*     row = [pickResult objectAtIndex: count-2];
+        
+        if ( [row checked] )
+        {
+            [row setChecked: NO];
+        }
+        else
+        {
+            [row setChecked: YES];
+        }
+        
+        [self setNeedsDisplay: YES];
+    }
+}
 
 @end
