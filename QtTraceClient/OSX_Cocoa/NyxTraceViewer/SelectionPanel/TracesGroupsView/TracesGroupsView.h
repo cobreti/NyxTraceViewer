@@ -16,4 +16,7 @@
     m_GroupsListCtrl;
 }
 
+- (void)onNewChannel: (NSDictionary*)params;
+
+
 @end

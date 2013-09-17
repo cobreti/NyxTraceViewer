@@ -4,6 +4,7 @@
 
 #include <Nyx.hpp>
 #include "TraceFeeder.hpp"
+#include "TracesPool.hpp"
 
 #include <list>
 
@@ -25,7 +26,7 @@ namespace TraceClientCore
         const Nyx::CAString&        Name() const        { return m_Name; }
         Nyx::CAString&              Name()              { return m_Name; }
         
-        CTracesPool*                Pool() const        { return m_pPool; }
+        CTracesPool*                Pool() const        { return m_refPool; }
 
 		const CTraceFeederRef&		Feeder() const		{ return m_refFeeder; }
 		CTraceFeederRef&			Feeder()			{ return m_refFeeder; }
@@ -38,7 +39,8 @@ namespace TraceClientCore
     protected:
         
         Nyx::CAString               m_Name;
-        CTracesPool*                m_pPool;
+//        CTracesPool*                m_pPool;
+        CTracesPoolRef              m_refPool;
 		CTraceFeederRef				m_refFeeder;
     };
     

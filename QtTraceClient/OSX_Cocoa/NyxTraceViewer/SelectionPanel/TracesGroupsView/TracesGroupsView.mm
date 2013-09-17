@@ -9,6 +9,9 @@
 #import "TracesGroupsView.h"
 #import "../../Controls/TracesGroupsList/TracesGroupsListCtrl.h"
 
+#include "TraceClientCoreModule.hpp"
+
+
 @implementation CTracesGroupsView
 
 - (id)initWithFrame:(NSRect)frame
@@ -49,6 +52,14 @@
                                                       attribute: NSLayoutAttributeWidth
                                                      multiplier: 1
                                                        constant: 0 ]];
+}
+
+
+- (void)onNewChannel: (NSDictionary*)params
+{
+    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
+    
+    NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
 }
 
 @end

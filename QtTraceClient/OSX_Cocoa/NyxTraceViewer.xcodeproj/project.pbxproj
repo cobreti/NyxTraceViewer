@@ -26,6 +26,7 @@
 		168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */; };
 		168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F947117E0014A006AA407 /* HorizontalCellsLayout.m */; };
 		168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */; };
+		168F948217E79E9F006AA407 /* ChannelsListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F948117E79E9F006AA407 /* ChannelsListener.mm */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
 		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
 		16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255117DB654600C4FD48 /* sources_hidden.png */; };
@@ -83,6 +84,8 @@
 		168F947117E0014A006AA407 /* HorizontalCellsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalCellsLayout.m; path = Controls/CellsLayout/HorizontalCellsLayout.m; sourceTree = "<group>"; };
 		168F947317E34115006AA407 /* RepositoriesListLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoriesListLayoutRow.h; path = Controls/RepositoriesList/RepositoriesListLayoutRow.h; sourceTree = "<group>"; };
 		168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoriesListLayoutRow.mm; path = Controls/RepositoriesList/RepositoriesListLayoutRow.mm; sourceTree = "<group>"; };
+		168F948017E79E9F006AA407 /* ChannelsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChannelsListener.h; path = SelectionPanel/ChannelsListener.h; sourceTree = "<group>"; };
+		168F948117E79E9F006AA407 /* ChannelsListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChannelsListener.mm; path = SelectionPanel/ChannelsListener.mm; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checked-checkbox-icon.png"; path = "icons/Checked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0255117DB654600C4FD48 /* sources_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_hidden.png; path = icons/sources_hidden.png; sourceTree = SOURCE_ROOT; };
@@ -243,6 +246,8 @@
 				16D0255717DB66A400C4FD48 /* SelectionPanel.mm */,
 				16D0255C17DB67EE00C4FD48 /* SelectionPanelBar.h */,
 				16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */,
+				168F948017E79E9F006AA407 /* ChannelsListener.h */,
+				168F948117E79E9F006AA407 /* ChannelsListener.mm */,
 			);
 			name = SelectionPanel;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */,
 				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
 				168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */,
+				168F948217E79E9F006AA407 /* ChannelsListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

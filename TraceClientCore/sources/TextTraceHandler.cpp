@@ -77,7 +77,7 @@ namespace TraceClientCore
 //    	NYXTRACE(0x0, "trace line content : '" << Nyx::CTF_AnsiText(szContent) << Nyx::CTF_AnsiText("'") );
 
     	CModule&		rModule = CModule::Instance();
-    	CTraceChannel*	pChannel = rModule.TraceChannels().Get( Nyx::CAString(szModule) );
+    	CTraceChannel*	pChannel = rModule.TraceChannels().Get( Nyx::CAString(szModule), true );
 
         if ( !pChannel )
         {

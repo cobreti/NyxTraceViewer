@@ -19,6 +19,7 @@
 		165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */; };
 		16736F291649A28D0033DDC1 /* TcpTracesReceiversTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16736F281649A28D0033DDC1 /* TcpTracesReceiversTable.cpp */; };
 		168CBEE814AA6FA6004FB957 /* TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */; };
+		168F947A17E77CE7006AA407 /* ChannelsMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F947917E77CE7006AA407 /* ChannelsMgr.cpp */; };
 		169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169387361347ACB000691948 /* RepositoryTraceInserter.cpp */; };
 		16A2773B14B23597002D6924 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773A14B23597002D6924 /* PoolsList.cpp */; };
 		16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */; };
@@ -72,6 +73,8 @@
 		16736F271649A1CD0033DDC1 /* TcpTracesReceiversTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TcpTracesReceiversTable.hpp; path = ../include/TcpTracesReceiversTable.hpp; sourceTree = "<group>"; };
 		16736F281649A28D0033DDC1 /* TcpTracesReceiversTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceiversTable.cpp; path = ../sources/TcpTracesReceiversTable.cpp; sourceTree = "<group>"; };
 		168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeStamp.cpp; path = ../sources/TimeStamp.cpp; sourceTree = "<group>"; };
+		168F947817E77CD5006AA407 /* ChannelsMgr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ChannelsMgr.hpp; path = ../include/ChannelsMgr.hpp; sourceTree = "<group>"; };
+		168F947917E77CE7006AA407 /* ChannelsMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChannelsMgr.cpp; path = ../sources/ChannelsMgr.cpp; sourceTree = "<group>"; };
 		169387361347ACB000691948 /* RepositoryTraceInserter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryTraceInserter.cpp; path = ../sources/RepositoryTraceInserter.cpp; sourceTree = "<group>"; };
 		16A2773A14B23597002D6924 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../sources/PoolsList.cpp; sourceTree = "<group>"; };
 		16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceNxStreamReader.hpp; path = ../include/TraceNxStreamReader.hpp; sourceTree = "<group>"; };
@@ -134,6 +137,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				168F947717E77CB7006AA407 /* interface */,
 				16AE9AED11A9D6160064A5F9 /* Feeders */,
 				165977AF1128406B00CC718B /* Repository Links */,
 				168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */,
@@ -188,6 +192,15 @@
 				165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */,
 			);
 			name = "Repository Links";
+			sourceTree = "<group>";
+		};
+		168F947717E77CB7006AA407 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				168F947817E77CD5006AA407 /* ChannelsMgr.hpp */,
+				168F947917E77CE7006AA407 /* ChannelsMgr.cpp */,
+			);
+			name = interface;
 			sourceTree = "<group>";
 		};
 		16AE9AED11A9D6160064A5F9 /* Feeders */ = {
@@ -322,6 +335,7 @@
 				16385ADE16D15627004B6276 /* TraceClientCoreModule.cpp in Sources */,
 				16385AE016D15631004B6276 /* TracesPool.cpp in Sources */,
 				16385AE216D15639004B6276 /* TracesPoolCollection.cpp in Sources */,
+				168F947A17E77CE7006AA407 /* ChannelsMgr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

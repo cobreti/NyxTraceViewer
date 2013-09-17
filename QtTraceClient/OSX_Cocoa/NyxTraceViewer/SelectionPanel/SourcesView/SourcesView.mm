@@ -10,6 +10,7 @@
 #import "../../Controls/RepositoriesList/RepositoriesListCtrl.h"
 
 #include <Nyx.hpp>
+#include "TraceClientCoreModule.hpp"
 
 
 @implementation CSourcesView
@@ -60,6 +61,15 @@
     [mCtrl setAutoresizingMask: NSViewHeightSizable | NSViewWidthSizable];
     [self setDocumentView: mCtrl];
     [mCtrl calcSize];    
+}
+
+- (void)onNewChannel: (NSDictionary*)params
+{
+    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
+    
+    NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
+
+    [mCtrl onNewChannel: params];
 }
 
 

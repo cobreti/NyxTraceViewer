@@ -14,6 +14,11 @@
 
 #include <list>
 
+namespace TraceClientCore
+{
+    class CTraceChannel;
+}
+
 
 /**
  *
@@ -26,9 +31,13 @@ public:
     
     const Nyx::CAString&    Name() const            { return m_Name; }
     
+    TraceClientCore::CTraceChannel*     Channel() const         { return m_pChannel; }
+    TraceClientCore::CTraceChannel*&    Channel()               { return m_pChannel; }
+    
 protected:
     
-    Nyx::CAString       m_Name;
+    Nyx::CAString                       m_Name;
+    TraceClientCore::CTraceChannel*     m_pChannel;
 };
 
 

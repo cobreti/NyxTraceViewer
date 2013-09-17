@@ -12,15 +12,19 @@
 @class CSourcesView;
 @class CTracesGroupsView;
 
+class CChannelsListener;
+
 @interface CSelectionPanel : NSView
 {
-    CSelectionPanelBar*     m_Bar;
-    CSourcesView*           m_SourcesView;
-    CTracesGroupsView*      m_TracesGroupsView;
+    CSelectionPanelBar*         m_Bar;
+    CSourcesView*               m_SourcesView;
+    CTracesGroupsView*          m_TracesGroupsView;
+    CChannelsListener*          m_pChannelsListener;
 }
 
 - (BOOL)isFlipped;
 - (void)dealloc;
+- (void)onNewChannel: (NSDictionary*)params;
 
 - (IBAction) onPanelSelectionChanged:(id)sender;
 

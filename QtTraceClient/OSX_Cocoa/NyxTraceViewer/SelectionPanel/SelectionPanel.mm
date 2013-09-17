@@ -11,6 +11,10 @@
 #import "SourcesView/SourcesView.h"
 #import "TracesGroupsView/TracesGroupsView.h"
 
+#include "ChannelsListener.h"
+#include "TraceClientCoreModule.hpp"
+
+
 @implementation CSelectionPanel
 
 - (id)initWithFrame:(NSRect)frame
@@ -20,6 +24,10 @@
         [self createSelectionBar];
         [self createSourcesView];
         [self createTracesGroupsView];
+
+        m_pChannelsListener = new CChannelsListener(self);
+        
+        TraceClientCore::CModule::Instance().ChannelsMgr().AddListener( static_cast<TraceClientCore::IChannelsNotificationsListener*>(m_pChannelsListener) );
     }
     
     return self;
@@ -176,6 +184,18 @@
                                                       attribute: NSLayoutAttributeWidth
                                                      multiplier: 1
                                                        constant: 0 ]];
+}
+
+
+- (void)onNewChannel: (NSDictionary*)params
+{
+    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
+    
+    NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
+    
+    [m_SourcesView onNewChannel: params];
+    
+    [params release];
 }
 
 

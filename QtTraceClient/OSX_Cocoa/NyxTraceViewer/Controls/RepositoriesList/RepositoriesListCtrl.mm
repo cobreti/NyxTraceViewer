@@ -12,13 +12,16 @@
 #import "../CellsLayout/CellLayoutItem.h"
 #import "RepositoriesListLayoutRow.h"
 
+#include "TraceClientCoreModule.hpp"
+
+
 @implementation CRepositoriesListCtrl
 
 - (id)initWithFrame:(NSRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+                
         m_Layout = [[CVerticalCellsLayout alloc] init];
         
         [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("first repository") )];
@@ -42,7 +45,7 @@
         [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("19 repository") )];
         [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("20 repository") )];
         [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("21 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("22 repository") )];
+        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("22 repository") )];       
     }
     
     return self;
@@ -90,6 +93,7 @@
 //    CGFloat         vertPos = [[superView verticalScroller] doubleValue];
 }
 
+
 - (void) addRepositoryInfo: (CRepositoryInfo*) repInfo
 {
     m_RepositoriesInfo.push_back(repInfo);
@@ -128,5 +132,21 @@
         [self setNeedsDisplay: YES];
     }
 }
+
+- (void)onNewChannel: (NSDictionary*)params
+{
+    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
+    
+    NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
+    
+    CRepositoryInfo*    pRepInfo = new CRepositoryInfo( pChannel->Name() );
+    pRepInfo->Channel() = pChannel;
+    
+    [self addRepositoryInfo: pRepInfo];
+    [self calcSize];
+    [self setNeedsDisplay: YES];
+}
+
+
 
 @end

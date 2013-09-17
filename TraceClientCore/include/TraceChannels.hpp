@@ -17,7 +17,7 @@ namespace TraceClientCore
         virtual ~CTraceChannels();
         
         virtual Nyx::NyxResult Add( CTraceChannel* pChannel );
-        virtual CTraceChannel* Get( const Nyx::CAString& name );
+        virtual CTraceChannel* Get( const Nyx::CAString& name, bool bCreateIfDontExist = false );
         virtual void Update( CTraceChannel* pChannel );
         virtual void Stop();
         

@@ -18,5 +18,6 @@
 - (BOOL)isFlipped;
 - (void)awakeFromNib;
 - (void)dealloc;
+- (void)onNewChannel: (NSDictionary*)params;
 
 @end
