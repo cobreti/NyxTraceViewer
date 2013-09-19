@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 #include <list>
+#include "ActionHandlerInfo.h"
 
 class CTracesGroupInfo;
 @class CVerticalCellsLayout;
@@ -18,6 +19,8 @@ class CTracesGroupInfo;
 {
     CVerticalCellsLayout*   m_Layout;
     CTracesGroupLayoutRow*  m_SelectedRow;
+    
+    CActionHandlerInfo      m_SelChangeHandler;
 }
 
 - (void)calcSize;
@@ -25,5 +28,10 @@ class CTracesGroupInfo;
 - (BOOL)isFlipped;
 - (void)addTracesGroup: (CTracesGroupInfo*) info;
 - (void)mouseDown:(NSEvent *)theEvent;
+- (CTracesGroupInfo*)selection;
+
+- (void)setFrame: (NSRect)framesize;
+
+- (void)setSelChangeHandler:(const CActionHandlerInfo&)handler;
 
 @end

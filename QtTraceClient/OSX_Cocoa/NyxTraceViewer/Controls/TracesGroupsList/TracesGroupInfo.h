@@ -11,11 +11,16 @@
 
 #include <Nyx.hpp>
 
+namespace TraceClientCore
+{
+    class CTracesGroup;
+}
+
+
 class CTracesGroupInfo
 {
 public:
-    CTracesGroupInfo();
-    CTracesGroupInfo(const Nyx::CAString& name);
+    CTracesGroupInfo(TraceClientCore::CTracesGroup* pGroup);
     ~CTracesGroupInfo();
     
     const Nyx::CAString& Name() const           { return m_Name; }
@@ -23,7 +28,8 @@ public:
     
 protected:
     
-    Nyx::CAString           m_Name;
+    Nyx::CAString                       m_Name;
+    TraceClientCore::CTracesGroup*      m_pGroup;
 };
 
 #endif /* defined(__NyxTraceViewer__TracesGroupInfo__) */

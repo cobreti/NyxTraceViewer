@@ -189,6 +189,8 @@
                                                       attribute: NSLayoutAttributeWidth
                                                      multiplier: 1
                                                        constant: 0 ]];
+    
+    [m_TracesGroupsView setTracesGroupSelChangeHandler: CActionHandlerInfo(@selector(onTracesGroupSelChanged:), self)];
 }
 
 
@@ -218,6 +220,11 @@
 - (void)onTracesGroupWillBeDeleted: (NSDictionary*)params
 {
     [params release];
+}
+
+- (void)onTracesGroupSelChanged: (NSValue*)selection
+{
+    [selection release];
 }
 
 

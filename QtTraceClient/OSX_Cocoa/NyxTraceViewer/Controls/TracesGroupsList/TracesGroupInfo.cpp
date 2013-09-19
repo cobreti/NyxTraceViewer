@@ -7,16 +7,12 @@
 //
 
 #include "TracesGroupInfo.h"
+#include "TraceClientCoreModule.hpp"
 
 
-CTracesGroupInfo::CTracesGroupInfo()
-{
-    
-}
-
-
-CTracesGroupInfo::CTracesGroupInfo(const Nyx::CAString& name) :
-m_Name(name)
+CTracesGroupInfo::CTracesGroupInfo( TraceClientCore::CTracesGroup* pGroup ) :
+m_pGroup(pGroup),
+m_Name(pGroup->Name())
 {
     
 }

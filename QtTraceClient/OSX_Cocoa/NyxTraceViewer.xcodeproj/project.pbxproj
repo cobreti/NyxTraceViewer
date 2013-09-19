@@ -195,8 +195,8 @@
 			children = (
 				168F944817DD0611006AA407 /* TracesGroupsListCtrl.h */,
 				168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */,
-				168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */,
 				168F944C17DE0A7E006AA407 /* TracesGroupInfo.h */,
+				168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */,
 				168F944E17DE0CD2006AA407 /* TracesGroupItem.h */,
 				168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */,
 				168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */,

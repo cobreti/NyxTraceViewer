@@ -19,6 +19,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self setHasHorizontalScroller: YES];
         [self setHasVerticalScroller: YES];
         
@@ -44,7 +45,10 @@
     [self setDocumentView: m_GroupsListCtrl];
     [m_GroupsListCtrl calcSize];
     
+    
     m_GroupsListCtrl.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [m_GroupsListCtrl setSelChangeHandler: CActionHandlerInfo(@selector(onTracesGroupSelectionChanged:), self)];
 
     [self addConstraint: [NSLayoutConstraint constraintWithItem: m_GroupsListCtrl
                                                       attribute: NSLayoutAttributeWidth
@@ -53,13 +57,32 @@
                                                       attribute: NSLayoutAttributeWidth
                                                      multiplier: 1
                                                        constant: 0 ]];
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_GroupsListCtrl
+                                                      attribute: NSLayoutAttributeLeft
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeLeft
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_GroupsListCtrl
+                                                      attribute: NSLayoutAttributeTop
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeTop
+                                                     multiplier: 1
+                                                       constant: 0 ]];
 }
 
 
+- (void)setTracesGroupSelChangeHandler: (const CActionHandlerInfo&)handler
+{
+    m_TracesGroupSelChangeHandler = handler;
+}
+
 - (void)onNewChannel: (NSDictionary*)params
 {
-    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
-    
     NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
 }
 
@@ -68,11 +91,8 @@
 {
     TraceClientCore::CTracesGroup*  pGroup = (TraceClientCore::CTracesGroup*)[[params objectForKey:@"tracesgroup"] pointerValue];
 
-    CTracesGroupInfo*   pInfo = new CTracesGroupInfo();
-    pInfo->Name() = pGroup->Name();
+    CTracesGroupInfo*   pInfo = new CTracesGroupInfo(pGroup);
     [m_GroupsListCtrl addTracesGroup: pInfo];
-    [m_GroupsListCtrl calcSize];
-    [m_GroupsListCtrl setNeedsDisplay: YES];
 }
 
 
@@ -80,5 +100,19 @@
 {
     
 }
+
+
+- (IBAction)onTracesGroupSelectionChanged: (id)sender
+{
+    CTracesGroupInfo*       pGroup = [m_GroupsListCtrl selection];
+    
+    if ( m_TracesGroupSelChangeHandler.Valid() )
+    {
+        NSValue*    val  = [NSValue valueWithPointer: pGroup];
+        [val retain];
+        [m_TracesGroupSelChangeHandler.Target() performSelector: m_TracesGroupSelChangeHandler.Selector() withObject: val ];
+    }
+}
+
 
 @end

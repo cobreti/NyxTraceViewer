@@ -25,10 +25,10 @@
         m_Layout = [[CVerticalCellsLayout alloc] init];
         m_SelectedRow = nil;
         
-        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("first group"))];
-        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("second group"))];
-        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("third group"))];
-        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("fourth group"))];
+//        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("first group"))];
+//        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("second group"))];
+//        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("third group"))];
+//        [self addTracesGroup: new CTracesGroupInfo(Nyx::CAString("fourth group"))];
     }
     
     return self;
@@ -82,6 +82,8 @@
     [layoutRow setMargins: MakeLayoutMargins(22, 5, 22, 5)];
     [layoutRow setTracesGroupInfo: info];
     [m_Layout addItem: layoutRow];
+    [self calcSize];
+    [self setNeedsDisplay: YES];
 }
 
 
@@ -107,11 +109,36 @@
         CTracesGroupInfo*   info = [m_SelectedRow tracesGroupInfo];
         NSString* name = [[NSString alloc] initWithCString: info->Name().c_str() encoding:NSMacOSRomanStringEncoding];
         [[self window] setTitle: name];
+        
+        [self sendAction: m_SelChangeHandler.Selector() to: m_SelChangeHandler.Target()];
     }
     
     [pickResult release];
     
     [self setNeedsDisplay: YES];
+}
+
+- (CTracesGroupInfo*)selection
+{
+    if ( NULL == m_SelectedRow )
+        return NULL;
+    
+    return [m_SelectedRow tracesGroupInfo];
+}
+
+- (void)setFrame: (NSRect)framesize
+{
+    NSRect frame = [m_Layout layoutRect];
+    
+    framesize.size.height = MAX(framesize.size.height, frame.size.height);
+    
+    [super setFrame: framesize];
+}
+
+
+- (void)setSelChangeHandler:(const CActionHandlerInfo&)handler
+{
+    m_SelChangeHandler = handler;
 }
 
 @end

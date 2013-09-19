@@ -29,7 +29,6 @@ class CTracesGroupListener;
 - (void)onNewChannel: (NSDictionary*)params;
 - (void)onNewTracesGroup: (NSDictionary*)params;
 - (void)onTracesGroupWillBeDeleted: (NSDictionary*)params;
-
-- (IBAction) onPanelSelectionChanged:(id)sender;
+- (void)onTracesGroupSelChanged: (NSValue*)selection;
 
 @end

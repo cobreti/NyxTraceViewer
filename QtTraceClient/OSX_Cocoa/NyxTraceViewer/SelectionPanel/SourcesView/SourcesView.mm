@@ -68,8 +68,11 @@
     TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
     
     NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
-
-    [mCtrl onNewChannel: params];
+    
+    CRepositoryInfo*    pRepInfo = new CRepositoryInfo( pChannel->Name() );
+    pRepInfo->Channel() = pChannel;
+    
+    [mCtrl addRepositoryInfo: pRepInfo];
 }
 
 

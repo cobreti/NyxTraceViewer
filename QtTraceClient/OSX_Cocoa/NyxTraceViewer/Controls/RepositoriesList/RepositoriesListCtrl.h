@@ -21,6 +21,5 @@
 - (void) addRepositoryInfo: (CRepositoryInfo*) repInfo;
 - (void)viewDidEndLiveResize;
 - (void)mouseDown:(NSEvent *)theEvent;
-- (void)onNewChannel: (NSDictionary*)params;
 
 @end

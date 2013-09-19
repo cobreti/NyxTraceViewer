@@ -24,28 +24,28 @@
                 
         m_Layout = [[CVerticalCellsLayout alloc] init];
         
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("first repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("second repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("third repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("4 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("5 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("6 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("7 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("8 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("9 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("10 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("11 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("12 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("13 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("14 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("15 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("16 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("17 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("18 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("19 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("20 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("21 repository") )];
-        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("22 repository") )];       
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("first repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("second repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("third repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("4 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("5 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("6 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("7 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("8 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("9 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("10 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("11 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("12 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("13 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("14 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("15 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("16 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("17 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("18 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("19 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("20 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("21 repository") )];
+//        [self addRepositoryInfo: new CRepositoryInfo( Nyx::CAString("22 repository") )];       
     }
     
     return self;
@@ -99,6 +99,8 @@
     m_RepositoriesInfo.push_back(repInfo);
         
     [m_Layout addItem: [[CRepositoriesListLayoutRow alloc] init: repInfo]];
+    [self calcSize];
+    [self setNeedsDisplay: YES];
 }
 
 
@@ -132,21 +134,6 @@
         [self setNeedsDisplay: YES];
     }
 }
-
-- (void)onNewChannel: (NSDictionary*)params
-{
-    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
-    
-    NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
-    
-    CRepositoryInfo*    pRepInfo = new CRepositoryInfo( pChannel->Name() );
-    pRepInfo->Channel() = pChannel;
-    
-    [self addRepositoryInfo: pRepInfo];
-    [self calcSize];
-    [self setNeedsDisplay: YES];
-}
-
 
 
 @end

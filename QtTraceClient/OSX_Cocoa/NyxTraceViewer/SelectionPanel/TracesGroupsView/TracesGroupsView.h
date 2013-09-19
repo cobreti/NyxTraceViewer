@@ -8,17 +8,24 @@
 
 #import <Cocoa/Cocoa.h>
 
+#include "ActionHandlerInfo.h"
+
 @class CTracesGroupsListCtrl;
 
 @interface CTracesGroupsView : NSScrollView
 {
-    CTracesGroupsListCtrl*
-    m_GroupsListCtrl;
+    CTracesGroupsListCtrl*      m_GroupsListCtrl;
+    CActionHandlerInfo          m_TracesGroupSelChangeHandler;
+    BOOL                        m_InLiveResize;
 }
+
+- (void)setTracesGroupSelChangeHandler: (const CActionHandlerInfo&)handler;
 
 - (void)onNewChannel: (NSDictionary*)params;
 - (void)onNewTracesGroup: (NSDictionary*)params;
 - (void)onTracesGroupWillBeDeleted: (NSDictionary*)params;
+
+- (IBAction)onTracesGroupSelectionChanged: (id)sender;
 
 
 @end
