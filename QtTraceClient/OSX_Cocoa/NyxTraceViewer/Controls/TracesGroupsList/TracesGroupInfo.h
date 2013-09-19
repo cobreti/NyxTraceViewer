@@ -26,6 +26,8 @@ public:
     const Nyx::CAString& Name() const           { return m_Name; }
     Nyx::CAString& Name()                       { return m_Name; }
     
+    TraceClientCore::CTracesGroup*      Group() const           { return m_pGroup; }
+    
 protected:
     
     Nyx::CAString                       m_Name;

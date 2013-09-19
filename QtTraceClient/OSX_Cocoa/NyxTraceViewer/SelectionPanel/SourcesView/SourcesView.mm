@@ -76,5 +76,11 @@
 }
 
 
+- (void)refreshForGroup: (CTracesGroupInfo*)pGroupInfo
+{
+    [mCtrl refreshForTracesGroup:pGroupInfo];
+}
+
+
 @end
 

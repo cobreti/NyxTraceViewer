@@ -10,6 +10,8 @@
 
 @class CRepositoriesListCtrl;
 
+class CTracesGroupInfo;
+
 @interface CSourcesView : NSScrollView
 {   
     CRepositoriesListCtrl*      mCtrl;
@@ -19,5 +21,6 @@
 - (void)awakeFromNib;
 - (void)dealloc;
 - (void)onNewChannel: (NSDictionary*)params;
+- (void)refreshForGroup: (CTracesGroupInfo*)pGroupInfo;
 
 @end

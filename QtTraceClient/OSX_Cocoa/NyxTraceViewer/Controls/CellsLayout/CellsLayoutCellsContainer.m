@@ -26,6 +26,19 @@
     [m_Items addObject: item];
 }
 
+
+- (CCellsLayout*)getItem: (NSUInteger)index
+{
+    return [m_Items objectAtIndex:index];
+}
+
+
+- (NSUInteger)count
+{
+    return [m_Items count];
+}
+
+
 - (void)update: (NSPoint)pt
 {
     

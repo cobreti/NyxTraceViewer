@@ -12,6 +12,8 @@
 
 @class CVerticalCellsLayout;
 
+class CTracesGroupInfo;
+
 @interface CRepositoriesListCtrl : NSControl
 {
     CVerticalCellsLayout*       m_Layout;
@@ -21,5 +23,6 @@
 - (void) addRepositoryInfo: (CRepositoryInfo*) repInfo;
 - (void)viewDidEndLiveResize;
 - (void)mouseDown:(NSEvent *)theEvent;
+- (void)refreshForTracesGroup: (CTracesGroupInfo*)pGroupInfo;
 
 @end

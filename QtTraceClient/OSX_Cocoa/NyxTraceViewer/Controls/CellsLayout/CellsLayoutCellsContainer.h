@@ -15,6 +15,8 @@
 
 - (id)init;
 - (void)addItem: (CCellsLayout*)item;
+- (CCellsLayout*)getItem: (NSUInteger)index;
+- (NSUInteger)count;
 - (void)update: (NSPoint)pt;
 - (void)drawInView: (NSView*)view withRect: (NSRect)frame;
 - (void)pick: (NSMutableArray*)items atPoint: (NSPoint)pt;

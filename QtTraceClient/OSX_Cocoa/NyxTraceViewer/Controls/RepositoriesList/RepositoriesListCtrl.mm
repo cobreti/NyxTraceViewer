@@ -13,6 +13,7 @@
 #import "RepositoriesListLayoutRow.h"
 
 #include "TraceClientCoreModule.hpp"
+#include "../TracesGroupsList/TracesGroupInfo.h"
 
 
 @implementation CRepositoriesListCtrl
@@ -112,26 +113,50 @@
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    NSMutableArray*         pickResult = [[NSMutableArray alloc] initWithCapacity:10];
+//    NSMutableArray*         pickResult = [[NSMutableArray alloc] initWithCapacity:10];
+//    
+//    [m_Layout pick: pickResult atPoint: [self convertPoint:[theEvent locationInWindow] fromView:nil]];
+//    
+//    NSInteger       count = [pickResult count];
+//    
+//    if (count > 2)
+//    {
+//        CRepositoriesListLayoutRow*     row = [pickResult objectAtIndex: count-2];
+//        
+//        if ( [row checked] )
+//        {
+//            [row setChecked: NO];
+//        }
+//        else
+//        {
+//            [row setChecked: YES];
+//        }
+//        
+//        [self setNeedsDisplay: YES];
+//    }
+}
+
+
+- (void)refreshForTracesGroup: (CTracesGroupInfo*)pGroupInfo
+{
+    NSUInteger      count = [m_Layout count];
+    NSUInteger      index = 0;
     
-    [m_Layout pick: pickResult atPoint: [self convertPoint:[theEvent locationInWindow] fromView:nil]];
-    
-    NSInteger       count = [pickResult count];
-    
-    if (count > 2)
+    while (index < count)
     {
-        CRepositoriesListLayoutRow*     row = [pickResult objectAtIndex: count-2];
+        CRepositoriesListLayoutRow*         pRow = (CRepositoriesListLayoutRow*) [m_Layout getItem:index];
+        CRepositoryInfo*                    pInfo = [pRow repositoryInfo];
         
-        if ( [row checked] )
+        if ( pGroupInfo->Group()->HasChannel(pInfo->Channel()) )
         {
-            [row setChecked: NO];
+            [pRow setChecked: YES];
         }
         else
         {
-            [row setChecked: YES];
+            [pRow setChecked: NO];
         }
         
-        [self setNeedsDisplay: YES];
+        ++ index;
     }
 }
 

@@ -14,6 +14,7 @@
 #include "ChannelsListener.h"
 #include "TracesGroupListener.h"
 #include "TraceClientCoreModule.hpp"
+#include "../Controls/TracesGroupsList/TracesGroupInfo.h"
 
 
 @implementation CSelectionPanel
@@ -28,6 +29,7 @@
 
         m_pChannelsListener = new CChannelsListener(self);
         m_pTracesGroupListener = new CTracesGroupListener(self);
+        m_pCurrentGroup = NULL;
 
         TraceClientCore::CModule&   rModule = TraceClientCore::CModule::Instance();
         
@@ -204,6 +206,7 @@
     [m_SourcesView onNewChannel: params];
     
     pTracesGroup = TraceClientCore::CModule::Instance().TracesGroupMgr().CreateTracesGroup( pChannel->Name() );
+    pTracesGroup->AddChannel(pChannel);
     
     [params release];
 }
@@ -222,8 +225,15 @@
     [params release];
 }
 
+
 - (void)onTracesGroupSelChanged: (NSValue*)selection
 {
+    CTracesGroupInfo*       pInfo = (CTracesGroupInfo*)[selection pointerValue];
+    
+    m_pCurrentGroup = pInfo;
+    
+    [m_SourcesView refreshForGroup:m_pCurrentGroup];
+    
     [selection release];
 }
 

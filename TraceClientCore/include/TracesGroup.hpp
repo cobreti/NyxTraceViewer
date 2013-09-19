@@ -11,8 +11,12 @@
 
 #include <Nyx.hpp>
 
+#include <list>
+
 namespace TraceClientCore
 {
+    class CTraceChannel;
+    class CTracesView;
     
     typedef     Nyx::UInt32         TracesGroupId;
     
@@ -29,6 +33,13 @@ namespace TraceClientCore
         const Nyx::CAString&    Name() const            { return m_Name; }
         Nyx::CAString&          Name()                  { return m_Name; }
         
+        void AddChannel( CTraceChannel* pChannel );
+        bool HasChannel( CTraceChannel* pChannel );
+        
+    protected:
+        
+        typedef     std::list<CTracesView*>     TTracesViews;
+        
     protected:
         
         CTracesGroup();
@@ -39,6 +50,7 @@ namespace TraceClientCore
         
         TracesGroupId           m_Id;
         Nyx::CAString           m_Name;
+        TTracesViews            m_Views;
         
     private:
         

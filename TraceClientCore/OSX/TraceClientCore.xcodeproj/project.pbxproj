@@ -14,6 +14,7 @@
 		16385ADE16D15627004B6276 /* TraceClientCoreModule.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16385ADD16D15627004B6276 /* TraceClientCoreModule.cpp */; };
 		16385AE016D15631004B6276 /* TracesPool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16385ADF16D15631004B6276 /* TracesPool.cpp */; };
 		16385AE216D15639004B6276 /* TracesPoolCollection.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16385AE116D15639004B6276 /* TracesPoolCollection.cpp */; };
+		164B6D6817EBAB9B00B25E5E /* TracesView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D6717EBAB9B00B25E5E /* TracesView.cpp */; };
 		165977031127109B00CC718B /* TracesPoolCollection.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165977021127109B00CC718B /* TracesPoolCollection.hpp */; };
 		165CF2E0114D7F49007430AE /* RepositoryObserver.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */; };
 		165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */; };
@@ -69,6 +70,8 @@
 		16385ADD16D15627004B6276 /* TraceClientCoreModule.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TraceClientCoreModule.cpp; path = ../sources/TraceClientCoreModule.cpp; sourceTree = "<group>"; };
 		16385ADF16D15631004B6276 /* TracesPool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPool.cpp; path = ../sources/TracesPool.cpp; sourceTree = "<group>"; };
 		16385AE116D15639004B6276 /* TracesPoolCollection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesPoolCollection.cpp; path = ../sources/TracesPoolCollection.cpp; sourceTree = "<group>"; };
+		164B6D6617EBAB8A00B25E5E /* TracesView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TracesView.hpp; path = ../include/TracesView.hpp; sourceTree = "<group>"; };
+		164B6D6717EBAB9B00B25E5E /* TracesView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesView.cpp; path = ../sources/TracesView.cpp; sourceTree = "<group>"; };
 		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserver.cpp; path = ../sources/RepositoryObserver.cpp; sourceTree = SOURCE_ROOT; };
@@ -149,16 +152,17 @@
 				168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */,
 				16EECE681126406500465BE0 /* TraceData.hpp */,
 				16385AD916D155FD004B6276 /* TraceData.cpp */,
-				16385ADB16D15611004B6276 /* TraceDataRepository.cpp */,
 				16EECE9E1126479800465BE0 /* TraceDataRepository.hpp */,
+				16385ADB16D15611004B6276 /* TraceDataRepository.cpp */,
+				169387361347ACB000691948 /* RepositoryTraceInserter.cpp */,
 				16EECEEB11265A1A00465BE0 /* TraceClientCoreModule.hpp */,
 				16385ADD16D15627004B6276 /* TraceClientCoreModule.cpp */,
 				16EECEF611265D8A00465BE0 /* TracesPool.hpp */,
 				16385ADF16D15631004B6276 /* TracesPool.cpp */,
 				16DF357F138CA1A5008C3E30 /* PoolsUpdateClock.hpp */,
+				16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */,
 				165977021127109B00CC718B /* TracesPoolCollection.hpp */,
 				16385AE116D15639004B6276 /* TracesPoolCollection.cpp */,
-				16DF357D138CA19D008C3E30 /* PoolsUpdateClock.cpp */,
 				16E93BF414BBDBAB002B3C9C /* PoolsList.hpp */,
 				16A2773A14B23597002D6924 /* PoolsList.cpp */,
 				16A2774014B24DAE002D6924 /* TcpModule.hpp */,
@@ -193,7 +197,6 @@
 		165977AF1128406B00CC718B /* Repository Links */ = {
 			isa = PBXGroup;
 			children = (
-				169387361347ACB000691948 /* RepositoryTraceInserter.cpp */,
 				165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */,
 				165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */,
 			);
@@ -209,6 +212,8 @@
 				168F948417E9F3B8006AA407 /* TracesGroupMgr.cpp */,
 				168F948617E9F501006AA407 /* TracesGroup.hpp */,
 				168F948717E9F52E006AA407 /* TracesGroup.cpp */,
+				164B6D6617EBAB8A00B25E5E /* TracesView.hpp */,
+				164B6D6717EBAB9B00B25E5E /* TracesView.cpp */,
 			);
 			name = interface;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				164B6D6817EBAB9B00B25E5E /* TracesView.cpp in Sources */,
 				165CF2E4114D7F53007430AE /* RepositoryObserver.cpp in Sources */,
 				16AE9AFA11A9DABA0064A5F9 /* TraceFeeder.cpp in Sources */,
 				1604112D11B1C71E00E3F6AF /* PipeTraceFeeder.cpp in Sources */,

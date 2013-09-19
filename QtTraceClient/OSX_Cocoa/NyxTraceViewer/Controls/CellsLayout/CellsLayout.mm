@@ -25,6 +25,19 @@
 {
 }
 
+
+- (CCellsLayout*)getItem: (NSUInteger)index
+{
+    return NULL;
+}
+
+
+- (NSUInteger)count
+{
+    return 0;
+}
+
+
 - (void)update: (NSPoint)pt
 {
     

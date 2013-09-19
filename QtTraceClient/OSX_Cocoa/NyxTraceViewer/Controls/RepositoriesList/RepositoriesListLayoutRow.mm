@@ -69,5 +69,10 @@
     }
 }
 
+- (CRepositoryInfo*) repositoryInfo
+{
+    return m_pInfo;
+}
+
 
 @end

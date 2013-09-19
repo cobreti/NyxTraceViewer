@@ -22,5 +22,6 @@ class CRepositoryInfo;
 - (id) init: (CRepositoryInfo*)info;
 - (BOOL) checked;
 - (void) setChecked: (BOOL) checked;
+- (CRepositoryInfo*) repositoryInfo;
 
 @end

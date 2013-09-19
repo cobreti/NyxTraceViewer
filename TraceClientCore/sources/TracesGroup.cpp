@@ -7,7 +7,9 @@
 //
 
 #include "TracesGroup.hpp"
-
+#include "TracesView.hpp"
+#include "TraceChannel.hpp"
+#include "TracesPool.hpp"
 
 namespace TraceClientCore
 {
@@ -30,5 +32,35 @@ namespace TraceClientCore
     CTracesGroup::~CTracesGroup()
     {
         
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroup::AddChannel( CTraceChannel* pChannel )
+    {
+        CTracesView*            pView = new CTracesView(pChannel);
+
+        m_Views.push_back(pView);
+    }
+    
+    
+    /**
+     *
+     */
+    bool CTracesGroup::HasChannel( CTraceChannel* pChannel )
+    {
+        TTracesViews::const_iterator        pos = m_Views.begin();
+        
+        while (pos != m_Views.end())
+        {
+            if ( pChannel == (*pos)->Channel() )
+                return true;
+            
+            ++ pos;
+        }
+        
+        return false;
     }
 }

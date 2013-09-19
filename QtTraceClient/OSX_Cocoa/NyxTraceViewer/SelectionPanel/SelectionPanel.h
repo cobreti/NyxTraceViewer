@@ -14,6 +14,7 @@
 
 class CChannelsListener;
 class CTracesGroupListener;
+class CTracesGroupInfo;
 
 @interface CSelectionPanel : NSView
 {
@@ -22,6 +23,7 @@ class CTracesGroupListener;
     CTracesGroupsView*          m_TracesGroupsView;
     CChannelsListener*          m_pChannelsListener;
     CTracesGroupListener*       m_pTracesGroupListener;
+    CTracesGroupInfo*           m_pCurrentGroup;
 }
 
 - (BOOL)isFlipped;
