@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		164B6D6517EB66C100B25E5E /* TracesGroupListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D6417EB66C100B25E5E /* TracesGroupListener.mm */; };
 		165D73DD17BD98220024CB1F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 165D73DC17BD98220024CB1F /* Cocoa.framework */; };
 		165D73E717BD98220024CB1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 165D73E517BD98220024CB1F /* InfoPlist.strings */; };
 		165D73E917BD98220024CB1F /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73E817BD98220024CB1F /* main.mm */; };
@@ -45,6 +46,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		164B6D6317EB667500B25E5E /* TracesGroupListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListener.h; path = SelectionPanel/TracesGroupListener.h; sourceTree = "<group>"; };
+		164B6D6417EB66C100B25E5E /* TracesGroupListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupListener.mm; path = SelectionPanel/TracesGroupListener.mm; sourceTree = "<group>"; };
 		165D73D917BD98220024CB1F /* NyxTraceViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyxTraceViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		165D73DC17BD98220024CB1F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		165D73DF17BD98220024CB1F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -248,6 +251,8 @@
 				16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */,
 				168F948017E79E9F006AA407 /* ChannelsListener.h */,
 				168F948117E79E9F006AA407 /* ChannelsListener.mm */,
+				164B6D6317EB667500B25E5E /* TracesGroupListener.h */,
+				164B6D6417EB66C100B25E5E /* TracesGroupListener.mm */,
 			);
 			name = SelectionPanel;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 				168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */,
 				168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */,
 				168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */,
+				164B6D6517EB66C100B25E5E /* TracesGroupListener.mm in Sources */,
 				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */,
 				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
 				168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */,

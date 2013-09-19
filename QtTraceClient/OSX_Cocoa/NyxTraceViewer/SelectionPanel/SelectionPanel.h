@@ -13,6 +13,7 @@
 @class CTracesGroupsView;
 
 class CChannelsListener;
+class CTracesGroupListener;
 
 @interface CSelectionPanel : NSView
 {
@@ -20,11 +21,14 @@ class CChannelsListener;
     CSourcesView*               m_SourcesView;
     CTracesGroupsView*          m_TracesGroupsView;
     CChannelsListener*          m_pChannelsListener;
+    CTracesGroupListener*       m_pTracesGroupListener;
 }
 
 - (BOOL)isFlipped;
 - (void)dealloc;
 - (void)onNewChannel: (NSDictionary*)params;
+- (void)onNewTracesGroup: (NSDictionary*)params;
+- (void)onTracesGroupWillBeDeleted: (NSDictionary*)params;
 
 - (IBAction) onPanelSelectionChanged:(id)sender;
 

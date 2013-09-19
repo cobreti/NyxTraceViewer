@@ -17,6 +17,8 @@
 }
 
 - (void)onNewChannel: (NSDictionary*)params;
+- (void)onNewTracesGroup: (NSDictionary*)params;
+- (void)onTracesGroupWillBeDeleted: (NSDictionary*)params;
 
 
 @end

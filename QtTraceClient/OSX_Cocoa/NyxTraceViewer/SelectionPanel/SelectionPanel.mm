@@ -12,6 +12,7 @@
 #import "TracesGroupsView/TracesGroupsView.h"
 
 #include "ChannelsListener.h"
+#include "TracesGroupListener.h"
 #include "TraceClientCoreModule.hpp"
 
 
@@ -26,8 +27,12 @@
         [self createTracesGroupsView];
 
         m_pChannelsListener = new CChannelsListener(self);
+        m_pTracesGroupListener = new CTracesGroupListener(self);
+
+        TraceClientCore::CModule&   rModule = TraceClientCore::CModule::Instance();
         
-        TraceClientCore::CModule::Instance().ChannelsMgr().AddListener( static_cast<TraceClientCore::IChannelsNotificationsListener*>(m_pChannelsListener) );
+        rModule.ChannelsMgr().AddListener( static_cast<TraceClientCore::IChannelsNotificationsListener*>(m_pChannelsListener) );
+        rModule.TracesGroupMgr().Listeners().Add( static_cast<TraceClientCore::ITracesGroupNotificationsListener*>(m_pTracesGroupListener) );
     }
     
     return self;
@@ -189,12 +194,29 @@
 
 - (void)onNewChannel: (NSDictionary*)params
 {
-    TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
+    TraceClientCore::CTraceChannel*     pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
+    TraceClientCore::CTracesGroup*      pTracesGroup = NULL;
     
     NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
     
     [m_SourcesView onNewChannel: params];
     
+    pTracesGroup = TraceClientCore::CModule::Instance().TracesGroupMgr().CreateTracesGroup( pChannel->Name() );
+    
+    [params release];
+}
+
+
+- (void)onNewTracesGroup: (NSDictionary*)params
+{
+    [m_TracesGroupsView onNewTracesGroup: params];
+    
+    [params release];
+}
+
+
+- (void)onTracesGroupWillBeDeleted: (NSDictionary*)params
+{
     [params release];
 }
 

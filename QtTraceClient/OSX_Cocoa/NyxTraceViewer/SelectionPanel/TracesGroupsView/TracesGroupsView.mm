@@ -9,6 +9,7 @@
 #import "TracesGroupsView.h"
 #import "../../Controls/TracesGroupsList/TracesGroupsListCtrl.h"
 
+#include "../../Controls/TracesGroupsList/TracesGroupInfo.h"
 #include "TraceClientCoreModule.hpp"
 
 
@@ -60,6 +61,24 @@
     TraceClientCore::CTraceChannel* pChannel = (TraceClientCore::CTraceChannel*)[[params objectForKey:@"channel"] pointerValue];
     
     NYXTRACE(0x0, L"RepositoriesListCtrl - onNewChannel");
+}
+
+
+- (void)onNewTracesGroup: (NSDictionary*)params
+{
+    TraceClientCore::CTracesGroup*  pGroup = (TraceClientCore::CTracesGroup*)[[params objectForKey:@"tracesgroup"] pointerValue];
+
+    CTracesGroupInfo*   pInfo = new CTracesGroupInfo();
+    pInfo->Name() = pGroup->Name();
+    [m_GroupsListCtrl addTracesGroup: pInfo];
+    [m_GroupsListCtrl calcSize];
+    [m_GroupsListCtrl setNeedsDisplay: YES];
+}
+
+
+- (void)onTracesGroupWillBeDeleted: (NSDictionary*)params
+{
+    
 }
 
 @end

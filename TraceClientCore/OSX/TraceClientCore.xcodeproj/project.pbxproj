@@ -20,6 +20,8 @@
 		16736F291649A28D0033DDC1 /* TcpTracesReceiversTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16736F281649A28D0033DDC1 /* TcpTracesReceiversTable.cpp */; };
 		168CBEE814AA6FA6004FB957 /* TimeStamp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */; };
 		168F947A17E77CE7006AA407 /* ChannelsMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F947917E77CE7006AA407 /* ChannelsMgr.cpp */; };
+		168F948517E9F3B8006AA407 /* TracesGroupMgr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F948417E9F3B8006AA407 /* TracesGroupMgr.cpp */; };
+		168F948817E9F52E006AA407 /* TracesGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F948717E9F52E006AA407 /* TracesGroup.cpp */; };
 		169387371347ACB000691948 /* RepositoryTraceInserter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 169387361347ACB000691948 /* RepositoryTraceInserter.cpp */; };
 		16A2773B14B23597002D6924 /* PoolsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16A2773A14B23597002D6924 /* PoolsList.cpp */; };
 		16A2773D14B2479C002D6924 /* TraceNxStreamReader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */; };
@@ -75,6 +77,10 @@
 		168CBEE714AA6FA6004FB957 /* TimeStamp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TimeStamp.cpp; path = ../sources/TimeStamp.cpp; sourceTree = "<group>"; };
 		168F947817E77CD5006AA407 /* ChannelsMgr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ChannelsMgr.hpp; path = ../include/ChannelsMgr.hpp; sourceTree = "<group>"; };
 		168F947917E77CE7006AA407 /* ChannelsMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ChannelsMgr.cpp; path = ../sources/ChannelsMgr.cpp; sourceTree = "<group>"; };
+		168F948317E9F36D006AA407 /* TracesGroupMgr.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TracesGroupMgr.hpp; path = ../include/TracesGroupMgr.hpp; sourceTree = "<group>"; };
+		168F948417E9F3B8006AA407 /* TracesGroupMgr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesGroupMgr.cpp; path = ../sources/TracesGroupMgr.cpp; sourceTree = "<group>"; };
+		168F948617E9F501006AA407 /* TracesGroup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TracesGroup.hpp; path = ../include/TracesGroup.hpp; sourceTree = "<group>"; };
+		168F948717E9F52E006AA407 /* TracesGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesGroup.cpp; path = ../sources/TracesGroup.cpp; sourceTree = "<group>"; };
 		169387361347ACB000691948 /* RepositoryTraceInserter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryTraceInserter.cpp; path = ../sources/RepositoryTraceInserter.cpp; sourceTree = "<group>"; };
 		16A2773A14B23597002D6924 /* PoolsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsList.cpp; path = ../sources/PoolsList.cpp; sourceTree = "<group>"; };
 		16A2773C14B2479C002D6924 /* TraceNxStreamReader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TraceNxStreamReader.hpp; path = ../include/TraceNxStreamReader.hpp; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 			children = (
 				168F947817E77CD5006AA407 /* ChannelsMgr.hpp */,
 				168F947917E77CE7006AA407 /* ChannelsMgr.cpp */,
+				168F948317E9F36D006AA407 /* TracesGroupMgr.hpp */,
+				168F948417E9F3B8006AA407 /* TracesGroupMgr.cpp */,
+				168F948617E9F501006AA407 /* TracesGroup.hpp */,
+				168F948717E9F52E006AA407 /* TracesGroup.cpp */,
 			);
 			name = interface;
 			sourceTree = "<group>";
@@ -336,6 +346,8 @@
 				16385AE016D15631004B6276 /* TracesPool.cpp in Sources */,
 				16385AE216D15639004B6276 /* TracesPoolCollection.cpp in Sources */,
 				168F947A17E77CE7006AA407 /* ChannelsMgr.cpp in Sources */,
+				168F948517E9F3B8006AA407 /* TracesGroupMgr.cpp in Sources */,
+				168F948817E9F52E006AA407 /* TracesGroup.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

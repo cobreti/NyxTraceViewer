@@ -6,6 +6,7 @@
 #include "TraceChannels.hpp"
 #include "NyxTraceTimeReference.hpp"
 #include "ChannelsMgr.hpp"
+#include "TracesGroupMgr.hpp"
 
 namespace TraceClientCore
 {
@@ -30,6 +31,8 @@ namespace TraceClientCore
         CTraceChannels&         TraceChannels()         { return m_TraceChannels; }
         
         CChannelsMgr&           ChannelsMgr()           { return m_ChannelsMgr; }
+        
+        CTracesGroupMgr&        TracesGroupMgr()        { return m_TracesGroupMgr; }
 
         const Nyx::CTraceTimeReference& TraceTimeReference() const      { return m_TraceTimeReference; }
 
@@ -41,6 +44,7 @@ namespace TraceClientCore
         CTraceChannels                      m_TraceChannels;
         Nyx::CTraceTimeReference            m_TraceTimeReference;
         CChannelsMgr                        m_ChannelsMgr;
+        CTracesGroupMgr                     m_TracesGroupMgr;
 	
 		static CModule*						s_pInstance;
 	};

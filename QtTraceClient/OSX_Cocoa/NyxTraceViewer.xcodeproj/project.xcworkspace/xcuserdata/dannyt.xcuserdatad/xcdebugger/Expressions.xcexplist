@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[CTracesGroupItem controlTextDidEndEditing:]:TracesGroupItem.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "m_TextField">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionPanelBar onSourcesSelected:]:SelectionPanelBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CRepositoriesListCtrl mouseDown:]:RepositoriesListCtrl.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[RepositoryListCtrlCell initWithRepositoryInfo:]:RepositoryListCtrlCell.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CToggleFlatBtn mouseUp:]:ToggleFlatBtn.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self action]">
+            </PersistentString>
+            <PersistentString
+               value = "[self target]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionPanelBar initWithFrame:]:SelectionPanelBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionBar onBtnClicked:]:SelectionBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionPanelBar onSelectionBarSelectedBtnChanged:]:SelectionPanelBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[RepositoryListCtrlCell toggleSelected]:RepositoryListCtrlCell.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CRepositoriesListCtrl addRepositoryInfo:]:RepositoriesListCtrl.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionPanel onPanelSelectionChanged:]:SelectionPanel.mm">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
