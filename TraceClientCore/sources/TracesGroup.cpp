@@ -10,6 +10,8 @@
 #include "TracesView.hpp"
 #include "TraceChannel.hpp"
 #include "TracesPool.hpp"
+#include "MultiViewTracesIterator.hpp"
+
 
 namespace TraceClientCore
 {
@@ -63,4 +65,63 @@ namespace TraceClientCore
         
         return false;
     }
+    
+    
+    /**
+     *
+     */
+    CMultiViewTracesIterator CTracesGroup::FirstPos()
+    {
+        CMultiViewTracesIterator            pos;
+        TTracesViews::const_iterator        viewPos = m_Views.begin();
+        
+        pos.m_pTracesGroup = this;
+        
+        while (viewPos != m_Views.end())
+        {
+            CTracesIterator     tracePos = (*viewPos)->FirstPos();
+            pos.m_Iterators[*viewPos] = tracePos;
+            
+            if ( tracePos.Valid() && pos.m_pCurrentView == NULL )
+            {
+                pos.m_pCurrentView = *viewPos;
+                pos.m_CurrentPos = tracePos;
+            }
+            
+            ++ viewPos;
+        }
+        
+        return pos;
+    }
+    
+    
+    /**
+     *
+     */
+    CMultiViewTracesIterator CTracesGroup::LastPos()
+    {
+        CMultiViewTracesIterator            pos;
+        TTracesViews::const_iterator        viewPos = m_Views.begin();
+        
+        pos.m_pTracesGroup = this;
+        
+        while (viewPos != m_Views.end())
+        {
+            CTracesIterator     tracePos = (*viewPos)->LastPos();
+            pos.m_Iterators[*viewPos] = tracePos;
+            
+            if ( tracePos.Valid() && pos.m_pCurrentView == NULL )
+            {
+                pos.m_pCurrentView = *viewPos;
+                pos.m_CurrentPos = tracePos;
+            }
+            
+            ++ viewPos;
+        }
+        
+        return pos;
+    }
 }
+
+
+

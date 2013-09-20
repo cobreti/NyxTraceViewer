@@ -10,6 +10,7 @@
 #import "TracesWindowController.h"
 
 #include "TraceClientCoreModule.hpp"
+#include "PoolsUpdateClock.hpp"
 
 @implementation AppDelegate
 
@@ -22,12 +23,16 @@
 {
     NYXTRACE(0x0, L"application starting");
 
+    TraceClientCore::CModule&       rModule = TraceClientCore::CModule::Instance();
+    
     TraceClientCore::CTcpTracesReceiversSvr::CSettings       settings;
     
     settings.PortNumber() = 8501;
     settings.UseHandshake() = false;
-    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
+    rModule.TcpModule().TcpTracesReceiversSvr(1).Start(settings);
 
+    rModule.PoolsUpdateClock().Start();
+    
     CTracesWindowController*    pWndController = [[CTracesWindowController alloc] initWithWindowNibName:@"TracesWindow"];
     [pWndController showWindow:self];
 }

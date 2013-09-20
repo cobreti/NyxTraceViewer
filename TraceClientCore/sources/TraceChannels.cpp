@@ -35,6 +35,8 @@ namespace TraceClientCore
         
         m_Channels.insert( std::make_pair(pChannel->Name(), pChannel) );
         
+        TraceClientCore::CModule::Instance().ChannelsMgr().OnNewChannel(pChannel);
+
         return Nyx::kNyxRes_Success;
     }
     
@@ -61,7 +63,6 @@ namespace TraceClientCore
             pChannel->Name() = name;
             Add(pChannel);
             
-            TraceClientCore::CModule::Instance().ChannelsMgr().NotifyNewOfNewChannel(pChannel);
 //            NYXTRACE(0x0, L"CTraceChannels - creating new channel : " << Nyx::CTF_AnsiText(name.c_str()) );
             
             return pChannel;

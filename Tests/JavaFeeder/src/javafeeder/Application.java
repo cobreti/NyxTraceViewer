@@ -24,7 +24,7 @@ public class Application {
             
             System.out.println("socket connection successful");
             
-            String s = new String("JavaTest3/hello world\0");
+            String s = new String("JavaTest2/hello world\0");
 
             sock.getOutputStream().write(s.getBytes());
             

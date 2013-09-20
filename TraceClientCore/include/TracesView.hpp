@@ -9,16 +9,24 @@
 #ifndef TraceClientCore_TracesView_hpp
 #define TraceClientCore_TracesView_hpp
 
+#include <Nyx.hpp>
+
+#include "TracesList.hpp"
+
 namespace TraceClientCore
 {
     class CTraceChannel;
+    class CTraceData;
+    class CTracesViewRepoObserver;
     
     
     /**
      *
      */
-    class CTracesView
+    class CTracesView : public CTracesList
     {
+        friend class CTracesViewRepoObserver;
+        
     public:
         CTracesView(CTraceChannel* pChannel);
         virtual ~CTracesView();
@@ -27,7 +35,13 @@ namespace TraceClientCore
         
     protected:
         
-        CTraceChannel*      m_pChannel;
+        void AddTrace( CTraceData* pTraceData );
+        
+    protected:
+        
+        CTraceChannel*                  m_pChannel;
+        CTracesViewRepoObserver*        m_pRepoObserver;
+        
     };
 }
 

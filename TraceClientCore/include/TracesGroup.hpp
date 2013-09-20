@@ -11,12 +11,14 @@
 
 #include <Nyx.hpp>
 
+
 #include <list>
 
 namespace TraceClientCore
 {
     class CTraceChannel;
     class CTracesView;
+    class CMultiViewTracesIterator;
     
     typedef     Nyx::UInt32         TracesGroupId;
     
@@ -35,6 +37,9 @@ namespace TraceClientCore
         
         void AddChannel( CTraceChannel* pChannel );
         bool HasChannel( CTraceChannel* pChannel );
+        
+        CMultiViewTracesIterator FirstPos();
+        CMultiViewTracesIterator LastPos();
         
     protected:
         

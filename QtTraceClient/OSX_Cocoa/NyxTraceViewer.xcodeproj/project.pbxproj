@@ -48,6 +48,9 @@
 /* Begin PBXFileReference section */
 		164B6D6317EB667500B25E5E /* TracesGroupListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListener.h; path = SelectionPanel/TracesGroupListener.h; sourceTree = "<group>"; };
 		164B6D6417EB66C100B25E5E /* TracesGroupListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupListener.mm; path = SelectionPanel/TracesGroupListener.mm; sourceTree = "<group>"; };
+		164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesViewRepoObserver.cpp; path = ../../TraceClientCore/sources/TracesViewRepoObserver.cpp; sourceTree = "<group>"; };
+		164B6D6D17EBD90100B25E5E /* TraceDataRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepository.cpp; path = ../../TraceClientCore/sources/TraceDataRepository.cpp; sourceTree = "<group>"; };
+		164B6D6E17EBD93E00B25E5E /* PoolsUpdateClock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsUpdateClock.cpp; path = ../../TraceClientCore/sources/PoolsUpdateClock.cpp; sourceTree = "<group>"; };
 		165D73D917BD98220024CB1F /* NyxTraceViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyxTraceViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		165D73DC17BD98220024CB1F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		165D73DF17BD98220024CB1F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -128,6 +131,9 @@
 		165D73D017BD98220024CB1F = {
 			isa = PBXGroup;
 			children = (
+				164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */,
+				164B6D6D17EBD90100B25E5E /* TraceDataRepository.cpp */,
+				164B6D6E17EBD93E00B25E5E /* PoolsUpdateClock.cpp */,
 				165D73E217BD98220024CB1F /* NyxTraceViewer */,
 				165D73DB17BD98220024CB1F /* Frameworks */,
 				165D73DA17BD98220024CB1F /* Products */,

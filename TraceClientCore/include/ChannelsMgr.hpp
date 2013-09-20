@@ -40,13 +40,17 @@ namespace TraceClientCore
         virtual ~CChannelsMgr();
         
         void AddListener( IChannelsNotificationsListener* pListener );
-        
-        void NotifyNewOfNewChannel( CTraceChannel* pChannel );
+
+        void OnNewChannel( CTraceChannel* pChannel );
         
     protected:
         
         typedef std::list<IChannelsNotificationsListener*>  TChannelsNotificationListeners;
+
+    protected:
         
+        void NotifyOfNewChannel( CTraceChannel* pChannel );
+
     protected:
         
         Nyx::CMutexRef                          m_refListenersMutex;

@@ -7,6 +7,8 @@
 //
 
 #include "ChannelsMgr.hpp"
+#include "PoolsUpdateClock.hpp"
+#include "TraceClientCoreModule.hpp"
 
 namespace TraceClientCore
 {
@@ -42,7 +44,18 @@ namespace TraceClientCore
     /**
      *
      */
-    void CChannelsMgr::NotifyNewOfNewChannel( CTraceChannel* pChannel )
+    void CChannelsMgr::OnNewChannel(TraceClientCore::CTraceChannel *pChannel)
+    {
+        TraceClientCore::CModule::Instance().PoolsUpdateClock().Insert( pChannel->Pool() );
+        
+        NotifyOfNewChannel(pChannel);
+    }
+    
+    
+    /**
+     *
+     */
+    void CChannelsMgr::NotifyOfNewChannel( CTraceChannel* pChannel )
     {
         Nyx::TMutexLock     lock(m_refListenersMutex, true);
         
