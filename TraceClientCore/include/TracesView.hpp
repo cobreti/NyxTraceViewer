@@ -10,14 +10,48 @@
 #define TraceClientCore_TracesView_hpp
 
 #include <Nyx.hpp>
+#include <list>
 
 #include "TracesList.hpp"
+#include "TracesViewNotificationsListener.hpp"
 
 namespace TraceClientCore
 {
     class CTraceChannel;
     class CTraceData;
     class CTracesViewRepoObserver;
+    class CTracesView;
+    
+    
+    /**
+     *
+     */
+    typedef     Nyx::UInt32         TracesViewId;
+    
+    
+    /**
+     *
+     */
+    class CTracesViewNotificationsListeners : public ITracesViewNotificationsListener
+    {
+    public:
+        CTracesViewNotificationsListeners();
+        virtual ~CTracesViewNotificationsListeners();
+        
+        virtual void Add( ITracesViewNotificationsListener* pListener );
+        
+    public:
+        virtual void OnViewBeginUpdate( CTracesView* pView );
+        virtual void OnViewEndUpdate( CTracesView* pView );
+        
+    protected:
+        
+        typedef std::list<ITracesViewNotificationsListener*> TListeners;
+        
+    protected:
+        
+        TListeners          m_Listeners;
+    };
     
     
     /**
@@ -30,17 +64,30 @@ namespace TraceClientCore
     public:
         CTracesView(CTraceChannel* pChannel);
         virtual ~CTracesView();
+
+        const TracesViewId&                         Id() const      { return m_Id; }
         
-        CTraceChannel*      Channel() const { return m_pChannel; }
+        CTraceChannel*                              Channel() const { return m_pChannel; }
+        CTracesViewNotificationsListeners&          Listeners()     { return m_Listeners; }
+        
+        Nyx::UInt32 LinesCount() const;
         
     protected:
         
         void AddTrace( CTraceData* pTraceData );
+        void BeginUpdate();
+        void EndUpdate();
         
     protected:
         
-        CTraceChannel*                  m_pChannel;
-        CTracesViewRepoObserver*        m_pRepoObserver;
+        CTraceChannel*                      m_pChannel;
+        CTracesViewRepoObserver*            m_pRepoObserver;
+        TracesViewId                        m_Id;
+        CTracesViewNotificationsListeners   m_Listeners;
+        
+    protected:
+        
+        static TracesViewId                 s_NextId;
         
     };
 }

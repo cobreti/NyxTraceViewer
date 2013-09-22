@@ -9,13 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "SelectionPanel.h"
 
-#include "TracesGroupListener.h"
+#include "TracesGroupMgrListener.h"
 
 
 /**
  *
  */
-CTracesGroupListener::CTracesGroupListener( CSelectionPanel* pPanel ) :
+CTracesGroupMgrListener::CTracesGroupMgrListener( CSelectionPanel* pPanel ) :
 m_pPanel(pPanel)
 {
     
@@ -25,7 +25,7 @@ m_pPanel(pPanel)
 /**
  *
  */
-CTracesGroupListener::~CTracesGroupListener()
+CTracesGroupMgrListener::~CTracesGroupMgrListener()
 {
     
 }
@@ -34,7 +34,7 @@ CTracesGroupListener::~CTracesGroupListener()
 /**
  *
  */
-void CTracesGroupListener::OnNewTracesGroup( TraceClientCore::CTracesGroup* pGroup )
+void CTracesGroupMgrListener::OnNewTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 {
     NSDictionary*       params = [[NSDictionary alloc] initWithObjectsAndKeys: [NSValue valueWithPointer: pGroup], @"tracesgroup", nil];
     
@@ -45,7 +45,7 @@ void CTracesGroupListener::OnNewTracesGroup( TraceClientCore::CTracesGroup* pGro
 /**
  *
  */
-void CTracesGroupListener::OnTracesGroupWillBeDeleted( TraceClientCore::CTracesGroup* pGroup )
+void CTracesGroupMgrListener::OnTracesGroupWillBeDeleted( TraceClientCore::CTracesGroup* pGroup )
 {
     
     NSDictionary*       params = [[NSDictionary alloc] initWithObjectsAndKeys: [NSValue valueWithPointer: pGroup], @"tracesgroup", nil];

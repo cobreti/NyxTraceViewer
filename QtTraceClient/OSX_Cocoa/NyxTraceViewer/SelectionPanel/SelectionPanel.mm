@@ -12,7 +12,7 @@
 #import "TracesGroupsView/TracesGroupsView.h"
 
 #include "ChannelsListener.h"
-#include "TracesGroupListener.h"
+#include "TracesGroupMgrListener.h"
 #include "TraceClientCoreModule.hpp"
 #include "../Controls/TracesGroupsList/TracesGroupInfo.h"
 
@@ -28,13 +28,13 @@
         [self createTracesGroupsView];
 
         m_pChannelsListener = new CChannelsListener(self);
-        m_pTracesGroupListener = new CTracesGroupListener(self);
+        m_pTracesGroupMgrListener = new CTracesGroupMgrListener(self);
         m_pCurrentGroup = NULL;
 
         TraceClientCore::CModule&   rModule = TraceClientCore::CModule::Instance();
         
         rModule.ChannelsMgr().AddListener( static_cast<TraceClientCore::IChannelsNotificationsListener*>(m_pChannelsListener) );
-        rModule.TracesGroupMgr().Listeners().Add( static_cast<TraceClientCore::ITracesGroupNotificationsListener*>(m_pTracesGroupListener) );
+        rModule.TracesGroupMgr().Listeners().Add( static_cast<TraceClientCore::ITracesGroupMgrNotificationsListener*>(m_pTracesGroupMgrListener) );
     }
     
     return self;
@@ -53,6 +53,13 @@
     
     [super dealloc];
 }
+
+
+- (void)setSelChangeHandler: (const CActionHandlerInfo&)handler
+{
+    m_SelChangeHandler = handler;
+}
+
 
 - (IBAction)onPanelSelectionChanged:(id)sender
 {
@@ -228,13 +235,22 @@
 
 - (void)onTracesGroupSelChanged: (NSValue*)selection
 {
-    CTracesGroupInfo*       pInfo = (CTracesGroupInfo*)[selection pointerValue];
+    CTracesGroupInfo*                   pInfo = (CTracesGroupInfo*)[selection pointerValue];
+    TraceClientCore::CTracesGroup*      pGroup = pInfo->Group();
     
     m_pCurrentGroup = pInfo;
     
     [m_SourcesView refreshForGroup:m_pCurrentGroup];
     
     [selection release];
+    
+    if ( m_SelChangeHandler.Valid() )
+    {
+        NSValue*    groupPtr = [NSValue valueWithPointer: pGroup];
+        [groupPtr retain];
+        
+        [m_SelChangeHandler.Target() performSelector: m_SelChangeHandler.Selector() withObject: groupPtr];
+    }
 }
 
 

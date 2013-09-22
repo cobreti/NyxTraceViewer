@@ -43,6 +43,8 @@ namespace TraceClientCore
     void CTracesGroup::AddChannel( CTraceChannel* pChannel )
     {
         CTracesView*            pView = new CTracesView(pChannel);
+        
+        pView->Listeners().Add( static_cast<ITracesViewNotificationsListener*>(this) );
 
         m_Views.push_back(pView);
     }
@@ -120,6 +122,123 @@ namespace TraceClientCore
         }
         
         return pos;
+    }
+    
+    
+    /**
+     *
+     */
+    Nyx::UInt32 CTracesGroup::LinesCount() const
+    {
+        Nyx::UInt32                         count = 0;
+        TTracesViews::const_iterator        viewPos = m_Views.begin();
+        
+        while (viewPos != m_Views.end())
+        {
+            count += (*viewPos)->LinesCount();
+            ++ viewPos;
+        }
+        
+        return count;
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroup::OnViewBeginUpdate(TraceClientCore::CTracesView *pView)
+    {
+        m_Listeners.OnViewBeginUpdate(this, pView);
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroup::OnViewEndUpdate(TraceClientCore::CTracesView *pView)
+    {
+        m_Listeners.OnViewEndUpdate(this, pView);
+    }
+    
+    
+    /**********************************************************
+            CTracesGroupNotificationsListeners
+     *********************************************************/
+    
+    /**
+     *
+     */
+    CTracesGroupNotificationsListeners::CTracesGroupNotificationsListeners()
+    {
+        
+    }
+    
+    
+    /**
+     *
+     */
+    CTracesGroupNotificationsListeners::~CTracesGroupNotificationsListeners()
+    {
+        
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroupNotificationsListeners::Add( ITracesGroupNotificationsListener* pListener )
+    {
+        m_Listeners.push_back(pListener);
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroupNotificationsListeners::Remove(TraceClientCore::ITracesGroupNotificationsListener *pListener)
+    {
+        TTracesGroupListeners::iterator         pos = m_Listeners.begin();
+        
+        while (pos != m_Listeners.end())
+        {
+            if ( *pos == pListener )
+            {
+                m_Listeners.erase(pos);
+                break;
+            }
+            
+            ++ pos;
+        }
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroupNotificationsListeners::OnViewBeginUpdate(TraceClientCore::CTracesGroup *pGroup, TraceClientCore::CTracesView *pView)
+    {
+        TTracesGroupListeners::const_iterator           pos = m_Listeners.begin();
+        
+        while (pos != m_Listeners.end())
+        {
+            (*pos)->OnViewBeginUpdate(pGroup, pView);
+            ++ pos;
+        }
+    }
+    
+    
+    /**
+     *
+     */
+    void CTracesGroupNotificationsListeners::OnViewEndUpdate(TraceClientCore::CTracesGroup *pGroup, TraceClientCore::CTracesView *pView)
+    {
+        TTracesGroupListeners::const_iterator           pos = m_Listeners.begin();
+        
+        while (pos != m_Listeners.end())
+        {
+            (*pos)->OnViewEndUpdate(pGroup, pView);
+            ++ pos;
+        }
     }
 }
 

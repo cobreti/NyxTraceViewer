@@ -15,11 +15,11 @@
 
 @class CSelectionPanel;
 
-class CTracesGroupListener : public TraceClientCore::ITracesGroupNotificationsListener
+class CTracesGroupMgrListener : public TraceClientCore::ITracesGroupMgrNotificationsListener
 {
 public:
-    CTracesGroupListener( CSelectionPanel* pPanel );
-    virtual ~CTracesGroupListener();
+    CTracesGroupMgrListener( CSelectionPanel* pPanel );
+    virtual ~CTracesGroupMgrListener();
     
 public:
     

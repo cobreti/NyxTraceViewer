@@ -8,6 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "SelectionPanel/SelectionPanel.h"
+#import "TracesView/ContentView.h"
+
 @interface CTracesWindowController : NSWindowController <NSToolbarDelegate, NSWindowDelegate>
 {
     CGFloat     m_LastChannelsPanelWidth;
@@ -17,10 +20,15 @@
 }
 
 @property (assign) IBOutlet NSSplitView *m_SplitView;
+@property (assign) IBOutlet CSelectionPanel *selectionPanel;
+@property (assign) IBOutlet CContentView *contentView;
 
 
 - (IBAction)onChannelsShowHide:(id)sender;
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
 - (NSArray*)toolbarAllowedItemIdentifiers:(NSToolbar*)toolbar;
 - (void)windowWillClose:(NSNotification *)notification;
+
+- (void)onTracesGroupSelectionChanged:(NSValue*)tracesGroupPtr;
+
 @end

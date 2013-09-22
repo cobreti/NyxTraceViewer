@@ -21,7 +21,7 @@ namespace TraceClientCore
     /**
      *
      */
-    class ITracesGroupNotificationsListener
+    class ITracesGroupMgrNotificationsListener
     {
     public:
         
@@ -34,14 +34,14 @@ namespace TraceClientCore
     /**
      *
      */
-    class CTracesGroupNotificationsListeners : public ITracesGroupNotificationsListener
+    class CTracesGroupMgrNotificationsListeners : public ITracesGroupMgrNotificationsListener
     {
     public:
-        CTracesGroupNotificationsListeners();
-        virtual ~CTracesGroupNotificationsListeners();
+        CTracesGroupMgrNotificationsListeners();
+        virtual ~CTracesGroupMgrNotificationsListeners();
         
-        void Add( ITracesGroupNotificationsListener* pListener );
-        void Remove( ITracesGroupNotificationsListener* pListener );
+        void Add( ITracesGroupMgrNotificationsListener* pListener );
+        void Remove( ITracesGroupMgrNotificationsListener* pListener );
 
     public:
         virtual void OnNewTracesGroup( CTracesGroup* pGroup );
@@ -49,7 +49,7 @@ namespace TraceClientCore
         
     protected:
         
-        typedef         std::list<ITracesGroupNotificationsListener*>           TListenersList;
+        typedef         std::list<ITracesGroupMgrNotificationsListener*>           TListenersList;
         
     protected:
         
@@ -70,7 +70,7 @@ namespace TraceClientCore
         CTracesGroup* CreateTracesGroup(const Nyx::CAString& name);
         void ReleaseTracesGroup( CTracesGroup* pTracesGroup );
         
-        CTracesGroupNotificationsListeners&     Listeners()         { return m_Listeners; }
+        CTracesGroupMgrNotificationsListeners&     Listeners()         { return m_Listeners; }
         
     protected:
         
@@ -79,7 +79,7 @@ namespace TraceClientCore
     protected:
         
         TTracesGroupMap                         m_TracesGroups;
-        CTracesGroupNotificationsListeners      m_Listeners;
+        CTracesGroupMgrNotificationsListeners   m_Listeners;
     };
 }
 

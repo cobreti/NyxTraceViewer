@@ -10,7 +10,7 @@
 #define TraceClientCore_TracesGroup_hpp
 
 #include <Nyx.hpp>
-
+#include "TracesViewNotificationsListener.hpp"
 
 #include <list>
 
@@ -18,22 +18,70 @@ namespace TraceClientCore
 {
     class CTraceChannel;
     class CTracesView;
+    class CTracesGroup;
     class CMultiViewTracesIterator;
     
-    typedef     Nyx::UInt32         TracesGroupId;
     
     /**
      *
      */
-    class CTracesGroup
+    typedef     Nyx::UInt32         TracesGroupId;
+    
+    
+    
+    /**
+     *
+     */
+    class ITracesGroupNotificationsListener
+    {
+    public:
+        virtual void OnViewBeginUpdate( CTracesGroup* pGroup, CTracesView* pView ) = 0;
+        virtual void OnViewEndUpdate( CTracesGroup* pGroup, CTracesView* pView ) = 0;
+    };
+    
+
+    
+    /**
+     *
+     */
+    class CTracesGroupNotificationsListeners : public ITracesGroupNotificationsListener
+    {
+    public:
+        CTracesGroupNotificationsListeners();
+        virtual ~CTracesGroupNotificationsListeners();
+        
+        virtual void Add( ITracesGroupNotificationsListener* pListener );
+        virtual void Remove( ITracesGroupNotificationsListener* pListener );
+
+    public:
+        virtual void OnViewBeginUpdate( CTracesGroup* pGroup, CTracesView* pView );
+        virtual void OnViewEndUpdate( CTracesGroup* pGroup, CTracesView* pView );
+        
+    protected:
+        
+        typedef     std::list<ITracesGroupNotificationsListener*>       TTracesGroupListeners;
+        
+    protected:
+        
+        TTracesGroupListeners           m_Listeners;
+    };
+    
+    
+    
+    /**
+     *
+     */
+    class CTracesGroup : public ITracesViewNotificationsListener
     {
         friend class CTracesGroupMgr;
         
     public:
-        const TracesGroupId&        Id() const      { return m_Id; }
+        const TracesGroupId&        Id() const                          { return m_Id; }
         
-        const Nyx::CAString&    Name() const            { return m_Name; }
-        Nyx::CAString&          Name()                  { return m_Name; }
+        const Nyx::CAString&    Name() const                            { return m_Name; }
+        Nyx::CAString&          Name()                                  { return m_Name; }
+        
+        CTracesGroupNotificationsListeners&     Listeners()             { return m_Listeners; }
         
         void AddChannel( CTraceChannel* pChannel );
         bool HasChannel( CTraceChannel* pChannel );
@@ -41,6 +89,13 @@ namespace TraceClientCore
         CMultiViewTracesIterator FirstPos();
         CMultiViewTracesIterator LastPos();
         
+        Nyx::UInt32 LinesCount() const;
+        
+    public:
+        
+        virtual void OnViewBeginUpdate( CTracesView* pView );
+        virtual void OnViewEndUpdate( CTracesView* pView );
+
     protected:
         
         typedef     std::list<CTracesView*>     TTracesViews;
@@ -53,9 +108,10 @@ namespace TraceClientCore
         
     protected:
         
-        TracesGroupId           m_Id;
-        Nyx::CAString           m_Name;
-        TTracesViews            m_Views;
+        TracesGroupId                           m_Id;
+        Nyx::CAString                           m_Name;
+        TTracesViews                            m_Views;
+        CTracesGroupNotificationsListeners      m_Listeners;
         
     private:
         

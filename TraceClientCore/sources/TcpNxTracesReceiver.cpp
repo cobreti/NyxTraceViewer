@@ -106,7 +106,7 @@ namespace TraceClientCore
             }
             
             CModule&            rModule = CModule::Instance();
-            CTraceChannel*      pChannel = rModule.TraceChannels().Get(Name);
+            CTraceChannel*      pChannel = rModule.TraceChannels().Get(Name, true);
             
             -- SectionsCount;
             

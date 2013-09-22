@@ -27,6 +27,10 @@
     
     TraceClientCore::CTcpTracesReceiversSvr::CSettings       settings;
     
+    settings.PortNumber() = 8500;
+    settings.UseHandshake() = true;
+    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(0).Start(settings);
+
     settings.PortNumber() = 8501;
     settings.UseHandshake() = false;
     rModule.TcpModule().TcpTracesReceiversSvr(1).Start(settings);

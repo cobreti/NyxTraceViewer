@@ -61,14 +61,14 @@ namespace TraceClientCore
     
     
     /*******************************************************************
-            CTracesGroupNotificationsListeners
+            CTracesGroupMgrNotificationsListeners
      ******************************************************************/
     
     
     /**
      *
      */
-    CTracesGroupNotificationsListeners::CTracesGroupNotificationsListeners()
+    CTracesGroupMgrNotificationsListeners::CTracesGroupMgrNotificationsListeners()
     {
         
     }
@@ -77,7 +77,7 @@ namespace TraceClientCore
     /**
      *
      */
-    CTracesGroupNotificationsListeners::~CTracesGroupNotificationsListeners()
+    CTracesGroupMgrNotificationsListeners::~CTracesGroupMgrNotificationsListeners()
     {
         
     }
@@ -86,7 +86,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTracesGroupNotificationsListeners::Add( ITracesGroupNotificationsListener* pListener )
+    void CTracesGroupMgrNotificationsListeners::Add( ITracesGroupMgrNotificationsListener* pListener )
     {
         m_Listeners.push_back(pListener);
     }
@@ -95,7 +95,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTracesGroupNotificationsListeners::Remove( ITracesGroupNotificationsListener* pListener )
+    void CTracesGroupMgrNotificationsListeners::Remove( ITracesGroupMgrNotificationsListener* pListener )
     {
         TListenersList::iterator          pos = m_Listeners.begin();
         
@@ -116,7 +116,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTracesGroupNotificationsListeners::OnNewTracesGroup(TraceClientCore::CTracesGroup *pGroup)
+    void CTracesGroupMgrNotificationsListeners::OnNewTracesGroup(TraceClientCore::CTracesGroup *pGroup)
     {
         TListenersList::const_iterator          pos = m_Listeners.begin();
         
@@ -132,7 +132,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTracesGroupNotificationsListeners::OnTracesGroupWillBeDeleted(TraceClientCore::CTracesGroup *pGroup)
+    void CTracesGroupMgrNotificationsListeners::OnTracesGroupWillBeDeleted(TraceClientCore::CTracesGroup *pGroup)
     {
         TListenersList::const_iterator          pos = m_Listeners.begin();
         

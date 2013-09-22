@@ -85,6 +85,7 @@
 		164B6D7417EC91F200B25E5E /* TracesList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesList.cpp; path = ../sources/TracesList.cpp; sourceTree = "<group>"; };
 		164B6D7617ECD2FB00B25E5E /* MultiViewTracesIterator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = MultiViewTracesIterator.hpp; path = ../include/MultiViewTracesIterator.hpp; sourceTree = "<group>"; };
 		164B6D7717ECD31000B25E5E /* MultiViewTracesIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultiViewTracesIterator.cpp; path = ../sources/MultiViewTracesIterator.cpp; sourceTree = "<group>"; };
+		164B6D8117EE052D00B25E5E /* TracesViewNotificationsListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TracesViewNotificationsListener.hpp; path = ../include/TracesViewNotificationsListener.hpp; sourceTree = "<group>"; };
 		165977021127109B00CC718B /* TracesPoolCollection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TracesPoolCollection.hpp; path = ../include/TracesPoolCollection.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2DE114D7F49007430AE /* RepositoryObserver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RepositoryObserver.hpp; path = ../include/RepositoryObserver.hpp; sourceTree = SOURCE_ROOT; };
 		165CF2E2114D7F53007430AE /* RepositoryObserver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RepositoryObserver.cpp; path = ../sources/RepositoryObserver.cpp; sourceTree = SOURCE_ROOT; };
@@ -235,6 +236,7 @@
 				164B6D7417EC91F200B25E5E /* TracesList.cpp */,
 				164B6D7617ECD2FB00B25E5E /* MultiViewTracesIterator.hpp */,
 				164B6D7717ECD31000B25E5E /* MultiViewTracesIterator.cpp */,
+				164B6D8117EE052D00B25E5E /* TracesViewNotificationsListener.hpp */,
 			);
 			name = interface;
 			sourceTree = "<group>";

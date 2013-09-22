@@ -8,12 +8,14 @@
 
 #import <Cocoa/Cocoa.h>
 
+#include "../Controls/ActionHandlerInfo.h"
+
 @class CSelectionPanelBar;
 @class CSourcesView;
 @class CTracesGroupsView;
 
 class CChannelsListener;
-class CTracesGroupListener;
+class CTracesGroupMgrListener;
 class CTracesGroupInfo;
 
 @interface CSelectionPanel : NSView
@@ -22,12 +24,15 @@ class CTracesGroupInfo;
     CSourcesView*               m_SourcesView;
     CTracesGroupsView*          m_TracesGroupsView;
     CChannelsListener*          m_pChannelsListener;
-    CTracesGroupListener*       m_pTracesGroupListener;
+    CTracesGroupMgrListener*    m_pTracesGroupMgrListener;
     CTracesGroupInfo*           m_pCurrentGroup;
+    
+    CActionHandlerInfo          m_SelChangeHandler;
 }
 
 - (BOOL)isFlipped;
 - (void)dealloc;
+- (void)setSelChangeHandler: (const CActionHandlerInfo&)handler;
 - (void)onNewChannel: (NSDictionary*)params;
 - (void)onNewTracesGroup: (NSDictionary*)params;
 - (void)onTracesGroupWillBeDeleted: (NSDictionary*)params;

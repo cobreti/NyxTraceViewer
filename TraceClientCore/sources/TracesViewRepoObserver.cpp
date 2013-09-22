@@ -64,7 +64,7 @@ namespace TraceClientCore
      */
     void CTracesViewRepoObserver::OnFirstBeginUpdate()
     {
-        
+        m_pView->BeginUpdate();
     }
     
     
@@ -73,7 +73,7 @@ namespace TraceClientCore
      */
     void CTracesViewRepoObserver::OnFinalEndUpdate()
     {
-        
+        m_pView->EndUpdate();
     }
 }
 

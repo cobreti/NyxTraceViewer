@@ -8,6 +8,8 @@
 
 #import "TracesWindowController.h"
 
+#include "TraceClientCoreModule.hpp"
+
 @interface CTracesWindowController ()
 
 @end
@@ -43,8 +45,8 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+    [[self selectionPanel] setSelChangeHandler: CActionHandlerInfo( @selector(onTracesGroupSelectionChanged:), self)];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
@@ -118,5 +120,16 @@
 {
     return NULL;
 }
+
+
+- (void)onTracesGroupSelectionChanged:(NSValue*)tracesGroupPtr
+{
+    TraceClientCore::CTracesGroup*      pGroup = (TraceClientCore::CTracesGroup*)[tracesGroupPtr pointerValue];
+    
+    [[self contentView] onTracesGroupChanged: pGroup];
+    
+    [tracesGroupPtr release];
+}
+
 
 @end
