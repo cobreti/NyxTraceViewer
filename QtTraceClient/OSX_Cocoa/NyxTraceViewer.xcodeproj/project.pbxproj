@@ -32,6 +32,7 @@
 		168F948217E79E9F006AA407 /* ChannelsListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F948117E79E9F006AA407 /* ChannelsListener.mm */; };
 		16CE6DC317EF6CCD000E9F69 /* TracesGroupListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DC217EF6CCD000E9F69 /* TracesGroupListener.mm */; };
 		16CE6DC617EFCEED000E9F69 /* ViewTracesIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DC517EFCEED000E9F69 /* ViewTracesIterator.cpp */; };
+		16CE6DCC17F8B858000E9F69 /* ColumnSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
 		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
 		16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255117DB654600C4FD48 /* sources_hidden.png */; };
@@ -109,6 +110,8 @@
 		16CE6DC517EFCEED000E9F69 /* ViewTracesIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ViewTracesIterator.cpp; path = TracesView/ViewTracesIterator.cpp; sourceTree = "<group>"; };
 		16CE6DC717F79D3A000E9F69 /* TcpTracesReceiversSvr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceiversSvr.cpp; path = ../../TraceClientCore/sources/TcpTracesReceiversSvr.cpp; sourceTree = "<group>"; };
 		16CE6DC817F79D62000E9F69 /* TcpNxTracesReceiversSvr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TcpNxTracesReceiversSvr.cpp; path = ../../TraceClientCore/sources/TcpNxTracesReceiversSvr.cpp; sourceTree = "<group>"; };
+		16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ColumnSettings.mm; path = TracesView/settings/ColumnSettings.mm; sourceTree = "<group>"; };
+		16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColumnSettings.h; path = TracesView/settings/ColumnSettings.h; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checked-checkbox-icon.png"; path = "icons/Checked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0255117DB654600C4FD48 /* sources_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_hidden.png; path = icons/sources_hidden.png; sourceTree = SOURCE_ROOT; };
@@ -148,6 +151,7 @@
 		164B6D7917ED097D00B25E5E /* TracesView */ = {
 			isa = PBXGroup;
 			children = (
+				16CE6DC917F8B81F000E9F69 /* settings */,
 				164B6D7A17ED09C000B25E5E /* ContentView.h */,
 				164B6D7B17ED09C000B25E5E /* ContentView.mm */,
 				164B6D7D17ED0C3400B25E5E /* TracesDataView.h */,
@@ -282,6 +286,15 @@
 				168F947117E0014A006AA407 /* HorizontalCellsLayout.m */,
 			);
 			name = CellsLayout;
+			sourceTree = "<group>";
+		};
+		16CE6DC917F8B81F000E9F69 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */,
+				16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */,
+			);
+			name = settings;
 			sourceTree = "<group>";
 		};
 		16D0255517DB663600C4FD48 /* SelectionPanel */ = {
@@ -426,6 +439,7 @@
 				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
 				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
 				16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */,
+				16CE6DCC17F8B858000E9F69 /* ColumnSettings.mm in Sources */,
 				168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */,
 				164B6D7F17ED0C3400B25E5E /* TracesDataView.mm in Sources */,
 				168F944317DCDC9B006AA407 /* SourcesView.mm in Sources */,

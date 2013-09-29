@@ -21,6 +21,9 @@
 
         m_pTracesGroup = NULL;
         m_pTracesGroupListener = new CTracesGroupListener(self);
+        m_pFont = [NSFont fontWithName: @"arial" size:12];
+        [m_pFont retain];
+        m_LineHeight = [m_pFont ascender] - [m_pFont descender] + 5;
     }
     return self;
 }
@@ -54,13 +57,12 @@
     
     if ( m_pTracesGroup )
     {
-        Nyx::UInt32                                     lineNumber = MAX((dirtyRect.origin.y / 20) - 1, 0);
-//        TraceClientCore::CMultiViewTracesIterator       iter = m_pTracesGroup->FirstPos();
+        Nyx::UInt32                                     lineNumber = MAX((dirtyRect.origin.y / m_LineHeight) - 1, 0);
         TraceClientCore::CTraceData*                    pTraceData = NULL;
-        NSPoint                                         pt = NSMakePoint(10, lineNumber * 20);
-        NSPoint                                         MaxPt = NSMakePoint(0, pt.y + MAX(dirtyRect.size.height + 40, 20));
-        NSFont*                                         font = [NSFont fontWithName: @"arial" size:12];
-        NSDictionary*                                   attributes = [[NSDictionary alloc] initWithObjectsAndKeys: font, NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
+        NSPoint                                         pt = NSMakePoint(10, lineNumber * m_LineHeight);
+        NSPoint                                         MaxPt = NSMakePoint(0, pt.y + MAX(dirtyRect.size.height + m_LineHeight*2, m_LineHeight));
+//        NSFont*                                         font = [NSFont fontWithName: @"arial" size:12];
+        NSDictionary*                                   attributes = [[NSDictionary alloc] initWithObjectsAndKeys: m_pFont, NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
         
         m_Pos.MoveToLine(lineNumber);
         
@@ -73,7 +75,7 @@
             NSString*   text = [[NSString alloc] initWithBytes: pTraceData->Data().c_str() length: pTraceData->Data().length()*sizeof(wchar_t) encoding: NSUTF32LittleEndianStringEncoding];
             [text drawAtPoint:pt withAttributes: attributes];
             
-            pt.y += 20;
+            pt.y += m_LineHeight;
             
             ++ iter;
         }
@@ -110,7 +112,7 @@
 - (void) onTracesViewEndUpdate
 {
     Nyx::UInt32     linesCount = m_pTracesGroup->LinesCount();
-    CGFloat         height = linesCount * 20;
+    CGFloat         height = linesCount * m_LineHeight + 15;
     NSRect          frame = [self frame];
     
     

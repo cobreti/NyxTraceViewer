@@ -21,6 +21,8 @@ class CTracesGroupListener;
     TraceClientCore::CTracesGroup*      m_pTracesGroup;
     CTracesGroupListener*               m_pTracesGroupListener;
     CViewTracesIterator                 m_Pos;
+    NSFont*                             m_pFont;
+    CGFloat                             m_LineHeight;
 }
 
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup;
