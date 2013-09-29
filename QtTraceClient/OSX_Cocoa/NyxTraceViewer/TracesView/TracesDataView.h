@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ViewTracesIterator.hpp"
 
 namespace TraceClientCore
 {
@@ -19,6 +20,7 @@ class CTracesGroupListener;
 {
     TraceClientCore::CTracesGroup*      m_pTracesGroup;
     CTracesGroupListener*               m_pTracesGroupListener;
+    CViewTracesIterator                 m_Pos;
 }
 
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup;

@@ -34,7 +34,11 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-	[super drawRect:dirtyRect];	
+	[super drawRect:dirtyRect];
+    
+    NSRect  bounds = [self bounds];
+    NSRect frame = [self frame];
+    NSRect superFrame = [[self superview] frame];
 
 //    [[NSColor blueColor] set];
 //    
@@ -50,14 +54,19 @@
     
     if ( m_pTracesGroup )
     {
-        TraceClientCore::CMultiViewTracesIterator       iter = m_pTracesGroup->FirstPos();
+        Nyx::UInt32                                     lineNumber = MAX((dirtyRect.origin.y / 20) - 1, 0);
+//        TraceClientCore::CMultiViewTracesIterator       iter = m_pTracesGroup->FirstPos();
         TraceClientCore::CTraceData*                    pTraceData = NULL;
-        NSPoint                                         pt = NSMakePoint(10, 0);
+        NSPoint                                         pt = NSMakePoint(10, lineNumber * 20);
+        NSPoint                                         MaxPt = NSMakePoint(0, pt.y + MAX(dirtyRect.size.height + 40, 20));
         NSFont*                                         font = [NSFont fontWithName: @"arial" size:12];
         NSDictionary*                                   attributes = [[NSDictionary alloc] initWithObjectsAndKeys: font, NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
         
+        m_Pos.MoveToLine(lineNumber);
         
-        while (iter.Valid())
+        CViewTracesIterator                             iter(m_Pos);
+        
+        while (iter.Valid() && pt.y < MaxPt.y)
         {
             pTraceData = iter.TraceData();
             
@@ -100,13 +109,21 @@
 
 - (void) onTracesViewEndUpdate
 {
-    CGFloat         height = m_pTracesGroup->LinesCount() * 20;
+    Nyx::UInt32     linesCount = m_pTracesGroup->LinesCount();
+    CGFloat         height = linesCount * 20;
     NSRect          frame = [self frame];
+    
     
     frame.size.height = height;
     [self setFrame: frame];
     
-    [self setNeedsDisplay: YES];
+    if ( linesCount > 0 )
+    {
+        if ( !m_Pos.Valid() )
+            m_Pos = CViewTracesIterator::FirstPos(m_pTracesGroup);
+    }
+
+//    [self setNeedsDisplay: YES];
 }
 
 
