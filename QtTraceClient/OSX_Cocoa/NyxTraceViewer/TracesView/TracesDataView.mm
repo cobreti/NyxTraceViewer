@@ -21,6 +21,7 @@
 
         m_pTracesGroup = NULL;
         m_pTracesGroupListener = new CTracesGroupListener(self);
+        
         m_pFont = [NSFont fontWithName: @"arial" size:12];
         [m_pFont retain];
         m_LineHeight = [m_pFont ascender] - [m_pFont descender] + 5;
@@ -37,23 +38,8 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    
 	[super drawRect:dirtyRect];
-    
-    NSRect  bounds = [self bounds];
-    NSRect frame = [self frame];
-    NSRect superFrame = [[self superview] frame];
-
-//    [[NSColor blueColor] set];
-//    
-//    NSBezierPath*       path = [NSBezierPath alloc];
-//    
-//    NSRect  rc = [self frame];
-//    rc.origin = NSZeroPoint;
-//    
-//    [path appendBezierPathWithOvalInRect: rc];
-//    
-//    [path stroke];
-    
     
     if ( m_pTracesGroup )
     {
@@ -61,7 +47,6 @@
         TraceClientCore::CTraceData*                    pTraceData = NULL;
         NSPoint                                         pt = NSMakePoint(10, lineNumber * m_LineHeight);
         NSPoint                                         MaxPt = NSMakePoint(0, pt.y + MAX(dirtyRect.size.height + m_LineHeight*2, m_LineHeight));
-//        NSFont*                                         font = [NSFont fontWithName: @"arial" size:12];
         NSDictionary*                                   attributes = [[NSDictionary alloc] initWithObjectsAndKeys: m_pFont, NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
         
         m_Pos.MoveToLine(lineNumber);
@@ -105,7 +90,8 @@
 
 - (void) onTracesViewBeginUpdate
 {
-    
+    m_LastVisibleRect = [self visibleRect];
+    m_LastFrame = [self frame];
 }
 
 
@@ -115,17 +101,20 @@
     CGFloat         height = linesCount * m_LineHeight + 15;
     NSRect          frame = [self frame];
     
-    
     frame.size.height = height;
     [self setFrame: frame];
+    
+    if ( (m_LastFrame.origin.y + m_LastFrame.size.height) - (m_LastVisibleRect.origin.y + m_LastVisibleRect.size.height) < m_LineHeight + 15 )
+    {
+        [self scrollRectToVisible: NSMakeRect(m_LastVisibleRect.origin.x, height-1, m_LastVisibleRect.origin.x + m_LastVisibleRect.size.width, height-1)];
+        [self setNeedsDisplay: YES];
+    }
     
     if ( linesCount > 0 )
     {
         if ( !m_Pos.Valid() )
             m_Pos = CViewTracesIterator::FirstPos(m_pTracesGroup);
     }
-
-//    [self setNeedsDisplay: YES];
 }
 
 

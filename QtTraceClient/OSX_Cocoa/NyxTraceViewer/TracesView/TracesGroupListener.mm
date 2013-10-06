@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Danny Thibaudeau. All rights reserved.
 //
 
+
 #include "TracesGroupListener.h"
 #include "TracesDataView.h"
 
 
-CTracesGroupListener::CTracesGroupListener(CTracesDataView* pView) :
-m_pView(pView)
+CTracesGroupListener::CTracesGroupListener(NSObject* pTarget) :
+m_pTarget(pTarget)
 {
-    
 }
 
 
@@ -25,12 +25,18 @@ CTracesGroupListener::~CTracesGroupListener()
 
 void CTracesGroupListener::OnViewBeginUpdate(TraceClientCore::CTracesGroup *pGroup, TraceClientCore::CTracesView *pView)
 {
-    [m_pView onTracesViewBeginUpdate];
+    if ( [m_pTarget conformsToProtocol:@protocol(CTracesGroupListenerProtocol)] )
+    {
+        [ (NSObject<CTracesGroupListenerProtocol>*) m_pTarget onTracesViewBeginUpdate];
+    }
 }
 
 
 void CTracesGroupListener::OnViewEndUpdate(TraceClientCore::CTracesGroup *pGroup, TraceClientCore::CTracesView *pView)
 {
-    [m_pView onTracesViewEndUpdate];
+    if ( [m_pTarget conformsToProtocol:@protocol(CTracesGroupListenerProtocol)] )
+    {
+        [(NSObject<CTracesGroupListenerProtocol>*) m_pTarget onTracesViewEndUpdate];
+    }
 }
 

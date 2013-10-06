@@ -33,6 +33,7 @@
 		16CE6DC317EF6CCD000E9F69 /* TracesGroupListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DC217EF6CCD000E9F69 /* TracesGroupListener.mm */; };
 		16CE6DC617EFCEED000E9F69 /* ViewTracesIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DC517EFCEED000E9F69 /* ViewTracesIterator.cpp */; };
 		16CE6DCC17F8B858000E9F69 /* ColumnSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */; };
+		16CE6DCF17F8F601000E9F69 /* TracesDataViewSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */; };
 		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
 		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
 		16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255117DB654600C4FD48 /* sources_hidden.png */; };
@@ -51,6 +52,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListenerProtocol.h; path = TracesView/TracesGroupListenerProtocol.h; sourceTree = "<group>"; };
+		162AADEC18010D240007B8EE /* TracesIterator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesIterator.cpp; path = ../../TraceClientCore/sources/TracesIterator.cpp; sourceTree = "<group>"; };
 		164B6D6317EB667500B25E5E /* TracesGroupMgrListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupMgrListener.h; path = SelectionPanel/TracesGroupMgrListener.h; sourceTree = "<group>"; };
 		164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupMgrListener.mm; path = SelectionPanel/TracesGroupMgrListener.mm; sourceTree = "<group>"; };
 		164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesViewRepoObserver.cpp; path = ../../TraceClientCore/sources/TracesViewRepoObserver.cpp; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 		16CE6DC817F79D62000E9F69 /* TcpNxTracesReceiversSvr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TcpNxTracesReceiversSvr.cpp; path = ../../TraceClientCore/sources/TcpNxTracesReceiversSvr.cpp; sourceTree = "<group>"; };
 		16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ColumnSettings.mm; path = TracesView/settings/ColumnSettings.mm; sourceTree = "<group>"; };
 		16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColumnSettings.h; path = TracesView/settings/ColumnSettings.h; sourceTree = "<group>"; };
+		16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesDataViewSettings.mm; path = TracesView/settings/TracesDataViewSettings.mm; sourceTree = "<group>"; };
+		16CE6DCE17F8F601000E9F69 /* TracesDataViewSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesDataViewSettings.h; path = TracesView/settings/TracesDataViewSettings.h; sourceTree = "<group>"; };
 		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checked-checkbox-icon.png"; path = "icons/Checked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
 		16D0255117DB654600C4FD48 /* sources_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_hidden.png; path = icons/sources_hidden.png; sourceTree = SOURCE_ROOT; };
@@ -148,6 +153,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		162AADEA1800F0DE0007B8EE /* references */ = {
+			isa = PBXGroup;
+			children = (
+				162AADEC18010D240007B8EE /* TracesIterator.cpp */,
+				164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */,
+				164B6D6D17EBD90100B25E5E /* TraceDataRepository.cpp */,
+				164B6D6E17EBD93E00B25E5E /* PoolsUpdateClock.cpp */,
+				164B6D8017EDE5CD00B25E5E /* TcpNxTracesReceiver.cpp */,
+				164B6D8217EE121900B25E5E /* TracesGroup.cpp */,
+				16CE6DC717F79D3A000E9F69 /* TcpTracesReceiversSvr.cpp */,
+				16CE6DC817F79D62000E9F69 /* TcpNxTracesReceiversSvr.cpp */,
+				164B6D8317EE128400B25E5E /* TracesView.cpp */,
+			);
+			name = references;
+			sourceTree = "<group>";
+		};
 		164B6D7917ED097D00B25E5E /* TracesView */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +177,7 @@
 				164B6D7B17ED09C000B25E5E /* ContentView.mm */,
 				164B6D7D17ED0C3400B25E5E /* TracesDataView.h */,
 				164B6D7E17ED0C3400B25E5E /* TracesDataView.mm */,
+				162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */,
 				16CE6DC117EF6C96000E9F69 /* TracesGroupListener.h */,
 				16CE6DC217EF6CCD000E9F69 /* TracesGroupListener.mm */,
 				16CE6DC417EFCE31000E9F69 /* ViewTracesIterator.hpp */,
@@ -167,14 +189,7 @@
 		165D73D017BD98220024CB1F = {
 			isa = PBXGroup;
 			children = (
-				164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */,
-				164B6D6D17EBD90100B25E5E /* TraceDataRepository.cpp */,
-				164B6D6E17EBD93E00B25E5E /* PoolsUpdateClock.cpp */,
-				164B6D8017EDE5CD00B25E5E /* TcpNxTracesReceiver.cpp */,
-				164B6D8217EE121900B25E5E /* TracesGroup.cpp */,
-				16CE6DC717F79D3A000E9F69 /* TcpTracesReceiversSvr.cpp */,
-				16CE6DC817F79D62000E9F69 /* TcpNxTracesReceiversSvr.cpp */,
-				164B6D8317EE128400B25E5E /* TracesView.cpp */,
+				162AADEA1800F0DE0007B8EE /* references */,
 				165D73E217BD98220024CB1F /* NyxTraceViewer */,
 				165D73DB17BD98220024CB1F /* Frameworks */,
 				165D73DA17BD98220024CB1F /* Products */,
@@ -293,6 +308,8 @@
 			children = (
 				16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */,
 				16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */,
+				16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */,
+				16CE6DCE17F8F601000E9F69 /* TracesDataViewSettings.h */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -444,6 +461,7 @@
 				164B6D7F17ED0C3400B25E5E /* TracesDataView.mm in Sources */,
 				168F944317DCDC9B006AA407 /* SourcesView.mm in Sources */,
 				168F944717DCF760006AA407 /* TracesGroupsView.mm in Sources */,
+				16CE6DCF17F8F601000E9F69 /* TracesDataViewSettings.mm in Sources */,
 				168F944A17DD0611006AA407 /* TracesGroupsListCtrl.mm in Sources */,
 				168F944D17DE0A7E006AA407 /* TracesGroupInfo.cpp in Sources */,
 				168F945017DE0CD2006AA407 /* TracesGroupItem.mm in Sources */,

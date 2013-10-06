@@ -9,6 +9,7 @@
 #ifndef NyxTraceViewer_TracesGroupListener_h
 #define NyxTraceViewer_TracesGroupListener_h
 
+#include <objc/objc.h>
 #include "TracesGroup.hpp"
 
 @class CTracesDataView;
@@ -16,7 +17,7 @@
 class CTracesGroupListener : public TraceClientCore::ITracesGroupNotificationsListener
 {
 public:
-    CTracesGroupListener(CTracesDataView* pView);
+    CTracesGroupListener(NSObject* m_pTarget);
     virtual ~CTracesGroupListener();
     
 public:
@@ -25,7 +26,7 @@ public:
     
 protected:
     
-    CTracesDataView*        m_pView;
+    NSObject*       m_pTarget;
 };
 
 

@@ -20,10 +20,35 @@ m_bAutoAdjust(true)
 }
 
 
+CColumnSettings::CColumnSettings(const CColumnSettings& settings) :
+m_MaxSize(settings.m_MaxSize),
+m_Size(settings.m_Size),
+m_bAutoAdjust(settings.m_bAutoAdjust)
+{
+    
+}
+
+
 /**
  *
  */
 CColumnSettings::~CColumnSettings()
 {
+
 }
 
+
+/**
+ *
+ */
+const CColumnSettings& CColumnSettings::operator = (const CColumnSettings& settings)
+{
+    if ( this != &settings )
+    {
+        m_MaxSize = settings.m_MaxSize;
+        m_Size = settings.m_Size;
+        m_bAutoAdjust = settings.m_bAutoAdjust;
+    }
+    
+    return *this;
+}

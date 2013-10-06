@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "TracesGroupListener.h"
+
 
 namespace TraceClientCore
 {
@@ -17,8 +19,8 @@ namespace TraceClientCore
 
 @interface CContentView : NSView
 {
-    NSScrollView*       m_TracesScrollView;
-    CTracesDataView*    m_TracesDataView;
+    NSScrollView*                   m_TracesScrollView;
+    CTracesDataView*                m_TracesDataView;
 }
 
 - (void) createTracesScrollView;

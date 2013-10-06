@@ -15,7 +15,10 @@ class CColumnSettings
 {
 public:
     CColumnSettings();
+    CColumnSettings(const CColumnSettings& settings);
     virtual ~CColumnSettings();
+    
+    const CColumnSettings& operator = (const CColumnSettings& settings);
     
 protected:
     
