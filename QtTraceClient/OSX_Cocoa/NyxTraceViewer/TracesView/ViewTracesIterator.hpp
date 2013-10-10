@@ -43,6 +43,8 @@ public:
     
     TraceClientCore::CTraceData* TraceData() const;
     
+    const Nyx::UInt32&      getLineNumber() const           { return m_LineNumber; }
+    
 protected:
     
     TraceClientCore::CTracesGroup*                  m_pGroup;

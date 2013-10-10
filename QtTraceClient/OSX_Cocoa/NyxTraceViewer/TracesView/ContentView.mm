@@ -88,7 +88,7 @@
 
 - (void) createTracesDataView
 {
-    m_TracesDataView = [[CTracesDataView alloc] initWithFrame: NSMakeRect(0, 0, 200, 200)];
+    m_TracesDataView = [[CTracesDataView alloc] initWithFrame: NSMakeRect(0, 0, 400, 200)];
     [m_TracesScrollView setDocumentView: m_TracesDataView];
 }
 

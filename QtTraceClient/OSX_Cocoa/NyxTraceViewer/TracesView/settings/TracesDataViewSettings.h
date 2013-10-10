@@ -34,6 +34,20 @@ public:
     
     const CTracesDataViewSettings& operator = (const CTracesDataViewSettings& settings);
     
+    void setFont( NSFont* pFont );
+    NSFont* getFont() const                 { return m_pFont; }
+    
+    CGFloat     getLineHeight() const       { return m_LineHeight; }
+    
+    const TColumnsOrder&        getColumnsOrder() const             { return m_ColumnsOrder; }
+    void                        setColumnsOrder(const TColumnsOrder& order);
+    
+    CColumnSettings&            rgetColumnSettings(EColumns col)        { return m_ColumnsSettings[col]; }
+    const CColumnSettings&      getColumnSettings(EColumns col) const   { return m_ColumnsSettings.at(col); }
+    void                        setColumnSettings(EColumns col, const CColumnSettings& settings);
+    
+    NSSize                      getMaxLineSize() const;
+    
 protected:
     
     typedef     std::map<EColumns, CColumnSettings>     TColumnsSettingsTable;
@@ -42,6 +56,8 @@ protected:
     
     TColumnsOrder               m_ColumnsOrder;
     TColumnsSettingsTable       m_ColumnsSettings;
+    CGFloat                     m_LineHeight;
+    NSFont*                     m_pFont;
 };
 
 #endif /* defined(__NyxTraceViewer__TracesDataViewSettings__) */

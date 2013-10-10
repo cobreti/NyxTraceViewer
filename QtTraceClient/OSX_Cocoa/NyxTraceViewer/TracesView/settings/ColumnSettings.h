@@ -14,16 +14,36 @@
 class CColumnSettings
 {
 public:
+    
+    struct TMargins
+    {
+        CGFloat     left;
+        CGFloat     top;
+        CGFloat     right;
+        CGFloat     bottom;
+    };
+    
+public:
     CColumnSettings();
     CColumnSettings(const CColumnSettings& settings);
     virtual ~CColumnSettings();
+    
+    const NSSize&       getMaxSize() const          { return m_MaxSize; }
+    void                setMaxSize(const NSSize& size);
+    
+    const NSSize&       getSize() const             { return m_Size; }
+    void                setSize(const NSSize& size);
+    
+    const TMargins&     getMargins() const          { return m_Margins; }
+    void                setMargins(const TMargins& margins);
     
     const CColumnSettings& operator = (const CColumnSettings& settings);
     
 protected:
     
-    NSRect          m_MaxSize;
-    NSRect          m_Size;
+    NSSize          m_MaxSize;
+    NSSize          m_Size;
+    TMargins        m_Margins;
     bool            m_bAutoAdjust;
 };
 

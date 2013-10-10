@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ViewTracesIterator.hpp"
 #import "TracesGroupListenerProtocol.h"
+#import "settings/TracesDataViewSettings.h"
 
 namespace TraceClientCore
 {
@@ -26,6 +27,7 @@ class CTracesGroupListener;
     CGFloat                             m_LineHeight;
     NSRect                              m_LastVisibleRect;
     NSRect                              m_LastFrame;
+    CTracesDataViewSettings             m_Settings;
 }
 
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup;

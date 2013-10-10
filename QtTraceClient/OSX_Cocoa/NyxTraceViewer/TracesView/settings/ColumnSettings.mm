@@ -15,14 +15,16 @@
 CColumnSettings::CColumnSettings() :
 m_bAutoAdjust(true)
 {
-    m_MaxSize = NSZeroRect;
-    m_Size = NSZeroRect;
+    m_MaxSize = NSZeroSize;
+    m_Size = NSZeroSize;
+    m_Margins = {10, 0, 20, 0};
 }
 
 
 CColumnSettings::CColumnSettings(const CColumnSettings& settings) :
 m_MaxSize(settings.m_MaxSize),
 m_Size(settings.m_Size),
+m_Margins(settings.m_Margins),
 m_bAutoAdjust(settings.m_bAutoAdjust)
 {
     
@@ -47,8 +49,44 @@ const CColumnSettings& CColumnSettings::operator = (const CColumnSettings& setti
     {
         m_MaxSize = settings.m_MaxSize;
         m_Size = settings.m_Size;
+        m_Margins = settings.m_Margins;
         m_bAutoAdjust = settings.m_bAutoAdjust;
     }
     
     return *this;
 }
+
+
+/**
+ *
+ */
+void CColumnSettings::setMaxSize(const NSSize &size)
+{
+    m_MaxSize = size;
+    
+    if ( m_bAutoAdjust )
+    {
+        m_Size.width = MAX(m_Size.width, size.width);
+        m_Size.height = MAX(m_Size.height, size.height);
+    }
+}
+
+
+/**
+ *
+ */
+void CColumnSettings::setSize(const NSSize &size)
+{
+    m_Size = size;
+}
+
+
+/**
+ *
+ */
+void CColumnSettings::setMargins(const CColumnSettings::TMargins& margins)
+{
+    m_Margins = margins;
+}
+
+
