@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "TracesGroupListener.h"
+#import "settings/TracesDataViewSettings.h"
 
 
 namespace TraceClientCore
@@ -21,10 +22,12 @@ namespace TraceClientCore
 {
     NSScrollView*                   m_TracesScrollView;
     CTracesDataView*                m_TracesDataView;
+    CTracesDataViewSettings         m_Settings;
 }
 
 - (void) createTracesScrollView;
 - (void) createTracesDataView;
+- (void) initSettings;
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup;
 
 @end

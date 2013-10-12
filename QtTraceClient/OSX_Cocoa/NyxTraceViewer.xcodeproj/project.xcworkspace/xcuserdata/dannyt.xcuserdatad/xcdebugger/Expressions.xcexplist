@@ -3,33 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[CRepositoriesListCtrl mouseDown:]:RepositoriesListCtrl.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[CToggleFlatBtn mouseUp:]:ToggleFlatBtn.mm">
+         contextName = "-[CTracesDataView onTracesViewEndUpdate]:TracesDataView.mm">
          <PersistentStrings>
             <PersistentString
-               value = "[self target]">
-            </PersistentString>
-            <PersistentString
-               value = "[self action]">
+               value = "(frame.origin.y + frame.size.height) - (visibleRect.origin.y + visibleRect.size.height) ">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[CSelectionPanel onPanelSelectionChanged:]:SelectionPanel.mm">
+         contextName = "-[CTraceLineDisplay drawLine]:TraceLineDisplay.mm">
       </ContextState>
       <ContextState
-         contextName = "-[RepositoryListCtrlCell initWithRepositoryInfo:]:RepositoryListCtrlCell.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[CSelectionBar onBtnClicked:]:SelectionBar.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[CSelectionPanelBar onSelectionBarSelectedBtnChanged:]:SelectionPanelBar.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[CRepositoriesListCtrl addRepositoryInfo:]:RepositoriesListCtrl.mm">
+         contextName = "-[CTracesDataView initWithFrame:]:TracesDataView.mm">
       </ContextState>
       <ContextState
          contextName = "-[CTracesGroupItem controlTextDidEndEditing:]:TracesGroupItem.mm">
@@ -40,10 +25,37 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[CTracesDataView initWithFrame:]:TracesDataView.mm">
+         contextName = "-[CTraceLineDisplay drawTraceData:]:TraceLineDisplay.mm">
       </ContextState>
       <ContextState
          contextName = "-[CSelectionPanelBar initWithFrame:]:SelectionPanelBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CTracesDataView setSettings:]:TracesDataView.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CContentView onTracesViewEndUpdate]:ContentView.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CRepositoriesListCtrl addRepositoryInfo:]:RepositoriesListCtrl.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionPanel onPanelSelectionChanged:]:SelectionPanel.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionPanelBar onSelectionBarSelectedBtnChanged:]:SelectionPanelBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CTraceLineDisplay drawLineNumber:]:TraceLineDisplay.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CSelectionBar onBtnClicked:]:SelectionBar.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[CRepositoriesListCtrl mouseDown:]:RepositoriesListCtrl.mm">
+      </ContextState>
+      <ContextState
+         contextName = "-[RepositoryListCtrlCell toggleSelected]:RepositoryListCtrlCell.mm">
       </ContextState>
       <ContextState
          contextName = "-[CSelectionPanelBar onSourcesSelected:]:SelectionPanelBar.mm">
@@ -52,16 +64,16 @@
          contextName = "CTracesGroupListener::OnViewBeginUpdate(TraceClientCore::CTracesGroup*, TraceClientCore::CTracesView*):TracesGroupListener.mm">
       </ContextState>
       <ContextState
-         contextName = "-[RepositoryListCtrlCell toggleSelected]:RepositoryListCtrlCell.mm">
+         contextName = "-[RepositoryListCtrlCell initWithRepositoryInfo:]:RepositoryListCtrlCell.mm">
       </ContextState>
       <ContextState
-         contextName = "-[CContentView onTracesViewEndUpdate]:ContentView.mm">
-      </ContextState>
-      <ContextState
-         contextName = "-[CTracesDataView onTracesViewEndUpdate]:TracesDataView.mm">
+         contextName = "-[CToggleFlatBtn mouseUp:]:ToggleFlatBtn.mm">
          <PersistentStrings>
             <PersistentString
-               value = "(frame.origin.y + frame.size.height) - (visibleRect.origin.y + visibleRect.size.height) ">
+               value = "[self action]">
+            </PersistentString>
+            <PersistentString
+               value = "[self target]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

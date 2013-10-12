@@ -9,13 +9,13 @@
 #import <Cocoa/Cocoa.h>
 #import "ViewTracesIterator.hpp"
 #import "TracesGroupListenerProtocol.h"
-#import "settings/TracesDataViewSettings.h"
 
 namespace TraceClientCore
 {
     class CTracesGroup;
 }
 
+class CTracesDataViewSettings;
 class CTracesGroupListener;
 
 @interface CTracesDataView : NSView <CTracesGroupListenerProtocol>
@@ -23,15 +23,14 @@ class CTracesGroupListener;
     TraceClientCore::CTracesGroup*      m_pTracesGroup;
     CTracesGroupListener*               m_pTracesGroupListener;
     CViewTracesIterator                 m_Pos;
-    NSFont*                             m_pFont;
-    CGFloat                             m_LineHeight;
     NSRect                              m_LastVisibleRect;
     NSRect                              m_LastFrame;
-    CTracesDataViewSettings             m_Settings;
+    CTracesDataViewSettings*            m_pSettings;
 }
 
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup;
 - (void) onTracesViewBeginUpdate;
 - (void) onTracesViewEndUpdate;
+- (void) setSettings: (CTracesDataViewSettings*)pSettings;
 
 @end
