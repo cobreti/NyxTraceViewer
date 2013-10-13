@@ -10,7 +10,28 @@
 #define __NyxTraceViewer__ColumnSettings__
 
 #include <objc/objc.h>
+#include <Nyx.hpp>
 
+#include <list>
+
+
+class CColumnSettings;
+
+
+/**
+ *
+ */
+class IColumnSettingsListener
+{
+public:
+    
+    virtual void OnColumnSettingsSizeChanged( CColumnSettings* pSettings ) = 0;
+};
+
+
+/**
+ *
+ */
 class CColumnSettings
 {
 public:
@@ -25,6 +46,7 @@ public:
     
 public:
     CColumnSettings();
+    CColumnSettings(const Nyx::CAString& title);
     CColumnSettings(const CColumnSettings& settings);
     virtual ~CColumnSettings();
     
@@ -37,14 +59,25 @@ public:
     const TMargins&     getMargins() const          { return m_Margins; }
     void                setMargins(const TMargins& margins);
     
+    const Nyx::CAString&    Title() const           { return m_Title; }
+    Nyx::CAString&          Title()                 { return m_Title; }
+    
     const CColumnSettings& operator = (const CColumnSettings& settings);
+    
+    void AddListener( IColumnSettingsListener* pListener );
     
 protected:
     
-    NSSize          m_MaxSize;
-    NSSize          m_Size;
-    TMargins        m_Margins;
-    bool            m_bAutoAdjust;
+    typedef std::list<IColumnSettingsListener*> TListeners;
+    
+protected:
+    
+    NSSize              m_MaxSize;
+    NSSize              m_Size;
+    TMargins            m_Margins;
+    bool                m_bAutoAdjust;
+    Nyx::CAString       m_Title;
+    TListeners          m_Listeners;
 };
 
 

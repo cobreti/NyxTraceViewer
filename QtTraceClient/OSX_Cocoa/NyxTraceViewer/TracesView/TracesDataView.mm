@@ -82,6 +82,7 @@
         
         m_pTracesGroup->Listeners().Add(m_pTracesGroupListener);
         
+        m_Pos = CViewTracesIterator::FirstPos(m_pTracesGroup);
         [self setNeedsDisplay: YES];
     }
 }
@@ -97,12 +98,14 @@
     Nyx::UInt32     linesCount = m_pTracesGroup->LinesCount();
     CGFloat         height = linesCount * m_pSettings->getLineHeight() + 15;
     NSRect          frame = [self frame];
+    NSRect          superFrame = [[self superview] frame];
     
     frame.size.height = height;
     if ( frame.size.height != m_LastFrame.size.height )
     {
         NSSize  maxLineSize = m_pSettings->getMaxLineSize();
-        frame.size.width = maxLineSize.width;
+        frame.size.width = MAX(maxLineSize.width, superFrame.size.width);
+        frame.size.height = MAX(frame.size.height, superFrame.size.height);
         
         [self setFrame: frame];
     }

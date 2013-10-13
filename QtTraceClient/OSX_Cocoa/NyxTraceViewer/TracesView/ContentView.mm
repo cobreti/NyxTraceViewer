@@ -8,6 +8,9 @@
 
 #import "ContentView.h"
 #import "TracesDataView.h"
+#import "TracesDataHeader.h"
+
+#include <Nyx.hpp>
 
 
 @implementation CContentView
@@ -20,6 +23,11 @@
     }
     
     return self;
+}
+
+- (BOOL) isFlipped
+{
+    return YES;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -42,6 +50,7 @@
 - (void)awakeFromNib
 {
     [self initSettings];
+    [self createTracesDataHeader];
     [self createTracesScrollView];
     [self createTracesDataView];
 }
@@ -56,13 +65,15 @@
     
     m_TracesScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     
+    NSRect headerFrame = [m_TracesDataHeader frame];
+    
     [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesScrollView
                                                       attribute: NSLayoutAttributeTop
                                                       relatedBy: NSLayoutRelationEqual
                                                          toItem: self
                                                       attribute: NSLayoutAttributeTop
                                                      multiplier: 0
-                                                       constant: 0 ]];
+                                                       constant: headerFrame.size.height ]];
     
     [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesScrollView
                                                       attribute: NSLayoutAttributeLeft
@@ -86,16 +97,61 @@
                                                          toItem: self
                                                       attribute: NSLayoutAttributeHeight
                                                      multiplier: 1
-                                                       constant: 0 ]];
+                                                       constant: -headerFrame.size.height ]];
 }
 
 
 - (void) createTracesDataView
 {
-    m_TracesDataView = [[CTracesDataView alloc] initWithFrame: NSMakeRect(0, 0, 400, 200)];
+    m_TracesDataView = [[CTracesDataView alloc] initWithFrame: NSMakeRect(0, 0, 0, 0)];
     [m_TracesDataView setSettings: &m_Settings];
     [m_TracesScrollView setDocumentView: m_TracesDataView];
 }
+
+
+- (void) createTracesDataHeader
+{
+    m_TracesDataHeader = [[CTracesDataHeader alloc] initWithFrame: NSMakeRect(0, 0, 0, 0)];
+    [m_TracesDataHeader setSettings: &m_Settings];
+    [self addSubview: m_TracesDataHeader];
+    
+    NSRect headerFrame = [m_TracesDataHeader frame];
+    
+    m_TracesDataHeader.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesDataHeader
+                                                      attribute: NSLayoutAttributeTop
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeTop
+                                                     multiplier: 0
+                                                       constant: 0 ]];
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesDataHeader
+                                                      attribute: NSLayoutAttributeLeft
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeLeft
+                                                     multiplier: 0
+                                                       constant: 0 ]];
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesDataHeader
+                                                      attribute: NSLayoutAttributeWidth
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeWidth
+                                                     multiplier: 1
+                                                       constant: 0 ]];
+
+    [self addConstraint: [NSLayoutConstraint constraintWithItem: m_TracesDataHeader
+                                                      attribute: NSLayoutAttributeHeight
+                                                      relatedBy: NSLayoutRelationEqual
+                                                         toItem: self
+                                                      attribute: NSLayoutAttributeHeight
+                                                     multiplier: 0
+                                                       constant: headerFrame.size.height ]];
+}
+
 
 - (void) initSettings
 {
@@ -108,8 +164,8 @@
     colsOrder.push_back( CTracesDataViewSettings::eColumn_Data );
     m_Settings.setColumnsOrder(colsOrder);
     
-    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_LineNumber, CColumnSettings());
-    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_Data, CColumnSettings());
+    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_LineNumber, CColumnSettings(Nyx::CAString("#")));
+    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_Data, CColumnSettings(Nyx::CAString("Data")));
 }
 
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup

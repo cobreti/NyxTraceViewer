@@ -17,16 +17,19 @@ namespace TraceClientCore
 }
 
 @class CTracesDataView;
+@class CTracesDataHeader;
 
 @interface CContentView : NSView
 {
     NSScrollView*                   m_TracesScrollView;
     CTracesDataView*                m_TracesDataView;
+    CTracesDataHeader*              m_TracesDataHeader;
     CTracesDataViewSettings         m_Settings;
 }
 
 - (void) createTracesScrollView;
 - (void) createTracesDataView;
+- (void) createTracesDataHeader;
 - (void) initSettings;
 - (void) onTracesGroupChanged: (TraceClientCore::CTracesGroup*)pTracesGroup;
 

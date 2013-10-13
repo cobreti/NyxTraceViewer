@@ -6,9 +6,11 @@
 //  Copyright (c) 2013 Danny Thibaudeau. All rights reserved.
 //
 
+#import "ColumnSettingsListenerProtocol.h"
+
 #include "TracesDataViewSettings.h"
 
-
+#include <algorithm>
 
 /**
  *
@@ -92,6 +94,7 @@ void CTracesDataViewSettings::setColumnsOrder(const CTracesDataViewSettings::TCo
 void CTracesDataViewSettings::setColumnSettings(CTracesDataViewSettings::EColumns col, const CColumnSettings &settings)
 {
     m_ColumnsSettings[col] = settings;
+    m_ColumnsSettings[col].AddListener( static_cast<IColumnSettingsListener*>(this) );
 }
 
 
@@ -117,5 +120,30 @@ NSSize CTracesDataViewSettings::getMaxLineSize() const
     }
     
     return size;
+}
+
+
+/**
+ *
+ */
+void CTracesDataViewSettings::OnColumnSettingsSizeChanged(CColumnSettings *pSettings)
+{
+    auto delegate = [pSettings] (NSObject* pListener) {
+        if ( [pListener conformsToProtocol:@protocol(CColumnSettingsListenerProtocol)] )
+        {
+            [(NSObject<CColumnSettingsListenerProtocol>*) pListener onColumnSettingsSizeChanged: pSettings];
+        }
+    };
+    
+    std::for_each(m_ColumnsSettingsListener.begin(), m_ColumnsSettingsListener.end(), delegate);    
+}
+
+
+/**
+ *
+ */
+void CTracesDataViewSettings::AddColumnsSettingsListener(NSObject *pListener)
+{
+    m_ColumnsSettingsListener.push_back(pListener);
 }
 

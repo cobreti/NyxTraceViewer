@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */; };
+		162AADF2180A17040007B8EE /* TracesDataHeader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADF1180A17040007B8EE /* TracesDataHeader.mm */; };
 		164B6D6517EB66C100B25E5E /* TracesGroupMgrListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */; };
 		164B6D7C17ED09C000B25E5E /* ContentView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D7B17ED09C000B25E5E /* ContentView.mm */; };
 		164B6D7F17ED0C3400B25E5E /* TracesDataView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D7E17ED0C3400B25E5E /* TracesDataView.mm */; };
@@ -57,6 +58,9 @@
 		162AADEC18010D240007B8EE /* TracesIterator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesIterator.cpp; path = ../../TraceClientCore/sources/TracesIterator.cpp; sourceTree = "<group>"; };
 		162AADED1803377D0007B8EE /* TraceLineDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TraceLineDisplay.h; path = TracesView/TraceLineDisplay.h; sourceTree = "<group>"; };
 		162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TraceLineDisplay.mm; path = TracesView/TraceLineDisplay.mm; sourceTree = "<group>"; };
+		162AADF0180A17040007B8EE /* TracesDataHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesDataHeader.h; path = TracesView/TracesDataHeader.h; sourceTree = "<group>"; };
+		162AADF1180A17040007B8EE /* TracesDataHeader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesDataHeader.mm; path = TracesView/TracesDataHeader.mm; sourceTree = "<group>"; };
+		162AADF3180A2C480007B8EE /* ColumnSettingsListenerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColumnSettingsListenerProtocol.h; path = TracesView/settings/ColumnSettingsListenerProtocol.h; sourceTree = "<group>"; };
 		164B6D6317EB667500B25E5E /* TracesGroupMgrListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupMgrListener.h; path = SelectionPanel/TracesGroupMgrListener.h; sourceTree = "<group>"; };
 		164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupMgrListener.mm; path = SelectionPanel/TracesGroupMgrListener.mm; sourceTree = "<group>"; };
 		164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesViewRepoObserver.cpp; path = ../../TraceClientCore/sources/TracesViewRepoObserver.cpp; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 				16CE6DC917F8B81F000E9F69 /* settings */,
 				164B6D7A17ED09C000B25E5E /* ContentView.h */,
 				164B6D7B17ED09C000B25E5E /* ContentView.mm */,
+				162AADF0180A17040007B8EE /* TracesDataHeader.h */,
+				162AADF1180A17040007B8EE /* TracesDataHeader.mm */,
 				164B6D7D17ED0C3400B25E5E /* TracesDataView.h */,
 				164B6D7E17ED0C3400B25E5E /* TracesDataView.mm */,
 				162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */,
@@ -315,6 +321,7 @@
 				16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */,
 				16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */,
 				16CE6DCE17F8F601000E9F69 /* TracesDataViewSettings.h */,
+				162AADF3180A2C480007B8EE /* ColumnSettingsListenerProtocol.h */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -481,6 +488,7 @@
 				164B6D7C17ED09C000B25E5E /* ContentView.mm in Sources */,
 				168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */,
 				162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */,
+				162AADF2180A17040007B8EE /* TracesDataHeader.mm in Sources */,
 				168F948217E79E9F006AA407 /* ChannelsListener.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

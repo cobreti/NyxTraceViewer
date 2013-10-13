@@ -13,8 +13,10 @@
 
 #include <map>
 #include <vector>
+#include <list>
 
-class CTracesDataViewSettings
+
+class CTracesDataViewSettings : public IColumnSettingsListener
 {
 public:
     
@@ -48,9 +50,16 @@ public:
     
     NSSize                      getMaxLineSize() const;
     
+    void AddColumnsSettingsListener(NSObject* pListener);
+    
+public:
+    
+    virtual void OnColumnSettingsSizeChanged( CColumnSettings* pSettings );
+    
 protected:
     
-    typedef     std::map<EColumns, CColumnSettings>     TColumnsSettingsTable;
+    typedef     std::map<EColumns, CColumnSettings>                             TColumnsSettingsTable;
+    typedef     std::list<NSObject*>                                            TColumnsSettingsListeners;
     
 protected:
     
@@ -58,6 +67,7 @@ protected:
     TColumnsSettingsTable       m_ColumnsSettings;
     CGFloat                     m_LineHeight;
     NSFont*                     m_pFont;
+    TColumnsSettingsListeners   m_ColumnsSettingsListener;
 };
 
 #endif /* defined(__NyxTraceViewer__TracesDataViewSettings__) */

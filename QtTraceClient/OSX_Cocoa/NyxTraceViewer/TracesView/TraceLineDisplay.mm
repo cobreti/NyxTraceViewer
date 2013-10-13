@@ -116,9 +116,12 @@
 {
     Nyx::UInt32         LineNumber = m_TracePos.getLineNumber() + 1;
     NSString*           text = [NSString stringWithFormat: @"%d", LineNumber ];
-    CGSize              size = [text sizeWithAttributes: m_TextAttributes];
     CColumnSettings&    settings = m_pSettings->rgetColumnSettings( CTracesDataViewSettings::eColumn_LineNumber );
+    CGSize              size = [text sizeWithAttributes: m_TextAttributes];
     NSSize              colMaxSize = settings.getMaxSize();
+    
+//    size.width += settings.getMargins().left + settings.getMargins().right;
+//    size.height += settings.getMargins().top + settings.getMargins().bottom;
     
     m_DisplayPos.x += settings.getMargins().left;
     
@@ -142,6 +145,9 @@
     CColumnSettings&    settings = m_pSettings->rgetColumnSettings( CTracesDataViewSettings::eColumn_Data );
     NSSize              colMaxSize = settings.getMaxSize();
     
+//    size.width += settings.getMargins().left + settings.getMargins().right;
+//    size.height += settings.getMargins().top + settings.getMargins().bottom;
+
     m_DisplayPos.x += settings.getMargins().left;
 
     colMaxSize.width = MAX(colMaxSize.width, size.width);
