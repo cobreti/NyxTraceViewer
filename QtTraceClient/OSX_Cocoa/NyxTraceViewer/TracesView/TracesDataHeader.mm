@@ -42,7 +42,8 @@
     CTracesDataViewSettings::TColumnsOrder      columnsOrder = m_pSettings->getColumnsOrder();
     size_t                                      index = 0;
     NSRect                                      rc = NSZeroRect;
-
+    CGFloat                                     height = [m_pFont ascender] - [m_pFont descender];
+    
     rc.origin.y = m_TopMargin;
     
     NSDictionary*                               textAttributes = [[NSDictionary alloc] initWithObjectsAndKeys: m_pFont, NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];;
@@ -53,6 +54,7 @@
         CColumnSettings&                        rSettings = m_pSettings->rgetColumnSettings(col);
         
         rc.size = rSettings.getSize();
+        rc.size.height = height + m_BottomMargin;
         rc.origin.x += rSettings.getMargins().left;
         
         if ( rc.size.width > 1 )
@@ -76,8 +78,44 @@
 {
     m_pSettings = pSettings;
     
+    [self initMinColsSize];
+    
     m_pSettings->AddColumnsSettingsListener(self);
 }
+
+
+- (void) initMinColsSize
+{
+    CTracesDataViewSettings::TColumnsOrder      columnsOrder = m_pSettings->getColumnsOrder();
+    size_t                                      index = 0;
+    NSSize                                      colSize;
+    
+    
+    NSDictionary*                               textAttributes = [[NSDictionary alloc] initWithObjectsAndKeys: m_pFont, NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];;
+    
+    while (index < columnsOrder.size())
+    {
+        CTracesDataViewSettings::EColumns       col = columnsOrder[index];
+        CColumnSettings&                        rSettings = m_pSettings->rgetColumnSettings(col);
+        NSSize                                  textSize;
+        
+        colSize = rSettings.getMaxSize();
+        
+        NSString*   text = [[NSString alloc] initWithCString: rSettings.Title().c_str() encoding: NSMacOSRomanStringEncoding];
+        textSize = [text sizeWithAttributes:textAttributes];
+        
+        if (textSize.width > colSize.width)
+        {
+            colSize.width = textSize.width;
+            rSettings.setMaxSize(colSize);
+        }
+        
+        ++ index;
+    }
+    
+    [textAttributes release];
+}
+
 
 - (void)onColumnSettingsSizeChanged: (CColumnSettings*) pSettings
 {

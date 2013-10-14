@@ -23,6 +23,8 @@ public:
     enum EColumns
     {
         eColumn_LineNumber = 0,
+        eColumn_TickCount,
+        eColumn_ThreadId,
         eColumn_Data,
         eColumnsCount
     };

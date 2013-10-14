@@ -19,7 +19,7 @@
     if (self)
     {
         m_pSettings = NULL;
-        m_DisplayPos = NSZeroPoint;
+        m_DisplayRect = NSZeroRect;
         m_MaxPos = NSZeroPoint;
         m_ViewRect = NSZeroRect;
         m_TextAttributes = NULL;
@@ -52,13 +52,13 @@
 
 - (void)setDisplayPos: (NSPoint) DisplayPos
 {
-    m_DisplayPos = DisplayPos;
+    m_DisplayRect.origin = DisplayPos;
 }
 
 
 - (NSPoint)getDisplayPos
 {
-    return m_DisplayPos;
+    return m_DisplayRect.origin;
 }
 
 
@@ -84,14 +84,14 @@
     if ( m_TextAttributes )
         [m_TextAttributes release];
     
-    m_MaxPos = NSMakePoint(0, m_DisplayPos.y + MAX(m_ViewRect.size.height + m_pSettings->getLineHeight()*2, m_pSettings->getLineHeight() ));
+    m_MaxPos = NSMakePoint(0, m_DisplayRect.origin.y + MAX(m_ViewRect.size.height + m_pSettings->getLineHeight()*2, m_pSettings->getLineHeight() ));
     m_TextAttributes = [[NSDictionary alloc] initWithObjectsAndKeys: m_pSettings->getFont(), NSFontAttributeName, [NSColor blackColor], NSForegroundColorAttributeName, nil];
 }
 
 
 - (BOOL)doneDrawing
 {
-    if ( !m_TracePos.Valid() || m_DisplayPos.y > m_MaxPos.y )
+    if ( !m_TracePos.Valid() || m_DisplayRect.origin.y > m_MaxPos.y )
         return YES;
     
     return NO;
@@ -100,13 +100,37 @@
 - (void)drawLine
 {
     TraceClientCore::CTraceData*                    pTraceData = m_TracePos.TraceData();
+    CTracesDataViewSettings::TColumnsOrder          columnsOrder = m_pSettings->getColumnsOrder();
+    size_t                                          index = 0;
+
+    m_DisplayRect.origin.x = 0;
     
-    m_DisplayPos.x = 0;
+    while (index < columnsOrder.size())
+    {
+        CTracesDataViewSettings::EColumns       col = columnsOrder[index];
+        CColumnSettings&                        rSettings = m_pSettings->rgetColumnSettings(col);
+        
+        m_DisplayRect.size = rSettings.getSize();
+        m_DisplayRect.origin.x += rSettings.getMargins().left;
+
+        switch (col)
+        {
+            case CTracesDataViewSettings::eColumn_LineNumber:
+                [self drawLineNumber: pTraceData];
+                break;
+            case CTracesDataViewSettings::eColumn_Data:
+                [self drawTraceData: pTraceData];
+            default:
+                break;
+        };
+        
+        m_DisplayRect.origin.x += m_DisplayRect.size.width;
+        m_DisplayRect.origin.x += rSettings.getMargins().right;
+
+        ++ index;
+    }
     
-    [self drawLineNumber: pTraceData];
-    [self drawTraceData: pTraceData];
-    
-    m_DisplayPos.y += m_pSettings->getLineHeight();
+    m_DisplayRect.origin.y += m_pSettings->getLineHeight();
     
     ++ m_TracePos;
 }
@@ -120,21 +144,13 @@
     CGSize              size = [text sizeWithAttributes: m_TextAttributes];
     NSSize              colMaxSize = settings.getMaxSize();
     
-//    size.width += settings.getMargins().left + settings.getMargins().right;
-//    size.height += settings.getMargins().top + settings.getMargins().bottom;
-    
-    m_DisplayPos.x += settings.getMargins().left;
     
     colMaxSize.width = MAX(colMaxSize.width, size.width);
     colMaxSize.height = MAX(colMaxSize.height, size.height);
     
     settings.setMaxSize(colMaxSize);
     
-    [text drawAtPoint:m_DisplayPos withAttributes: m_TextAttributes];
-    
-    m_DisplayPos.x += colMaxSize.width;
-    m_DisplayPos.x += settings.getMargins().right;
-    
+    [text drawInRect:m_DisplayRect withAttributes:m_TextAttributes];
 }
 
 
@@ -145,20 +161,12 @@
     CColumnSettings&    settings = m_pSettings->rgetColumnSettings( CTracesDataViewSettings::eColumn_Data );
     NSSize              colMaxSize = settings.getMaxSize();
     
-//    size.width += settings.getMargins().left + settings.getMargins().right;
-//    size.height += settings.getMargins().top + settings.getMargins().bottom;
-
-    m_DisplayPos.x += settings.getMargins().left;
-
     colMaxSize.width = MAX(colMaxSize.width, size.width);
     colMaxSize.height = MAX(colMaxSize.height, size.height);
     
     settings.setMaxSize(colMaxSize);
     
-    [text drawAtPoint:m_DisplayPos withAttributes: m_TextAttributes];
-
-    m_DisplayPos.x += colMaxSize.width;
-    m_DisplayPos.x += settings.getMargins().right;
+    [text drawInRect:m_DisplayRect withAttributes:m_TextAttributes];
 }
 
 

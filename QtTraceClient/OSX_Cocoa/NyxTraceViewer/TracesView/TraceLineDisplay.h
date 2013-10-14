@@ -15,7 +15,7 @@ class CTracesDataViewSettings;
 @interface CTraceLineDisplay : NSObject
 {
     CViewTracesIterator             m_TracePos;
-    NSPoint                         m_DisplayPos;
+    NSRect                          m_DisplayRect;
     NSRect                          m_ViewRect;
     CTracesDataViewSettings*        m_pSettings;
     NSPoint                         m_MaxPos;

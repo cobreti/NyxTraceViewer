@@ -20,6 +20,7 @@ class CTracesDataViewSettings;
 }
 
 - (void) setSettings: (CTracesDataViewSettings*)pSettings;
+- (void) initMinColsSize;
 
 - (void)onColumnSettingsSizeChanged: (CColumnSettings*) pSettings;
 

@@ -161,10 +161,14 @@
     CTracesDataViewSettings::TColumnsOrder      colsOrder;
     
     colsOrder.push_back( CTracesDataViewSettings::eColumn_LineNumber );
+    colsOrder.push_back( CTracesDataViewSettings::eColumn_TickCount );
+    colsOrder.push_back( CTracesDataViewSettings::eColumn_ThreadId );
     colsOrder.push_back( CTracesDataViewSettings::eColumn_Data );
     m_Settings.setColumnsOrder(colsOrder);
     
-    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_LineNumber, CColumnSettings(Nyx::CAString("#")));
+    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_LineNumber, CColumnSettings(Nyx::CAString("Line #")));
+    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_TickCount, CColumnSettings(Nyx::CAString("TickCount")));
+    m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_ThreadId, CColumnSettings(Nyx::CAString("ThreadId")));
     m_Settings.setColumnSettings(CTracesDataViewSettings::eColumn_Data, CColumnSettings(Nyx::CAString("Data")));
 }
 
