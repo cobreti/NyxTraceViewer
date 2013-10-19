@@ -121,7 +121,7 @@
 {
     m_SourcesView = [[CSourcesView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
     [self addSubview: m_SourcesView];
-    [m_SourcesView setHidden: NO];
+    [m_SourcesView setHidden: YES];
     
     m_SourcesView.translatesAutoresizingMaskIntoConstraints = NO;
 
@@ -163,7 +163,7 @@
 {
     m_TracesGroupsView = [[CTracesGroupsView alloc] initWithFrame: NSMakeRect(0, 50, 200, 400)];
     [self addSubview: m_TracesGroupsView];
-    [m_TracesGroupsView setHidden: YES];
+    [m_TracesGroupsView setHidden: NO];
     
     m_TracesGroupsView.translatesAutoresizingMaskIntoConstraints = NO;
     

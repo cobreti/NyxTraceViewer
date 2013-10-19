@@ -118,8 +118,15 @@
             case CTracesDataViewSettings::eColumn_LineNumber:
                 [self drawLineNumber: pTraceData];
                 break;
+            case CTracesDataViewSettings::eColumn_TickCount:
+                [self drawTickCount: pTraceData];
+                break;
+            case CTracesDataViewSettings::eColumn_ThreadId:
+                [self drawThreadId: pTraceData];
+                break;
             case CTracesDataViewSettings::eColumn_Data:
                 [self drawTraceData: pTraceData];
+                break;
             default:
                 break;
         };
@@ -144,6 +151,38 @@
     CGSize              size = [text sizeWithAttributes: m_TextAttributes];
     NSSize              colMaxSize = settings.getMaxSize();
     
+    
+    colMaxSize.width = MAX(colMaxSize.width, size.width);
+    colMaxSize.height = MAX(colMaxSize.height, size.height);
+    
+    settings.setMaxSize(colMaxSize);
+    
+    [text drawInRect:m_DisplayRect withAttributes:m_TextAttributes];
+}
+
+
+- (void)drawTickCount: (TraceClientCore::CTraceData*) pTraceData
+{
+    NSString*           text = [[NSString alloc] initWithBytes: pTraceData->TickCount().c_str() length: pTraceData->TickCount().length()*sizeof(wchar_t) encoding: NSUTF32LittleEndianStringEncoding];
+    CGSize              size = [text sizeWithAttributes: m_TextAttributes];
+    CColumnSettings&    settings = m_pSettings->rgetColumnSettings( CTracesDataViewSettings::eColumn_TickCount );
+    NSSize              colMaxSize = settings.getMaxSize();
+    
+    colMaxSize.width = MAX(colMaxSize.width, size.width);
+    colMaxSize.height = MAX(colMaxSize.height, size.height);
+    
+    settings.setMaxSize(colMaxSize);
+    
+    [text drawInRect:m_DisplayRect withAttributes:m_TextAttributes];
+}
+
+
+- (void)drawThreadId: (TraceClientCore::CTraceData*) pTraceData
+{
+    NSString*           text = [[NSString alloc] initWithBytes: pTraceData->ThreadId().c_str() length: pTraceData->ThreadId().length()*sizeof(wchar_t) encoding: NSUTF32LittleEndianStringEncoding];
+    CGSize              size = [text sizeWithAttributes: m_TextAttributes];
+    CColumnSettings&    settings = m_pSettings->rgetColumnSettings( CTracesDataViewSettings::eColumn_ThreadId );
+    NSSize              colMaxSize = settings.getMaxSize();
     
     colMaxSize.width = MAX(colMaxSize.width, size.width);
     colMaxSize.height = MAX(colMaxSize.height, size.height);

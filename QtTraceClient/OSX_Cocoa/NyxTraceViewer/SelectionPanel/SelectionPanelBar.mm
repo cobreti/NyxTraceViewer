@@ -48,7 +48,7 @@ enum {
         [pSourcesBtn setStateImg:kToggleFlatBtn_OnState withResourceImage:@"sources_visible" withSize:NSMakeSize(16, 16)];
         [pSourcesBtn setId: kSelectionPanelBar_SourcesPanel];
                 
-        [pSourcesBtn setState: kToggleFlatBtn_OnState];
+        [pChannelsBtn setState: kToggleFlatBtn_OnState];
         [m_SelectionBar addBtn: pSourcesBtn];
         [m_SelectionBar addBtn: pChannelsBtn];
         [m_SelectionBar calcSize];
