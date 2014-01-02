@@ -5,6 +5,7 @@ QT += xml
 QT += widgets
 TARGET = NyxTraceViewer
 TEMPLATE = app
+NyxPath=../../../Nyx
 SOURCES += ../Sources/TracesView.cpp \
     ../Sources/main.cpp \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -131,7 +132,7 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/ViewItemInserter.hpp \
     ../Sources/View/ViewItemLineNumberPainter.hpp \
     ../Sources/View/ViewItemsNodeObjectsPool.hpp \
-    ../Sources/TraceClientApp.hpp \
+    ../Sources/TraceClientApp.h \
     ../Sources/View/SettingsToolBar.hpp \
     ../Sources/View/SessionViewItems.hpp \
     ../Sources/View/ModuleViewItems.hpp \
@@ -160,9 +161,7 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/ViewItemsModulesListeners.hpp \
     ../Sources/TracesWindow.hpp \
     ../Sources/TracesWindows.hpp \
-    ../Sources/TraceClientApp.h \
     ../Sources/MainWindow/MainWindow.hpp \
-    ../Sources/MainWindow/ChannelsMgnt.hpp \
     ../Sources/ChannelsMgnt/ChannelsMgnt.hpp \
     ../Sources/ChannelsMgnt/CChannelTreeItem.hpp \
     ../Sources/ChannelsMgnt/CChannelTreeItemDelegate.hpp \
@@ -206,52 +205,52 @@ MOC_DIR = ../MOC
 UI_DIR = ../UI
 INCLUDEPATH += ../Sources
 INCLUDEPATH += ../UI
-INCLUDEPATH += $(NyxPath)/include/
-INCLUDEPATH += $(NyxPath)/include/NyxNet
+INCLUDEPATH += $${NyxPath}/include/
+INCLUDEPATH += $${NyxPath}/include/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
-mac:INCLUDEPATH += $(NyxPath)/include/OSX
-mac:INCLUDEPATH += $(NyxPath)/include/OSX/NyxNet
+mac:INCLUDEPATH += $${NyxPath}/include/OSX
+mac:INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 
-CONFIG(Debug_64) {
-    mac::PRE_TARGETDEPS += ../../Lib/OSX/Debug_64/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_64/libNyxNet.a
+CONFIG(Debug_64, Debug_64 | Release_64) {
+    mac::PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
+    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
     mac:LIBS += -lTraceClientCore \
-        -L../../Lib/OSX/Debug_64
+        -L../../Lib/Qt/Debug_64
     mac:LIBS += -lNyxBase \
-        -L$(NyxPath)/Lib/OSX/Debug_64
+        -L$${NyxPath}/Lib/Qt/Debug_64
     mac:LIBS += -lNyxNet \
-        -L$(NyxPath)/Lib/OSX/Debug_64
+        -L$${NyxPath}/Lib/Qt/Debug_64
     mac:LIBS += -lNyxWebSvr \
-        -L$(NyxPath)/Lib/OSX/Debug_64
+        -L$${NyxPath}/Lib/Qt/Debug_64
     mac:LIBS += -lssl \
-        -L$(NyxPath)/Lib/OSX/OpenSSL_64
+        -L$${NyxPath}/Lib/OSX/OpenSSL_64
     mac:LIBS += -lcrypto \
-        -L$(NyxPath)/Lib/OSX/OpenSSL_64
+        -L$${NyxPath}/Lib/OSX/OpenSSL_64
     mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Debug_64
     OBJECTS_DIR = ./Debug_64
     DEFINES += _DEBUG
 }
 
-CONFIG(Release_64) {
-    mac::PRE_TARGETDEPS += ../../Lib/OSX/Release_64/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Release_64/libNyxNet.a
+CONFIG(Release_64, Debug_64 | Release_64) {
+    mac::PRE_TARGETDEPS += ../../Lib/Qt/Release_64/libTraceClientCore.a
+    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Release_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Release_64/libNyxNet.a
     mac:LIBS += -lTraceClientCore \
-        -L../../Lib/OSX/Release_64
+        -L../../Lib/Qt/Release_64
     mac:LIBS += -lNyxBase \
-        -L$(NyxPath)/Lib/OSX/Release_64
+        -L$${NyxPath}/Lib/Qt/Release_64
     mac:LIBS += -lNyxNet \
-        -L$(NyxPath)/Lib/OSX/Release_64
+        -L$${NyxPath}/Lib/Qt/Release_64
     mac:LIBS += -lNyxWebSvr \
-        -L$(NyxPath)/Lib/OSX/Release_64
+        -L$${NyxPath}/Lib/Qt/Release_64
     mac:LIBS += -lssl \
-        -L$(NyxPath)/Lib/OSX/OpenSSL_64
+        -L$${NyxPath}/Lib/OSX/OpenSSL_64
     mac:LIBS += -lcrypto \
-        -L$(NyxPath)/Lib/OSX/OpenSSL_64
+        -L$${NyxPath}/Lib/OSX/OpenSSL_64
     mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Release_64
     OBJECTS_DIR = ./Release_64
