@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		16077A8B18130CD3000897A7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16077A8A18130CD3000897A7 /* Preferences.xib */; };
+		16077A8E18131CB4000897A7 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16077A8D18131CB4000897A7 /* PrefsWindowController.m */; };
 		162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */; };
 		162AADF2180A17040007B8EE /* TracesDataHeader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADF1180A17040007B8EE /* TracesDataHeader.mm */; };
 		164B6D6517EB66C100B25E5E /* TracesGroupMgrListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */; };
@@ -54,6 +56,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		16077A8A18130CD3000897A7 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		16077A8C18131CB4000897A7 /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
+		16077A8D18131CB4000897A7 /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
 		162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListenerProtocol.h; path = TracesView/TracesGroupListenerProtocol.h; sourceTree = "<group>"; };
 		162AADEC18010D240007B8EE /* TracesIterator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesIterator.cpp; path = ../../TraceClientCore/sources/TracesIterator.cpp; sourceTree = "<group>"; };
 		162AADED1803377D0007B8EE /* TraceLineDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TraceLineDisplay.h; path = TracesView/TraceLineDisplay.h; sourceTree = "<group>"; };
@@ -246,8 +251,11 @@
 				165D73E317BD98220024CB1F /* Supporting Files */,
 				165D73F117BD98220024CB1F /* MainMenu.xib */,
 				16FD8D4117CA2E1B00718001 /* TracesWindow.xib */,
+				16077A8A18130CD3000897A7 /* Preferences.xib */,
 				16FD8D4517CA2FC000718001 /* TracesWindowController.h */,
 				16FD8D4617CA2FC000718001 /* TracesWindowController.mm */,
+				16077A8C18131CB4000897A7 /* PrefsWindowController.h */,
+				16077A8D18131CB4000897A7 /* PrefsWindowController.m */,
 			);
 			path = NyxTraceViewer;
 			sourceTree = "<group>";
@@ -447,6 +455,7 @@
 				16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */,
 				16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */,
 				16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */,
+				16077A8B18130CD3000897A7 /* Preferences.xib in Resources */,
 				16D0255417DB654600C4FD48 /* sources_visible.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -464,6 +473,7 @@
 				16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */,
 				16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */,
 				16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */,
+				16077A8E18131CB4000897A7 /* PrefsWindowController.m in Sources */,
 				16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */,
 				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
 				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
