@@ -6,6 +6,7 @@ QT += widgets
 TARGET = NyxTraceViewer
 TEMPLATE = app
 NyxPath=../../../Nyx
+DEFINES += STDCONSTRUCT
 SOURCES += ../Sources/TracesView.cpp \
     ../Sources/main.cpp \
     ../Sources/Dialogs/NewViewDlg.cpp \
