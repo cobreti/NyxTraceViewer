@@ -39,6 +39,8 @@
     
     CTracesWindowController*    pWndController = [[CTracesWindowController alloc] initWithWindowNibName:@"TracesWindow"];
     [pWndController showWindow:self];
+    
+    mPrefsController = [[PrefsWindowController alloc] initWithWindowNibName:@"Preferences"];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
@@ -49,6 +51,16 @@
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem
 {
     return YES;
+}
+
+- (IBAction)onPreferences: (id)sender
+{
+//    [[[NSApplication sharedApplication] mainWindow] resignMainWindow];
+//    [[[NSApplication sharedApplication] mainWindow] resignKeyWindow];
+    
+    
+    [[mPrefsController window] makeKeyAndOrderFront: nil];
+    [mPrefsController showWindow: nil];
 }
 
 @end

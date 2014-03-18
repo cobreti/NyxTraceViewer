@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		16077A8B18130CD3000897A7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16077A8A18130CD3000897A7 /* Preferences.xib */; };
-		16077A8E18131CB4000897A7 /* PrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16077A8D18131CB4000897A7 /* PrefsWindowController.m */; };
+		16145342187748EE00191269 /* PrefsWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16145341187748EE00191269 /* PrefsWindowController.mm */; };
+		161453461877491700191269 /* ConnectionSettingsControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161453451877491700191269 /* ConnectionSettingsControl.mm */; };
+		161453491877495E00191269 /* ConnectionSettingsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161453481877495E00191269 /* ConnectionSettingsView.mm */; };
 		162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */; };
 		162AADF2180A17040007B8EE /* TracesDataHeader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADF1180A17040007B8EE /* TracesDataHeader.mm */; };
 		164B6D6517EB66C100B25E5E /* TracesGroupMgrListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */; };
@@ -57,8 +59,12 @@
 
 /* Begin PBXFileReference section */
 		16077A8A18130CD3000897A7 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
-		16077A8C18131CB4000897A7 /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefsWindowController.h; sourceTree = "<group>"; };
-		16077A8D18131CB4000897A7 /* PrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefsWindowController.m; sourceTree = "<group>"; };
+		16145340187748EE00191269 /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsWindowController.h; path = Preferences/PrefsWindowController.h; sourceTree = "<group>"; };
+		16145341187748EE00191269 /* PrefsWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PrefsWindowController.mm; path = Preferences/PrefsWindowController.mm; sourceTree = "<group>"; };
+		161453441877491700191269 /* ConnectionSettingsControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionSettingsControl.h; path = Preferences/ConnectionSettings/ConnectionSettingsControl.h; sourceTree = "<group>"; };
+		161453451877491700191269 /* ConnectionSettingsControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ConnectionSettingsControl.mm; path = Preferences/ConnectionSettings/ConnectionSettingsControl.mm; sourceTree = "<group>"; };
+		161453471877495E00191269 /* ConnectionSettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionSettingsView.h; path = Preferences/ConnectionSettings/ConnectionSettingsView.h; sourceTree = "<group>"; };
+		161453481877495E00191269 /* ConnectionSettingsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ConnectionSettingsView.mm; path = Preferences/ConnectionSettings/ConnectionSettingsView.mm; sourceTree = "<group>"; };
 		162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListenerProtocol.h; path = TracesView/TracesGroupListenerProtocol.h; sourceTree = "<group>"; };
 		162AADEC18010D240007B8EE /* TracesIterator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesIterator.cpp; path = ../../TraceClientCore/sources/TracesIterator.cpp; sourceTree = "<group>"; };
 		162AADED1803377D0007B8EE /* TraceLineDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TraceLineDisplay.h; path = TracesView/TraceLineDisplay.h; sourceTree = "<group>"; };
@@ -165,6 +171,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1614533F187748DC00191269 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				161453431877490900191269 /* ConnectionSettings */,
+				16145340187748EE00191269 /* PrefsWindowController.h */,
+				16145341187748EE00191269 /* PrefsWindowController.mm */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		161453431877490900191269 /* ConnectionSettings */ = {
+			isa = PBXGroup;
+			children = (
+				161453441877491700191269 /* ConnectionSettingsControl.h */,
+				161453451877491700191269 /* ConnectionSettingsControl.mm */,
+				161453471877495E00191269 /* ConnectionSettingsView.h */,
+				161453481877495E00191269 /* ConnectionSettingsView.mm */,
+			);
+			name = ConnectionSettings;
+			sourceTree = "<group>";
+		};
 		162AADEA1800F0DE0007B8EE /* references */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +269,7 @@
 		165D73E217BD98220024CB1F /* NyxTraceViewer */ = {
 			isa = PBXGroup;
 			children = (
+				1614533F187748DC00191269 /* Preferences */,
 				164B6D7917ED097D00B25E5E /* TracesView */,
 				16D0255517DB663600C4FD48 /* SelectionPanel */,
 				16FD8D5E17D234C200718001 /* Controls */,
@@ -254,8 +282,6 @@
 				16077A8A18130CD3000897A7 /* Preferences.xib */,
 				16FD8D4517CA2FC000718001 /* TracesWindowController.h */,
 				16FD8D4617CA2FC000718001 /* TracesWindowController.mm */,
-				16077A8C18131CB4000897A7 /* PrefsWindowController.h */,
-				16077A8D18131CB4000897A7 /* PrefsWindowController.m */,
 			);
 			path = NyxTraceViewer;
 			sourceTree = "<group>";
@@ -473,7 +499,6 @@
 				16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */,
 				16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */,
 				16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */,
-				16077A8E18131CB4000897A7 /* PrefsWindowController.m in Sources */,
 				16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */,
 				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
 				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
@@ -490,11 +515,14 @@
 				168F946017DFD4EB006AA407 /* CellsLayout.mm in Sources */,
 				168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */,
 				168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */,
+				161453461877491700191269 /* ConnectionSettingsControl.mm in Sources */,
 				16CE6DC317EF6CCD000E9F69 /* TracesGroupListener.mm in Sources */,
 				168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */,
 				164B6D6517EB66C100B25E5E /* TracesGroupMgrListener.mm in Sources */,
+				16145342187748EE00191269 /* PrefsWindowController.mm in Sources */,
 				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */,
 				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
+				161453491877495E00191269 /* ConnectionSettingsView.mm in Sources */,
 				164B6D7C17ED09C000B25E5E /* ContentView.mm in Sources */,
 				168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */,
 				162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */,

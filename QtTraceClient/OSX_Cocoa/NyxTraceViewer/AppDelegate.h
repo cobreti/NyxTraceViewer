@@ -7,14 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PrefsWindowController.h"
 #include <Nyx.hpp>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
 
+    PrefsWindowController*     mPrefsController;
 }
 
 @property (assign) IBOutlet NSWindow *window;
 
 - (BOOL)validateToolbarItem:(NSToolbarItem *)theItem;
+- (IBAction)onPreferences: (id)sender;
 
 @end

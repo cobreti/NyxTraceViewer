@@ -62,7 +62,7 @@
 - (void)calcSize
 {
     int         index = 0;
-    NSSize      size;
+    NSSize      size = NSZeroSize;
     NSSize      cellSize;
     
     while (index < kToggleFlatBtn_StatesCount)
