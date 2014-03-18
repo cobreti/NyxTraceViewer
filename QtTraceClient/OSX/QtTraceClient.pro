@@ -93,7 +93,12 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Highlight/HighlightColorsPopup.cpp \
     ../Sources/View/ViewSearchEngine.cpp \
     ../Sources/WindowsManager.cpp \
-    ../Sources/MainWindow/TcpIpSettingsPanel.cpp
+    ../Sources/MainWindow/TcpIpSettingsPanel.cpp \
+    ../Sources/ChannelSelection.cpp \
+    ../Sources/ChannelsListener.cpp \
+    ../Sources/View/ViewTracesIterator.cpp \
+    ../Sources/TracesGroupMgrListener.cpp \
+    ../Sources/TracesGroupListItem.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -185,7 +190,12 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Highlight/HighlightColorsPopup.h \
     ../Sources/View/ViewSearchEngine.h \
     ../Sources/WindowsManager.hpp \
-    ../Sources/MainWindow/TcpIpSettingsPanel.h
+    ../Sources/MainWindow/TcpIpSettingsPanel.h \
+    ../Sources/ChannelSelection.h \
+    ../Sources/ChannelsListener.h \
+    ../Sources/View/ViewTracesIterator.hpp \
+    ../Sources/TracesGroupMgrListener.h \
+    ../Sources/TracesGroupListItem.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -200,7 +210,8 @@ FORMS += ../UI/TracesView.ui \
     ../UI/HighlightColorsSelectionDlg.ui \
     ../UI/HighlightColorsPopup.ui \
     ../UI/AboutDlg.ui \
-    ../UI/TcpIpSettingsPanel.ui
+    ../UI/TcpIpSettingsPanel.ui \
+    ../UI/ChannelSelection.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI
@@ -214,7 +225,7 @@ mac:INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 
-CONFIG(Debug_64, Debug_64 | Release_64) {
+CONFIG(debug, debug | release) {
     mac::PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
     mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
     mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
@@ -236,7 +247,7 @@ CONFIG(Debug_64, Debug_64 | Release_64) {
     DEFINES += _DEBUG
 }
 
-CONFIG(Release_64, Debug_64 | Release_64) {
+CONFIG(release, debug | release) {
     mac::PRE_TARGETDEPS += ../../Lib/Qt/Release_64/libTraceClientCore.a
     mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Release_64/libNyxBase.a
     mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Release_64/libNyxNet.a

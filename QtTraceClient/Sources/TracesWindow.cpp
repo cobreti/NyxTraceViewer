@@ -1,5 +1,6 @@
 #include "TracesWindow.hpp"
 #include "TracesView.h"
+#include "ChannelSelection.h"
 #include "MainWindow/PipesMgntPage.hpp"
 #include "MainWindow/MainWindow.hpp"
 #include "TraceClientApp.h"
@@ -33,6 +34,7 @@
 CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui( new Ui::TracesWindow() ),
     m_pTracesView(NULL),
+    m_pChannelSelection(NULL),
     m_pBtn_MainWindow(NULL),
     m_pBtn_SourceFeeds(NULL),
     m_pBtn_NewView(NULL),
@@ -77,11 +79,12 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
         pBase = pSrc->m_pTracesView;
 
     m_pTracesView = new CTracesView(this, pBase);
-    m_pPipesMgntPage = new CPipesMgntPage(this);
-    m_pPipesMgntPage->hide();
+    m_pChannelSelection = new CChannelSelection(this);
+//    m_pPipesMgntPage = new CPipesMgntPage(this);
+//    m_pPipesMgntPage->hide();
 
-    ui->gridLayout->addWidget(m_pPipesMgntPage);
-    ui->gridLayout->addWidget(m_pTracesView);
+    ui->gridLayout->addWidget(m_pChannelSelection, 0, 1);
+    ui->gridLayout->addWidget(m_pTracesView, 0, 2);
 
     m_pBtn_MainWindow = new QToolButton();
     m_pBtn_MainWindow->setIcon(MainWindowIcon);

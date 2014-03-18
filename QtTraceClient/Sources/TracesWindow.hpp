@@ -13,7 +13,7 @@ class QLineEdit;
 class CViewSearchEngine;
 class CColorBtn;
 class CHighlightsMgrWnd;
-
+class CChannelSelection;
 
 namespace TraceClientCore
 {
@@ -64,6 +64,7 @@ protected:
     Ui::TracesWindow*       ui;
 
     CTracesView*            m_pTracesView;
+    CChannelSelection*      m_pChannelSelection;
 
     QToolButton*            m_pBtn_MainWindow;
     QToolButton*            m_pBtn_SourceFeeds;
