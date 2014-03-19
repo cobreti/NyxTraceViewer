@@ -18,6 +18,7 @@ class CChannelSelection;
 namespace TraceClientCore
 {
     class CTraceChannel;
+    class CTracesGroup;
 }
 
 namespace Ui
@@ -51,6 +52,7 @@ public slots:
     void OnSearch();
     void OnHideSearch();
     void OnShowMainWindow();
+    void OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup);
 
 protected:
 

@@ -2,6 +2,7 @@
 #include <NyxAnsiFile.hpp>
 
 #include "TracesView.h"
+#include "TracesView.hpp"
 #include "ui_TracesView.h"
 #include "TraceClientApp.h"
 #include "View/ViewHeader.hpp"
@@ -20,6 +21,7 @@
 #include "View/Walkers/ViewItemsWalker.hpp"
 #include "View/Highlight/ViewItemPattern_Text.hpp"
 #include "View/Highlight/HighlightColorsPopup.h"
+#include "TracesGroup.hpp"
 
 
 /**
@@ -33,7 +35,8 @@ CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
     m_pHeader(NULL),
     m_pItemsWalker(NULL),
     m_pLastSelectedItem(NULL),
-    m_pHighlightColorsPopup(NULL)
+    m_pHighlightColorsPopup(NULL),
+    m_pCurrentTracesGroup(NULL)
 {
     Init(pBase);
 }
@@ -63,14 +66,14 @@ void CTracesView::SetName(const QString& name)
  */
 void CTracesView::OnNewTraces()
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    refMethods->InitNewModulesPosition();
+//    refMethods->InitNewModulesPosition();
 
-    if ( !refMethods->ValidPos() )
-        refMethods->MoveToBegin();
+//    if ( !refMethods->ValidPos() )
+//        refMethods->MoveToBegin();
 
-    m_bViewDirty = true;
+//    m_bViewDirty = true;
 }
 
 
@@ -79,19 +82,19 @@ void CTracesView::OnNewTraces()
  */
 void CTracesView::RefreshDisplay()
 {
-    if (m_bViewDirty && this->isVisible() )
-    {
-        UpdateScrollbarRange(ClientRect());
+//    if (m_bViewDirty && this->isVisible() )
+//    {
+//        UpdateScrollbarRange(ClientRect());
 
-        if ( m_bKeepAtEnd )
-        {
-            ui->m_VertScrollbar->setValue( ui->m_VertScrollbar->maximum() );
-        }
+//        if ( m_bKeepAtEnd )
+//        {
+//            ui->m_VertScrollbar->setValue( ui->m_VertScrollbar->maximum() );
+//        }
 
-        update();
+//        update();
 
-        m_bViewDirty = false;
-    }
+//        m_bViewDirty = false;
+//    }
 }
 
 
@@ -111,13 +114,41 @@ void CTracesView::OnChooseHighlightBrush( CHighlightBrush* pBrush )
 
 
 /**
+ * @brief CTracesView::OnViewBeginUpdate
+ * @param pGroup
+ * @param pView
+ */
+void CTracesView::OnViewBeginUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView )
+{
+
+}
+
+
+/**
+ * @brief CTracesView::OnViewEndUpdate
+ * @param pGroup
+ * @param pView
+ */
+void CTracesView::OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView )
+{
+    if ( pView->Dirty() )
+    {
+        int linesCount = pView->LinesCount();
+
+        NYXTRACE(0x0, L"traces view lines count : " << Nyx::CTF_Int(linesCount));
+        pView->ResetDirty();
+    }
+}
+
+
+/**
  *
  */
 void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    refMethods->OnNewModuleViewItem(pModule);
+//    refMethods->OnNewModuleViewItem(pModule);
 }
 
 
@@ -126,9 +157,9 @@ void CTracesView::OnNewModuleViewItems( CModuleViewItems* pModule )
  */
 void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    refMethods->OnNewSessionViewItem(pModule, pSession);
+//    refMethods->OnNewSessionViewItem(pModule, pSession);
 }
 
 
@@ -137,9 +168,9 @@ void CTracesView::OnNewSessionViewItems( CModuleViewItems* pModule, CSessionView
  */
 void CTracesView::OnBeginClearModule( const Nyx::CAString& ModuleName )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    refMethods->Lock();
+//    refMethods->Lock();
 }
 
 
@@ -148,11 +179,11 @@ void CTracesView::OnBeginClearModule( const Nyx::CAString& ModuleName )
  */
 void CTracesView::OnEndClearModule( const Nyx::CAString& ModuleName )
 {
-    delete m_pItemsWalker;
-    m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
+//    delete m_pItemsWalker;
+//    m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
 
-    m_bViewDirty = true;
-    RefreshDisplay();
+//    m_bViewDirty = true;
+//    RefreshDisplay();
 }
 
 
@@ -161,16 +192,16 @@ void CTracesView::OnEndClearModule( const Nyx::CAString& ModuleName )
  */
 void CTracesView::Save( const QString& filename )
 {
-    CFileWriterViewItemsWalker      SaveWalker(*m_pItemsWalker);
-    Nyx::CAnsiFileRef               refFile = Nyx::CAnsiFile::Alloc();
-    Nyx::NyxResult                  res;
+//    CFileWriterViewItemsWalker      SaveWalker(*m_pItemsWalker);
+//    Nyx::CAnsiFileRef               refFile = Nyx::CAnsiFile::Alloc();
+//    Nyx::NyxResult                  res;
 
-    res = refFile->Create(filename.toStdString().c_str());
-    if ( Nyx::Succeeded(res) )
-    {
-        SaveWalker.Write(refFile);
-        refFile->Close();
-    }
+//    res = refFile->Create(filename.toStdString().c_str());
+//    if ( Nyx::Succeeded(res) )
+//    {
+//        SaveWalker.Write(refFile);
+//        refFile->Close();
+//    }
 }
 
 
@@ -191,11 +222,12 @@ const QRectF CTracesView::ViewRect() const
  */
 int CTracesView::NumberOfLinesVisibles() const
 {
-    int                 height = ViewRect().height();
-    CViewSettings&      rSettings = ViewCore()->ViewSettings();
-    int                 NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
+//    int                 height = ViewRect().height();
+//    CViewSettings&      rSettings = ViewCore()->ViewSettings();
+//    int                 NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
 
-    return (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+//    return (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+    return 0;
 }
 
 /**
@@ -203,17 +235,24 @@ int CTracesView::NumberOfLinesVisibles() const
  */
 void CTracesView::Invalidate(bool dirty)
 {
-    float       ScrollBarPos = 0.0f;
+//    float       ScrollBarPos = 0.0f;
 
-    {
-        CViewItemsWalker::MethodsInterfaceRef       refWalkerMethods(ItemsWalker());
-        ScrollBarPos = refWalkerMethods->LineNo();
-//        ScrollBarPos = refWalkerMethods->ItemYPos();
-    }
+//    {
+//        CViewItemsWalker::MethodsInterfaceRef       refWalkerMethods(ItemsWalker());
+//        ScrollBarPos = refWalkerMethods->LineNo();
+////        ScrollBarPos = refWalkerMethods->ItemYPos();
+//    }
 
-    ui->m_VertScrollbar->setValue(ScrollBarPos);
-    m_bViewDirty = dirty;
-    RefreshDisplay();
+//    ui->m_VertScrollbar->setValue(ScrollBarPos);
+//    m_bViewDirty = dirty;
+//    RefreshDisplay();
+}
+
+
+void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
+{
+    m_TracesGroupNotificationsListener.ConnectTo(pGroup);
+    m_pCurrentTracesGroup = pGroup;
 }
 
 
@@ -222,24 +261,24 @@ void CTracesView::Invalidate(bool dirty)
  */
 void CTracesView::OnVertSliderPosChanged(int value)
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    if ( refMethods->MoveToLine(value) )
-    {
-        m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
-        //update();
-    }
+//    if ( refMethods->MoveToLine(value) )
+//    {
+//        m_bKeepAtEnd = value == ui->m_VertScrollbar->maximum();
+//        //update();
+//    }
 
 
-    update();
+//    update();
 }
 
 
 void CTracesView::OnHorzSliderPosChanged(int value)
 {
-    m_pHeader->SetHorzOffset(value);
+//    m_pHeader->SetHorzOffset(value);
 
-    update();
+//    update();
 }
 
 
@@ -258,65 +297,65 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     m_pHeader->move( this->ClientRect().left(), this->ClientRect().top());
     m_pHeader->resize( event->size().width()-nWidth, m_pHeader->size().height() );
 
-    UpdateScrollbarRange( ClientRect(rcWnd) );
+//    UpdateScrollbarRange( ClientRect(rcWnd) );
 
-    update();
+//    update();
 }
 
 
 void CTracesView::paintEvent(QPaintEvent* pEvent)
 {
     QPainter                                painter(this);
-    CDrawViewItemState                      drawstate(&painter);
-    qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
-    CViewItem*                              pItem = NULL;
-    bool                                    bContinue = true;
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CDrawViewItemState                      drawstate(&painter);
+//    qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
+//    CViewItem*                              pItem = NULL;
+//    bool                                    bContinue = true;
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    drawstate.TextPos() = QPointF(0.0, HeaderSize().height());
+//    drawstate.TextPos() = QPointF(0.0, HeaderSize().height());
 
-    refMethods->PushState();
+//    refMethods->PushState();
 
-	painter.setClipping(true);
-    painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
+//	painter.setClipping(true);
+//    painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
 
     QBrush  bkgndBrush = palette().base();
     painter.fillRect(pEvent->rect(), bkgndBrush);
 
-    painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
+//    painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
 
-    painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
+//    painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
-//    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
-    drawstate.TextPos().ry() = HeaderSize().height();// - ui->m_VertScrollbar->value();
+////    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
+//    drawstate.TextPos().ry() = HeaderSize().height();// - ui->m_VertScrollbar->value();
 
-    drawstate.ViewRect() = QRectF(  ui->m_HorzScrollbar->value(), 
-                                    ui->m_VertScrollbar->value(),
-                                    ClientRect().width()+ui->m_HorzScrollbar->value(), 
-                                    ClientRect().height()+ui->m_VertScrollbar->value());
+//    drawstate.ViewRect() = QRectF(  ui->m_HorzScrollbar->value(),
+//                                    ui->m_VertScrollbar->value(),
+//                                    ClientRect().width()+ui->m_HorzScrollbar->value(),
+//                                    ClientRect().height()+ui->m_VertScrollbar->value());
 
-    drawstate.Highlighter() = (CViewItemHighlighter*)Highlighters();
+//    drawstate.Highlighter() = (CViewItemHighlighter*)Highlighters();
 
 
-    while ( bContinue && refMethods->ValidPos() && drawstate.TextPos().y() < ViewHeight )
-    {
-        drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value() + m_Margins.left();
+//    while ( bContinue && refMethods->ValidPos() && drawstate.TextPos().y() < ViewHeight )
+//    {
+//        drawstate.TextPos().rx() = -ui->m_HorzScrollbar->value() + m_Margins.left();
 
-        pItem = refMethods->Item();
+//        pItem = refMethods->Item();
 
-        drawstate.ItemNumber() = refMethods->ItemNumber();
-        pItem->Display(Settings(), drawstate);
+//        drawstate.ItemNumber() = refMethods->ItemNumber();
+//        pItem->Display(Settings(), drawstate);
 
-        bContinue = refMethods->MoveToNext();
-    }
+//        bContinue = refMethods->MoveToNext();
+//    }
 
-    refMethods->PopState();
+//    refMethods->PopState();
 }
 
 
 void CTracesView::closeEvent(QCloseEvent* event)
 {
-    m_refViewCore->ViewItemsModulesMgr().Listeners().Remove( static_cast<IViewItemsModulesListener*>(this) );
+//    m_refViewCore->ViewItemsModulesMgr().Listeners().Remove( static_cast<IViewItemsModulesListener*>(this) );
     m_refViewCore->RemoveView(this);
 	event->accept();
 }
@@ -324,23 +363,23 @@ void CTracesView::closeEvent(QCloseEvent* event)
 
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
-    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
-    int                                     NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
-    int                                     NumberOfDisplayedLines = (rcClient.height() - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
+//    int                                     NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
+//    int                                     NumberOfDisplayedLines = (rcClient.height() - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
 
-    //int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
-    int nScrollHeight = Nyx::Max( NumberOfLines - NumberOfDisplayedLines, 0 );
-    int nScrollWidth = Nyx::Max((int)(rSettings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
+//    //int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
+//    int nScrollHeight = Nyx::Max( NumberOfLines - NumberOfDisplayedLines, 0 );
+//    int nScrollWidth = Nyx::Max((int)(rSettings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
-    ui->m_VertScrollbar->setMaximum( nScrollHeight );
-    ui->m_HorzScrollbar->setMaximum( nScrollWidth );
+//    ui->m_VertScrollbar->setMaximum( nScrollHeight );
+//    ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-//    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
-    ui->m_VertScrollbar->setSingleStep( 1 );
-    ui->m_VertScrollbar->setPageStep( NumberOfDisplayedLines );
-    ui->m_HorzScrollbar->setSingleStep(20);
-    ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
+////    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
+//    ui->m_VertScrollbar->setSingleStep( 1 );
+//    ui->m_VertScrollbar->setPageStep( NumberOfDisplayedLines );
+//    ui->m_HorzScrollbar->setSingleStep(20);
+//    ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 }
 
 
@@ -388,55 +427,55 @@ void CTracesView::keyPressEvent( QKeyEvent* event )
 
 void CTracesView::mousePressEvent( QMouseEvent* event )
 {
-    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
+//    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
-    if ( event->pos().x() < m_Margins.left() && event->pos().y() > m_pHeader->size().height() )
-	{
-//        float       y = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
-        bool            bContinue = true;
-        CViewSettings&  rSettings = ViewCore()->ViewSettings();
-        qreal           ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
-        size_t          VisibleLineNo = (event->pos().y() - HeaderSize().height()) / rSettings.DrawSettings()->SingleLineHeight();
-        size_t          LineNo = refMethods->LineNo() + VisibleLineNo;
+//    if ( event->pos().x() < m_Margins.left() && event->pos().y() > m_pHeader->size().height() )
+//	{
+////        float       y = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
+//        bool            bContinue = true;
+//        CViewSettings&  rSettings = ViewCore()->ViewSettings();
+//        qreal           ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
+//        size_t          VisibleLineNo = (event->pos().y() - HeaderSize().height()) / rSettings.DrawSettings()->SingleLineHeight();
+//        size_t          LineNo = refMethods->LineNo() + VisibleLineNo;
 
-        refMethods->PushState();
+//        refMethods->PushState();
 
-        if ( refMethods->MoveToLine(LineNo) )
-        {
-            CViewItem*      pItem = refMethods->Item();
+//        if ( refMethods->MoveToLine(LineNo) )
+//        {
+//            CViewItem*      pItem = refMethods->Item();
 
-            if ( event->button() == Qt::LeftButton )
-            {
-                if ( pItem->HasFlag(CViewItem::eVIF_Marked) )
-                {
-                    pItem->SetFlag(CViewItem::eVIF_Marked, false);
-                    pItem->HighlightBrush() = NULL;
-                }
-                else
-                {
-                    pItem->SetFlag(CViewItem::eVIF_Marked, true);
-                    pItem->HighlightBrush() = m_pLastSelectedBrush;
-                }
-            }
-            else if ( event->button() == Qt::RightButton )
-            {
-                pItem->SetFlag(CViewItem::eVIF_Marked, true);
-                m_pLastSelectedItem = pItem;
+//            if ( event->button() == Qt::LeftButton )
+//            {
+//                if ( pItem->HasFlag(CViewItem::eVIF_Marked) )
+//                {
+//                    pItem->SetFlag(CViewItem::eVIF_Marked, false);
+//                    pItem->HighlightBrush() = NULL;
+//                }
+//                else
+//                {
+//                    pItem->SetFlag(CViewItem::eVIF_Marked, true);
+//                    pItem->HighlightBrush() = m_pLastSelectedBrush;
+//                }
+//            }
+//            else if ( event->button() == Qt::RightButton )
+//            {
+//                pItem->SetFlag(CViewItem::eVIF_Marked, true);
+//                m_pLastSelectedItem = pItem;
 
-                if ( m_pHighlightColorsPopup != NULL )
-                    delete m_pHighlightColorsPopup;
+//                if ( m_pHighlightColorsPopup != NULL )
+//                    delete m_pHighlightColorsPopup;
 
-                m_pHighlightColorsPopup = new CHighlightColorsPopup();
-                connect(    m_pHighlightColorsPopup, SIGNAL(OnChooseBrush( CHighlightBrush*)),
-                            this, SLOT(OnChooseHighlightBrush( CHighlightBrush*)));
-                m_pHighlightColorsPopup->Show( mapToGlobal(event->pos()), CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights() );
-            }
-        }
+//                m_pHighlightColorsPopup = new CHighlightColorsPopup();
+//                connect(    m_pHighlightColorsPopup, SIGNAL(OnChooseBrush( CHighlightBrush*)),
+//                            this, SLOT(OnChooseHighlightBrush( CHighlightBrush*)));
+//                m_pHighlightColorsPopup->Show( mapToGlobal(event->pos()), CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights() );
+//            }
+//        }
 
-        refMethods->PopState();
+//        refMethods->PopState();
 
-        update();
-	}
+//        update();
+//	}
 }
 
 
@@ -445,11 +484,11 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
  */
 void CTracesView::wheelEvent(QWheelEvent* event)
 {
-    int numDegrees = event->delta() / 8;
-    int numSteps = numDegrees / 15;
+//    int numDegrees = event->delta() / 8;
+//    int numSteps = numDegrees / 15;
 
-    int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
-    ui->m_VertScrollbar->setValue( value );
+//    int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
+//    ui->m_VertScrollbar->setValue( value );
 }
 
 
@@ -470,6 +509,11 @@ void CTracesView::Init(CTracesView* pBase)
 
     this->setContentsMargins(0, 0, ui->m_VertScrollbar->width(), ui->m_HorzScrollbar->height());
 
+    connect( &m_TracesGroupNotificationsListener, SIGNAL(ViewBeginUpdate(TraceClientCore::CTracesGroup*,TraceClientCore::CTracesView*)),
+             this, SLOT(OnViewBeginUpdate(TraceClientCore::CTracesGroup*,TraceClientCore::CTracesView*)) );
+    connect( &m_TracesGroupNotificationsListener, SIGNAL(ViewEndUpdate(TraceClientCore::CTracesGroup*,TraceClientCore::CTracesView*)),
+             this, SLOT(OnViewEndUpdate(TraceClientCore::CTracesGroup*,TraceClientCore::CTracesView*)) );
+
     m_Margins.setLeft(25.0);
     m_Margins.setRight(25.0);
 
@@ -477,15 +521,15 @@ void CTracesView::Init(CTracesView* pBase)
     {
         m_refViewCore = pBase->ViewCore();
 
-        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
-        m_pItemsWalker->Clone(*pBase->m_pItemsWalker);
+//        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
+//        m_pItemsWalker->Clone(*pBase->m_pItemsWalker);
 
         ui->m_VertScrollbar->setValue( pBase->ui->m_VertScrollbar->value());
     }
     else
     {
         m_refViewCore = new CTracesViewCore();
-        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
+//        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
 
         Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
     }
@@ -497,7 +541,7 @@ void CTracesView::Init(CTracesView* pBase)
     m_pHeader->Margins() = m_Margins;
 
     m_refViewCore->AddView(this);
-    m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
+//    m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
 
     m_pLastSelectedBrush = CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights()[0];
 

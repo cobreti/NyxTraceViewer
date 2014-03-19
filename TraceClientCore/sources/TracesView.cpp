@@ -25,7 +25,8 @@ namespace TraceClientCore
     CTracesList(),
     m_pChannel(pChannel),
     m_pRepoObserver(NULL),
-    m_Id(s_NextId++)
+    m_Id(s_NextId++),
+    m_bDirty(false)
     {
         CTraceDataRepository&   rRepository = pChannel->Pool()->Repository();
         m_pRepoObserver = new CTracesViewRepoObserver(this);
@@ -41,6 +42,15 @@ namespace TraceClientCore
     {
     }
     
+
+    /**
+     * @brief CTracesView::ResetDirty
+     */
+    void CTracesView::ResetDirty()
+    {
+        m_bDirty = false;
+    }
+
     
     /**
      *
@@ -58,6 +68,7 @@ namespace TraceClientCore
     {
         Nyx::TMutexLock     TracesLock(m_refMutex, true);
         
+        m_bDirty = true;
         push_back(pTraceData);
     }
     

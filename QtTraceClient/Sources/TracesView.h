@@ -10,6 +10,7 @@
 #include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
+#include "TracesGroupNotificationsListener.h"
 
 
 namespace Ui
@@ -67,12 +68,16 @@ public:
 
     void Invalidate(bool dirty);
 
+    void SetTracesGroup( TraceClientCore::CTracesGroup* pGroup );
+
 public slots:
 
     void OnVertSliderPosChanged(int value);
     void OnHorzSliderPosChanged(int value);
     void RefreshDisplay();
     void OnChooseHighlightBrush( CHighlightBrush* pBrush );
+    void OnViewBeginUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView );
+    void OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView );
 
 protected:
 
@@ -117,6 +122,9 @@ protected:
     CHighlightBrush*                    m_pLastSelectedBrush;
 
     CHighlightColorsPopup*              m_pHighlightColorsPopup;
+
+    CTracesGroupNotificationsListener   m_TracesGroupNotificationsListener;
+    TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
 };
 
 #endif // TRACESVIEW_H

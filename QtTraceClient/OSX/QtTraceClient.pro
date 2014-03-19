@@ -98,7 +98,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/ChannelsListener.cpp \
     ../Sources/View/ViewTracesIterator.cpp \
     ../Sources/TracesGroupMgrListener.cpp \
-    ../Sources/TracesGroupListItem.cpp
+    ../Sources/TracesGroupListItem.cpp \
+    ../Sources/TracesGroupNotificationsListener.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -195,7 +196,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/ChannelsListener.h \
     ../Sources/View/ViewTracesIterator.hpp \
     ../Sources/TracesGroupMgrListener.h \
-    ../Sources/TracesGroupListItem.h
+    ../Sources/TracesGroupListItem.h \
+    ../Sources/TracesGroupNotificationsListener.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

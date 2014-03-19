@@ -69,6 +69,9 @@ namespace TraceClientCore
         
         CTraceChannel*                              Channel() const { return m_pChannel; }
         CTracesViewNotificationsListeners&          Listeners()     { return m_Listeners; }
+
+        bool Dirty() const                                          { return m_bDirty; }
+        void ResetDirty();
         
         Nyx::UInt32 LinesCount() const;
         
@@ -84,6 +87,7 @@ namespace TraceClientCore
         CTracesViewRepoObserver*            m_pRepoObserver;
         TracesViewId                        m_Id;
         CTracesViewNotificationsListeners   m_Listeners;
+        bool                                m_bDirty;
         
     protected:
         

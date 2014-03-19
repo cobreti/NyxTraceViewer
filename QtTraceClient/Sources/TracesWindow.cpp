@@ -162,6 +162,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_HighlightColorSelection, SIGNAL(clicked()), this, SLOT(OnHighlightColorSelection()));
     connect( m_pBtn_Search, SIGNAL(clicked()), this, SLOT(OnSearch()));
     connect( m_pBtn_MainWindow, SIGNAL(clicked()), this, SLOT(OnShowMainWindow()));
+    connect( m_pChannelSelection, SIGNAL(SelectionChanged(TraceClientCore::CTracesGroup*)),
+             this, SLOT(OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*)) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -353,6 +355,16 @@ void CTracesWindow::OnShowMainWindow()
 {
     CTraceClientApp::Instance().MainWindow()->showNormal();
     CTraceClientApp::Instance().MainWindow()->activateWindow();
+}
+
+
+/**
+ * @brief CTracesWindow::OnTracesGroupSelectionChanged
+ * @param pGroup
+ */
+void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup)
+{
+    m_pTracesView->SetTracesGroup(pGroup);
 }
 
 
