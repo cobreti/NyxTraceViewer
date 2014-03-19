@@ -22,7 +22,8 @@
 #include "View/Highlight/ViewItemPattern_Text.hpp"
 #include "View/Highlight/HighlightColorsPopup.h"
 #include "TracesGroup.hpp"
-
+#include "View/ViewTracesIterator.hpp"
+#include "View/ViewTracePainter.h"
 
 /**
  *
@@ -133,6 +134,9 @@ void CTracesView::OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceC
 {
     if ( pView->Dirty() )
     {
+        UpdateScrollbarRange(ClientRect());
+        update();
+
         int linesCount = pView->LinesCount();
 
         NYXTRACE(0x0, L"traces view lines count : " << Nyx::CTF_Int(linesCount));
@@ -222,12 +226,12 @@ const QRectF CTracesView::ViewRect() const
  */
 int CTracesView::NumberOfLinesVisibles() const
 {
-//    int                 height = ViewRect().height();
-//    CViewSettings&      rSettings = ViewCore()->ViewSettings();
-//    int                 NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
+    int                 height = ViewRect().height();
+    CViewSettings&      rSettings = ViewCore()->ViewSettings();
 
-//    return (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
-    return 0;
+    float               visibleLines = (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+
+    return int(visibleLines - 0.5);
 }
 
 /**
@@ -253,6 +257,8 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 {
     m_TracesGroupNotificationsListener.ConnectTo(pGroup);
     m_pCurrentTracesGroup = pGroup;
+
+    update();
 }
 
 
@@ -270,15 +276,15 @@ void CTracesView::OnVertSliderPosChanged(int value)
 //    }
 
 
-//    update();
+    update();
 }
 
 
 void CTracesView::OnHorzSliderPosChanged(int value)
 {
-//    m_pHeader->SetHorzOffset(value);
+    m_pHeader->SetHorzOffset(value);
 
-//    update();
+    update();
 }
 
 
@@ -297,7 +303,7 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     m_pHeader->move( this->ClientRect().left(), this->ClientRect().top());
     m_pHeader->resize( event->size().width()-nWidth, m_pHeader->size().height() );
 
-//    UpdateScrollbarRange( ClientRect(rcWnd) );
+    UpdateScrollbarRange( ClientRect(rcWnd) );
 
 //    update();
 }
@@ -306,8 +312,11 @@ void CTracesView::resizeEvent(QResizeEvent *event)
 void CTracesView::paintEvent(QPaintEvent* pEvent)
 {
     QPainter                                painter(this);
-//    CDrawViewItemState                      drawstate(&painter);
-//    qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
+    CDrawViewItemState                      drawstate(&painter);
+    CViewTracesIterator                     TraceIterator = CViewTracesIterator::FirstPos(m_pCurrentTracesGroup);
+    qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
+    CViewTracePainter                       TracePainter(painter);
+    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
 //    CViewItem*                              pItem = NULL;
 //    bool                                    bContinue = true;
 //    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
@@ -322,10 +331,24 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     QBrush  bkgndBrush = palette().base();
     painter.fillRect(pEvent->rect(), bkgndBrush);
 
-//    painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
+    painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
 
-//    painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
+    painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
+    TracePainter.Origin() = QPoint(ui->m_HorzScrollbar->value() + m_Margins.left(), HeaderSize().height());
+    TracePainter.ViewSize() = QSize( ClientRect().width(), ViewHeight );
+    TracePainter.LineHeight() = rSettings.DrawSettings()->SingleLineHeight();
+
+    TracePainter.Init();
+
+    TraceIterator.MoveToLine(ui->m_VertScrollbar->value());
+
+    while ( TraceIterator.Valid() && !TracePainter.Done() )
+    {
+        TracePainter.Draw(TraceIterator.TraceData());
+
+        ++ TraceIterator;
+    }
 ////    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
 //    drawstate.TextPos().ry() = HeaderSize().height();// - ui->m_VertScrollbar->value();
 
@@ -364,22 +387,28 @@ void CTracesView::closeEvent(QCloseEvent* event)
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
 //    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
-//    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
+    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
 //    int                                     NumberOfLines = ViewCore()->ViewItemsModulesMgr().LinesCount();
-//    int                                     NumberOfDisplayedLines = (rcClient.height() - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+    int                                     NumberOfLines = 0;
+    int                                     NumberOfDisplayedLines = NumberOfLinesVisibles();
+
+    if ( m_pCurrentTracesGroup != NULL )
+    {
+        NumberOfLines = m_pCurrentTracesGroup->LinesCount();
+    }
 
 //    //int nScrollHeight = Nyx::Max((int)(refMethods->Height()) - rcClient.height() + ui->m_HorzScrollbar->height(), 0);
-//    int nScrollHeight = Nyx::Max( NumberOfLines - NumberOfDisplayedLines, 0 );
-//    int nScrollWidth = Nyx::Max((int)(rSettings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
+    int nScrollHeight = Nyx::Max( NumberOfLines - NumberOfDisplayedLines, 0 );
+    int nScrollWidth = Nyx::Max((int)(rSettings.ColumnsSettings().GetTotalWidth()) - rcClient.width() + ui->m_VertScrollbar->width() + 20,  0);
 
-//    ui->m_VertScrollbar->setMaximum( nScrollHeight );
-//    ui->m_HorzScrollbar->setMaximum( nScrollWidth );
+    ui->m_VertScrollbar->setMaximum( nScrollHeight );
+    ui->m_HorzScrollbar->setMaximum( nScrollWidth );
 
-////    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
-//    ui->m_VertScrollbar->setSingleStep( 1 );
-//    ui->m_VertScrollbar->setPageStep( NumberOfDisplayedLines );
-//    ui->m_HorzScrollbar->setSingleStep(20);
-//    ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
+//    ui->m_VertScrollbar->setSingleStep( rSettings.DrawSettings()->SingleLineHeight() );
+    ui->m_VertScrollbar->setSingleStep( 1 );
+    ui->m_VertScrollbar->setPageStep( NumberOfDisplayedLines );
+    ui->m_HorzScrollbar->setSingleStep(20);
+    ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 }
 
 

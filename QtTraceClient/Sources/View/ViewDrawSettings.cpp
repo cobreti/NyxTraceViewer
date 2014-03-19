@@ -23,6 +23,12 @@ CViewDrawSettings::~CViewDrawSettings()
 }
 
 
+void CViewDrawSettings::setSingleLineHeight(float height)
+{
+    m_LineHeight = height;
+}
+
+
 /**
  *
  */

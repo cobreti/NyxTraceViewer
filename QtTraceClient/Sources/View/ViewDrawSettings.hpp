@@ -21,6 +21,7 @@ public:
     CViewItemPainter*&      Painter (const CViewItemPainter::EPainterId& id)             { return m_Painters[id]; }
 
     float SingleLineHeight() const      { return m_LineHeight; }
+    void setSingleLineHeight(float height);
 
     void CalculateLineHeight();
 
