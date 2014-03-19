@@ -338,6 +338,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     TracePainter.Origin() = QPoint(ui->m_HorzScrollbar->value() + m_Margins.left(), HeaderSize().height());
     TracePainter.ViewSize() = QSize( ClientRect().width(), ViewHeight );
     TracePainter.LineHeight() = rSettings.DrawSettings()->SingleLineHeight();
+    TracePainter.ColumnsSettings() = &rSettings.ColumnsSettings();
 
     TracePainter.Init();
 
@@ -345,6 +346,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     while ( TraceIterator.Valid() && !TracePainter.Done() )
     {
+        TracePainter.LineNumber() = TraceIterator.getLineNumber();
         TracePainter.Draw(TraceIterator.TraceData());
 
         ++ TraceIterator;
