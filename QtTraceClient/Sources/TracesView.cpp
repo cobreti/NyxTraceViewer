@@ -305,7 +305,7 @@ void CTracesView::resizeEvent(QResizeEvent *event)
 
     UpdateScrollbarRange( ClientRect(rcWnd) );
 
-//    update();
+    update();
 }
 
 
@@ -328,14 +328,18 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 //	painter.setClipping(true);
 //    painter.setClipRect(0, HeaderSize().height(), ClientRect().width(), ViewHeight);
 
+//    m_pHeader->update();
+
     QBrush  bkgndBrush = palette().base();
     painter.fillRect(pEvent->rect(), bkgndBrush);
 
     painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
 
+    NYXTRACE(0x0, L"paint event hscroll value = " << ui->m_HorzScrollbar->value());
+
     painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
-    TracePainter.Origin() = QPoint(ui->m_HorzScrollbar->value() + m_Margins.left(), HeaderSize().height());
+    TracePainter.Origin() = QPoint( m_Margins.left() - ui->m_HorzScrollbar->value(), HeaderSize().height());
     TracePainter.ViewSize() = QSize( ClientRect().width(), ViewHeight );
     TracePainter.LineHeight() = rSettings.DrawSettings()->SingleLineHeight();
     TracePainter.ColumnsSettings() = &rSettings.ColumnsSettings();
@@ -351,6 +355,9 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
         ++ TraceIterator;
     }
+
+    TracePainter.Release();
+//    m_pHeader->update();
 ////    drawstate.TextPos().ry() = refMethods->ItemYPos() - ui->m_VertScrollbar->value() + HeaderSize().height();
 //    drawstate.TextPos().ry() = HeaderSize().height();// - ui->m_VertScrollbar->value();
 

@@ -4,6 +4,8 @@
 #include <QPainter>
 #include "ViewColumnId.hpp"
 
+#include <map>
+
 
 namespace TraceClientCore
 {
@@ -37,6 +39,8 @@ public:
     CViewColumnsSettings*& ColumnsSettings()            { return m_pColumnsSettings; }
 
     void Init();
+    void Release();
+
     bool Done() const;
 
     void Draw( TraceClientCore::CTraceData* pData );
@@ -46,7 +50,12 @@ protected:
     void DrawColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
 
     void DrawDataColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
+    void DrawTickCountColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
     void DrawLineNumberColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
+
+protected:
+
+    typedef std::map<EViewColumnId, qreal>          TColumnsSizeTable;
 
 protected:
 
@@ -58,6 +67,7 @@ protected:
     QFont                       m_Font;
     CViewColumnsSettings*       m_pColumnsSettings;
     Nyx::UInt32                 m_LineNumber;
+    TColumnsSizeTable           m_ColumnsSize;
 };
 
 

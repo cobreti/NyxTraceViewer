@@ -72,7 +72,7 @@ qreal CViewColumnsSettings::GetTotalWidth() const
 
     for (pos = m_Settings.begin(); pos != m_Settings.end(); ++pos)
         if ( pos->second->GetVisible() )
-            width += pos->second->GetWidth();
+            width += pos->second->GetWidth() + pos->second->Margins().width();
 
     return width;
 }
