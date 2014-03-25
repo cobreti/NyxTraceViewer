@@ -58,6 +58,9 @@ namespace TraceClientCore
         
         const Nyx::UInt32& TraceId() const                  { return m_TraceId; }
         Nyx::UInt32& TraceId()                              { return m_TraceId; }
+
+        const Nyx::UInt32& Level() const                    { return m_Level; }
+        Nyx::UInt32& Level()                                { return m_Level; }
 		
 	protected:
 	
@@ -72,6 +75,7 @@ namespace TraceClientCore
         NyxNet::CTraceFlags         m_Flags;
         Nyx::UInt32                 m_RepositoryId;
         Nyx::UInt32                 m_TraceId;
+        Nyx::UInt32                 m_Level;
 	};
 }
 

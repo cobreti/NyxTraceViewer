@@ -46,7 +46,8 @@ namespace TraceClientCore
     		{
     			*pSrcPos = '\0';
     			++ pSrcPos;
-                HandleTraceLine(szLine, pThreadPos, pSrcPos);
+//                HandleTraceLine(szLine, pThreadPos, pSrcPos);
+                ProcessMultipleLinesContent(szLine, pThreadPos, pSrcPos);
     			break;
     		}
 
@@ -55,10 +56,40 @@ namespace TraceClientCore
     }
 
 
+    void CTextTraceHandler::ProcessMultipleLinesContent(char* szModule, char* pThread, char* szContent)
+    {
+        char*       pStart = szContent;
+        char*       pNext = pStart;
+        int         level = 0;
+
+        while ( *pNext != '\0')
+        {
+            if ( *pNext == '\n' )
+            {
+                *pNext = '\0';
+
+                if ( pNext - pStart > 0 )
+                {
+                    HandleTraceLine(szModule, pThread, pStart, level);
+                    ++ level;
+                }
+
+                pStart = pNext+1;
+            }
+
+            ++ pNext;
+        }
+
+        if ( pNext - pStart > 0 )
+        {
+            HandleTraceLine(szModule, pThread, pStart, level);
+        }
+    }
+
     /**
      *
      */
-    void CTextTraceHandler::HandleTraceLine(char* szModule, char* pThread, char* szContent)
+    void CTextTraceHandler::HandleTraceLine(char* szModule, char* pThread, char* szContent, int level)
     {
     	Nyx::CTF_TickCount		TickCount;
     	Nyx::NyxSize			len = strlen(TickCount.GetAnsiText());
@@ -99,6 +130,7 @@ namespace TraceClientCore
     		pTraceData->TickCount() = Buffer;
     		pTraceData->Data() = content;
     		pTraceData->OwnerPool() = pChannel->Pool();
+            pTraceData->Level() = level;
 
             for (size_t index = 0; index < pTraceData->Data().length(); ++index)
             {

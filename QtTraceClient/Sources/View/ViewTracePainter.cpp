@@ -130,6 +130,9 @@ void CViewTracePainter::DrawDataColumn( TraceClientCore::CTraceData* pData, CVie
 
 void CViewTracePainter::DrawTickCountColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
 {
+    if ( pData->Level() > 0 )
+        return;
+
     QFontMetricsF           metrics(m_Font);
     QRectF                  rcText;
     QString                 text = QString::fromWCharArray(pData->TickCount().c_str());
@@ -188,6 +191,9 @@ void CViewTracePainter::DrawLineNumberColumn( TraceClientCore::CTraceData* pData
 
 void CViewTracePainter::DrawModuleNameColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
 {
+    if ( pData->Level() > 0 )
+        return;
+
     QFontMetricsF           metrics(m_Font);
     QRectF                  rcText;
     QString                 text = QString::fromWCharArray(pData->OwnerPool()->Name().c_str());
@@ -217,6 +223,9 @@ void CViewTracePainter::DrawModuleNameColumn( TraceClientCore::CTraceData* pData
 
 void CViewTracePainter::DrawThreadIdColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
 {
+    if ( pData->Level() > 0 )
+        return;
+
     QFontMetricsF           metrics(m_Font);
     QRectF                  rcText;
     QString                 text = QString::fromWCharArray(pData->ThreadId().c_str());

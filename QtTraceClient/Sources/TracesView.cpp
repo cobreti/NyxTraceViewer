@@ -532,11 +532,19 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
  */
 void CTracesView::wheelEvent(QWheelEvent* event)
 {
+    QPoint numPixels = event->pixelDelta();
 //    int numDegrees = event->delta() / 8;
 //    int numSteps = numDegrees / 15;
 
+    int Vvalue = Nyx::Max(0, ui->m_VertScrollbar->value() - numPixels.y()/2);
+    int Hvalue = Nyx::Max(0, ui->m_HorzScrollbar->value() - numPixels.x()/2);
+
 //    int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
-//    ui->m_VertScrollbar->setValue( value );
+    ui->m_VertScrollbar->setValue( Vvalue );
+    ui->m_HorzScrollbar->setValue( Hvalue );
+
+    m_pHeader->update();
+    update();
 }
 
 

@@ -19,7 +19,8 @@ namespace TraceClientCore
      */
     CTraceDataRepository::CTraceDataRepository() :
     m_RepositoryId( CTraceDataRepository::s_NextRepositoryId ),
-    m_NextTraceId(1)
+    m_NextTraceId(1),
+    m_LastTraceId(0)
     {
         m_refObserversMutex = Nyx::CMutex::Alloc();
         m_refTracesMutex = Nyx::CMutex::Alloc();
@@ -41,14 +42,18 @@ namespace TraceClientCore
     {
         pTraceData->RepositoryId() = m_RepositoryId;
         pTraceData->TraceId() = m_NextTraceId;
+        m_LastTraceId = m_NextTraceId;
 
         {
             Nyx::TMutexLock         TracesLock(m_refTracesMutex, true);
             
             m_Traces.push_back(pTraceData);
         }
-        
-        ++ m_NextTraceId;
+
+        if ( pTraceData->Level() == 0 )
+        {
+            ++ m_NextTraceId;
+        }
     }
     
     

@@ -78,6 +78,7 @@ namespace TraceClientCore
         
         Nyx::UInt32                         m_RepositoryId;
         Nyx::UInt32                         m_NextTraceId;
+        Nyx::UInt32                         m_LastTraceId;
         
         static Nyx::UInt32                  s_NextRepositoryId;
 	};
