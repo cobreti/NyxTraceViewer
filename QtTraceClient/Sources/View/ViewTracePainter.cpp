@@ -4,6 +4,7 @@
 #include "TraceData.hpp"
 #include "ViewColumnsSettings.hpp"
 #include "ViewColumnSettings.hpp"
+#include "TracesPool.hpp"
 
 
 CViewTracePainter::CViewTracePainter(QPainter &rPainter) :
@@ -38,11 +39,6 @@ void CViewTracePainter::Release()
     for (size_t index = 0; index < eVCI_Count; ++index) {
         EViewColumnId id = (EViewColumnId) index;
 
-        qreal oldSize = (*m_pColumnsSettings)[id].GetWidth();
-        qreal newSize = m_ColumnsSize[id];
-
-//        NYXTRACE(0x0, L"old size = " << oldSize << L" / new size = " << newSize);
-
         (*m_pColumnsSettings)[id].SetWidth(m_ColumnsSize[id]);
     }
 }
@@ -68,25 +64,10 @@ void CViewTracePainter::Draw( TraceClientCore::CTraceData* pData )
         ColumnId = colsOrder[ColumnIndex];
         CViewColumnSettings& ColumnSettings = (*m_pColumnsSettings)[ColumnId];
 
-//        ColumnSettings.SetWidth(100.0f);
-
         DrawColumn(pData, ColumnSettings, ColumnId);
 
         ++ ColumnIndex;
     }
-
-
-//    QFontMetricsF           metrics(m_Font);
-//    QRectF                  rcText;
-//    QString                 text = QString::fromWCharArray(pData->Data().c_str());
-//    QRectF                  rcArea;
-
-//    rcArea = QRectF(m_Pos.x(), m_Pos.y(), m_ViewSize.width()-m_Pos.x(), m_ViewSize.height() - m_Pos.y());
-
-//    rcText = metrics.boundingRect(text);
-
-//    m_rPainter.setFont(m_Font);
-//    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
 
     m_Pos.ry() += m_LineHeight;
 }
@@ -105,13 +86,16 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
         case eVCI_TickCount:
             DrawTickCountColumn(pData, settings, columnId);
             break;
+        case eVCI_ModuleName:
+            DrawModuleNameColumn(pData, settings, columnId);
+            break;
+        case eVCI_ThreadId:
+            DrawThreadIdColumn(pData, settings, columnId);
+            break;
     }
 
     qreal colWidth = settings.GetWidth() + settings.Margins().width();
-    NYXTRACE(0x0, L"TracePainter : col id (" << columnId << ") size = " << colWidth );
     m_Pos.rx() += colWidth;
-
-    m_rPainter.drawLine( QPointF(m_Pos.rx(), m_Pos.ry()), QPointF(m_Pos.rx(), m_Pos.ry()+10));
 }
 
 
@@ -178,6 +162,64 @@ void CViewTracePainter::DrawLineNumberColumn( TraceClientCore::CTraceData* pData
     QFontMetricsF           metrics(m_Font);
     QRectF                  rcText;
     QString                 text = QString::number(m_LineNumber);
+    QRectF                  rcArea;
+    qreal                   colWidth = m_ColumnsSize[columnId];
+
+    m_rPainter.setFont(m_Font);
+    rcText = metrics.boundingRect(text);
+
+    if (settings.AutoWidth())
+    {
+        colWidth = std::max(colWidth, rcText.width());
+        m_ColumnsSize[columnId] = colWidth;
+    }
+
+    colWidth = settings.GetWidth();
+
+    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
+                        m_Pos.y() + settings.Margins().top(),
+                        colWidth,
+                        m_ViewSize.height() - m_Pos.y() - settings.Margins().height() );
+
+
+    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
+}
+
+
+void CViewTracePainter::DrawModuleNameColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
+{
+    QFontMetricsF           metrics(m_Font);
+    QRectF                  rcText;
+    QString                 text = QString::fromWCharArray(pData->OwnerPool()->Name().c_str());
+    QRectF                  rcArea;
+    qreal                   colWidth = m_ColumnsSize[columnId];
+
+    m_rPainter.setFont(m_Font);
+    rcText = metrics.boundingRect(text);
+
+    if (settings.AutoWidth())
+    {
+        colWidth = std::max(colWidth, rcText.width());
+        m_ColumnsSize[columnId] = colWidth;
+    }
+
+    colWidth = settings.GetWidth();
+
+    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
+                        m_Pos.y() + settings.Margins().top(),
+                        colWidth,
+                        m_ViewSize.height() - m_Pos.y() - settings.Margins().height() );
+
+
+    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
+}
+
+
+void CViewTracePainter::DrawThreadIdColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
+{
+    QFontMetricsF           metrics(m_Font);
+    QRectF                  rcText;
+    QString                 text = QString::fromWCharArray(pData->ThreadId().c_str());
     QRectF                  rcArea;
     qreal                   colWidth = m_ColumnsSize[columnId];
 

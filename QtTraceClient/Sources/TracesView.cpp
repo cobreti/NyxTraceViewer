@@ -258,6 +258,10 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
     m_TracesGroupNotificationsListener.ConnectTo(pGroup);
     m_pCurrentTracesGroup = pGroup;
 
+    ui->m_HorzScrollbar->setValue(0);
+    ui->m_VertScrollbar->setValue(0);
+    UpdateScrollbarRange(ClientRect());
+
     update();
 }
 
@@ -418,6 +422,12 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_VertScrollbar->setPageStep( NumberOfDisplayedLines );
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
+
+    NYXTRACE(0x0, L"UpdateScrollBarRange : nScrollWidth = " << nScrollWidth );
+    NYXTRACE(0x0, L"UpdateScrollBarRange : hscrollbar value = " << ui->m_HorzScrollbar->value());
+
+    m_pHeader->SetHorzOffset(ui->m_HorzScrollbar->value());
+    m_pHeader->update();
 }
 
 

@@ -15,8 +15,7 @@ CViewHeader::CViewHeader(CViewColumnsSettings& rColumnsSettings, QWidget *parent
 {
     resize(0, m_Margins.height());
 
-//    m_pFont = new QFont("Courier New", 11);
-    m_pFont = new QFont();
+    m_pFont = new QFont("Courier New", 11);
     m_pFont->setBold(true);
     m_pFont->setUnderline(true);
 
@@ -77,8 +76,6 @@ void CViewHeader::paintEvent(QPaintEvent* pEvent)
     qreal       x = m_Margins.left() - m_HorzOffset;
     int         ClientWidth = size().width();
 
-    NYXTRACE(0x0, L"header horz offset : " << m_HorzOffset );
-
     painter.setFont(*m_pFont);
 
     if ( m_pBkgndImage )
@@ -104,10 +101,7 @@ void CViewHeader::paintEvent(QPaintEvent* pEvent)
                           Qt::AlignLeft, rSettings.GetTitle() );
 
         qreal colWidth = rSettings.GetWidth() + rSettings.Margins().width();
-        NYXTRACE(0x0, L"header : col id (" << id << ") size = " << colWidth );
         x += colWidth;
-
-        painter.drawLine( QPointF(x, 0), QPointF(x, rect().height()) );
     }
 }
 
