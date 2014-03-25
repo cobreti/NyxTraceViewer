@@ -101,3 +101,6 @@ SOURCES += \
     ../../sources/TracesReceiverProtocol.cpp \
     ../../sources/TracesView.cpp \
     ../../sources/TracesViewRepoObserver.cpp
+
+FORMS += \
+    ../../../QtTraceClient/UI/settingsPanel.ui

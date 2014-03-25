@@ -100,7 +100,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/TracesGroupMgrListener.cpp \
     ../Sources/TracesGroupListItem.cpp \
     ../Sources/TracesGroupNotificationsListener.cpp \
-    ../Sources/View/ViewTracePainter.cpp
+    ../Sources/View/ViewTracePainter.cpp \
+    ../Sources/Controls/ToggleToolButton.cpp \
+    ../Sources/Panels/SettingsPanel.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -199,7 +201,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/TracesGroupMgrListener.h \
     ../Sources/TracesGroupListItem.h \
     ../Sources/TracesGroupNotificationsListener.h \
-    ../Sources/View/ViewTracePainter.h
+    ../Sources/View/ViewTracePainter.h \
+    ../Sources/Controls/ToggleToolButton.h \
+    ../Sources/Panels/SettingsPanel.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -215,7 +219,8 @@ FORMS += ../UI/TracesView.ui \
     ../UI/HighlightColorsPopup.ui \
     ../UI/AboutDlg.ui \
     ../UI/TcpIpSettingsPanel.ui \
-    ../UI/ChannelSelection.ui
+    ../UI/ChannelSelection.ui \
+    ../UI/SettingsPanel.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI

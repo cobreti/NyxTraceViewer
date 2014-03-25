@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "View/Highlight/ViewItemPattern_Text.hpp"
 #include "View/Highlight/ViewItemHighlighter.hpp"
+#include "Controls/ToggleToolButton.h"
 
 
 class QToolButton;
@@ -53,6 +54,7 @@ public slots:
     void OnHideSearch();
     void OnShowMainWindow();
     void OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup);
+    void OnSettingsBtnStateChanged(CToggleToolButton::EState state);
 
 protected:
 
@@ -76,6 +78,8 @@ protected:
     QToolButton*            m_pBtn_HighlightColorSelection;
     QToolButton*            m_pBtn_SaveAs;
     QToolButton*            m_pBtn_About;
+    CToggleToolButton*      m_pBtn_Settings;
+    QToolButton*            m_pBtn_SettingsSelected;
 
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_HideSearch;

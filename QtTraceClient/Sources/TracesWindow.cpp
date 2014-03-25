@@ -18,6 +18,7 @@
 
 #include "Color/ColorBtn.h"
 
+
 #include <QToolButton>
 #include <QCloseEvent>
 #include <QFileDialog>
@@ -43,6 +44,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_HighlightColorSelection(NULL),
     m_pBtn_SaveAs(NULL),
     m_pBtn_About(NULL),
+    m_pBtn_Settings(NULL),
+    m_pBtn_SettingsSelected(NULL),
     m_pSearchText(NULL),
     m_pBtn_HideSearch(NULL),
     m_pBtn_SearchNext(NULL),
@@ -72,6 +75,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               HighlightColorSelectionIcon(":/TracesWindow/HighlightColorSelection");
     QIcon               SearchIcon(":/TracesWindow/Search");
     QIcon               HideSearchIcon(":/TracesWindow/HideSearch");
+    QIcon               SettingsIcon(":/TracesWindow/Settings-Icon");
+    QIcon               SettingsSelectedIcon(":/TracesWindow/Settings-Selected-Icon");
 
     CTracesView* pBase = NULL;
 
@@ -111,6 +116,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_About = new QToolButton();
     m_pBtn_About->setIcon(AboutIcon);
 
+    m_pBtn_Settings = new CToggleToolButton();
+    m_pBtn_Settings->setNormalIcon(SettingsIcon);
+    m_pBtn_Settings->setSelectedIcon(SettingsSelectedIcon);
+
     m_pSearchText = new QLineEdit();
     
     m_pBtn_SearchNext = new QToolButton();
@@ -127,18 +136,19 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_HighlightColor = new CChooseColorBtn();
 
-    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
+//    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
+    ui->MainToolBar->addWidget(m_pBtn_Settings);
     ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
-    ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_NewView);
-    ui->MainToolBar->addWidget(m_pBtn_CloneView);
-    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
+//    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_NewView);
+//    ui->MainToolBar->addWidget(m_pBtn_CloneView);
+//    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_Search);
     ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
     ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_SaveAs);
-    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_SaveAs);
+//    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
@@ -164,6 +174,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_MainWindow, SIGNAL(clicked()), this, SLOT(OnShowMainWindow()));
     connect( m_pChannelSelection, SIGNAL(SelectionChanged(TraceClientCore::CTracesGroup*)),
              this, SLOT(OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*)) );
+    connect( m_pBtn_Settings, SIGNAL(stateChanged(CToggleToolButton::EState)), this, SLOT(OnSettingsBtnStateChanged(CToggleToolButton::EState)));
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -365,6 +376,21 @@ void CTracesWindow::OnShowMainWindow()
 void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup)
 {
     m_pTracesView->SetTracesGroup(pGroup);
+}
+
+
+void CTracesWindow::OnSettingsBtnStateChanged(CToggleToolButton::EState state)
+{
+    switch (state)
+    {
+    case CToggleToolButton::eState_Normal:
+        CTraceClientApp::Instance().HideSettings();
+        break;
+
+    case CToggleToolButton::eState_Selected:
+        CTraceClientApp::Instance().ShowSettings(this, QPoint(50, ui->MainToolBar->height()));
+        break;
+    }
 }
 
 

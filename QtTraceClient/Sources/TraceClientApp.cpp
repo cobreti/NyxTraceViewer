@@ -14,9 +14,14 @@
 #include "View/ViewItemThreadIdPainter.hpp"
 #include "View/ViewItemDataPainter.hpp"
 #include "View/ViewItemLineNumberPainter.hpp"
+#include "Panels/SettingsPanel.h"
 #include "PoolsUpdateClock.hpp"
 
 #include "TraceClientCoreModule.hpp"
+
+#include <QWidget>
+#include <QLayout>
+
 
 /**
  *
@@ -40,7 +45,8 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_pQtApplication(NULL),
     m_AppReturnValue(-1),
     m_pTracesWindow(NULL),
-    m_pMainWindow(NULL)
+    m_pMainWindow(NULL),
+    m_pSettingsPanel(NULL)
 {
     s_pInstance = this;
 }
@@ -109,6 +115,8 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTracesWindow = new CTracesWindow(NULL);
     m_pTracesWindow->setParent(NULL, Qt::Window);
     m_pTracesWindow->show();
+
+    m_pSettingsPanel = new CSettingsPanel();
 }
 
 
@@ -138,6 +146,22 @@ void CTraceClientApp::Destroy()
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
     WindowsManager().Terminate();
+}
+
+
+void CTraceClientApp::ShowSettings(QWidget *parent, const QPoint& pt )
+{
+    m_pSettingsPanel->setParent(parent);
+    m_pSettingsPanel->show();
+    m_pSettingsPanel->move(pt);
+    m_pSettingsPanel->raise();
+}
+
+
+void CTraceClientApp::HideSettings()
+{
+    m_pSettingsPanel->hide();
+    m_pSettingsPanel->setParent(NULL);
 }
 
 

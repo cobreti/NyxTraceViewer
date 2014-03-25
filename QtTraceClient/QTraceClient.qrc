@@ -11,6 +11,8 @@
         <file alias="Search">Icons/search-icon.png</file>
         <file alias="HideSearch">Icons/search-remove-icon.png</file>
         <file alias="MainWindow">Icons/Window-icon.png</file>
+        <file alias="Settings-Icon">Icons/Settings-icon.png</file>
+        <file alias="Settings-Selected-Icon">Icons/Settings-selected-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

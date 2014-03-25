@@ -13,6 +13,9 @@
 class CMainWindow;
 class CTracesWindow;
 class QApplication;
+class CSettingsPanel;
+class QWidget;
+
 
 class CTraceClientApp : public QObject,
                         public ITracesWindowsListener
@@ -43,6 +46,9 @@ public:
     CWindowsManager&        WindowsManager()            { return m_WindowsManager; }
     const CWindowsManager&  WindowsManager() const      { return m_WindowsManager; }
 
+    void ShowSettings(QWidget* parent, const QPoint& pt = QPoint(0,0));
+    void HideSettings();
+
     const char* GetVersion() const;
 
 public: // ITracesWindowsListener methods
@@ -72,6 +78,8 @@ protected:
 
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
     CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
+
+    CSettingsPanel*         m_pSettingsPanel;
 
     static CTraceClientApp*     s_pInstance;
 };
