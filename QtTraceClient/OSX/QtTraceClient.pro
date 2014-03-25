@@ -3,6 +3,9 @@
 # -------------------------------------------------
 QT += xml
 QT += widgets
+QT += network
+QT += script
+
 TARGET = NyxTraceViewer
 TEMPLATE = app
 NyxPath=../../../Nyx
