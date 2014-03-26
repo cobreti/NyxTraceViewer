@@ -105,7 +105,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/TracesGroupNotificationsListener.cpp \
     ../Sources/View/ViewTracePainter.cpp \
     ../Sources/Controls/ToggleToolButton.cpp \
-    ../Sources/Panels/SettingsPanel.cpp
+    ../Sources/Panels/SettingsPanel.cpp \
+    ../Sources/ServerAccess/TraceServerPortal.cpp \
+    ../Sources/ServerAccess/WSSetTraceClient.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -206,7 +208,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/TracesGroupNotificationsListener.h \
     ../Sources/View/ViewTracePainter.h \
     ../Sources/Controls/ToggleToolButton.h \
-    ../Sources/Panels/SettingsPanel.h
+    ../Sources/Panels/SettingsPanel.h \
+    ../Sources/ServerAccess/TraceServerPortal.h \
+    ../Sources/ServerAccess/WSSetTraceClient.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

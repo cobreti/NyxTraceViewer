@@ -26,6 +26,7 @@ public:
 public slots:
 
     void onTraceDirectoryServerChanged(const QString& text);
+    void onNameChanged(const QString& text);
     void onApply();
     void onResult(QNetworkReply*);
 
@@ -35,6 +36,7 @@ signals:
 protected:
 
     void Init();
+    void ValidateInputs();
 
 protected:
 
@@ -46,8 +48,8 @@ protected:
     Ui::SettingsPanel*      ui;
 
     CTcpIpSettingsPanel*        m_pTxtTcpIpSettingsPanel;
-    QNetworkAccessManager       networkManager;
-    QNetworkReply*              currentReply;
+//    QNetworkAccessManager       networkManager;
+//    QNetworkReply*              currentReply;
 };
 
 

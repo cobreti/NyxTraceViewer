@@ -15,6 +15,7 @@ class CTracesWindow;
 class QApplication;
 class CSettingsPanel;
 class QWidget;
+class CTraceServerPortal;
 
 
 class CTraceClientApp : public QObject,
@@ -49,6 +50,8 @@ public:
     void ShowSettings(QWidget* parent, const QPoint& pt = QPoint(0,0));
     void HideSettings();
 
+    CTraceServerPortal&     TraceServerPortal() const   { return *m_pTraceServerPortal; }
+
     const char* GetVersion() const;
 
 public: // ITracesWindowsListener methods
@@ -80,6 +83,7 @@ protected:
     CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
 
     CSettingsPanel*         m_pSettingsPanel;
+    CTraceServerPortal*     m_pTraceServerPortal;
 
     static CTraceClientApp*     s_pInstance;
 };

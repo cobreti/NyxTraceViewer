@@ -1,6 +1,8 @@
 #include "SettingsPanel.h"
 #include "ui_SettingsPanel.h"
 #include "MainWindow/TcpIpSettingsPanel.h"
+#include "TraceClientApp.h"
+#include "ServerAccess/TraceServerPortal.h"
 
 
 #include <QNetworkAccessManager>
@@ -29,49 +31,63 @@ CSettingsPanel::~CSettingsPanel()
 
 void CSettingsPanel::onTraceDirectoryServerChanged(const QString& text)
 {
-    ui->applyButton->setEnabled(true);
+    ValidateInputs();
+}
+
+
+void CSettingsPanel::onNameChanged(const QString &text)
+{
+    ValidateInputs();
 }
 
 
 void CSettingsPanel::onApply()
 {
-    QUrl url("http://10.11.0.180/backend/");
-    QString method = "Management/Services/ListUsers.php";
+    QString name = ui->name->text();
+    QString server = ui->TraceDirectoryServer->text();
 
-    url.setPath( QString("%1%2").arg(url.path()).arg(method));
+    CTraceServerPortal& rServerPortal = CTraceClientApp::Instance().TraceServerPortal();
 
-    QMap<QString, QVariant> params;
-    params["key"] = "53850c682a15401eab4d66864c5600c0";
+    rServerPortal.setServer(server);
+    rServerPortal.setTraceClient(name);
 
-    QUrlQuery   query;
-    foreach(QString param, params.keys())
-    {
-        query.addQueryItem(param, params[param].toString());
-    }
-    url.setQuery(query);
+//    QUrl url("http://10.11.0.180/backend/");
+//    QString method = "Management/Services/ListUsers.php";
 
-    QNetworkRequest request;
-    request.setUrl(url);
+//    url.setPath( QString("%1%2").arg(url.path()).arg(method));
 
-    QString urlstr = url.toString();
+//    QMap<QString, QVariant> params;
+//    params["key"] = "53850c682a15401eab4d66864c5600c0";
 
-    connect( &networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
+//    QUrlQuery   query;
+//    foreach(QString param, params.keys())
+//    {
+//        query.addQueryItem(param, params[param].toString());
+//    }
+//    url.setQuery(query);
 
-    QByteArray      data;
-    data.append("key=53850c682a15401eab4d66864c5600c0");
-    currentReply = networkManager.post(request, data);
+//    QNetworkRequest request;
+//    request.setUrl(url);
+
+//    QString urlstr = url.toString();
+
+//    connect( &networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
+
+//    QByteArray      data;
+//    data.append("key=53850c682a15401eab4d66864c5600c0");
+//    currentReply = networkManager.post(request, data);
 }
 
 
 void CSettingsPanel::onResult(QNetworkReply *reply)
 {
-    if (currentReply->error() != QNetworkReply::NoError)
-        return;
+//    if (currentReply->error() != QNetworkReply::NoError)
+//        return;
 
-    QString data = reply->readAll();
+//    QString data = reply->readAll();
 
-    QScriptEngine engine;
-    QScriptValue result = engine.evaluate(data);
+//    QScriptEngine engine;
+//    QScriptValue result = engine.evaluate(data);
 }
 
 
@@ -80,15 +96,32 @@ void CSettingsPanel::Init()
     m_pTxtTcpIpSettingsPanel = new CTcpIpSettingsPanel();
     m_pTxtTcpIpSettingsPanel->SetTracesReceiversSvr( &TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1) );
     ui->TxtTracePortLayout->addWidget(m_pTxtTcpIpSettingsPanel);
+    ui->TxtTracePortLayout->update();
+    ui->frame->layout()->update();
+    QRect rcLayout = ui->TxtTracePortLayout->contentsRect();
+    QRect rcCtrl = m_pTxtTcpIpSettingsPanel->rect();
 
     connect( ui->TraceDirectoryServer, SIGNAL(textChanged(QString)), this, SLOT(onTraceDirectoryServerChanged(QString)));
+    connect( ui->name, SIGNAL(textChanged(QString)), this, SLOT(onNameChanged(QString)));
     connect( ui->applyButton, SIGNAL(clicked()), this, SLOT(onApply()));
+}
+
+
+
+void CSettingsPanel::ValidateInputs()
+{
+    QString name = ui->name->text();
+
+    ui->applyButton->setEnabled( !name.isEmpty() );
 }
 
 
 void CSettingsPanel::showEvent(QShowEvent *)
 {
     ui->applyButton->setEnabled(false);
+
+    QRect rcLayout = ui->TxtTracePortLayout->contentsRect();
+    QRect rcCtrl = m_pTxtTcpIpSettingsPanel->rect();
 }
 
 

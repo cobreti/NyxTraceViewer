@@ -16,6 +16,7 @@
 #include "View/ViewItemLineNumberPainter.hpp"
 #include "Panels/SettingsPanel.h"
 #include "PoolsUpdateClock.hpp"
+#include "ServerAccess/TraceServerPortal.h"
 
 #include "TraceClientCoreModule.hpp"
 
@@ -46,7 +47,8 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_AppReturnValue(-1),
     m_pTracesWindow(NULL),
     m_pMainWindow(NULL),
-    m_pSettingsPanel(NULL)
+    m_pSettingsPanel(NULL),
+    m_pTraceServerPortal(NULL)
 {
     s_pInstance = this;
 }
@@ -117,6 +119,7 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTracesWindow->show();
 
     m_pSettingsPanel = new CSettingsPanel();
+    m_pTraceServerPortal = new CTraceServerPortal();
 }
 
 
