@@ -5,9 +5,9 @@
 #include <QUrl>
 #include <QNetworkRequest>
 #include <QNetworkReply>
-#include <QScriptEngine>
-#include <QScriptValueIterator>
-#include <QScopedPointer>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 
 CWSSetTraceClient::CWSSetTraceClient() : QObject()
 {
@@ -40,7 +40,6 @@ void CWSSetTraceClient::send()
     {
         query.addQueryItem(param, params[param].toString());
     }
-//    url.setQuery(query);
 
     QNetworkRequest request;
     request.setUrl(url);
@@ -62,42 +61,12 @@ void CWSSetTraceClient::onResult(QNetworkReply *reply)
     if (m_pCurrentReply->error() != QNetworkReply::NoError)
         return;
 
-    QString data = reply->readAll();
-    data = data.replace("\n", "");
+    QByteArray data = reply->readAll();
+    QJsonParseError err;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &err);
 
-    QScriptEngine engine;
-    QScriptValue dataVal = engine.evaluate("(" + data + ")");
-
-    parseResult(dataVal);
-//    QScriptValueIterator        it(dataVal);
-//    QString name;
-
-//    while (it.hasNext())
-//    {
-//        it.next();
-//        QScriptValue val = it.value();
-//        name = it.name();
-//    }
-}
-
-
-void CWSSetTraceClient::parseResult(QScriptValue value)
-{
-    QString     text;
-
-    if ( value.isArray() || value.isObject() )
-    {
-        QScriptValueIterator        it(value);
-        QString name;
-
-        while (it.hasNext())
-        {
-            it.next();
-            parseResult(it.value());
-        }
-    }
-    else
-    {
-        text = value.toString();
-    }
+    QJsonObject obj = doc.object();
+    QJsonObject::iterator it = obj.find("result");
+    QJsonValue value = it.value();
+    QString result = value.toString();
 }

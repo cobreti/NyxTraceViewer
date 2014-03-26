@@ -6,7 +6,6 @@
 #include <QString>
 #include <QNetworkInterface>
 #include <QNetworkAccessManager>
-#include <QScriptValue>
 
 class QNetworkReply;
 
@@ -37,8 +36,6 @@ public slots:
 signals:
 
 protected:
-
-     void parseResult(QScriptValue value);
 
 protected:
 
