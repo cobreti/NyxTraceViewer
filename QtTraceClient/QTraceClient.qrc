@@ -13,6 +13,8 @@
         <file alias="MainWindow">Icons/Window-icon.png</file>
         <file alias="Settings-Icon">Icons/Settings-icon.png</file>
         <file alias="Settings-Selected-Icon">Icons/Settings-selected-icon.png</file>
+        <file alias="Device-Icon">Icons/device-icon.png</file>
+        <file alias="Device-Selected-Icon">Icons/device-selected-icon.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

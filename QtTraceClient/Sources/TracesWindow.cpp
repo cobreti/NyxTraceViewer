@@ -45,7 +45,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_SaveAs(NULL),
     m_pBtn_About(NULL),
     m_pBtn_Settings(NULL),
-    m_pBtn_SettingsSelected(NULL),
+    m_pBtn_Devices(NULL),
     m_pSearchText(NULL),
     m_pBtn_HideSearch(NULL),
     m_pBtn_SearchNext(NULL),
@@ -77,6 +77,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               HideSearchIcon(":/TracesWindow/HideSearch");
     QIcon               SettingsIcon(":/TracesWindow/Settings-Icon");
     QIcon               SettingsSelectedIcon(":/TracesWindow/Settings-Selected-Icon");
+    QIcon               DevicesIcon(":/TracesWindow/Device-Icon");
+    QIcon               DevicesSelectedIcon(":/TracesWindow/Device-Selected-Icon");
 
     CTracesView* pBase = NULL;
 
@@ -120,6 +122,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_Settings->setNormalIcon(SettingsIcon);
     m_pBtn_Settings->setSelectedIcon(SettingsSelectedIcon);
 
+    m_pBtn_Devices = new CToggleToolButton();
+    m_pBtn_Devices->setNormalIcon(DevicesIcon);
+    m_pBtn_Devices->setSelectedIcon(DevicesSelectedIcon);
+
     m_pSearchText = new QLineEdit();
     
     m_pBtn_SearchNext = new QToolButton();
@@ -138,6 +144,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
 //    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
     ui->MainToolBar->addWidget(m_pBtn_Settings);
+    ui->MainToolBar->addWidget(m_pBtn_Devices);
     ui->MainToolBar->addSeparator();
 //    ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
 //    ui->MainToolBar->addSeparator();
@@ -175,6 +182,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pChannelSelection, SIGNAL(SelectionChanged(TraceClientCore::CTracesGroup*)),
              this, SLOT(OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*)) );
     connect( m_pBtn_Settings, SIGNAL(stateChanged(CToggleToolButton::EState)), this, SLOT(OnSettingsBtnStateChanged(CToggleToolButton::EState)));
+    connect( m_pBtn_Devices, SIGNAL(stateChanged(CToggleToolButton::EState)), this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -388,7 +396,22 @@ void CTracesWindow::OnSettingsBtnStateChanged(CToggleToolButton::EState state)
         break;
 
     case CToggleToolButton::eState_Selected:
-        CTraceClientApp::Instance().ShowSettings(this, QPoint(50, ui->MainToolBar->height()));
+        CTraceClientApp::Instance().ShowSettings(this, QPoint(20, ui->MainToolBar->height()));
+        break;
+    }
+}
+
+
+void CTracesWindow::OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState state)
+{
+    switch (state)
+    {
+    case CToggleToolButton::eState_Normal:
+        CTraceClientApp::Instance().HideDevicesSelection();
+        break;
+
+    case CToggleToolButton::eState_Selected:
+        CTraceClientApp::Instance().ShowDevicesSelection(this, QPoint(50, ui->MainToolBar->height()));
         break;
     }
 }

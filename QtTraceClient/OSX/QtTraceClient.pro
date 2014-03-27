@@ -107,7 +107,10 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/Controls/ToggleToolButton.cpp \
     ../Sources/Panels/SettingsPanel.cpp \
     ../Sources/ServerAccess/TraceServerPortal.cpp \
-    ../Sources/ServerAccess/WSSetTraceClient.cpp
+    ../Sources/ServerAccess/WSSetTraceClient.cpp \
+    ../Sources/Panels/DevicesSelectionPanel.cpp \
+    ../Sources/DevicesMgr.cpp \
+    ../Sources/Device.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -210,7 +213,10 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/Controls/ToggleToolButton.h \
     ../Sources/Panels/SettingsPanel.h \
     ../Sources/ServerAccess/TraceServerPortal.h \
-    ../Sources/ServerAccess/WSSetTraceClient.h
+    ../Sources/ServerAccess/WSSetTraceClient.h \
+    ../Sources/Panels/DevicesSelectionPanel.h \
+    ../Sources/DevicesMgr.h \
+    ../Sources/Device.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -227,7 +233,8 @@ FORMS += ../UI/TracesView.ui \
     ../UI/AboutDlg.ui \
     ../UI/TcpIpSettingsPanel.ui \
     ../UI/ChannelSelection.ui \
-    ../UI/SettingsPanel.ui
+    ../UI/SettingsPanel.ui \
+    ../UI/DevicesSelection.ui
 ICON=../Icons/AppOSX.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI

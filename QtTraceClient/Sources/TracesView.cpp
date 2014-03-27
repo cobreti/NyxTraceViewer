@@ -339,8 +339,6 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
 
-    NYXTRACE(0x0, L"paint event hscroll value = " << ui->m_HorzScrollbar->value());
-
     painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
     TracePainter.Origin() = QPoint( m_Margins.left() - ui->m_HorzScrollbar->value(), HeaderSize().height());

@@ -15,8 +15,10 @@
 #include "View/ViewItemDataPainter.hpp"
 #include "View/ViewItemLineNumberPainter.hpp"
 #include "Panels/SettingsPanel.h"
+#include "Panels/DevicesSelectionPanel.h"
 #include "PoolsUpdateClock.hpp"
 #include "ServerAccess/TraceServerPortal.h"
+#include "DevicesMgr.h"
 
 #include "TraceClientCoreModule.hpp"
 
@@ -48,7 +50,9 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_pTracesWindow(NULL),
     m_pMainWindow(NULL),
     m_pSettingsPanel(NULL),
-    m_pTraceServerPortal(NULL)
+    m_pDevicesSelectionPanel(NULL),
+    m_pTraceServerPortal(NULL),
+    m_pDevicesMgr( new CDevicesMgr() )
 {
     s_pInstance = this;
 }
@@ -119,6 +123,7 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTracesWindow->show();
 
     m_pSettingsPanel = new CSettingsPanel();
+    m_pDevicesSelectionPanel = new CDevicesSelectionPanel();
     m_pTraceServerPortal = new CTraceServerPortal();
 }
 
@@ -165,6 +170,22 @@ void CTraceClientApp::HideSettings()
 {
     m_pSettingsPanel->hide();
     m_pSettingsPanel->setParent(NULL);
+}
+
+
+void CTraceClientApp::ShowDevicesSelection(QWidget *parent, const QPoint &pt)
+{
+    m_pDevicesSelectionPanel->setParent(parent);
+    m_pDevicesSelectionPanel->show();
+    m_pDevicesSelectionPanel->move(pt);
+    m_pDevicesSelectionPanel->raise();
+}
+
+
+void CTraceClientApp::HideDevicesSelection()
+{
+    m_pDevicesSelectionPanel->hide();
+    m_pDevicesSelectionPanel->setParent(NULL);
 }
 
 

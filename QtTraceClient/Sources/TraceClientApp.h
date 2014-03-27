@@ -14,8 +14,10 @@ class CMainWindow;
 class CTracesWindow;
 class QApplication;
 class CSettingsPanel;
+class CDevicesSelectionPanel;
 class QWidget;
 class CTraceServerPortal;
+class CDevicesMgr;
 
 
 class CTraceClientApp : public QObject,
@@ -47,8 +49,14 @@ public:
     CWindowsManager&        WindowsManager()            { return m_WindowsManager; }
     const CWindowsManager&  WindowsManager() const      { return m_WindowsManager; }
 
+    const CDevicesMgr&      DevicesMgr() const          { return *m_pDevicesMgr; }
+    CDevicesMgr&            DevicesMgr()                { return *m_pDevicesMgr; }
+
     void ShowSettings(QWidget* parent, const QPoint& pt = QPoint(0,0));
     void HideSettings();
+
+    void ShowDevicesSelection(QWidget* parent, const QPoint& pt = QPoint(0,0));
+    void HideDevicesSelection();
 
     CTraceServerPortal&     TraceServerPortal() const   { return *m_pTraceServerPortal; }
 
@@ -82,8 +90,11 @@ protected:
     CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
     CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
 
-    CSettingsPanel*         m_pSettingsPanel;
-    CTraceServerPortal*     m_pTraceServerPortal;
+    CSettingsPanel*             m_pSettingsPanel;
+    CDevicesSelectionPanel*     m_pDevicesSelectionPanel;
+    CTraceServerPortal*         m_pTraceServerPortal;
+
+    CDevicesMgr*                m_pDevicesMgr;
 
     static CTraceClientApp*     s_pInstance;
 };
