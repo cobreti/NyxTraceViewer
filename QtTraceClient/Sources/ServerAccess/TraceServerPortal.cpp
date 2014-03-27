@@ -28,15 +28,19 @@ void CTraceServerPortal::setTraceClient(const QString& name)
     m_p_ws_SetTraceClient->address() = hostAddress.toString();
 
     m_p_ws_SetTraceClient->send();
-//    CWSSetTraceClient       setTraceClient(m_Server, m_Name, hostAddress);
-
-//    setTraceClient.send();
 }
 
 
 void CTraceServerPortal::setServer(const QString &server)
 {
     m_Server = server;
+
+    QRegExp         exp("http://(.*)");
+
+    if ( !exp.exactMatch(m_Server) )
+    {
+        m_Server = QString("%1%2").arg("http://").arg(m_Server);
+    }
 }
 
 
@@ -56,3 +60,6 @@ QHostAddress CTraceServerPortal::GetHostAddress()
 
     return hostAddress;
 }
+
+
+

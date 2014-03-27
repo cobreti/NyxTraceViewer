@@ -45,4 +45,7 @@
         <file alias="Start">Icons/StartTcpIp.png</file>
         <file alias="Stop">Icons/StopTcpIp.png</file>
     </qresource>
+    <qresource prefix="/ChannelSelection">
+        <file alias="add-icon">Icons/add-icon.png</file>
+    </qresource>
 </RCC>

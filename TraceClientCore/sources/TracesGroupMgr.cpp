@@ -31,10 +31,37 @@ namespace TraceClientCore
     
     
     /**
+     * @brief CTracesGroupMgr::GetGroup
+     * @param name
+     * @return
+     */
+    CTracesGroup* CTracesGroupMgr::GetGroup(const Nyx::CAString& name) const
+    {
+        TTracesGroupMap::const_iterator     pos = m_TracesGroups.begin();
+        CTracesGroup*                       pGroup = NULL;
+
+        while (pos != m_TracesGroups.end() && pGroup == NULL)
+        {
+            if ( pos->second->Name() == name )
+            {
+                pGroup = pos->second;
+            }
+
+            ++ pos;
+        }
+
+        return pGroup;
+    }
+
+
+    /**
      *
      */
     CTracesGroup* CTracesGroupMgr::CreateTracesGroup(const Nyx::CAString& name)
     {
+        if ( NULL != GetGroup(name) )
+            return NULL;
+
         CTracesGroup*   pGroup = new CTracesGroup();
         pGroup->Name() = name;
         
