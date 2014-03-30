@@ -249,6 +249,10 @@ macx {
     LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
     LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 }
+win32 {
+    INCLUDEPATH += $${NyxPath}/include/Win32
+    INCLUDEPATH += $${NyxPath}/include/Win32/NyxNet
+}
 
 CONFIG(debug, debug | release) {
 
@@ -269,6 +273,24 @@ CONFIG(debug, debug | release) {
             LIBS += -lcrypto \
                 -L$${NyxPath}/Lib/OSX/OpenSSL_64
             LIBS += /usr/lib/libiconv.dylib
+    }
+
+    win32 {
+            LIBS += -lwinmm
+            LIBS += -lws2_32
+            LIBS += -ladvapi32
+            LIBS += -lTraceClientCore \
+                -L../../Lib/Qt/Debug_64
+            LIBS += -lNyxBase \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lNyxNet \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lNyxWebSvr \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lssleay32 \
+                -L$${NyxPath}/Lib/Windows/x64/openssl
+            LIBS += -llibeay32 \
+                -L$${NyxPath}/Lib/Windows/x64/openssl
     }
 
     DESTDIR = ./Debug_64
@@ -294,6 +316,24 @@ CONFIG(release, debug | release) {
         LIBS += -lcrypto \
             -L$${NyxPath}/Lib/OSX/OpenSSL_64
         LIBS += /usr/lib/libiconv.dylib
+    }
+
+    win32 {
+            LIBS += -lwinmm
+            LIBS += -lws2_32
+            LIBS += -ladvapi32
+            LIBS += -lTraceClientCore \
+                -L../../Lib/Qt/Release_64
+            LIBS += -lNyxBase \
+                -L$${NyxPath}/Lib/Qt/Release_64
+            LIBS += -lNyxNet \
+                -L$${NyxPath}/Lib/Qt/Release_64
+            LIBS += -lNyxWebSvr \
+                -L$${NyxPath}/Lib/Qt/Release_64
+            LIBS += -lssleay32 \
+                -L$${NyxPath}/Lib/Windows/x64/openssl
+            LIBS += -llibeay32 \
+                -L$${NyxPath}/Lib/Windows/x64/openssl
     }
 
     DESTDIR = ./Release_64

@@ -15,9 +15,16 @@ DEFINES += STDCONSTRUCT
 
 INCLUDEPATH += ../include
 INCLUDEPATH += $${NyxPath}/include
-INCLUDEPATH += $${NyxPath}/include/OSX
 INCLUDEPATH += $${NyxPath}/include/NyxNet
-INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
+macx {
+    INCLUDEPATH += $${NyxPath}/include/OSX
+    INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
+}
+
+win32 {
+    INCLUDEPATH += $${NyxPath}/include/Win32
+    INCLUDEPATH += $${NyxPath}/include/Win32/NyxNet
+}
 
 CONFIG(debug, debug | release) {
     OBJECTS_DIR = ./Debug_64
