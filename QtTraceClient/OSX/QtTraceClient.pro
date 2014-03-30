@@ -243,28 +243,33 @@ INCLUDEPATH += ../UI
 INCLUDEPATH += $${NyxPath}/include/
 INCLUDEPATH += $${NyxPath}/include/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
-mac:INCLUDEPATH += $${NyxPath}/include/OSX
-mac:INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
-mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
-mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
+macx {
+    INCLUDEPATH += $${NyxPath}/include/OSX
+    INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
+    LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
+    LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
+}
 
 CONFIG(debug, debug | release) {
-    mac::PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
-    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
-    mac:LIBS += -lTraceClientCore \
-        -L../../Lib/Qt/Debug_64
-    mac:LIBS += -lNyxBase \
-        -L$${NyxPath}/Lib/Qt/Debug_64
-    mac:LIBS += -lNyxNet \
-        -L$${NyxPath}/Lib/Qt/Debug_64
-    mac:LIBS += -lNyxWebSvr \
-        -L$${NyxPath}/Lib/Qt/Debug_64
-    mac:LIBS += -lssl \
-        -L$${NyxPath}/Lib/OSX/OpenSSL_64
-    mac:LIBS += -lcrypto \
-        -L$${NyxPath}/Lib/OSX/OpenSSL_64
-    mac:LIBS += /usr/lib/libiconv.dylib
+
+    macx {
+            PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
+            PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
+            PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
+            LIBS += -lTraceClientCore \
+                -L../../Lib/Qt/Debug_64
+            LIBS += -lNyxBase \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lNyxNet \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lNyxWebSvr \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lssl \
+                -L$${NyxPath}/Lib/OSX/OpenSSL_64
+            LIBS += -lcrypto \
+                -L$${NyxPath}/Lib/OSX/OpenSSL_64
+            LIBS += /usr/lib/libiconv.dylib
+    }
     DESTDIR = ./Debug_64
     OBJECTS_DIR = ./Debug_64
     DEFINES += _DEBUG
