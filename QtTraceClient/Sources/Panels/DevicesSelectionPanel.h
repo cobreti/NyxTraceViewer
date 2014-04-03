@@ -1,7 +1,13 @@
 #ifndef DEVICESSELECTIONPANEL_H
 #define DEVICESSELECTIONPANEL_H
 
+
+#include "device.h"
+
 #include <QWidget>
+#include <QItemDelegate>
+#include <QTreeWidgetItem>
+
 
 namespace Ui
 {
@@ -18,12 +24,46 @@ public:
 
 public slots:
 
-    void onDeviceNameChanged(const QString& text);
-    void onAddDevice();
-    void onFocusChanged( QWidget* pOld, QWidget* pNew );
+    void onItemDoubleClicked( QTreeWidgetItem* pItem, int column );
+    void onDeviceAdded(const CDevice& device);
+    void onDeviceRemoved(const CDevice& device);
 
 signals:
 
+
+protected:
+
+
+    class XTreeItem : public QTreeWidgetItem
+    {
+    public:
+        XTreeItem(const CDevice& device);
+        virtual ~XTreeItem();
+
+        bool isSelected() const                 { return m_bSelected; }
+        void setSelected(bool bSelected);
+
+    protected:
+
+        CDevice     m_Device;
+        bool        m_bSelected;
+    };
+
+
+
+    class XItemDelegate : public QItemDelegate
+    {
+    public:
+        XItemDelegate();
+        virtual ~XItemDelegate();
+
+        virtual void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+        virtual QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+    protected:
+
+        QIcon       m_CheckIcon;
+    };
 
 protected:
 

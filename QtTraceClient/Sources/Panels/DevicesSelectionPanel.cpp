@@ -2,6 +2,7 @@
 #include "DevicesSelectionPanel.h"
 #include "TraceClientApp.h"
 #include "DevicesMgr.h"
+#include "ServerAccess/TraceServerPortal.h"
 
 #include "ui_DevicesSelection.h"
 
@@ -16,11 +17,21 @@ CDevicesSelectionPanel::CDevicesSelectionPanel() : QWidget(),
 {
     ui->setupUi(this);
 
-    ui->removeDeviceBtn->setEnabled(false);
-    ui->addDeviceBtn->setEnabled(false);
+    XItemDelegate* pDelegate = new XItemDelegate();
+    pDelegate->setParent(ui->devicesList);
+    ui->devicesList->setItemDelegateForColumn(0, pDelegate);
+    ui->devicesList->setItemDelegateForColumn(1, pDelegate);
 
-    connect( ui->deviceNameEdit, SIGNAL(textChanged(QString)), this, SLOT(onDeviceNameChanged(QString)));
-    connect( ui->addDeviceBtn, SIGNAL(clicked()), this, SLOT(onAddDevice()));
+    connect(    ui->devicesList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+                this, SLOT(onItemDoubleClicked(QTreeWidgetItem*,int)) );
+
+
+//    CDevice         device;
+//    device.id() = 1;
+//    device.name() = "test";
+//    device.alias() = "alias value";
+//    XTreeItem* pItem = new XTreeItem(device);
+//    ui->devicesList->addTopLevelItem(pItem);
 }
 
 
@@ -33,47 +44,112 @@ CDevicesSelectionPanel::~CDevicesSelectionPanel()
 }
 
 
-/**
- * @brief CDevicesSelectionPanel::onDeviceNameChanged
- * @param text
- */
-void CDevicesSelectionPanel::onDeviceNameChanged(const QString &text)
+void CDevicesSelectionPanel::onItemDoubleClicked(QTreeWidgetItem *pItem, int column)
 {
-    CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
-    bool            bAddEnabled = !text.isEmpty() && !rDevicesMgr.IsDeviceWithNameExists(text);
-
-    ui->addDeviceBtn->setEnabled(bAddEnabled);
+    if ( column == 0 )
+    {
+        XTreeItem*      pTreeItem = static_cast<XTreeItem*>(pItem);
+        pTreeItem->setSelected( !pTreeItem->isSelected() );
+    }
 }
 
 
-void CDevicesSelectionPanel::onAddDevice()
+void CDevicesSelectionPanel::onDeviceAdded(const CDevice &device)
 {
-    CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
-    QString         deviceName = ui->deviceNameEdit->text();
-    CDevice*        pDevice = new CDevice(deviceName);
-
-    rDevicesMgr.AddDevice(pDevice);
-    ui->addDeviceBtn->setEnabled(false);
-    ui->deviceList->addItem(deviceName);
+    XTreeItem* pItem = new XTreeItem(device);
+    ui->devicesList->addTopLevelItem(pItem);
 }
 
 
-void CDevicesSelectionPanel::onFocusChanged(QWidget *pOld, QWidget *pNew)
+void CDevicesSelectionPanel::onDeviceRemoved(const CDevice &device)
 {
+
 }
 
 
 void CDevicesSelectionPanel::showEvent(QShowEvent *)
 {
     QApplication*   app = static_cast<QApplication*>(QApplication::instance());
+    CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
 
+    connect(    &rDevicesMgr, SIGNAL(deviceAdded(CDevice)), this, SLOT(onDeviceAdded(CDevice)));
     connect( app, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
+
+    CTraceClientApp::Instance().TraceServerPortal().getDevices();
 }
 
 
 void CDevicesSelectionPanel::hideEvent(QHideEvent *)
 {
     QApplication*   app = static_cast<QApplication*>(QApplication::instance());
+    CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
 
     disconnect( app, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
+    disconnect( &rDevicesMgr, SIGNAL(deviceAdded(CDevice)), this, SLOT(onDeviceAdded(CDevice)) );
 }
+
+
+
+CDevicesSelectionPanel::XTreeItem::XTreeItem(const CDevice& device) : QTreeWidgetItem(),
+    m_Device(device),
+    m_bSelected(false)
+
+{
+    setText(1, device.alias());
+}
+
+
+CDevicesSelectionPanel::XTreeItem::~XTreeItem()
+{
+
+}
+
+
+void CDevicesSelectionPanel::XTreeItem::setSelected(bool bSelected)
+{
+    m_bSelected = bSelected;
+    setData(0, Qt::UserRole, QVariant(m_bSelected));
+}
+
+
+CDevicesSelectionPanel::XItemDelegate::XItemDelegate() : QItemDelegate()
+{
+    m_CheckIcon = QIcon(":/devicesSelectionPanel/Check-Icon");
+}
+
+
+CDevicesSelectionPanel::XItemDelegate::~XItemDelegate()
+{
+
+}
+
+
+void CDevicesSelectionPanel::XItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    switch (index.column())
+    {
+        case 0:
+        {
+            bool bSelected = index.data(Qt::UserRole).toBool();
+
+            if ( bSelected )
+            {
+                m_CheckIcon.paint(painter, option.rect);
+            }
+        }
+        break;
+
+        default:
+        {
+            QItemDelegate::paint(painter, option, index);
+        }
+        break;
+    }
+}
+
+
+QSize CDevicesSelectionPanel::XItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    return QItemDelegate::sizeHint(option, index);
+}
+

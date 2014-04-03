@@ -1,5 +1,6 @@
 #include "DevicesMgr.h"
-
+#include "TraceClientApp.h"
+#include "ServerAccess/TraceServerPortal.h"
 
 
 /**
@@ -7,7 +8,8 @@
  */
 CDevicesMgr::CDevicesMgr()
 {
-
+    connect(    &CTraceClientApp::Instance().TraceServerPortal(), SIGNAL(devicesRefresh(CDevice::IdMap)),
+                this, SLOT(onDevicesRefreshed(CDevice::IdMap)));
 }
 
 
@@ -21,35 +23,31 @@ CDevicesMgr::~CDevicesMgr()
 
 
 
-bool CDevicesMgr::AddDevice(CDevice *pDevice)
+void CDevicesMgr::onDevicesRefreshed(const CDevice::IdMap &devicesList)
 {
-    if ( NULL == pDevice )
-        return false;
+    CDevice::IdMap::const_iterator      pos;
 
-    if ( m_Devices.count(pDevice->name()) > 0 )
-        return false;
-
-    m_Devices[pDevice->name()] = pDevice;
-
-    return true;
-}
-
-
-bool CDevicesMgr::IsDeviceWithNameExists(const QString name)
-{
-    return m_Devices.count(name) > 0;
-}
-
-
-void CDevicesMgr::GetDevicesList(CDevicesList &list) const
-{
-    TDevicesMap::const_iterator     pos = m_Devices.begin();
-
-    list.clear();
-
-    while ( pos != m_Devices.end() )
+    pos = devicesList.begin();
+    while (pos != devicesList.end())
     {
-        list.push_back(pos->second);
+        if ( m_Devices.count(pos->second.id()) == 0 ) // new device
+        {
+            m_Devices[pos->second.id()] = pos->second;
+            CDevice device(pos->second);
+            emit deviceAdded(device);
+        }
+
+        ++ pos;
+    }
+
+    pos = m_Devices.begin();
+    while (pos != m_Devices.end())
+    {
+        if ( devicesList.count(pos->second.id()) == 0 ) // removed device
+        {
+            emit deviceRemoved(pos->second);
+        }
+
         ++ pos;
     }
 }

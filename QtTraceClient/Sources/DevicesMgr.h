@@ -11,7 +11,7 @@
 /**
  * @brief The CDevicesMgr class
  */
-class CDevicesMgr : QObject
+class CDevicesMgr : public QObject
 {
     Q_OBJECT
 
@@ -19,22 +19,22 @@ public:
     CDevicesMgr();
     virtual ~CDevicesMgr();
 
-    bool AddDevice(CDevice* pDevice);
-    bool IsDeviceWithNameExists(const QString name);
-
-    void GetDevicesList( CDevicesList& list ) const;
-
 public slots:
+
+    void onDevicesRefreshed(const CDevice::IdMap& devicesList);
 
 signals:
 
+    void deviceAdded(const CDevice& device);
+    void deviceRemoved(const CDevice& device);
+
 protected:
 
-    typedef std::map<QString, CDevice*>      TDevicesMap;
+//    typedef std::map<int, CDevice*>      TDevicesMap;
 
 protected:
 
-    TDevicesMap     m_Devices;
+    CDevice::IdMap          m_Devices;
 };
 
 #endif // DEVICESMGR_H

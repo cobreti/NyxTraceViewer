@@ -3,7 +3,10 @@
 
 
 #include <QtCore>
-#include <list>
+//#include <list>
+
+#include <map>
+
 
 
 /**
@@ -12,14 +15,30 @@
 class CDevice
 {
 public:
-    CDevice(const QString& name);
+//    typedef     QList<CDevice>          List;
+    typedef     std::map<int, CDevice>  IdMap;
+
+public:
+    CDevice();
+    CDevice(const CDevice& device);
     virtual ~CDevice();
 
     const QString&      name() const        { return m_Name; }
+    QString&            name()              { return m_Name; }
+
+    const QString&      alias() const       { return m_Alias; }
+    QString&            alias()             { return m_Alias; }
+
+    const int&          id() const          { return m_Id; }
+    int&                id()                { return m_Id; }
+
+    const CDevice& operator = (const CDevice& device);
 
 protected:
 
     QString     m_Name;
+    QString     m_Alias;
+    int         m_Id;
 };
 
 

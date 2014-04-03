@@ -50,4 +50,7 @@
     <qresource prefix="/ChannelSelection">
         <file alias="add-icon">Icons/add-icon.png</file>
     </qresource>
+    <qresource prefix="/devicesSelectionPanel">
+        <file alias="Check-Icon">Icons/check-icon.png</file>
+    </qresource>
 </RCC>

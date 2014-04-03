@@ -52,7 +52,7 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_pSettingsPanel(NULL),
     m_pDevicesSelectionPanel(NULL),
     m_pTraceServerPortal(NULL),
-    m_pDevicesMgr( new CDevicesMgr() )
+    m_pDevicesMgr()
 {
     s_pInstance = this;
 }
@@ -125,6 +125,7 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pSettingsPanel = new CSettingsPanel();
     m_pDevicesSelectionPanel = new CDevicesSelectionPanel();
     m_pTraceServerPortal = new CTraceServerPortal();
+    m_pDevicesMgr = new CDevicesMgr();
 }
 
 

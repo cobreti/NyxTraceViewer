@@ -79,63 +79,35 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QListWidget" name="deviceList">
-            <property name="enabled">
+           <widget class="QTreeWidget" name="devicesList">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="alternatingRowColors">
              <bool>true</bool>
             </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QLineEdit" name="deviceNameEdit"/>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
-          <property name="topMargin">
-           <number>12</number>
-          </property>
-          <property name="bottomMargin">
-           <number>12</number>
-          </property>
-          <item>
-           <widget class="QPushButton" name="removeDeviceBtn">
-            <property name="text">
-             <string>-</string>
+            <property name="indentation">
+             <number>0</number>
             </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+            <property name="columnCount">
+             <number>2</number>
             </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::MinimumExpanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="addDeviceBtn">
-            <property name="text">
-             <string>+</string>
-            </property>
+            <attribute name="headerDefaultSectionSize">
+             <number>50</number>
+            </attribute>
+            <column>
+             <property name="text">
+              <string/>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>alias</string>
+             </property>
+            </column>
            </widget>
           </item>
          </layout>

@@ -1,13 +1,16 @@
 
 #include "TraceServerPortal.h"
 #include "WSSetTraceClient.h"
+#include "WSGetDevices.h"
 
 
 
-CTraceServerPortal::CTraceServerPortal() :
-    m_p_ws_SetTraceClient(new CWSSetTraceClient())
+CTraceServerPortal::CTraceServerPortal() : QObject(),
+    m_p_ws_SetTraceClient(new CWSSetTraceClient()),
+    m_p_ws_GetDevices(new CWSGetDevices())
 {
-
+    connect(    m_p_ws_GetDevices, SIGNAL(devicesRefresh(CDevice::IdMap)),
+                this, SLOT(onDevicesRefresh(CDevice::IdMap)) );
 }
 
 
@@ -44,6 +47,13 @@ void CTraceServerPortal::setServer(const QString &server)
 }
 
 
+void CTraceServerPortal::getDevices()
+{
+    m_p_ws_GetDevices->server() = m_Server;
+    m_p_ws_GetDevices->send();
+}
+
+
 QHostAddress CTraceServerPortal::GetHostAddress()
 {
     QList<QHostAddress>     list = QNetworkInterface::allAddresses();
@@ -62,4 +72,7 @@ QHostAddress CTraceServerPortal::GetHostAddress()
 }
 
 
-
+void CTraceServerPortal::onDevicesRefresh(const CDevice::IdMap &devicesList)
+{
+    emit devicesRefresh(devicesList);
+}

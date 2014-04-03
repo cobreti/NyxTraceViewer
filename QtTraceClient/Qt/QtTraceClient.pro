@@ -110,7 +110,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/ServerAccess/WSSetTraceClient.cpp \
     ../Sources/Panels/DevicesSelectionPanel.cpp \
     ../Sources/DevicesMgr.cpp \
-    ../Sources/Device.cpp
+    ../Sources/Device.cpp \
+    ../Sources/ServerAccess/WSGetDevices.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -216,7 +217,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/ServerAccess/WSSetTraceClient.h \
     ../Sources/Panels/DevicesSelectionPanel.h \
     ../Sources/DevicesMgr.h \
-    ../Sources/Device.h
+    ../Sources/Device.h \
+    ../Sources/ServerAccess/WSGetDevices.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
