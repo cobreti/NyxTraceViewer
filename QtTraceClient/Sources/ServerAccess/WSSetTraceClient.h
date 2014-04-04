@@ -27,6 +27,8 @@ public slots:
 
 signals:
 
+    void registered(int id);
+
 protected:
 
     virtual void onHandleResult(const QJsonDocument& doc);

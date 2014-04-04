@@ -22,16 +22,20 @@ public:
     void setTraceClient(const QString& name);
     void setServer(const QString& server);
     void getDevices();
+    void setClientMapping(int deviceId, int clientId);
+    void removeClientMapping(int deviceId, int clientId);
 
     QHostAddress GetHostAddress();
 
 public slots:
 
     void onDevicesRefresh(const CDevice::IdMap& devicesList );
+    void onClientRegistered(int id);
 
 signals:
 
     void devicesRefresh( const CDevice::IdMap& devicesList );
+    void clientRegistered(int id);
 
 protected:
 

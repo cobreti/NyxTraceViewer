@@ -4,7 +4,8 @@
 /**
  *
  */
-CAppSettings::CAppSettings()
+CAppSettings::CAppSettings() :
+    m_ClientId(0)
 {
     Init();
 }

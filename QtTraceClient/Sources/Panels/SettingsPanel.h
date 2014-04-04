@@ -2,7 +2,7 @@
 #define SETTINGSPANEL_H
 
 #include <QWidget>
-#include <QNetworkAccessManager>
+
 
 
 namespace Ui
@@ -28,7 +28,7 @@ public slots:
     void onTraceDirectoryServerChanged(const QString& text);
     void onNameChanged(const QString& text);
     void onApply();
-    void onResult(QNetworkReply*);
+    void onClientRegistered(int id);
 
 signals:
 
@@ -48,8 +48,6 @@ protected:
     Ui::SettingsPanel*      ui;
 
     CTcpIpSettingsPanel*        m_pTxtTcpIpSettingsPanel;
-//    QNetworkAccessManager       networkManager;
-//    QNetworkReply*              currentReply;
 };
 
 

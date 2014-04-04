@@ -43,6 +43,9 @@ protected:
         bool isSelected() const                 { return m_bSelected; }
         void setSelected(bool bSelected);
 
+        const CDevice&      device() const      { return m_Device; }
+        CDevice&            device()            { return m_Device; }
+
     protected:
 
         CDevice     m_Device;

@@ -24,14 +24,6 @@ CDevicesSelectionPanel::CDevicesSelectionPanel() : QWidget(),
 
     connect(    ui->devicesList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
                 this, SLOT(onItemDoubleClicked(QTreeWidgetItem*,int)) );
-
-
-//    CDevice         device;
-//    device.id() = 1;
-//    device.name() = "test";
-//    device.alias() = "alias value";
-//    XTreeItem* pItem = new XTreeItem(device);
-//    ui->devicesList->addTopLevelItem(pItem);
 }
 
 
@@ -48,8 +40,13 @@ void CDevicesSelectionPanel::onItemDoubleClicked(QTreeWidgetItem *pItem, int col
 {
     if ( column == 0 )
     {
-        XTreeItem*      pTreeItem = static_cast<XTreeItem*>(pItem);
-        pTreeItem->setSelected( !pTreeItem->isSelected() );
+        XTreeItem*                  pTreeItem = static_cast<XTreeItem*>(pItem);
+        bool                        bSelected = !pTreeItem->isSelected();
+        CTraceServerPortal&         rPortal = CTraceClientApp::Instance().TraceServerPortal();
+        pTreeItem->setSelected( bSelected );
+
+        if (bSelected)
+            rPortal.setClientMapping( pTreeItem->device().id(), CTraceClientApp::Instance().AppSettings().clientId() );
     }
 }
 

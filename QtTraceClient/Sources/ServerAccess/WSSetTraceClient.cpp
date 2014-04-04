@@ -33,4 +33,9 @@ void CWSSetTraceClient::onHandleResult(const QJsonDocument& doc)
     QJsonObject::iterator it = obj.find("result");
     QJsonValue value = it.value();
     QString result = value.toString();
+
+    it = obj.find("id");
+    int id = it.value().toInt();
+
+    emit registered(id);
 }

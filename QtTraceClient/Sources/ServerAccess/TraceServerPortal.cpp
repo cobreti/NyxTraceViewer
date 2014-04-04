@@ -11,6 +11,8 @@ CTraceServerPortal::CTraceServerPortal() : QObject(),
 {
     connect(    m_p_ws_GetDevices, SIGNAL(devicesRefresh(CDevice::IdMap)),
                 this, SLOT(onDevicesRefresh(CDevice::IdMap)) );
+    connect(    m_p_ws_SetTraceClient, SIGNAL(registered(int)),
+                this, SLOT(onClientRegistered(int)));
 }
 
 
@@ -54,6 +56,18 @@ void CTraceServerPortal::getDevices()
 }
 
 
+void CTraceServerPortal::setClientMapping(int deviceId, int clientId)
+{
+
+}
+
+
+void CTraceServerPortal::removeClientMapping(int deviceId, int clientId)
+{
+
+}
+
+
 QHostAddress CTraceServerPortal::GetHostAddress()
 {
     QList<QHostAddress>     list = QNetworkInterface::allAddresses();
@@ -76,3 +90,10 @@ void CTraceServerPortal::onDevicesRefresh(const CDevice::IdMap &devicesList)
 {
     emit devicesRefresh(devicesList);
 }
+
+
+void CTraceServerPortal::onClientRegistered(int id)
+{
+    emit clientRegistered(id);
+}
+

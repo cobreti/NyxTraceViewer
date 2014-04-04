@@ -5,14 +5,6 @@
 #include "ServerAccess/TraceServerPortal.h"
 
 
-#include <QNetworkAccessManager>
-#include <QUrlQuery>
-#include <QUrl>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QScriptEngine>
-
-
 CSettingsPanel::CSettingsPanel() : QWidget(),
     ui(new Ui::SettingsPanel()),
     m_pTxtTcpIpSettingsPanel(NULL)
@@ -50,44 +42,12 @@ void CSettingsPanel::onApply()
 
     rServerPortal.setServer(server);
     rServerPortal.setTraceClient(name);
-
-//    QUrl url("http://10.11.0.180/backend/");
-//    QString method = "Management/Services/ListUsers.php";
-
-//    url.setPath( QString("%1%2").arg(url.path()).arg(method));
-
-//    QMap<QString, QVariant> params;
-//    params["key"] = "53850c682a15401eab4d66864c5600c0";
-
-//    QUrlQuery   query;
-//    foreach(QString param, params.keys())
-//    {
-//        query.addQueryItem(param, params[param].toString());
-//    }
-//    url.setQuery(query);
-
-//    QNetworkRequest request;
-//    request.setUrl(url);
-
-//    QString urlstr = url.toString();
-
-//    connect( &networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
-
-//    QByteArray      data;
-//    data.append("key=53850c682a15401eab4d66864c5600c0");
-//    currentReply = networkManager.post(request, data);
 }
 
 
-void CSettingsPanel::onResult(QNetworkReply *reply)
+void CSettingsPanel::onClientRegistered(int id)
 {
-//    if (currentReply->error() != QNetworkReply::NoError)
-//        return;
-
-//    QString data = reply->readAll();
-
-//    QScriptEngine engine;
-//    QScriptValue result = engine.evaluate(data);
+    CTraceClientApp::Instance().AppSettings().clientId() = id;
 }
 
 
@@ -118,15 +78,23 @@ void CSettingsPanel::ValidateInputs()
 
 void CSettingsPanel::showEvent(QShowEvent *)
 {
+    CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
+
     ui->applyButton->setEnabled(false);
 
     QRect rcLayout = ui->TxtTracePortLayout->contentsRect();
     QRect rcCtrl = m_pTxtTcpIpSettingsPanel->rect();
+
+    connect(    &rPortal, SIGNAL(clientRegistered(int)),
+                this, SLOT(onClientRegistered(int)) );
 }
 
 
 void CSettingsPanel::hideEvent(QHideEvent *)
 {
+    CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
+    disconnect( &rPortal, SIGNAL(clientRegistered(int)),
+                this, SLOT(onClientRegistered(int)) );
 }
 
