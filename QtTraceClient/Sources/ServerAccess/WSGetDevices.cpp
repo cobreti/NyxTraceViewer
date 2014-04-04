@@ -9,7 +9,7 @@
 #include <QJsonArray>
 
 
-CWSGetDevices::CWSGetDevices() : QObject()
+CWSGetDevices::CWSGetDevices() : CWebServiceRequest("/command/device/list")
 {
 
 }
@@ -21,50 +21,9 @@ CWSGetDevices::~CWSGetDevices()
 }
 
 
-void CWSGetDevices::send()
+void CWSGetDevices::onHandleResult(const QJsonDocument& doc)
 {
-    if ( m_Server.isEmpty() )
-        return;
-
-    QUrl url(m_Server);
-    QString method = "/command/device/list";
-
-    url.setPath( QString("%1%2").arg(url.path()).arg(method));
-
-    QMap<QString, QVariant> params;
-//    params["name"] = m_Name;
-//    params["address"] = m_HostAddress.toString();
-
-    QUrlQuery   query;
-    foreach(QString param, params.keys())
-    {
-        query.addQueryItem(param, params[param].toString());
-    }
-
-    QNetworkRequest request;
-    request.setUrl(url);
-
-    QString urlstr = url.toString();
-
-    QByteArray      data;
-    data.append(query.toString());
-
-    connect( &m_NetworkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onResult(QNetworkReply*)));
-
-    m_pCurrentReply = m_NetworkManager.post(request, data);
-}
-
-
-void CWSGetDevices::onResult(QNetworkReply* reply)
-{
-    if (m_pCurrentReply->error() != QNetworkReply::NoError)
-        return;
-
     CDevice::IdMap       devicesMap;
-
-    QByteArray data = reply->readAll();
-    QJsonParseError err;
-    QJsonDocument doc = QJsonDocument::fromJson(data, &err);
 
     QJsonObject obj = doc.object();
 

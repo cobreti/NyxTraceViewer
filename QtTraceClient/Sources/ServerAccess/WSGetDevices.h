@@ -2,14 +2,10 @@
 #define WSGETDEVICES_H
 
 #include "Device.h"
-
-#include <QObject>
-#include <QString>
-#include <QNetworkInterface>
-#include <QNetworkAccessManager>
+#include "WebServiceRequest.h"
 
 
-class CWSGetDevices : public QObject
+class CWSGetDevices : public CWebServiceRequest
 {
     Q_OBJECT
 
@@ -17,14 +13,8 @@ public:
     CWSGetDevices();
     virtual ~CWSGetDevices();
 
-    const QString&      server() const          { return m_Server; }
-    QString&            server()                { return m_Server; }
-
-    void send();
-
 public slots:
 
-    void onResult(QNetworkReply*);
 
 signals:
 
@@ -32,10 +22,8 @@ signals:
 
 protected:
 
-    QString         m_Server;
+    virtual void onHandleResult(const QJsonDocument& doc);
 
-    QNetworkAccessManager       m_NetworkManager;
-    QNetworkReply*              m_pCurrentReply;
 };
 
 #endif // WSGETDEVICES_H

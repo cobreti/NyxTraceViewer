@@ -2,15 +2,12 @@
 #define WSSETTRACECLIENT_H
 
 
-#include <QObject>
-#include <QString>
-#include <QNetworkInterface>
-#include <QNetworkAccessManager>
+#include "WebServiceRequest.h"
 
 class QNetworkReply;
 
 
-class CWSSetTraceClient : public QObject
+class CWSSetTraceClient : public CWebServiceRequest
 {
     Q_OBJECT
 
@@ -18,33 +15,26 @@ public:
     CWSSetTraceClient();
     virtual ~CWSSetTraceClient();
 
-    const QString&      server() const          { return m_Server; }
-    QString&            server()                { return m_Server; }
-
     const QString&      name() const            { return m_Name; }
     QString&            name()                  { return m_Name; }
 
     const QHostAddress&     address() const     { return m_HostAddress; }
     QHostAddress&           address()           { return m_HostAddress; }
 
-    void send();
+    virtual void send();
 
 public slots:
-
-     void onResult(QNetworkReply*);
 
 signals:
 
 protected:
 
+    virtual void onHandleResult(const QJsonDocument& doc);
+
 protected:
 
-    QString                     m_Server;
     QString                     m_Name;
     QHostAddress                m_HostAddress;
-
-    QNetworkAccessManager       m_NetworkManager;
-    QNetworkReply*              m_pCurrentReply;
 };
 
 #endif // WSSETTRACECLIENT_H
