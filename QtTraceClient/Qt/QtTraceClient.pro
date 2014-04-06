@@ -112,7 +112,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/DevicesMgr.cpp \
     ../Sources/Device.cpp \
     ../Sources/ServerAccess/WSGetDevices.cpp \
-    ../Sources/ServerAccess/WebServiceRequest.cpp
+    ../Sources/ServerAccess/WebServiceRequest.cpp \
+    ../Sources/ServerAccess/WSMapDevice.cpp \
+    ../Sources/ServerAccess/WSUnmapDevice.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -220,7 +222,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/DevicesMgr.h \
     ../Sources/Device.h \
     ../Sources/ServerAccess/WSGetDevices.h \
-    ../Sources/ServerAccess/WebServiceRequest.h
+    ../Sources/ServerAccess/WebServiceRequest.h \
+    ../Sources/ServerAccess/WSMapDevice.h \
+    ../Sources/ServerAccess/WSUnmapDevice.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

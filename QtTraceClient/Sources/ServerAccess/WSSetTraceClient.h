@@ -4,8 +4,6 @@
 
 #include "WebServiceRequest.h"
 
-class QNetworkReply;
-
 
 class CWSSetTraceClient : public CWebServiceRequest
 {

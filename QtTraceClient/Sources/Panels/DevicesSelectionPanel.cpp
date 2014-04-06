@@ -43,10 +43,12 @@ void CDevicesSelectionPanel::onItemDoubleClicked(QTreeWidgetItem *pItem, int col
         XTreeItem*                  pTreeItem = static_cast<XTreeItem*>(pItem);
         bool                        bSelected = !pTreeItem->isSelected();
         CTraceServerPortal&         rPortal = CTraceClientApp::Instance().TraceServerPortal();
-        pTreeItem->setSelected( bSelected );
+//        pTreeItem->setSelected( bSelected );
 
         if (bSelected)
             rPortal.setClientMapping( pTreeItem->device().id(), CTraceClientApp::Instance().AppSettings().clientId() );
+        else
+            rPortal.removeClientMapping( pTreeItem->device().id() );
     }
 }
 
@@ -64,13 +66,58 @@ void CDevicesSelectionPanel::onDeviceRemoved(const CDevice &device)
 }
 
 
+void CDevicesSelectionPanel::onDeviceMapped(int id)
+{
+    int count = ui->devicesList->topLevelItemCount();
+    int index = 0;
+
+    while ( index < count )
+    {
+        XTreeItem* pItem = static_cast<XTreeItem*>(ui->devicesList->topLevelItem(index));
+
+        if ( pItem->device().id() == id )
+            pItem->setSelected(true);
+
+        ++ index;
+    }
+
+    ui->devicesList->update();
+}
+
+
+void CDevicesSelectionPanel::onDeviceUnmapped(int id)
+{
+    int count = ui->devicesList->topLevelItemCount();
+    int index = 0;
+
+    while ( index < count )
+    {
+        XTreeItem* pItem = static_cast<XTreeItem*>(ui->devicesList->topLevelItem(index));
+
+        if ( pItem->device().id() == id )
+            pItem->setSelected(false);
+
+        ++ index;
+    }
+
+    ui->devicesList->update();
+}
+
+
+
+
 void CDevicesSelectionPanel::showEvent(QShowEvent *)
 {
-    QApplication*   app = static_cast<QApplication*>(QApplication::instance());
-    CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
+    QApplication*           app = static_cast<QApplication*>(QApplication::instance());
+    CDevicesMgr&            rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
+    CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
     connect(    &rDevicesMgr, SIGNAL(deviceAdded(CDevice)), this, SLOT(onDeviceAdded(CDevice)));
     connect( app, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
+    connect(    &rPortal, SIGNAL(deviceMapped(int)),
+                this, SLOT(onDeviceMapped(int)) );
+    connect(    &rPortal, SIGNAL(deviceUnmapped(int)),
+                this, SLOT(onDeviceUnmapped(int)) );
 
     CTraceClientApp::Instance().TraceServerPortal().getDevices();
 }
@@ -80,9 +127,14 @@ void CDevicesSelectionPanel::hideEvent(QHideEvent *)
 {
     QApplication*   app = static_cast<QApplication*>(QApplication::instance());
     CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
+    CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
     disconnect( app, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
     disconnect( &rDevicesMgr, SIGNAL(deviceAdded(CDevice)), this, SLOT(onDeviceAdded(CDevice)) );
+    disconnect( &rPortal, SIGNAL(deviceMapped(int)),
+                this, SLOT(onDeviceMapped(int)) );
+    disconnect( &rPortal, SIGNAL(deviceUnmapped(int)),
+                this, SLOT(onDeviceUnmapped(int)) );
 }
 
 

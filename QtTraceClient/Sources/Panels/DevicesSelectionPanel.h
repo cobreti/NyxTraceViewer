@@ -2,7 +2,7 @@
 #define DEVICESSELECTIONPANEL_H
 
 
-#include "device.h"
+#include "Device.h"
 
 #include <QWidget>
 #include <QItemDelegate>
@@ -27,6 +27,8 @@ public slots:
     void onItemDoubleClicked( QTreeWidgetItem* pItem, int column );
     void onDeviceAdded(const CDevice& device);
     void onDeviceRemoved(const CDevice& device);
+    void onDeviceMapped(int id);
+    void onDeviceUnmapped(int id);
 
 signals:
 
