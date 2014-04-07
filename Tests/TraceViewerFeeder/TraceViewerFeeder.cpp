@@ -7,7 +7,7 @@
 /**
  *
  */
-CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WFlags flags)
+CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags),
       m_pUserTextFeeder(NULL),
       m_pTextFileFeeder(NULL)

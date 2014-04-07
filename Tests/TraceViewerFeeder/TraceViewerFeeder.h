@@ -1,11 +1,12 @@
 #ifndef TRACEVIEWERFEEDER_H
 #define TRACEVIEWERFEEDER_H
 
-#include <QtGui/QMainWindow>
+#include <QtGui>
 #include "ui_traceviewerfeeder.h"
 #include "FeederSource_UserText.hpp"
 #include "FeederSource_TextFile.hpp"
 
+#include <QMainWindow>
 
 class CFeederEntry;
 class CFeederSettings;
@@ -19,7 +20,7 @@ class CTraceViewerFeeder : public QMainWindow
     Q_OBJECT
 
 public:
-    CTraceViewerFeeder(QWidget *parent = 0, Qt::WFlags flags = 0);
+    CTraceViewerFeeder(QWidget *parent = 0, Qt::WindowFlags flags = 0);
     virtual ~CTraceViewerFeeder();
 
 public slots:
