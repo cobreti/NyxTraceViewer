@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT += widgets
+QT += network
 
 
 TARGET = TraceViewerFeeder
@@ -55,7 +56,8 @@ HEADERS += \
     ../FeederSource.hpp \
     ../FeederSource_UserText.hpp \
     ../FeederSource_TextFile.hpp \
-    ../ExternalFeeder.hpp
+    ../ExternalFeeder.hpp \
+    ../PlainFeeder.h
 
 SOURCES += \
     ../TraceViewerFeeder.cpp \
@@ -69,7 +71,8 @@ SOURCES += \
     ../FeederSource_UserText.cpp \
     ../FeederSource_TextFile.cpp \
     ../ExternalFeeder.cpp \
-    ../../../TraceViewerConnection/public/OSX/NyxTraceViewerConnection_Impl.cpp
+    ../../../TraceViewerConnection/public/OSX/NyxTraceViewerConnection_Impl.cpp \
+    ../PlainFeeder.cpp
 
 FORMS += \
     ../UI/traceviewerfeeder.ui

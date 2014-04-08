@@ -1,6 +1,7 @@
 #include "FeederEntry.hpp"
 #include "FeederBase.hpp"
 #include "NyxFeeder.hpp"
+#include "PlainFeeder.h"
 #include "ExternalFeeder.hpp"
 
 #if defined(_WIN32)
@@ -33,6 +34,9 @@ void CFeederEntry::Start()
     {
     case CFeederSettings::eTAPI_External:
         m_pFeeder = new CExternalFeeder();
+        break;
+    case CFeederSettings::eTAPI_PlainTcpIp:
+        m_pFeeder = new CPlainFeeder();
         break;
 #if defined(WIN32)
     case CFeederSettings::eTAPI_Dll:

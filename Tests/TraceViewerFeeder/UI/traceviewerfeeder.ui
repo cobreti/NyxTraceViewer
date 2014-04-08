@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
+    <width>714</width>
     <height>693</height>
    </rect>
   </property>
@@ -403,7 +403,14 @@
                  <item>
                   <widget class="QRadioButton" name="btnNyxTcpIpAPISource">
                    <property name="text">
-                    <string>Nyx TcpIp</string>
+                    <string>Nyx TCP/IP</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QRadioButton" name="btnPlainTcpIp">
+                   <property name="text">
+                    <string>Plain TCP/IP</string>
                    </property>
                   </widget>
                  </item>
@@ -662,7 +669,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>696</width>
+     <width>714</width>
      <height>22</height>
     </rect>
    </property>

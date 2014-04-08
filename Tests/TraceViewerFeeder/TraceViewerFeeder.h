@@ -34,6 +34,7 @@ public slots:
     void OnUseFilenameClicked();
     void OnNyxPipeClicked();
     void OnNyxTcpIpClicked();
+    void OnPlainTcpIpClicked();
     void OnExternalClicked();
     void OnDllFeederClicked();
     void OnBrowseForFile();
