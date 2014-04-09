@@ -36,6 +36,7 @@ protected:
 
     QString                     m_Server;
     QString                     m_Method;
+    QString                     m_Key;
 
     QMap<QString, QVariant>     m_Parameters;
 

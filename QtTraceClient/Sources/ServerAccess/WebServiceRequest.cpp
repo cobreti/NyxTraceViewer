@@ -7,6 +7,7 @@
 
 
 CWebServiceRequest::CWebServiceRequest(const QString& method) : QObject(),
+    m_Key("a35830b6-4060-4c3b-abd0-c24d079cdcd5"),
     m_Method(method),
     m_pCurrentReply(NULL)
 {
@@ -26,6 +27,8 @@ void CWebServiceRequest::send()
     if ( m_Server.isEmpty() )
         return;
 
+    m_Parameters["key"] = m_Key;
+
     QUrl url(m_Server);
 
     url.setPath( QString("%1%2").arg(url.path()).arg(m_Method));
@@ -38,6 +41,7 @@ void CWebServiceRequest::send()
 
     QNetworkRequest request;
     request.setUrl(url);
+    request.setHeader( QNetworkRequest::ContentTypeHeader, "text/json" );
 
     QString urlstr = url.toString();
 
