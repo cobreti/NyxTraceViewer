@@ -2,6 +2,7 @@
 #include "View/ViewColumnsSettings.hpp"
 #include "View/ViewColumnSettings.hpp"
 
+#include <QPainter>
 
 /**
  *

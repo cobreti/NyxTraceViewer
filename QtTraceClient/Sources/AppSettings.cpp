@@ -31,7 +31,7 @@ void CAppSettings::Init()
     pColSettings->SetWidth(0);
     pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
     pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_LineNumber );
+//    pColSettings->SetPainterId( CViewItemPainter::ePId_LineNumber );
     pColSettings->SetTitle("Line #");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     m_DefaultViewSettings.ColumnsSettings().Set( eVCI_LineNumber, pColSettings );
@@ -41,7 +41,7 @@ void CAppSettings::Init()
     pColSettings->SetWidth(0);
     pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
     pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_ModuleName );
+//    pColSettings->SetPainterId( CViewItemPainter::ePId_ModuleName );
     pColSettings->SetTitle("Module Name");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     m_DefaultViewSettings.ColumnsSettings().Set( eVCI_ModuleName, pColSettings );
@@ -51,7 +51,7 @@ void CAppSettings::Init()
     pColSettings->SetWidth(0);
     pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
     pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_TickCount );
+//    pColSettings->SetPainterId( CViewItemPainter::ePId_TickCount );
     pColSettings->SetTitle("Time Stamp");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     m_DefaultViewSettings.ColumnsSettings().Set( eVCI_TickCount, pColSettings );
@@ -61,7 +61,7 @@ void CAppSettings::Init()
     pColSettings->SetWidth(0);
     pColSettings->Margins() = CViewItemMargins(10, 0, 10, 0);
     pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_ThreadId );
+//    pColSettings->SetPainterId( CViewItemPainter::ePId_ThreadId );
     pColSettings->SetTitle("Thread Id");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     m_DefaultViewSettings.ColumnsSettings().Set( eVCI_ThreadId, pColSettings );
@@ -71,7 +71,7 @@ void CAppSettings::Init()
     pColSettings->SetWidth(0);
     pColSettings->Margins() = CViewItemMargins(10, 0, 20, 0);
     pColSettings->AutoWidth() = true;
-    pColSettings->SetPainterId( CViewItemPainter::ePId_Data );
+//    pColSettings->SetPainterId( CViewItemPainter::ePId_Data );
     pColSettings->SetTitle("Data");
 //    pColSettings->SetWidth( TextMetrics.boundingRect(pColSettings->GetTitle()).width() + pColSettings->Margins().width());
     m_DefaultViewSettings.ColumnsSettings().Set( eVCI_Data, pColSettings );

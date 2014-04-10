@@ -2,7 +2,7 @@
 #define _VIEWCOLUMNSETTINGS_HPP_
 
 #include <QtGlobal>
-#include "ViewItemPainter.hpp"
+#include <QString>
 #include "ViewItemMargins.hpp"
 
 /**
@@ -17,9 +17,6 @@ public:
 
 	const qreal& GetWidth() const		{ return m_Width; }
 	void SetWidth( const qreal& width );
-
-	const CViewItemPainter::EPainterId& GetPainterId() const		{ return m_PainterId; }
-	void SetPainterId( const CViewItemPainter::EPainterId& id );
 
 	bool GetVisible() const				{ return m_bVisible; }
 	void SetVisible(bool bVisible)		{ m_bVisible = bVisible; }
@@ -36,7 +33,6 @@ public:
 protected:
 
 	qreal								m_Width;
-	CViewItemPainter::EPainterId		m_PainterId;
 	bool								m_bVisible;
 	QString								m_Title;
     CViewItemMargins                    m_Margins;

@@ -8,12 +8,6 @@
 
 #include "MainWindow/MainWindow.hpp"
 #include "TracesWindow.hpp"
-#include "View/ViewItemBackgroundPainter.hpp"
-#include "View/ViewItemModuleNamePainter.hpp"
-#include "View/ViewItemTickCountPainter.hpp"
-#include "View/ViewItemThreadIdPainter.hpp"
-#include "View/ViewItemDataPainter.hpp"
-#include "View/ViewItemLineNumberPainter.hpp"
 #include "Panels/SettingsPanel.h"
 #include "Panels/DevicesSelectionPanel.h"
 #include "PoolsUpdateClock.hpp"
@@ -226,12 +220,12 @@ void CTraceClientApp::InitDefaultDrawSettings()
 {
     CViewDrawSettings&      rDrawSettings = m_AppSettings.DefaultDrawSettings();
 
-    rDrawSettings.Painter( CViewItemPainter::ePId_Row ) = new CViewItemBackgroundPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_LineNumber ) = new CViewItemLineNumberPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_ModuleName ) = new CViewItemModuleNamePainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_TickCount ) = new CViewItemTickCountPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_ThreadId ) = new CViewItemThreadIdPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_Data ) = new CViewItemDataPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_Row ) = new CViewItemBackgroundPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_LineNumber ) = new CViewItemLineNumberPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_ModuleName ) = new CViewItemModuleNamePainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_TickCount ) = new CViewItemTickCountPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_ThreadId ) = new CViewItemThreadIdPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_Data ) = new CViewItemDataPainter();
     rDrawSettings.CalculateLineHeight();
 }
 

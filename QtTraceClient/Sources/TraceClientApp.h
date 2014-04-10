@@ -7,8 +7,8 @@
 #include "WindowsManager.hpp"
 #include "DevicesMapping.h"
 
-#include "View/ViewItemsNodeObjectsPool.hpp"
-#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
+//#include "View/ViewItemsNodeObjectsPool.hpp"
+//#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
 
 class CMainWindow;
 class CTracesWindow;
@@ -90,8 +90,8 @@ protected:
     CTracesWindow*      m_pTracesWindow;
 //    CTracesWindows      m_TracesWindows;
 
-    CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
-    CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
+//    CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
+//    CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
 
     CSettingsPanel*             m_pSettingsPanel;
     CDevicesSelectionPanel*     m_pDevicesSelectionPanel;

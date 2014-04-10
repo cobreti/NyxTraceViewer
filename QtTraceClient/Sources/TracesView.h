@@ -5,12 +5,13 @@
 #include <QToolBar>
 #include <QPushButton>
 #include <QTimer>
-#include "View/ViewItems.hpp"
+//#include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
-#include "View/IViewItemsModulesListener.hpp"
+//#include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
 #include "TracesGroupNotificationsListener.h"
+#include "View/ViewTracesIterator.hpp"
 
 
 namespace Ui
@@ -20,9 +21,9 @@ namespace Ui
 
 class CViewHeader;
 class QToolButton;
-class CModuleViewItems;
-class CSessionViewItems;
-class CViewItemsWalker;
+//class CModuleViewItems;
+//class CSessionViewItems;
+//class CViewItemsWalker;
 class CHighlightBrush;
 class CHighlightColorsPopup;
 class QFile;
@@ -31,8 +32,7 @@ class QFile;
 /**
  *
  */
-class CTracesView : public QWidget,
-                    public IViewItemsModulesListener
+class CTracesView : public QWidget
 {
     Q_OBJECT
 
@@ -54,14 +54,14 @@ public:
 
 //    void UpdateVisibleLines( const CViewSettings& settings );
 
-    virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
-    virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
-    virtual void OnBeginClearModule( const Nyx::CAString& ModuleName );
-    virtual void OnEndClearModule( const Nyx::CAString& ModuleName );
+//    virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
+//    virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
+//    virtual void OnBeginClearModule( const Nyx::CAString& ModuleName );
+//    virtual void OnEndClearModule( const Nyx::CAString& ModuleName );
 
     void Save( const QString& filename );
 
-    CViewItemsWalker*           ItemsWalker()               { return m_pItemsWalker; }
+//    CViewItemsWalker*           ItemsWalker()               { return m_pItemsWalker; }
 
     const QRectF                ViewRect() const;
     int                         NumberOfLinesVisibles() const;
@@ -112,19 +112,20 @@ protected:
     bool                                m_bViewDirty;
     bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
-    CViewItemsWalker*                   m_pItemsWalker;
+//    CViewItemsWalker*                   m_pItemsWalker;
     QTimer                              m_RefreshTimer;
     CTracesViewCoreRef                  m_refViewCore;
 
     CViewItemHighlightersSetRef         m_refHighlighters;
 
-    CViewItem*                          m_pLastSelectedItem;
+//    CViewItem*                          m_pLastSelectedItem;
     CHighlightBrush*                    m_pLastSelectedBrush;
 
     CHighlightColorsPopup*              m_pHighlightColorsPopup;
 
     CTracesGroupNotificationsListener   m_TracesGroupNotificationsListener;
     TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
+    CViewTracesIterator                 m_TopPos;
 };
 
 #endif // TRACESVIEW_H

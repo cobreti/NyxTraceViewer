@@ -18,6 +18,26 @@ namespace TraceClientCore
 
     public:
 
+        class CIdentifier
+        {
+        public:
+            CIdentifier();
+            CIdentifier(const int& repositoryId, const int& traceId, const int& level);
+            CIdentifier(const CIdentifier& identifier);
+            ~CIdentifier();
+
+
+            const CIdentifier& operator = (const CIdentifier& identifier);
+            bool operator == (const CIdentifier& identifier) const;
+            bool operator != (const CIdentifier& identifier) const;
+
+        protected:
+
+            Nyx::UInt32     m_RepositoryId;
+            Nyx::UInt32     m_TraceId;
+            Nyx::UInt32     m_Level;
+        };
+
         enum ETraceType
         {
             eTT_User,
@@ -61,6 +81,8 @@ namespace TraceClientCore
 
         const Nyx::UInt32& Level() const                    { return m_Level; }
         Nyx::UInt32& Level()                                { return m_Level; }
+
+        const CIdentifier identifier() const                { return CIdentifier(m_RepositoryId, m_TraceId, m_Level); }
 		
 	protected:
 	
