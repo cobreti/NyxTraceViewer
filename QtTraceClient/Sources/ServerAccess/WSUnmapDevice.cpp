@@ -36,3 +36,11 @@ void CWSUnmapDevice::onHandleResult(const QJsonDocument& doc)
         emit deviceUnmapped(m_DeviceId);
     }
 }
+
+
+void CWSUnmapDevice::onHandleNetworkError()
+{
+
+}
+
+

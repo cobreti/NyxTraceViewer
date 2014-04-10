@@ -15,12 +15,16 @@ CTraceServerPortal::CTraceServerPortal() : QObject(),
 {
     connect(    m_p_ws_GetDevices, SIGNAL(devicesRefresh(CDevice::IdMap)),
                 this, SLOT(onDevicesRefresh(CDevice::IdMap)) );
-    connect(    m_p_ws_SetTraceClient, SIGNAL(registered(int)),
-                this, SLOT(onClientRegistered(int)));
     connect(    m_p_ws_MapDevice, SIGNAL(deviceMapped(int)),
                 this, SLOT(onDeviceMapped(int)) );
     connect(    m_p_ws_UnmapDevice, SIGNAL(deviceUnmapped(int)),
                 this, SLOT(onDeviceUnmapped(int)) );
+    connect(    m_p_ws_SetTraceClient, SIGNAL(registered(int)),
+                this, SLOT(onClientRegistered(int)));
+    connect(    m_p_ws_SetTraceClient, SIGNAL(clientMapping(int,QString,QString)),
+                this, SLOT(onClientMapping(int,QString,QString)) );
+    connect(    m_p_ws_SetTraceClient, SIGNAL(registerFailure()),
+                this, SLOT(onClientRegisterFailed()));
 }
 
 
@@ -114,6 +118,12 @@ void CTraceServerPortal::onClientRegistered(int id)
 }
 
 
+void CTraceServerPortal::onClientRegisterFailed()
+{
+    emit clientRegisterFailed();
+}
+
+
 void CTraceServerPortal::onDeviceMapped(int id)
 {
     emit deviceMapped(id);
@@ -125,3 +135,8 @@ void CTraceServerPortal::onDeviceUnmapped(int id)
     emit deviceUnmapped(id);
 }
 
+
+void CTraceServerPortal::onClientMapping(int id, const QString &alias, const QString &name)
+{
+    emit clientMapping(id, alias, name);
+}

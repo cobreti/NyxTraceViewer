@@ -21,6 +21,22 @@ CDevicesMgr::~CDevicesMgr()
 
 }
 
+const CDevice& CDevicesMgr::getDevice(int id)
+{
+    return m_Devices[id];
+}
+
+
+void CDevicesMgr::listDevices(CDevice::IdSet &set)
+{
+    CDevice::IdMap::const_iterator  pos = m_Devices.begin();
+
+    while (pos != m_Devices.end())
+    {
+        set.insert( pos->first );
+        ++ pos;
+    }
+}
 
 
 void CDevicesMgr::onDevicesRefreshed(const CDevice::IdMap &devicesList)

@@ -29,6 +29,7 @@ public slots:
     void onNameChanged(const QString& text);
     void onApply();
     void onClientRegistered(int id);
+    void onClientRegisterFailed();
 
 signals:
 

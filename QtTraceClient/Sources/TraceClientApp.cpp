@@ -126,6 +126,8 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pDevicesSelectionPanel = new CDevicesSelectionPanel();
     m_pTraceServerPortal = new CTraceServerPortal();
     m_pDevicesMgr = new CDevicesMgr();
+
+    devicesMapping().Init();
 }
 
 

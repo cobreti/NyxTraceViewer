@@ -26,10 +26,14 @@ public slots:
 signals:
 
     void registered(int id);
+    void registerFailure();
+    void clientMapping(int id, const QString& alias, const QString& name);
 
 protected:
 
     virtual void onHandleResult(const QJsonDocument& doc);
+    virtual void onHandleNetworkError();
+    virtual void extractMapping(const QJsonArray& mappings);
 
 protected:
 

@@ -42,12 +42,26 @@ void CSettingsPanel::onApply()
 
     rServerPortal.setServer(server);
     rServerPortal.setTraceClient(name);
+
+    ui->applyButton->setEnabled(false);
 }
 
 
 void CSettingsPanel::onClientRegistered(int id)
 {
-    CTraceClientApp::Instance().AppSettings().clientId() = id;
+    CTraceClientApp&    rApp = CTraceClientApp::Instance();
+
+    rApp.AppSettings().clientId() = id;
+    rApp.TraceServerPortal().getDevices();
+
+    ui->statusLabel->setText("<font color='green'>connected to server</font>");
+}
+
+
+void CSettingsPanel::onClientRegisterFailed()
+{
+    ui->statusLabel->setText("<font color='red'>failure to connect to server</font>");
+    ui->applyButton->setEnabled(true);
 }
 
 
@@ -61,9 +75,12 @@ void CSettingsPanel::Init()
     QRect rcLayout = ui->TxtTracePortLayout->contentsRect();
     QRect rcCtrl = m_pTxtTcpIpSettingsPanel->rect();
 
-    connect( ui->TraceDirectoryServer, SIGNAL(textChanged(QString)), this, SLOT(onTraceDirectoryServerChanged(QString)));
-    connect( ui->name, SIGNAL(textChanged(QString)), this, SLOT(onNameChanged(QString)));
-    connect( ui->applyButton, SIGNAL(clicked()), this, SLOT(onApply()));
+    connect( ui->TraceDirectoryServer, SIGNAL(textChanged(QString)),
+             this, SLOT(onTraceDirectoryServerChanged(QString)));
+    connect( ui->name, SIGNAL(textChanged(QString)),
+             this, SLOT(onNameChanged(QString)));
+    connect( ui->applyButton, SIGNAL(clicked()),
+             this, SLOT(onApply()));
 }
 
 
@@ -87,6 +104,8 @@ void CSettingsPanel::showEvent(QShowEvent *)
 
     connect(    &rPortal, SIGNAL(clientRegistered(int)),
                 this, SLOT(onClientRegistered(int)) );
+    connect(    &rPortal, SIGNAL(clientRegisterFailed()),
+                this, SLOT(onClientRegisterFailed()));
 }
 
 
@@ -96,5 +115,9 @@ void CSettingsPanel::hideEvent(QHideEvent *)
 
     disconnect( &rPortal, SIGNAL(clientRegistered(int)),
                 this, SLOT(onClientRegistered(int)) );
+    disconnect( &rPortal, SIGNAL(clientRegisterFailed()),
+                this, SLOT(onClientRegisterFailed()) );
+
+    ui->statusLabel->clear();
 }
 

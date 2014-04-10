@@ -74,6 +74,8 @@ protected:
 
     void showEvent(QShowEvent *);
     void hideEvent(QHideEvent *);
+    void listDevices();
+    void addDevice(const CDevice& device);
 
 protected:
 

@@ -25,8 +25,6 @@ public slots:
     void onChannelSelectionChanged();
     void onNewChannel(TraceClientCore::CTraceChannel* pChannel);
     void onNewTracesGroup(TraceClientCore::CTracesGroup* pGroup);
-    void onAddChannel();
-    void onNewChannelNameChanged(const QString& text);
 
 signals:
 

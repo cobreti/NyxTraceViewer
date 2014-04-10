@@ -43,7 +43,6 @@ void CDevicesSelectionPanel::onItemDoubleClicked(QTreeWidgetItem *pItem, int col
         XTreeItem*                  pTreeItem = static_cast<XTreeItem*>(pItem);
         bool                        bSelected = !pTreeItem->isSelected();
         CTraceServerPortal&         rPortal = CTraceClientApp::Instance().TraceServerPortal();
-//        pTreeItem->setSelected( bSelected );
 
         if (bSelected)
             rPortal.setClientMapping( pTreeItem->device().id(), CTraceClientApp::Instance().AppSettings().clientId() );
@@ -55,8 +54,7 @@ void CDevicesSelectionPanel::onItemDoubleClicked(QTreeWidgetItem *pItem, int col
 
 void CDevicesSelectionPanel::onDeviceAdded(const CDevice &device)
 {
-    XTreeItem* pItem = new XTreeItem(device);
-    ui->devicesList->addTopLevelItem(pItem);
+    addDevice(device);
 }
 
 
@@ -112,8 +110,12 @@ void CDevicesSelectionPanel::showEvent(QShowEvent *)
     CDevicesMgr&            rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
     CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
-    connect(    &rDevicesMgr, SIGNAL(deviceAdded(CDevice)), this, SLOT(onDeviceAdded(CDevice)));
-    connect( app, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
+    listDevices();
+
+    connect(    &rDevicesMgr, SIGNAL(deviceAdded(CDevice)),
+                this, SLOT(onDeviceAdded(CDevice)));
+    connect(    app, SIGNAL(focusChanged(QWidget*,QWidget*)),
+                this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
     connect(    &rPortal, SIGNAL(deviceMapped(int)),
                 this, SLOT(onDeviceMapped(int)) );
     connect(    &rPortal, SIGNAL(deviceUnmapped(int)),
@@ -129,14 +131,48 @@ void CDevicesSelectionPanel::hideEvent(QHideEvent *)
     CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
     CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
-    disconnect( app, SIGNAL(focusChanged(QWidget*,QWidget*)), this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
-    disconnect( &rDevicesMgr, SIGNAL(deviceAdded(CDevice)), this, SLOT(onDeviceAdded(CDevice)) );
+    disconnect( app, SIGNAL(focusChanged(QWidget*,QWidget*)),
+                this, SLOT(onFocusChanged(QWidget*,QWidget*)) );
+    disconnect( &rDevicesMgr, SIGNAL(deviceAdded(CDevice)),
+                this, SLOT(onDeviceAdded(CDevice)) );
     disconnect( &rPortal, SIGNAL(deviceMapped(int)),
                 this, SLOT(onDeviceMapped(int)) );
     disconnect( &rPortal, SIGNAL(deviceUnmapped(int)),
                 this, SLOT(onDeviceUnmapped(int)) );
+
+    ui->devicesList->clear();
 }
 
+
+void CDevicesSelectionPanel::listDevices()
+{
+    CDevicesMgr&        rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
+    CDevice::IdSet  set;
+    CDevice::IdSet::const_iterator  pos;
+
+    rDevicesMgr.listDevices(set);
+
+    pos = set.begin();
+    while (pos != set.end())
+    {
+        addDevice( rDevicesMgr.getDevice(*pos) );
+        ++ pos;
+    }
+}
+
+
+void CDevicesSelectionPanel::addDevice(const CDevice &device)
+{
+    CDevicesMapping&    rDevicesMapping = CTraceClientApp::Instance().devicesMapping();
+
+    XTreeItem* pItem = new XTreeItem(device);
+    ui->devicesList->addTopLevelItem(pItem);
+
+    if ( rDevicesMapping.isDeviceMapped(device.id()) )
+    {
+        pItem->setSelected(true);
+    }
+}
 
 
 CDevicesSelectionPanel::XTreeItem::XTreeItem(const CDevice& device) : QTreeWidgetItem(),

@@ -33,15 +33,19 @@ public slots:
 
     void onDevicesRefresh(const CDevice::IdMap& devicesList );
     void onClientRegistered(int id);
+    void onClientRegisterFailed();
     void onDeviceMapped(int id);
     void onDeviceUnmapped(int id);
+    void onClientMapping(int id, const QString& alias, const QString& name);
 
 signals:
 
     void devicesRefresh( const CDevice::IdMap& devicesList );
     void clientRegistered(int id);
+    void clientRegisterFailed();
     void deviceMapped(int id);
     void deviceUnmapped(int id);
+    void clientMapping(int id, const QString& alias, const QString& name);
 
 protected:
 

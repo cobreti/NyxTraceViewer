@@ -4,8 +4,8 @@
 //#include <QtGui>
 
 #include "AppSettings.hpp"
-//#include "TracesWindows.hpp"
 #include "WindowsManager.hpp"
+#include "DevicesMapping.h"
 
 #include "View/ViewItemsNodeObjectsPool.hpp"
 #include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
@@ -52,6 +52,9 @@ public:
     const CDevicesMgr&      DevicesMgr() const          { return *m_pDevicesMgr; }
     CDevicesMgr&            DevicesMgr()                { return *m_pDevicesMgr; }
 
+    const CDevicesMapping&  devicesMapping() const          { return m_DevicesMapping; }
+    CDevicesMapping& devicesMapping()                       { return m_DevicesMapping; }
+
     void ShowSettings(QWidget* parent, const QPoint& pt = QPoint(0,0));
     void HideSettings();
 
@@ -95,6 +98,7 @@ protected:
     CTraceServerPortal*         m_pTraceServerPortal;
 
     CDevicesMgr*                m_pDevicesMgr;
+    CDevicesMapping             m_DevicesMapping;
 
     static CTraceClientApp*     s_pInstance;
 };

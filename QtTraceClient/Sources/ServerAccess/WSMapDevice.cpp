@@ -41,3 +41,7 @@ void CWSMapDevice::onHandleResult(const QJsonDocument& doc)
 }
 
 
+void CWSMapDevice::onHandleNetworkError()
+{
+
+}

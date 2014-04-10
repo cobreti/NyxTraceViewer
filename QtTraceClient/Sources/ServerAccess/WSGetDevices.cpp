@@ -70,3 +70,9 @@ void CWSGetDevices::onHandleResult(const QJsonDocument& doc)
     }
 }
 
+
+void CWSGetDevices::onHandleNetworkError()
+{
+
+}
+

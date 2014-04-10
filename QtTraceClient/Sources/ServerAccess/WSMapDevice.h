@@ -29,6 +29,7 @@ signals:
 protected:
 
     virtual void onHandleResult(const QJsonDocument& doc);
+    virtual void onHandleNetworkError();
 
 protected:
 

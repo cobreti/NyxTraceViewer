@@ -6,7 +6,7 @@
 //#include <list>
 
 #include <map>
-
+#include <set>
 
 
 /**
@@ -15,8 +15,8 @@
 class CDevice
 {
 public:
-//    typedef     QList<CDevice>          List;
-    typedef     std::map<int, CDevice>  IdMap;
+    typedef     std::map<int, CDevice>      IdMap;
+    typedef     std::set<int>               IdSet;
 
 public:
     CDevice();

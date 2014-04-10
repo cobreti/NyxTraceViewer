@@ -8,6 +8,7 @@
 #include "View/ViewSettings.hpp"
 #include "View/Highlight/ViewHighlightSettings.hpp"
 
+
 /**
  *
  */
@@ -27,6 +28,7 @@ public:
 
     const int&      clientId() const            { return m_ClientId; }
     int&            clientId()                  { return m_ClientId; }
+
 
 protected:
 

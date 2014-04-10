@@ -57,12 +57,18 @@ void CWebServiceRequest::send()
 void CWebServiceRequest::onResult(QNetworkReply* reply)
 {
     if (m_pCurrentReply->error() != QNetworkReply::NoError)
+    {
+        onHandleNetworkError();
         return;
+    }
 
     QByteArray data = reply->readAll();
-    QJsonParseError err;
-    QJsonDocument doc = QJsonDocument::fromJson(data, &err);
+    if (data.length() > 0)
+    {
+        QJsonParseError err;
+        QJsonDocument doc = QJsonDocument::fromJson(data, &err);
 
-    onHandleResult(doc);
+        onHandleResult(doc);
+    }
 }
 

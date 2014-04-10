@@ -16,10 +16,6 @@ ui(new Ui::ChannelSelection() )
     connect(ui->channelsList, SIGNAL(itemSelectionChanged()), this, SLOT(onChannelSelectionChanged()));
     connect(&m_ChannelsListener, SIGNAL(newChannel(TraceClientCore::CTraceChannel*)), this, SLOT(onNewChannel(TraceClientCore::CTraceChannel*)));
     connect(&m_TracesGroupListener, SIGNAL(NewTracesGroup(TraceClientCore::CTracesGroup*)), this, SLOT(onNewTracesGroup(TraceClientCore::CTracesGroup*)));
-    connect(ui->addBtn, SIGNAL(clicked()), this, SLOT(onAddChannel()));
-    connect(ui->newChannelEdit, SIGNAL(textChanged(QString)), this, SLOT(onNewChannelNameChanged(QString)));
-
-    ui->addBtn->setEnabled(false);
 }
 
 
@@ -51,27 +47,3 @@ void CChannelSelection::onNewTracesGroup(TraceClientCore::CTracesGroup *pGroup)
     ui->channelsList->addItem(pItem);
 }
 
-
-void CChannelSelection::onAddChannel()
-{
-    QString         channelName = ui->newChannelEdit->text();
-    Nyx::CAString   strChannelName(channelName.toStdString().c_str());
-
-    TraceClientCore::CModule&           rModule = TraceClientCore::CModule::Instance();
-    TraceClientCore::CTracesGroupMgr&   rTracesGroupMgr = rModule.TracesGroupMgr();
-
-    rTracesGroupMgr.CreateTracesGroup(strChannelName);
-
-    ui->addBtn->setEnabled(false);
-}
-
-
-void CChannelSelection::onNewChannelNameChanged(const QString &text)
-{
-    Nyx::CAString                       strChannelName(text.toStdString().c_str());
-    TraceClientCore::CModule&           rModule = TraceClientCore::CModule::Instance();
-    TraceClientCore::CTracesGroupMgr&   rTracesGroupMgr = rModule.TracesGroupMgr();
-    bool                                bChannelNameValid = !text.isEmpty() && (NULL == rTracesGroupMgr.GetGroup(strChannelName));
-
-    ui->addBtn->setEnabled(bChannelNameValid);
-}

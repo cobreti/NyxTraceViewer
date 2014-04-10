@@ -19,6 +19,9 @@ public:
     CDevicesMgr();
     virtual ~CDevicesMgr();
 
+    const CDevice& getDevice(int id);
+    void listDevices( CDevice::IdSet& set );
+
 public slots:
 
     void onDevicesRefreshed(const CDevice::IdMap& devicesList);
@@ -30,7 +33,6 @@ signals:
 
 protected:
 
-//    typedef std::map<int, CDevice*>      TDevicesMap;
 
 protected:
 
