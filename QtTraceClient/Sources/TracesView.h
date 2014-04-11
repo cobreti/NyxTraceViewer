@@ -5,9 +5,7 @@
 #include <QToolBar>
 #include <QPushButton>
 #include <QTimer>
-//#include "View/ViewItems.hpp"
 #include "View/ViewSettings.hpp"
-//#include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
 #include "TracesGroupNotificationsListener.h"
@@ -21,9 +19,6 @@ namespace Ui
 
 class CViewHeader;
 class QToolButton;
-//class CModuleViewItems;
-//class CSessionViewItems;
-//class CViewItemsWalker;
 class CHighlightBrush;
 class CHighlightColorsPopup;
 class QFile;
@@ -52,16 +47,7 @@ public:
 
     void OnNewTraces();
 
-//    void UpdateVisibleLines( const CViewSettings& settings );
-
-//    virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
-//    virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
-//    virtual void OnBeginClearModule( const Nyx::CAString& ModuleName );
-//    virtual void OnEndClearModule( const Nyx::CAString& ModuleName );
-
     void Save( const QString& filename );
-
-//    CViewItemsWalker*           ItemsWalker()               { return m_pItemsWalker; }
 
     const QRectF                ViewRect() const;
     int                         NumberOfLinesVisibles() const;
@@ -96,15 +82,7 @@ protected:
     virtual QRect ClientRect( const QRect& rcWnd ) const;
     virtual QSize HeaderSize() const;
 
-//    virtual bool UpdateVisibleLines();
-
 protected:
-
-    //enum
-    //{
-    //    kPanel_LeftMargin = 50,
-    //    kPanel_RightMargin = 50
-    //};
 
     Ui::CTracesView*			        ui;
     QString								m_Name;
@@ -112,13 +90,11 @@ protected:
     bool                                m_bViewDirty;
     bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
-//    CViewItemsWalker*                   m_pItemsWalker;
     QTimer                              m_RefreshTimer;
     CTracesViewCoreRef                  m_refViewCore;
 
     CViewItemHighlightersSetRef         m_refHighlighters;
 
-//    CViewItem*                          m_pLastSelectedItem;
     CHighlightBrush*                    m_pLastSelectedBrush;
 
     CHighlightColorsPopup*              m_pHighlightColorsPopup;

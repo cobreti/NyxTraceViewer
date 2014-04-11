@@ -10,7 +10,8 @@
 CViewTracePainter::CViewTracePainter(QPainter &rPainter) :
     m_rPainter(rPainter),
     m_pColumnsSettings(NULL),
-    m_LineNumber(0)
+    m_LineNumber(0),
+    m_bColumnSizeChanged(false)
 {
 }
 
@@ -26,6 +27,7 @@ void CViewTracePainter::Init()
 //    m_ColumnsSize.reserve(eVCI_Count);
 
     m_Pos = m_Origin;
+    m_bColumnSizeChanged = false;
 
     for (size_t index = 0; index < eVCI_Count; ++index) {
         EViewColumnId id = (EViewColumnId) index;
@@ -39,7 +41,11 @@ void CViewTracePainter::Release()
     for (size_t index = 0; index < eVCI_Count; ++index) {
         EViewColumnId id = (EViewColumnId) index;
 
-        (*m_pColumnsSettings)[id].SetWidth(m_ColumnsSize[id]);
+        if ( m_ColumnsSize[id] > (*m_pColumnsSettings)[id].GetWidth() )
+        {
+            (*m_pColumnsSettings)[id].SetWidth(m_ColumnsSize[id]);
+            m_bColumnSizeChanged = true;
+        }
     }
 }
 

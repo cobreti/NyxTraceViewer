@@ -40,6 +40,7 @@ public:
 
     void Init();
     void Release();
+    bool columnsWidthChanged() const            { return m_bColumnSizeChanged; }
 
     bool Done() const;
 
@@ -70,6 +71,7 @@ protected:
     CViewColumnsSettings*       m_pColumnsSettings;
     Nyx::UInt32                 m_LineNumber;
     TColumnsSizeTable           m_ColumnsSize;
+    bool                        m_bColumnSizeChanged;
 };
 
 
