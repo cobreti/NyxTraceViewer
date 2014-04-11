@@ -7,7 +7,7 @@
 #include "TracesPool.hpp"
 
 
-CViewTracePainter::CViewTracePainter(QPainter &rPainter) :
+CViewTracePainter::CViewTracePainter(QPainter &rPainter) : CViewTraceMetrics(),
     m_rPainter(rPainter),
     m_pColumnsSettings(NULL),
     m_LineNumber(0),

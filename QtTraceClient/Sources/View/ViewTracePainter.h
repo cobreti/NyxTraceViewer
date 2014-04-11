@@ -2,6 +2,7 @@
 #define VIEWTRACEPAINTER_H
 
 #include <QPainter>
+#include "ViewTraceMetrics.h"
 #include "ViewColumnId.hpp"
 
 #include <map>
@@ -16,7 +17,7 @@ class CViewColumnsSettings;
 class CViewColumnSettings;
 
 
-class CViewTracePainter
+class CViewTracePainter : public CViewTraceMetrics
 {
 public:
     CViewTracePainter(QPainter& rPainter);

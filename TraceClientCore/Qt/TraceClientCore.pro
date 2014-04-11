@@ -10,7 +10,8 @@ TARGET = TraceClientCore
 TEMPLATE = lib
 CONFIG += staticlib
 NyxPath = ../../../Nyx
-DEFINES += STDCONSTRUCT
+# DEFINES += STDCONSTRUCT
+CONFIG += c++11
 
 
 INCLUDEPATH += ../include

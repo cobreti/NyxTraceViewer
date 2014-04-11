@@ -6,10 +6,12 @@ QT += widgets
 QT += network
 QT += script
 
+CONFIG += c++11
+
 TARGET = NyxTraceViewer
 TEMPLATE = app
 NyxPath=../../../Nyx
-DEFINES += STDCONSTRUCT
+# DEFINES += STDCONSTRUCT
 SOURCES += ../Sources/TracesView.cpp \
     ../Sources/main.cpp \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -82,7 +84,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/ServerAccess/WSUnmapDevice.cpp \
     ../Sources/DevicesMapping.cpp \
     ../Sources/View/ViewTracePainter.cpp \
-    ../Sources/View/TracesViewSet.cpp
+    ../Sources/View/TracesViewSet.cpp \
+    ../Sources/View/ViewTraceMetrics.cpp \
+    ../Sources/View/ViewTracePortal.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -157,7 +161,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/ServerAccess/WSUnmapDevice.h \
     ../Sources/DevicesMapping.h \
     ../Sources/View/ViewTracePainter.h \
-    ../Sources/View/TracesViewSet.hpp
+    ../Sources/View/TracesViewSet.hpp \
+    ../Sources/View/ViewTraceMetrics.h \
+    ../Sources/View/ViewTracePortal.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

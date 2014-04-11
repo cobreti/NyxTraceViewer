@@ -1,6 +1,8 @@
 #ifndef _VIEWCOLUMNID_HPP_
 #define _VIEWCOLUMNID_HPP_
 
+#include <vector>
+
 
 enum EViewColumnId
 {
@@ -11,5 +13,9 @@ enum EViewColumnId
     eVCI_LineNumber,
 	eVCI_Count
 };
+
+
+typedef std::vector<EViewColumnId>      ColumnsIdVector;
+
 
 #endif // _VIEWCOLUMNID_HPP_
