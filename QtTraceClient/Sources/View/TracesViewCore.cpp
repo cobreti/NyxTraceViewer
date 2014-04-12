@@ -93,6 +93,7 @@ void CTracesViewCore::RemoveRepository(TraceClientCore::CTracesPool &rPool)
 bool CTracesViewCore::Contains(const TraceClientCore::CTracesPool &rPool)
 {
 //    return rPool.Repository().Contains(m_pRepositoryObserver);
+    return false;
 }
 
 
