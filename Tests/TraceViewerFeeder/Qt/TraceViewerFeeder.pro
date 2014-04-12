@@ -6,6 +6,7 @@
 
 QT += widgets
 QT += network
+CONFIG += c++11
 
 
 TARGET = TraceViewerFeeder

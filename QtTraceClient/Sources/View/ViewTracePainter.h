@@ -17,7 +17,7 @@ class CViewColumnsSettings;
 class CViewColumnSettings;
 
 
-class CViewTracePainter : public CViewTraceMetrics
+class CViewTracePainter
 {
 public:
     CViewTracePainter(QPainter& rPainter);
@@ -73,6 +73,7 @@ protected:
     Nyx::UInt32                 m_LineNumber;
     TColumnsSizeTable           m_ColumnsSize;
     bool                        m_bColumnSizeChanged;
+    CViewTraceMetrics           m_Metrics;
 };
 
 

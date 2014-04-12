@@ -17,13 +17,11 @@ public:
 	void Set( EViewColumnId id, size_t newPos );
     size_t Count() const        { return m_ColumnsOrder.size(); }
 
-protected:
-
-	typedef		std::vector<EViewColumnId>		ColumnIdVector;
+    const ColumnsIdVector& OrderVector() const          { return m_ColumnsOrder; }
 
 protected:
 
-	ColumnIdVector		m_ColumnsOrder;
+    ColumnsIdVector         m_ColumnsOrder;
 };
 
 

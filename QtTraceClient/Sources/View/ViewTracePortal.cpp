@@ -18,7 +18,7 @@ CViewTracePortal::~CViewTracePortal()
 }
 
 
-QString CViewTracePortal::GetColumnText(EViewColumnId columnId)
+QString CViewTracePortal::GetColumnText(EViewColumnId columnId) const
 {
     QString     text;
 

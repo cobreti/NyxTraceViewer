@@ -14,6 +14,8 @@ namespace TraceClientCore
     class CTraceData;
 }
 
+class CViewTracePortal;
+
 
 class CViewTraceMetrics
 {
@@ -23,7 +25,8 @@ public:
 
 public:
 
-    void CalcTraceSize( TraceClientCore::CTraceData* pData, const ColumnsIdVector& columnsIds );
+    void CalcTraceSize( const CViewTracePortal& tracePortal, const ColumnsIdVector& columnsIds );
+    const QRectF& ColumnRect( const EViewColumnId id )                  { return m_ColumnsRect[id]; }
 
 protected:
 

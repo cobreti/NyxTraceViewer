@@ -18,12 +18,11 @@ CViewTraceMetrics::~CViewTraceMetrics()
 }
 
 
-void CViewTraceMetrics::CalcTraceSize(TraceClientCore::CTraceData *pData, const ColumnsIdVector& columnsIds)
+void CViewTraceMetrics::CalcTraceSize(const CViewTracePortal& tracePortal, const ColumnsIdVector& columnsIds)
 {
-    CViewTracePortal        TracePortal(*pData);
     auto                    fct = [&] (EViewColumnId id)
                                     {
-                                        this->CalcColumnSize(id, TracePortal.GetColumnText(id));
+                                        this->CalcColumnSize(id, tracePortal.GetColumnText(id));
                                     };
 
 
@@ -35,6 +34,8 @@ void CViewTraceMetrics::CalcColumnSize(EViewColumnId columnId, const QString& te
 {
     QFontMetricsF           metrics(m_Font);
     QRectF                  rcText = metrics.boundingRect(text);
+
+    rcText.adjust(0, 0, 0.5, 0.5);
 
     m_ColumnsRect[columnId] = rcText;
 }

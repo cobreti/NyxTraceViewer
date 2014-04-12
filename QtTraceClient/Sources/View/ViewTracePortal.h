@@ -20,7 +20,7 @@ public:
     CViewTracePortal(TraceClientCore::CTraceData& rTraceData, Nyx::UInt32 lineNumber = 0);
     ~CViewTracePortal();
 
-    QString GetColumnText(EViewColumnId columnId);
+    QString GetColumnText(EViewColumnId columnId) const;
 
 protected:
 
