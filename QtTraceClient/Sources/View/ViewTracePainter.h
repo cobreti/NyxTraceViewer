@@ -15,12 +15,13 @@ namespace TraceClientCore
 
 class CViewColumnsSettings;
 class CViewColumnSettings;
+class CViewTracesDisplayCache;
 
 
 class CViewTracePainter
 {
 public:
-    CViewTracePainter(QPainter& rPainter);
+    CViewTracePainter(QPainter& rPainter, CViewTracesDisplayCache& rDisplayCache);
     virtual ~CViewTracePainter();
 
     const QPointF&  Origin() const              { return m_Origin; }
@@ -64,6 +65,8 @@ protected:
 protected:
 
     QPainter&                   m_rPainter;
+    CViewTracesDisplayCache&    m_rDisplayCache;
+
     QPointF                     m_Origin;
     QSizeF                      m_ViewSize;
     QPointF                     m_Pos;

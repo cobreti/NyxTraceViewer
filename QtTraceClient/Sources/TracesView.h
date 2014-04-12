@@ -10,6 +10,7 @@
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
 #include "TracesGroupNotificationsListener.h"
 #include "View/ViewTracesIterator.hpp"
+#include "View/ViewTracesDisplayCache.h"
 
 
 namespace Ui
@@ -102,6 +103,7 @@ protected:
     CTracesGroupNotificationsListener   m_TracesGroupNotificationsListener;
     TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
     CViewTracesIterator                 m_TopPos;
+    CViewTracesDisplayCache             m_DisplayCache;
 };
 
 #endif // TRACESVIEW_H

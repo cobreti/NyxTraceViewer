@@ -8,8 +8,9 @@
 #include "ViewTracePortal.h"
 
 
-CViewTracePainter::CViewTracePainter(QPainter &rPainter) :
+CViewTracePainter::CViewTracePainter(QPainter &rPainter, CViewTracesDisplayCache& rDisplayCache) :
     m_rPainter(rPainter),
+    m_rDisplayCache(rDisplayCache),
     m_pColumnsSettings(NULL),
     m_LineNumber(0),
     m_bColumnSizeChanged(false)
@@ -68,7 +69,7 @@ void CViewTracePainter::Draw( TraceClientCore::CTraceData* pData )
     size_t ColumnIndex = 0;
     EViewColumnId ColumnId;
 
-    m_Metrics.CalcTraceSize(TracePortal, colsOrder.OrderVector());
+    m_Metrics.CalcTraceSize(TracePortal, colsOrder.OrderVector(), m_rDisplayCache);
 
     while (ColumnIndex < ColumnsCount)
     {

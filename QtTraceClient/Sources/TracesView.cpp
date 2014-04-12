@@ -177,6 +177,7 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 void CTracesView::OnVertSliderPosChanged(int value)
 {
     m_TopPos.MoveToLine(value);
+    m_DisplayCache.Clear();
 
 
     update();
@@ -186,6 +187,7 @@ void CTracesView::OnVertSliderPosChanged(int value)
 void CTracesView::OnHorzSliderPosChanged(int value)
 {
     m_pHeader->SetHorzOffset(value);
+//    m_DisplayCache.Clear();
 
     update();
 }
@@ -223,7 +225,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     QPainter                                painter(this);
     CViewTracesIterator                     TraceIterator = m_TopPos;
     qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
-    CViewTracePainter                       TracePainter(painter);
+    CViewTracePainter                       TracePainter(painter, m_DisplayCache);
     CViewSettings&                          rSettings = ViewCore()->ViewSettings();
 
     QBrush  bkgndBrush = palette().base();
@@ -403,6 +405,7 @@ void CTracesView::wheelEvent(QWheelEvent* event)
 //    int	value = Nyx::Max(0, ui->m_VertScrollbar->value() - (ui->m_VertScrollbar->singleStep()*numSteps));
     ui->m_VertScrollbar->setValue( Vvalue );
     ui->m_HorzScrollbar->setValue( Hvalue );
+    m_DisplayCache.Clear();
 
     m_pHeader->update();
     update();

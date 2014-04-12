@@ -15,6 +15,7 @@ namespace TraceClientCore
 }
 
 class CViewTracePortal;
+class CViewTracesDisplayCache;
 
 
 class CViewTraceMetrics
@@ -25,12 +26,12 @@ public:
 
 public:
 
-    void CalcTraceSize( const CViewTracePortal& tracePortal, const ColumnsIdVector& columnsIds );
+    void CalcTraceSize( const CViewTracePortal& tracePortal, const ColumnsIdVector& columnsIds, CViewTracesDisplayCache& displayCache );
     const QRectF& ColumnRect( const EViewColumnId id )                  { return m_ColumnsRect[id]; }
 
 protected:
 
-    void CalcColumnSize(EViewColumnId columnId, const QString& text);
+    void CalcColumnSize(EViewColumnId columnId, const CViewTracePortal& tracePortal, CViewTracesDisplayCache& displayCache);
 
 protected:
 

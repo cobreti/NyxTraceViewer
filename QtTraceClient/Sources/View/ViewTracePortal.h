@@ -22,6 +22,8 @@ public:
 
     QString GetColumnText(EViewColumnId columnId) const;
 
+    TraceClientCore::CTraceData*        traceData() const       { return &m_rTraceData; }
+
 protected:
 
     TraceClientCore::CTraceData&        m_rTraceData;
