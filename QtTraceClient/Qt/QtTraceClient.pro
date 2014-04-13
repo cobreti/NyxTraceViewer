@@ -87,7 +87,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/TracesViewSet.cpp \
     ../Sources/View/ViewTraceMetrics.cpp \
     ../Sources/View/ViewTracePortal.cpp \
-    ../Sources/View/ViewTracesDisplayCache.cpp
+    ../Sources/View/ViewTracesDisplayCache.cpp \
+    ../Sources/View/ViewTracePicker.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -165,7 +166,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/TracesViewSet.hpp \
     ../Sources/View/ViewTraceMetrics.h \
     ../Sources/View/ViewTracePortal.h \
-    ../Sources/View/ViewTracesDisplayCache.h
+    ../Sources/View/ViewTracesDisplayCache.h \
+    ../Sources/View/ViewTracePicker.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

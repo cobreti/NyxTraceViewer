@@ -1,5 +1,7 @@
 #include "ViewTracesDisplayCache.h"
 
+#include <algorithm>
+
 
 CViewTracesDisplayCache::CViewTracesDisplayCache()
 {
@@ -25,8 +27,21 @@ void CViewTracesDisplayCache::setEntry(const CEntryId &id, const CEntryData &dat
 }
 
 
+//void CViewTracesDisplayCache::for_each( CViewTracesDisplayCache::pfctIterFunc pfct) const
+//{
+////    auto cbfct = [&] (std::pair<const CEntryId, const CEntryData> value)
+////                    {
+////                        fct(value.first, value.second);
+////                    };
+
+//    std::for_each(m_Entries.begin(), m_Entries.end(), cbfct);
+//}
+
+
 CViewTracesDisplayCache::CEntryData::CEntryData() :
-    m_pTraceData(NULL)
+    m_pTraceData(NULL),
+    m_ColumnWidth(0),
+    m_LineNumber(0)
 {
 
 }
@@ -39,7 +54,10 @@ CViewTracesDisplayCache::CEntryData::~CEntryData()
 
 
 CViewTracesDisplayCache::CEntryData::CEntryData(const CEntryData &entryData) :
-    m_ItemArea(entryData.m_ItemArea)
+    m_ItemArea(entryData.m_ItemArea),
+    m_pTraceData(entryData.m_pTraceData),
+    m_ColumnWidth(entryData.m_ColumnWidth),
+    m_LineNumber(entryData.m_LineNumber)
 {
 
 }
@@ -48,6 +66,9 @@ CViewTracesDisplayCache::CEntryData::CEntryData(const CEntryData &entryData) :
 const CViewTracesDisplayCache::CEntryData& CViewTracesDisplayCache::CEntryData::operator = ( const CViewTracesDisplayCache::CEntryData& entryData )
 {
     m_ItemArea = entryData.m_ItemArea;
+    m_pTraceData = entryData.m_pTraceData;
+    m_ColumnWidth = entryData.m_ColumnWidth;
+    m_LineNumber = entryData.m_LineNumber;
 
     return *this;
 }

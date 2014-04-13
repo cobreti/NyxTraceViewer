@@ -6,6 +6,7 @@
 #include "ViewColumnSettings.hpp"
 #include "TracesPool.hpp"
 #include "ViewTracePortal.h"
+#include "View/ViewTracesDisplayCache.h"
 
 
 CViewTracePainter::CViewTracePainter(QPainter &rPainter, CViewTracesDisplayCache& rDisplayCache) :
@@ -28,7 +29,7 @@ void CViewTracePainter::Init()
 {
 //    m_ColumnsSize.reserve(eVCI_Count);
 
-    m_Pos = m_Origin;
+    m_Pos = QPointF(0, m_Origin.y());
     m_bColumnSizeChanged = false;
 
     for (size_t index = 0; index < eVCI_Count; ++index) {
@@ -88,42 +89,47 @@ void CViewTracePainter::Draw( TraceClientCore::CTraceData* pData )
 void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
 {
     CViewTracePortal        TracePortal(*pData, m_LineNumber);
-    QRectF                  rcArea = m_Metrics.ColumnRect(columnId);
-    qreal                   colWidth = m_ColumnsSize[columnId];
 
-    if (settings.AutoWidth())
+    CViewTracesDisplayCache::CEntryId       entryId(TracePortal.traceData()->identifier(), columnId);
+    CViewTracesDisplayCache::CEntryData     entryData;
+    QRectF                                  rcArea;
+
+    if ( m_rDisplayCache.hasEntry(entryId) )
     {
-        colWidth = std::max(colWidth, rcArea.width());
-        m_ColumnsSize[columnId] = colWidth;
+        entryData = m_rDisplayCache[entryId];
+
+        rcArea = entryData.itemArea();
+        rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
+
+        m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
+
+        m_Pos.rx() += entryData.columnWidth() + settings.Margins().width();
     }
+    else
+    {
+        qreal                   colWidth = m_ColumnsSize[columnId];
 
-    colWidth = settings.GetWidth();
-    rcArea.moveTo(m_Pos.x() + settings.Margins().left(), m_Pos.y() + settings.Margins().top());
+        rcArea = m_Metrics.ColumnRect(columnId);
 
-    m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
-//    rcArea.setBottom(m_ViewSize.height() - m_Pos.y());
+        if (settings.AutoWidth())
+        {
+            colWidth = std::max(colWidth, rcArea.width());
+            m_ColumnsSize[columnId] = colWidth;
+        }
 
-//    switch (columnId)
-//    {
-//        case eVCI_LineNumber:
-//            DrawLineNumberColumn(pData, settings, columnId);
-//            break;
-//        case eVCI_Data:
-//            DrawDataColumn(pData, settings, columnId);
-//            break;
-//        case eVCI_TickCount:
-//            DrawTickCountColumn(pData, settings, columnId);
-//            break;
-//        case eVCI_ModuleName:
-//            DrawModuleNameColumn(pData, settings, columnId);
-//            break;
-//        case eVCI_ThreadId:
-//            DrawThreadIdColumn(pData, settings, columnId);
-//            break;
-//    }
+        colWidth = settings.GetWidth();
+        rcArea.moveTo(m_Pos.x() + settings.Margins().left(), m_Pos.y() + settings.Margins().top());
 
-//    qreal colWidth = settings.GetWidth() + settings.Margins().width();
-    m_Pos.rx() += colWidth + settings.Margins().width();
+        entryData.itemArea() = rcArea;
+        entryData.traceData() = pData;
+        entryData.columnWidth() = colWidth;
+        entryData.lineNumber() = m_LineNumber;
+        m_rDisplayCache.setEntry(entryId, entryData);
+
+        rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
+        m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
+        m_Pos.rx() += colWidth + settings.Margins().width();
+    }
 }
 
 

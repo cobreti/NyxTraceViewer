@@ -74,6 +74,8 @@ protected:
     virtual void UpdateScrollbarRange(const QRect& rcClient);
 	virtual void keyPressEvent( QKeyEvent* event );
 	virtual void mousePressEvent( QMouseEvent* event );
+    virtual void mouseReleaseEvent(QMouseEvent* event);
+    virtual void mouseMoveEvent(QMouseEvent* event);
     virtual void wheelEvent(QWheelEvent* event);
     virtual void showEvent( QShowEvent* event);
 
@@ -104,6 +106,8 @@ protected:
     TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
     CViewTracesIterator                 m_TopPos;
     CViewTracesDisplayCache             m_DisplayCache;
+
+    QRect                               m_SelectionArea;
 };
 
 #endif // TRACESVIEW_H

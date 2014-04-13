@@ -14,6 +14,8 @@
 #include "View/Highlight/HighlightColorsPopup.h"
 #include "TracesGroup.hpp"
 #include "View/ViewTracePainter.h"
+#include "View/ViewTracePicker.h"
+
 
 /**
  *
@@ -252,8 +254,18 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     TracePainter.Release();
 
+    QRect       rcArea = m_SelectionArea;
+    rcArea.adjust( -ui->m_HorzScrollbar->value() + m_Margins.left(), 0, -ui->m_HorzScrollbar->value() + m_Margins.left(), 0 );
+
+    painter.setBrush(Qt::NoBrush);
+    painter.setPen(Qt::blue);
+    painter.drawRect(rcArea);
+
     if ( TracePainter.columnsWidthChanged() )
+    {
+        m_DisplayCache.Clear();
         update();
+    }
 }
 
 
@@ -338,6 +350,12 @@ void CTracesView::keyPressEvent( QKeyEvent* event )
 
 void CTracesView::mousePressEvent( QMouseEvent* event )
 {
+    if ( event->button() == Qt::LeftButton )
+    {
+        m_SelectionArea = QRect();
+        m_SelectionArea.moveTo(event->pos().x() + ui->m_HorzScrollbar->value() - m_Margins.left(), event->pos().y());
+    }
+
 //    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
 //    if ( event->pos().x() < m_Margins.left() && event->pos().y() > m_pHeader->size().height() )
@@ -387,6 +405,23 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 
 //        update();
 //	}
+}
+
+
+void CTracesView::mouseReleaseEvent(QMouseEvent *event)
+{
+    CViewTracePicker        picker(m_DisplayCache);
+
+    picker.getTextInRect(m_SelectionArea);
+}
+
+
+void CTracesView::mouseMoveEvent(QMouseEvent *event)
+{
+    m_SelectionArea.setRight(event->pos().x() + ui->m_HorzScrollbar->value() - m_Margins.left());
+    m_SelectionArea.setBottom(event->pos().y() );
+
+    update();
 }
 
 
