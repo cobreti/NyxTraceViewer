@@ -51,12 +51,7 @@ public:
 protected:
 
     void DrawColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
-
-    void DrawDataColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
-    void DrawTickCountColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
-    void DrawLineNumberColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
-    void DrawModuleNameColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
-    void DrawThreadIdColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
+    bool DisplayColumnData( TraceClientCore::CTraceData* pData, EViewColumnId columnId );
 
 protected:
 

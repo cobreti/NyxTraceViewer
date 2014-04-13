@@ -101,7 +101,10 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
         rcArea = entryData.itemArea();
         rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
 
-        m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
+        if ( DisplayColumnData(pData, columnId) )
+        {
+            m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
+        }
 
         m_Pos.rx() += entryData.columnWidth() + settings.Margins().width();
     }
@@ -127,161 +130,25 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
         m_rDisplayCache.setEntry(entryId, entryData);
 
         rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
-        m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
+
+        if ( DisplayColumnData(pData, columnId) )
+        {
+            m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
+        }
+
+
         m_Pos.rx() += colWidth + settings.Margins().width();
     }
 }
 
 
-void CViewTracePainter::DrawDataColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
+bool CViewTracePainter::DisplayColumnData( TraceClientCore::CTraceData* pData, EViewColumnId columnId )
 {
-    QFontMetricsF           metrics(m_Font);
-    QRectF                  rcText;
-    QString                 text = QString::fromWCharArray(pData->Data().c_str());
-    QRectF                  rcArea;
-    qreal                   colWidth = m_ColumnsSize[columnId];
-
-    m_rPainter.setFont(m_Font);
-    rcText = metrics.boundingRect(text);
-
-    if (settings.AutoWidth())
+    if (    pData->Level() > 0 &&
+            (eVCI_ModuleName == columnId || eVCI_ThreadId == columnId || eVCI_TickCount == columnId) )
     {
-        colWidth = std::max(colWidth, rcText.width());
-        m_ColumnsSize[columnId] = colWidth;
+        return false;
     }
 
-    colWidth = settings.GetWidth();
-
-    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
-                        m_Pos.y() + settings.Margins().top(),
-                        colWidth,
-                        m_ViewSize.height() - m_Pos.y());
-
-
-    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
-}
-
-
-void CViewTracePainter::DrawTickCountColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
-{
-    if ( pData->Level() > 0 )
-        return;
-
-    QFontMetricsF           metrics(m_Font);
-    QRectF                  rcText;
-    QString                 text = QString::fromWCharArray(pData->TickCount().c_str());
-    QRectF                  rcArea;
-    qreal                   colWidth = m_ColumnsSize[columnId];
-
-    m_rPainter.setFont(m_Font);
-    rcText = metrics.boundingRect(text);
-
-    if (settings.AutoWidth())
-    {
-        colWidth = std::max(colWidth, rcText.width());
-        m_ColumnsSize[columnId] = colWidth;
-    }
-
-    colWidth = settings.GetWidth();
-
-    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
-                        m_Pos.y() + settings.Margins().top(),
-                        colWidth,
-                        m_ViewSize.height());
-
-    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
-}
-
-
-
-void CViewTracePainter::DrawLineNumberColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
-{
-    QFontMetricsF           metrics(m_Font);
-    QRectF                  rcText;
-    QString                 text = QString::number(m_LineNumber);
-    QRectF                  rcArea;
-    qreal                   colWidth = m_ColumnsSize[columnId];
-
-    m_rPainter.setFont(m_Font);
-    rcText = metrics.boundingRect(text);
-
-    if (settings.AutoWidth())
-    {
-        colWidth = std::max(colWidth, rcText.width());
-        m_ColumnsSize[columnId] = colWidth;
-    }
-
-    colWidth = settings.GetWidth();
-
-    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
-                        m_Pos.y() + settings.Margins().top(),
-                        colWidth,
-                        m_ViewSize.height() - m_Pos.y() - settings.Margins().height() );
-
-
-    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
-}
-
-
-void CViewTracePainter::DrawModuleNameColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
-{
-    if ( pData->Level() > 0 )
-        return;
-
-    QFontMetricsF           metrics(m_Font);
-    QRectF                  rcText;
-    QString                 text = QString::fromWCharArray(pData->OwnerPool()->Name().c_str());
-    QRectF                  rcArea;
-    qreal                   colWidth = m_ColumnsSize[columnId];
-
-    m_rPainter.setFont(m_Font);
-    rcText = metrics.boundingRect(text);
-
-    if (settings.AutoWidth())
-    {
-        colWidth = std::max(colWidth, rcText.width());
-        m_ColumnsSize[columnId] = colWidth;
-    }
-
-    colWidth = settings.GetWidth();
-
-    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
-                        m_Pos.y() + settings.Margins().top(),
-                        colWidth,
-                        m_ViewSize.height() - m_Pos.y() - settings.Margins().height() );
-
-
-    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
-}
-
-
-void CViewTracePainter::DrawThreadIdColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId)
-{
-    if ( pData->Level() > 0 )
-        return;
-
-    QFontMetricsF           metrics(m_Font);
-    QRectF                  rcText;
-    QString                 text = QString::fromWCharArray(pData->ThreadId().c_str());
-    QRectF                  rcArea;
-    qreal                   colWidth = m_ColumnsSize[columnId];
-
-    m_rPainter.setFont(m_Font);
-    rcText = metrics.boundingRect(text);
-
-    if (settings.AutoWidth())
-    {
-        colWidth = std::max(colWidth, rcText.width());
-        m_ColumnsSize[columnId] = colWidth;
-    }
-
-    colWidth = settings.GetWidth();
-
-    rcArea = QRectF(    m_Pos.x() + settings.Margins().left(),
-                        m_Pos.y() + settings.Margins().top(),
-                        colWidth,
-                        m_ViewSize.height() - m_Pos.y() - settings.Margins().height() );
-
-
-    m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
+    return true;
 }

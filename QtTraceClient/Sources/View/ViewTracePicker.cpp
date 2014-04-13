@@ -18,9 +18,10 @@ CViewTracePicker::~CViewTracePicker()
 
 
 
-QString CViewTracePicker::getTextInRect(const QRectF &rcArea)
+CViewTracePicker::CPickerResult CViewTracePicker::getTextInRect(const QRectF &rcArea)
 {
-    QString     text;
+    QString                 text;
+    CPickerResult           result;
 
     NYXTRACE(0x0, L"CViewTracePicker::getTextInRect begin");
 
@@ -34,7 +35,7 @@ QString CViewTracePicker::getTextInRect(const QRectF &rcArea)
                                 int y = int(data.itemArea().top() + 0.5);
                                 CPickerEntry        entry(data, id.columnId());
 
-                                m_Entries[y][x] = entry;
+                                (*result.m_pEntries)[y][x] = entry;
 
                                 NYXTRACE(0x0, L"-- "
                                          << Nyx::CTF_AnsiText(tracePortal.GetColumnText(id.columnId()).toStdString().c_str())
@@ -49,24 +50,44 @@ QString CViewTracePicker::getTextInRect(const QRectF &rcArea)
 
     NYXTRACE(0x0, L"CViewTracePicker::getTextInRect end");
 
-    std::for_each( m_Entries.begin(), m_Entries.end(), [&] (std::pair<int, TEntriesRow> pair)
-        {
-            std::for_each( pair.second.begin(), pair.second.end(), [&] (std::pair<int, CPickerEntry> values)
-            {
-                CPickerEntry&        entry = values.second;
-                CViewTracePortal    tracePortal(*entry.traceData(), entry.lineNumber());
+//    std::for_each( result.m_Entries.begin(), result.m_Entries.end(), [&] (std::pair<int, CPickerResult::TEntriesRow> pair)
+//        {
+//            std::for_each( pair.second.begin(), pair.second.end(), [&] (std::pair<int, CPickerEntry> values)
+//            {
+//                CPickerEntry&        entry = values.second;
+//                CViewTracePortal    tracePortal(*entry.traceData(), entry.lineNumber());
 
-                NYXTRACE(0x0, L"==> "
-                         << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
-                         << L" : top = "
-                         << Nyx::CTF_Float(pair.first)
-                         << L" : left = "
-                         << Nyx::CTF_Float(values.first) );
+//                NYXTRACE(0x0, L"==> "
+//                         << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
+//                         << L" : top = "
+//                         << Nyx::CTF_Float(pair.first)
+//                         << L" : left = "
+//                         << Nyx::CTF_Float(values.first) );
 
-            });
-        });
+//            });
+//        });
 
-    return text;
+    return std::move(result);
+}
+
+
+CViewTracePicker::CPickerResult::CPickerResult() :
+    m_pEntries( new  TEntriesTable() )
+{
+
+}
+
+
+CViewTracePicker::CPickerResult::CPickerResult(CViewTracePicker::CPickerResult&& result) :
+    m_pEntries(result.m_pEntries)
+{
+    result.m_pEntries = NULL;
+}
+
+
+CViewTracePicker::CPickerResult::~CPickerResult()
+{
+    delete m_pEntries;
 }
 
 

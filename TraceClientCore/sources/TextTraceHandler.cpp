@@ -121,13 +121,22 @@ namespace TraceClientCore
 
     		CTraceData*		pTraceData = new (pChannel->Pool()->MemoryPool())CTraceData(pChannel->Pool()->MemoryPool());
 
-    		if ( pThread == NULL )
-    			pTraceData->ThreadId() = "default";
-    		else
-    			pTraceData->ThreadId() = pThread;
+            if ( level == 0 )
+            {
+                if ( pThread == NULL )
+                    pTraceData->ThreadId() = "default";
+                else
+                    pTraceData->ThreadId() = pThread;
 
 
-    		pTraceData->TickCount() = Buffer;
+                pTraceData->TickCount() = Buffer;
+            }
+            else
+            {
+                pTraceData->ThreadId() = "";
+                pTraceData->TickCount() = "";
+            }
+
     		pTraceData->Data() = content;
     		pTraceData->OwnerPool() = pChannel->Pool();
             pTraceData->Level() = level;

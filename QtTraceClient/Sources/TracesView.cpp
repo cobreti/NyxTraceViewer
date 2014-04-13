@@ -15,6 +15,7 @@
 #include "TracesGroup.hpp"
 #include "View/ViewTracePainter.h"
 #include "View/ViewTracePicker.h"
+#include "View/ViewTracePortal.h"
 
 
 /**
@@ -201,10 +202,10 @@ void CTracesView::resizeEvent(QResizeEvent *event)
     int     nWidth = ui->m_VertScrollbar->width();
     QRect   rcWnd(  QPoint(0,0), event->size() );
 
-    ui->m_HorzScrollbar->resize( event->size().width()-nHeight, nHeight );
+    ui->m_HorzScrollbar->resize( event->size().width()-nHeight+1, nHeight );
     ui->m_HorzScrollbar->move(0, event->size().height()-nHeight);
 
-    ui->m_VertScrollbar->resize( nWidth, event->size().height()-nWidth );
+    ui->m_VertScrollbar->resize( nWidth, event->size().height() );
     ui->m_VertScrollbar->move(event->size().width()-nWidth+1, 0);
 
     m_pHeader->move( this->ClientRect().left(), this->ClientRect().top());
@@ -412,7 +413,19 @@ void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 {
     CViewTracePicker        picker(m_DisplayCache);
 
-    picker.getTextInRect(m_SelectionArea);
+    CViewTracePicker::CPickerResult     pickResult = picker.getTextInRect(m_SelectionArea);
+
+    pickResult.for_each( [] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
+                        {
+                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
+
+                            NYXTRACE(0x0, L"==> "
+                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
+                                     << L" : top = "
+                                     << Nyx::CTF_Int(y)
+                                     << L" : left = "
+                                     << Nyx::CTF_Int(x) );
+                        } );
 }
 
 
