@@ -57,7 +57,8 @@ CViewTracesDisplayCache::CEntryData::CEntryData(const CEntryData &entryData) :
     m_ItemArea(entryData.m_ItemArea),
     m_pTraceData(entryData.m_pTraceData),
     m_ColumnWidth(entryData.m_ColumnWidth),
-    m_LineNumber(entryData.m_LineNumber)
+    m_LineNumber(entryData.m_LineNumber),
+    m_Margins(entryData.m_Margins)
 {
 
 }
@@ -69,6 +70,7 @@ const CViewTracesDisplayCache::CEntryData& CViewTracesDisplayCache::CEntryData::
     m_pTraceData = entryData.m_pTraceData;
     m_ColumnWidth = entryData.m_ColumnWidth;
     m_LineNumber = entryData.m_LineNumber;
+    m_Margins = entryData.m_Margins;
 
     return *this;
 }

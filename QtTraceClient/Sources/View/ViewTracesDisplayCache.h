@@ -3,6 +3,8 @@
 
 #include "TraceData.hpp"
 #include "ViewColumnId.hpp"
+#include "ViewItemMargins.hpp"
+
 
 #include <QRectF>
 #include <map>
@@ -35,12 +37,16 @@ public:
         const Nyx::UInt32&  lineNumber() const          { return m_LineNumber; }
         Nyx::UInt32&        lineNumber()                { return m_LineNumber; }
 
+        const CViewItemMargins&     margins() const     { return m_Margins; }
+        CViewItemMargins&           margins()           { return m_Margins; }
+
     protected:
 
         QRectF                              m_ItemArea;
         TraceClientCore::CTraceData*        m_pTraceData;
         qreal                               m_ColumnWidth;
         Nyx::UInt32                         m_LineNumber;
+        CViewItemMargins                    m_Margins;
     };
 
 

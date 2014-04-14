@@ -29,8 +29,12 @@ public:
         const EViewColumnId&    columnId() const            { return m_ColumnId; }
         EViewColumnId&          columnId()                  { return m_ColumnId; }
 
+        const QString&          textInSelection() const     { return m_TextInSelection; }
+        QString&                textInSelection()           { return m_TextInSelection; }
+
     protected:
         EViewColumnId           m_ColumnId;
+        QString                 m_TextInSelection;
     };
 
 
@@ -73,7 +77,14 @@ public:
     CViewTracePicker(const CViewTracesDisplayCache& rDisplayCache);
     virtual ~CViewTracePicker();
 
-    virtual CPickerResult getTextInRect( const QRectF& rcArea );
+    virtual CPickerResult pick( const QRectF& rcArea );
+
+protected:
+
+    void ValidatePickEntry( const QRectF& rcArea,
+                            const CViewTracesDisplayCache::CEntryId& id,
+                            const CViewTracesDisplayCache::CEntryData& data,
+                            CPickerResult& result);
 
 protected:
 

@@ -28,6 +28,7 @@ public:
 
     void CalcTraceSize( const CViewTracePortal& tracePortal, const ColumnsIdVector& columnsIds, CViewTracesDisplayCache& displayCache );
     const QRectF& ColumnRect( const EViewColumnId id )                  { return m_ColumnsRect[id]; }
+    QString GetTextInRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, const QRectF& rcArea );
 
 protected:
 

@@ -124,6 +124,7 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
         rcArea.moveTo(m_Pos.x() + settings.Margins().left(), m_Pos.y() + settings.Margins().top());
 
         entryData.itemArea() = rcArea;
+        entryData.margins() = settings.Margins();
         entryData.traceData() = pData;
         entryData.columnWidth() = colWidth;
         entryData.lineNumber() = m_LineNumber;

@@ -413,7 +413,7 @@ void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 {
     CViewTracePicker        picker(m_DisplayCache);
 
-    CViewTracePicker::CPickerResult     pickResult = picker.getTextInRect(m_SelectionArea);
+    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
 
     pickResult.for_each( [] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
                         {

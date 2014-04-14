@@ -46,3 +46,48 @@ void CViewTraceMetrics::CalcColumnSize(EViewColumnId columnId, const CViewTraceP
 
     m_ColumnsRect[columnId] = rcText;
 }
+
+
+QString CViewTraceMetrics::GetTextInRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, const QRectF& rcArea )
+{
+    QString         text;
+    QString         srcText = tracePortal.GetColumnText(columnId);
+    QFontMetricsF   metrics(m_Font);
+    QRectF          rcText;
+    QRectF          adjustedItemArea = itemArea;
+    qreal           threshold = metrics.averageCharWidth() / 2;
+    QRectF          adjustedArea = rcArea;
+    qreal           offset = 0;
+    int             startPos = 1;
+    int             len = srcText.length();
+
+    adjustedItemArea.adjust( -itemArea.left(), 0, -itemArea.left(), 0 );
+    adjustedArea.adjust( -itemArea.left(), 0, -itemArea.left(), 0 );
+
+    rcText = metrics.boundingRect(srcText.mid(0, startPos));
+
+    while ( rcText.right() < adjustedArea.left() && startPos <= len )
+    {
+        ++ startPos;
+        rcText = metrics.boundingRect(srcText.mid(0, startPos));
+    }
+
+    startPos --;
+    rcText = metrics.boundingRect(srcText.mid(0, startPos));
+    offset = rcText.right();
+
+    rcText = metrics.boundingRect(srcText.mid(0, len));
+    rcText.adjust(offset, 0, offset, 0);
+
+    while ( rcText.right() - threshold > adjustedArea.right() && len > 0 )
+    {
+        -- len;
+        rcText = metrics.boundingRect(srcText.mid(0, len));
+        rcText.adjust(offset, 0, offset, 0);
+    }
+
+
+    text = srcText.mid(startPos, len);
+
+    return text;
+}
