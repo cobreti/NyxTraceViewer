@@ -165,10 +165,12 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 {
     m_TracesGroupNotificationsListener.ConnectTo(pGroup);
     m_pCurrentTracesGroup = pGroup;
+    m_TopPos = CViewTracesIterator();
 
     ui->m_HorzScrollbar->setValue(0);
     ui->m_VertScrollbar->setValue(0);
     UpdateScrollbarRange(ClientRect());
+    m_DisplayCache.Clear();
 
     update();
 }
@@ -411,21 +413,21 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 
 void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 {
-    CViewTracePicker        picker(m_DisplayCache);
+//    CViewTracePicker        picker(m_DisplayCache);
 
-    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
+//    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
 
-    pickResult.for_each( [] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
-                        {
-                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
+//    pickResult.for_each( [] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
+//                        {
+//                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
 
-                            NYXTRACE(0x0, L"==> "
-                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
-                                     << L" : top = "
-                                     << Nyx::CTF_Int(y)
-                                     << L" : left = "
-                                     << Nyx::CTF_Int(x) );
-                        } );
+//                            NYXTRACE(0x0, L"==> "
+//                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
+//                                     << L" : top = "
+//                                     << Nyx::CTF_Int(y)
+//                                     << L" : left = "
+//                                     << Nyx::CTF_Int(x) );
+//                        } );
 }
 
 
