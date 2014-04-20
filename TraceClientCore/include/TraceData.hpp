@@ -31,7 +31,9 @@ namespace TraceClientCore
             bool operator == (const CIdentifier& identifier) const;
             bool operator != (const CIdentifier& identifier) const;
             bool operator < (const CIdentifier& identifier) const;
+            bool operator <= (const CIdentifier& identifier) const;
             bool operator > (const CIdentifier& identifier) const;
+            bool operator >= (const CIdentifier& identifier) const;
 
         protected:
 

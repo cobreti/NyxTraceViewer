@@ -32,9 +32,21 @@ public:
         const QString&          textInSelection() const     { return m_TextInSelection; }
         QString&                textInSelection()           { return m_TextInSelection; }
 
+        const int&              startIndex() const          { return m_StartIndex; }
+        int&                    startIndex()                { return m_StartIndex; }
+
+        const int&              length() const              { return m_Length; }
+        int&                    length()                    { return m_Length; }
+
+        const QRectF&           subRect() const             { return m_SubRect; }
+        QRectF&                 subRect()                   { return m_SubRect; }
+
     protected:
         EViewColumnId           m_ColumnId;
         QString                 m_TextInSelection;
+        int                     m_StartIndex;
+        int                     m_Length;
+        QRectF                  m_SubRect;
     };
 
 
@@ -82,7 +94,7 @@ public:
 protected:
 
     void ValidatePickEntry( const QRectF& rcArea,
-                            const CViewTracesDisplayCache::CEntryId& id,
+                            const CTraceSectionId& id,
                             const CViewTracesDisplayCache::CEntryData& data,
                             CPickerResult& result);
 

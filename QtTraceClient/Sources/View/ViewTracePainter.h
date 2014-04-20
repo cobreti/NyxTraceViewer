@@ -16,6 +16,7 @@ namespace TraceClientCore
 class CViewColumnsSettings;
 class CViewColumnSettings;
 class CViewTracesDisplayCache;
+class CViewTraceObjectsDirectory;
 
 
 class CViewTracePainter
@@ -46,10 +47,15 @@ public:
 
     bool Done() const;
 
+    void PrepareProcess();
+    void Process( TraceClientCore::CTraceData* pData );
+    void PrepareDrawing();
+    void PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory );
     void Draw( TraceClientCore::CTraceData* pData );
 
 protected:
 
+    void ProcessColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId );
     void DrawColumn( TraceClientCore::CTraceData* pData, CViewColumnSettings& settings, EViewColumnId columnId);
     bool DisplayColumnData( TraceClientCore::CTraceData* pData, EViewColumnId columnId );
 

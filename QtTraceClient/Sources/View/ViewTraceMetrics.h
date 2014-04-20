@@ -21,6 +21,37 @@ class CViewTracesDisplayCache;
 class CViewTraceMetrics
 {
 public:
+
+    class CSubSection
+    {
+    public:
+        CSubSection();
+        CSubSection(const CSubSection& section);
+        ~CSubSection();
+
+        const CSubSection& operator = (const CSubSection& section);
+
+        const QString&                      text() const            { return m_Text; }
+        QString&                            text()                  { return m_Text; }
+
+        const int&                          startIndex() const      { return m_StartIndex; }
+        int&                                startIndex()            { return m_StartIndex; }
+
+        const int&                          length() const          { return m_Length; }
+        int&                                length()                { return m_Length; }
+
+        const QRectF&                       subRect() const         { return m_SubRect; }
+        QRectF&                             subRect()               { return m_SubRect; }
+
+    protected:
+
+        QString     m_Text;
+        int         m_StartIndex;
+        int         m_Length;
+        QRectF      m_SubRect;
+    };
+
+public:
     CViewTraceMetrics();
     virtual ~CViewTraceMetrics();
 
@@ -28,7 +59,7 @@ public:
 
     void CalcTraceSize( const CViewTracePortal& tracePortal, const ColumnsIdVector& columnsIds, CViewTracesDisplayCache& displayCache );
     const QRectF& ColumnRect( const EViewColumnId id )                  { return m_ColumnsRect[id]; }
-    QString GetTextInRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, const QRectF& rcArea );
+    const CSubSection GetTextInRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, const QRectF& rcArea );
 
 protected:
 

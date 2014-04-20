@@ -88,7 +88,12 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/ViewTraceMetrics.cpp \
     ../Sources/View/ViewTracePortal.cpp \
     ../Sources/View/ViewTracesDisplayCache.cpp \
-    ../Sources/View/ViewTracePicker.cpp
+    ../Sources/View/ViewTracePicker.cpp \
+    ../Sources/View/TraceSectionId.cpp \
+    ../Sources/View/Decorations/ViewObject.cpp \
+    ../Sources/View/Decorations/ViewTraceObject.cpp \
+    ../Sources/View/Decorations/ViewTraceObjectsDirectory.cpp \
+    ../Sources/View/Decorations/ViewTraceSectionHilight.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -167,7 +172,12 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/ViewTraceMetrics.h \
     ../Sources/View/ViewTracePortal.h \
     ../Sources/View/ViewTracesDisplayCache.h \
-    ../Sources/View/ViewTracePicker.h
+    ../Sources/View/ViewTracePicker.h \
+    ../Sources/View/TraceSectionId.h \
+    ../Sources/View/Decorations/ViewObject.h \
+    ../Sources/View/Decorations/ViewTraceObject.h \
+    ../Sources/View/Decorations/ViewTraceObjectsDirectory.h \
+    ../Sources/View/Decorations/ViewTraceSectionHilight.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

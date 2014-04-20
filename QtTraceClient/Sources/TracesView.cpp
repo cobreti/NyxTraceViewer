@@ -16,6 +16,7 @@
 #include "View/ViewTracePainter.h"
 #include "View/ViewTracePicker.h"
 #include "View/ViewTracePortal.h"
+#include "View/Decorations/ViewTraceSectionHilight.h"
 
 
 /**
@@ -247,6 +248,34 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     TracePainter.Init();
 
+    TracePainter.PrepareProcess();
+
+    while ( TraceIterator.Valid() && !TracePainter.Done() )
+    {
+        TracePainter.LineNumber() = TraceIterator.getLineNumber();
+        TracePainter.Process(TraceIterator.TraceData());
+
+        ++ TraceIterator;
+    }
+
+    TraceIterator = m_TopPos;
+
+
+    TracePainter.PrepareDrawing();
+
+    m_TraceSectionsHilights.enumContent();
+
+    while ( TraceIterator.Valid() && !TracePainter.Done() )
+    {
+        TracePainter.LineNumber() = TraceIterator.getLineNumber();
+        TracePainter.PreDraw(TraceIterator.TraceData(), m_TraceSectionsHilights);
+
+        ++ TraceIterator;
+    }
+
+    TraceIterator = m_TopPos;
+    TracePainter.PrepareDrawing();
+
     while ( TraceIterator.Valid() && !TracePainter.Done() )
     {
         TracePainter.LineNumber() = TraceIterator.getLineNumber();
@@ -256,6 +285,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     }
 
     TracePainter.Release();
+
 
     QRect       rcArea = m_SelectionArea;
     rcArea.adjust( -ui->m_HorzScrollbar->value() + m_Margins.left(), 0, -ui->m_HorzScrollbar->value() + m_Margins.left(), 0 );
@@ -413,21 +443,27 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
 
 void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 {
-//    CViewTracePicker        picker(m_DisplayCache);
+    CViewTracePicker        picker(m_DisplayCache);
 
-//    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
+    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
 
-//    pickResult.for_each( [] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
-//                        {
-//                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
+    pickResult.for_each( [&] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
+                        {
+                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
+                            CTraceSectionId         id( entry.traceData()->identifier(), entry.columnId() );
 
-//                            NYXTRACE(0x0, L"==> "
-//                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
-//                                     << L" : top = "
-//                                     << Nyx::CTF_Int(y)
-//                                     << L" : left = "
-//                                     << Nyx::CTF_Int(x) );
-//                        } );
+                            m_TraceSectionsHilights.Set(id, new CViewTraceSectionHilight(*entry.traceData(), entry.columnId(), entry.subRect()) );
+
+                            NYXTRACE(0x0, L"==> "
+                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
+                                     << L" : top = "
+                                     << Nyx::CTF_Int(y)
+                                     << L" : left = "
+                                     << Nyx::CTF_Int(x) );
+                        } );
+
+    m_SelectionArea = QRect();
+    update();
 }
 
 

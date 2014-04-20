@@ -4,6 +4,7 @@
 #include "TraceData.hpp"
 #include "ViewColumnId.hpp"
 #include "ViewItemMargins.hpp"
+#include "TraceSectionId.h"
 
 
 #include <QRectF>
@@ -50,28 +51,6 @@ public:
     };
 
 
-    class CEntryId
-    {
-    public:
-        CEntryId( const TraceClientCore::CTraceData::CIdentifier& traceId, EViewColumnId colId );
-        CEntryId( const CEntryId& entryId );
-        ~CEntryId();
-
-        const TraceClientCore::CTraceData::CIdentifier& traceIdentifier() const     { return m_TraceId; }
-        const EViewColumnId& columnId() const                                       { return m_ColumnId; }
-
-        const CEntryId& operator = (const CEntryId& entryId);
-        bool operator == (const CEntryId& entryId) const;
-        bool operator != (const CEntryId& entryId) const;
-        bool operator < (const CEntryId& entryId) const;
-        bool operator > (const CEntryId& entryId) const;
-
-    protected:
-
-        TraceClientCore::CTraceData::CIdentifier        m_TraceId;
-        EViewColumnId                                   m_ColumnId;
-
-    };
 
 public:
     CViewTracesDisplayCache();
@@ -79,14 +58,14 @@ public:
 
     void Clear();
 
-    bool hasEntry(const CEntryId& id) const                             { return m_Entries.count(id) > 0; }
-    CEntryData& operator[] ( const CEntryId& id )                       { return m_Entries[id]; }
-    void setEntry(const CEntryId& id, const CEntryData& data);
+    bool hasEntry(const CTraceSectionId& id) const                             { return m_Entries.count(id) > 0; }
+    CEntryData& operator[] ( const CTraceSectionId& id )                       { return m_Entries[id]; }
+    void setEntry(const CTraceSectionId& id, const CEntryData& data);
 
     template <class _FUNCTION>
     void for_each( _FUNCTION fct ) const
     {
-        auto cbfct = [&] (std::pair<const CEntryId, const CEntryData> value)
+        auto cbfct = [&] (std::pair<const CTraceSectionId, const CEntryData> value)
                         {
                             fct(value.first, value.second);
                         };
@@ -96,7 +75,7 @@ public:
 
 protected:
 
-    typedef     std::map<CEntryId, CEntryData>          TEntriesTable;
+    typedef     std::map<CTraceSectionId, CEntryData>          TEntriesTable;
 
 
 protected:

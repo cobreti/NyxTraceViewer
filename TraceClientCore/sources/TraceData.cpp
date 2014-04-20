@@ -95,26 +95,72 @@ namespace TraceClientCore
     {
         if ( m_RepositoryId < identifier.m_RepositoryId )
             return true;
-
-        if ( m_TraceId < identifier.m_TraceId )
-            return true;
-
-        if ( m_Level < identifier.m_Level )
-            return true;
+        else if ( m_RepositoryId == identifier.m_RepositoryId )
+        {
+            if ( m_TraceId < identifier.m_TraceId )
+                return true;
+            else if ( m_TraceId == identifier.m_TraceId )
+            {
+                if ( m_Level < identifier.m_Level )
+                    return true;
+            }
+        }
 
         return false;
     }
+
+
+    bool CTraceData::CIdentifier::operator <= (const CTraceData::CIdentifier& identifier) const
+    {
+        if ( m_RepositoryId < identifier.m_RepositoryId )
+            return true;
+        else if ( m_RepositoryId == identifier.m_RepositoryId )
+        {
+            if ( m_TraceId < identifier.m_TraceId )
+                return true;
+            else if ( m_TraceId == identifier.m_TraceId )
+            {
+                if ( m_Level <= identifier.m_Level )
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
 
     bool CTraceData::CIdentifier::operator > (const CTraceData::CIdentifier& identifier) const
     {
         if ( m_RepositoryId > identifier.m_RepositoryId )
             return true;
+        else if ( m_RepositoryId == identifier.m_RepositoryId )
+        {
+            if ( m_TraceId > identifier.m_TraceId )
+                return true;
+            else if ( m_TraceId == identifier.m_TraceId )
+            {
+                if ( m_Level > identifier.m_Level )
+                    return true;
+            }
+        }
 
-        if ( m_TraceId > identifier.m_TraceId )
-            return true;
+        return false;
+    }
 
-        if ( m_Level > identifier.m_Level )
+    bool CTraceData::CIdentifier::operator >= (const CTraceData::CIdentifier& identifier) const
+    {
+        if ( m_RepositoryId > identifier.m_RepositoryId )
             return true;
+        else if ( m_RepositoryId == identifier.m_RepositoryId )
+        {
+            if ( m_TraceId > identifier.m_TraceId )
+                return true;
+            else if ( m_TraceId == identifier.m_TraceId )
+            {
+                if ( m_Level >= identifier.m_Level )
+                    return true;
+            }
+        }
 
         return false;
     }

@@ -33,7 +33,7 @@ void CViewTraceMetrics::CalcTraceSize(const CViewTracePortal& tracePortal, const
 
 void CViewTraceMetrics::CalcColumnSize(EViewColumnId columnId, const CViewTracePortal& tracePortal, CViewTracesDisplayCache& displayCache)
 {
-    CViewTracesDisplayCache::CEntryId       entryId(tracePortal.traceData()->identifier(), columnId);
+    CTraceSectionId       entryId(tracePortal.traceData()->identifier(), columnId);
 
     if ( displayCache.hasEntry(entryId) )
         return;
@@ -48,7 +48,7 @@ void CViewTraceMetrics::CalcColumnSize(EViewColumnId columnId, const CViewTraceP
 }
 
 
-QString CViewTraceMetrics::GetTextInRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, const QRectF& rcArea )
+const CViewTraceMetrics::CSubSection CViewTraceMetrics::GetTextInRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, const QRectF& rcArea )
 {
     QString         text;
     QString         srcText = tracePortal.GetColumnText(columnId);
@@ -60,6 +60,7 @@ QString CViewTraceMetrics::GetTextInRect( const CViewTracePortal& tracePortal, E
     qreal           offset = 0;
     int             startPos = 1;
     int             len = srcText.length();
+    CSubSection     subSection;
 
     adjustedItemArea.adjust( -itemArea.left(), 0, -itemArea.left(), 0 );
     adjustedArea.adjust( -itemArea.left(), 0, -itemArea.left(), 0 );
@@ -76,18 +77,63 @@ QString CViewTraceMetrics::GetTextInRect( const CViewTracePortal& tracePortal, E
     rcText = metrics.boundingRect(srcText.mid(0, startPos));
     offset = rcText.right();
 
-    rcText = metrics.boundingRect(srcText.mid(0, len));
+    subSection.startIndex() = startPos;
+    subSection.subRect().setTop(rcText.top());
+    subSection.subRect().setLeft( rcText.right() );
+
+    rcText = metrics.boundingRect(srcText.mid(startPos, len));
     rcText.adjust(offset, 0, offset, 0);
 
     while ( rcText.right() - threshold > adjustedArea.right() && len > 0 )
     {
         -- len;
-        rcText = metrics.boundingRect(srcText.mid(0, len));
+        rcText = metrics.boundingRect(srcText.mid(startPos, len));
         rcText.adjust(offset, 0, offset, 0);
     }
 
+    subSection.length() = len;
+    subSection.subRect().setRight(rcText.right());
+    subSection.subRect().setBottom(rcText.bottom());
+    subSection.text() = srcText.mid(startPos, len);
 
-    text = srcText.mid(startPos, len);
+//    text = srcText.mid(startPos, len);
 
-    return text;
+    return subSection;
+}
+
+
+
+CViewTraceMetrics::CSubSection::CSubSection() :
+    m_StartIndex(-1),
+    m_Length(0),
+    m_SubRect(QRectF())
+{
+
+}
+
+
+CViewTraceMetrics::CSubSection::CSubSection(const CSubSection &section) :
+    m_Text(section.m_Text),
+    m_StartIndex(section.m_StartIndex),
+    m_Length(section.m_Length),
+    m_SubRect(section.m_SubRect)
+{
+
+}
+
+
+CViewTraceMetrics::CSubSection::~CSubSection()
+{
+
+}
+
+
+const CViewTraceMetrics::CSubSection& CViewTraceMetrics::CSubSection::operator = (const CSubSection& section)
+{
+    m_Text = section.m_Text;
+    m_StartIndex = section.m_StartIndex;
+    m_Length = section.m_Length;
+    m_SubRect = section.m_SubRect;
+
+    return *this;
 }

@@ -26,7 +26,7 @@ CViewTracePicker::CPickerResult CViewTracePicker::pick(const QRectF &rcArea)
 
     NYXTRACE(0x0, L"CViewTracePicker::getTextInRect begin");
 
-    auto    iterFct = [&] (const CViewTracesDisplayCache::CEntryId& id, const CViewTracesDisplayCache::CEntryData& data)
+    auto    iterFct = [&] (const CTraceSectionId& id, const CViewTracesDisplayCache::CEntryData& data)
                         {
                             ValidatePickEntry(rcArea, id, data, result);
                         };
@@ -40,21 +40,27 @@ CViewTracePicker::CPickerResult CViewTracePicker::pick(const QRectF &rcArea)
 
 
 void CViewTracePicker::ValidatePickEntry(   const QRectF& rcArea,
-                                            const CViewTracesDisplayCache::CEntryId &id,
+                                            const CTraceSectionId &id,
                                             const CViewTracesDisplayCache::CEntryData &data,
                                             CPickerResult& result)
 {
     if (rcArea.intersects(data.itemArea()))
     {
-        CViewTracePortal    tracePortal(*data.traceData(), data.lineNumber());
-        CViewTraceMetrics   traceMetrics;
-        QRectF              rcIntersect = rcArea.intersected(data.itemArea());
+        CViewTracePortal                tracePortal(*data.traceData(), data.lineNumber());
+        CViewTraceMetrics               traceMetrics;
+        QRectF                          rcIntersect = rcArea.intersected(data.itemArea());
+        CViewTraceMetrics::CSubSection  subSection;
 
         int x = int(data.itemArea().left() + 0.5);
         int y = int(data.itemArea().top() + 0.5);
         CPickerEntry        entry(data, id.columnId());
 
-        entry.textInSelection() = traceMetrics.GetTextInRect(tracePortal, id.columnId(), data.itemArea(), rcIntersect);
+        subSection = traceMetrics.GetTextInRect(tracePortal, id.columnId(), data.itemArea(), rcIntersect);
+
+        entry.textInSelection() = subSection.text();
+        entry.startIndex() = subSection.startIndex();
+        entry.length() = subSection.length();
+        entry.subRect() = subSection.subRect();
 
         (*result.m_pEntries)[y][x] = entry;
 
@@ -92,7 +98,9 @@ CViewTracePicker::CPickerResult::~CPickerResult()
 
 CViewTracePicker::CPickerEntry::CPickerEntry(EViewColumnId columnId) :
     CViewTracesDisplayCache::CEntryData(),
-    m_ColumnId(columnId)
+    m_ColumnId(columnId),
+    m_StartIndex(-1),
+    m_Length(0)
 {
 
 }
@@ -100,7 +108,10 @@ CViewTracePicker::CPickerEntry::CPickerEntry(EViewColumnId columnId) :
 
 CViewTracePicker::CPickerEntry::CPickerEntry(const CPickerEntry &entry) :
     CViewTracesDisplayCache::CEntryData(entry),
-    m_ColumnId(entry.m_ColumnId)
+    m_ColumnId(entry.m_ColumnId),
+    m_StartIndex(entry.m_StartIndex),
+    m_Length(entry.m_Length),
+    m_SubRect(entry.m_SubRect)
 {
 
 }
@@ -108,7 +119,9 @@ CViewTracePicker::CPickerEntry::CPickerEntry(const CPickerEntry &entry) :
 
 CViewTracePicker::CPickerEntry::CPickerEntry(const CViewTracesDisplayCache::CEntryData &entryData, EViewColumnId columnId) :
     CViewTracesDisplayCache::CEntryData(entryData),
-    m_ColumnId(columnId)
+    m_ColumnId(columnId),
+    m_StartIndex(-1),
+    m_Length(0)
 {
 
 }
@@ -125,6 +138,9 @@ const CViewTracePicker::CPickerEntry& CViewTracePicker::CPickerEntry::operator =
     CViewTracesDisplayCache::CEntryData::operator = (entry);
 
     m_ColumnId = entry.m_ColumnId;
+    m_StartIndex = entry.m_StartIndex;
+    m_Length = entry.m_Length;
+    m_SubRect = entry.m_SubRect;
 
     return *this;
 }

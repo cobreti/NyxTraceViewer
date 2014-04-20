@@ -21,21 +21,11 @@ void CViewTracesDisplayCache::Clear()
 }
 
 
-void CViewTracesDisplayCache::setEntry(const CEntryId &id, const CEntryData &data)
+void CViewTracesDisplayCache::setEntry(const CTraceSectionId &id, const CEntryData &data)
 {
     m_Entries[id] = data;
 }
 
-
-//void CViewTracesDisplayCache::for_each( CViewTracesDisplayCache::pfctIterFunc pfct) const
-//{
-////    auto cbfct = [&] (std::pair<const CEntryId, const CEntryData> value)
-////                    {
-////                        fct(value.first, value.second);
-////                    };
-
-//    std::for_each(m_Entries.begin(), m_Entries.end(), cbfct);
-//}
 
 
 CViewTracesDisplayCache::CEntryData::CEntryData() :
@@ -75,70 +65,3 @@ const CViewTracesDisplayCache::CEntryData& CViewTracesDisplayCache::CEntryData::
     return *this;
 }
 
-
-
-CViewTracesDisplayCache::CEntryId::CEntryId(const TraceClientCore::CTraceData::CIdentifier &traceId, EViewColumnId colId) :
-    m_TraceId(traceId),
-    m_ColumnId(colId)
-{
-
-}
-
-
-CViewTracesDisplayCache::CEntryId::CEntryId(const CEntryId &entryId) :
-    m_TraceId(entryId.m_TraceId),
-    m_ColumnId(entryId.m_ColumnId)
-{
-
-}
-
-
-CViewTracesDisplayCache::CEntryId::~CEntryId()
-{
-
-}
-
-
-const CViewTracesDisplayCache::CEntryId& CViewTracesDisplayCache::CEntryId::operator = (const CViewTracesDisplayCache::CEntryId& entryId)
-{
-    m_TraceId = entryId.m_TraceId;
-    m_ColumnId = entryId.m_ColumnId;
-
-    return *this;
-}
-
-
-bool CViewTracesDisplayCache::CEntryId::operator == (const CViewTracesDisplayCache::CEntryId& entryId) const
-{
-    return  ( m_TraceId == entryId.m_TraceId && m_ColumnId == entryId.m_ColumnId );
-}
-
-
-bool CViewTracesDisplayCache::CEntryId::operator != (const CViewTracesDisplayCache::CEntryId& entryId) const
-{
-    return ( m_TraceId != entryId.m_TraceId || m_ColumnId != entryId.m_ColumnId );
-}
-
-
-bool CViewTracesDisplayCache::CEntryId::operator < (const CViewTracesDisplayCache::CEntryId& entryId) const
-{
-    if ( m_TraceId < entryId.m_TraceId )
-        return true;
-
-    if ( m_ColumnId < entryId.m_ColumnId )
-        return true;
-
-    return false;
-}
-
-
-bool CViewTracesDisplayCache::CEntryId::operator > (const CViewTracesDisplayCache::CEntryId& entryId) const
-{
-    if ( m_TraceId > entryId.m_TraceId )
-        return true;
-
-    if ( m_ColumnId > entryId.m_ColumnId )
-        return true;
-
-    return false;
-}

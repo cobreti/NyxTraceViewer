@@ -11,7 +11,7 @@
 #include "TracesGroupNotificationsListener.h"
 #include "View/ViewTracesIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
-
+#include "View/Decorations/ViewTraceObjectsDirectory.h"
 
 namespace Ui
 {
@@ -106,6 +106,8 @@ protected:
     TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
     CViewTracesIterator                 m_TopPos;
     CViewTracesDisplayCache             m_DisplayCache;
+
+    CViewTraceObjectsDirectory          m_TraceSectionsHilights;
 
     QRect                               m_SelectionArea;
 };
