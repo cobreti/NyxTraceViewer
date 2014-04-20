@@ -154,7 +154,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->addWidget(m_pBtn_Search);
     ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
     ui->MainToolBar->addSeparator();
-//    ui->MainToolBar->addWidget(m_pBtn_SaveAs);
+    ui->MainToolBar->addWidget(m_pBtn_SaveAs);
 //    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
