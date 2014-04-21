@@ -283,6 +283,20 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
         ++ TraceIterator;
     }
 
+    if ( !m_SelectionArea.isEmpty() )
+    {
+        QRect       rcArea = m_SelectionArea;
+        rcArea.adjust( -ui->m_HorzScrollbar->value() + m_Margins.left(), 0, -ui->m_HorzScrollbar->value() + m_Margins.left(), 0 );
+        QPen        pen(m_SelectionBorderBrush, 1.0);
+        QPen        oldPen = painter.pen();
+
+        painter.fillRect(rcArea, m_SelectionBrush);
+        painter.setPen(pen);
+        painter.drawRect(rcArea);
+        painter.setPen(oldPen);
+    }
+
+
     TraceIterator = m_TopPos;
     TracePainter.PrepareDrawing();
 
@@ -296,13 +310,6 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     TracePainter.Release();
 
-
-    QRect       rcArea = m_SelectionArea;
-    rcArea.adjust( -ui->m_HorzScrollbar->value() + m_Margins.left(), 0, -ui->m_HorzScrollbar->value() + m_Margins.left(), 0 );
-
-    painter.setBrush(Qt::NoBrush);
-    painter.setPen(Qt::blue);
-    painter.drawRect(rcArea);
 
     if ( TracePainter.columnsWidthChanged() )
     {
@@ -569,6 +576,9 @@ void CTracesView::Init(CTracesView* pBase)
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
 
     m_RefreshTimer.start(250);
+
+    m_SelectionBrush = QBrush(Settings().selectionColor());
+    m_SelectionBorderBrush = QBrush(Settings().selectionBorderColor());
 
     if ( pBase )
         update();

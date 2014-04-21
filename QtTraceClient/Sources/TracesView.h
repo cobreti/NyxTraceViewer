@@ -5,6 +5,8 @@
 #include <QToolBar>
 #include <QPushButton>
 #include <QTimer>
+#include <QBrush>
+
 #include "View/ViewSettings.hpp"
 #include "View/TracesViewCore.hpp"
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
@@ -110,6 +112,8 @@ protected:
     CViewTraceObjectsDirectory          m_TraceSectionsHilights;
 
     QRect                               m_SelectionArea;
+    QBrush                              m_SelectionBrush;
+    QBrush                              m_SelectionBorderBrush;
 };
 
 #endif // TRACESVIEW_H
