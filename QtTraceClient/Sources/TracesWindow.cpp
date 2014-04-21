@@ -151,15 +151,15 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 //    ui->MainToolBar->addWidget(m_pBtn_NewView);
 //    ui->MainToolBar->addWidget(m_pBtn_CloneView);
 //    ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_Search);
-    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
-    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_Search);
+//    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
+//    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
 //    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
-    ui->SearchToolBar->addWidget(m_pBtn_HighlightColor);
+//    ui->SearchToolBar->addWidget(m_pBtn_HighlightColor);
     ui->SearchToolBar->addWidget(m_pSearchText);
     ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
