@@ -203,7 +203,7 @@ void CTracesView::OnVertSliderPosChanged(int value)
 void CTracesView::OnHorzSliderPosChanged(int value)
 {
     m_pHeader->SetHorzOffset(value);
-//    m_DisplayCache.Clear();
+    m_DisplayCache.Clear();
 
     update();
 }

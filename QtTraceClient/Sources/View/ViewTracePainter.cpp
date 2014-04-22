@@ -226,7 +226,7 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
         entryData = m_rDisplayCache[entryId];
 
         rcArea = entryData.itemArea();
-        rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
+//        rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
 
         if ( DisplayColumnData(pData, columnId) )
         {
