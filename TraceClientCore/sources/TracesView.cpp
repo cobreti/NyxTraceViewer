@@ -59,6 +59,12 @@ namespace TraceClientCore
     {
         return size();
     }
+
+
+    void CTracesView::Clear()
+    {
+        CTracesList::clear();
+    }
     
     
     /**

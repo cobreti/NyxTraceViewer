@@ -139,6 +139,18 @@ void CTracesView::Save( const QString& filename )
 }
 
 
+void CTracesView::Clear()
+{
+    if ( NULL != m_pCurrentTracesGroup )
+    {
+        m_pCurrentTracesGroup->Clear();
+        m_DisplayCache.Clear();
+        m_TopPos = CViewTracesIterator();
+        update();
+    }
+}
+
+
 /**
  *
  */

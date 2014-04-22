@@ -44,6 +44,7 @@ public slots:
     void OnNewView();
     void OnCloneView();
     void OnSaveAs();
+    void OnClear();
     void OnSearchTextChanged( const QString& text );
     void OnSearchNext();
     void OnSearchPrevious();
@@ -78,6 +79,7 @@ protected:
     QToolButton*            m_pBtn_Search;
     QToolButton*            m_pBtn_HighlightColorSelection;
     QToolButton*            m_pBtn_SaveAs;
+    QToolButton*            m_pBtn_Clear;
     QToolButton*            m_pBtn_About;
     CToggleToolButton*      m_pBtn_Settings;
     CToggleToolButton*      m_pBtn_Devices;

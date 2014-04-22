@@ -74,6 +74,8 @@ namespace TraceClientCore
         void ResetDirty();
         
         Nyx::UInt32 LinesCount() const;
+
+        void Clear();
         
     protected:
         

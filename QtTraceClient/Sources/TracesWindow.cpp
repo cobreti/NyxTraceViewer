@@ -79,6 +79,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               SettingsSelectedIcon(":/TracesWindow/Settings-Selected-Icon");
     QIcon               DevicesIcon(":/TracesWindow/Device-Icon");
     QIcon               DevicesSelectedIcon(":/TracesWindow/Device-Selected-Icon");
+    QIcon               Clear(":/TracesWindow/Clear-Icon");
 
     CTracesView* pBase = NULL;
 
@@ -114,6 +115,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_SaveAs = new QToolButton();
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
+
+    m_pBtn_Clear = new QToolButton();
+    m_pBtn_Clear->setIcon(Clear);
 
     m_pBtn_About = new QToolButton();
     m_pBtn_About->setIcon(AboutIcon);
@@ -155,6 +159,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 //    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
 //    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
+    ui->MainToolBar->addWidget(m_pBtn_Clear);
 //    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
@@ -170,6 +175,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
     connect( m_pBtn_CloneView, SIGNAL(clicked()), this, SLOT(OnCloneView()));
     connect( m_pBtn_SaveAs, SIGNAL(clicked()), this, SLOT(OnSaveAs()));
+    connect( m_pBtn_Clear, SIGNAL(clicked()), this, SLOT(OnClear()));
     connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
     connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
     connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
@@ -271,6 +277,12 @@ void CTracesWindow::OnSaveAs()
 
         m_pTracesView->Save(file);
     }
+}
+
+
+void CTracesWindow::OnClear()
+{
+    m_pTracesView->Clear();
 }
 
 

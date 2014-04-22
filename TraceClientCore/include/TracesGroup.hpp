@@ -90,6 +90,8 @@ namespace TraceClientCore
         CMultiViewTracesIterator LastPos();
         
         Nyx::UInt32 LinesCount() const;
+
+        void Clear();
         
     public:
         

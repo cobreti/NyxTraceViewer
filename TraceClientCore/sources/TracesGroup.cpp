@@ -142,6 +142,14 @@ namespace TraceClientCore
         return count;
     }
     
+
+    void CTracesGroup::Clear()
+    {
+        auto fctPtr = [] ( CTracesView* pView ) { pView->Clear(); };
+
+        std::for_each( m_Views.begin(), m_Views.end(), fctPtr );
+    }
+
     
     /**
      *

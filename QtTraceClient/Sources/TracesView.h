@@ -51,6 +51,7 @@ public:
     void OnNewTraces();
 
     void Save( const QString& filename );
+    void Clear();
 
     const QRectF                ViewRect() const;
     int                         NumberOfLinesVisibles() const;

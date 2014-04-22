@@ -18,10 +18,11 @@ CViewTracesIterator CViewTracesIterator::FirstPos(TraceClientCore::CTracesGroup 
 {
     CViewTracesIterator     iter(pGroup);
     
-    if ( NULL != pGroup )
+    if ( NULL != pGroup && pGroup->LinesCount() > 0 )
     {
         iter.m_Pos = pGroup->FirstPos();
         iter.m_LineNumber = 0;
+        iter.m_Initialized = true;
     }
     
     return iter;
@@ -33,7 +34,8 @@ CViewTracesIterator CViewTracesIterator::FirstPos(TraceClientCore::CTracesGroup 
  */
 CViewTracesIterator::CViewTracesIterator() :
 m_pGroup(NULL),
-m_LineNumber(0)
+m_LineNumber(0),
+    m_Initialized(false)
 {
     
 }
@@ -44,7 +46,8 @@ m_LineNumber(0)
  */
 CViewTracesIterator::CViewTracesIterator( TraceClientCore::CTracesGroup* pGroup ) :
 m_pGroup(pGroup),
-m_LineNumber(0)
+m_LineNumber(0),
+  m_Initialized(false)
 {
     
 }
@@ -56,7 +59,8 @@ m_LineNumber(0)
 CViewTracesIterator::CViewTracesIterator( const CViewTracesIterator& iter ) :
 m_pGroup(iter.m_pGroup),
 m_LineNumber(iter.m_LineNumber),
-m_Pos(iter.m_Pos)
+m_Pos(iter.m_Pos),
+  m_Initialized(iter.m_Initialized)
 {
     
 }
@@ -79,6 +83,7 @@ const CViewTracesIterator& CViewTracesIterator::operator = (const CViewTracesIte
     m_pGroup = iter.m_pGroup;
     m_LineNumber = iter.m_LineNumber;
     m_Pos = iter.m_Pos;
+    m_Initialized = iter.m_Initialized;
     
     return *this;
 }
@@ -119,7 +124,7 @@ CViewTracesIterator& CViewTracesIterator::operator -- ()
  */
 bool CViewTracesIterator::Valid() const
 {
-    return m_Pos.Valid();
+    return m_Initialized && m_Pos.Valid();
 }
 
 

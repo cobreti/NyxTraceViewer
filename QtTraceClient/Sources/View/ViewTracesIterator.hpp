@@ -50,6 +50,7 @@ protected:
     TraceClientCore::CTracesGroup*                  m_pGroup;
     Nyx::UInt32                                     m_LineNumber;
     TraceClientCore::CMultiViewTracesIterator       m_Pos;
+    bool                                            m_Initialized;
 };
 
 
