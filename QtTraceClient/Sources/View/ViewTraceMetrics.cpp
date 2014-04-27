@@ -96,11 +96,41 @@ const CViewTraceMetrics::CSubSection CViewTraceMetrics::GetTextInRect( const CVi
     subSection.subRect().setBottom(rcText.bottom());
     subSection.text() = srcText.mid(startPos, len);
 
-//    text = srcText.mid(startPos, len);
-
     return subSection;
 }
 
+
+const CViewTraceMetrics::CSubSection CViewTraceMetrics::GetSubTextRect( const CViewTracePortal& tracePortal, EViewColumnId columnId, const QRectF& itemArea, int startIndex, int len )
+{
+    QString         srcText = tracePortal.GetColumnText(columnId);
+    QFontMetrics    metrics(m_Font);
+    QRectF          rcText;
+    CSubSection     subSection;
+    qreal           left = 0;
+    qreal           width = itemArea.width();
+
+    if ( startIndex > 0 )
+    {
+        left = metrics.width(srcText, startIndex);
+//        left = rcText.right();
+    }
+
+    if ( startIndex + len < srcText.length() )
+    {
+        width = metrics.width(srcText, startIndex+len) - left;
+//        width = rcText.right() - left;
+    }
+
+    subSection.startIndex() = startIndex;
+    subSection.length() = len;
+    subSection.text() = srcText.mid(startIndex, len);
+    subSection.subRect() = QRectF(  left + itemArea.left(),
+                                    itemArea.top(),
+                                    width,
+                                    itemArea.height());
+
+    return subSection;
+}
 
 
 CViewTraceMetrics::CSubSection::CSubSection() :

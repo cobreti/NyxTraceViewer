@@ -14,6 +14,7 @@
 #include "View/ViewTracesIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
 #include "View/Decorations/ViewTraceObjectsDirectory.h"
+#include "View/Decorations/DynamicHighlightsDirectory.h"
 
 namespace Ui
 {
@@ -111,6 +112,7 @@ protected:
     CViewTracesDisplayCache             m_DisplayCache;
 
     CViewTraceObjectsDirectory          m_TraceSectionsHilights;
+    CDynamicHighlightsDirectory         m_DynamicHighlights;
 
     QRect                               m_SelectionArea;
     QBrush                              m_SelectionBrush;

@@ -290,7 +290,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     while ( TraceIterator.Valid() && !TracePainter.Done() )
     {
         TracePainter.LineNumber() = TraceIterator.getLineNumber();
-        TracePainter.PreDraw(TraceIterator.TraceData(), m_TraceSectionsHilights);
+        TracePainter.PreDraw(TraceIterator.TraceData(), m_TraceSectionsHilights, m_DynamicHighlights);
 
         ++ TraceIterator;
     }
@@ -474,6 +474,7 @@ void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 {
     CViewTracePicker        picker(m_DisplayCache);
 
+    m_SelectionArea.adjust( m_Margins.left(), 0, m_Margins.left(), 0);
     CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
 
     pickResult.for_each( [&] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
@@ -591,6 +592,10 @@ void CTracesView::Init(CTracesView* pBase)
 
     m_SelectionBrush = QBrush(Settings().selectionColor());
     m_SelectionBorderBrush = QBrush(Settings().selectionBorderColor());
+
+    CDynamicHighlight*  pHighlight = new CDynamicHighlight();
+    pHighlight->id() = 1;
+    m_DynamicHighlights.Add(pHighlight);
 
     if ( pBase )
         update();

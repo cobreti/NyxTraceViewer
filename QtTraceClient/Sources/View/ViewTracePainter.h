@@ -1,6 +1,8 @@
 #ifndef VIEWTRACEPAINTER_H
 #define VIEWTRACEPAINTER_H
 
+#include <Nyx.hpp>
+
 #include <QPainter>
 #include "ViewTraceMetrics.h"
 #include "ViewColumnId.hpp"
@@ -17,10 +19,38 @@ class CViewColumnsSettings;
 class CViewColumnSettings;
 class CViewTracesDisplayCache;
 class CViewTraceObjectsDirectory;
-
+class CDynamicHighlightsDirectory;
 
 class CViewTracePainter
 {
+public:
+
+    class CPaintContext
+    {
+        friend class CViewTracePainter;
+
+    public:
+        CPaintContext();
+        CPaintContext(const CPaintContext& context);
+        virtual ~CPaintContext();
+
+        const CPaintContext& operator = (const CPaintContext& context);
+
+        CViewTracePortal&       portal() const      { return *m_pPortal; }
+        EViewColumnId           columnId() const    { return m_ColumnId; }
+        CViewTraceMetrics&      metrics() const     { return *m_pMetrics; }
+        const QRectF&           area() const        { return m_Area; }
+        QPainter&               qpainter() const    { return *m_pQPainter; }
+
+    protected:
+
+        CViewTracePortal*       m_pPortal;
+        EViewColumnId           m_ColumnId;
+        CViewTraceMetrics*      m_pMetrics;
+        QRectF                  m_Area;
+        QPainter*               m_pQPainter;
+    };
+
 public:
     CViewTracePainter(QPainter& rPainter, CViewTracesDisplayCache& rDisplayCache);
     virtual ~CViewTracePainter();
@@ -50,7 +80,7 @@ public:
     void PrepareProcess();
     void Process( TraceClientCore::CTraceData* pData );
     void PrepareDrawing();
-    void PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory );
+    void PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory, const CDynamicHighlightsDirectory& dynamicHighlights );
     void Draw( TraceClientCore::CTraceData* pData );
 
 protected:

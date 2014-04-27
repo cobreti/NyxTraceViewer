@@ -9,7 +9,7 @@
 #include "View/ViewTracesDisplayCache.h"
 #include "Decorations/ViewTraceObjectsDirectory.h"
 #include "Decorations/ViewTraceObject.h"
-
+#include "Decorations/DynamicHighlightsDirectory.h"
 
 
 CViewTracePainter::CViewTracePainter(QPainter &rPainter, CViewTracesDisplayCache& rDisplayCache) :
@@ -30,11 +30,6 @@ CViewTracePainter::~CViewTracePainter()
 
 void CViewTracePainter::Init()
 {
-//    m_ColumnsSize.reserve(eVCI_Count);
-
-//    m_Pos = QPointF(0, m_Origin.y());
-//    m_bColumnSizeChanged = false;
-
     for (size_t index = 0; index < eVCI_Count; ++index) {
         EViewColumnId id = (EViewColumnId) index;
         m_ColumnsSize[id] = (*m_pColumnsSettings)[id].GetWidth();
@@ -103,7 +98,7 @@ void CViewTracePainter::PrepareDrawing()
 }
 
 
-void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory )
+void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory, const CDynamicHighlightsDirectory& dynamicHighlights )
 {
     CViewTracePortal        TracePortal(*pData, m_LineNumber);
 
@@ -128,12 +123,22 @@ void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CView
         {
             entryData = m_rDisplayCache[sectionId];
 
+            QRectF      rcArea = entryData.itemArea();
+
             if ( NULL != pViewTraceObject )
             {
-                QRectF      rcArea = entryData.itemArea();
-                rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
                 pViewTraceObject->Draw(m_rPainter, rcArea);
             }
+
+            CPaintContext       context;
+
+            context.m_pMetrics = &m_Metrics;
+            context.m_pPortal = &TracePortal;
+            context.m_Area = rcArea;
+            context.m_ColumnId = ColumnId;
+            context.m_pQPainter = &m_rPainter;
+
+            dynamicHighlights.Draw(context);
 
             m_Pos.rx() += entryData.columnWidth() + ColumnSettings.Margins().width();
         }
@@ -221,52 +226,38 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
     CViewTracesDisplayCache::CEntryData     entryData;
     QRectF                                  rcArea;
 
-    if ( m_rDisplayCache.hasEntry(entryId) )
+    if ( !m_rDisplayCache.hasEntry(entryId) )
+        return;
+
+    entryData = m_rDisplayCache[entryId];
+
+    rcArea = entryData.itemArea();
+
+    if ( DisplayColumnData(pData, columnId) )
     {
-        entryData = m_rDisplayCache[entryId];
+//        CPaintContext       context;
 
-        rcArea = entryData.itemArea();
-//        rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
+//        context.m_pMetrics = &m_Metrics;
+//        context.m_pPortal = &TracePortal;
+//        context.m_Area = rcArea;
+//        context.m_ColumnId = columnId;
+//        context.m_pQPainter = &m_rPainter;
 
-        if ( DisplayColumnData(pData, columnId) )
-        {
-            m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
-        }
+        QString     text = TracePortal.GetColumnText(columnId);
 
-        m_Pos.rx() += entryData.columnWidth() + settings.Margins().width();
+//        int index = text.indexOf("http");
+//        if ( index > -1 )
+//        {
+
+//            CViewTraceMetrics::CSubSection      section = m_Metrics.GetSubTextRect(TracePortal, columnId, rcArea, index, 4);
+
+//            m_rPainter.fillRect(section.subRect(), Qt::green);
+//        }
+
+        m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
     }
-//    else
-//    {
-//        qreal                   colWidth = m_ColumnsSize[columnId];
 
-//        rcArea = m_Metrics.ColumnRect(columnId);
-
-//        if (settings.AutoWidth())
-//        {
-//            colWidth = std::max(colWidth, rcArea.width());
-//            m_ColumnsSize[columnId] = colWidth;
-//        }
-
-//        colWidth = settings.GetWidth();
-//        rcArea.moveTo(m_Pos.x() + settings.Margins().left(), m_Pos.y() + settings.Margins().top());
-
-//        entryData.itemArea() = rcArea;
-//        entryData.margins() = settings.Margins();
-//        entryData.traceData() = pData;
-//        entryData.columnWidth() = colWidth;
-//        entryData.lineNumber() = m_LineNumber;
-//        m_rDisplayCache.setEntry(entryId, entryData);
-
-//        rcArea.adjust(m_Origin.x(), 0, m_Origin.x(), 0);
-
-//        if ( DisplayColumnData(pData, columnId) )
-//        {
-//            m_rPainter.drawText(rcArea, Qt::AlignLeft, TracePortal.GetColumnText(columnId));
-//        }
-
-
-//        m_Pos.rx() += colWidth + settings.Margins().width();
-//    }
+    m_Pos.rx() += entryData.columnWidth() + settings.Margins().width();
 }
 
 
@@ -279,4 +270,44 @@ bool CViewTracePainter::DisplayColumnData( TraceClientCore::CTraceData* pData, E
     }
 
     return true;
+}
+
+
+
+CViewTracePainter::CPaintContext::CPaintContext() :
+    m_pPortal(NULL),
+    m_ColumnId(eVCI_Count),
+    m_pMetrics(NULL),
+    m_pQPainter(NULL)
+{
+
+}
+
+
+CViewTracePainter::CPaintContext::CPaintContext(const CPaintContext &context) :
+    m_pPortal(context.m_pPortal),
+    m_ColumnId(context.m_ColumnId),
+    m_pMetrics(context.m_pMetrics),
+    m_Area(context.m_Area),
+    m_pQPainter(context.m_pQPainter)
+{
+
+}
+
+
+CViewTracePainter::CPaintContext::~CPaintContext()
+{
+
+}
+
+
+const CViewTracePainter::CPaintContext& CViewTracePainter::CPaintContext::operator = (const CPaintContext& context)
+{
+    m_pPortal = context.m_pPortal;
+    m_ColumnId = context.m_ColumnId;
+    m_pMetrics = context.m_pMetrics;
+    m_Area = context.m_Area;
+    m_pQPainter = context.m_pQPainter;
+
+    return *this;
 }
