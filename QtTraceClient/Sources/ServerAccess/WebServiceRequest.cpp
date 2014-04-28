@@ -6,6 +6,7 @@
 #include <QNetworkReply>
 
 
+
 CWebServiceRequest::CWebServiceRequest(const QString& method) : QObject(),
     m_Key("a35830b6-4060-4c3b-abd0-c24d079cdcd5"),
     m_Method(method),
@@ -39,11 +40,9 @@ void CWebServiceRequest::send()
         query.addQueryItem(param, m_Parameters[param].toString());
     }
 
+
     QNetworkRequest request;
     request.setUrl(url);
-    request.setHeader( QNetworkRequest::ContentTypeHeader, "text/json" );
-
-    QString urlstr = url.toString();
 
     QByteArray      data;
     data.append(query.toString());
