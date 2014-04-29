@@ -15,6 +15,7 @@ public:
 
     virtual void Add( CDynamicHighlight* pHighlight );
     virtual void Remove( const CDynamicHighlight::ID& id );
+    virtual CDynamicHighlight* Get( const CDynamicHighlight::ID& id );
 
     virtual void Draw( CViewTracePainter::CPaintContext& context ) const;
 

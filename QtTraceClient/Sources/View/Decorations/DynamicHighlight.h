@@ -10,6 +10,12 @@ class CDynamicHighlight
 public:
     typedef     int         ID;
 
+    enum
+    {
+        kDefault        = 1,
+        kBatchStart     = 100
+    };
+
 public:
     CDynamicHighlight();
     virtual ~CDynamicHighlight();

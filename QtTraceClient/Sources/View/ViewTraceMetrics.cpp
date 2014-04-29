@@ -115,7 +115,7 @@ const CViewTraceMetrics::CSubSection CViewTraceMetrics::GetSubTextRect( const CV
 //        left = rcText.right();
     }
 
-    if ( startIndex + len < srcText.length() )
+    if ( startIndex + len <= srcText.length() )
     {
         width = metrics.width(srcText, startIndex+len) - left;
 //        width = rcText.right() - left;

@@ -48,6 +48,16 @@ void CDynamicHighlightsDirectory::Remove(const CDynamicHighlight::ID &id)
 }
 
 
+CDynamicHighlight* CDynamicHighlightsDirectory::Get( const CDynamicHighlight::ID& id )
+{
+    HighlightsTable::iterator pos = m_Highlights.find(id);
+    if ( pos != m_Highlights.end() )
+        return pos->second;
+
+    return NULL;
+}
+
+
 void CDynamicHighlightsDirectory::Draw( CViewTracePainter::CPaintContext& context ) const
 {
     auto    drawFct = [&] ( std::pair<const CDynamicHighlight::ID, CDynamicHighlight*> pair )

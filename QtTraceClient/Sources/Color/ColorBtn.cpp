@@ -11,7 +11,7 @@
  *
  */
 CColorBtn::CColorBtn() : QToolButton(),
-    m_Color( Qt::yellow )
+    m_Color( Qt::gray )
 {
     connect(this, SIGNAL(clicked()), this, SLOT(OnClicked()));
 }

@@ -15,6 +15,7 @@
 #include "Dialogs/AboutDlg.h"
 #include "Dialogs/HighlightColorsSelectionDlg.h"
 #include "View/Highlight/HighlightsMgrWnd.h"
+#include "View/Decorations/DynamicTextHighlight.h"
 
 #include "Color/ColorBtn.h"
 
@@ -155,16 +156,16 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 //    ui->MainToolBar->addWidget(m_pBtn_NewView);
 //    ui->MainToolBar->addWidget(m_pBtn_CloneView);
 //    ui->MainToolBar->addSeparator();
-//    ui->MainToolBar->addWidget(m_pBtn_Search);
-//    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
-//    ui->MainToolBar->addSeparator();
+    ui->MainToolBar->addWidget(m_pBtn_Search);
+    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
+    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
     ui->MainToolBar->addWidget(m_pBtn_Clear);
 //    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
-//    ui->SearchToolBar->addWidget(m_pBtn_HighlightColor);
+    ui->SearchToolBar->addWidget(m_pBtn_HighlightColor);
     ui->SearchToolBar->addWidget(m_pSearchText);
     ui->SearchToolBar->addWidget(m_pBtn_SearchNext);
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
@@ -203,6 +204,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pTracesView->Highlighters()->Add( m_refHighlighter );
 
     m_WndName = QString::number(CWindowsManager::Instance().TracesWindows().GetWindowNo());
+
+    CDynamicHighlight*  pHighlight = m_pTracesView->dynamicHighlights().Get(CDynamicHighlight::kDefault);
+    CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+    m_pBtn_HighlightColor->Color() = pTextHighlight->color();
 
     QString     title;
     title += "NyxTracesViewer - ";
@@ -291,7 +296,12 @@ void CTracesWindow::OnClear()
  */
 void CTracesWindow::OnSearchTextChanged( const QString& text )
 {
-    m_refTextPattern->TextToMatch() = text;
+    CDynamicHighlight*  pHighlight = m_pTracesView->dynamicHighlights().Get(CDynamicHighlight::kDefault);
+    CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+
+    pTextHighlight->text() = text;
+
+//    m_refTextPattern->TextToMatch() = text;
     m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
     m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
 
@@ -330,7 +340,10 @@ void CTracesWindow::OnSearchPrevious()
  */
 void CTracesWindow::OnHighlightColorChanged(CColorBtn* pBtn)
 {
-    m_refHighlighter->HighlightColor() = pBtn->Color();
+    CDynamicHighlight*  pHighlight = m_pTracesView->dynamicHighlights().Get(CDynamicHighlight::kDefault);
+    CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+
+    pTextHighlight->color() = pBtn->Color();
     m_pTracesView->update();
 }
 

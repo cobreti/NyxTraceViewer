@@ -17,6 +17,7 @@
 #include "View/ViewTracePicker.h"
 #include "View/ViewTracePortal.h"
 #include "View/Decorations/ViewTraceSectionHilight.h"
+#include "View/Decorations/DynamicTextHighlight.h"
 
 
 /**
@@ -593,8 +594,8 @@ void CTracesView::Init(CTracesView* pBase)
     m_SelectionBrush = QBrush(Settings().selectionColor());
     m_SelectionBorderBrush = QBrush(Settings().selectionBorderColor());
 
-    CDynamicHighlight*  pHighlight = new CDynamicHighlight();
-    pHighlight->id() = 1;
+    CDynamicHighlight*  pHighlight = new CDynamicTextHighlight();
+    pHighlight->id() = CDynamicHighlight::kDefault;
     m_DynamicHighlights.Add(pHighlight);
 
     if ( pBase )

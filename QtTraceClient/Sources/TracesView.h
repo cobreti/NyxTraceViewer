@@ -49,6 +49,8 @@ public:
 
     CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
+    CDynamicHighlightsDirectory&     dynamicHighlights()        { return m_DynamicHighlights; }
+
     void OnNewTraces();
 
     void Save( const QString& filename );
