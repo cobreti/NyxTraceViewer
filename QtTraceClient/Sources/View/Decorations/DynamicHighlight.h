@@ -13,6 +13,7 @@ public:
     enum
     {
         kDefault        = 1,
+        kFocusedItem    = 2,
         kBatchStart     = 100
     };
 

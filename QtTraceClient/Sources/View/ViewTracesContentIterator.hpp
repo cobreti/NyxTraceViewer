@@ -21,11 +21,13 @@ public:
 
     const EViewColumnId&            columnId() const            { return m_ColumnsOrder[m_ColumnIndex]; }
     int                             textIndex() const           { return m_TextIndex; }
+    const QString&                  text() const                { return m_Text; }
 
     virtual void setText(const QString& text);
     virtual void setColumnsOrder(const ColumnsIdVector& columnsOrder);
 
     CViewTracesContentIterator& operator ++ ();
+    CViewTracesContentIterator& operator -- ();
 
 protected:
 

@@ -12,6 +12,7 @@
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
 #include "TracesGroupNotificationsListener.h"
 #include "View/ViewTracesIterator.hpp"
+#include "View/ViewTracesContentIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
 #include "View/Decorations/ViewTraceObjectsDirectory.h"
 #include "View/Decorations/DynamicHighlightsDirectory.h"
@@ -50,6 +51,11 @@ public:
     CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
     CDynamicHighlightsDirectory&     dynamicHighlights()        { return m_DynamicHighlights; }
+
+    CViewTracesContentIterator&     focusedItem()               { return m_FocusedItem; }
+    CViewTracesIterator&            topPos()                    { return m_TopPos; }
+
+    void MakeFocusedItemVisible();
 
     void OnNewTraces();
 
@@ -111,6 +117,7 @@ protected:
     CTracesGroupNotificationsListener   m_TracesGroupNotificationsListener;
     TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
     CViewTracesIterator                 m_TopPos;
+    CViewTracesContentIterator          m_FocusedItem;
     CViewTracesDisplayCache             m_DisplayCache;
 
     CViewTraceObjectsDirectory          m_TraceSectionsHilights;

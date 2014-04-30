@@ -18,6 +18,7 @@
 #include "View/ViewTracePortal.h"
 #include "View/Decorations/ViewTraceSectionHilight.h"
 #include "View/Decorations/DynamicTextHighlight.h"
+#include "View/Decorations/DynamicFocusedItemHighlight.hpp"
 
 
 /**
@@ -52,6 +53,28 @@ void CTracesView::SetName(const QString& name)
 	window()->setWindowTitle(name);
 }
 
+
+/**
+ * @brief CTracesView::MakeFocusedItemVisible
+ */
+void CTracesView::MakeFocusedItemVisible()
+{
+    Nyx::UInt32 numberOfVisibleLines = NumberOfLinesVisibles();
+    Nyx::UInt32 lastVisibleLineNumber = m_TopPos.getLineNumber() + numberOfVisibleLines;
+
+    if ( m_FocusedItem.Valid() && !(m_FocusedItem.getLineNumber() < lastVisibleLineNumber) )
+    {
+        int newTopLine = m_TopPos.getLineNumber() + m_FocusedItem.getLineNumber() - lastVisibleLineNumber + 2;
+        ui->m_VertScrollbar->setValue(newTopLine);
+        ui->m_VertScrollbar->update();
+    }
+
+    if ( m_FocusedItem.Valid() && m_FocusedItem.getLineNumber() < m_TopPos.getLineNumber() )
+    {
+        ui->m_VertScrollbar->setValue(m_FocusedItem.getLineNumber());
+        ui->m_VertScrollbar->update();
+    }
+}
 
 
 /**
@@ -597,6 +620,12 @@ void CTracesView::Init(CTracesView* pBase)
     CDynamicHighlight*  pHighlight = new CDynamicTextHighlight();
     pHighlight->id() = CDynamicHighlight::kDefault;
     m_DynamicHighlights.Add(pHighlight);
+
+    CDynamicFocusedItemHighlight*   pFocusedItemHighlight = new CDynamicFocusedItemHighlight(m_FocusedItem);
+    pFocusedItemHighlight->id() = CDynamicHighlight::kFocusedItem;
+    m_DynamicHighlights.Add(pFocusedItemHighlight);
+
+    m_FocusedItem.setColumnsOrder(Settings().ColumnsSettings().Order().OrderVector());
 
     if ( pBase )
         update();

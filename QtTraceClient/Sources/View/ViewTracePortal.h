@@ -23,6 +23,7 @@ public:
     QString GetColumnText(EViewColumnId columnId) const;
 
     TraceClientCore::CTraceData*        traceData() const       { return &m_rTraceData; }
+    Nyx::UInt32                         lineNumber() const      { return m_LineNumber; }
 
 protected:
 

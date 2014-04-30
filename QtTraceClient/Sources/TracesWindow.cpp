@@ -288,6 +288,9 @@ void CTracesWindow::OnSaveAs()
 void CTracesWindow::OnClear()
 {
     m_pTracesView->Clear();
+    m_pTracesView->focusedItem() = CViewTracesIterator();
+    m_pBtn_SearchNext->setEnabled( false );
+    m_pBtn_SearchPrevious->setEnabled( false );
 }
 
 
@@ -301,9 +304,9 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
 
     pTextHighlight->text() = text;
 
-//    m_refTextPattern->TextToMatch() = text;
-    m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
-    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
+    m_pTracesView->focusedItem().setText(text);
+    m_pBtn_SearchNext->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() && m_pTracesView->focusedItem().Valid() );
 
     m_pTracesView->update();
 }
@@ -314,11 +317,21 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
  */
 void CTracesWindow::OnSearchNext()
 {
-    m_pSearchEngine->Highlighter() = m_refHighlighter;
+    CViewTracesContentIterator&  rPos =  m_pTracesView->focusedItem();
+    CViewTracesIterator& rTopPos = m_pTracesView->topPos();
 
-    m_pSearchEngine->Next();
+    if ( !rPos.Valid() )
+    {
+        rPos = rTopPos;
+    }
 
-    m_pBtn_HideSearch->setEnabled(true);
+    ++ rPos;
+
+    m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->focusedItem().Valid() );
+    m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+
+    m_pTracesView->MakeFocusedItemVisible();
+    m_pTracesView->update();
 }
 
 
@@ -327,11 +340,17 @@ void CTracesWindow::OnSearchNext()
  */
 void CTracesWindow::OnSearchPrevious()
 {
-    m_pSearchEngine->Highlighter() = m_refHighlighter;
+    CViewTracesContentIterator&  rPos =  m_pTracesView->focusedItem();
 
-    m_pSearchEngine->Previous();
+    if ( rPos.Valid() )
+    {
+        -- rPos;
+        m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->focusedItem().Valid() );
+        m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+        m_pTracesView->MakeFocusedItemVisible();
+        m_pTracesView->update();
+    }
 
-    m_pBtn_HideSearch->setEnabled(true);
 }
 
 

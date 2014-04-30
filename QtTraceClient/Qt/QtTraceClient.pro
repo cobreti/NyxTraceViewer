@@ -97,7 +97,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Decorations/DynamicHighlight.cpp \
     ../Sources/View/Decorations/DynamicHighlightsDirectory.cpp \
     ../Sources/View/Decorations/DynamicTextHighlight.cpp \
-    ../Sources/View/ViewTracesContentIterator.cpp
+    ../Sources/View/ViewTracesContentIterator.cpp \
+    ../Sources/View/Decorations/DynamicFocusedItemHighlight.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -185,7 +186,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Decorations/DynamicHighlight.h \
     ../Sources/View/Decorations/DynamicHighlightsDirectory.h \
     ../Sources/View/Decorations/DynamicTextHighlight.h \
-    ../Sources/View/ViewTracesContentIterator.hpp
+    ../Sources/View/ViewTracesContentIterator.hpp \
+    ../Sources/View/Decorations/DynamicFocusedItemHighlight.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
