@@ -287,7 +287,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
-    TracePainter.Origin() = QPoint( m_Margins.left() - ui->m_HorzScrollbar->value(), HeaderSize().height());
+    TracePainter.Origin() = QPoint( m_Margins.left() - ui->m_HorzScrollbar->value(), HeaderSize().height()+1);
     TracePainter.ViewSize() = QSize( ClientRect().width(), ViewHeight );
     TracePainter.LineHeight() = rSettings.DrawSettings()->SingleLineHeight();
     TracePainter.ColumnsSettings() = &rSettings.ColumnsSettings();
@@ -385,10 +385,13 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 
     NYXTRACE(0x0, L"UpdateScrollBarRange : nScrollWidth = " << nScrollWidth );
-    NYXTRACE(0x0, L"UpdateScrollBarRange : hscrollbar value = " << ui->m_HorzScrollbar->value());
+    NYXTRACE(0x0, L"UpdateScrollBarRange : hscrollbar value = " << ui->m_HorzScrollbar->value() << L" of " << nScrollWidth );
+
+    m_DisplayCache.Clear();
 
     m_pHeader->SetHorzOffset(ui->m_HorzScrollbar->value());
     m_pHeader->update();
+    update();
 }
 
 

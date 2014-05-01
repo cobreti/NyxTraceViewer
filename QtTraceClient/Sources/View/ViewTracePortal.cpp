@@ -25,7 +25,7 @@ QString CViewTracePortal::GetColumnText(EViewColumnId columnId) const
     switch (columnId)
     {
     case eVCI_LineNumber:
-        text = QString::number(m_LineNumber);
+        text = QString::number(m_LineNumber+1);
         break;
     case eVCI_Data:
         text = QString::fromWCharArray(m_rTraceData.Data().c_str());
