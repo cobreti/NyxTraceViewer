@@ -25,6 +25,7 @@ class CViewTracesIterator
 public:
     
     static CViewTracesIterator FirstPos(TraceClientCore::CTracesGroup* pGroup);
+    static CViewTracesIterator LastPos(TraceClientCore::CTracesGroup* pGroup);
     
 public:
     CViewTracesIterator();

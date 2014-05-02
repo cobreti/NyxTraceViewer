@@ -32,6 +32,25 @@ CViewTracesIterator CViewTracesIterator::FirstPos(TraceClientCore::CTracesGroup 
 /**
  *
  */
+CViewTracesIterator CViewTracesIterator::LastPos(TraceClientCore::CTracesGroup *pGroup)
+{
+    CViewTracesIterator     iter(pGroup);
+
+    if ( NULL != pGroup && pGroup->LinesCount() > 0 )
+    {
+        iter.m_Pos = pGroup->LastPos();
+        iter.m_LineNumber = pGroup->LinesCount()-1;
+        iter.m_Initialized = true;
+    }
+
+    return iter;
+}
+
+
+
+/**
+ *
+ */
 CViewTracesIterator::CViewTracesIterator() :
 m_pGroup(NULL),
 m_LineNumber(0),

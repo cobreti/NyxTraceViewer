@@ -306,7 +306,7 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
 
     m_pTracesView->focusedItem().setText(text);
     m_pBtn_SearchNext->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
-    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() && m_pTracesView->focusedItem().Valid() );
+    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
 
     m_pTracesView->update();
 }
@@ -318,16 +318,15 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
 void CTracesWindow::OnSearchNext()
 {
     CViewTracesContentIterator&  rPos =  m_pTracesView->focusedItem();
-    CViewTracesIterator& rTopPos = m_pTracesView->topPos();
 
     if ( !rPos.Valid() )
     {
-        rPos = rTopPos;
+        rPos = m_pTracesView->FirstPos();
     }
 
     ++ rPos;
 
-    m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->focusedItem().Valid() );
+    m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
     m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
 
     m_pTracesView->MakeFocusedItemVisible();
@@ -342,15 +341,18 @@ void CTracesWindow::OnSearchPrevious()
 {
     CViewTracesContentIterator&  rPos =  m_pTracesView->focusedItem();
 
-    if ( rPos.Valid() )
+    if ( !rPos.Valid() )
     {
-        -- rPos;
-        m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->focusedItem().Valid() );
-        m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
-        m_pTracesView->MakeFocusedItemVisible();
-        m_pTracesView->update();
+        rPos = m_pTracesView->LastPos();
+        rPos.moveToEnd();
     }
 
+    -- rPos;
+
+    m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pTracesView->MakeFocusedItemVisible();
+    m_pTracesView->update();
 }
 
 

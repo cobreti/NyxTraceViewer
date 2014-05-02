@@ -134,3 +134,8 @@ CViewTracesContentIterator& CViewTracesContentIterator::operator -- ()
     return *this;
 }
 
+
+void CViewTracesContentIterator::moveToEnd()
+{
+    m_ColumnIndex = m_ColumnsOrder.size() - 1;
+}

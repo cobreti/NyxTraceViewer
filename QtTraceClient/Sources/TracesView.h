@@ -55,6 +55,9 @@ public:
     CViewTracesContentIterator&     focusedItem()               { return m_FocusedItem; }
     CViewTracesIterator&            topPos()                    { return m_TopPos; }
 
+    CViewTracesIterator             FirstPos() const;
+    CViewTracesIterator             LastPos() const;
+
     void MakeFocusedItemVisible();
 
     void OnNewTraces();

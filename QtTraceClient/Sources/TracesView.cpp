@@ -54,6 +54,20 @@ void CTracesView::SetName(const QString& name)
 }
 
 
+CViewTracesIterator CTracesView::FirstPos() const
+{
+    return CViewTracesIterator::FirstPos(m_pCurrentTracesGroup);
+}
+
+
+
+CViewTracesIterator CTracesView::LastPos() const
+{
+    return CViewTracesIterator::LastPos(m_pCurrentTracesGroup);
+}
+
+
+
 /**
  * @brief CTracesView::MakeFocusedItemVisible
  */

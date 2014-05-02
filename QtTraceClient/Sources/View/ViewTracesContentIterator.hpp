@@ -29,6 +29,8 @@ public:
     CViewTracesContentIterator& operator ++ ();
     CViewTracesContentIterator& operator -- ();
 
+    void moveToEnd();
+
 protected:
 
     int                     m_ColumnIndex;
