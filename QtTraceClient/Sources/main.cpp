@@ -50,12 +50,12 @@ int main(int argc, char *argv[])
     NyxNet::CModuleRef                          refNetModule = NyxNet::CModule::Alloc();
     NyxWebSvr::CModuleRef                       refWebSvrModule = NyxWebSvr::CModule::Alloc();
 
-//#if defined(_DEBUG)
+#if defined(_DEBUG)
 	Nyx::CTraceCompositorRef                    refTraceCompositor = Nyx::CTraceCompositor::Alloc();
 
     refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
 //    refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceViewer"));
-//#endif
+#endif
 
     QDir currentFolder = QDir::current();
 
