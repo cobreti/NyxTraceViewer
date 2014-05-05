@@ -40,7 +40,8 @@
         <file alias="StartChannel">Icons/Channels/StartChannel.png</file>
     </qresource>
     <qresource prefix="/App">
-        <file alias="TraceViewer">Icons/App-icon.png</file>
+        <file>Icons/App-icon.png</file>
+        <file alias="TraceViewer">Icons/App-icon-lvl.png</file>
     </qresource>
     <qresource prefix="/HighlightsMgrWnd">
         <file alias="SearchNext">Icons/Actions-go-down-icon.png</file>

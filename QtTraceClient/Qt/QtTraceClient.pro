@@ -206,7 +206,7 @@ FORMS += ../UI/TracesView.ui \
     ../UI/ChannelSelection.ui \
     ../UI/SettingsPanel.ui \
     ../UI/DevicesSelection.ui
-ICON=../Icons/AppOSX.icns
+ICON=../Icons/App-icon-lvl.icns
 MOC_DIR = ../MOC
 UI_DIR = ../UI
 INCLUDEPATH += ../Sources

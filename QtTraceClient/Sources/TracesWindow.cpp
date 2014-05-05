@@ -118,9 +118,11 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_SaveAs = new QToolButton();
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
+    m_pBtn_SaveAs->setEnabled(false);
 
     m_pBtn_Clear = new QToolButton();
     m_pBtn_Clear->setIcon(Clear);
+    m_pBtn_Clear->setEnabled(false);
 
     m_pBtn_About = new QToolButton();
     m_pBtn_About->setIcon(AboutIcon);
@@ -179,9 +181,13 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->SearchToolBar->addWidget(m_pBtn_HideSearch);
     ui->SearchToolBar->setIconSize( QSize(16, 16) );
 
-    ui->TracesToolBar->addWidget(m_pBtn_Clear);
     ui->TracesToolBar->addWidget(m_pBtn_KeepAtEnd);
+    ui->TracesToolBar->addWidget( new QToolButton() );
+    ui->TracesToolBar->addWidget( new QToolButton() );
+    ui->TracesToolBar->addWidget(m_pBtn_Clear);
     ui->TracesToolBar->setIconSize( QSize(16, 16) );
+
+    this->addToolBar(Qt::RightToolBarArea, ui->TracesToolBar);
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
@@ -445,6 +451,9 @@ void CTracesWindow::OnShowMainWindow()
 void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup)
 {
     m_pBtn_KeepAtEnd->setEnabled(true);
+    m_pBtn_SaveAs->setEnabled(true);
+    m_pBtn_Clear->setEnabled(true);
+
     m_pTracesView->SetTracesGroup(pGroup);
 }
 
