@@ -58,6 +58,8 @@ public:
     CViewTracesIterator             FirstPos() const;
     CViewTracesIterator             LastPos() const;
 
+    void                            setKeepAtEnd(bool keepAtEnd);
+
     void MakeFocusedItemVisible();
 
     void OnNewTraces();
@@ -99,6 +101,7 @@ protected:
     virtual QRect ClientRect() const { return ClientRect(rect()); }
     virtual QRect ClientRect( const QRect& rcWnd ) const;
     virtual QSize HeaderSize() const;
+    virtual void MovePosToDisplayLastLine();
 
 protected:
 

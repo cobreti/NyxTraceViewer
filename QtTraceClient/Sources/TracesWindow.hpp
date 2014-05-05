@@ -57,6 +57,7 @@ public slots:
     void OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup);
     void OnSettingsBtnStateChanged(CToggleToolButton::EState state);
     void OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState state);
+    void OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state);
 
 protected:
 
@@ -83,6 +84,7 @@ protected:
     QToolButton*            m_pBtn_About;
     CToggleToolButton*      m_pBtn_Settings;
     CToggleToolButton*      m_pBtn_Devices;
+    CToggleToolButton*      m_pBtn_KeepAtEnd;
 
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_HideSearch;

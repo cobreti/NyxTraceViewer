@@ -16,6 +16,8 @@
         <file alias="Device-Icon">Icons/device-icon.png</file>
         <file alias="Device-Selected-Icon">Icons/device-selected-icon.png</file>
         <file alias="Clear-Icon">Icons/Actions-trash-empty-icon.png</file>
+        <file alias="Arrow-Down-Icon">Icons/Arrow-Down.png</file>
+        <file alias="Arrow-Down-Selected-Icon">Icons/Arrow-Down-Selected.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

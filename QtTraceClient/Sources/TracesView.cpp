@@ -28,7 +28,7 @@ CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
     QWidget(pParent),
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
-    m_bKeepAtEnd(true),
+    m_bKeepAtEnd(false),
     m_pHeader(NULL),
     m_pHighlightColorsPopup(NULL),
     m_pCurrentTracesGroup(NULL)
@@ -66,6 +66,18 @@ CViewTracesIterator CTracesView::LastPos() const
     return CViewTracesIterator::LastPos(m_pCurrentTracesGroup);
 }
 
+
+void CTracesView::setKeepAtEnd(bool keepAtEnd)
+{
+    m_bKeepAtEnd = keepAtEnd;
+
+    if ( m_bKeepAtEnd )
+    {
+        MovePosToDisplayLastLine();
+    }
+
+    update();
+}
 
 
 /**
@@ -138,7 +150,14 @@ void CTracesView::OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceC
 {
     if ( pView->Dirty() )
     {
+
         UpdateScrollbarRange(ClientRect());
+
+        if ( m_bKeepAtEnd )
+        {
+            MovePosToDisplayLastLine();
+        }
+
         update();
 
         int linesCount = pView->LinesCount();
@@ -672,4 +691,21 @@ QSize CTracesView::HeaderSize() const
         size += m_pHeader->size();
 
     return size;
+}
+
+
+void CTracesView::MovePosToDisplayLastLine()
+{
+    Nyx::UInt32 lastLineNo = m_pCurrentTracesGroup->LinesCount() - 1;
+    Nyx::UInt32 linesVisible = NumberOfLinesVisibles();
+
+    int firstLineNo = Nyx::Max( int(lastLineNo - linesVisible), 0);
+
+    if ( !m_TopPos.Valid())
+    {
+        m_TopPos = CViewTracesIterator::FirstPos(m_pCurrentTracesGroup);
+    }
+
+    m_TopPos.MoveToLine(firstLineNo);
+    ui->m_VertScrollbar->setValue(firstLineNo);
 }

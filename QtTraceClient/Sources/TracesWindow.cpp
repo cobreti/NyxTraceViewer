@@ -81,6 +81,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               DevicesIcon(":/TracesWindow/Device-Icon");
     QIcon               DevicesSelectedIcon(":/TracesWindow/Device-Selected-Icon");
     QIcon               Clear(":/TracesWindow/Clear-Icon");
+    QIcon               KeepAtEndIcon(":/TracesWindow/Arrow-Down-Icon");
+    QIcon               KeepAtEndSelectedIcon(":/TracesWindow/Arrow-Down-Selected-Icon");
 
     CTracesView* pBase = NULL;
 
@@ -131,6 +133,11 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_Devices->setNormalIcon(DevicesIcon);
     m_pBtn_Devices->setSelectedIcon(DevicesSelectedIcon);
 
+    m_pBtn_KeepAtEnd = new CToggleToolButton();
+    m_pBtn_KeepAtEnd->setNormalIcon(KeepAtEndIcon);
+    m_pBtn_KeepAtEnd->setSelectedIcon(KeepAtEndSelectedIcon);
+    m_pBtn_KeepAtEnd->setEnabled(false);
+
     m_pSearchText = new QLineEdit();
     
     m_pBtn_SearchNext = new QToolButton();
@@ -160,7 +167,7 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
-    ui->MainToolBar->addWidget(m_pBtn_Clear);
+//    ui->MainToolBar->addWidget(m_pBtn_Clear);
 //    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
@@ -171,6 +178,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->SearchToolBar->addWidget(m_pBtn_SearchPrevious);
     ui->SearchToolBar->addWidget(m_pBtn_HideSearch);
     ui->SearchToolBar->setIconSize( QSize(16, 16) );
+
+    ui->TracesToolBar->addWidget(m_pBtn_Clear);
+    ui->TracesToolBar->addWidget(m_pBtn_KeepAtEnd);
+    ui->TracesToolBar->setIconSize( QSize(16, 16) );
 
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
@@ -188,8 +199,12 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_MainWindow, SIGNAL(clicked()), this, SLOT(OnShowMainWindow()));
     connect( m_pChannelSelection, SIGNAL(SelectionChanged(TraceClientCore::CTracesGroup*)),
              this, SLOT(OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*)) );
-    connect( m_pBtn_Settings, SIGNAL(stateChanged(CToggleToolButton::EState)), this, SLOT(OnSettingsBtnStateChanged(CToggleToolButton::EState)));
-    connect( m_pBtn_Devices, SIGNAL(stateChanged(CToggleToolButton::EState)), this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
+    connect( m_pBtn_Settings, SIGNAL(stateChanged(CToggleToolButton::EState)),
+             this, SLOT(OnSettingsBtnStateChanged(CToggleToolButton::EState)));
+    connect( m_pBtn_Devices, SIGNAL(stateChanged(CToggleToolButton::EState)),
+             this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
+    connect( m_pBtn_KeepAtEnd, SIGNAL(stateChanged(CToggleToolButton::EState)),
+             this, SLOT(OnKeepAtEndBtnStateChanged(CToggleToolButton::EState)) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -429,6 +444,7 @@ void CTracesWindow::OnShowMainWindow()
  */
 void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup)
 {
+    m_pBtn_KeepAtEnd->setEnabled(true);
     m_pTracesView->SetTracesGroup(pGroup);
 }
 
@@ -458,6 +474,20 @@ void CTracesWindow::OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState 
 
     case CToggleToolButton::eState_Selected:
         CTraceClientApp::Instance().ShowDevicesSelection(this, QPoint(50, ui->MainToolBar->height()));
+        break;
+    }
+}
+
+
+void CTracesWindow::OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state)
+{
+    switch (state)
+    {
+    case CToggleToolButton::eState_Normal:
+        m_pTracesView->setKeepAtEnd(false);
+        break;
+    case CToggleToolButton::eState_Selected:
+        m_pTracesView->setKeepAtEnd(true);
         break;
     }
 }
