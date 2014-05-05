@@ -12,6 +12,7 @@
 #include "TracesPool.hpp"
 #include "MultiViewTracesIterator.hpp"
 
+#include <algorithm>
 
 namespace TraceClientCore
 {
