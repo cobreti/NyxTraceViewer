@@ -247,6 +247,7 @@ CONFIG(debug, debug | release) {
     }
 
     win32 {
+            RC_FILE = ../QtTraceClient.rc
             LIBS += -lwinmm
             LIBS += -lws2_32
             LIBS += -ladvapi32
@@ -290,6 +291,8 @@ CONFIG(release, debug | release) {
     }
 
     win32 {
+            CONFIG += embed_manifest_exe
+            RC_FILE = ../QtTraceClient.rc
             LIBS += -lwinmm
             LIBS += -lws2_32
             LIBS += -ladvapi32
