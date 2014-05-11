@@ -228,6 +228,7 @@ win32 {
 CONFIG(debug, debug | release) {
 
     macx {
+            QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
             PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
             PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
             PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
