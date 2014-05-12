@@ -121,6 +121,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTraceServerPortal = new CTraceServerPortal();
     m_pDevicesMgr = new CDevicesMgr();
 
+    connect(    &m_serverHeartbeatTimer, SIGNAL(timeout()),
+                this, SLOT(onServerHeartbeatTimerTimeout()) );
+
     devicesMapping().Init();
 }
 
@@ -198,9 +201,61 @@ const char* CTraceClientApp::GetVersion() const
 /**
  *
  */
+void CTraceClientApp::startServerConnectionMonitor()
+{
+    connect(    m_pTraceServerPortal, SIGNAL(heartbeatSuccessfull()),
+                this, SLOT(onServerHeartbeatSuccessfull()) );
+    connect(    m_pTraceServerPortal, SIGNAL(heartbeatFailure()),
+                this, SLOT(onServerHeartbeatFailure()) );
+
+
+    m_serverHeartbeatTimer.setSingleShot(true);
+    m_serverHeartbeatTimer.setInterval(1000);
+
+    m_pTraceServerPortal->checkServerConnection();
+}
+
+
+/**
+ *
+ */
 void CTraceClientApp::OnTracesWindows_Empty()
 {
     //m_pQtApplication->quit();
+}
+
+
+/**
+ * @brief CTraceClientApp::onServerHeartbeatSuccessfull
+ */
+void CTraceClientApp::onServerHeartbeatSuccessfull()
+{
+    NYXTRACE(0x0, L"onServerHeartbeatSuccessfull");
+
+    m_serverHeartbeatTimer.start();
+}
+
+
+/**
+ * @brief CTraceClientApp::onServerHeartbeatFailure
+ */
+void CTraceClientApp::onServerHeartbeatFailure()
+{
+    NYXTRACE(0x0, L"onServerHeartbeatFailure");
+
+    disconnect( m_pTraceServerPortal, SIGNAL(heartbeatSuccessfull()),
+                this, SLOT(onServerHeartbeatSuccessfull()) );
+    disconnect( m_pTraceServerPortal, SIGNAL(heartbeatFailure()),
+                this, SLOT(onServerHeartbeatFailure()) );
+}
+
+
+
+void CTraceClientApp::onServerHeartbeatTimerTimeout()
+{
+    m_serverHeartbeatTimer.setSingleShot(true);
+
+    m_pTraceServerPortal->checkServerConnection();
 }
 
 

@@ -38,12 +38,14 @@ void CSettingsPanel::onApply()
     QString name = ui->name->text();
     QString server = ui->TraceDirectoryServer->text();
 
-    CTraceServerPortal& rServerPortal = CTraceClientApp::Instance().TraceServerPortal();
+    CTraceClientApp& rApp = CTraceClientApp::Instance();
+    CTraceServerPortal& rServerPortal = rApp.TraceServerPortal();
 
     rServerPortal.setServer(server);
     rServerPortal.setTraceClient(name);
 
     ui->applyButton->setEnabled(false);
+    rApp.startServerConnectionMonitor();
 }
 
 

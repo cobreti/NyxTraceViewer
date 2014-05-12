@@ -18,6 +18,8 @@
         <file alias="Clear-Icon">Icons/Actions-trash-empty-icon.png</file>
         <file alias="Arrow-Down-Icon">Icons/Arrow-Down.png</file>
         <file alias="Arrow-Down-Selected-Icon">Icons/Arrow-Down-Selected.png</file>
+        <file alias="Connected-Icon">Icons/connected.png</file>
+        <file alias="No-Connection-Icon">Icons/no-connection.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>

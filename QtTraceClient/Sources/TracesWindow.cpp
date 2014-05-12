@@ -47,6 +47,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_About(NULL),
     m_pBtn_Settings(NULL),
     m_pBtn_Devices(NULL),
+    m_pBtn_KeepAtEnd(NULL),
+    m_pBtn_ConnectionStatus(NULL),
     m_pSearchText(NULL),
     m_pBtn_HideSearch(NULL),
     m_pBtn_SearchNext(NULL),
@@ -83,6 +85,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               Clear(":/TracesWindow/Clear-Icon");
     QIcon               KeepAtEndIcon(":/TracesWindow/Arrow-Down-Icon");
     QIcon               KeepAtEndSelectedIcon(":/TracesWindow/Arrow-Down-Selected-Icon");
+    QIcon               ConnectedIcon(":/TracesWindow/Connected-Icon");
+    QIcon               NoConnectionIcon(":/TracesWindow/No-Connection-Icon");
 
     CTracesView* pBase = NULL;
 
@@ -140,6 +144,11 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_KeepAtEnd->setSelectedIcon(KeepAtEndSelectedIcon);
     m_pBtn_KeepAtEnd->setEnabled(false);
 
+    m_pBtn_ConnectionStatus = new CToggleToolButton();
+    m_pBtn_ConnectionStatus->setNormalIcon(NoConnectionIcon);
+    m_pBtn_ConnectionStatus->setSelectedIcon(ConnectedIcon);
+    m_pBtn_ConnectionStatus->setEnabled(false);
+
     m_pSearchText = new QLineEdit();
     
     m_pBtn_SearchNext = new QToolButton();
@@ -157,6 +166,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_HighlightColor = new CChooseColorBtn();
 
 //    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
+    ui->MainToolBar->addWidget(m_pBtn_ConnectionStatus);
+    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_Settings);
     ui->MainToolBar->addWidget(m_pBtn_Devices);
     ui->MainToolBar->addSeparator();

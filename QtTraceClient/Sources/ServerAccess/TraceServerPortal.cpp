@@ -4,6 +4,7 @@
 #include "WSGetDevices.h"
 #include "WSMapDevice.h"
 #include "WSUnmapDevice.h"
+#include "WSHeartbeat.h"
 
 
 
@@ -11,7 +12,8 @@ CTraceServerPortal::CTraceServerPortal() : QObject(),
     m_p_ws_SetTraceClient(new CWSSetTraceClient()),
     m_p_ws_GetDevices(new CWSGetDevices()),
     m_p_ws_MapDevice(new CWSMapDevice()),
-    m_p_ws_UnmapDevice(new CWSUnmapDevice())
+    m_p_ws_UnmapDevice(new CWSUnmapDevice()),
+    m_p_ws_Heartbeat(new CWSHeartbeat())
 {
     connect(    m_p_ws_GetDevices, SIGNAL(devicesRefresh(CDevice::IdMap)),
                 this, SLOT(onDevicesRefresh(CDevice::IdMap)) );
@@ -25,6 +27,10 @@ CTraceServerPortal::CTraceServerPortal() : QObject(),
                 this, SLOT(onClientMapping(int,QString,QString)) );
     connect(    m_p_ws_SetTraceClient, SIGNAL(registerFailure()),
                 this, SLOT(onClientRegisterFailed()));
+    connect(    m_p_ws_Heartbeat, SIGNAL(heartbeatSuccessfull()),
+                this, SLOT(onHeartbeatSuccessfull()) );
+    connect(    m_p_ws_Heartbeat, SIGNAL(heartbeatFailure()),
+                this, SLOT(onHeartbeatFailure()) );
 }
 
 
@@ -34,6 +40,7 @@ CTraceServerPortal::~CTraceServerPortal()
     delete m_p_ws_MapDevice;
     delete m_p_ws_GetDevices;
     delete m_p_ws_SetTraceClient;
+    delete m_p_ws_Heartbeat;
 }
 
 
@@ -85,6 +92,13 @@ void CTraceServerPortal::removeClientMapping(int deviceId)
     m_p_ws_UnmapDevice->server() = m_Server;
     m_p_ws_UnmapDevice->deviceId() = deviceId;
     m_p_ws_UnmapDevice->send();
+}
+
+
+void CTraceServerPortal::checkServerConnection()
+{
+    m_p_ws_Heartbeat->server() = m_Server;
+    m_p_ws_Heartbeat->send();
 }
 
 
@@ -140,3 +154,16 @@ void CTraceServerPortal::onClientMapping(int id, const QString &alias, const QSt
 {
     emit clientMapping(id, alias, name);
 }
+
+
+void CTraceServerPortal::onHeartbeatSuccessfull()
+{
+    emit heartbeatSuccessfull();
+}
+
+
+void CTraceServerPortal::onHeartbeatFailure()
+{
+    emit heartbeatFailure();
+}
+

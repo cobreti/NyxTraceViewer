@@ -12,6 +12,7 @@ class CWSSetTraceClient;
 class CWSGetDevices;
 class CWSMapDevice;
 class CWSUnmapDevice;
+class CWSHeartbeat;
 
 class CTraceServerPortal : public QObject
 {
@@ -26,6 +27,7 @@ public:
     void getDevices();
     void setClientMapping(int deviceId, int clientId);
     void removeClientMapping(int deviceId);
+    void checkServerConnection();
 
     QHostAddress GetHostAddress();
 
@@ -37,6 +39,8 @@ public slots:
     void onDeviceMapped(int id);
     void onDeviceUnmapped(int id);
     void onClientMapping(int id, const QString& alias, const QString& name);
+    void onHeartbeatSuccessfull();
+    void onHeartbeatFailure();
 
 signals:
 
@@ -46,6 +50,8 @@ signals:
     void deviceMapped(int id);
     void deviceUnmapped(int id);
     void clientMapping(int id, const QString& alias, const QString& name);
+    void heartbeatSuccessfull();
+    void heartbeatFailure();
 
 protected:
 
@@ -58,6 +64,7 @@ protected:
     CWSGetDevices*          m_p_ws_GetDevices;
     CWSMapDevice*           m_p_ws_MapDevice;
     CWSUnmapDevice*         m_p_ws_UnmapDevice;
+    CWSHeartbeat*           m_p_ws_Heartbeat;
 };
 
 

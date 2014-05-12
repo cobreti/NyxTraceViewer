@@ -85,6 +85,7 @@ protected:
     CToggleToolButton*      m_pBtn_Settings;
     CToggleToolButton*      m_pBtn_Devices;
     CToggleToolButton*      m_pBtn_KeepAtEnd;
+    CToggleToolButton*      m_pBtn_ConnectionStatus;
 
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_HideSearch;

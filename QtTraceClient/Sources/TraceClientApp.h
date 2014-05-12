@@ -10,6 +10,8 @@
 //#include "View/ViewItemsNodeObjectsPool.hpp"
 //#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
 
+#include <QTimer>
+
 class CMainWindow;
 class CTracesWindow;
 class QApplication;
@@ -65,11 +67,17 @@ public:
 
     const char* GetVersion() const;
 
+    void startServerConnectionMonitor();
+
 public: // ITracesWindowsListener methods
 
     virtual void OnTracesWindows_Empty();
 
 public slots:
+
+    void onServerHeartbeatSuccessfull();
+    void onServerHeartbeatFailure();
+    void onServerHeartbeatTimerTimeout();
 
 signals:
 
@@ -99,6 +107,8 @@ protected:
 
     CDevicesMgr*                m_pDevicesMgr;
     CDevicesMapping             m_DevicesMapping;
+
+    QTimer                      m_serverHeartbeatTimer;
 
     static CTraceClientApp*     s_pInstance;
 };

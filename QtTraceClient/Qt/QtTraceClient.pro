@@ -98,7 +98,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Decorations/DynamicHighlightsDirectory.cpp \
     ../Sources/View/Decorations/DynamicTextHighlight.cpp \
     ../Sources/View/ViewTracesContentIterator.cpp \
-    ../Sources/View/Decorations/DynamicFocusedItemHighlight.cpp
+    ../Sources/View/Decorations/DynamicFocusedItemHighlight.cpp \
+    ../Sources/ServerAccess/WSHeartbeat.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -187,7 +188,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Decorations/DynamicHighlightsDirectory.h \
     ../Sources/View/Decorations/DynamicTextHighlight.h \
     ../Sources/View/ViewTracesContentIterator.hpp \
-    ../Sources/View/Decorations/DynamicFocusedItemHighlight.hpp
+    ../Sources/View/Decorations/DynamicFocusedItemHighlight.hpp \
+    ../Sources/ServerAccess/WSHeartbeat.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
