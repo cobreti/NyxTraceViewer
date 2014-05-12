@@ -194,7 +194,7 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return "1.0.0";
+    return "1.0.1";
 }
 
 
@@ -232,6 +232,8 @@ void CTraceClientApp::onServerHeartbeatSuccessfull()
 {
     NYXTRACE(0x0, L"onServerHeartbeatSuccessfull");
 
+    emit serverHeartbeatSuccess();
+
     m_serverHeartbeatTimer.start();
 }
 
@@ -247,6 +249,8 @@ void CTraceClientApp::onServerHeartbeatFailure()
                 this, SLOT(onServerHeartbeatSuccessfull()) );
     disconnect( m_pTraceServerPortal, SIGNAL(heartbeatFailure()),
                 this, SLOT(onServerHeartbeatFailure()) );
+
+    emit serverHeartbeatFailure();
 }
 
 

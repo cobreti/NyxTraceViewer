@@ -24,6 +24,10 @@ public:
     void setNormalIcon( QIcon icon );
     void setSelectedIcon( QIcon icon );
 
+    void setState( EState state );
+
+    const EState state() const { return m_State; }
+
 public slots:
 
     void onClicked();

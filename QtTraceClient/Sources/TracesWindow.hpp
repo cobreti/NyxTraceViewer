@@ -58,6 +58,8 @@ public slots:
     void OnSettingsBtnStateChanged(CToggleToolButton::EState state);
     void OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState state);
     void OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state);
+    void OnServerHeartbeatSuccess();
+    void OnServerHeartbeatFailure();
 
 protected:
 

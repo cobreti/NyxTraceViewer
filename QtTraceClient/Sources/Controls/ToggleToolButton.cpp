@@ -27,6 +27,28 @@ void CToggleToolButton::setSelectedIcon(QIcon icon)
 }
 
 
+void CToggleToolButton::setState(EState state)
+{
+    if ( m_State != state )
+    {
+        m_State = state;
+
+        switch (m_State)
+        {
+        case eState_Normal:
+            setIcon(m_NormalIcon);
+            break;
+
+        case eState_Selected:
+            setIcon(m_SelectedIcon);
+            break;
+        }
+
+        emit stateChanged(m_State);
+    }
+}
+
+
 void CToggleToolButton::onClicked()
 {
     switch (m_State)

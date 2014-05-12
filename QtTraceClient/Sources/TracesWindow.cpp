@@ -200,6 +200,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     this->addToolBar(Qt::RightToolBarArea, ui->TracesToolBar);
 
+    CTraceClientApp&    rApp = CTraceClientApp::Instance();
+
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
     connect( m_pBtn_CloneView, SIGNAL(clicked()), this, SLOT(OnCloneView()));
@@ -222,6 +224,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
              this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
     connect( m_pBtn_KeepAtEnd, SIGNAL(stateChanged(CToggleToolButton::EState)),
              this, SLOT(OnKeepAtEndBtnStateChanged(CToggleToolButton::EState)) );
+    connect( &rApp, SIGNAL(serverHeartbeatSuccess()),
+             this, SLOT(OnServerHeartbeatSuccess()) );
+    connect( &rApp, SIGNAL(serverHeartbeatFailure()),
+             this, SLOT(OnServerHeartbeatFailure()) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -510,6 +516,24 @@ void CTracesWindow::OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state)
         m_pTracesView->setKeepAtEnd(true);
         break;
     }
+}
+
+
+void CTracesWindow::OnServerHeartbeatSuccess()
+{
+    if ( m_pBtn_ConnectionStatus->state() != CToggleToolButton::eState_Selected )
+    {
+        m_pBtn_ConnectionStatus->setState(CToggleToolButton::eState_Selected);
+        m_pBtn_ConnectionStatus->setEnabled(true);
+        update();
+    }
+}
+
+
+void CTracesWindow::OnServerHeartbeatFailure()
+{
+    m_pBtn_ConnectionStatus->setState(CToggleToolButton::eState_Normal);
+    m_pBtn_ConnectionStatus->setEnabled(false);
 }
 
 

@@ -81,6 +81,11 @@ public slots:
 
 signals:
 
+
+    void serverHeartbeatSuccess();
+    void serverHeartbeatFailure();
+
+
 protected:
 
     void initDefaultSettings();
