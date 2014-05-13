@@ -1,16 +1,10 @@
 #ifndef _TRACECLIENTAPP_HPP_
 #define _TRACECLIENTAPP_HPP_
 
-//#include <QtGui>
-
 #include "AppSettings.hpp"
 #include "WindowsManager.hpp"
 #include "DevicesMapping.h"
 
-//#include "View/ViewItemsNodeObjectsPool.hpp"
-//#include "View/Walkers/ViewItemsWalkerNodesPool.hpp"
-
-#include <QTimer>
 
 class CMainWindow;
 class CTracesWindow;
@@ -20,6 +14,7 @@ class CDevicesSelectionPanel;
 class QWidget;
 class CTraceServerPortal;
 class CDevicesMgr;
+class CTraceServerMonitor;
 
 
 class CTraceClientApp : public QObject,
@@ -43,9 +38,6 @@ public:
     const CAppSettings&     AppSettings() const         { return m_AppSettings; }
     CAppSettings&           AppSettings()               { return m_AppSettings; }
 
-//    const CTracesWindows&   TracesWindows() const       { return m_TracesWindows; }
-//    CTracesWindows&         TracesWindows()             { return m_TracesWindows; }
-
     CMainWindow*            MainWindow() const          { return m_pMainWindow; }
 
     CWindowsManager&        WindowsManager()            { return m_WindowsManager; }
@@ -64,27 +56,13 @@ public:
     void HideDevicesSelection();
 
     CTraceServerPortal&     TraceServerPortal() const   { return *m_pTraceServerPortal; }
+    CTraceServerMonitor&    TraceServerMonitor() const  { return *m_pTraceServerMonitor; }
 
     const char* GetVersion() const;
-
-    void startServerConnectionMonitor();
 
 public: // ITracesWindowsListener methods
 
     virtual void OnTracesWindows_Empty();
-
-public slots:
-
-    void onServerHeartbeatSuccessfull();
-    void onServerHeartbeatFailure();
-    void onServerHeartbeatTimerTimeout();
-
-signals:
-
-
-    void serverHeartbeatSuccess();
-    void serverHeartbeatFailure();
-
 
 protected:
 
@@ -101,19 +79,14 @@ protected:
 
     CMainWindow*        m_pMainWindow;
     CTracesWindow*      m_pTracesWindow;
-//    CTracesWindows      m_TracesWindows;
-
-//    CViewItemsNodeObjectsPool   m_ViewNodeObjectsPool;
-//    CViewItemsWalkerNodesPool   m_ViewItemsWalkerNodesPool;
 
     CSettingsPanel*             m_pSettingsPanel;
     CDevicesSelectionPanel*     m_pDevicesSelectionPanel;
     CTraceServerPortal*         m_pTraceServerPortal;
+    CTraceServerMonitor*        m_pTraceServerMonitor;
 
     CDevicesMgr*                m_pDevicesMgr;
     CDevicesMapping             m_DevicesMapping;
-
-    QTimer                      m_serverHeartbeatTimer;
 
     static CTraceClientApp*     s_pInstance;
 };

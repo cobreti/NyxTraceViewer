@@ -12,6 +12,7 @@
 #include "Panels/DevicesSelectionPanel.h"
 #include "PoolsUpdateClock.hpp"
 #include "ServerAccess/TraceServerPortal.h"
+#include "ServerAccess/TraceServerMonitor.h"
 #include "DevicesMgr.h"
 
 #include "TraceClientCoreModule.hpp"
@@ -46,6 +47,7 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_pSettingsPanel(NULL),
     m_pDevicesSelectionPanel(NULL),
     m_pTraceServerPortal(NULL),
+    m_pTraceServerMonitor(NULL),
     m_pDevicesMgr()
 {
     s_pInstance = this;
@@ -110,19 +112,17 @@ void CTraceClientApp::Init(int &argc, char **argv)
 
     m_pMainWindow = new CMainWindow();
     m_pMainWindow->move( rcScreen.left(), rcScreen.top() );
-//    m_pMainWindow->show();
 
     m_pTracesWindow = new CTracesWindow(NULL);
     m_pTracesWindow->setParent(NULL, Qt::Window);
-    m_pTracesWindow->show();
 
     m_pSettingsPanel = new CSettingsPanel();
     m_pDevicesSelectionPanel = new CDevicesSelectionPanel();
     m_pTraceServerPortal = new CTraceServerPortal();
+    m_pTraceServerMonitor = new CTraceServerMonitor(*m_pTraceServerPortal);
     m_pDevicesMgr = new CDevicesMgr();
 
-    connect(    &m_serverHeartbeatTimer, SIGNAL(timeout()),
-                this, SLOT(onServerHeartbeatTimerTimeout()) );
+    m_pTracesWindow->show();
 
     devicesMapping().Init();
 }
@@ -201,65 +201,8 @@ const char* CTraceClientApp::GetVersion() const
 /**
  *
  */
-void CTraceClientApp::startServerConnectionMonitor()
-{
-    connect(    m_pTraceServerPortal, SIGNAL(heartbeatSuccessfull()),
-                this, SLOT(onServerHeartbeatSuccessfull()) );
-    connect(    m_pTraceServerPortal, SIGNAL(heartbeatFailure()),
-                this, SLOT(onServerHeartbeatFailure()) );
-
-
-    m_serverHeartbeatTimer.setSingleShot(true);
-    m_serverHeartbeatTimer.setInterval(5000);
-
-    m_pTraceServerPortal->checkServerConnection();
-}
-
-
-/**
- *
- */
 void CTraceClientApp::OnTracesWindows_Empty()
 {
-    //m_pQtApplication->quit();
-}
-
-
-/**
- * @brief CTraceClientApp::onServerHeartbeatSuccessfull
- */
-void CTraceClientApp::onServerHeartbeatSuccessfull()
-{
-    NYXTRACE(0x0, L"onServerHeartbeatSuccessfull");
-
-    emit serverHeartbeatSuccess();
-
-    m_serverHeartbeatTimer.start();
-}
-
-
-/**
- * @brief CTraceClientApp::onServerHeartbeatFailure
- */
-void CTraceClientApp::onServerHeartbeatFailure()
-{
-    NYXTRACE(0x0, L"onServerHeartbeatFailure");
-
-    disconnect( m_pTraceServerPortal, SIGNAL(heartbeatSuccessfull()),
-                this, SLOT(onServerHeartbeatSuccessfull()) );
-    disconnect( m_pTraceServerPortal, SIGNAL(heartbeatFailure()),
-                this, SLOT(onServerHeartbeatFailure()) );
-
-    emit serverHeartbeatFailure();
-}
-
-
-
-void CTraceClientApp::onServerHeartbeatTimerTimeout()
-{
-    m_serverHeartbeatTimer.setSingleShot(true);
-
-    m_pTraceServerPortal->checkServerConnection();
 }
 
 

@@ -16,6 +16,7 @@
 #include "Dialogs/HighlightColorsSelectionDlg.h"
 #include "View/Highlight/HighlightsMgrWnd.h"
 #include "View/Decorations/DynamicTextHighlight.h"
+#include "ServerAccess/TraceServerMonitor.h"
 
 #include "Color/ColorBtn.h"
 
@@ -223,10 +224,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
              this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
     connect( m_pBtn_KeepAtEnd, SIGNAL(stateChanged(CToggleToolButton::EState)),
              this, SLOT(OnKeepAtEndBtnStateChanged(CToggleToolButton::EState)) );
-    connect( &rApp, SIGNAL(serverHeartbeatSuccess()),
-             this, SLOT(OnServerHeartbeatSuccess()) );
-    connect( &rApp, SIGNAL(serverHeartbeatFailure()),
-             this, SLOT(OnServerHeartbeatFailure()) );
+//    connect( &rApp, SIGNAL(serverHeartbeatSuccess()),
+//             this, SLOT(OnServerHeartbeatSuccess()) );
+//    connect( &rApp, SIGNAL(serverHeartbeatFailure()),
+//             this, SLOT(OnServerHeartbeatFailure()) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -554,6 +555,13 @@ void CTracesWindow::closeEvent(QCloseEvent *event)
  */
 void CTracesWindow::showEvent(QShowEvent *)
 {
+    CTraceClientApp& rApp = CTraceClientApp::Instance();
+
+    connect( &rApp.TraceServerMonitor(), SIGNAL(connected()),
+             this, SLOT(OnServerHeartbeatSuccess()) );
+    connect( &rApp.TraceServerMonitor(), SIGNAL(connectionLost()),
+             this, SLOT(OnServerHeartbeatFailure()) );
+
     if ( isMinimized() )
     {
         NYXTRACE(0x0, L"CTracesWindow::showEvent - minimized");

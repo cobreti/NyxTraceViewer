@@ -3,6 +3,7 @@
 #include "MainWindow/TcpIpSettingsPanel.h"
 #include "TraceClientApp.h"
 #include "ServerAccess/TraceServerPortal.h"
+#include "ServerAccess/TraceServerMonitor.h"
 
 
 CSettingsPanel::CSettingsPanel() : QWidget(),
@@ -53,7 +54,11 @@ void CSettingsPanel::onApply()
     rServerPortal.setTraceClient(name);
 
     ui->applyButton->setEnabled(false);
-    rApp.startServerConnectionMonitor();
+    ui->name->setEnabled(false);
+    ui->TraceDirectoryServer->setEnabled(false);
+    ui->TraceDirectoryPort->setEnabled(false);
+
+    rApp.TraceServerMonitor().Start();
 }
 
 
@@ -72,6 +77,9 @@ void CSettingsPanel::onClientRegisterFailed()
 {
     ui->statusLabel->setText("<font color='red'>failure to connect to server</font>");
     ui->applyButton->setEnabled(true);
+    ui->name->setEnabled(true);
+    ui->TraceDirectoryServer->setEnabled(true);
+    ui->TraceDirectoryPort->setEnabled(true);
 }
 
 
@@ -110,11 +118,19 @@ void CSettingsPanel::ValidateInputs()
 void CSettingsPanel::showEvent(QShowEvent *)
 {
     CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
+    CTraceServerMonitor&    rMonitor = CTraceClientApp::Instance().TraceServerMonitor();
 
-    ui->applyButton->setEnabled(false);
-
-    QRect rcLayout = ui->TxtTracePortLayout->contentsRect();
-    QRect rcCtrl = m_pTxtTcpIpSettingsPanel->rect();
+    if ( rMonitor.active() )
+    {
+        ui->applyButton->setEnabled(false);
+        ui->name->setEnabled(false);
+        ui->TraceDirectoryServer->setEnabled(false);
+        ui->TraceDirectoryPort->setEnabled(false);
+    }
+    else
+    {
+        ValidateInputs();
+    }
 
     connect(    &rPortal, SIGNAL(clientRegistered(int)),
                 this, SLOT(onClientRegistered(int)) );
