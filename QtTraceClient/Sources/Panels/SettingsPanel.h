@@ -26,6 +26,7 @@ public:
 public slots:
 
     void onTraceDirectoryServerChanged(const QString& text);
+    void onTraceDirectoryPortChanged(const QString& text);
     void onNameChanged(const QString& text);
     void onApply();
     void onClientRegistered(int id);

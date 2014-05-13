@@ -27,6 +27,12 @@ void CSettingsPanel::onTraceDirectoryServerChanged(const QString& text)
 }
 
 
+void CSettingsPanel::onTraceDirectoryPortChanged(const QString &text)
+{
+    ValidateInputs();
+}
+
+
 void CSettingsPanel::onNameChanged(const QString &text)
 {
     ValidateInputs();
@@ -37,11 +43,13 @@ void CSettingsPanel::onApply()
 {
     QString name = ui->name->text();
     QString server = ui->TraceDirectoryServer->text();
+    QString port = ui->TraceDirectoryPort->text();
+    QString fullAddress = QString("%1:%2").arg(server).arg(port);
 
     CTraceClientApp& rApp = CTraceClientApp::Instance();
     CTraceServerPortal& rServerPortal = rApp.TraceServerPortal();
 
-    rServerPortal.setServer(server);
+    rServerPortal.setServer(fullAddress);
     rServerPortal.setTraceClient(name);
 
     ui->applyButton->setEnabled(false);
@@ -79,6 +87,8 @@ void CSettingsPanel::Init()
 
     connect( ui->TraceDirectoryServer, SIGNAL(textChanged(QString)),
              this, SLOT(onTraceDirectoryServerChanged(QString)));
+    connect( ui->TraceDirectoryPort, SIGNAL(textChanged(QString)),
+             this, SLOT(onTraceDirectoryPortChanged(QString)));
     connect( ui->name, SIGNAL(textChanged(QString)),
              this, SLOT(onNameChanged(QString)));
     connect( ui->applyButton, SIGNAL(clicked()),
@@ -90,8 +100,10 @@ void CSettingsPanel::Init()
 void CSettingsPanel::ValidateInputs()
 {
     QString name = ui->name->text();
+    QString address = ui->TraceDirectoryServer->text();
+    QString port = ui->TraceDirectoryPort->text();
 
-    ui->applyButton->setEnabled( !name.isEmpty() );
+    ui->applyButton->setEnabled( !name.isEmpty() && !address.isEmpty() && !port.isEmpty() );
 }
 
 
