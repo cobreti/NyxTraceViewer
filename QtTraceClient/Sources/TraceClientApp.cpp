@@ -210,7 +210,7 @@ void CTraceClientApp::startServerConnectionMonitor()
 
 
     m_serverHeartbeatTimer.setSingleShot(true);
-    m_serverHeartbeatTimer.setInterval(1000);
+    m_serverHeartbeatTimer.setInterval(5000);
 
     m_pTraceServerPortal->checkServerConnection();
 }

@@ -99,7 +99,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Decorations/DynamicTextHighlight.cpp \
     ../Sources/View/ViewTracesContentIterator.cpp \
     ../Sources/View/Decorations/DynamicFocusedItemHighlight.cpp \
-    ../Sources/ServerAccess/WSHeartbeat.cpp
+    ../Sources/ServerAccess/WSHeartbeat.cpp \
+    ../Sources/Controls/ConnectionStatusToolButton.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -189,7 +190,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Decorations/DynamicTextHighlight.h \
     ../Sources/View/ViewTracesContentIterator.hpp \
     ../Sources/View/Decorations/DynamicFocusedItemHighlight.hpp \
-    ../Sources/ServerAccess/WSHeartbeat.h
+    ../Sources/ServerAccess/WSHeartbeat.h \
+    ../Sources/Controls/ConnectionStatusToolButton.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

@@ -5,6 +5,7 @@
 #include "View/Highlight/ViewItemPattern_Text.hpp"
 #include "View/Highlight/ViewItemHighlighter.hpp"
 #include "Controls/ToggleToolButton.h"
+#include "Controls/ConnectionStatusToolButton.h"
 
 
 class QToolButton;
@@ -87,7 +88,7 @@ protected:
     CToggleToolButton*      m_pBtn_Settings;
     CToggleToolButton*      m_pBtn_Devices;
     CToggleToolButton*      m_pBtn_KeepAtEnd;
-    CToggleToolButton*      m_pBtn_ConnectionStatus;
+    CConnectionStatusToolButton*    m_pBtn_ConnectionStatus;
 
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_HideSearch;

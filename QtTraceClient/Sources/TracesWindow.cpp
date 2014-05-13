@@ -144,10 +144,9 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_KeepAtEnd->setSelectedIcon(KeepAtEndSelectedIcon);
     m_pBtn_KeepAtEnd->setEnabled(false);
 
-    m_pBtn_ConnectionStatus = new CToggleToolButton();
-    m_pBtn_ConnectionStatus->setNormalIcon(NoConnectionIcon);
-    m_pBtn_ConnectionStatus->setSelectedIcon(ConnectedIcon);
-    m_pBtn_ConnectionStatus->setEnabled(false);
+    m_pBtn_ConnectionStatus = new CConnectionStatusToolButton();
+    m_pBtn_ConnectionStatus->setNoConnectionIcon(NoConnectionIcon);
+    m_pBtn_ConnectionStatus->setConnectedIcon(ConnectedIcon);
 
     m_pSearchText = new QLineEdit();
     
@@ -521,10 +520,9 @@ void CTracesWindow::OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state)
 
 void CTracesWindow::OnServerHeartbeatSuccess()
 {
-    if ( m_pBtn_ConnectionStatus->state() != CToggleToolButton::eState_Selected )
+    if ( m_pBtn_ConnectionStatus->state() != CConnectionStatusToolButton::eState_Connected )
     {
-        m_pBtn_ConnectionStatus->setState(CToggleToolButton::eState_Selected);
-        m_pBtn_ConnectionStatus->setEnabled(true);
+        m_pBtn_ConnectionStatus->setState(CConnectionStatusToolButton::eState_Connected);
         update();
     }
 }
@@ -532,7 +530,7 @@ void CTracesWindow::OnServerHeartbeatSuccess()
 
 void CTracesWindow::OnServerHeartbeatFailure()
 {
-    m_pBtn_ConnectionStatus->setState(CToggleToolButton::eState_Normal);
+    m_pBtn_ConnectionStatus->setState(CConnectionStatusToolButton::eState_NoConnection);
     m_pBtn_ConnectionStatus->setEnabled(false);
 }
 
