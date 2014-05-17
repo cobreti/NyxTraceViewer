@@ -61,6 +61,7 @@ public slots:
     void OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state);
     void OnServerHeartbeatSuccess();
     void OnServerHeartbeatFailure();
+    void OnKeepAtEndDisabled();
 
 protected:
 

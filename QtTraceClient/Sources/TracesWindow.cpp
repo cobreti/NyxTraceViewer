@@ -224,10 +224,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
              this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
     connect( m_pBtn_KeepAtEnd, SIGNAL(stateChanged(CToggleToolButton::EState)),
              this, SLOT(OnKeepAtEndBtnStateChanged(CToggleToolButton::EState)) );
-//    connect( &rApp, SIGNAL(serverHeartbeatSuccess()),
-//             this, SLOT(OnServerHeartbeatSuccess()) );
-//    connect( &rApp, SIGNAL(serverHeartbeatFailure()),
-//             this, SLOT(OnServerHeartbeatFailure()) );
+    connect( m_pTracesView, SIGNAL(keepAtEndDisabled()),
+             this, SLOT(OnKeepAtEndDisabled()) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -534,6 +532,13 @@ void CTracesWindow::OnServerHeartbeatFailure()
     m_pBtn_ConnectionStatus->setState(CConnectionStatusToolButton::eState_NoConnection);
     m_pBtn_ConnectionStatus->setEnabled(false);
 }
+
+
+void CTracesWindow::OnKeepAtEndDisabled()
+{
+    m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Normal);
+}
+
 
 
 /**

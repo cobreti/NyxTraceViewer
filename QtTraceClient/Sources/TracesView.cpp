@@ -31,7 +31,8 @@ CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
     m_bKeepAtEnd(false),
     m_pHeader(NULL),
     m_pHighlightColorsPopup(NULL),
-    m_pCurrentTracesGroup(NULL)
+    m_pCurrentTracesGroup(NULL),
+    m_bUpdatingScrollPos(false)
 {
     Init(pBase);
 }
@@ -264,6 +265,11 @@ void CTracesView::OnVertSliderPosChanged(int value)
     m_TopPos.MoveToLine(value);
     m_DisplayCache.Clear();
 
+    if ( !updatingScrollPos() && m_bKeepAtEnd )
+    {
+        m_bKeepAtEnd = false;
+        emit keepAtEndDisabled();
+    }
 
     update();
 }
@@ -707,5 +713,9 @@ void CTracesView::MovePosToDisplayLastLine()
     }
 
     m_TopPos.MoveToLine(firstLineNo);
-    ui->m_VertScrollbar->setValue(firstLineNo);
+
+    {
+        XScrollPosUpdate        scrollPosUpdate(*this);
+        ui->m_VertScrollbar->setValue(firstLineNo);
+    }
 }

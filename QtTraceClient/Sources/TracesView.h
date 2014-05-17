@@ -83,6 +83,12 @@ public slots:
     void OnViewBeginUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView );
     void OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView );
 
+
+signals:
+
+    void keepAtEndDisabled();
+
+
 protected:
 
     virtual void resizeEvent(QResizeEvent* event);
@@ -102,6 +108,28 @@ protected:
     virtual QRect ClientRect( const QRect& rcWnd ) const;
     virtual QSize HeaderSize() const;
     virtual void MovePosToDisplayLastLine();
+
+    virtual bool updatingScrollPos() const      { return m_bUpdatingScrollPos; }
+
+protected:
+
+    class XScrollPosUpdate
+    {
+    public:
+        XScrollPosUpdate(CTracesView& rView) : m_rView(rView)
+        {
+            m_rView.m_bUpdatingScrollPos = true;
+        }
+
+        ~XScrollPosUpdate()
+        {
+            m_rView.m_bUpdatingScrollPos = false;
+        }
+
+
+    protected:
+        CTracesView&        m_rView;
+    };
 
 protected:
 
@@ -128,6 +156,8 @@ protected:
 
     CViewTraceObjectsDirectory          m_TraceSectionsHilights;
     CDynamicHighlightsDirectory         m_DynamicHighlights;
+
+    bool                                m_bUpdatingScrollPos;
 
     QRect                               m_SelectionArea;
     QBrush                              m_SelectionBrush;
