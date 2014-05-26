@@ -176,8 +176,8 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 //    ui->MainToolBar->addWidget(m_pBtn_NewView);
 //    ui->MainToolBar->addWidget(m_pBtn_CloneView);
 //    ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_Search);
-    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
+//    ui->MainToolBar->addWidget(m_pBtn_Search);
+//    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
 //    ui->MainToolBar->addWidget(m_pBtn_Clear);

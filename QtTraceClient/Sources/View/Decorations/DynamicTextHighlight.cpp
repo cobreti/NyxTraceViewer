@@ -1,7 +1,7 @@
 #include "DynamicTextHighlight.h"
 
 #include "../ViewTracePortal.h"
-
+#include "TraceData.hpp"
 
 CDynamicTextHighlight::CDynamicTextHighlight() : CDynamicHighlight(),
     m_Color(Qt::yellow)
@@ -19,6 +19,9 @@ CDynamicTextHighlight::~CDynamicTextHighlight()
 void CDynamicTextHighlight::Draw( CViewTracePainter::CPaintContext& context )
 {
     if ( m_Text.isEmpty() )
+        return;
+
+    if ( context.portal().traceData()->Type() != TraceClientCore::CTraceData::eTT_User )
         return;
 
     QString     text = context.portal().GetColumnText(context.columnId());

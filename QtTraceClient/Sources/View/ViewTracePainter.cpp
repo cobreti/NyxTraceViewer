@@ -233,27 +233,18 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
 
     rcArea = entryData.itemArea();
 
-    if ( DisplayColumnData(pData, columnId) )
+    if ( columnId != eVCI_LineNumber && pData->Type() == TraceClientCore::CTraceData::eTT_ConnectionStatus_Disconnection )
     {
-//        CPaintContext       context;
-
-//        context.m_pMetrics = &m_Metrics;
-//        context.m_pPortal = &TracePortal;
-//        context.m_Area = rcArea;
-//        context.m_ColumnId = columnId;
-//        context.m_pQPainter = &m_rPainter;
-
+        qreal   y = rcArea.top() + m_LineHeight / 2;
+        QPen oldPen = m_rPainter.pen();
+        m_rPainter.setPen( Qt::red );
+        m_rPainter.drawLine(rcArea.left(), y-2, rcArea.left() + entryData.columnWidth(), y-2);
+        m_rPainter.drawLine(rcArea.left(), y+2, rcArea.left() + entryData.columnWidth(), y+2);
+        m_rPainter.setPen(oldPen);
+    }
+    else if ( DisplayColumnData(pData, columnId) )
+    {
         QString     text = TracePortal.GetColumnText(columnId);
-
-//        int index = text.indexOf("http");
-//        if ( index > -1 )
-//        {
-
-//            CViewTraceMetrics::CSubSection      section = m_Metrics.GetSubTextRect(TracePortal, columnId, rcArea, index, 4);
-
-//            m_rPainter.fillRect(section.subRect(), Qt::green);
-//        }
-
         m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
     }
 
