@@ -73,7 +73,8 @@ HEADERS += \
     ../include/TracesView.hpp \
     ../include/TracesViewNotificationsListener.hpp \
     ../include/TracesViewRepoObserver.hpp \
-    ../include/DataStruct/PoolsList.hpp
+    ../include/DataStruct/PoolsList.hpp \
+    ../include/ConnectionsMgr.hpp
 
 SOURCES += \
     ../sources/ChannelsMgr.cpp \
@@ -108,4 +109,5 @@ SOURCES += \
     ../sources/TracesReceiverProtocol_WebSocket.cpp \
     ../sources/TracesReceiverProtocol.cpp \
     ../sources/TracesView.cpp \
-    ../sources/TracesViewRepoObserver.cpp
+    ../sources/TracesViewRepoObserver.cpp \
+    ../sources/ConnectionsMgr.cpp

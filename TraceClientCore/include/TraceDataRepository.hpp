@@ -28,6 +28,7 @@ namespace TraceClientCore
 		
 		virtual void Insert(TraceClientCore::CTraceData* pTraceData);
         virtual void Clear(const Nyx::CAString& ModuleName);
+        virtual void InsertDisconnection(TraceClientCore::CTraceData* pTraceData);
         virtual void Insert(CRepositoryObserver* pObserver);
         virtual void Remove(CRepositoryObserver* pObserver);
         virtual bool Contains(CRepositoryObserver* pObserver) const;

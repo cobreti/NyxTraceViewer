@@ -179,14 +179,14 @@ namespace TraceClientCore
     CTcpTxtTracesReceiver::CTcpTxtTracesReceiver(CTcpTxtTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection) :
     m_pConnection(pConnection),
     m_pServer(pSvr),
-    m_pChannel(NULL),
     m_pProtocol(NULL)
     {
     	m_Buffer.Resize(1024 * 1024);
-//        CTcpTxtTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
-//
-//        refMethods->Insert(this);
+
+        GetClientAddress(pConnection);
         
+        TraceClientCore::CModule::Instance().ConnectionsMgr().onNewConnection(m_ClientAddress);
+
         m_refHttpConnHandler = NyxWebSvr::CConnHttpHandler::Alloc();
         m_refHttpConnHandler->Handlers()->Set("/Trace", new CHttpHandlerCB(*this));
     }
@@ -318,6 +318,8 @@ namespace TraceClientCore
     void CTcpTxtTracesReceiver::OnConnectionTerminated( NyxNet::IConnection* pConnection )
     {
     	NYXTRACE(0x0, "Txt Traces Receiver connection terminated");
+
+        TraceClientCore::CModule::Instance().ConnectionsMgr().onCloseConnection(m_ClientAddress, m_TextTraceHandler.channelsSet());
 
     	if ( m_pProtocol )
     	{
@@ -523,6 +525,20 @@ namespace TraceClientCore
         rStream.Write(content.BufferPtr(), content.length(), writtenSize );
     }
 
+
+    void CTcpTxtTracesReceiver::GetClientAddress(NyxNet::IConnection *pConnection)
+    {
+        NyxNet::CSocketRef refSocket = pConnection->Socket();
+        if ( !refSocket.Valid() )
+            return;
+
+        NyxNet::CTcpIpSocketRef refTcpIpSocket = refSocket->TcpIpSocket();
+        if ( !refTcpIpSocket.Valid() )
+            return;
+
+        m_ClientAddress = refTcpIpSocket->ClientAddress();
+
+    }
 }
 
 

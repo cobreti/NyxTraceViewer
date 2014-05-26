@@ -35,6 +35,17 @@ namespace TraceClientCore
     }
 
 
+    void CTraceDataRepository::InsertDisconnection(CTraceData *pTraceData)
+    {
+        Nyx::TMutexLock     TracesLock(m_refTracesMutex, true);
+
+        CTraceData* pLastTrace = m_Traces.back();
+        pTraceData->TickCount() = pLastTrace->TickCount();
+
+        Insert(pTraceData);
+    }
+
+
     /**
      *
      */

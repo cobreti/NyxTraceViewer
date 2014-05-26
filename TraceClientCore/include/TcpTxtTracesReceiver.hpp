@@ -17,8 +17,6 @@ namespace TraceClientCore
     public:
         CTcpTxtTracesReceiver(CTcpTxtTracesReceiversSvr* pSvr, NyxNet::IConnection* pConnection);
         virtual ~CTcpTxtTracesReceiver();
-
-        CTraceChannel*  LastChannel() const     { return m_pChannel; }
         
         //
         // IConnectionHandler methods
@@ -38,16 +36,17 @@ namespace TraceClientCore
 		virtual void HandleTraceLine(char* szHeader, char* pThread, char* szContent);
 		virtual void SendWebSocketAnswer(char* szInHeader, Nyx::IStreamRW& rStream);
 		virtual void SendHttpAnswer(char* szInHeader, Nyx::IStreamRW& rStream);
+        virtual void GetClientAddress(NyxNet::IConnection* pConnection);
 
     protected:
         
         NyxNet::IConnection*            m_pConnection;
         Nyx::TBuffer<Nyx::Byte>         m_Buffer;
         CTcpTxtTracesReceiversSvr*      m_pServer;
-        CTraceChannel*                  m_pChannel;
         CTracesReceiverProtocol*		m_pProtocol;
         CTextTraceHandler				m_TextTraceHandler;
         NyxWebSvr::CConnHttpHandlerRef  m_refHttpConnHandler;
+        NyxNet::CAddress                m_ClientAddress;
     };
 }
 

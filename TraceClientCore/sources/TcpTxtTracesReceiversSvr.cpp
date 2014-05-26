@@ -123,6 +123,9 @@ namespace TraceClientCore
      */
     Nyx::NyxResult CTcpTxtTracesReceiversSvr::OnNewConnection( NyxNet::IConnection* pConnection, NyxNet::IConnectionHandler*& pCloneHandler )
     {
+        NyxNet::CSocketRef refSocket = pConnection->Socket();
+        NyxNet::CAddress clientAddress = refSocket->TcpIpSocket()->ClientAddress();
+
         CTcpTxtTracesReceiver* pReceiver = new CTcpTxtTracesReceiver(this, pConnection);
         pCloneHandler = static_cast<NyxNet::IConnectionHandler*>(pReceiver);
         

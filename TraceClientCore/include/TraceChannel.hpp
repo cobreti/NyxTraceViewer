@@ -7,6 +7,7 @@
 #include "TracesPool.hpp"
 
 #include <list>
+#include <set>
 
 namespace TraceClientCore
 {
@@ -39,11 +40,21 @@ namespace TraceClientCore
     protected:
         
         Nyx::CAString               m_Name;
-//        CTracesPool*                m_pPool;
         CTracesPoolRef              m_refPool;
 		CTraceFeederRef				m_refFeeder;
     };
     
+
+    /**
+     * @brief The CTraceChannelSet class
+     */
+    class CTraceChannelSet : public std::set<CTraceChannel*>
+    {
+    public:
+        CTraceChannelSet() {}
+        virtual ~CTraceChannelSet() {}
+    };
+
     
     /**
      *

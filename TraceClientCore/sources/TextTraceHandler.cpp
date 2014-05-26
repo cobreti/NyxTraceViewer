@@ -117,6 +117,8 @@ namespace TraceClientCore
         
     	if ( pChannel )
     	{
+            m_ChannelsSet.insert(pChannel);
+
     		Nyx::CUtf8String	content(szContent);
 
     		CTraceData*		pTraceData = new (pChannel->Pool()->MemoryPool())CTraceData(pChannel->Pool()->MemoryPool());
