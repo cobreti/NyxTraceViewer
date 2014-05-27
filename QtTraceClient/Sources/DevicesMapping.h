@@ -20,6 +20,8 @@ public:
 public slots:
 
     void onClientMapping(int id, const QString& alias, const QString& name);
+    void onDeviceMapped(int id);
+    void onDeviceUnmapped(int id);
 
 signals:
 

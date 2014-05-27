@@ -20,6 +20,10 @@ void CDevicesMapping::Init()
 
     connect(    &rServerPortal, SIGNAL(clientMapping(int,QString,QString)),
                 this, SLOT(onClientMapping(int,QString,QString)) );
+    connect(    &rServerPortal, SIGNAL(deviceMapped(int)),
+                this, SLOT(onDeviceMapped(int)) );
+    connect(    &rServerPortal, SIGNAL(deviceUnmapped(int)),
+                this, SLOT(onDeviceUnmapped(int)) );
 
 }
 
@@ -35,4 +39,16 @@ void CDevicesMapping::onClientMapping(int id, const QString &alias, const QStrin
     m_MappedDevices.insert(id);
 
     emit addedDevice(id);
+}
+
+
+void CDevicesMapping::onDeviceMapped(int id)
+{
+    m_MappedDevices.insert(id);
+}
+
+
+void CDevicesMapping::onDeviceUnmapped(int id)
+{
+    m_MappedDevices.erase(id);
 }

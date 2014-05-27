@@ -44,6 +44,8 @@ void CDevicesSelectionPanel::onItemDoubleClicked(QTreeWidgetItem *pItem, int col
         bool                        bSelected = !pTreeItem->isSelected();
         CTraceServerPortal&         rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
+        NYXTRACE(0x0, L"onItemDoubleClicked : " << Nyx::CTF_Int(pTreeItem->device().id()) );
+
         if (bSelected)
             rPortal.setClientMapping( pTreeItem->device().id(), CTraceClientApp::Instance().AppSettings().clientId() );
         else
@@ -66,6 +68,8 @@ void CDevicesSelectionPanel::onDeviceRemoved(const CDevice &device)
 
 void CDevicesSelectionPanel::onDeviceMapped(int id)
 {
+    NYXTRACE(0x0, L"onDeviceMapped : " << Nyx::CTF_Int(id));
+
     int count = ui->devicesList->topLevelItemCount();
     int index = 0;
 
@@ -85,6 +89,8 @@ void CDevicesSelectionPanel::onDeviceMapped(int id)
 
 void CDevicesSelectionPanel::onDeviceUnmapped(int id)
 {
+    NYXTRACE(0x0, L"onDeviceUnmapped : " << Nyx::CTF_Int(id));
+
     int count = ui->devicesList->topLevelItemCount();
     int index = 0;
 
