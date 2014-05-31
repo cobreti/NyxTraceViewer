@@ -29,6 +29,12 @@ public:
     void removeClientMapping(int deviceId);
     void checkServerConnection();
 
+    const QString& server() const   { return m_Server; }
+    QString& server()               { return m_Server; }
+
+    const QString& traceClientName() const  { return m_Name; }
+    QString& traceClientName()              { return m_Name; }
+
     QHostAddress GetHostAddress();
 
 public slots:

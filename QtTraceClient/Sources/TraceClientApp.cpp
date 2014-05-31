@@ -14,6 +14,7 @@
 #include "ServerAccess/TraceServerPortal.h"
 #include "ServerAccess/TraceServerMonitor.h"
 #include "DevicesMgr.h"
+#include "Config/ConfigReader.hpp"
 
 #include "TraceClientCoreModule.hpp"
 
@@ -122,6 +123,10 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTraceServerMonitor = new CTraceServerMonitor(*m_pTraceServerPortal);
     m_pDevicesMgr = new CDevicesMgr();
 
+    CConfigReader       configReader;
+
+    configReader.Load();
+
     m_pTracesWindow->show();
 
     devicesMapping().Init();
@@ -194,7 +199,7 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return "1.0.2";
+    return "1.0.3";
 }
 
 

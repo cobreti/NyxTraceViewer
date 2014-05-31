@@ -101,7 +101,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/Decorations/DynamicFocusedItemHighlight.cpp \
     ../Sources/ServerAccess/WSHeartbeat.cpp \
     ../Sources/Controls/ConnectionStatusToolButton.cpp \
-    ../Sources/ServerAccess/TraceServerMonitor.cpp
+    ../Sources/ServerAccess/TraceServerMonitor.cpp \
+    ../Sources/Config/ConfigReader.cpp \
+    ../Sources/Config/ConfigWriter.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -193,7 +195,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/Decorations/DynamicFocusedItemHighlight.hpp \
     ../Sources/ServerAccess/WSHeartbeat.h \
     ../Sources/Controls/ConnectionStatusToolButton.h \
-    ../Sources/ServerAccess/TraceServerMonitor.h
+    ../Sources/ServerAccess/TraceServerMonitor.h \
+    ../Sources/Config/ConfigReader.hpp \
+    ../Sources/Config/ConfigWriter.hpp
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

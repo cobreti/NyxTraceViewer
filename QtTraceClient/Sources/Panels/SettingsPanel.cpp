@@ -4,6 +4,7 @@
 #include "TraceClientApp.h"
 #include "ServerAccess/TraceServerPortal.h"
 #include "ServerAccess/TraceServerMonitor.h"
+#include "Config/ConfigWriter.hpp"
 
 
 CSettingsPanel::CSettingsPanel() : QWidget(),
@@ -59,6 +60,10 @@ void CSettingsPanel::onApply()
     ui->TraceDirectoryPort->setEnabled(false);
 
     rApp.TraceServerMonitor().Start();
+
+    CConfigWriter       configWriter;
+
+    configWriter.Save();
 }
 
 
@@ -119,6 +124,19 @@ void CSettingsPanel::showEvent(QShowEvent *)
 {
     CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
     CTraceServerMonitor&    rMonitor = CTraceClientApp::Instance().TraceServerMonitor();
+
+    if ( !rPortal.server().isEmpty() )
+    {
+        QString server = rPortal.server();
+        int index = server.lastIndexOf(':');
+
+        if ( index > 0 )
+        {
+            ui->TraceDirectoryServer->setText(server.left(index));
+        }
+    }
+
+    ui->name->setText( rPortal.traceClientName() );
 
     if ( rMonitor.active() )
     {
