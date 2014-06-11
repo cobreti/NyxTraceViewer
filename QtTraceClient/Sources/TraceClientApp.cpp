@@ -199,7 +199,7 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return "1.0.3";
+    return "1.0.4";
 }
 
 

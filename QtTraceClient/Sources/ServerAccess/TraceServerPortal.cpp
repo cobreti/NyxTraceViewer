@@ -6,6 +6,7 @@
 #include "WSUnmapDevice.h"
 #include "WSHeartbeat.h"
 
+#include <QHostInfo>
 
 
 CTraceServerPortal::CTraceServerPortal() : QObject(),
@@ -104,11 +105,16 @@ void CTraceServerPortal::checkServerConnection()
 
 QHostAddress CTraceServerPortal::GetHostAddress()
 {
-    QList<QHostAddress>     list = QNetworkInterface::allAddresses();
+    QHostInfo info = QHostInfo::fromName( QHostInfo::localHostName() );
+
+
+    QList<QHostAddress>     list = info.addresses();
     QHostAddress            hostAddress;
+    QString                 addr;
 
     for (int index = 0; index < list.count(); ++index)
     {
+        addr = list[index].toString();
         if ( !list[index].isLoopback() && list[index].protocol() == QAbstractSocket::IPv4Protocol )
         {
             hostAddress = list[index];
