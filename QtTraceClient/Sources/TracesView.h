@@ -15,7 +15,7 @@
 #include "View/ViewTracesContentIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
 //#include "View/Decorations/ViewTraceObjectsDirectory.h"
-#include "View/Decorations/DynamicHighlightsDirectory.h"
+//#include "View/Decorations/DynamicHighlightsDirectory.h"
 
 namespace Ui
 {
@@ -51,7 +51,8 @@ public:
 
     CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
-    CDynamicHighlightsDirectory&     dynamicHighlights()        { return m_DynamicHighlights; }
+    CTracesGroupView*           TracesGroupView() const     { return m_pCurrentTracesGroupView; }
+//    CDynamicHighlightsDirectory&     dynamicHighlights()        { return m_DynamicHighlights; }
 
     CViewTracesContentIterator&     focusedItem()               { return m_FocusedItem; }
     CViewTracesIterator&            topPos()                    { return m_TopPos; }
@@ -156,7 +157,7 @@ protected:
     CViewTracesDisplayCache             m_DisplayCache;
 
 //    CViewTraceObjectsDirectory          m_TraceSectionsHilights;
-    CDynamicHighlightsDirectory         m_DynamicHighlights;
+//    CDynamicHighlightsDirectory         m_DynamicHighlights;
 
     CTracesGroupView*                   m_pCurrentTracesGroupView;
 

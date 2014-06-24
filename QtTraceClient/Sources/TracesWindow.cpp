@@ -17,6 +17,7 @@
 #include "View/Highlight/HighlightsMgrWnd.h"
 #include "View/Decorations/DynamicTextHighlight.h"
 #include "ServerAccess/TraceServerMonitor.h"
+#include "View/TracesGroupViewMgr.h"
 
 #include "Color/ColorBtn.h"
 
@@ -241,9 +242,20 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_WndName = QString::number(CWindowsManager::Instance().TracesWindows().GetWindowNo());
 
-    CDynamicHighlight*  pHighlight = m_pTracesView->dynamicHighlights().Get(CDynamicHighlight::kDefault);
-    CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
-    m_pBtn_HighlightColor->Color() = pTextHighlight->color();
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    CDynamicHighlight*  pHighlight = NULL;
+    CDynamicTextHighlight*  pTextHighlight = NULL;
+
+    if ( pTGV != NULL )
+    {
+        pHighlight = pTGV->DynamicHilights().Get(CDynamicHighlight::kDefault);
+        pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+        m_pBtn_HighlightColor->Color() = pTextHighlight->color();
+    }
+    else
+    {
+        m_pBtn_HighlightColor->Color() = Qt::yellow;
+    }
 
     QString     title;
     title += "NyxTracesViewer - ";
@@ -335,7 +347,8 @@ void CTracesWindow::OnClear()
  */
 void CTracesWindow::OnSearchTextChanged( const QString& text )
 {
-    CDynamicHighlight*  pHighlight = m_pTracesView->dynamicHighlights().Get(CDynamicHighlight::kDefault);
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    CDynamicHighlight*  pHighlight = pTGV->DynamicHilights().Get(CDynamicHighlight::kDefault);
     CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
 
     pTextHighlight->text() = text;
@@ -343,6 +356,8 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
     m_pTracesView->focusedItem().setText(text);
     m_pBtn_SearchNext->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
     m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
+
+    pTGV->FocusedText() = text;
 
     m_pTracesView->update();
 }
@@ -397,7 +412,8 @@ void CTracesWindow::OnSearchPrevious()
  */
 void CTracesWindow::OnHighlightColorChanged(CColorBtn* pBtn)
 {
-    CDynamicHighlight*  pHighlight = m_pTracesView->dynamicHighlights().Get(CDynamicHighlight::kDefault);
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    CDynamicHighlight*  pHighlight = pTGV->DynamicHilights().Get(CDynamicHighlight::kDefault);
     CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
 
     pTextHighlight->color() = pBtn->Color();
@@ -470,6 +486,9 @@ void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*
     m_pBtn_Clear->setEnabled(true);
 
     m_pTracesView->SetTracesGroup(pGroup);
+
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    m_pSearchText->setText(pTGV->FocusedText());
 }
 
 

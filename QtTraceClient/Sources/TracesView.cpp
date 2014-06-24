@@ -250,6 +250,20 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 
     m_pCurrentTracesGroupView = rApp.TracesGroupViewMgr().Get(pGroup->Id());
 
+    if ( m_pCurrentTracesGroupView->DynamicHilights().Get(CDynamicHighlight::kDefault) == NULL )
+    {
+        CDynamicHighlight*  pHighlight = new CDynamicTextHighlight();
+        pHighlight->id() = CDynamicHighlight::kDefault;
+        m_pCurrentTracesGroupView->DynamicHilights().Add(pHighlight);
+    }
+
+    if ( m_pCurrentTracesGroupView->DynamicHilights().Get(CDynamicHighlight::kFocusedItem) == NULL )
+    {
+        CDynamicFocusedItemHighlight*   pFocusedItemHighlight = new CDynamicFocusedItemHighlight(m_FocusedItem);
+        pFocusedItemHighlight->id() = CDynamicHighlight::kFocusedItem;
+        m_pCurrentTracesGroupView->DynamicHilights().Add(pFocusedItemHighlight);
+    }
+
     m_TracesGroupNotificationsListener.ConnectTo(pGroup);
     m_pCurrentTracesGroup = pGroup;
     m_TopPos = CViewTracesIterator();
@@ -363,7 +377,7 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     while ( TraceIterator.Valid() && !TracePainter.Done() )
     {
         TracePainter.LineNumber() = TraceIterator.getLineNumber();
-        TracePainter.PreDraw(TraceIterator.TraceData(), m_pCurrentTracesGroupView->SectionsHilights(), m_DynamicHighlights);
+        TracePainter.PreDraw(TraceIterator.TraceData(), m_pCurrentTracesGroupView->SectionsHilights(), m_pCurrentTracesGroupView->DynamicHilights());
 
         ++ TraceIterator;
     }
@@ -653,7 +667,6 @@ void CTracesView::Init(CTracesView* pBase)
     m_pHeader->Margins() = m_Margins;
 
     m_refViewCore->AddView(this);
-//    m_refViewCore->ViewItemsModulesMgr().Listeners().Insert( static_cast<IViewItemsModulesListener*>(this) );
 
     m_pLastSelectedBrush = CTraceClientApp::Instance().AppSettings().ViewHighlightSettings().LineHighlights()[0];
 
@@ -668,14 +681,6 @@ void CTracesView::Init(CTracesView* pBase)
 
     m_SelectionBrush = QBrush(Settings().selectionColor());
     m_SelectionBorderBrush = QBrush(Settings().selectionBorderColor());
-
-    CDynamicHighlight*  pHighlight = new CDynamicTextHighlight();
-    pHighlight->id() = CDynamicHighlight::kDefault;
-    m_DynamicHighlights.Add(pHighlight);
-
-    CDynamicFocusedItemHighlight*   pFocusedItemHighlight = new CDynamicFocusedItemHighlight(m_FocusedItem);
-    pFocusedItemHighlight->id() = CDynamicHighlight::kFocusedItem;
-    m_DynamicHighlights.Add(pFocusedItemHighlight);
 
     m_FocusedItem.setColumnsOrder(Settings().ColumnsSettings().Order().OrderVector());
 
