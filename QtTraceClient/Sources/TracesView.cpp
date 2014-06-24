@@ -163,7 +163,7 @@ void CTracesView::OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceC
 
         int linesCount = pView->LinesCount();
 
-        NYXTRACE(0x0, L"traces view lines count : " << Nyx::CTF_Int(linesCount));
+//        NYXTRACE(0x0, L"traces view lines count : " << Nyx::CTF_Int(linesCount));
         pView->ResetDirty();
     }
 }
@@ -423,8 +423,8 @@ void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
     ui->m_HorzScrollbar->setSingleStep(20);
     ui->m_HorzScrollbar->setPageStep( rcClient.width()/2 );
 
-    NYXTRACE(0x0, L"UpdateScrollBarRange : nScrollWidth = " << nScrollWidth );
-    NYXTRACE(0x0, L"UpdateScrollBarRange : hscrollbar value = " << ui->m_HorzScrollbar->value() << L" of " << nScrollWidth );
+//    NYXTRACE(0x0, L"UpdateScrollBarRange : nScrollWidth = " << nScrollWidth );
+//    NYXTRACE(0x0, L"UpdateScrollBarRange : hscrollbar value = " << ui->m_HorzScrollbar->value() << L" of " << nScrollWidth );
 
     m_DisplayCache.Clear();
 

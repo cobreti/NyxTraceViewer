@@ -77,10 +77,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
 
     initDefaultSettings();
 
-    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
-    QRect           rcScreen = pApp->desktop()->availableGeometry();
+    QRect           rcScreen = m_pQtApplication->desktop()->availableGeometry();
 
-    QString path = pApp->applicationDirPath();
+    QString path = m_pQtApplication->applicationDirPath();
     std::string strPath = path.toStdString();
 
     NYXTRACE(0x0, L"current path : " << Nyx::CTF_AnsiText(strPath.c_str()) );
@@ -199,7 +198,8 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return "1.0.4";
+    return " - in development";
+//    return "1.0.4";
 }
 
 

@@ -56,9 +56,9 @@ void CViewTraceObjectsDirectory::enumContent()
         NYXTRACE( 0x0, L"    -- view trace object");
     };
 
-    NYXTRACE(0x0, L"begin enum content");
+//    NYXTRACE(0x0, L"begin enum content");
 
     std::for_each( m_ObjectsTable.begin(), m_ObjectsTable.end(), eachFct );
 
-    NYXTRACE(0x0, L"end enum content");
+//    NYXTRACE(0x0, L"end enum content");
 }

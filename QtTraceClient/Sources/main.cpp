@@ -2,6 +2,7 @@
 
 #include <Nyx.hpp>
 #include <NyxNet.hpp>
+#include <NyxNetTcpIpTraceOutput.hpp>
 #include <NyxWebSvr/Module.hpp>
 #include <NyxConsoleTraceOutput.hpp>
 
@@ -53,7 +54,8 @@ int main(int argc, char *argv[])
 #if defined(_DEBUG)
 	Nyx::CTraceCompositorRef                    refTraceCompositor = Nyx::CTraceCompositor::Alloc();
 
-    refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
+//    refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
+    refTraceCompositor->SetOutput(NyxNet::CTcpIpTraceOutput::Alloc("NyxTraceViewer", "127.0.0.1", 8500, true));
 //    refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceViewer"));
 #endif
 

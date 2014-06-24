@@ -16,6 +16,9 @@ namespace TraceClientCore
     m_pServer(pSvr),
     m_pChannel(NULL)
     {
+        GetClientAddress(pConnection);
+
+        TraceClientCore::CModule::Instance().ConnectionsMgr().onNewConnection(m_ClientAddress);
 //        CTcpNxTracesReceiversTable::MethodsRef    refMethods = m_pServer->ReceiversTable().GetMethods();
 //
 //        refMethods->Insert(this);
@@ -69,7 +72,9 @@ namespace TraceClientCore
      *
      */
     void CTcpNxTracesReceiver::OnConnectionTerminated( NyxNet::IConnection* pConnection )
-    {        
+    {
+        TraceClientCore::CModule::Instance().ConnectionsMgr().onCloseConnection(m_ClientAddress, m_ChannelsSet);
+
         delete this;
     }
     
@@ -112,6 +117,7 @@ namespace TraceClientCore
             
             if ( pChannel )
             {
+                m_ChannelsSet.insert(pChannel);
                 m_pChannel = pChannel;
                 
                 CTraceNxStreamReader        TraceReader( pChannel->Pool() );
@@ -215,6 +221,21 @@ namespace TraceClientCore
             NYXTRACE(0x0, L"trace text : " << Nyx::CTF_AnsiText(pText) );
         }
     }
+
+    void CTcpNxTracesReceiver::GetClientAddress(NyxNet::IConnection *pConnection)
+    {
+        NyxNet::CSocketRef refSocket = pConnection->Socket();
+        if ( !refSocket.Valid() )
+            return;
+
+        NyxNet::CTcpIpSocketRef refTcpIpSocket = refSocket->TcpIpSocket();
+        if ( !refTcpIpSocket.Valid() )
+            return;
+
+        m_ClientAddress = refTcpIpSocket->ClientAddress();
+
+    }
+
 }
 
 
