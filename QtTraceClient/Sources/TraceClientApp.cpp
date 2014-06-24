@@ -198,8 +198,8 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return " - in development";
-//    return "1.0.4";
+//    return " - in development";
+    return "1.0.5";
 }
 
 
