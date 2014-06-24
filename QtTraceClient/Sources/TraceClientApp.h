@@ -5,7 +5,6 @@
 #include "WindowsManager.hpp"
 #include "DevicesMapping.h"
 
-
 class CMainWindow;
 class CTracesWindow;
 class QApplication;
@@ -15,6 +14,7 @@ class QWidget;
 class CTraceServerPortal;
 class CDevicesMgr;
 class CTraceServerMonitor;
+class CTracesGroupViewMgr;
 
 
 class CTraceClientApp : public QObject,
@@ -58,6 +58,8 @@ public:
     CTraceServerPortal&     TraceServerPortal() const   { return *m_pTraceServerPortal; }
     CTraceServerMonitor&    TraceServerMonitor() const  { return *m_pTraceServerMonitor; }
 
+    CTracesGroupViewMgr&    TracesGroupViewMgr() const  { return *m_pTracesGroupViewMgr; }
+
     const char* GetVersion() const;
 
 public: // ITracesWindowsListener methods
@@ -87,6 +89,7 @@ protected:
 
     CDevicesMgr*                m_pDevicesMgr;
     CDevicesMapping             m_DevicesMapping;
+    CTracesGroupViewMgr*        m_pTracesGroupViewMgr;
 
     static CTraceClientApp*     s_pInstance;
 };

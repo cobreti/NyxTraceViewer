@@ -15,6 +15,7 @@
 #include "ServerAccess/TraceServerMonitor.h"
 #include "DevicesMgr.h"
 #include "Config/ConfigReader.hpp"
+#include "View/TracesGroupViewMgr.h"
 
 #include "TraceClientCoreModule.hpp"
 
@@ -49,7 +50,8 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_pDevicesSelectionPanel(NULL),
     m_pTraceServerPortal(NULL),
     m_pTraceServerMonitor(NULL),
-    m_pDevicesMgr()
+    m_pDevicesMgr(),
+    m_pTracesGroupViewMgr(NULL)
 {
     s_pInstance = this;
 }
@@ -93,16 +95,18 @@ void CTraceClientApp::Init(int &argc, char **argv)
     Nyx::CAString       bioFile( strPath.c_str() );
     bioFile += "/SSL/dh1024.pem";
 
+    int     basePortNumber = 8600;
+
     TraceClientCore::CTcpTracesReceiversSvr::CSettings     settings;
-    settings.PortNumber() = 8500;
+    settings.PortNumber() = basePortNumber;
     settings.UseHandshake() = true;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(0).Start(settings);
 
-    settings.PortNumber() = 8501;
+    settings.PortNumber() = basePortNumber + 1;
     settings.UseHandshake() = false;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
 
-    settings.PortNumber() = 8502;
+    settings.PortNumber() = basePortNumber + 2;
     settings.UseHandshake() = false;
     settings.UseSSL() = true;
     settings.CertificateFile() = certificateFile;
@@ -121,6 +125,7 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pTraceServerPortal = new CTraceServerPortal();
     m_pTraceServerMonitor = new CTraceServerMonitor(*m_pTraceServerPortal);
     m_pDevicesMgr = new CDevicesMgr();
+    m_pTracesGroupViewMgr = new CTracesGroupViewMgr();
 
     CConfigReader       configReader;
 
@@ -158,6 +163,8 @@ void CTraceClientApp::Destroy()
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
     WindowsManager().Terminate();
+
+    delete m_pTracesGroupViewMgr;
 }
 
 
@@ -198,8 +205,8 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-//    return " - in development";
-    return "1.0.5";
+    return " - in development";
+//    return "1.0.5";
 }
 
 

@@ -14,6 +14,7 @@
 
 #include <list>
 
+
 namespace TraceClientCore
 {
     class CTraceChannel;

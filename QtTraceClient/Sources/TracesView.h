@@ -14,7 +14,7 @@
 #include "View/ViewTracesIterator.hpp"
 #include "View/ViewTracesContentIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
-#include "View/Decorations/ViewTraceObjectsDirectory.h"
+//#include "View/Decorations/ViewTraceObjectsDirectory.h"
 #include "View/Decorations/DynamicHighlightsDirectory.h"
 
 namespace Ui
@@ -27,6 +27,7 @@ class QToolButton;
 class CHighlightBrush;
 class CHighlightColorsPopup;
 class QFile;
+class CTracesGroupView;
 
 
 /**
@@ -154,8 +155,10 @@ protected:
     CViewTracesContentIterator          m_FocusedItem;
     CViewTracesDisplayCache             m_DisplayCache;
 
-    CViewTraceObjectsDirectory          m_TraceSectionsHilights;
+//    CViewTraceObjectsDirectory          m_TraceSectionsHilights;
     CDynamicHighlightsDirectory         m_DynamicHighlights;
+
+    CTracesGroupView*                   m_pCurrentTracesGroupView;
 
     bool                                m_bUpdatingScrollPos;
 

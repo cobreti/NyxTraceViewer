@@ -103,7 +103,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/Controls/ConnectionStatusToolButton.cpp \
     ../Sources/ServerAccess/TraceServerMonitor.cpp \
     ../Sources/Config/ConfigReader.cpp \
-    ../Sources/Config/ConfigWriter.cpp
+    ../Sources/Config/ConfigWriter.cpp \
+    ../Sources/View/TracesGroupView.cpp \
+    ../Sources/View/TracesGroupViewMgr.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -197,7 +199,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/Controls/ConnectionStatusToolButton.h \
     ../Sources/ServerAccess/TraceServerMonitor.h \
     ../Sources/Config/ConfigReader.hpp \
-    ../Sources/Config/ConfigWriter.hpp
+    ../Sources/Config/ConfigWriter.hpp \
+    ../Sources/View/TracesGroupView.h \
+    ../Sources/View/TracesGroupViewMgr.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

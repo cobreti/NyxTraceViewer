@@ -19,6 +19,7 @@
 #include "View/Decorations/ViewTraceSectionHilight.h"
 #include "View/Decorations/DynamicTextHighlight.h"
 #include "View/Decorations/DynamicFocusedItemHighlight.hpp"
+#include "View/TracesGroupViewMgr.h"
 
 
 /**
@@ -32,7 +33,8 @@ CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
     m_pHeader(NULL),
     m_pHighlightColorsPopup(NULL),
     m_pCurrentTracesGroup(NULL),
-    m_bUpdatingScrollPos(false)
+    m_bUpdatingScrollPos(false),
+    m_pCurrentTracesGroupView(NULL)
 {
     Init(pBase);
 }
@@ -244,6 +246,10 @@ void CTracesView::Invalidate(bool dirty)
 
 void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 {
+    CTraceClientApp& rApp = CTraceClientApp::Instance();
+
+    m_pCurrentTracesGroupView = rApp.TracesGroupViewMgr().Get(pGroup->Id());
+
     m_TracesGroupNotificationsListener.ConnectTo(pGroup);
     m_pCurrentTracesGroup = pGroup;
     m_TopPos = CViewTracesIterator();
@@ -324,6 +330,9 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     painter.drawLine(m_Margins.left()-1, 0, m_Margins.left()-1, ViewHeight);
 
+    if ( m_pCurrentTracesGroup == NULL )
+        return;
+
     painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
     TracePainter.Origin() = QPoint( m_Margins.left() - ui->m_HorzScrollbar->value(), HeaderSize().height()+1);
@@ -348,12 +357,13 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     TracePainter.PrepareDrawing();
 
-    m_TraceSectionsHilights.enumContent();
+    m_pCurrentTracesGroupView->SectionsHilights().enumContent();
+//    m_TraceSectionsHilights.enumContent();
 
     while ( TraceIterator.Valid() && !TracePainter.Done() )
     {
         TracePainter.LineNumber() = TraceIterator.getLineNumber();
-        TracePainter.PreDraw(TraceIterator.TraceData(), m_TraceSectionsHilights, m_DynamicHighlights);
+        TracePainter.PreDraw(TraceIterator.TraceData(), m_pCurrentTracesGroupView->SectionsHilights(), m_DynamicHighlights);
 
         ++ TraceIterator;
     }
@@ -548,7 +558,7 @@ void CTracesView::mouseReleaseEvent(QMouseEvent *event)
                             CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
                             CTraceSectionId         id( entry.traceData()->identifier(), entry.columnId() );
 
-                            m_TraceSectionsHilights.Set(id, new CViewTraceSectionHilight(*entry.traceData(), entry.columnId(), entry.subRect()) );
+                            m_pCurrentTracesGroupView->SectionsHilights().Set(id, new CViewTraceSectionHilight(*entry.traceData(), entry.columnId(), entry.subRect()) );
 
                             NYXTRACE(0x0, L"==> "
                                      << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
