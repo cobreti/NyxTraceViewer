@@ -270,10 +270,13 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
     m_pCurrentTracesGroup = pGroup;
     m_TopPos = CViewTracesIterator();
 
+    ui->m_VertScrollbar->blockSignals(true);
     ui->m_HorzScrollbar->setValue(0);
     ui->m_VertScrollbar->setValue(0);
     UpdateScrollbarRange(ClientRect());
     m_DisplayCache.Clear();
+
+    ui->m_VertScrollbar->blockSignals(false);
 
     update();
 }
