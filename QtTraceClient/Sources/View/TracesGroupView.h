@@ -20,10 +20,14 @@ public:
 
     QString& FocusedText()          { return m_FocusedText; }
 
+    bool KeepAtEnd() const          { return m_bKeepAtEnd; }
+    bool& KeepAtEnd()               { return m_bKeepAtEnd; }
+
 protected:
     CViewTraceObjectsDirectory          m_TraceSectionsHilights;
     CDynamicHighlightsDirectory         m_DynamicHighlights;
     QString                             m_FocusedText;
+    bool                                m_bKeepAtEnd;
 };
 
 #endif // TRACESGROUPVIEW_H

@@ -139,7 +139,7 @@ protected:
     QString								m_Name;
     QRectF								m_Margins;
     bool                                m_bViewDirty;
-    bool                                m_bKeepAtEnd;
+//    bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
     QTimer                              m_RefreshTimer;
     CTracesViewCoreRef                  m_refViewCore;

@@ -29,7 +29,7 @@ CTracesView::CTracesView(QWidget* pParent, CTracesView* pBase) :
     QWidget(pParent),
     ui( new Ui::CTracesView() ),
     m_bViewDirty(false),
-    m_bKeepAtEnd(false),
+//    m_bKeepAtEnd(false),
     m_pHeader(NULL),
     m_pHighlightColorsPopup(NULL),
     m_pCurrentTracesGroup(NULL),
@@ -72,9 +72,11 @@ CViewTracesIterator CTracesView::LastPos() const
 
 void CTracesView::setKeepAtEnd(bool keepAtEnd)
 {
-    m_bKeepAtEnd = keepAtEnd;
+    m_pCurrentTracesGroupView->KeepAtEnd() = keepAtEnd;
 
-    if ( m_bKeepAtEnd )
+//    m_bKeepAtEnd = keepAtEnd;
+
+    if ( m_pCurrentTracesGroupView->KeepAtEnd() )
     {
         MovePosToDisplayLastLine();
     }
@@ -156,7 +158,7 @@ void CTracesView::OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceC
 
         UpdateScrollbarRange(ClientRect());
 
-        if ( m_bKeepAtEnd )
+        if ( m_pCurrentTracesGroupView->KeepAtEnd() )
         {
             MovePosToDisplayLastLine();
         }
@@ -285,9 +287,9 @@ void CTracesView::OnVertSliderPosChanged(int value)
     m_TopPos.MoveToLine(value);
     m_DisplayCache.Clear();
 
-    if ( !updatingScrollPos() && m_bKeepAtEnd )
+    if ( !updatingScrollPos() && m_pCurrentTracesGroupView->KeepAtEnd() )
     {
-        m_bKeepAtEnd = false;
+        m_pCurrentTracesGroupView->KeepAtEnd() = false;
         emit keepAtEndDisabled();
     }
 

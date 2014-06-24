@@ -1,7 +1,8 @@
 #include "TracesGroupView.h"
 
 
-CTracesGroupView::CTracesGroupView()
+CTracesGroupView::CTracesGroupView() :
+    m_bKeepAtEnd(false)
 {
 }
 

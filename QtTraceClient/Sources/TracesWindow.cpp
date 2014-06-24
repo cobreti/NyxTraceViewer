@@ -489,6 +489,15 @@ void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*
 
     CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
     m_pSearchText->setText(pTGV->FocusedText());
+
+    if ( pTGV->KeepAtEnd() )
+    {
+        m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Selected);
+    }
+    else
+    {
+        m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Normal);
+    }
 }
 
 
