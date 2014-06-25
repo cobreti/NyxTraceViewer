@@ -112,6 +112,9 @@ const CViewColumnsSettings& CViewColumnsSettings::operator = (const CViewColumns
 
         for ( ColumnSettingsTable::const_iterator pos = settings.m_Settings.begin(); pos != settings.m_Settings.end(); ++pos )
             m_Settings[pos->first] = new CViewColumnSettings(*pos->second);
+
+        m_ColumnsOrder = settings.m_ColumnsOrder;
+        m_VisibleColumnsCount = settings.m_VisibleColumnsCount;
     }
 
     return *this;

@@ -230,10 +230,13 @@ const QRectF CTracesView::ViewRect() const
  */
 int CTracesView::NumberOfLinesVisibles() const
 {
-    int                 height = ViewRect().height();
-    CViewSettings&      rSettings = ViewCore()->ViewSettings();
+    if ( m_pCurrentTracesGroupView == NULL )
+        return 1;
 
-    float               visibleLines = (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
+    int                         height = ViewRect().height();
+    const CViewSettings&        rSettings = m_Settings;
+
+    float                       visibleLines = (height - ui->m_HorzScrollbar->height()) / rSettings.DrawSettings()->SingleLineHeight();
 
     return int(visibleLines - 0.5);
 }
@@ -250,7 +253,14 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
 {
     CTraceClientApp& rApp = CTraceClientApp::Instance();
 
+    if ( m_pCurrentTracesGroupView != NULL )
+    {
+        m_pCurrentTracesGroupView->ColumnsSettings() = m_Settings.ColumnsSettings();
+    }
+
     m_pCurrentTracesGroupView = rApp.TracesGroupViewMgr().Get(pGroup->Id());
+
+    m_Settings.ColumnsSettings() = m_pCurrentTracesGroupView->ColumnsSettings();
 
     if ( m_pCurrentTracesGroupView->DynamicHilights().Get(CDynamicHighlight::kDefault) == NULL )
     {
@@ -275,6 +285,7 @@ void CTracesView::SetTracesGroup( TraceClientCore::CTracesGroup* pGroup )
     ui->m_VertScrollbar->setValue(0);
     UpdateScrollbarRange(ClientRect());
     m_DisplayCache.Clear();
+    m_pHeader->AdjustColumnsSize();
 
     ui->m_VertScrollbar->blockSignals(false);
 
@@ -342,7 +353,6 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     CViewTracesIterator                     TraceIterator = m_TopPos;
     qreal                                   ViewHeight = (qreal) ClientRect().height() + HeaderSize().height();
     CViewTracePainter                       TracePainter(painter, m_DisplayCache);
-    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
 
     QBrush  bkgndBrush = palette().base();
     painter.fillRect(pEvent->rect(), bkgndBrush);
@@ -351,6 +361,8 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
 
     if ( m_pCurrentTracesGroup == NULL )
         return;
+
+    CViewSettings&                          rSettings = m_Settings;
 
     painter.setClipRect(m_Margins.left(), HeaderSize().height(), ClientRect().width(), ViewHeight);
 
@@ -432,7 +444,10 @@ void CTracesView::closeEvent(QCloseEvent* event)
 
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
-    CViewSettings&                          rSettings = ViewCore()->ViewSettings();
+    if ( m_pCurrentTracesGroupView == NULL )
+        return;
+
+    CViewSettings&                          rSettings = m_Settings;
     int                                     NumberOfLines = 0;
     int                                     NumberOfDisplayedLines = NumberOfLinesVisibles();
 
@@ -648,19 +663,18 @@ void CTracesView::Init(CTracesView* pBase)
     m_Margins.setLeft(25.0);
     m_Margins.setRight(25.0);
 
+    m_Settings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
+    m_Settings.DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
+
     if ( pBase )
     {
         m_refViewCore = pBase->ViewCore();
-
-//        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
-//        m_pItemsWalker->Clone(*pBase->m_pItemsWalker);
 
         ui->m_VertScrollbar->setValue( pBase->ui->m_VertScrollbar->value());
     }
     else
     {
         m_refViewCore = new CTracesViewCore();
-//        m_pItemsWalker = new CViewItemsWalker(m_refViewCore->ViewItemsModulesMgr());
 
         Settings().DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
     }
@@ -668,7 +682,7 @@ void CTracesView::Init(CTracesView* pBase)
     m_refHighlighters = new CViewItemHighlightersSet();
 
     m_pHeader = new CViewHeader( Settings().ColumnsSettings(), this );
-    m_pHeader->InitDefaultWidth();
+//    m_pHeader->InitDefaultWidth();
     m_pHeader->Margins() = m_Margins;
 
     m_refViewCore->AddView(this);

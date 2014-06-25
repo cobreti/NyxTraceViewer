@@ -65,6 +65,33 @@ void CViewHeader::InitDefaultWidth()
 }
 
 
+void CViewHeader::AdjustColumnsSize()
+{
+    size_t              ColsCount = m_rColumnsSettings.Order().Count();
+    QFontMetrics        metrics(*m_pFont);
+    int                 height = 0;
+    int                 lWidth = 0;
+
+    for (size_t index = 0; index < ColsCount; ++index)
+    {
+        EViewColumnId             id  = m_rColumnsSettings.Order()[index];
+        CViewColumnSettings&      rSettings = m_rColumnsSettings[id];
+
+        QRectF      rcText = metrics.boundingRect(rSettings.GetTitle());
+
+        lWidth = rcText.width() + m_Margins.width();
+
+        if ( lWidth > rSettings.GetWidth() )
+            rSettings.SetWidth( lWidth );
+
+        if ( rcText.height() > height )
+            height = rcText.height();
+    }
+
+    resize( width(), height + m_Margins.height() );
+}
+
+
 /**
  *
  */

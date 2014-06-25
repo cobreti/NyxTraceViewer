@@ -130,9 +130,9 @@ void CTracesViewCore::Init()
 //    m_pViewItemsModulesMgr = new CViewItemsModulesMgr(m_refMemoryPool);
 //    m_pRepositoryObserver = new CTracesViewCoreRepositoryObserver(*this);
 
-    m_ViewSettings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
+//    m_ViewSettings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
 
-    m_ViewSettings.DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
+//    m_ViewSettings.DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
 }
 
 

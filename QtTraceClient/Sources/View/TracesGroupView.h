@@ -5,6 +5,8 @@
 
 #include "Decorations/ViewTraceObjectsDirectory.h"
 #include "Decorations/DynamicHighlightsDirectory.h"
+#include "ViewColumnsSettings.hpp"
+
 
 #include <QtGui>
 
@@ -23,11 +25,15 @@ public:
     bool KeepAtEnd() const          { return m_bKeepAtEnd; }
     bool& KeepAtEnd()               { return m_bKeepAtEnd; }
 
+    const CViewColumnsSettings&     ColumnsSettings() const { return m_ColumnsSettings; }
+    CViewColumnsSettings&           ColumnsSettings()       { return m_ColumnsSettings; }
+
 protected:
     CViewTraceObjectsDirectory          m_TraceSectionsHilights;
     CDynamicHighlightsDirectory         m_DynamicHighlights;
     QString                             m_FocusedText;
     bool                                m_bKeepAtEnd;
+    CViewColumnsSettings                m_ColumnsSettings;
 };
 
 #endif // TRACESGROUPVIEW_H

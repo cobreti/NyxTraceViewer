@@ -17,7 +17,8 @@ CViewTracePainter::CViewTracePainter(QPainter &rPainter, CViewTracesDisplayCache
     m_rDisplayCache(rDisplayCache),
     m_pColumnsSettings(NULL),
     m_LineNumber(0),
-    m_bColumnSizeChanged(false)
+    m_bColumnSizeChanged(false),
+    m_TextMargin(5)
 {
 }
 
@@ -196,6 +197,7 @@ void CViewTracePainter::ProcessColumn( TraceClientCore::CTraceData* pData, CView
         qreal                   colWidth = m_ColumnsSize[columnId];
 
         rcArea = m_Metrics.ColumnRect(columnId);
+        rcArea.setRight( rcArea.right() + m_TextMargin*2 );
 
         if (settings.AutoWidth())
         {
@@ -232,6 +234,7 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
     entryData = m_rDisplayCache[entryId];
 
     rcArea = entryData.itemArea();
+    rcArea.translate( m_TextMargin, 0 );
 
     if ( columnId != eVCI_LineNumber && pData->Type() == TraceClientCore::CTraceData::eTT_ConnectionStatus_Disconnection )
     {
@@ -246,6 +249,7 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
     {
         QString     text = TracePortal.GetColumnText(columnId);
         m_rPainter.drawText(rcArea, Qt::AlignLeft, text);
+//        m_rPainter.drawRect(rcArea);
     }
 
     m_Pos.rx() += entryData.columnWidth() + settings.Margins().width();

@@ -108,6 +108,8 @@ protected:
     TColumnsSizeTable           m_ColumnsSize;
     bool                        m_bColumnSizeChanged;
     CViewTraceMetrics           m_Metrics;
+
+    int                         m_TextMargin;
 };
 
 

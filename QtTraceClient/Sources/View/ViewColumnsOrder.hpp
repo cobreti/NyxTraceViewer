@@ -19,6 +19,8 @@ public:
 
     const ColumnsIdVector& OrderVector() const          { return m_ColumnsOrder; }
 
+    const CViewColumnsOrder& operator = (const CViewColumnsOrder& columnsOrder);
+
 protected:
 
     ColumnsIdVector         m_ColumnsOrder;

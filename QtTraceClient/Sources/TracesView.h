@@ -14,8 +14,8 @@
 #include "View/ViewTracesIterator.hpp"
 #include "View/ViewTracesContentIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
-//#include "View/Decorations/ViewTraceObjectsDirectory.h"
-//#include "View/Decorations/DynamicHighlightsDirectory.h"
+#include "View/ViewSettings.hpp"
+
 
 namespace Ui
 {
@@ -44,8 +44,8 @@ public:
 	void SetName( const QString& name );
 	const QString& Name() const		{ return m_Name; }
 
-    const CViewSettings&		Settings() const		{ return ViewCore()->ViewSettings(); }
-    CViewSettings&				Settings()				{ return ViewCore()->ViewSettings(); }
+    const CViewSettings&		Settings() const		{ return m_Settings; }
+    CViewSettings&				Settings()				{ return m_Settings; }
 
     CViewItemHighlightersSetRef Highlighters() const    { return m_refHighlighters; }
 
@@ -166,6 +166,8 @@ protected:
     QRect                               m_SelectionArea;
     QBrush                              m_SelectionBrush;
     QBrush                              m_SelectionBorderBrush;
+
+    CViewSettings                       m_Settings;
 };
 
 #endif // TRACESVIEW_H
