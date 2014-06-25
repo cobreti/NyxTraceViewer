@@ -95,7 +95,7 @@ void CTraceClientApp::Init(int &argc, char **argv)
     Nyx::CAString       bioFile( strPath.c_str() );
     bioFile += "/SSL/dh1024.pem";
 
-    int     basePortNumber = 8600;
+    int     basePortNumber = 8500;
 
     TraceClientCore::CTcpTracesReceiversSvr::CSettings     settings;
     settings.PortNumber() = basePortNumber;
@@ -205,8 +205,8 @@ void CTraceClientApp::HideDevicesSelection()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return " - in development";
-//    return "1.0.5";
+//    return " - in development";
+    return "1.0.6";
 }
 
 
