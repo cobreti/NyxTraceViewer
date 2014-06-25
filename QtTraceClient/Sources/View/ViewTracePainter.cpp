@@ -198,6 +198,7 @@ void CViewTracePainter::ProcessColumn( TraceClientCore::CTraceData* pData, CView
 
         rcArea = m_Metrics.ColumnRect(columnId);
         rcArea.setRight( rcArea.right() + m_TextMargin*2 );
+        rcArea.setLeft( rcArea.left() + m_TextMargin );
 
         if (settings.AutoWidth())
         {
@@ -234,7 +235,7 @@ void CViewTracePainter::DrawColumn( TraceClientCore::CTraceData* pData, CViewCol
     entryData = m_rDisplayCache[entryId];
 
     rcArea = entryData.itemArea();
-    rcArea.translate( m_TextMargin, 0 );
+//    rcArea.translate( m_TextMargin, 0 );
 
     if ( columnId != eVCI_LineNumber && pData->Type() == TraceClientCore::CTraceData::eTT_ConnectionStatus_Disconnection )
     {

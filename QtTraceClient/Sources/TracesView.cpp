@@ -584,7 +584,9 @@ void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 {
     CViewTracePicker        picker(m_DisplayCache);
 
-    m_SelectionArea.adjust( m_Margins.left(), 0, m_Margins.left(), 0);
+    int scrollOffset = ui->m_HorzScrollbar->value();
+
+    m_SelectionArea.adjust( m_Margins.left() - scrollOffset, 0, m_Margins.left() - scrollOffset, 0);
     CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
 
     pickResult.for_each( [&] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
@@ -694,6 +696,7 @@ void CTracesView::Init(CTracesView* pBase)
     connect( ui->m_VertScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_VertScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnVertSliderPosChanged(int)));
     connect( ui->m_HorzScrollbar, SIGNAL(sliderMoved(int)), this, SLOT(OnHorzSliderPosChanged(int)));
+    connect( ui->m_HorzScrollbar, SIGNAL(valueChanged(int)), this, SLOT(OnHorzSliderPosChanged(int)));
     connect( &m_RefreshTimer, SIGNAL(timeout()), this, SLOT(RefreshDisplay()));
 
     m_RefreshTimer.start(250);
