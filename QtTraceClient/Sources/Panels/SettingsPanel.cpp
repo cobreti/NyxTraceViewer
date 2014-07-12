@@ -6,6 +6,7 @@
 #include "ServerAccess/TraceServerMonitor.h"
 #include "Config/ConfigWriter.hpp"
 
+#include <QMouseEvent>
 
 CSettingsPanel::CSettingsPanel() : QWidget(),
     ui(new Ui::SettingsPanel()),
@@ -20,6 +21,29 @@ CSettingsPanel::CSettingsPanel() : QWidget(),
 CSettingsPanel::~CSettingsPanel()
 {
 
+}
+
+
+bool CSettingsPanel::eventFilter(QObject * pWatched, QEvent * pEvent)
+{
+    if ( pEvent->type() == QEvent::MouseButtonPress )
+    {
+        QMouseEvent*    pMouseEvent = static_cast<QMouseEvent*>(pEvent);
+        QRect           rcWidget = QRect( mapToGlobal(rect().topLeft()), mapToGlobal(rect().bottomRight()) );
+        QPoint          mousePos = pMouseEvent->globalPos();
+
+        if ( rcWidget.contains(mousePos) )
+        {
+            return QObject::eventFilter(pWatched, pEvent);
+        }
+        else
+        {
+            emit closing();
+            this->close();
+        }
+    }
+
+    return QObject::eventFilter(pWatched, pEvent);
 }
 
 
@@ -80,11 +104,15 @@ void CSettingsPanel::onClientRegistered(int id)
 
 void CSettingsPanel::onClientRegisterFailed()
 {
+    CTraceClientApp&    rApp = CTraceClientApp::Instance();
+
     ui->statusLabel->setText("<font color='red'>failure to connect to server</font>");
     ui->applyButton->setEnabled(true);
     ui->name->setEnabled(true);
     ui->TraceDirectoryServer->setEnabled(true);
     ui->TraceDirectoryPort->setEnabled(true);
+
+    rApp.TraceServerMonitor().Stop();
 }
 
 
@@ -154,11 +182,17 @@ void CSettingsPanel::showEvent(QShowEvent *)
                 this, SLOT(onClientRegistered(int)) );
     connect(    &rPortal, SIGNAL(clientRegisterFailed()),
                 this, SLOT(onClientRegisterFailed()));
+
+    QCoreApplication* pApp = QApplication::instance();
+    pApp->installEventFilter(this);
 }
 
 
 void CSettingsPanel::hideEvent(QHideEvent *)
 {
+    QCoreApplication* pApp = QApplication::instance();
+    pApp->removeEventFilter(this);
+
     CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();
 
     disconnect( &rPortal, SIGNAL(clientRegistered(int)),

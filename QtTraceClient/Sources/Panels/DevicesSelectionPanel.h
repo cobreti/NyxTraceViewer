@@ -22,6 +22,8 @@ public:
     CDevicesSelectionPanel();
     virtual ~CDevicesSelectionPanel();
 
+    virtual bool eventFilter(QObject *, QEvent *);
+
 public slots:
 
     void onItemDoubleClicked( QTreeWidgetItem* pItem, int column );
@@ -32,6 +34,7 @@ public slots:
 
 signals:
 
+    void closing();
 
 protected:
 

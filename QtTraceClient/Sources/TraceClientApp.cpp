@@ -127,6 +127,11 @@ void CTraceClientApp::Init(int &argc, char **argv)
     m_pDevicesMgr = new CDevicesMgr();
     m_pTracesGroupViewMgr = new CTracesGroupViewMgr();
 
+    connect(    m_pSettingsPanel, SIGNAL(closing()),
+                this, SLOT(onSettingsPanelClosed()) );
+    connect(    m_pDevicesSelectionPanel, SIGNAL(closing()),
+                this, SLOT(onDevicesSelectionPanelClosed()) );
+
     CConfigReader       configReader;
 
     configReader.Load();
@@ -216,6 +221,26 @@ const char* CTraceClientApp::GetVersion() const
 void CTraceClientApp::OnTracesWindows_Empty()
 {
 }
+
+
+
+/**
+ * @brief CTraceClientApp::onSettingsPanelClosed
+ */
+void CTraceClientApp::onSettingsPanelClosed()
+{
+    emit settingsPanelClosed();
+}
+
+
+/**
+ * @brief CTraceClientApp::onDevicesSelectionPanelClosed
+ */
+void CTraceClientApp::onDevicesSelectionPanelClosed()
+{
+    emit devicesSelectionPanelClosed();
+}
+
 
 
 /**

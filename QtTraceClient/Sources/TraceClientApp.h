@@ -66,10 +66,22 @@ public: // ITracesWindowsListener methods
 
     virtual void OnTracesWindows_Empty();
 
+public slots:
+
+    void onSettingsPanelClosed();
+    virtual void onDevicesSelectionPanelClosed();
+
+signals:
+
+    void settingsPanelClosed();
+    void devicesSelectionPanelClosed();
+
 protected:
 
     void initDefaultSettings();
     void InitDefaultDrawSettings();
+
+
 
 protected:
 

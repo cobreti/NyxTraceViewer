@@ -7,6 +7,7 @@
 #include "ui_DevicesSelection.h"
 
 #include <QApplication>
+#include <QMouseEvent>
 
 
 /**
@@ -33,6 +34,29 @@ CDevicesSelectionPanel::CDevicesSelectionPanel() : QWidget(),
 CDevicesSelectionPanel::~CDevicesSelectionPanel()
 {
 
+}
+
+
+bool CDevicesSelectionPanel::eventFilter(QObject * pWatched, QEvent * pEvent)
+{
+    if ( pEvent->type() == QEvent::MouseButtonPress )
+    {
+        QMouseEvent*    pMouseEvent = static_cast<QMouseEvent*>(pEvent);
+        QRect           rcWidget = QRect( mapToGlobal(rect().topLeft()), mapToGlobal(rect().bottomRight()) );
+        QPoint          mousePos = pMouseEvent->globalPos();
+
+        if ( rcWidget.contains(mousePos) )
+        {
+            return QObject::eventFilter(pWatched, pEvent);
+        }
+        else
+        {
+            emit closing();
+            this->close();
+        }
+    }
+
+    return QObject::eventFilter(pWatched, pEvent);
 }
 
 
@@ -128,11 +152,17 @@ void CDevicesSelectionPanel::showEvent(QShowEvent *)
                 this, SLOT(onDeviceUnmapped(int)) );
 
     CTraceClientApp::Instance().TraceServerPortal().getDevices();
+
+    QCoreApplication* pApp = QApplication::instance();
+    pApp->installEventFilter(this);
 }
 
 
 void CDevicesSelectionPanel::hideEvent(QHideEvent *)
 {
+    QCoreApplication* pApp = QApplication::instance();
+    pApp->removeEventFilter(this);
+
     QApplication*   app = static_cast<QApplication*>(QApplication::instance());
     CDevicesMgr&    rDevicesMgr = CTraceClientApp::Instance().DevicesMgr();
     CTraceServerPortal&     rPortal = CTraceClientApp::Instance().TraceServerPortal();

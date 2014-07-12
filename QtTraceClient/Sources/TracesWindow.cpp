@@ -227,6 +227,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
              this, SLOT(OnKeepAtEndBtnStateChanged(CToggleToolButton::EState)) );
     connect( m_pTracesView, SIGNAL(keepAtEndDisabled()),
              this, SLOT(OnKeepAtEndDisabled()) );
+    connect( &rApp, SIGNAL(settingsPanelClosed()),
+             this, SLOT(onSettingsPanelClosing()) );
+    connect( &rApp, SIGNAL(devicesSelectionPanelClosed()),
+             this, SLOT(onDevicesSelectionPanelClosing()) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -567,6 +571,17 @@ void CTracesWindow::OnKeepAtEndDisabled()
     m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Normal);
 }
 
+
+void CTracesWindow::onSettingsPanelClosing()
+{
+    m_pBtn_Settings->setState( CToggleToolButton::eState_Normal );
+}
+
+
+void CTracesWindow::onDevicesSelectionPanelClosing()
+{
+    m_pBtn_Devices->setState( CToggleToolButton::eState_Normal );
+}
 
 
 /**

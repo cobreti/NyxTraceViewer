@@ -62,6 +62,8 @@ public slots:
     void OnServerHeartbeatSuccess();
     void OnServerHeartbeatFailure();
     void OnKeepAtEndDisabled();
+    void onSettingsPanelClosing();
+    void onDevicesSelectionPanelClosing();
 
 protected:
 

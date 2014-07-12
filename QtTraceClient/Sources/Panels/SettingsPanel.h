@@ -23,6 +23,8 @@ public:
     CSettingsPanel();
     virtual ~CSettingsPanel();
 
+    virtual bool eventFilter(QObject *, QEvent *);
+
 public slots:
 
     void onTraceDirectoryServerChanged(const QString& text);
@@ -34,6 +36,7 @@ public slots:
 
 signals:
 
+    void closing();
 
 protected:
 
