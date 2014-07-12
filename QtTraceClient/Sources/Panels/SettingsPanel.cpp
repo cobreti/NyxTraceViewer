@@ -38,8 +38,24 @@ bool CSettingsPanel::eventFilter(QObject * pWatched, QEvent * pEvent)
         }
         else
         {
+            return true;
+        }
+    }
+    else if ( pEvent->type() == QEvent::MouseButtonRelease )
+    {
+        QMouseEvent*    pMouseEvent = static_cast<QMouseEvent*>(pEvent);
+        QRect           rcWidget = QRect( mapToGlobal(rect().topLeft()), mapToGlobal(rect().bottomRight()) );
+        QPoint          mousePos = pMouseEvent->globalPos();
+
+        if ( rcWidget.contains(mousePos) )
+        {
+            return QObject::eventFilter(pWatched, pEvent);
+        }
+        else
+        {
             emit closing();
             this->close();
+            return true;
         }
     }
 
