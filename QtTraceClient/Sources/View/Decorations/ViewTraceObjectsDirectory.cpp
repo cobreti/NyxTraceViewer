@@ -49,6 +49,16 @@ CViewTraceObject* CViewTraceObjectsDirectory::Get(const CTraceSectionId& id) con
 }
 
 
+void CViewTraceObjectsDirectory::Clear()
+{
+    auto eachfct = [] ( std::pair<const CTraceSectionId, const CViewTraceObject*> pair ) { delete pair.second; };
+
+    std::for_each( m_ObjectsTable.begin(), m_ObjectsTable.end(), eachfct );
+
+    m_ObjectsTable.clear();
+}
+
+
 void CViewTraceObjectsDirectory::enumContent()
 {
     auto eachFct = [&] ( std::pair<const CTraceSectionId, const CViewTraceObject*> pair )
@@ -61,4 +71,27 @@ void CViewTraceObjectsDirectory::enumContent()
     std::for_each( m_ObjectsTable.begin(), m_ObjectsTable.end(), eachFct );
 
 //    NYXTRACE(0x0, L"end enum content");
+}
+
+
+
+void CViewTraceObjectsDirectory::ImportFrom( CViewTraceObjectsDirectory& directory )
+{
+    auto eachFct = [&] ( std::pair<CTraceSectionId, CViewTraceObject*> pair )
+    {
+        TViewTraceObjectsMap::iterator existingPos = m_ObjectsTable.find(pair.first);
+        if ( existingPos != m_ObjectsTable.end() )
+        {
+            CViewTraceObject* pExisting = existingPos->second;
+            if ( pExisting != pair.second )
+                delete pExisting;
+            m_ObjectsTable.erase(existingPos);
+        }
+
+        m_ObjectsTable[pair.first] = pair.second;
+    };
+
+    std::for_each( directory.m_ObjectsTable.begin(), directory.m_ObjectsTable.end(), eachFct );
+
+    directory.m_ObjectsTable.clear();
 }

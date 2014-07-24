@@ -389,28 +389,45 @@ void CTracesView::paintEvent(QPaintEvent* pEvent)
     TracePainter.PrepareDrawing();
 
     m_pCurrentTracesGroupView->SectionsHilights().enumContent();
-//    m_TraceSectionsHilights.enumContent();
 
     while ( TraceIterator.Valid() && !TracePainter.Done() )
     {
         TracePainter.LineNumber() = TraceIterator.getLineNumber();
         TracePainter.PreDraw(TraceIterator.TraceData(), m_pCurrentTracesGroupView->SectionsHilights(), m_pCurrentTracesGroupView->DynamicHilights());
+//        TracePainter.PreDraw(TraceIterator.TraceData(), m_LiveHilights );
 
         ++ TraceIterator;
     }
 
-    if ( !m_SelectionArea.isEmpty() )
-    {
-        QRect       rcArea = m_SelectionArea;
-        rcArea.adjust( -ui->m_HorzScrollbar->value() + m_Margins.left(), 0, -ui->m_HorzScrollbar->value() + m_Margins.left(), 0 );
-        QPen        pen(m_SelectionBorderBrush, 1.0);
-        QPen        oldPen = painter.pen();
 
-        painter.fillRect(rcArea, m_SelectionBrush);
-        painter.setPen(pen);
-        painter.drawRect(rcArea);
-        painter.setPen(oldPen);
+    TraceIterator = m_TopPos;
+
+    TracePainter.PrepareDrawing();
+
+    m_pCurrentTracesGroupView->SectionsHilights().enumContent();
+
+    while ( TraceIterator.Valid() && !TracePainter.Done() )
+    {
+        TracePainter.LineNumber() = TraceIterator.getLineNumber();
+//        TracePainter.PreDraw(TraceIterator.TraceData(), m_pCurrentTracesGroupView->SectionsHilights(), m_pCurrentTracesGroupView->DynamicHilights());
+        TracePainter.PreDraw(TraceIterator.TraceData(), m_LiveHilights );
+
+        ++ TraceIterator;
     }
+
+
+//    if ( !m_SelectionArea.isEmpty() )
+//    {
+//        QRect       rcArea = m_SelectionArea;
+//        rcArea.adjust( -ui->m_HorzScrollbar->value() + m_Margins.left(), 0, -ui->m_HorzScrollbar->value() + m_Margins.left(), 0 );
+//        QPen        pen(m_SelectionBorderBrush, 1.0);
+//        QPen        oldPen = painter.pen();
+
+//        painter.fillRect(rcArea, m_SelectionBrush);
+//        painter.setPen(pen);
+//        painter.drawRect(rcArea);
+//        painter.setPen(oldPen);
+//    }
 
 
     TraceIterator = m_TopPos;
@@ -528,6 +545,8 @@ void CTracesView::mousePressEvent( QMouseEvent* event )
         m_SelectionArea.moveTo(event->pos().x() + ui->m_HorzScrollbar->value() - m_Margins.left(), event->pos().y());
     }
 
+    m_LiveHilights.Clear();
+
 //    CViewItemsWalker::MethodsInterfaceRef   refMethods(m_pItemsWalker);
 
 //    if ( event->pos().x() < m_Margins.left() && event->pos().y() > m_pHeader->size().height() )
@@ -586,23 +605,26 @@ void CTracesView::mouseReleaseEvent(QMouseEvent *event)
 
     int scrollOffset = ui->m_HorzScrollbar->value();
 
-    m_SelectionArea.adjust( m_Margins.left() - scrollOffset, 0, m_Margins.left() - scrollOffset, 0);
-    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
+//    m_SelectionArea.adjust( m_Margins.left() - scrollOffset, 0, m_Margins.left() - scrollOffset, 0);
+//    CViewTracePicker::CPickerResult     pickResult = picker.pick(m_SelectionArea);
 
-    pickResult.for_each( [&] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
-                        {
-                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
-                            CTraceSectionId         id( entry.traceData()->identifier(), entry.columnId() );
+//    pickResult.for_each( [&] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
+//                        {
+//                            CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
+//                            CTraceSectionId         id( entry.traceData()->identifier(), entry.columnId() );
 
-                            m_pCurrentTracesGroupView->SectionsHilights().Set(id, new CViewTraceSectionHilight(*entry.traceData(), entry.columnId(), entry.subRect()) );
+//                            m_pCurrentTracesGroupView->SectionsHilights().Set(id, new CViewTraceSectionHilight(*entry.traceData(), entry.columnId(), entry.subRect()) );
 
-                            NYXTRACE(0x0, L"==> "
-                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
-                                     << L" : top = "
-                                     << Nyx::CTF_Int(y)
-                                     << L" : left = "
-                                     << Nyx::CTF_Int(x) );
-                        } );
+//                            NYXTRACE(0x0, L"==> "
+//                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
+//                                     << L" : top = "
+//                                     << Nyx::CTF_Int(y)
+//                                     << L" : left = "
+//                                     << Nyx::CTF_Int(x) );
+//                        } );
+
+
+    m_pCurrentTracesGroupView->SectionsHilights().ImportFrom(m_LiveHilights);
 
     m_SelectionArea = QRect();
     update();
@@ -613,6 +635,48 @@ void CTracesView::mouseMoveEvent(QMouseEvent *event)
 {
     m_SelectionArea.setRight(event->pos().x() + ui->m_HorzScrollbar->value() - m_Margins.left());
     m_SelectionArea.setBottom(event->pos().y() );
+
+    CViewTracePicker        picker(m_DisplayCache);
+
+    int scrollOffset = ui->m_HorzScrollbar->value();
+
+    QRect area = m_SelectionArea;
+
+    if ( area.width() < 0 )
+    {
+        qreal left = area.left() + area.width() - 1;
+        qreal right = area.left();
+
+        area.setLeft(left);
+        area.setRight(right);
+    }
+
+    area.adjust( m_Margins.left() - scrollOffset, 0, m_Margins.left() - scrollOffset, 0);
+
+     m_LiveHilights.Clear();
+
+    if ( area.width() > 0 )
+    {
+        if ( area.height() == 0 )
+            area.setHeight(1);
+
+        CViewTracePicker::CPickerResult     pickResult = picker.pick(area);
+
+        pickResult.for_each( [&] (int y, int x, const CViewTracePicker::CPickerEntry& entry)
+                            {
+                                CViewTracePortal        tracePortal(*entry.traceData(), entry.lineNumber());
+                                CTraceSectionId         id( entry.traceData()->identifier(), entry.columnId() );
+
+                                m_LiveHilights.Set(id, new CViewTraceSectionHilight(*entry.traceData(), entry.columnId(), entry.subRect()) );
+
+    //                            NYXTRACE(0x0, L"==> "
+    //                                     << Nyx::CTF_AnsiText(tracePortal.GetColumnText(entry.columnId()).toStdString().c_str())
+    //                                     << L" : top = "
+    //                                     << Nyx::CTF_Int(y)
+    //                                     << L" : left = "
+    //                                     << Nyx::CTF_Int(x) );
+                            } );
+    }
 
     update();
 }

@@ -81,6 +81,7 @@ public:
     void Process( TraceClientCore::CTraceData* pData );
     void PrepareDrawing();
     void PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory, const CDynamicHighlightsDirectory& dynamicHighlights );
+    void PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory );
     void Draw( TraceClientCore::CTraceData* pData );
 
 protected:

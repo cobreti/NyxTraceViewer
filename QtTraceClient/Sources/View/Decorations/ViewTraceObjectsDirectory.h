@@ -18,7 +18,11 @@ public:
     void Remove( const CTraceSectionId& id );
     CViewTraceObject* Get(const CTraceSectionId& id) const;
 
+    void Clear();
+
     void enumContent();
+
+    void ImportFrom( CViewTraceObjectsDirectory& directory );
 
 protected:
 
@@ -28,5 +32,6 @@ protected:
 
     TViewTraceObjectsMap        m_ObjectsTable;
 };
+
 
 #endif // VIEWTRACEOBJECTSDIRECTORY_H
