@@ -3,9 +3,9 @@
 
 #include <Nyx.hpp>
 
-#include "Decorations/ViewTraceObjectsDirectory.h"
 #include "Decorations/DynamicHighlightsDirectory.h"
 #include "ViewColumnsSettings.hpp"
+#include "Decorations/StaticHighlights.hpp"
 
 
 #include <QtGui>
@@ -17,7 +17,7 @@ public:
     CTracesGroupView();
     virtual ~CTracesGroupView();
 
-    CViewTraceObjectsDirectory&     SectionsHilights()  { return m_TraceSectionsHilights; }
+    CStaticHighlights&              StaticHighlights()  { return m_StaticHighlights; }
     CDynamicHighlightsDirectory&    DynamicHilights() { return m_DynamicHighlights; }
 
     QString& FocusedText()          { return m_FocusedText; }
@@ -29,7 +29,7 @@ public:
     CViewColumnsSettings&           ColumnsSettings()       { return m_ColumnsSettings; }
 
 protected:
-    CViewTraceObjectsDirectory          m_TraceSectionsHilights;
+    CStaticHighlights                   m_StaticHighlights;
     CDynamicHighlightsDirectory         m_DynamicHighlights;
     QString                             m_FocusedText;
     bool                                m_bKeepAtEnd;

@@ -7,7 +7,6 @@
 #include "TracesPool.hpp"
 #include "ViewTracePortal.h"
 #include "View/ViewTracesDisplayCache.h"
-#include "Decorations/ViewTraceObjectsDirectory.h"
 #include "Decorations/ViewTraceObject.h"
 #include "Decorations/DynamicHighlightsDirectory.h"
 
@@ -99,7 +98,7 @@ void CViewTracePainter::PrepareDrawing()
 }
 
 
-void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory, const CDynamicHighlightsDirectory& dynamicHighlights )
+void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CDynamicHighlightsDirectory& dynamicHighlights )
 {
     CViewTracePortal        TracePortal(*pData, m_LineNumber);
 
@@ -118,18 +117,12 @@ void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CView
         CViewColumnSettings&                    ColumnSettings = (*m_pColumnsSettings)[ColumnId];
         CTraceSectionId                         sectionId(TracePortal.traceData()->identifier(), ColumnId);
         CViewTracesDisplayCache::CEntryData     entryData;
-        CViewTraceObject*                       pViewTraceObject = directory.Get(sectionId);
 
         if ( m_rDisplayCache.hasEntry(sectionId) )
         {
             entryData = m_rDisplayCache[sectionId];
 
             QRectF      rcArea = entryData.itemArea();
-
-            if ( NULL != pViewTraceObject )
-            {
-                pViewTraceObject->Draw(m_rPainter, rcArea);
-            }
 
             CPaintContext       context;
 
@@ -150,57 +143,6 @@ void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CView
     m_Pos.ry() += m_LineHeight;
 }
 
-
-void CViewTracePainter::PreDraw( TraceClientCore::CTraceData* pData, const CViewTraceObjectsDirectory& directory )
-{
-    CViewTracePortal        TracePortal(*pData, m_LineNumber);
-
-    m_Pos.rx() = m_Origin.x();
-
-    const CViewColumnsOrder& colsOrder = m_pColumnsSettings->Order();
-    size_t ColumnsCount = colsOrder.Count();
-    size_t ColumnIndex = 0;
-    EViewColumnId ColumnId;
-
-    m_Metrics.CalcTraceSize(TracePortal, colsOrder.OrderVector(), m_rDisplayCache);
-
-    while (ColumnIndex < ColumnsCount)
-    {
-        ColumnId = colsOrder[ColumnIndex];
-        CViewColumnSettings&                    ColumnSettings = (*m_pColumnsSettings)[ColumnId];
-        CTraceSectionId                         sectionId(TracePortal.traceData()->identifier(), ColumnId);
-        CViewTracesDisplayCache::CEntryData     entryData;
-        CViewTraceObject*                       pViewTraceObject = directory.Get(sectionId);
-
-        if ( m_rDisplayCache.hasEntry(sectionId) )
-        {
-            entryData = m_rDisplayCache[sectionId];
-
-            QRectF      rcArea = entryData.itemArea();
-
-            if ( NULL != pViewTraceObject )
-            {
-                pViewTraceObject->Draw(m_rPainter, rcArea);
-            }
-
-//            CPaintContext       context;
-
-//            context.m_pMetrics = &m_Metrics;
-//            context.m_pPortal = &TracePortal;
-//            context.m_Area = rcArea;
-//            context.m_ColumnId = ColumnId;
-//            context.m_pQPainter = &m_rPainter;
-
-//            dynamicHighlights.Draw(context);
-
-            m_Pos.rx() += entryData.columnWidth() + ColumnSettings.Margins().width();
-        }
-
-        ++ ColumnIndex;
-    }
-
-    m_Pos.ry() += m_LineHeight;
-}
 
 
 void CViewTracePainter::Draw( TraceClientCore::CTraceData* pData )

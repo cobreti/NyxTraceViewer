@@ -15,7 +15,7 @@
 #include "View/ViewTracesContentIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
 #include "View/ViewSettings.hpp"
-#include "View/Decorations/ViewTraceObjectsDirectory.h"
+#include "View/Decorations/StaticHighlights.hpp"
 
 
 namespace Ui
@@ -156,8 +156,7 @@ protected:
     CViewTracesContentIterator          m_FocusedItem;
     CViewTracesDisplayCache             m_DisplayCache;
 
-    CViewTraceObjectsDirectory          m_LiveHilights;
-//    CDynamicHighlightsDirectory         m_DynamicHighlights;
+    CStaticHighlights                   m_LiveStaticHighlights;
 
     CTracesGroupView*                   m_pCurrentTracesGroupView;
 

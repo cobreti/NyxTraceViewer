@@ -5,6 +5,9 @@
 #include "../ViewColumnId.hpp"
 
 #include <QRectF>
+#include <Nyx.hpp>
+
+
 
 class CViewTraceSectionHilight : public CViewTraceObject
 {
@@ -22,5 +25,9 @@ protected:
     EViewColumnId       m_ColumnId;
     QRectF              m_rcHilight;
 };
+
+
+DECLARE_OBJECTREF(CViewTraceSectionHilight)
+
 
 #endif // VIEWTRACESECTIONHILIGHT_H
