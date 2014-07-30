@@ -105,7 +105,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/Config/ConfigWriter.cpp \
     ../Sources/View/TracesGroupView.cpp \
     ../Sources/View/TracesGroupViewMgr.cpp \
-    ../Sources/View/Decorations/StaticHighlights.cpp
+    ../Sources/View/Decorations/StaticHighlights.cpp \
+    ../Sources/View/Formater/TracesViewTextFormater.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -201,7 +202,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/Config/ConfigWriter.hpp \
     ../Sources/View/TracesGroupView.h \
     ../Sources/View/TracesGroupViewMgr.h \
-    ../Sources/View/Decorations/StaticHighlights.hpp
+    ../Sources/View/Decorations/StaticHighlights.hpp \
+    ../Sources/View/Formater/TracesViewTextFormater.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
