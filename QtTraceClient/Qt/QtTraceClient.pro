@@ -92,7 +92,6 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/TraceSectionId.cpp \
     ../Sources/View/Decorations/ViewObject.cpp \
     ../Sources/View/Decorations/ViewTraceObject.cpp \
-    ../Sources/View/Decorations/ViewTraceObjectsDirectory.cpp \
     ../Sources/View/Decorations/ViewTraceSectionHilight.cpp \
     ../Sources/View/Decorations/DynamicHighlight.cpp \
     ../Sources/View/Decorations/DynamicHighlightsDirectory.cpp \
@@ -105,7 +104,9 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/Config/ConfigReader.cpp \
     ../Sources/Config/ConfigWriter.cpp \
     ../Sources/View/TracesGroupView.cpp \
-    ../Sources/View/TracesGroupViewMgr.cpp
+    ../Sources/View/TracesGroupViewMgr.cpp \
+    ../Sources/View/Decorations/StaticHighlights.cpp \
+    ../Sources/View/Formater/TracesViewTextFormater.cpp
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -188,7 +189,6 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/TraceSectionId.h \
     ../Sources/View/Decorations/ViewObject.h \
     ../Sources/View/Decorations/ViewTraceObject.h \
-    ../Sources/View/Decorations/ViewTraceObjectsDirectory.h \
     ../Sources/View/Decorations/ViewTraceSectionHilight.h \
     ../Sources/View/Decorations/DynamicHighlight.h \
     ../Sources/View/Decorations/DynamicHighlightsDirectory.h \
@@ -201,7 +201,9 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/Config/ConfigReader.hpp \
     ../Sources/Config/ConfigWriter.hpp \
     ../Sources/View/TracesGroupView.h \
-    ../Sources/View/TracesGroupViewMgr.h
+    ../Sources/View/TracesGroupViewMgr.h \
+    ../Sources/View/Decorations/StaticHighlights.hpp \
+    ../Sources/View/Formater/TracesViewTextFormater.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \

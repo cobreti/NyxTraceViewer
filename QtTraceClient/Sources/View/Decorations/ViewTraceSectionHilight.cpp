@@ -19,12 +19,22 @@ CViewTraceSectionHilight::~CViewTraceSectionHilight()
 
 void CViewTraceSectionHilight::Draw(QPainter &rPainter, const QRectF &itemRect)
 {
-    QBrush      brush(Qt::GlobalColor::yellow);
+    QColor      color = Qt::GlobalColor::yellow;
+
+    QBrush      brush(color);
+    QBrush      oldBrush = rPainter.brush();
+    QPen        oldPen = rPainter.pen();
     QRectF      rcHilight = m_rcHilight;
 
     rcHilight.adjust(itemRect.left(), 0, itemRect.left(), 0);
     rcHilight.setTop(itemRect.top());
     rcHilight.setBottom(itemRect.bottom());
 
-    rPainter.fillRect(rcHilight, brush);
+    rPainter.setPen(Qt::GlobalColor::darkYellow);
+    rPainter.setBrush(brush);
+    rPainter.drawRoundedRect(rcHilight, 2, 2);
+
+    rPainter.setPen(oldPen);
+    rPainter.setBrush(oldBrush);
+//    rPainter.fillRect(rcHilight, brush);
 }

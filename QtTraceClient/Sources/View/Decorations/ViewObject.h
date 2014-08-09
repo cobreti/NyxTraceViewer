@@ -1,8 +1,10 @@
 #ifndef VIEWOBJECT_H
 #define VIEWOBJECT_H
 
+#include <Nyx.hpp>
 
-class CViewObject
+
+class CViewObject : public Nyx::CRefCount_Impl<>
 {
 public:
     CViewObject();

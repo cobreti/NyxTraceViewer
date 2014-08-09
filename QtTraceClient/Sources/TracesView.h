@@ -15,6 +15,7 @@
 #include "View/ViewTracesContentIterator.hpp"
 #include "View/ViewTracesDisplayCache.h"
 #include "View/ViewSettings.hpp"
+#include "View/Decorations/StaticHighlights.hpp"
 
 
 namespace Ui
@@ -139,7 +140,6 @@ protected:
     QString								m_Name;
     QRectF								m_Margins;
     bool                                m_bViewDirty;
-//    bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
     QTimer                              m_RefreshTimer;
     CTracesViewCoreRef                  m_refViewCore;
@@ -156,8 +156,7 @@ protected:
     CViewTracesContentIterator          m_FocusedItem;
     CViewTracesDisplayCache             m_DisplayCache;
 
-//    CViewTraceObjectsDirectory          m_TraceSectionsHilights;
-//    CDynamicHighlightsDirectory         m_DynamicHighlights;
+    CStaticHighlights                   m_LiveStaticHighlights;
 
     CTracesGroupView*                   m_pCurrentTracesGroupView;
 

@@ -59,4 +59,5 @@
     <qresource prefix="/devicesSelectionPanel">
         <file alias="Check-Icon">Icons/check-icon.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
