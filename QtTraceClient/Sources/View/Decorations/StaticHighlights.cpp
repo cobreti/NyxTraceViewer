@@ -49,6 +49,8 @@ const CStaticHighlights& CStaticHighlights::operator += (const CStaticHighlights
     };
 
     std::for_each( highlights.m_highlights.begin(), highlights.m_highlights.end(), foreachFct );
+
+    return *this;
 }
 
 
