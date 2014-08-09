@@ -1,10 +1,10 @@
 #include "TracesViewCore.hpp"
 #include "TracesView.h"
-#include "ViewItem.hpp"
-#include "ViewItemsModulesMgr.hpp"
-#include "ViewItemPos.hpp"
-#include "ViewItems.hpp"
-#include "TracesViewCoreRepositoryObserver.hpp"
+//#include "ViewItem.hpp"
+//#include "ViewItemsModulesMgr.hpp"
+//#include "ViewItemPos.hpp"
+//#include "ViewItems.hpp"
+//#include "TracesViewCoreRepositoryObserver.hpp"
 #include "TraceClientApp.h"
 
 
@@ -12,10 +12,10 @@
  *
  */
 CTracesViewCore::CTracesViewCore() :
-    Nyx::CRefCount_Impl<Nyx::CMsgHandler>(),
-    m_pViewItemsModulesMgr(NULL),
-    m_pRepositoryObserver(NULL),
-    m_NextLineId(1)
+    Nyx::CRefCount_Impl<Nyx::CMsgHandler>()
+//    m_pViewItemsModulesMgr(NULL),
+//    m_pRepositoryObserver(NULL)
+//    m_NextLineId(1)
 {
     Init();
 }
@@ -26,7 +26,7 @@ CTracesViewCore::CTracesViewCore() :
  */
 CTracesViewCore::~CTracesViewCore()
 {
-    delete m_pViewItemsModulesMgr;
+//    delete m_pViewItemsModulesMgr;
 }
 
 
@@ -74,7 +74,7 @@ CTracesViewSetIterator CTracesViewCore::GetViewsIterator() const
  */
 void CTracesViewCore::AddRepository(TraceClientCore::CTracesPool &rPool)
 {
-    rPool.Repository().Insert(m_pRepositoryObserver);
+//    rPool.Repository().Insert(m_pRepositoryObserver);
 }
 
 
@@ -83,7 +83,7 @@ void CTracesViewCore::AddRepository(TraceClientCore::CTracesPool &rPool)
  */
 void CTracesViewCore::RemoveRepository(TraceClientCore::CTracesPool &rPool)
 {
-    rPool.Repository().Remove(m_pRepositoryObserver);
+//    rPool.Repository().Remove(m_pRepositoryObserver);
 }
 
 
@@ -92,7 +92,8 @@ void CTracesViewCore::RemoveRepository(TraceClientCore::CTracesPool &rPool)
  */
 bool CTracesViewCore::Contains(const TraceClientCore::CTracesPool &rPool)
 {
-    return rPool.Repository().Contains(m_pRepositoryObserver);
+//    return rPool.Repository().Contains(m_pRepositoryObserver);
+    return false;
 }
 
 
@@ -101,20 +102,20 @@ bool CTracesViewCore::Contains(const TraceClientCore::CTracesPool &rPool)
  */
 void CTracesViewCore::HandleMessage( Nyx::CMsg& msg )
 {
-    NYXTRACE(0x0, L"CTracesViewCore handle message : " << Nyx::CTF_Int(msg.Id()) );
+//    NYXTRACE(0x0, L"CTracesViewCore handle message : " << Nyx::CTF_Int(msg.Id()) );
 
-    switch ( msg.Id() )
-    {
-        case 0:
-            OnNewTraces( static_cast<CViewItemsMsg&>(msg).ViewItems() );
-            break;
-        case 1:
-            OnBeginClearModule( static_cast<CBeginClearItemsMsg&>(msg).ModuleName() );
-            break;
-        case 2:
-            OnEndClearModule( static_cast<CEndClearItemsMsg&>(msg).ModuleName() );
-            break;
-    };
+//    switch ( msg.Id() )
+//    {
+//        case 0:
+//            OnNewTraces( static_cast<CViewItemsMsg&>(msg).ViewItems() );
+//            break;
+//        case 1:
+//            OnBeginClearModule( static_cast<CBeginClearItemsMsg&>(msg).ModuleName() );
+//            break;
+//        case 2:
+//            OnEndClearModule( static_cast<CEndClearItemsMsg&>(msg).ModuleName() );
+//            break;
+//    };
 
 }
 
@@ -126,88 +127,88 @@ void CTracesViewCore::Init()
 {
     m_refMemoryPool = Nyx::CMemoryPool::Alloc(100);
 
-    m_pViewItemsModulesMgr = new CViewItemsModulesMgr(m_refMemoryPool);
-    m_pRepositoryObserver = new CTracesViewCoreRepositoryObserver(*this);
+//    m_pViewItemsModulesMgr = new CViewItemsModulesMgr(m_refMemoryPool);
+//    m_pRepositoryObserver = new CTracesViewCoreRepositoryObserver(*this);
 
-    m_ViewSettings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
+//    m_ViewSettings = CTraceClientApp::Instance().AppSettings().DefaultViewSettings();
 
-    m_ViewSettings.DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
+//    m_ViewSettings.DrawSettings() = &CTraceClientApp::Instance().AppSettings().DefaultDrawSettings();
 }
 
 
 /**
  *
  */
-void CTracesViewCore::OnNewTraces(CViewItems *pViewItems)
-{
-    CViewItemPos        posItem = pViewItems->begin();
-    while ( posItem.IsValid() )
-    {
-        posItem.Item()->Id() = m_NextLineId ++;
-        m_pViewItemsModulesMgr->Insert( posItem.Item() );
-        ++posItem;
-    }
+//void CTracesViewCore::OnNewTraces(CViewItems *pViewItems)
+//{
+//    CViewItemPos        posItem = pViewItems->begin();
+//    while ( posItem.IsValid() )
+//    {
+//        posItem.Item()->Id() = m_NextLineId ++;
+//        m_pViewItemsModulesMgr->Insert( posItem.Item() );
+//        ++posItem;
+//    }
 
-    CTracesViewSetIterator      ViewIter(m_Views);
+//    CTracesViewSetIterator      ViewIter(m_Views);
 
-    ViewIter.MoveToFirst();
+//    ViewIter.MoveToFirst();
 
-    while ( ViewIter.Valid() )
-    {
-        ViewIter.View()->OnNewTraces();
-        ViewIter.MoveToNext();
-    }
+//    while ( ViewIter.Valid() )
+//    {
+//        ViewIter.View()->OnNewTraces();
+//        ViewIter.MoveToNext();
+//    }
 
-    delete pViewItems;
-}
-
-
-/**
- *
- */
-void CTracesViewCore::OnBeginClearModule(const Nyx::CAString& ModuleName)
-{
-    NYXTRACE(0x0, "OnBeginClearModule");
-
-    Nyx::CWString   wModuleName;
-
-    wModuleName = ModuleName;
-
-    m_pViewItemsModulesMgr->ClearModule(wModuleName);
-
-    CTracesViewSetIterator      ViewPos(m_Views);
-
-    ViewPos.MoveToFirst();
-
-    while ( ViewPos.Valid() )
-    {
-        ViewPos.View()->OnBeginClearModule(ModuleName);
-        ViewPos.MoveToNext();
-    }
-
-    NYXTRACE(0x0, "OnBeginClearModule - end");
-}
+//    delete pViewItems;
+//}
 
 
 /**
  *
  */
-void CTracesViewCore::OnEndClearModule(const Nyx::CAString& ModuleName)
-{
-    Nyx::CWString   wModuleName;
+//void CTracesViewCore::OnBeginClearModule(const Nyx::CAString& ModuleName)
+//{
+//    NYXTRACE(0x0, "OnBeginClearModule");
 
-    wModuleName = ModuleName;
+//    Nyx::CWString   wModuleName;
 
-    m_pViewItemsModulesMgr->ClearModule(wModuleName);
+//    wModuleName = ModuleName;
 
-    CTracesViewSetIterator      ViewPos(m_Views);
+//    m_pViewItemsModulesMgr->ClearModule(wModuleName);
 
-    ViewPos.MoveToFirst();
+//    CTracesViewSetIterator      ViewPos(m_Views);
 
-    while ( ViewPos.Valid() )
-    {
-        ViewPos.View()->OnEndClearModule(ModuleName);
-        ViewPos.MoveToNext();
-    }
-}
+//    ViewPos.MoveToFirst();
+
+//    while ( ViewPos.Valid() )
+//    {
+//        ViewPos.View()->OnBeginClearModule(ModuleName);
+//        ViewPos.MoveToNext();
+//    }
+
+//    NYXTRACE(0x0, "OnBeginClearModule - end");
+//}
+
+
+/**
+ *
+ */
+//void CTracesViewCore::OnEndClearModule(const Nyx::CAString& ModuleName)
+//{
+//    Nyx::CWString   wModuleName;
+
+//    wModuleName = ModuleName;
+
+//    m_pViewItemsModulesMgr->ClearModule(wModuleName);
+
+//    CTracesViewSetIterator      ViewPos(m_Views);
+
+//    ViewPos.MoveToFirst();
+
+//    while ( ViewPos.Valid() )
+//    {
+//        ViewPos.View()->OnEndClearModule(ModuleName);
+//        ViewPos.MoveToNext();
+//    }
+//}
 

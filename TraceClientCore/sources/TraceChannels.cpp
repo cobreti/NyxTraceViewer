@@ -1,5 +1,7 @@
 #include "TraceChannels.hpp"
+#include "TracesPool.hpp"
 
+#include "TraceClientCoreModule.hpp"
 
 namespace TraceClientCore
 {
@@ -33,6 +35,8 @@ namespace TraceClientCore
         
         m_Channels.insert( std::make_pair(pChannel->Name(), pChannel) );
         
+        TraceClientCore::CModule::Instance().ChannelsMgr().OnNewChannel(pChannel);
+
         return Nyx::kNyxRes_Success;
     }
     
@@ -40,12 +44,29 @@ namespace TraceClientCore
     /**
      *
      */
-    CTraceChannel* CTraceChannels::Get( const Nyx::CAString& name )
+    CTraceChannel* CTraceChannels::Get( const Nyx::CAString& name, bool bCreateIfDontExist /* = false*/ )
     {
         TraceChannelsMap::const_iterator       pos = m_Channels.find(name);
         
         if ( pos != m_Channels.end() )
             return pos->second;
+
+        if ( bCreateIfDontExist )
+        {
+            Nyx::CWString                       poolName;
+            
+            poolName = name;
+            
+            TraceClientCore::CTracesPoolRef     refPool = new TraceClientCore::CTracesPool( Nyx::CMemoryPool::Alloc(10 * 1024 * 1024), poolName.c_str());
+            
+            TraceClientCore::CTraceChannel*     pChannel = new TraceClientCore::CTraceChannel(refPool);
+            pChannel->Name() = name;
+            Add(pChannel);
+            
+//            NYXTRACE(0x0, L"CTraceChannels - creating new channel : " << Nyx::CTF_AnsiText(name.c_str()) );
+            
+            return pChannel;
+        }
         
         return NULL;
     }

@@ -9,7 +9,7 @@ namespace TraceClientCore
      *
      */
     CTraceChannel::CTraceChannel(CTracesPool* pPool) :
-    m_pPool(pPool)
+    m_refPool(pPool)
     {
         
     }
@@ -29,7 +29,7 @@ namespace TraceClientCore
      */
     void CTraceChannel::Insert(CTraceData* pTraceData)
     {        
-        m_pPool->Repository().Insert(pTraceData);
+        m_refPool->Repository().Insert(pTraceData);
     }
 
     
@@ -38,8 +38,8 @@ namespace TraceClientCore
      */
     void CTraceChannel::Clear()
     {
-        m_pPool->Repository().Clear(m_Name);
-		m_pPool->MemoryPool()->Clear();
+        m_refPool->Repository().Clear(m_Name);
+		m_refPool->MemoryPool()->Clear();
     }
     
     

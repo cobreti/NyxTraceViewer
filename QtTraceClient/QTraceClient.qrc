@@ -11,6 +11,15 @@
         <file alias="Search">Icons/search-icon.png</file>
         <file alias="HideSearch">Icons/search-remove-icon.png</file>
         <file alias="MainWindow">Icons/Window-icon.png</file>
+        <file alias="Settings-Icon">Icons/Settings-icon.png</file>
+        <file alias="Settings-Selected-Icon">Icons/Settings-selected-icon.png</file>
+        <file alias="Device-Icon">Icons/device-icon.png</file>
+        <file alias="Device-Selected-Icon">Icons/device-selected-icon.png</file>
+        <file alias="Clear-Icon">Icons/Actions-trash-empty-icon.png</file>
+        <file alias="Arrow-Down-Icon">Icons/Arrow-Down.png</file>
+        <file alias="Arrow-Down-Selected-Icon">Icons/Arrow-Down-Selected.png</file>
+        <file alias="Connected-Icon">Icons/connected.png</file>
+        <file alias="No-Connection-Icon">Icons/no-connection.png</file>
     </qresource>
     <qresource prefix="/View">
         <file>Images/VGradientOuter.png</file>
@@ -33,7 +42,8 @@
         <file alias="StartChannel">Icons/Channels/StartChannel.png</file>
     </qresource>
     <qresource prefix="/App">
-        <file alias="TraceViewer">Icons/App-icon.png</file>
+        <file>Icons/App-icon.png</file>
+        <file alias="TraceViewer">Icons/App-icon-lvl.png</file>
     </qresource>
     <qresource prefix="/HighlightsMgrWnd">
         <file alias="SearchNext">Icons/Actions-go-down-icon.png</file>
@@ -43,4 +53,11 @@
         <file alias="Start">Icons/StartTcpIp.png</file>
         <file alias="Stop">Icons/StopTcpIp.png</file>
     </qresource>
+    <qresource prefix="/ChannelSelection">
+        <file alias="add-icon">Icons/add-icon.png</file>
+    </qresource>
+    <qresource prefix="/devicesSelectionPanel">
+        <file alias="Check-Icon">Icons/check-icon.png</file>
+    </qresource>
+    <qresource prefix="/"/>
 </RCC>

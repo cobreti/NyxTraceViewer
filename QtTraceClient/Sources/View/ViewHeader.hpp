@@ -21,6 +21,7 @@ public:
     void SetHorzOffset(int offset)      { m_HorzOffset = offset; }
 
     void InitDefaultWidth();
+    void AdjustColumnsSize();
 
     const QRectF&       Margins() const     { return m_Margins; }
     QRectF&             Margins()           { return m_Margins; }

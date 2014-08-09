@@ -1,5 +1,5 @@
 #include "TraceViewerFeeder.h"
-#include <QtGui/QApplication>
+#include <QApplication>
 
 #include <Nyx.hpp>
 #include <NyxNet.hpp>

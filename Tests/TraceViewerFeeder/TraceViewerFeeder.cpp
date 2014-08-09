@@ -7,7 +7,7 @@
 /**
  *
  */
-CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WFlags flags)
+CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WindowFlags flags)
     : QMainWindow(parent, flags),
       m_pUserTextFeeder(NULL),
       m_pTextFileFeeder(NULL)
@@ -32,6 +32,8 @@ CTraceViewerFeeder::CTraceViewerFeeder(QWidget *parent, Qt::WFlags flags)
                 this, SLOT(OnNyxPipeClicked()));
     connect(    ui.btnNyxTcpIpAPISource, SIGNAL(clicked()),
                 this, SLOT(OnNyxTcpIpClicked()));
+    connect(    ui.btnPlainTcpIp, SIGNAL(clicked()),
+                this, SLOT(OnPlainTcpIpClicked()));
     connect(    ui.btnExternalAPISource, SIGNAL(clicked()),
                 this, SLOT(OnExternalClicked()));
     connect(    ui.btnDllSource, SIGNAL(clicked()),
@@ -138,6 +140,12 @@ void CTraceViewerFeeder::SaveSettings(CFeederEntryWidgetItem* pItem, CFeederSett
         settings.ApiType() = CFeederSettings::eTAPI_External;
     else if ( ui.btnDllSource->isChecked() )
         settings.ApiType() = CFeederSettings::eTAPI_Dll;
+    else if ( ui.btnPlainTcpIp->isChecked() )
+    {
+        settings.ApiType() = CFeederSettings::eTAPI_PlainTcpIp;
+        settings.TcpIpAddress() = ui.editTcpIpAddress->text().toStdString().c_str();
+        settings.PortNumber() = ui.editPortNumber->text().toInt();
+    }
 
     settings.FeederSource() = NULL;
 
@@ -234,6 +242,16 @@ void CTraceViewerFeeder::OnNyxTcpIpClicked()
 
 
 /**
+ * @brief CTraceViewerFeeder::OnPlainTcpIpClicked
+ */
+void CTraceViewerFeeder::OnPlainTcpIpClicked()
+{
+    ui.editTcpIpAddress->setEnabled(true);
+    ui.editPortNumber->setEnabled(true);
+}
+
+
+/**
  *
  */
 void CTraceViewerFeeder::OnExternalClicked()
@@ -297,6 +315,13 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
             ui.editPortNumber->setEnabled(true);
             ui.editPortNumber->setText( QString::number(pEntry->Settings().PortNumber()));
             break;
+        case CFeederSettings::eTAPI_PlainTcpIp:
+            ui.btnPlainTcpIp->setChecked(true);
+            ui.editTcpIpAddress->setEnabled(true);
+            ui.editTcpIpAddress->setText( pEntry->Settings().TcpIpAddress().c_str() );
+            ui.editPortNumber->setEnabled(true);
+            ui.editPortNumber->setText( QString::number(pEntry->Settings().PortNumber()));
+            break;
         case CFeederSettings::eTAPI_External:
             ui.btnExternalAPISource->setChecked(true);
             break;
@@ -328,6 +353,7 @@ void CTraceViewerFeeder::InitDetailsPanel(CFeederEntry *pEntry)
         ui.btnNyxPipeAPISource->setChecked(false);
         ui.btnNyxTcpIpAPISource->setChecked(false);
         ui.btnExternalAPISource->setChecked(false);
+        ui.btnPlainTcpIp->setChecked(false);
         ui.btnDllSource->setChecked(false);
         ui.TracesPerBlockSpinBox->setValue(0);
         ui.IntervalBetweenBlocksSpinBox->setValue(1000);

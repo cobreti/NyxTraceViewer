@@ -4,6 +4,9 @@
 #include <Nyx.hpp>
 #include <NyxNet.hpp>
 
+#include "TraceChannel.hpp"
+
+
 namespace TraceClientCore
 {
     class CTcpNxTracesReceiversSvr;
@@ -29,6 +32,7 @@ namespace TraceClientCore
         
         virtual void HandleTraceStream( NyxNet::CNxStreamReader& rStreamReader );
         virtual void HandleTxtTraceStream( NyxNet::CNxStreamReader& rStreamReader );
+        virtual void GetClientAddress(NyxNet::IConnection* pConnection);
         
     protected:
         
@@ -36,6 +40,8 @@ namespace TraceClientCore
         Nyx::TBuffer<Nyx::Byte>         m_Buffer;
         CTcpNxTracesReceiversSvr*       m_pServer;
         CTraceChannel*                  m_pChannel;
+        NyxNet::CAddress                m_ClientAddress;
+        CTraceChannelSet                m_ChannelsSet;
     };
 }
 

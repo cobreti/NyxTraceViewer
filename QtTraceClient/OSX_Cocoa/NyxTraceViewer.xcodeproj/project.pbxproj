@@ -1,0 +1,722 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		16077A8B18130CD3000897A7 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16077A8A18130CD3000897A7 /* Preferences.xib */; };
+		16145342187748EE00191269 /* PrefsWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16145341187748EE00191269 /* PrefsWindowController.mm */; };
+		161453461877491700191269 /* ConnectionSettingsControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161453451877491700191269 /* ConnectionSettingsControl.mm */; };
+		161453491877495E00191269 /* ConnectionSettingsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 161453481877495E00191269 /* ConnectionSettingsView.mm */; };
+		162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */; };
+		162AADF2180A17040007B8EE /* TracesDataHeader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 162AADF1180A17040007B8EE /* TracesDataHeader.mm */; };
+		164B6D6517EB66C100B25E5E /* TracesGroupMgrListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */; };
+		164B6D7C17ED09C000B25E5E /* ContentView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D7B17ED09C000B25E5E /* ContentView.mm */; };
+		164B6D7F17ED0C3400B25E5E /* TracesDataView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 164B6D7E17ED0C3400B25E5E /* TracesDataView.mm */; };
+		165D73DD17BD98220024CB1F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 165D73DC17BD98220024CB1F /* Cocoa.framework */; };
+		165D73E717BD98220024CB1F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 165D73E517BD98220024CB1F /* InfoPlist.strings */; };
+		165D73E917BD98220024CB1F /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73E817BD98220024CB1F /* main.mm */; };
+		165D73ED17BD98220024CB1F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 165D73EB17BD98220024CB1F /* Credits.rtf */; };
+		165D73F317BD98220024CB1F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 165D73F117BD98220024CB1F /* MainMenu.xib */; };
+		165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 165D73EF17BD98220024CB1F /* AppDelegate.mm */; };
+		168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */; };
+		168F944317DCDC9B006AA407 /* SourcesView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944217DCDC9B006AA407 /* SourcesView.mm */; };
+		168F944717DCF760006AA407 /* TracesGroupsView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944617DCF760006AA407 /* TracesGroupsView.mm */; };
+		168F944A17DD0611006AA407 /* TracesGroupsListCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */; };
+		168F944D17DE0A7E006AA407 /* TracesGroupInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */; };
+		168F945017DE0CD2006AA407 /* TracesGroupItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */; };
+		168F946017DFD4EB006AA407 /* CellsLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F945F17DFD4EB006AA407 /* CellsLayout.mm */; };
+		168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */; };
+		168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946517DFD59B006AA407 /* CellLayoutItem.mm */; };
+		168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */; };
+		168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */; };
+		168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 168F947117E0014A006AA407 /* HorizontalCellsLayout.m */; };
+		168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */; };
+		168F948217E79E9F006AA407 /* ChannelsListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 168F948117E79E9F006AA407 /* ChannelsListener.mm */; };
+		16CE6DC317EF6CCD000E9F69 /* TracesGroupListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DC217EF6CCD000E9F69 /* TracesGroupListener.mm */; };
+		16CE6DC617EFCEED000E9F69 /* ViewTracesIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DC517EFCEED000E9F69 /* ViewTracesIterator.cpp */; };
+		16CE6DCC17F8B858000E9F69 /* ColumnSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */; };
+		16CE6DCF17F8F601000E9F69 /* TracesDataViewSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */; };
+		16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */; };
+		16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */; };
+		16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255117DB654600C4FD48 /* sources_hidden.png */; };
+		16D0255417DB654600C4FD48 /* sources_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 16D0255217DB654600C4FD48 /* sources_visible.png */; };
+		16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0255717DB66A400C4FD48 /* SelectionPanel.mm */; };
+		16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */; };
+		16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */; };
+		16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16D0256317DBC12800C4FD48 /* SelectionBar.mm */; };
+		16FD8D4017C907BE00718001 /* App-icon.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D3F17C907BE00718001 /* App-icon.iconset */; };
+		16FD8D4217CA2E1B00718001 /* TracesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4117CA2E1B00718001 /* TracesWindow.xib */; };
+		16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D4617CA2FC000718001 /* TracesWindowController.mm */; };
+		16FD8D4A17CA7E0A00718001 /* channels_hidden.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4817CA7E0A00718001 /* channels_hidden.png */; };
+		16FD8D4B17CA7E0A00718001 /* channels_visible.png in Resources */ = {isa = PBXBuildFile; fileRef = 16FD8D4917CA7E0A00718001 /* channels_visible.png */; };
+		16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */; };
+		16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		16077A8A18130CD3000897A7 /* Preferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Preferences.xib; sourceTree = "<group>"; };
+		16145340187748EE00191269 /* PrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsWindowController.h; path = Preferences/PrefsWindowController.h; sourceTree = "<group>"; };
+		16145341187748EE00191269 /* PrefsWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = PrefsWindowController.mm; path = Preferences/PrefsWindowController.mm; sourceTree = "<group>"; };
+		161453441877491700191269 /* ConnectionSettingsControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionSettingsControl.h; path = Preferences/ConnectionSettings/ConnectionSettingsControl.h; sourceTree = "<group>"; };
+		161453451877491700191269 /* ConnectionSettingsControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ConnectionSettingsControl.mm; path = Preferences/ConnectionSettings/ConnectionSettingsControl.mm; sourceTree = "<group>"; };
+		161453471877495E00191269 /* ConnectionSettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionSettingsView.h; path = Preferences/ConnectionSettings/ConnectionSettingsView.h; sourceTree = "<group>"; };
+		161453481877495E00191269 /* ConnectionSettingsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ConnectionSettingsView.mm; path = Preferences/ConnectionSettings/ConnectionSettingsView.mm; sourceTree = "<group>"; };
+		162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListenerProtocol.h; path = TracesView/TracesGroupListenerProtocol.h; sourceTree = "<group>"; };
+		162AADEC18010D240007B8EE /* TracesIterator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesIterator.cpp; path = ../../TraceClientCore/sources/TracesIterator.cpp; sourceTree = "<group>"; };
+		162AADED1803377D0007B8EE /* TraceLineDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TraceLineDisplay.h; path = TracesView/TraceLineDisplay.h; sourceTree = "<group>"; };
+		162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TraceLineDisplay.mm; path = TracesView/TraceLineDisplay.mm; sourceTree = "<group>"; };
+		162AADF0180A17040007B8EE /* TracesDataHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesDataHeader.h; path = TracesView/TracesDataHeader.h; sourceTree = "<group>"; };
+		162AADF1180A17040007B8EE /* TracesDataHeader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesDataHeader.mm; path = TracesView/TracesDataHeader.mm; sourceTree = "<group>"; };
+		162AADF3180A2C480007B8EE /* ColumnSettingsListenerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ColumnSettingsListenerProtocol.h; path = TracesView/settings/ColumnSettingsListenerProtocol.h; sourceTree = "<group>"; };
+		164B6D6317EB667500B25E5E /* TracesGroupMgrListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupMgrListener.h; path = SelectionPanel/TracesGroupMgrListener.h; sourceTree = "<group>"; };
+		164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupMgrListener.mm; path = SelectionPanel/TracesGroupMgrListener.mm; sourceTree = "<group>"; };
+		164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesViewRepoObserver.cpp; path = ../../TraceClientCore/sources/TracesViewRepoObserver.cpp; sourceTree = "<group>"; };
+		164B6D6D17EBD90100B25E5E /* TraceDataRepository.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TraceDataRepository.cpp; path = ../../TraceClientCore/sources/TraceDataRepository.cpp; sourceTree = "<group>"; };
+		164B6D6E17EBD93E00B25E5E /* PoolsUpdateClock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PoolsUpdateClock.cpp; path = ../../TraceClientCore/sources/PoolsUpdateClock.cpp; sourceTree = "<group>"; };
+		164B6D7A17ED09C000B25E5E /* ContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentView.h; path = TracesView/ContentView.h; sourceTree = "<group>"; };
+		164B6D7B17ED09C000B25E5E /* ContentView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ContentView.mm; path = TracesView/ContentView.mm; sourceTree = "<group>"; };
+		164B6D7D17ED0C3400B25E5E /* TracesDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesDataView.h; path = TracesView/TracesDataView.h; sourceTree = "<group>"; };
+		164B6D7E17ED0C3400B25E5E /* TracesDataView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesDataView.mm; path = TracesView/TracesDataView.mm; sourceTree = "<group>"; };
+		164B6D8017EDE5CD00B25E5E /* TcpNxTracesReceiver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TcpNxTracesReceiver.cpp; path = ../../TraceClientCore/sources/TcpNxTracesReceiver.cpp; sourceTree = "<group>"; };
+		164B6D8217EE121900B25E5E /* TracesGroup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesGroup.cpp; path = ../../TraceClientCore/sources/TracesGroup.cpp; sourceTree = "<group>"; };
+		164B6D8317EE128400B25E5E /* TracesView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TracesView.cpp; path = ../../TraceClientCore/sources/TracesView.cpp; sourceTree = "<group>"; };
+		165D73D917BD98220024CB1F /* NyxTraceViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyxTraceViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		165D73DC17BD98220024CB1F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		165D73DF17BD98220024CB1F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		165D73E017BD98220024CB1F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		165D73E117BD98220024CB1F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		165D73E417BD98220024CB1F /* NyxTraceViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NyxTraceViewer-Info.plist"; sourceTree = "<group>"; };
+		165D73E617BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		165D73E817BD98220024CB1F /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		165D73EA17BD98220024CB1F /* NyxTraceViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NyxTraceViewer-Prefix.pch"; sourceTree = "<group>"; };
+		165D73EC17BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		165D73EE17BD98220024CB1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		165D73EF17BD98220024CB1F /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		165D73F217BD98220024CB1F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActionHandlerInfo.cpp; path = Controls/ActionHandlerInfo.cpp; sourceTree = "<group>"; };
+		168F943D17DCABC3006AA407 /* ActionHandlerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionHandlerInfo.h; path = Controls/ActionHandlerInfo.h; sourceTree = "<group>"; };
+		168F944117DCDC9B006AA407 /* SourcesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SourcesView.h; path = SelectionPanel/SourcesView/SourcesView.h; sourceTree = "<group>"; };
+		168F944217DCDC9B006AA407 /* SourcesView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SourcesView.mm; path = SelectionPanel/SourcesView/SourcesView.mm; sourceTree = "<group>"; };
+		168F944517DCF760006AA407 /* TracesGroupsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupsView.h; path = SelectionPanel/TracesGroupsView/TracesGroupsView.h; sourceTree = "<group>"; };
+		168F944617DCF760006AA407 /* TracesGroupsView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupsView.mm; path = SelectionPanel/TracesGroupsView/TracesGroupsView.mm; sourceTree = "<group>"; };
+		168F944817DD0611006AA407 /* TracesGroupsListCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupsListCtrl.h; path = Controls/TracesGroupsList/TracesGroupsListCtrl.h; sourceTree = "<group>"; };
+		168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupsListCtrl.mm; path = Controls/TracesGroupsList/TracesGroupsListCtrl.mm; sourceTree = "<group>"; };
+		168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TracesGroupInfo.cpp; path = Controls/TracesGroupsList/TracesGroupInfo.cpp; sourceTree = "<group>"; };
+		168F944C17DE0A7E006AA407 /* TracesGroupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupInfo.h; path = Controls/TracesGroupsList/TracesGroupInfo.h; sourceTree = "<group>"; };
+		168F944E17DE0CD2006AA407 /* TracesGroupItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupItem.h; path = Controls/TracesGroupsList/TracesGroupItem.h; sourceTree = "<group>"; };
+		168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupItem.mm; path = Controls/TracesGroupsList/TracesGroupItem.mm; sourceTree = "<group>"; };
+		168F945E17DFD4EB006AA407 /* CellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellsLayout.h; path = Controls/CellsLayout/CellsLayout.h; sourceTree = "<group>"; };
+		168F945F17DFD4EB006AA407 /* CellsLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CellsLayout.mm; path = Controls/CellsLayout/CellsLayout.mm; sourceTree = "<group>"; };
+		168F946117DFD52B006AA407 /* VerticalCellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalCellsLayout.h; path = Controls/CellsLayout/VerticalCellsLayout.h; sourceTree = "<group>"; };
+		168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VerticalCellsLayout.mm; path = Controls/CellsLayout/VerticalCellsLayout.mm; sourceTree = "<group>"; };
+		168F946417DFD59B006AA407 /* CellLayoutItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellLayoutItem.h; path = Controls/CellsLayout/CellLayoutItem.h; sourceTree = "<group>"; };
+		168F946517DFD59B006AA407 /* CellLayoutItem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CellLayoutItem.mm; path = Controls/CellsLayout/CellLayoutItem.mm; sourceTree = "<group>"; };
+		168F946A17DFFCE6006AA407 /* CellsLayoutCellsContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CellsLayoutCellsContainer.h; path = Controls/CellsLayout/CellsLayoutCellsContainer.h; sourceTree = "<group>"; };
+		168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CellsLayoutCellsContainer.m; path = Controls/CellsLayout/CellsLayoutCellsContainer.m; sourceTree = "<group>"; };
+		168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesGroupLayoutRow.h; path = Controls/TracesGroupsList/TracesGroupLayoutRow.h; sourceTree = "<group>"; };
+		168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupLayoutRow.mm; path = Controls/TracesGroupsList/TracesGroupLayoutRow.mm; sourceTree = "<group>"; };
+		168F947017E0014A006AA407 /* HorizontalCellsLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalCellsLayout.h; path = Controls/CellsLayout/HorizontalCellsLayout.h; sourceTree = "<group>"; };
+		168F947117E0014A006AA407 /* HorizontalCellsLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HorizontalCellsLayout.m; path = Controls/CellsLayout/HorizontalCellsLayout.m; sourceTree = "<group>"; };
+		168F947317E34115006AA407 /* RepositoriesListLayoutRow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoriesListLayoutRow.h; path = Controls/RepositoriesList/RepositoriesListLayoutRow.h; sourceTree = "<group>"; };
+		168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoriesListLayoutRow.mm; path = Controls/RepositoriesList/RepositoriesListLayoutRow.mm; sourceTree = "<group>"; };
+		168F948017E79E9F006AA407 /* ChannelsListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChannelsListener.h; path = SelectionPanel/ChannelsListener.h; sourceTree = "<group>"; };
+		168F948117E79E9F006AA407 /* ChannelsListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChannelsListener.mm; path = SelectionPanel/ChannelsListener.mm; sourceTree = "<group>"; };
+		16CE6DC117EF6C96000E9F69 /* TracesGroupListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TracesGroupListener.h; path = TracesView/TracesGroupListener.h; sourceTree = "<group>"; };
+		16CE6DC217EF6CCD000E9F69 /* TracesGroupListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesGroupListener.mm; path = TracesView/TracesGroupListener.mm; sourceTree = "<group>"; };
+		16CE6DC417EFCE31000E9F69 /* ViewTracesIterator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ViewTracesIterator.hpp; path = TracesView/ViewTracesIterator.hpp; sourceTree = "<group>"; };
+		16CE6DC517EFCEED000E9F69 /* ViewTracesIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ViewTracesIterator.cpp; path = TracesView/ViewTracesIterator.cpp; sourceTree = "<group>"; };
+		16CE6DC717F79D3A000E9F69 /* TcpTracesReceiversSvr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TcpTracesReceiversSvr.cpp; path = ../../TraceClientCore/sources/TcpTracesReceiversSvr.cpp; sourceTree = "<group>"; };
+		16CE6DC817F79D62000E9F69 /* TcpNxTracesReceiversSvr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TcpNxTracesReceiversSvr.cpp; path = ../../TraceClientCore/sources/TcpNxTracesReceiversSvr.cpp; sourceTree = "<group>"; };
+		16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ColumnSettings.mm; path = TracesView/settings/ColumnSettings.mm; sourceTree = "<group>"; };
+		16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColumnSettings.h; path = TracesView/settings/ColumnSettings.h; sourceTree = "<group>"; };
+		16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TracesDataViewSettings.mm; path = TracesView/settings/TracesDataViewSettings.mm; sourceTree = "<group>"; };
+		16CE6DCE17F8F601000E9F69 /* TracesDataViewSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TracesDataViewSettings.h; path = TracesView/settings/TracesDataViewSettings.h; sourceTree = "<group>"; };
+		16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Unchecked-checkbox-icon.png"; path = "icons/Unchecked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
+		16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Checked-checkbox-icon.png"; path = "icons/Checked-checkbox-icon.png"; sourceTree = SOURCE_ROOT; };
+		16D0255117DB654600C4FD48 /* sources_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_hidden.png; path = icons/sources_hidden.png; sourceTree = SOURCE_ROOT; };
+		16D0255217DB654600C4FD48 /* sources_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sources_visible.png; path = icons/sources_visible.png; sourceTree = SOURCE_ROOT; };
+		16D0255617DB66A400C4FD48 /* SelectionPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionPanel.h; path = SelectionPanel/SelectionPanel.h; sourceTree = "<group>"; };
+		16D0255717DB66A400C4FD48 /* SelectionPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionPanel.mm; path = SelectionPanel/SelectionPanel.mm; sourceTree = "<group>"; };
+		16D0255C17DB67EE00C4FD48 /* SelectionPanelBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionPanelBar.h; path = SelectionPanel/SelectionPanelBar.h; sourceTree = "<group>"; };
+		16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionPanelBar.mm; path = SelectionPanel/SelectionPanelBar.mm; sourceTree = "<group>"; };
+		16D0255F17DB7A2400C4FD48 /* ToggleFlatBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToggleFlatBtn.h; path = Controls/ToggleFlatBtn.h; sourceTree = "<group>"; };
+		16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ToggleFlatBtn.mm; path = Controls/ToggleFlatBtn.mm; sourceTree = "<group>"; };
+		16D0256217DBC12800C4FD48 /* SelectionBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectionBar.h; path = Controls/SelectionBar.h; sourceTree = "<group>"; };
+		16D0256317DBC12800C4FD48 /* SelectionBar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SelectionBar.mm; path = Controls/SelectionBar.mm; sourceTree = "<group>"; };
+		16FD8D3F17C907BE00718001 /* App-icon.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = "App-icon.iconset"; sourceTree = SOURCE_ROOT; };
+		16FD8D4117CA2E1B00718001 /* TracesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TracesWindow.xib; sourceTree = "<group>"; };
+		16FD8D4517CA2FC000718001 /* TracesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracesWindowController.h; sourceTree = "<group>"; };
+		16FD8D4617CA2FC000718001 /* TracesWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TracesWindowController.mm; sourceTree = "<group>"; };
+		16FD8D4817CA7E0A00718001 /* channels_hidden.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = channels_hidden.png; path = icons/channels_hidden.png; sourceTree = SOURCE_ROOT; };
+		16FD8D4917CA7E0A00718001 /* channels_visible.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = channels_visible.png; path = icons/channels_visible.png; sourceTree = SOURCE_ROOT; };
+		16FD8D6017D234E900718001 /* RepositoriesListCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RepositoriesListCtrl.h; path = Controls/RepositoriesList/RepositoriesListCtrl.h; sourceTree = "<group>"; };
+		16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = RepositoriesListCtrl.mm; path = Controls/RepositoriesList/RepositoriesListCtrl.mm; sourceTree = "<group>"; };
+		16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepositoryInfo.cpp; sourceTree = "<group>"; };
+		16FD8D6417D23A6400718001 /* RepositoryInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepositoryInfo.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		165D73D617BD98220024CB1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165D73DD17BD98220024CB1F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1614533F187748DC00191269 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				161453431877490900191269 /* ConnectionSettings */,
+				16145340187748EE00191269 /* PrefsWindowController.h */,
+				16145341187748EE00191269 /* PrefsWindowController.mm */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		161453431877490900191269 /* ConnectionSettings */ = {
+			isa = PBXGroup;
+			children = (
+				161453441877491700191269 /* ConnectionSettingsControl.h */,
+				161453451877491700191269 /* ConnectionSettingsControl.mm */,
+				161453471877495E00191269 /* ConnectionSettingsView.h */,
+				161453481877495E00191269 /* ConnectionSettingsView.mm */,
+			);
+			name = ConnectionSettings;
+			sourceTree = "<group>";
+		};
+		162AADEA1800F0DE0007B8EE /* references */ = {
+			isa = PBXGroup;
+			children = (
+				162AADEC18010D240007B8EE /* TracesIterator.cpp */,
+				164B6D6C17EBD81400B25E5E /* TracesViewRepoObserver.cpp */,
+				164B6D6D17EBD90100B25E5E /* TraceDataRepository.cpp */,
+				164B6D6E17EBD93E00B25E5E /* PoolsUpdateClock.cpp */,
+				164B6D8017EDE5CD00B25E5E /* TcpNxTracesReceiver.cpp */,
+				164B6D8217EE121900B25E5E /* TracesGroup.cpp */,
+				16CE6DC717F79D3A000E9F69 /* TcpTracesReceiversSvr.cpp */,
+				16CE6DC817F79D62000E9F69 /* TcpNxTracesReceiversSvr.cpp */,
+				164B6D8317EE128400B25E5E /* TracesView.cpp */,
+			);
+			name = references;
+			sourceTree = "<group>";
+		};
+		164B6D7917ED097D00B25E5E /* TracesView */ = {
+			isa = PBXGroup;
+			children = (
+				16CE6DC917F8B81F000E9F69 /* settings */,
+				164B6D7A17ED09C000B25E5E /* ContentView.h */,
+				164B6D7B17ED09C000B25E5E /* ContentView.mm */,
+				162AADF0180A17040007B8EE /* TracesDataHeader.h */,
+				162AADF1180A17040007B8EE /* TracesDataHeader.mm */,
+				164B6D7D17ED0C3400B25E5E /* TracesDataView.h */,
+				164B6D7E17ED0C3400B25E5E /* TracesDataView.mm */,
+				162AADEB1800FEC20007B8EE /* TracesGroupListenerProtocol.h */,
+				16CE6DC117EF6C96000E9F69 /* TracesGroupListener.h */,
+				16CE6DC217EF6CCD000E9F69 /* TracesGroupListener.mm */,
+				16CE6DC417EFCE31000E9F69 /* ViewTracesIterator.hpp */,
+				16CE6DC517EFCEED000E9F69 /* ViewTracesIterator.cpp */,
+				162AADED1803377D0007B8EE /* TraceLineDisplay.h */,
+				162AADEE1803377D0007B8EE /* TraceLineDisplay.mm */,
+			);
+			name = TracesView;
+			sourceTree = "<group>";
+		};
+		165D73D017BD98220024CB1F = {
+			isa = PBXGroup;
+			children = (
+				162AADEA1800F0DE0007B8EE /* references */,
+				165D73E217BD98220024CB1F /* NyxTraceViewer */,
+				165D73DB17BD98220024CB1F /* Frameworks */,
+				165D73DA17BD98220024CB1F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		165D73DA17BD98220024CB1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				165D73D917BD98220024CB1F /* NyxTraceViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		165D73DB17BD98220024CB1F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				165D73DC17BD98220024CB1F /* Cocoa.framework */,
+				165D73DE17BD98220024CB1F /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		165D73DE17BD98220024CB1F /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				165D73DF17BD98220024CB1F /* AppKit.framework */,
+				165D73E017BD98220024CB1F /* CoreData.framework */,
+				165D73E117BD98220024CB1F /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		165D73E217BD98220024CB1F /* NyxTraceViewer */ = {
+			isa = PBXGroup;
+			children = (
+				1614533F187748DC00191269 /* Preferences */,
+				164B6D7917ED097D00B25E5E /* TracesView */,
+				16D0255517DB663600C4FD48 /* SelectionPanel */,
+				16FD8D5E17D234C200718001 /* Controls */,
+				16FD8D3A17C903E100718001 /* icons */,
+				165D73EE17BD98220024CB1F /* AppDelegate.h */,
+				165D73EF17BD98220024CB1F /* AppDelegate.mm */,
+				165D73E317BD98220024CB1F /* Supporting Files */,
+				165D73F117BD98220024CB1F /* MainMenu.xib */,
+				16FD8D4117CA2E1B00718001 /* TracesWindow.xib */,
+				16077A8A18130CD3000897A7 /* Preferences.xib */,
+				16FD8D4517CA2FC000718001 /* TracesWindowController.h */,
+				16FD8D4617CA2FC000718001 /* TracesWindowController.mm */,
+			);
+			path = NyxTraceViewer;
+			sourceTree = "<group>";
+		};
+		165D73E317BD98220024CB1F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				165D73E417BD98220024CB1F /* NyxTraceViewer-Info.plist */,
+				165D73E517BD98220024CB1F /* InfoPlist.strings */,
+				165D73E817BD98220024CB1F /* main.mm */,
+				165D73EA17BD98220024CB1F /* NyxTraceViewer-Prefix.pch */,
+				165D73EB17BD98220024CB1F /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		168F943F17DCD981006AA407 /* TracesGroupsList */ = {
+			isa = PBXGroup;
+			children = (
+				168F944817DD0611006AA407 /* TracesGroupsListCtrl.h */,
+				168F944917DD0611006AA407 /* TracesGroupsListCtrl.mm */,
+				168F944C17DE0A7E006AA407 /* TracesGroupInfo.h */,
+				168F944B17DE0A7E006AA407 /* TracesGroupInfo.cpp */,
+				168F944E17DE0CD2006AA407 /* TracesGroupItem.h */,
+				168F944F17DE0CD2006AA407 /* TracesGroupItem.mm */,
+				168F946D17DFFFEC006AA407 /* TracesGroupLayoutRow.h */,
+				168F946E17DFFFEC006AA407 /* TracesGroupLayoutRow.mm */,
+			);
+			name = TracesGroupsList;
+			sourceTree = "<group>";
+		};
+		168F944017DCDAAA006AA407 /* SourcesView */ = {
+			isa = PBXGroup;
+			children = (
+				168F944117DCDC9B006AA407 /* SourcesView.h */,
+				168F944217DCDC9B006AA407 /* SourcesView.mm */,
+			);
+			name = SourcesView;
+			sourceTree = "<group>";
+		};
+		168F944417DCDFE5006AA407 /* TracesGroupsView */ = {
+			isa = PBXGroup;
+			children = (
+				168F944517DCF760006AA407 /* TracesGroupsView.h */,
+				168F944617DCF760006AA407 /* TracesGroupsView.mm */,
+			);
+			name = TracesGroupsView;
+			sourceTree = "<group>";
+		};
+		168F945D17DFD4B5006AA407 /* CellsLayout */ = {
+			isa = PBXGroup;
+			children = (
+				168F945E17DFD4EB006AA407 /* CellsLayout.h */,
+				168F945F17DFD4EB006AA407 /* CellsLayout.mm */,
+				168F946117DFD52B006AA407 /* VerticalCellsLayout.h */,
+				168F946217DFD52B006AA407 /* VerticalCellsLayout.mm */,
+				168F946417DFD59B006AA407 /* CellLayoutItem.h */,
+				168F946517DFD59B006AA407 /* CellLayoutItem.mm */,
+				168F946A17DFFCE6006AA407 /* CellsLayoutCellsContainer.h */,
+				168F946B17DFFCE6006AA407 /* CellsLayoutCellsContainer.m */,
+				168F947017E0014A006AA407 /* HorizontalCellsLayout.h */,
+				168F947117E0014A006AA407 /* HorizontalCellsLayout.m */,
+			);
+			name = CellsLayout;
+			sourceTree = "<group>";
+		};
+		16CE6DC917F8B81F000E9F69 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				16CE6DCA17F8B858000E9F69 /* ColumnSettings.mm */,
+				16CE6DCB17F8B858000E9F69 /* ColumnSettings.h */,
+				16CE6DCD17F8F601000E9F69 /* TracesDataViewSettings.mm */,
+				16CE6DCE17F8F601000E9F69 /* TracesDataViewSettings.h */,
+				162AADF3180A2C480007B8EE /* ColumnSettingsListenerProtocol.h */,
+			);
+			name = settings;
+			sourceTree = "<group>";
+		};
+		16D0255517DB663600C4FD48 /* SelectionPanel */ = {
+			isa = PBXGroup;
+			children = (
+				168F944417DCDFE5006AA407 /* TracesGroupsView */,
+				168F944017DCDAAA006AA407 /* SourcesView */,
+				16D0255617DB66A400C4FD48 /* SelectionPanel.h */,
+				16D0255717DB66A400C4FD48 /* SelectionPanel.mm */,
+				16D0255C17DB67EE00C4FD48 /* SelectionPanelBar.h */,
+				16D0255D17DB67EE00C4FD48 /* SelectionPanelBar.mm */,
+				168F948017E79E9F006AA407 /* ChannelsListener.h */,
+				168F948117E79E9F006AA407 /* ChannelsListener.mm */,
+				164B6D6317EB667500B25E5E /* TracesGroupMgrListener.h */,
+				164B6D6417EB66C100B25E5E /* TracesGroupMgrListener.mm */,
+			);
+			name = SelectionPanel;
+			sourceTree = "<group>";
+		};
+		16FD8D3A17C903E100718001 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				16D0254F17DA955400C4FD48 /* Checked-checkbox-icon.png */,
+				16D0254A17DA158500C4FD48 /* Unchecked-checkbox-icon.png */,
+				16FD8D4817CA7E0A00718001 /* channels_hidden.png */,
+				16FD8D4917CA7E0A00718001 /* channels_visible.png */,
+				16FD8D3F17C907BE00718001 /* App-icon.iconset */,
+				16D0255117DB654600C4FD48 /* sources_hidden.png */,
+				16D0255217DB654600C4FD48 /* sources_visible.png */,
+			);
+			name = icons;
+			sourceTree = "<group>";
+		};
+		16FD8D5E17D234C200718001 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				168F945D17DFD4B5006AA407 /* CellsLayout */,
+				168F943F17DCD981006AA407 /* TracesGroupsList */,
+				16FD8D5F17D234C800718001 /* RepositoriesList */,
+				16D0255F17DB7A2400C4FD48 /* ToggleFlatBtn.h */,
+				16D0256017DB7A2400C4FD48 /* ToggleFlatBtn.mm */,
+				16D0256217DBC12800C4FD48 /* SelectionBar.h */,
+				16D0256317DBC12800C4FD48 /* SelectionBar.mm */,
+				168F943C17DCABC3006AA407 /* ActionHandlerInfo.cpp */,
+				168F943D17DCABC3006AA407 /* ActionHandlerInfo.h */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
+		16FD8D5F17D234C800718001 /* RepositoriesList */ = {
+			isa = PBXGroup;
+			children = (
+				16FD8D6017D234E900718001 /* RepositoriesListCtrl.h */,
+				16FD8D6117D234E900718001 /* RepositoriesListCtrl.mm */,
+				16FD8D6417D23A6400718001 /* RepositoryInfo.hpp */,
+				16FD8D6317D23A6400718001 /* RepositoryInfo.cpp */,
+				168F947317E34115006AA407 /* RepositoriesListLayoutRow.h */,
+				168F947417E34116006AA407 /* RepositoriesListLayoutRow.mm */,
+			);
+			name = RepositoriesList;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		165D73D817BD98220024CB1F /* NyxTraceViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 165D73F617BD98220024CB1F /* Build configuration list for PBXNativeTarget "NyxTraceViewer" */;
+			buildPhases = (
+				165D73D517BD98220024CB1F /* Sources */,
+				165D73D617BD98220024CB1F /* Frameworks */,
+				165D73D717BD98220024CB1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NyxTraceViewer;
+			productName = NyxTraceViewer;
+			productReference = 165D73D917BD98220024CB1F /* NyxTraceViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		165D73D117BD98220024CB1F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Danny Thibaudeau";
+			};
+			buildConfigurationList = 165D73D417BD98220024CB1F /* Build configuration list for PBXProject "NyxTraceViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 165D73D017BD98220024CB1F;
+			productRefGroup = 165D73DA17BD98220024CB1F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				165D73D817BD98220024CB1F /* NyxTraceViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		165D73D717BD98220024CB1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165D73E717BD98220024CB1F /* InfoPlist.strings in Resources */,
+				165D73ED17BD98220024CB1F /* Credits.rtf in Resources */,
+				165D73F317BD98220024CB1F /* MainMenu.xib in Resources */,
+				16FD8D4017C907BE00718001 /* App-icon.iconset in Resources */,
+				16FD8D4217CA2E1B00718001 /* TracesWindow.xib in Resources */,
+				16FD8D4A17CA7E0A00718001 /* channels_hidden.png in Resources */,
+				16FD8D4B17CA7E0A00718001 /* channels_visible.png in Resources */,
+				16D0254B17DA158500C4FD48 /* Unchecked-checkbox-icon.png in Resources */,
+				16D0255017DA955400C4FD48 /* Checked-checkbox-icon.png in Resources */,
+				16D0255317DB654600C4FD48 /* sources_hidden.png in Resources */,
+				16077A8B18130CD3000897A7 /* Preferences.xib in Resources */,
+				16D0255417DB654600C4FD48 /* sources_visible.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		165D73D517BD98220024CB1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				165D73E917BD98220024CB1F /* main.mm in Sources */,
+				165D73F917BD9FAC0024CB1F /* AppDelegate.mm in Sources */,
+				16CE6DC617EFCEED000E9F69 /* ViewTracesIterator.cpp in Sources */,
+				16FD8D4717CA2FC000718001 /* TracesWindowController.mm in Sources */,
+				16FD8D6217D234E900718001 /* RepositoriesListCtrl.mm in Sources */,
+				16FD8D6517D23A6400718001 /* RepositoryInfo.cpp in Sources */,
+				16D0255817DB66A400C4FD48 /* SelectionPanel.mm in Sources */,
+				16D0255E17DB67EE00C4FD48 /* SelectionPanelBar.mm in Sources */,
+				16D0256117DB7A2400C4FD48 /* ToggleFlatBtn.mm in Sources */,
+				16D0256417DBC12800C4FD48 /* SelectionBar.mm in Sources */,
+				16CE6DCC17F8B858000E9F69 /* ColumnSettings.mm in Sources */,
+				168F943E17DCABC3006AA407 /* ActionHandlerInfo.cpp in Sources */,
+				164B6D7F17ED0C3400B25E5E /* TracesDataView.mm in Sources */,
+				168F944317DCDC9B006AA407 /* SourcesView.mm in Sources */,
+				168F944717DCF760006AA407 /* TracesGroupsView.mm in Sources */,
+				16CE6DCF17F8F601000E9F69 /* TracesDataViewSettings.mm in Sources */,
+				168F944A17DD0611006AA407 /* TracesGroupsListCtrl.mm in Sources */,
+				168F944D17DE0A7E006AA407 /* TracesGroupInfo.cpp in Sources */,
+				168F945017DE0CD2006AA407 /* TracesGroupItem.mm in Sources */,
+				168F946017DFD4EB006AA407 /* CellsLayout.mm in Sources */,
+				168F946317DFD52B006AA407 /* VerticalCellsLayout.mm in Sources */,
+				168F946617DFD59B006AA407 /* CellLayoutItem.mm in Sources */,
+				161453461877491700191269 /* ConnectionSettingsControl.mm in Sources */,
+				16CE6DC317EF6CCD000E9F69 /* TracesGroupListener.mm in Sources */,
+				168F946C17DFFCE6006AA407 /* CellsLayoutCellsContainer.m in Sources */,
+				164B6D6517EB66C100B25E5E /* TracesGroupMgrListener.mm in Sources */,
+				16145342187748EE00191269 /* PrefsWindowController.mm in Sources */,
+				168F946F17DFFFEC006AA407 /* TracesGroupLayoutRow.mm in Sources */,
+				168F947217E0014A006AA407 /* HorizontalCellsLayout.m in Sources */,
+				161453491877495E00191269 /* ConnectionSettingsView.mm in Sources */,
+				164B6D7C17ED09C000B25E5E /* ContentView.mm in Sources */,
+				168F947517E34116006AA407 /* RepositoriesListLayoutRow.mm in Sources */,
+				162AADEF1803377D0007B8EE /* TraceLineDisplay.mm in Sources */,
+				162AADF2180A17040007B8EE /* TracesDataHeader.mm in Sources */,
+				168F948217E79E9F006AA407 /* ChannelsListener.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		165D73E517BD98220024CB1F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165D73E617BD98220024CB1F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		165D73EB17BD98220024CB1F /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165D73EC17BD98220024CB1F /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		165D73F117BD98220024CB1F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				165D73F217BD98220024CB1F /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		165D73F417BD98220024CB1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		165D73F517BD98220024CB1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		165D73F717BD98220024CB1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = ./build/debug_64;
+				CONFIGURATION_TEMP_DIR = ./build/debug_64;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NyxTraceViewer/NyxTraceViewer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					$NyxPath/include,
+					$NyxPath/include/NyxNet,
+					$NyxPath/include/NyxWebSvr,
+					$NyxPath/include/OSX,
+					$NyxPath/include/OSX/NyxNet,
+					../../TraceClientCore/include,
+				);
+				INFOPLIST_FILE = "NyxTraceViewer/NyxTraceViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					$NyxPath/Lib/OSX/Debug_64,
+					$NyxPath/Lib/OSX/OpenSSL_64,
+					../../Lib/OSX/Debug_64,
+				);
+				NyxPath = ../../../Nyx;
+				OBJROOT = ./build/debug_64;
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+					"-lNyxWebSvr",
+					"-lTraceClientCore",
+					"-lcrypto",
+					"-lssl",
+					"-liconv",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ./build/debug_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		165D73F817BD98220024CB1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = ./build/release_64;
+				CONFIGURATION_TEMP_DIR = ./build/release_64;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NyxTraceViewer/NyxTraceViewer-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					$NyxPath/include,
+					$NyxPath/include/NyxNet,
+					$NyxPath/include/NyxWebSvr,
+					$NyxPath/include/OSX,
+					$NyxPath/include/OSX/NyxNet,
+					../../TraceClientCore/include,
+				);
+				INFOPLIST_FILE = "NyxTraceViewer/NyxTraceViewer-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					$NyxPath/Lib/OSX/Release_64,
+					$NyxPath/Lib/OSX/OpenSSL_64,
+					../../Lib/OSX/Release_64,
+				);
+				NyxPath = ../../../Nyx;
+				OTHER_LDFLAGS = (
+					"-lNyxBase",
+					"-lNyxNet",
+					"-lNyxWebSvr",
+					"-lTraceClientCore",
+					"-lcrypto",
+					"-lssl",
+					"-liconv",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ./build/release_64;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		165D73D417BD98220024CB1F /* Build configuration list for PBXProject "NyxTraceViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165D73F417BD98220024CB1F /* Debug */,
+				165D73F517BD98220024CB1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		165D73F617BD98220024CB1F /* Build configuration list for PBXNativeTarget "NyxTraceViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				165D73F717BD98220024CB1F /* Debug */,
+				165D73F817BD98220024CB1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 165D73D117BD98220024CB1F /* Project object */;
+}

@@ -18,6 +18,30 @@ namespace TraceClientCore
 
     public:
 
+        class CIdentifier
+        {
+        public:
+            CIdentifier();
+            CIdentifier(const int& repositoryId, const int& traceId, const int& level);
+            CIdentifier(const CIdentifier& identifier);
+            ~CIdentifier();
+
+
+            const CIdentifier& operator = (const CIdentifier& identifier);
+            bool operator == (const CIdentifier& identifier) const;
+            bool operator != (const CIdentifier& identifier) const;
+            bool operator < (const CIdentifier& identifier) const;
+            bool operator <= (const CIdentifier& identifier) const;
+            bool operator > (const CIdentifier& identifier) const;
+            bool operator >= (const CIdentifier& identifier) const;
+
+        protected:
+
+            Nyx::UInt32     m_RepositoryId;
+            Nyx::UInt32     m_TraceId;
+            Nyx::UInt32     m_Level;
+        };
+
         enum ETraceType
         {
             eTT_User,
@@ -52,6 +76,17 @@ namespace TraceClientCore
         
         const NyxNet::CTraceFlags& Flags() const            { return m_Flags; }
         NyxNet::CTraceFlags& Flags()                        { return m_Flags; }
+        
+        const Nyx::UInt32& RepositoryId() const             { return m_RepositoryId; }
+        Nyx::UInt32& RepositoryId()                         { return m_RepositoryId; }
+        
+        const Nyx::UInt32& TraceId() const                  { return m_TraceId; }
+        Nyx::UInt32& TraceId()                              { return m_TraceId; }
+
+        const Nyx::UInt32& Level() const                    { return m_Level; }
+        Nyx::UInt32& Level()                                { return m_Level; }
+
+        const CIdentifier identifier() const                { return CIdentifier(m_RepositoryId, m_TraceId, m_Level); }
 		
 	protected:
 	
@@ -64,6 +99,9 @@ namespace TraceClientCore
 		CTracesPool*				m_pOwnerPool;
         ETraceType					m_eType;
         NyxNet::CTraceFlags         m_Flags;
+        Nyx::UInt32                 m_RepositoryId;
+        Nyx::UInt32                 m_TraceId;
+        Nyx::UInt32                 m_Level;
 	};
 }
 

@@ -5,6 +5,9 @@
 #include "ViewColumnsSettings.hpp"
 #include "ViewDrawSettings.hpp"
 
+#include <QColor>
+
+
 /**
  *
  */
@@ -23,6 +26,12 @@ public:
     bool        Dirty() const       { return m_bDirty; }
     bool&       Dirty()             { return m_bDirty; }
 
+    const QColor&                       selectionColor() const          { return m_SelectionColor; }
+    QColor&                             selectionColor()                { return m_SelectionColor; }
+
+    const QColor&                       selectionBorderColor() const    { return m_SelectionBorderColor; }
+    QColor&                             selectionBorderColor()          { return m_SelectionBorderColor; }
+
     CViewDrawSettings*      DrawSettings() const            { return m_pDrawSettings; }
     CViewDrawSettings*&     DrawSettings()                  { return m_pDrawSettings; }
 
@@ -36,6 +45,8 @@ protected:
     CViewColumnsSettings        m_ViewColumnsSettings;
     CViewDrawSettings*          m_pDrawSettings;
     bool                        m_bDirty;
+    QColor                      m_SelectionColor;
+    QColor                      m_SelectionBorderColor;
 };
 
 

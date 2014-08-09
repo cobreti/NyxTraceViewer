@@ -1,5 +1,6 @@
 #include "TracesWindow.hpp"
 #include "TracesView.h"
+#include "ChannelSelection.h"
 #include "MainWindow/PipesMgntPage.hpp"
 #include "MainWindow/MainWindow.hpp"
 #include "TraceClientApp.h"
@@ -14,8 +15,12 @@
 #include "Dialogs/AboutDlg.h"
 #include "Dialogs/HighlightColorsSelectionDlg.h"
 #include "View/Highlight/HighlightsMgrWnd.h"
+#include "View/Decorations/DynamicTextHighlight.h"
+#include "ServerAccess/TraceServerMonitor.h"
+#include "View/TracesGroupViewMgr.h"
 
 #include "Color/ColorBtn.h"
+
 
 #include <QToolButton>
 #include <QCloseEvent>
@@ -33,6 +38,7 @@
 CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui( new Ui::TracesWindow() ),
     m_pTracesView(NULL),
+    m_pChannelSelection(NULL),
     m_pBtn_MainWindow(NULL),
     m_pBtn_SourceFeeds(NULL),
     m_pBtn_NewView(NULL),
@@ -41,6 +47,10 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pBtn_HighlightColorSelection(NULL),
     m_pBtn_SaveAs(NULL),
     m_pBtn_About(NULL),
+    m_pBtn_Settings(NULL),
+    m_pBtn_Devices(NULL),
+    m_pBtn_KeepAtEnd(NULL),
+    m_pBtn_ConnectionStatus(NULL),
     m_pSearchText(NULL),
     m_pBtn_HideSearch(NULL),
     m_pBtn_SearchNext(NULL),
@@ -70,6 +80,15 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     QIcon               HighlightColorSelectionIcon(":/TracesWindow/HighlightColorSelection");
     QIcon               SearchIcon(":/TracesWindow/Search");
     QIcon               HideSearchIcon(":/TracesWindow/HideSearch");
+    QIcon               SettingsIcon(":/TracesWindow/Settings-Icon");
+    QIcon               SettingsSelectedIcon(":/TracesWindow/Settings-Selected-Icon");
+    QIcon               DevicesIcon(":/TracesWindow/Device-Icon");
+    QIcon               DevicesSelectedIcon(":/TracesWindow/Device-Selected-Icon");
+    QIcon               Clear(":/TracesWindow/Clear-Icon");
+    QIcon               KeepAtEndIcon(":/TracesWindow/Arrow-Down-Icon");
+    QIcon               KeepAtEndSelectedIcon(":/TracesWindow/Arrow-Down-Selected-Icon");
+    QIcon               ConnectedIcon(":/TracesWindow/Connected-Icon");
+    QIcon               NoConnectionIcon(":/TracesWindow/No-Connection-Icon");
 
     CTracesView* pBase = NULL;
 
@@ -77,11 +96,12 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
         pBase = pSrc->m_pTracesView;
 
     m_pTracesView = new CTracesView(this, pBase);
-    m_pPipesMgntPage = new CPipesMgntPage(this);
-    m_pPipesMgntPage->hide();
+    m_pChannelSelection = new CChannelSelection(this);
+//    m_pPipesMgntPage = new CPipesMgntPage(this);
+//    m_pPipesMgntPage->hide();
 
-    ui->gridLayout->addWidget(m_pPipesMgntPage);
-    ui->gridLayout->addWidget(m_pTracesView);
+    ui->gridLayout->addWidget(m_pChannelSelection, 0, 1);
+    ui->gridLayout->addWidget(m_pTracesView, 0, 2);
 
     m_pBtn_MainWindow = new QToolButton();
     m_pBtn_MainWindow->setIcon(MainWindowIcon);
@@ -104,9 +124,31 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_SaveAs = new QToolButton();
     m_pBtn_SaveAs->setIcon(SaveAsIcon);
+    m_pBtn_SaveAs->setEnabled(false);
+
+    m_pBtn_Clear = new QToolButton();
+    m_pBtn_Clear->setIcon(Clear);
+    m_pBtn_Clear->setEnabled(false);
 
     m_pBtn_About = new QToolButton();
     m_pBtn_About->setIcon(AboutIcon);
+
+    m_pBtn_Settings = new CToggleToolButton();
+    m_pBtn_Settings->setNormalIcon(SettingsIcon);
+    m_pBtn_Settings->setSelectedIcon(SettingsSelectedIcon);
+
+    m_pBtn_Devices = new CToggleToolButton();
+    m_pBtn_Devices->setNormalIcon(DevicesIcon);
+    m_pBtn_Devices->setSelectedIcon(DevicesSelectedIcon);
+
+    m_pBtn_KeepAtEnd = new CToggleToolButton();
+    m_pBtn_KeepAtEnd->setNormalIcon(KeepAtEndIcon);
+    m_pBtn_KeepAtEnd->setSelectedIcon(KeepAtEndSelectedIcon);
+    m_pBtn_KeepAtEnd->setEnabled(false);
+
+    m_pBtn_ConnectionStatus = new CConnectionStatusToolButton();
+    m_pBtn_ConnectionStatus->setNoConnectionIcon(NoConnectionIcon);
+    m_pBtn_ConnectionStatus->setConnectedIcon(ConnectedIcon);
 
     m_pSearchText = new QLineEdit();
     
@@ -124,18 +166,23 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
 
     m_pBtn_HighlightColor = new CChooseColorBtn();
 
-    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
+//    ui->MainToolBar->addWidget(m_pBtn_MainWindow);
+    ui->MainToolBar->addWidget(m_pBtn_ConnectionStatus);
     ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
+    ui->MainToolBar->addWidget(m_pBtn_Settings);
+    ui->MainToolBar->addWidget(m_pBtn_Devices);
     ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_NewView);
-    ui->MainToolBar->addWidget(m_pBtn_CloneView);
-    ui->MainToolBar->addSeparator();
-    ui->MainToolBar->addWidget(m_pBtn_Search);
-    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
+//    ui->MainToolBar->addWidget(m_pBtn_SourceFeeds);
+//    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_NewView);
+//    ui->MainToolBar->addWidget(m_pBtn_CloneView);
+//    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_Search);
+//    ui->MainToolBar->addWidget(m_pBtn_HighlightColorSelection);
     ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_SaveAs);
-    ui->MainToolBar->addSeparator();
+//    ui->MainToolBar->addWidget(m_pBtn_Clear);
+//    ui->MainToolBar->addSeparator();
     ui->MainToolBar->addWidget(m_pBtn_About);
     ui->MainToolBar->setIconSize( QSize(16, 16) );
 
@@ -146,10 +193,21 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     ui->SearchToolBar->addWidget(m_pBtn_HideSearch);
     ui->SearchToolBar->setIconSize( QSize(16, 16) );
 
+    ui->TracesToolBar->addWidget(m_pBtn_KeepAtEnd);
+    ui->TracesToolBar->addWidget( new QToolButton() );
+    ui->TracesToolBar->addWidget( new QToolButton() );
+    ui->TracesToolBar->addWidget(m_pBtn_Clear);
+    ui->TracesToolBar->setIconSize( QSize(16, 16) );
+
+    this->addToolBar(Qt::RightToolBarArea, ui->TracesToolBar);
+
+    CTraceClientApp&    rApp = CTraceClientApp::Instance();
+
     connect( m_pBtn_SourceFeeds, SIGNAL(clicked()), this, SLOT(OnSourceFeedsBtnClicked()));
     connect( m_pBtn_NewView, SIGNAL(clicked()), this, SLOT(OnNewView()));
     connect( m_pBtn_CloneView, SIGNAL(clicked()), this, SLOT(OnCloneView()));
     connect( m_pBtn_SaveAs, SIGNAL(clicked()), this, SLOT(OnSaveAs()));
+    connect( m_pBtn_Clear, SIGNAL(clicked()), this, SLOT(OnClear()));
     connect( m_pSearchText, SIGNAL(textChanged(const QString&)), this, SLOT(OnSearchTextChanged(const QString&)));
     connect( m_pBtn_SearchNext, SIGNAL(clicked()), this, SLOT(OnSearchNext()));
     connect( m_pBtn_SearchPrevious, SIGNAL(clicked()), this, SLOT(OnSearchPrevious()));
@@ -159,6 +217,20 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     connect( m_pBtn_HighlightColorSelection, SIGNAL(clicked()), this, SLOT(OnHighlightColorSelection()));
     connect( m_pBtn_Search, SIGNAL(clicked()), this, SLOT(OnSearch()));
     connect( m_pBtn_MainWindow, SIGNAL(clicked()), this, SLOT(OnShowMainWindow()));
+    connect( m_pChannelSelection, SIGNAL(SelectionChanged(TraceClientCore::CTracesGroup*)),
+             this, SLOT(OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup*)) );
+    connect( m_pBtn_Settings, SIGNAL(stateChanged(CToggleToolButton::EState)),
+             this, SLOT(OnSettingsBtnStateChanged(CToggleToolButton::EState)));
+    connect( m_pBtn_Devices, SIGNAL(stateChanged(CToggleToolButton::EState)),
+             this, SLOT(OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState)));
+    connect( m_pBtn_KeepAtEnd, SIGNAL(stateChanged(CToggleToolButton::EState)),
+             this, SLOT(OnKeepAtEndBtnStateChanged(CToggleToolButton::EState)) );
+    connect( m_pTracesView, SIGNAL(keepAtEndDisabled()),
+             this, SLOT(OnKeepAtEndDisabled()) );
+    connect( &rApp, SIGNAL(settingsPanelClosed()),
+             this, SLOT(onSettingsPanelClosing()) );
+    connect( &rApp, SIGNAL(devicesSelectionPanelClosed()),
+             this, SLOT(onDevicesSelectionPanelClosing()) );
 
     CWindowsManager::Instance().AddTracesWindow(this);
 
@@ -173,6 +245,21 @@ CTracesWindow::CTracesWindow(CTracesWindow *pSrc) : QMainWindow(),
     m_pTracesView->Highlighters()->Add( m_refHighlighter );
 
     m_WndName = QString::number(CWindowsManager::Instance().TracesWindows().GetWindowNo());
+
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    CDynamicHighlight*  pHighlight = NULL;
+    CDynamicTextHighlight*  pTextHighlight = NULL;
+
+    if ( pTGV != NULL )
+    {
+        pHighlight = pTGV->DynamicHilights().Get(CDynamicHighlight::kDefault);
+        pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+        m_pBtn_HighlightColor->Color() = pTextHighlight->color();
+    }
+    else
+    {
+        m_pBtn_HighlightColor->Color() = Qt::yellow;
+    }
 
     QString     title;
     title += "NyxTracesViewer - ";
@@ -250,14 +337,31 @@ void CTracesWindow::OnSaveAs()
 }
 
 
+void CTracesWindow::OnClear()
+{
+    m_pTracesView->Clear();
+    m_pTracesView->focusedItem() = CViewTracesIterator();
+    m_pBtn_SearchNext->setEnabled( false );
+    m_pBtn_SearchPrevious->setEnabled( false );
+}
+
+
 /**
  *
  */
 void CTracesWindow::OnSearchTextChanged( const QString& text )
 {
-    m_refTextPattern->TextToMatch() = text;
-    m_pBtn_SearchNext->setEnabled( !text.isEmpty() );
-    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() );
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    CDynamicHighlight*  pHighlight = pTGV->DynamicHilights().Get(CDynamicHighlight::kDefault);
+    CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+
+    pTextHighlight->text() = text;
+
+    m_pTracesView->focusedItem().setText(text);
+    m_pBtn_SearchNext->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pBtn_SearchPrevious->setEnabled( !text.isEmpty() && m_pTracesView->topPos().Valid() );
+
+    pTGV->FocusedText() = text;
 
     m_pTracesView->update();
 }
@@ -268,11 +372,20 @@ void CTracesWindow::OnSearchTextChanged( const QString& text )
  */
 void CTracesWindow::OnSearchNext()
 {
-    m_pSearchEngine->Highlighter() = m_refHighlighter;
+    CViewTracesContentIterator&  rPos =  m_pTracesView->focusedItem();
 
-    m_pSearchEngine->Next();
+    if ( !rPos.Valid() )
+    {
+        rPos = m_pTracesView->FirstPos();
+    }
 
-    m_pBtn_HideSearch->setEnabled(true);
+    ++ rPos;
+
+    m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+
+    m_pTracesView->MakeFocusedItemVisible();
+    m_pTracesView->update();
 }
 
 
@@ -281,11 +394,20 @@ void CTracesWindow::OnSearchNext()
  */
 void CTracesWindow::OnSearchPrevious()
 {
-    m_pSearchEngine->Highlighter() = m_refHighlighter;
+    CViewTracesContentIterator&  rPos =  m_pTracesView->focusedItem();
 
-    m_pSearchEngine->Previous();
+    if ( !rPos.Valid() )
+    {
+        rPos = m_pTracesView->LastPos();
+        rPos.moveToEnd();
+    }
 
-    m_pBtn_HideSearch->setEnabled(true);
+    -- rPos;
+
+    m_pBtn_SearchPrevious->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pBtn_SearchNext->setEnabled( !m_pSearchText->text().isEmpty() && m_pTracesView->topPos().Valid() );
+    m_pTracesView->MakeFocusedItemVisible();
+    m_pTracesView->update();
 }
 
 
@@ -294,7 +416,11 @@ void CTracesWindow::OnSearchPrevious()
  */
 void CTracesWindow::OnHighlightColorChanged(CColorBtn* pBtn)
 {
-    m_refHighlighter->HighlightColor() = pBtn->Color();
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    CDynamicHighlight*  pHighlight = pTGV->DynamicHilights().Get(CDynamicHighlight::kDefault);
+    CDynamicTextHighlight*  pTextHighlight = static_cast<CDynamicTextHighlight*>(pHighlight);
+
+    pTextHighlight->color() = pBtn->Color();
     m_pTracesView->update();
 }
 
@@ -354,6 +480,111 @@ void CTracesWindow::OnShowMainWindow()
 
 
 /**
+ * @brief CTracesWindow::OnTracesGroupSelectionChanged
+ * @param pGroup
+ */
+void CTracesWindow::OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup)
+{
+    m_pBtn_KeepAtEnd->setEnabled(true);
+    m_pBtn_SaveAs->setEnabled(true);
+    m_pBtn_Clear->setEnabled(true);
+
+    m_pTracesView->SetTracesGroup(pGroup);
+
+    CTracesGroupView* pTGV = m_pTracesView->TracesGroupView();
+    m_pSearchText->setText(pTGV->FocusedText());
+
+    if ( pTGV->KeepAtEnd() )
+    {
+        m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Selected);
+    }
+    else
+    {
+        m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Normal);
+    }
+}
+
+
+void CTracesWindow::OnSettingsBtnStateChanged(CToggleToolButton::EState state)
+{
+    switch (state)
+    {
+    case CToggleToolButton::eState_Normal:
+        CTraceClientApp::Instance().HideSettings();
+        break;
+
+    case CToggleToolButton::eState_Selected:
+        CTraceClientApp::Instance().ShowSettings(this, QPoint(20, ui->MainToolBar->height()));
+        break;
+    }
+}
+
+
+void CTracesWindow::OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState state)
+{
+    switch (state)
+    {
+    case CToggleToolButton::eState_Normal:
+        CTraceClientApp::Instance().HideDevicesSelection();
+        break;
+
+    case CToggleToolButton::eState_Selected:
+        CTraceClientApp::Instance().ShowDevicesSelection(this, QPoint(50, ui->MainToolBar->height()));
+        break;
+    }
+}
+
+
+void CTracesWindow::OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state)
+{
+    switch (state)
+    {
+    case CToggleToolButton::eState_Normal:
+        m_pTracesView->setKeepAtEnd(false);
+        break;
+    case CToggleToolButton::eState_Selected:
+        m_pTracesView->setKeepAtEnd(true);
+        break;
+    }
+}
+
+
+void CTracesWindow::OnServerHeartbeatSuccess()
+{
+    if ( m_pBtn_ConnectionStatus->state() != CConnectionStatusToolButton::eState_Connected )
+    {
+        m_pBtn_ConnectionStatus->setState(CConnectionStatusToolButton::eState_Connected);
+        update();
+    }
+}
+
+
+void CTracesWindow::OnServerHeartbeatFailure()
+{
+    m_pBtn_ConnectionStatus->setState(CConnectionStatusToolButton::eState_NoConnection);
+    m_pBtn_ConnectionStatus->setEnabled(false);
+}
+
+
+void CTracesWindow::OnKeepAtEndDisabled()
+{
+    m_pBtn_KeepAtEnd->setState(CToggleToolButton::eState_Normal);
+}
+
+
+void CTracesWindow::onSettingsPanelClosing()
+{
+    m_pBtn_Settings->setState( CToggleToolButton::eState_Normal );
+}
+
+
+void CTracesWindow::onDevicesSelectionPanelClosing()
+{
+    m_pBtn_Devices->setState( CToggleToolButton::eState_Normal );
+}
+
+
+/**
  *
  */
 void CTracesWindow::closeEvent(QCloseEvent *event)
@@ -372,6 +603,13 @@ void CTracesWindow::closeEvent(QCloseEvent *event)
  */
 void CTracesWindow::showEvent(QShowEvent *)
 {
+    CTraceClientApp& rApp = CTraceClientApp::Instance();
+
+    connect( &rApp.TraceServerMonitor(), SIGNAL(connected()),
+             this, SLOT(OnServerHeartbeatSuccess()) );
+    connect( &rApp.TraceServerMonitor(), SIGNAL(connectionLost()),
+             this, SLOT(OnServerHeartbeatFailure()) );
+
     if ( isMinimized() )
     {
         NYXTRACE(0x0, L"CTracesWindow::showEvent - minimized");

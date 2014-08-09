@@ -28,6 +28,7 @@ namespace TraceClientCore
 		
 		virtual void Insert(TraceClientCore::CTraceData* pTraceData);
         virtual void Clear(const Nyx::CAString& ModuleName);
+        virtual void InsertDisconnection(TraceClientCore::CTraceData* pTraceData);
         virtual void Insert(CRepositoryObserver* pObserver);
         virtual void Remove(CRepositoryObserver* pObserver);
         virtual bool Contains(CRepositoryObserver* pObserver) const;
@@ -74,7 +75,14 @@ namespace TraceClientCore
         ObserverDataTable                   m_ObserversSuspended;
         ObserverDataTable                   m_ObserversToUpdate; // map of observers used in the update process
         Nyx::CMutexRef                      m_refObserversMutex;
-	};	
+        Nyx::CMutexRef                      m_refTracesMutex;
+        
+        Nyx::UInt32                         m_RepositoryId;
+        Nyx::UInt32                         m_NextTraceId;
+        Nyx::UInt32                         m_LastTraceId;
+        
+        static Nyx::UInt32                  s_NextRepositoryId;
+	};
 }
 
 

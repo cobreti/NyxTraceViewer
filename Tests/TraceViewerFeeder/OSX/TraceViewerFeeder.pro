@@ -8,25 +8,23 @@ QT       += core gui
 
 TARGET = TraceViewerFeeder
 TEMPLATE = app
+NyxPath=../../../../Nyx
 
-
-FORMS += \
-    ../traceviewerfeeder.ui
-
-INCLUDEPATH += $(NyxPath)/include
-INCLUDEPATH += $(NyxPath)/include/NyxNet
+INCLUDEPATH += $${NyxPath}/include
+INCLUDEPATH += $${NyxPath}/include/NyxNet
 INCLUDEPATH += ../../../TraceViewerConnection/public/OSX
-mac:INCLUDEPATH += $(NyxPath)/include/OSX
+mac:INCLUDEPATH += $${NyxPath}/include/OSX
+mac:INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
 mac:LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices
 mac:LIBS += /System/Library/Frameworks/Foundation.framework/Foundation
 
 CONFIG(debug, debug|release) {
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_64/libNyxBase.a
-    mac::PRE_TARGETDEPS += $(NyxPath)/Lib/OSX/Debug_64/libNyxNet.a
+    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
+    mac::PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
     mac:LIBS += -lNyxBase \
-        -L$(NyxPath)/Lib/OSX/Debug_64
+        -L$${NyxPath}/Lib/Qt/Debug_64
     mac:LIBS += -lNyxNet \
-        -L$(NyxPath)/Lib/OSX/Debug_64
+        -L$${NyxPath}/Lib/Qt/Debug_64
     mac:LIBS += /usr/lib/libiconv.dylib
     DESTDIR = ./Debug
     OBJECTS_DIR = ./Debug
@@ -68,4 +66,6 @@ SOURCES += \
     ../FeederSource_TextFile.cpp \
     ../ExternalFeeder.cpp \
     ../../../TraceViewerConnection/public/OSX/NyxTraceViewerConnection_Impl.cpp
+
+FORMS += ../traceviewerfeeder.ui
 

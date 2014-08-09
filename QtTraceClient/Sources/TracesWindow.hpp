@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "View/Highlight/ViewItemPattern_Text.hpp"
 #include "View/Highlight/ViewItemHighlighter.hpp"
+#include "Controls/ToggleToolButton.h"
+#include "Controls/ConnectionStatusToolButton.h"
 
 
 class QToolButton;
@@ -13,11 +15,12 @@ class QLineEdit;
 class CViewSearchEngine;
 class CColorBtn;
 class CHighlightsMgrWnd;
-
+class CChannelSelection;
 
 namespace TraceClientCore
 {
     class CTraceChannel;
+    class CTracesGroup;
 }
 
 namespace Ui
@@ -42,6 +45,7 @@ public slots:
     void OnNewView();
     void OnCloneView();
     void OnSaveAs();
+    void OnClear();
     void OnSearchTextChanged( const QString& text );
     void OnSearchNext();
     void OnSearchPrevious();
@@ -51,6 +55,15 @@ public slots:
     void OnSearch();
     void OnHideSearch();
     void OnShowMainWindow();
+    void OnTracesGroupSelectionChanged(TraceClientCore::CTracesGroup* pGroup);
+    void OnSettingsBtnStateChanged(CToggleToolButton::EState state);
+    void OnDevicesSelectionBtnStateChanged(CToggleToolButton::EState state);
+    void OnKeepAtEndBtnStateChanged(CToggleToolButton::EState state);
+    void OnServerHeartbeatSuccess();
+    void OnServerHeartbeatFailure();
+    void OnKeepAtEndDisabled();
+    void onSettingsPanelClosing();
+    void onDevicesSelectionPanelClosing();
 
 protected:
 
@@ -64,6 +77,7 @@ protected:
     Ui::TracesWindow*       ui;
 
     CTracesView*            m_pTracesView;
+    CChannelSelection*      m_pChannelSelection;
 
     QToolButton*            m_pBtn_MainWindow;
     QToolButton*            m_pBtn_SourceFeeds;
@@ -72,7 +86,12 @@ protected:
     QToolButton*            m_pBtn_Search;
     QToolButton*            m_pBtn_HighlightColorSelection;
     QToolButton*            m_pBtn_SaveAs;
+    QToolButton*            m_pBtn_Clear;
     QToolButton*            m_pBtn_About;
+    CToggleToolButton*      m_pBtn_Settings;
+    CToggleToolButton*      m_pBtn_Devices;
+    CToggleToolButton*      m_pBtn_KeepAtEnd;
+    CConnectionStatusToolButton*    m_pBtn_ConnectionStatus;
 
     QLineEdit*              m_pSearchText;
     QToolButton*            m_pBtn_HideSearch;

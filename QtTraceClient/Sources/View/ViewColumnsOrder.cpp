@@ -52,3 +52,19 @@ void CViewColumnsOrder::Set( EViewColumnId id, size_t newPos )
 
 	m_ColumnsOrder[newPos] = id;
 }
+
+
+
+/**
+ *
+ */
+const CViewColumnsOrder& CViewColumnsOrder::operator = (const CViewColumnsOrder& columnsOrder)
+{
+    if ( this != &columnsOrder )
+    {
+        m_ColumnsOrder = columnsOrder.m_ColumnsOrder;
+    }
+
+    return *this;
+}
+

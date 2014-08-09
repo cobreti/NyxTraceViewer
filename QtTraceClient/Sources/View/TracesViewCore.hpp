@@ -5,12 +5,12 @@
 #include <NyxMsgHandler.hpp>
 #include "TracesViewSet.hpp"
 #include "TracesPool.hpp"
-#include "ViewSettings.hpp"
+//#include "ViewSettings.hpp"
 
 
-class CViewItemsModulesMgr;
-class CTracesViewCoreRepositoryObserver;
-class CViewItems;
+//class CViewItemsModulesMgr;
+//class CTracesViewCoreRepositoryObserver;
+//class CViewItems;
 
 DECLARE_OBJECTREF(CTracesViewCore)
 
@@ -25,13 +25,13 @@ public:
     CTracesViewCore();
     virtual ~CTracesViewCore();
 
-    CViewItemsModulesMgr&           ViewItemsModulesMgr()           { return *m_pViewItemsModulesMgr; }
-    const CViewItemsModulesMgr&     ViewItemsModulesMgr() const     { return *m_pViewItemsModulesMgr; }
+//    CViewItemsModulesMgr&           ViewItemsModulesMgr()           { return *m_pViewItemsModulesMgr; }
+//    const CViewItemsModulesMgr&     ViewItemsModulesMgr() const     { return *m_pViewItemsModulesMgr; }
 
     Nyx::CMemoryPool*               MemoryPool() const              { return m_refMemoryPool; }
 
-    const CViewSettings&            ViewSettings() const            { return m_ViewSettings; }
-    CViewSettings&                  ViewSettings()                  { return m_ViewSettings; }
+//    const CViewSettings&            ViewSettings() const            { return m_ViewSettings; }
+//    CViewSettings&                  ViewSettings()                  { return m_ViewSettings; }
 
     Nyx::CMsgHandler* GetViewItemsMsgHandler();
 
@@ -53,17 +53,17 @@ protected:
 
     void Init();
 
-    void OnNewTraces( CViewItems* pViewItems );
-    void OnBeginClearModule(const Nyx::CAString& ModuleName);
-    void OnEndClearModule(const Nyx::CAString& ModuleName);
+//    void OnNewTraces( CViewItems* pViewItems );
+//    void OnBeginClearModule(const Nyx::CAString& ModuleName);
+//    void OnEndClearModule(const Nyx::CAString& ModuleName);
 
 protected:
     Nyx::CMemoryPoolRef                                     m_refMemoryPool;
-    CViewItemsModulesMgr*                                   m_pViewItemsModulesMgr;
-    CTracesViewCoreRepositoryObserver*                      m_pRepositoryObserver;
-    size_t                                                  m_NextLineId;
+//    CViewItemsModulesMgr*                                   m_pViewItemsModulesMgr;
+//    CTracesViewCoreRepositoryObserver*                      m_pRepositoryObserver;
+//    size_t                                                  m_NextLineId;
     CTracesViewSet                                          m_Views;
-    CViewSettings                                           m_ViewSettings;
+//    CViewSettings                                           m_ViewSettings;
 };
 
 

@@ -8,15 +8,20 @@
 
 #include "MainWindow/MainWindow.hpp"
 #include "TracesWindow.hpp"
-#include "View/ViewItemBackgroundPainter.hpp"
-#include "View/ViewItemModuleNamePainter.hpp"
-#include "View/ViewItemTickCountPainter.hpp"
-#include "View/ViewItemThreadIdPainter.hpp"
-#include "View/ViewItemDataPainter.hpp"
-#include "View/ViewItemLineNumberPainter.hpp"
+#include "Panels/SettingsPanel.h"
+#include "Panels/DevicesSelectionPanel.h"
 #include "PoolsUpdateClock.hpp"
+#include "ServerAccess/TraceServerPortal.h"
+#include "ServerAccess/TraceServerMonitor.h"
+#include "DevicesMgr.h"
+#include "Config/ConfigReader.hpp"
+#include "View/TracesGroupViewMgr.h"
 
 #include "TraceClientCoreModule.hpp"
+
+#include <QWidget>
+#include <QLayout>
+
 
 /**
  *
@@ -40,7 +45,13 @@ CTraceClientApp::CTraceClientApp() : QObject(),
     m_pQtApplication(NULL),
     m_AppReturnValue(-1),
     m_pTracesWindow(NULL),
-    m_pMainWindow(NULL)
+    m_pMainWindow(NULL),
+    m_pSettingsPanel(NULL),
+    m_pDevicesSelectionPanel(NULL),
+    m_pTraceServerPortal(NULL),
+    m_pTraceServerMonitor(NULL),
+    m_pDevicesMgr(),
+    m_pTracesGroupViewMgr(NULL)
 {
     s_pInstance = this;
 }
@@ -68,10 +79,9 @@ void CTraceClientApp::Init(int &argc, char **argv)
 
     initDefaultSettings();
 
-    QApplication*   pApp = qobject_cast<QApplication*>(QApplication::instance());
-    QRect           rcScreen = pApp->desktop()->availableGeometry();
+    QRect           rcScreen = m_pQtApplication->desktop()->availableGeometry();
 
-    QString path = pApp->applicationDirPath();
+    QString path = m_pQtApplication->applicationDirPath();
     std::string strPath = path.toStdString();
 
     NYXTRACE(0x0, L"current path : " << Nyx::CTF_AnsiText(strPath.c_str()) );
@@ -85,16 +95,18 @@ void CTraceClientApp::Init(int &argc, char **argv)
     Nyx::CAString       bioFile( strPath.c_str() );
     bioFile += "/SSL/dh1024.pem";
 
+    int     basePortNumber = 8500;
+
     TraceClientCore::CTcpTracesReceiversSvr::CSettings     settings;
-    settings.PortNumber() = 8500;
+    settings.PortNumber() = basePortNumber;
     settings.UseHandshake() = true;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(0).Start(settings);
 
-    settings.PortNumber() = 8501;
+    settings.PortNumber() = basePortNumber + 1;
     settings.UseHandshake() = false;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
 
-    settings.PortNumber() = 8502;
+    settings.PortNumber() = basePortNumber + 2;
     settings.UseHandshake() = false;
     settings.UseSSL() = true;
     settings.CertificateFile() = certificateFile;
@@ -104,11 +116,29 @@ void CTraceClientApp::Init(int &argc, char **argv)
 
     m_pMainWindow = new CMainWindow();
     m_pMainWindow->move( rcScreen.left(), rcScreen.top() );
-//    m_pMainWindow->show();
 
     m_pTracesWindow = new CTracesWindow(NULL);
     m_pTracesWindow->setParent(NULL, Qt::Window);
+
+    m_pSettingsPanel = new CSettingsPanel();
+    m_pDevicesSelectionPanel = new CDevicesSelectionPanel();
+    m_pTraceServerPortal = new CTraceServerPortal();
+    m_pTraceServerMonitor = new CTraceServerMonitor(*m_pTraceServerPortal);
+    m_pDevicesMgr = new CDevicesMgr();
+    m_pTracesGroupViewMgr = new CTracesGroupViewMgr();
+
+    connect(    m_pSettingsPanel, SIGNAL(closing()),
+                this, SLOT(onSettingsPanelClosed()) );
+    connect(    m_pDevicesSelectionPanel, SIGNAL(closing()),
+                this, SLOT(onDevicesSelectionPanelClosed()) );
+
+    CConfigReader       configReader;
+
+    configReader.Load();
+
     m_pTracesWindow->show();
+
+    devicesMapping().Init();
 }
 
 
@@ -138,6 +168,40 @@ void CTraceClientApp::Destroy()
     TraceClientCore::CModule::Instance().TraceChannels().Stop();
 
     WindowsManager().Terminate();
+
+    delete m_pTracesGroupViewMgr;
+}
+
+
+void CTraceClientApp::ShowSettings(QWidget *parent, const QPoint& pt )
+{
+    m_pSettingsPanel->setParent(parent);
+    m_pSettingsPanel->show();
+    m_pSettingsPanel->move(pt);
+    m_pSettingsPanel->raise();
+}
+
+
+void CTraceClientApp::HideSettings()
+{
+    m_pSettingsPanel->hide();
+    m_pSettingsPanel->setParent(NULL);
+}
+
+
+void CTraceClientApp::ShowDevicesSelection(QWidget *parent, const QPoint &pt)
+{
+    m_pDevicesSelectionPanel->setParent(parent);
+    m_pDevicesSelectionPanel->show();
+    m_pDevicesSelectionPanel->move(pt);
+    m_pDevicesSelectionPanel->raise();
+}
+
+
+void CTraceClientApp::HideDevicesSelection()
+{
+    m_pDevicesSelectionPanel->hide();
+    m_pDevicesSelectionPanel->setParent(NULL);
 }
 
 
@@ -146,7 +210,8 @@ void CTraceClientApp::Destroy()
  */
 const char* CTraceClientApp::GetVersion() const
 {
-    return "1.0.12";
+//    return " - in development";
+    return "1.0.7";
 }
 
 
@@ -155,8 +220,27 @@ const char* CTraceClientApp::GetVersion() const
  */
 void CTraceClientApp::OnTracesWindows_Empty()
 {
-    //m_pQtApplication->quit();
 }
+
+
+
+/**
+ * @brief CTraceClientApp::onSettingsPanelClosed
+ */
+void CTraceClientApp::onSettingsPanelClosed()
+{
+    emit settingsPanelClosed();
+}
+
+
+/**
+ * @brief CTraceClientApp::onDevicesSelectionPanelClosed
+ */
+void CTraceClientApp::onDevicesSelectionPanelClosed()
+{
+    emit devicesSelectionPanelClosed();
+}
+
 
 
 /**
@@ -175,12 +259,12 @@ void CTraceClientApp::InitDefaultDrawSettings()
 {
     CViewDrawSettings&      rDrawSettings = m_AppSettings.DefaultDrawSettings();
 
-    rDrawSettings.Painter( CViewItemPainter::ePId_Row ) = new CViewItemBackgroundPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_LineNumber ) = new CViewItemLineNumberPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_ModuleName ) = new CViewItemModuleNamePainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_TickCount ) = new CViewItemTickCountPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_ThreadId ) = new CViewItemThreadIdPainter();
-    rDrawSettings.Painter( CViewItemPainter::ePId_Data ) = new CViewItemDataPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_Row ) = new CViewItemBackgroundPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_LineNumber ) = new CViewItemLineNumberPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_ModuleName ) = new CViewItemModuleNamePainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_TickCount ) = new CViewItemTickCountPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_ThreadId ) = new CViewItemThreadIdPainter();
+//    rDrawSettings.Painter( CViewItemPainter::ePId_Data ) = new CViewItemDataPainter();
     rDrawSettings.CalculateLineHeight();
 }
 

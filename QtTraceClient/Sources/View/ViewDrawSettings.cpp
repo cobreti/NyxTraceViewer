@@ -1,6 +1,9 @@
 #include "ViewDrawSettings.hpp"
-#include "View/ViewItemPainter.hpp"
 
+static char* HeightCalcString = "abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+#include <QFont>
+#include <QFontMetrics>
 
 /**
  *
@@ -8,10 +11,7 @@
 CViewDrawSettings::CViewDrawSettings() :
     m_LineHeight(0)
 {
-    m_Painters.resize( CViewItemPainter::ePId_Count );
 
-    for (size_t index = 0; index < m_Painters.size(); ++index )
-        m_Painters[index] = NULL;
 }
 
 
@@ -23,16 +23,18 @@ CViewDrawSettings::~CViewDrawSettings()
 }
 
 
+void CViewDrawSettings::setSingleLineHeight(float height)
+{
+    m_LineHeight = height;
+}
+
+
 /**
  *
  */
 void CViewDrawSettings::CalculateLineHeight()
 {
-    for (size_t index = 0; index < m_Painters.size(); ++index)
-    {
-        if ( m_Painters[index] )
-            m_LineHeight = Nyx::Max(m_LineHeight, m_Painters[index]->MaxFontHeight());
-    }
+    m_LineHeight = QFontMetricsF(QFont()).boundingRect(HeightCalcString).height() * 1.2;
 }
 
 

@@ -5,11 +5,17 @@
 #include <QToolBar>
 #include <QPushButton>
 #include <QTimer>
-#include "View/ViewItems.hpp"
+#include <QBrush>
+
 #include "View/ViewSettings.hpp"
-#include "View/IViewItemsModulesListener.hpp"
 #include "View/TracesViewCore.hpp"
 #include "View/Highlight/ViewItemHighlightersSet.hpp"
+#include "TracesGroupNotificationsListener.h"
+#include "View/ViewTracesIterator.hpp"
+#include "View/ViewTracesContentIterator.hpp"
+#include "View/ViewTracesDisplayCache.h"
+#include "View/ViewSettings.hpp"
+#include "View/Decorations/StaticHighlights.hpp"
 
 
 namespace Ui
@@ -19,19 +25,16 @@ namespace Ui
 
 class CViewHeader;
 class QToolButton;
-class CModuleViewItems;
-class CSessionViewItems;
-class CViewItemsWalker;
 class CHighlightBrush;
 class CHighlightColorsPopup;
 class QFile;
+class CTracesGroupView;
 
 
 /**
  *
  */
-class CTracesView : public QWidget,
-                    public IViewItemsModulesListener
+class CTracesView : public QWidget
 {
     Q_OBJECT
 
@@ -42,30 +45,37 @@ public:
 	void SetName( const QString& name );
 	const QString& Name() const		{ return m_Name; }
 
-    const CViewSettings&		Settings() const		{ return ViewCore()->ViewSettings(); }
-    CViewSettings&				Settings()				{ return ViewCore()->ViewSettings(); }
+    const CViewSettings&		Settings() const		{ return m_Settings; }
+    CViewSettings&				Settings()				{ return m_Settings; }
 
     CViewItemHighlightersSetRef Highlighters() const    { return m_refHighlighters; }
 
     CTracesViewCore*            ViewCore() const        { return m_refViewCore; }
 
+    CTracesGroupView*           TracesGroupView() const     { return m_pCurrentTracesGroupView; }
+//    CDynamicHighlightsDirectory&     dynamicHighlights()        { return m_DynamicHighlights; }
+
+    CViewTracesContentIterator&     focusedItem()               { return m_FocusedItem; }
+    CViewTracesIterator&            topPos()                    { return m_TopPos; }
+
+    CViewTracesIterator             FirstPos() const;
+    CViewTracesIterator             LastPos() const;
+
+    void                            setKeepAtEnd(bool keepAtEnd);
+
+    void MakeFocusedItemVisible();
+
     void OnNewTraces();
 
-//    void UpdateVisibleLines( const CViewSettings& settings );
-
-    virtual void OnNewModuleViewItems( CModuleViewItems* pModule );
-    virtual void OnNewSessionViewItems( CModuleViewItems* pModule, CSessionViewItems* pSession );
-    virtual void OnBeginClearModule( const Nyx::CAString& ModuleName );
-    virtual void OnEndClearModule( const Nyx::CAString& ModuleName );
-
     void Save( const QString& filename );
-
-    CViewItemsWalker*           ItemsWalker()               { return m_pItemsWalker; }
+    void Clear();
 
     const QRectF                ViewRect() const;
     int                         NumberOfLinesVisibles() const;
 
     void Invalidate(bool dirty);
+
+    void SetTracesGroup( TraceClientCore::CTracesGroup* pGroup );
 
 public slots:
 
@@ -73,6 +83,14 @@ public slots:
     void OnHorzSliderPosChanged(int value);
     void RefreshDisplay();
     void OnChooseHighlightBrush( CHighlightBrush* pBrush );
+    void OnViewBeginUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView );
+    void OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceClientCore::CTracesView* pView );
+
+
+signals:
+
+    void keepAtEndDisabled();
+
 
 protected:
 
@@ -82,6 +100,8 @@ protected:
     virtual void UpdateScrollbarRange(const QRect& rcClient);
 	virtual void keyPressEvent( QKeyEvent* event );
 	virtual void mousePressEvent( QMouseEvent* event );
+    virtual void mouseReleaseEvent(QMouseEvent* event);
+    virtual void mouseMoveEvent(QMouseEvent* event);
     virtual void wheelEvent(QWheelEvent* event);
     virtual void showEvent( QShowEvent* event);
 
@@ -90,33 +110,63 @@ protected:
     virtual QRect ClientRect() const { return ClientRect(rect()); }
     virtual QRect ClientRect( const QRect& rcWnd ) const;
     virtual QSize HeaderSize() const;
+    virtual void MovePosToDisplayLastLine();
 
-//    virtual bool UpdateVisibleLines();
+    virtual bool updatingScrollPos() const      { return m_bUpdatingScrollPos; }
 
 protected:
 
-    //enum
-    //{
-    //    kPanel_LeftMargin = 50,
-    //    kPanel_RightMargin = 50
-    //};
+    class XScrollPosUpdate
+    {
+    public:
+        XScrollPosUpdate(CTracesView& rView) : m_rView(rView)
+        {
+            m_rView.m_bUpdatingScrollPos = true;
+        }
+
+        ~XScrollPosUpdate()
+        {
+            m_rView.m_bUpdatingScrollPos = false;
+        }
+
+
+    protected:
+        CTracesView&        m_rView;
+    };
+
+protected:
 
     Ui::CTracesView*			        ui;
     QString								m_Name;
     QRectF								m_Margins;
     bool                                m_bViewDirty;
-    bool                                m_bKeepAtEnd;
     CViewHeader*                        m_pHeader;
-    CViewItemsWalker*                   m_pItemsWalker;
     QTimer                              m_RefreshTimer;
     CTracesViewCoreRef                  m_refViewCore;
 
     CViewItemHighlightersSetRef         m_refHighlighters;
 
-    CViewItem*                          m_pLastSelectedItem;
     CHighlightBrush*                    m_pLastSelectedBrush;
 
     CHighlightColorsPopup*              m_pHighlightColorsPopup;
+
+    CTracesGroupNotificationsListener   m_TracesGroupNotificationsListener;
+    TraceClientCore::CTracesGroup*      m_pCurrentTracesGroup;
+    CViewTracesIterator                 m_TopPos;
+    CViewTracesContentIterator          m_FocusedItem;
+    CViewTracesDisplayCache             m_DisplayCache;
+
+    CStaticHighlights                   m_LiveStaticHighlights;
+
+    CTracesGroupView*                   m_pCurrentTracesGroupView;
+
+    bool                                m_bUpdatingScrollPos;
+
+    QRect                               m_SelectionArea;
+    QBrush                              m_SelectionBrush;
+    QBrush                              m_SelectionBorderBrush;
+
+    CViewSettings                       m_Settings;
 };
 
 #endif // TRACESVIEW_H

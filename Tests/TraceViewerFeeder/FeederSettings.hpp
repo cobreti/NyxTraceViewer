@@ -20,7 +20,8 @@ public:
         eTAPI_NyxPipe,
         eTAPI_NyxTcpIp,
         eTAPI_External,
-        eTAPI_Dll
+        eTAPI_Dll,
+        eTAPI_PlainTcpIp
     };
 
 

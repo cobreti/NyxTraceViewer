@@ -5,7 +5,9 @@
  */
 CViewSettings::CViewSettings() :
     m_pDrawSettings(NULL),
-    m_bDirty(false)
+    m_bDirty(false),
+    m_SelectionColor(Qt::yellow),
+    m_SelectionBorderColor(Qt::darkYellow)
 {
 }
 
@@ -36,6 +38,8 @@ const CViewSettings& CViewSettings::operator = (const CViewSettings& settings)
     {
         m_ViewItemsSettings = settings.m_ViewItemsSettings;
         m_ViewColumnsSettings = settings.m_ViewColumnsSettings;
+        m_SelectionColor = settings.m_SelectionColor;
+        m_SelectionBorderColor = settings.m_SelectionBorderColor;
     }
 
     return *this;

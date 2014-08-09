@@ -2,6 +2,7 @@
 #include "View/ViewColumnsSettings.hpp"
 #include "View/ViewColumnSettings.hpp"
 
+#include <QPainter>
 
 /**
  *
@@ -64,6 +65,33 @@ void CViewHeader::InitDefaultWidth()
 }
 
 
+void CViewHeader::AdjustColumnsSize()
+{
+    size_t              ColsCount = m_rColumnsSettings.Order().Count();
+    QFontMetrics        metrics(*m_pFont);
+    int                 height = 0;
+    int                 lWidth = 0;
+
+    for (size_t index = 0; index < ColsCount; ++index)
+    {
+        EViewColumnId             id  = m_rColumnsSettings.Order()[index];
+        CViewColumnSettings&      rSettings = m_rColumnsSettings[id];
+
+        QRectF      rcText = metrics.boundingRect(rSettings.GetTitle());
+
+        lWidth = rcText.width() + m_Margins.width();
+
+        if ( lWidth > rSettings.GetWidth() )
+            rSettings.SetWidth( lWidth );
+
+        if ( rcText.height() > height )
+            height = rcText.height();
+    }
+
+    resize( width(), height + m_Margins.height() );
+}
+
+
 /**
  *
  */
@@ -73,7 +101,7 @@ void CViewHeader::paintEvent(QPaintEvent* pEvent)
 
     size_t      ColsCount = m_rColumnsSettings.Order().Count();
     int         headerHeight = size().height();
-    int         x = -m_HorzOffset;
+    qreal       x = m_Margins.left() - m_HorzOffset;
     int         ClientWidth = size().width();
 
     painter.setFont(*m_pFont);
@@ -94,9 +122,14 @@ void CViewHeader::paintEvent(QPaintEvent* pEvent)
         EViewColumnId                   id  = m_rColumnsSettings.Order()[index];
         const CViewColumnSettings&      rSettings = m_rColumnsSettings[id];
 
-        painter.drawText( QRectF(x + m_Margins.left() + rSettings.Margins().left(), m_Margins.top(), rSettings.GetWidth() - m_Margins.width(), headerHeight - m_Margins.height()),
+        painter.drawText( QRectF(   x + rSettings.Margins().left(),
+                                    m_Margins.top(),
+                                    rSettings.GetWidth(),
+                                    headerHeight ),
                           Qt::AlignLeft, rSettings.GetTitle() );
-        x += rSettings.GetWidth();
+
+        qreal colWidth = rSettings.GetWidth() + rSettings.Margins().width();
+        x += colWidth;
     }
 }
 

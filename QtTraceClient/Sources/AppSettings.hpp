@@ -8,6 +8,7 @@
 #include "View/ViewSettings.hpp"
 #include "View/Highlight/ViewHighlightSettings.hpp"
 
+
 /**
  *
  */
@@ -25,6 +26,10 @@ public:
     const CViewHighlightSettings&       ViewHighlightSettings() const       { return m_HighlightSettings; }
     CViewHighlightSettings&             ViewHighlightSettings()             { return m_HighlightSettings; }
 
+    const int&      clientId() const            { return m_ClientId; }
+    int&            clientId()                  { return m_ClientId; }
+
+
 protected:
 
     typedef     std::map<Nyx::CWString, CViewDrawSettings*>     TViewDrawSettingsTable;
@@ -39,6 +44,7 @@ protected:
     CViewDrawSettings               m_DefaultViewDrawSettings;
     CViewSettings                   m_DefaultViewSettings;
     CViewHighlightSettings          m_HighlightSettings;
+    int                             m_ClientId;
 
 };
 

@@ -72,7 +72,7 @@ qreal CViewColumnsSettings::GetTotalWidth() const
 
     for (pos = m_Settings.begin(); pos != m_Settings.end(); ++pos)
         if ( pos->second->GetVisible() )
-            width += pos->second->GetWidth();
+            width += pos->second->GetWidth() + pos->second->Margins().width();
 
     return width;
 }
@@ -112,6 +112,9 @@ const CViewColumnsSettings& CViewColumnsSettings::operator = (const CViewColumns
 
         for ( ColumnSettingsTable::const_iterator pos = settings.m_Settings.begin(); pos != settings.m_Settings.end(); ++pos )
             m_Settings[pos->first] = new CViewColumnSettings(*pos->second);
+
+        m_ColumnsOrder = settings.m_ColumnsOrder;
+        m_VisibleColumnsCount = settings.m_VisibleColumnsCount;
     }
 
     return *this;

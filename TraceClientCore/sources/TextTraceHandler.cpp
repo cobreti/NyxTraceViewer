@@ -46,7 +46,8 @@ namespace TraceClientCore
     		{
     			*pSrcPos = '\0';
     			++ pSrcPos;
-                HandleTraceLine(szLine, pThreadPos, pSrcPos);
+//                HandleTraceLine(szLine, pThreadPos, pSrcPos);
+                ProcessMultipleLinesContent(szLine, pThreadPos, pSrcPos);
     			break;
     		}
 
@@ -55,10 +56,40 @@ namespace TraceClientCore
     }
 
 
+    void CTextTraceHandler::ProcessMultipleLinesContent(char* szModule, char* pThread, char* szContent)
+    {
+        char*       pStart = szContent;
+        char*       pNext = pStart;
+        int         level = 0;
+
+        while ( *pNext != '\0')
+        {
+            if ( *pNext == '\n' )
+            {
+                *pNext = '\0';
+
+                if ( pNext - pStart > 0 )
+                {
+                    HandleTraceLine(szModule, pThread, pStart, level);
+                    ++ level;
+                }
+
+                pStart = pNext+1;
+            }
+
+            ++ pNext;
+        }
+
+        if ( pNext - pStart > 0 )
+        {
+            HandleTraceLine(szModule, pThread, pStart, level);
+        }
+    }
+
     /**
      *
      */
-    void CTextTraceHandler::HandleTraceLine(char* szModule, char* pThread, char* szContent)
+    void CTextTraceHandler::HandleTraceLine(char* szModule, char* pThread, char* szContent, int level)
     {
     	Nyx::CTF_TickCount		TickCount;
     	Nyx::NyxSize			len = strlen(TickCount.GetAnsiText());
@@ -77,23 +108,40 @@ namespace TraceClientCore
 //    	NYXTRACE(0x0, "trace line content : '" << Nyx::CTF_AnsiText(szContent) << Nyx::CTF_AnsiText("'") );
 
     	CModule&		rModule = CModule::Instance();
-    	CTraceChannel*	pChannel = rModule.TraceChannels().Get( Nyx::CAString(szModule) );
+    	CTraceChannel*	pChannel = rModule.TraceChannels().Get( Nyx::CAString(szModule), true );
 
+        if ( !pChannel )
+        {
+            NYXTRACE(0x0, L"received trace from new channel : " << Nyx::CTF_AnsiText(szModule));
+        }
+        
     	if ( pChannel )
     	{
+            m_ChannelsSet.insert(pChannel);
+
     		Nyx::CUtf8String	content(szContent);
 
     		CTraceData*		pTraceData = new (pChannel->Pool()->MemoryPool())CTraceData(pChannel->Pool()->MemoryPool());
 
-    		if ( pThread == NULL )
-    			pTraceData->ThreadId() = "default";
-    		else
-    			pTraceData->ThreadId() = pThread;
+            if ( level == 0 )
+            {
+                if ( pThread == NULL )
+                    pTraceData->ThreadId() = "default";
+                else
+                    pTraceData->ThreadId() = pThread;
 
 
-    		pTraceData->TickCount() = Buffer;
+                pTraceData->TickCount() = Buffer;
+            }
+            else
+            {
+                pTraceData->ThreadId() = "";
+                pTraceData->TickCount() = "";
+            }
+
     		pTraceData->Data() = content;
     		pTraceData->OwnerPool() = pChannel->Pool();
+            pTraceData->Level() = level;
 
             for (size_t index = 0; index < pTraceData->Data().length(); ++index)
             {

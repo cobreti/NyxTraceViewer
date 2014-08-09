@@ -12,12 +12,18 @@
 
 namespace TraceClientCore
 {
+    Nyx::UInt32 CTraceDataRepository::s_NextRepositoryId = 1;
+    
     /**
      *
      */
-    CTraceDataRepository::CTraceDataRepository()
+    CTraceDataRepository::CTraceDataRepository() :
+    m_RepositoryId( CTraceDataRepository::s_NextRepositoryId ),
+    m_NextTraceId(1),
+    m_LastTraceId(0)
     {
         m_refObserversMutex = Nyx::CMutex::Alloc();
+        m_refTracesMutex = Nyx::CMutex::Alloc();
     }
 
 
@@ -29,12 +35,36 @@ namespace TraceClientCore
     }
 
 
+    void CTraceDataRepository::InsertDisconnection(CTraceData *pTraceData)
+    {
+        Nyx::TMutexLock     TracesLock(m_refTracesMutex, true);
+
+        CTraceData* pLastTrace = m_Traces.back();
+        pTraceData->TickCount() = pLastTrace->TickCount();
+
+        Insert(pTraceData);
+    }
+
+
     /**
      *
      */
     void CTraceDataRepository::Insert(TraceClientCore::CTraceData* pTraceData)
     {
-        m_Traces.push_back(pTraceData);
+        pTraceData->RepositoryId() = m_RepositoryId;
+        pTraceData->TraceId() = m_NextTraceId;
+        m_LastTraceId = m_NextTraceId;
+
+        {
+            Nyx::TMutexLock         TracesLock(m_refTracesMutex, true);
+            
+            m_Traces.push_back(pTraceData);
+        }
+
+        if ( pTraceData->Level() == 0 )
+        {
+            ++ m_NextTraceId;
+        }
     }
     
     
@@ -43,6 +73,7 @@ namespace TraceClientCore
      */
     void CTraceDataRepository::Clear(const Nyx::CAString& ModuleName)
     {
+        
 		// notify traces are about to be cleared
         {
             Nyx::TLock<Nyx::CMutex>                 ObserversLock(m_refObserversMutex, true);
@@ -59,7 +90,11 @@ namespace TraceClientCore
             }
         }
 
-		m_Traces.clear();
+        {
+            Nyx::TMutexLock         TracesLock(m_refTracesMutex, true);
+
+            m_Traces.clear();
+        }
 
 		// notify traces have been cleared
         {
@@ -173,11 +208,16 @@ namespace TraceClientCore
 
         const clock_t                       kThreshold = CLOCKS_PER_SEC / 5;
 
-        TraceDataList::const_iterator       EndPos = m_Traces.end();
+        TraceDataList::const_iterator       EndPos;
         ObserverDataTable::iterator         posObserver = m_ObserversToUpdate.begin();
         clock_t                             start_clock;
 
-        -- EndPos;
+        {
+            Nyx::TMutexLock         TracesLock(m_refTracesMutex, true);
+
+            EndPos = m_Traces.end();
+            -- EndPos;
+        }
 
         while ( posObserver != m_ObserversToUpdate.end() )
         {
