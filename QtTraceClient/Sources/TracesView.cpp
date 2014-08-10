@@ -301,7 +301,7 @@ void CTracesView::OnVertSliderPosChanged(int value)
     m_TopPos.MoveToLine(value);
     m_DisplayCache.Clear();
 
-    if ( !updatingScrollPos() && m_pCurrentTracesGroupView->KeepAtEnd() )
+    if ( !updatingScrollPos() && m_pCurrentTracesGroupView && m_pCurrentTracesGroupView->KeepAtEnd() )
     {
         m_pCurrentTracesGroupView->KeepAtEnd() = false;
         emit keepAtEndDisabled();
@@ -433,7 +433,11 @@ void CTracesView::closeEvent(QCloseEvent* event)
 void CTracesView::UpdateScrollbarRange(const QRect& rcClient)
 {
     if ( m_pCurrentTracesGroupView == NULL )
+    {
+        ui->m_HorzScrollbar->setMaximum(0);
+        ui->m_VertScrollbar->setMaximum(0);
         return;
+    }
 
     CViewSettings&                          rSettings = m_Settings;
     int                                     NumberOfLines = 0;
