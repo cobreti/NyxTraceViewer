@@ -10,7 +10,6 @@ TARGET = TraceClientCore
 TEMPLATE = lib
 CONFIG += staticlib
 NyxPath = ../../../Nyx
-# DEFINES += STDCONSTRUCT
 CONFIG += c++11
 
 
@@ -25,6 +24,11 @@ macx {
 win32 {
     INCLUDEPATH += $${NyxPath}/include/Win32
     INCLUDEPATH += $${NyxPath}/include/Win32/NyxNet
+}
+
+linux {
+    INCLUDEPATH += $${NyxPath}/include/Linux
+    INCLUDEPATH += $${NyxPath}/include/Linux/NyxNet
 }
 
 CONFIG(debug, debug | release) {

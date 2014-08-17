@@ -11,7 +11,7 @@ CONFIG += c++11
 TARGET = NyxTraceViewer
 TEMPLATE = app
 NyxPath=../../../Nyx
-# DEFINES += STDCONSTRUCT
+
 SOURCES += ../Sources/TracesView.cpp \
     ../Sources/main.cpp \
     ../Sources/Dialogs/NewViewDlg.cpp \
@@ -107,6 +107,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/TracesGroupViewMgr.cpp \
     ../Sources/View/Decorations/StaticHighlights.cpp \
     ../Sources/View/Formater/TracesViewTextFormater.cpp
+
+
 HEADERS += ../Sources/TracesView.h \
     ../Sources/Dialogs/NewViewDlg.hpp \
     ../Sources/Dialogs/NewPoolDlg.hpp \
@@ -240,6 +242,10 @@ win32 {
     INCLUDEPATH += $${NyxPath}/include/Win32
     INCLUDEPATH += $${NyxPath}/include/Win32/NyxNet
 }
+linux {
+    INCLUDEPATH += $${NyxPath}/include/Linux
+    INCLUDEPATH += $${NyxPath}/include/Linux/NyxNet
+}
 
 CONFIG(debug, debug | release) {
 
@@ -262,6 +268,27 @@ CONFIG(debug, debug | release) {
                 -L$${NyxPath}/Lib/OSX/OpenSSL_64
             LIBS += /usr/lib/libiconv.dylib
     }
+
+
+    linux {
+            PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
+            PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
+            PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
+            LIBS += -lTraceClientCore \
+                -L../../Lib/Qt/Debug_64
+            LIBS += -lNyxBase \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lNyxNet \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lNyxWebSvr \
+                -L$${NyxPath}/Lib/Qt/Debug_64
+            LIBS += -lssl \
+                -L$${NyxPath}/Lib/Linux/OpenSSL_64
+            LIBS += -lcrypto \
+                -L$${NyxPath}/Lib/Linux/OpenSSL_64
+            LIBS += -ldl
+    }
+
 
     win32 {
             RC_FILE = ../QtTraceClient.rc
