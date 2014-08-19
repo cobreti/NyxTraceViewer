@@ -17,11 +17,7 @@
 #include <QApplication>
 #include <QDir>
 
-//#include <openssl/bio.h>
-//#include <openssl/ssl.h>
-//#include <openssl/err.h>
-//#include <openssl/crypto.h>
-
+#include "NyxTaskExecuterPool.hpp"
 
 
 
@@ -51,16 +47,21 @@ int main(int argc, char *argv[])
     NyxNet::CModuleRef                          refNetModule = NyxNet::CModule::Alloc();
     NyxWebSvr::CModuleRef                       refWebSvrModule = NyxWebSvr::CModule::Alloc();
 
+
 #if defined(_DEBUG)
 	Nyx::CTraceCompositorRef                    refTraceCompositor = Nyx::CTraceCompositor::Alloc();
 
-//    refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
-    refTraceCompositor->SetOutput(NyxNet::CTcpIpTraceOutput::Alloc("NyxTraceViewer", "127.0.0.1", 8500, true));
+    refTraceCompositor->SetOutput(Nyx::CConsoleTraceOutput::Alloc());
+//    refTraceCompositor->SetOutput(NyxNet::CTcpIpTraceOutput::Alloc("NyxTraceViewer", "127.0.0.1", 8500, true));
 //    refTraceCompositor->SetOutput( NyxNet::CPipeTraceOutput::Alloc("TraceViewer"));
 #endif
 
     QDir currentFolder = QDir::current();
 
+    //
+    // PATCH for the application to build under Linux
+    //
+    Nyx::CTaskExecuterPool::Alloc();
 
     Nyx::CLocalTime     ltime = Nyx::CLocalTime::Get();
 

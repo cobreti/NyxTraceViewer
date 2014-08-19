@@ -274,6 +274,7 @@ CONFIG(debug, debug | release) {
             PRE_TARGETDEPS += ../../Lib/Qt/Debug_64/libTraceClientCore.a
             PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxBase.a
             PRE_TARGETDEPS += $${NyxPath}/Lib/Qt/Debug_64/libNyxNet.a
+            LIBS += -ldl
             LIBS += -lTraceClientCore \
                 -L../../Lib/Qt/Debug_64
             LIBS += -lNyxBase \
@@ -286,7 +287,6 @@ CONFIG(debug, debug | release) {
                 -L$${NyxPath}/Lib/Linux/OpenSSL_64
             LIBS += -lcrypto \
                 -L$${NyxPath}/Lib/Linux/OpenSSL_64
-            LIBS += -ldl
     }
 
 
