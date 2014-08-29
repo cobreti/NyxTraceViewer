@@ -181,6 +181,7 @@ namespace TraceClientCore
                         }
                         else if ( NULL != strstr(szStr, "GET") && NULL != strstr(szStr, "HTTP/") )
                         {
+                            NYXTRACE(0x0, szStr)
 //                            SendHttpAnswer(szStr, rStream);
                             m_refHttpConnHandler->HandleStream(szStr, rStream);
                             return;

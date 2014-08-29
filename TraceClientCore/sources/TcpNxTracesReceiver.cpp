@@ -121,11 +121,13 @@ namespace TraceClientCore
                 m_pChannel = pChannel;
                 
                 CTraceNxStreamReader        TraceReader( pChannel->Pool() );
-                CTraceData*                 pTrace = NULL;
+
+                TraceReader.Read(SectionsCount, rStreamReader, *pChannel);
+//                CTraceData*                 pTrace = NULL;
                 
-                pTrace = TraceReader.Read(SectionsCount, rStreamReader);
-                if ( pTrace )
-                    pChannel->Insert(pTrace);
+//                pTrace = TraceReader.Read(SectionsCount, rStreamReader);
+//                if ( pTrace )
+//                    pChannel->Insert(pTrace);
             }
             else
             {

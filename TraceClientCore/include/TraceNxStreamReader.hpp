@@ -13,6 +13,7 @@ namespace TraceClientCore
 {
     class CTracesPool;
     class CTraceData;
+    class CTraceChannel;
     
     class CTraceNxStreamReader
     {
@@ -21,6 +22,7 @@ namespace TraceClientCore
         ~CTraceNxStreamReader();
         
         virtual CTraceData* Read( Nyx::UInt32 SectionsCount, NyxNet::CNxStreamReader& Reader );
+        virtual void Read( Nyx::UInt32 SectionsCount, NyxNet::CNxStreamReader& Reader, CTraceChannel& rChannel );
         virtual CTraceData* ReadTxtTrace( NyxNet::CNxStreamReader& reader );
         
     protected:
