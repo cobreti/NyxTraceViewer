@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "express": "latest"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-karma": "^0.8.3",
+    "karma": "^0.12.23"
+  }
+}
