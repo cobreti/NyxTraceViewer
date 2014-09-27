@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name wwwApp.controller:MainCtrl
+ * @name nyxClientWebTestApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the wwwApp
+ * Controller of the nyxClientWebTestApp
  */
-angular.module('wwwApp')
+angular.module('nyxClientWebTestApp')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

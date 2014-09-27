@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name wwwApp
+ * @name nyxClientWebTestApp
  * @description
- * # wwwApp
+ * # nyxClientWebTestApp
  *
  * Main module of the application.
  */
 angular
-  .module('wwwApp', [
+  .module('nyxClientWebTestApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
