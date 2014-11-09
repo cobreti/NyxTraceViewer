@@ -7,14 +7,15 @@
 #include <NyxMemPoolWString.hpp>
 #include <NyxNetTraceFlags.hpp>
 
+#include <QtCore>
 
 namespace TraceClientCore
 {
 	class CTracesPool;
 	
-	class CTraceData : public Nyx::CMemPoolObj<>
+    class CTraceData// : public Nyx::CMemPoolObj<>
 	{
-		typedef		Nyx::CMemPoolObj<>		BaseType;
+//		typedef		Nyx::CMemPoolObj<>		BaseType;
 
     public:
 
@@ -22,7 +23,7 @@ namespace TraceClientCore
         {
         public:
             CIdentifier();
-            CIdentifier(const int& repositoryId, const int& traceId, const int& level);
+            CIdentifier(quint32 repositoryId, quint32 traceId, quint32 level);
             CIdentifier(const CIdentifier& identifier);
             ~CIdentifier();
 
@@ -37,9 +38,9 @@ namespace TraceClientCore
 
         protected:
 
-            Nyx::UInt32     m_RepositoryId;
-            Nyx::UInt32     m_TraceId;
-            Nyx::UInt32     m_Level;
+            quint32     m_RepositoryId;
+            quint32     m_TraceId;
+            quint32     m_Level;
         };
 
         enum ETraceType
@@ -50,26 +51,23 @@ namespace TraceClientCore
         };
 
 	public:
-		CTraceData(Nyx::CMemoryPool* pMemPool);
+        CTraceData();
 		virtual ~CTraceData();
 				
-		const Nyx::CMemPoolWString& TimeReference() const	{ return m_TimeReference; }
-		Nyx::CMemPoolWString& TimeReference()				{ return m_TimeReference; }
+        const QString& TimeReference() const	{ return m_TimeReference; }
+        QString& TimeReference()				{ return m_TimeReference; }
 
-        const Nyx::CMemPoolWString& TickCountReference() const		{ return m_TickCountReference; }
-		Nyx::CMemPoolWString& TickCountReference()					{ return m_TickCountReference; }        
+        const QString& TickCountReference() const		{ return m_TickCountReference; }
+        QString& TickCountReference()					{ return m_TickCountReference; }
 
-		const Nyx::CMemPoolWString& ThreadId() const		{ return m_ThreadId; }
-		Nyx::CMemPoolWString& ThreadId()					{ return m_ThreadId; }
+        const QString& ThreadId() const		{ return m_ThreadId; }
+        QString& ThreadId()					{ return m_ThreadId; }
 		
-		const Nyx::CMemPoolWString& TickCount() const		{ return m_TickCount; }
-		Nyx::CMemPoolWString& TickCount()					{ return m_TickCount; }
+        const QString& TickCount() const		{ return m_TickCount; }
+        QString& TickCount()					{ return m_TickCount; }
 		
-		const Nyx::CMemPoolWString& Data() const			{ return m_Data; }
-		Nyx::CMemPoolWString& Data()						{ return m_Data; }
-
-		CTracesPool* OwnerPool() const				        { return m_pOwnerPool; }
-		CTracesPool*& OwnerPool()					        { return m_pOwnerPool; }
+        const QString& Data() const			{ return m_Data; }
+        QString& Data()						{ return m_Data; }
 
         const ETraceType& Type() const                      { return m_eType; }
         ETraceType& Type()                                  { return m_eType; }
@@ -77,31 +75,30 @@ namespace TraceClientCore
         const NyxNet::CTraceFlags& Flags() const            { return m_Flags; }
         NyxNet::CTraceFlags& Flags()                        { return m_Flags; }
         
-        const Nyx::UInt32& RepositoryId() const             { return m_RepositoryId; }
-        Nyx::UInt32& RepositoryId()                         { return m_RepositoryId; }
+        const quint32& RepositoryId() const             { return m_RepositoryId; }
+        quint32& RepositoryId()                         { return m_RepositoryId; }
         
-        const Nyx::UInt32& TraceId() const                  { return m_TraceId; }
-        Nyx::UInt32& TraceId()                              { return m_TraceId; }
+        const quint32& TraceId() const                  { return m_TraceId; }
+        quint32& TraceId()                              { return m_TraceId; }
 
-        const Nyx::UInt32& Level() const                    { return m_Level; }
-        Nyx::UInt32& Level()                                { return m_Level; }
+        const quint32& Level() const                    { return m_Level; }
+        quint32& Level()                                { return m_Level; }
 
         const CIdentifier identifier() const                { return CIdentifier(m_RepositoryId, m_TraceId, m_Level); }
 		
 	protected:
 	
-        Nyx::CMemPoolWString        m_TimeReference;
-        Nyx::CMemPoolWString        m_TickCountReference;
+        QString        m_TimeReference;
+        QString        m_TickCountReference;
 
-		Nyx::CMemPoolWString		m_ThreadId;
-		Nyx::CMemPoolWString		m_TickCount;
-		Nyx::CMemPoolWString		m_Data;
-		CTracesPool*				m_pOwnerPool;
+        QString		m_ThreadId;
+        QString		m_TickCount;
+        QString		m_Data;
         ETraceType					m_eType;
         NyxNet::CTraceFlags         m_Flags;
-        Nyx::UInt32                 m_RepositoryId;
-        Nyx::UInt32                 m_TraceId;
-        Nyx::UInt32                 m_Level;
+        quint32                 m_RepositoryId;
+        quint32                 m_TraceId;
+        quint32                 m_Level;
 	};
 }
 

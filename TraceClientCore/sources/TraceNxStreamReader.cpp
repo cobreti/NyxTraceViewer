@@ -59,7 +59,7 @@ namespace TraceClientCore
 
         if ( Reader.Valid() )
         {
-            pTraceData = new (m_pPool->MemoryPool())CTraceData(m_pPool->MemoryPool());
+            pTraceData = new CTraceData();
                         
             // flags
             {
@@ -185,12 +185,12 @@ namespace TraceClientCore
                     	}
                     }
 
-                    pTraceData->Data() = (wchar_t*)pBuffer;
+                    pTraceData->Data().fromWCharArray((wchar_t*)pBuffer);
                     
                     for (size_t index = 0; index < pTraceData->Data().length(); ++index)
                     {
-                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
-                            pTraceData->Data()[index] = 32;
+//                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+//                            pTraceData->Data()[index] = 32;
                     }
                 }
                 else if ( flags.IsAnsi() )
@@ -199,13 +199,11 @@ namespace TraceClientCore
 
                     for (size_t index = 0; index < pTraceData->Data().length(); ++index)
                     {
-                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
-                            pTraceData->Data()[index] = 32;
+//                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+//                            pTraceData->Data()[index] = 32;
                     }
                 }
             }
-                            
-            pTraceData->OwnerPool() = m_pPool;
         }
     
         return pTraceData;
@@ -382,13 +380,12 @@ namespace TraceClientCore
                             ++ pSrc;
                             ++ idx;
 
-                            pTraceData = new (m_pPool->MemoryPool())CTraceData(m_pPool->MemoryPool());
+                            pTraceData = new CTraceData();
                             pTraceData->Flags() = flags;
-                            pTraceData->ThreadId() = wstrThreadId.c_str();
-                            pTraceData->TickCount() = wstrTickCount.c_str();
-                            pTraceData->Data() = pDataStart;
+                            pTraceData->ThreadId().fromWCharArray(wstrThreadId.c_str());
+                            pTraceData->TickCount().fromWCharArray(wstrTickCount.c_str());
+                            pTraceData->Data().fromWCharArray(pDataStart);
                             pTraceData->Level() = level;
-                            pTraceData->OwnerPool() = m_pPool;
                             rChannel.Insert(pTraceData);
                             pTraceData = NULL;
                             ++ level;
@@ -409,13 +406,12 @@ namespace TraceClientCore
                         }
                     }
 
-                    pTraceData = new (m_pPool->MemoryPool())CTraceData(m_pPool->MemoryPool());
+                    pTraceData = new CTraceData();
                     pTraceData->Flags() = flags;
-                    pTraceData->ThreadId() = wstrThreadId.c_str();
-                    pTraceData->TickCount() = wstrTickCount.c_str();
-                    pTraceData->Data() = pDataStart;
+                    pTraceData->ThreadId().fromWCharArray(wstrThreadId.c_str());
+                    pTraceData->TickCount().fromWCharArray(wstrTickCount.c_str());
+                    pTraceData->Data().fromWCharArray(pDataStart);
                     pTraceData->Level() = level;
-                    pTraceData->OwnerPool() = m_pPool;
                     rChannel.Insert(pTraceData);
 
 //                    for (size_t index = 0; index < pTraceData->Data().length(); ++index)
@@ -430,8 +426,8 @@ namespace TraceClientCore
 
                     for (size_t index = 0; index < pTraceData->Data().length(); ++index)
                     {
-                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
-                            pTraceData->Data()[index] = 32;
+//                        if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+//                            pTraceData->Data()[index] = 32;
                     }
                 }
             }

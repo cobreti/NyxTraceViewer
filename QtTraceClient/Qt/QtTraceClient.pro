@@ -1,6 +1,7 @@
 # -------------------------------------------------
 # Project created by QtCreator 2010-02-12T21:15:19
 # -------------------------------------------------
+
 QT += xml
 QT += widgets
 QT += network
@@ -106,7 +107,8 @@ SOURCES += ../Sources/TracesView.cpp \
     ../Sources/View/TracesGroupView.cpp \
     ../Sources/View/TracesGroupViewMgr.cpp \
     ../Sources/View/Decorations/StaticHighlights.cpp \
-    ../Sources/View/Formater/TracesViewTextFormater.cpp
+    ../Sources/View/Formater/TracesViewTextFormater.cpp \
+    ../Sources/Servers/TextInputServer.cpp
 
 
 HEADERS += ../Sources/TracesView.h \
@@ -205,7 +207,8 @@ HEADERS += ../Sources/TracesView.h \
     ../Sources/View/TracesGroupView.h \
     ../Sources/View/TracesGroupViewMgr.h \
     ../Sources/View/Decorations/StaticHighlights.hpp \
-    ../Sources/View/Formater/TracesViewTextFormater.h
+    ../Sources/View/Formater/TracesViewTextFormater.h \
+    ../Sources/Servers/TextInputServer.h
 FORMS += ../UI/TracesView.ui \
     ../UI/NewViewDlg.ui \
     ../UI/NewPoolDlg.ui \
@@ -233,6 +236,8 @@ INCLUDEPATH += $${NyxPath}/include/
 INCLUDEPATH += $${NyxPath}/include/NyxNet
 INCLUDEPATH += ../../TraceClientCore/include
 macx {
+    QMAKE_MAC_SDK = macosx10.9
+
     INCLUDEPATH += $${NyxPath}/include/OSX
     INCLUDEPATH += $${NyxPath}/include/OSX/NyxNet
     LIBS += /System/Library/Frameworks/CoreServices.framework/CoreServices

@@ -28,16 +28,16 @@ QString CViewTracePortal::GetColumnText(EViewColumnId columnId) const
         text = QString::number(m_LineNumber+1);
         break;
     case eVCI_Data:
-        text = QString::fromWCharArray(m_rTraceData.Data().c_str());
+        text = m_rTraceData.Data();
         break;
     case eVCI_TickCount:
-        text = QString::fromWCharArray(m_rTraceData.TickCount().c_str());
+        text = m_rTraceData.TickCount();
         break;
     case eVCI_ModuleName:
-        text = QString::fromWCharArray(m_rTraceData.OwnerPool()->Name().c_str());
+        text = "Default"; //m_rTraceData.OwnerPool();
         break;
     case eVCI_ThreadId:
-        text = QString::fromWCharArray(m_rTraceData.ThreadId().c_str());
+        text = m_rTraceData.ThreadId();
         break;
     }
 

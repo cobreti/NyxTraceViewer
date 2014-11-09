@@ -3,6 +3,7 @@
 # Project created by QtCreator 2011-01-08T10:05:35
 #
 #-------------------------------------------------
+QMAKE_MAC_SDK = macosx10.9
 
 QT += widgets
 QT += network

@@ -178,26 +178,26 @@ void CTracesView::OnViewEndUpdate( TraceClientCore::CTracesGroup* pGroup, TraceC
  */
 void CTracesView::Save( const QString& filename )
 {
-    Nyx::CAnsiFileRef               refFile = Nyx::CAnsiFile::Alloc();
-    Nyx::NyxResult                  res;
-    CViewTracesIterator             iter = CViewTracesIterator::FirstPos(m_pCurrentTracesGroup);
-    Nyx::CWString                   eol(L"\r\n");
+//    Nyx::CAnsiFileRef               refFile = Nyx::CAnsiFile::Alloc();
+//    Nyx::NyxResult                  res;
+//    CViewTracesIterator             iter = CViewTracesIterator::FirstPos(m_pCurrentTracesGroup);
+//    Nyx::CWString                   eol(L"\r\n");
 
-    res = refFile->Create(filename.toStdString().c_str());
-    if ( Nyx::Succeeded(res) )
-    {
-        while ( iter.Valid() )
-        {
-            Nyx::CWString   data = iter.TraceData()->Data();
+//    res = refFile->Create(filename.toStdString().c_str());
+//    if ( Nyx::Succeeded(res) )
+//    {
+//        while ( iter.Valid() )
+//        {
+//            Nyx::CWString   data = iter.TraceData()->Data();
 
-            refFile->Write(data);
-            refFile->Write(eol);
+//            refFile->Write(data);
+//            refFile->Write(eol);
 
-            ++ iter;
-        }
+//            ++ iter;
+//        }
 
-        refFile->Close();
-    }
+//        refFile->Close();
+//    }
 }
 
 

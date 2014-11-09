@@ -119,9 +119,9 @@ namespace TraceClientCore
     	{
             m_ChannelsSet.insert(pChannel);
 
-    		Nyx::CUtf8String	content(szContent);
+//    		Nyx::CUtf8String	content(szContent);
 
-    		CTraceData*		pTraceData = new (pChannel->Pool()->MemoryPool())CTraceData(pChannel->Pool()->MemoryPool());
+            CTraceData*		pTraceData = new CTraceData();
 
             if ( level == 0 )
             {
@@ -139,14 +139,21 @@ namespace TraceClientCore
                 pTraceData->TickCount() = "";
             }
 
-    		pTraceData->Data() = content;
-    		pTraceData->OwnerPool() = pChannel->Pool();
+            pTraceData->Data() = szContent;
             pTraceData->Level() = level;
+
+            QString& contentData = pTraceData->Data();
 
             for (size_t index = 0; index < pTraceData->Data().length(); ++index)
             {
-                if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
-                    pTraceData->Data()[index] = 32;
+                QChar c = contentData.at(index);
+
+                if ( c < 32 && c != '\n' )
+                {
+                    contentData = contentData.replace(index, 1, QChar(32));
+                }
+//                if ( pTraceData->Data()[index] < 32 && pTraceData->Data()[index] != '\n' )
+//                    pTraceData->Data()[index] = 32;
             }
 
     		pChannel->Insert(pTraceData);

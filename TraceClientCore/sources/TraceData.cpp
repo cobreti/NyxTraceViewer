@@ -1,20 +1,12 @@
 #include "TraceData.hpp"
 
-
 namespace TraceClientCore
 {
 
     /**
      *
      */
-    CTraceData::CTraceData(Nyx::CMemoryPool* pMemPool) :
-    CTraceData::BaseType(pMemPool),
-    m_TimeReference(pMemPool),
-    m_TickCountReference(pMemPool),
-    m_ThreadId(pMemPool),
-    m_TickCount(pMemPool),
-    m_Data(pMemPool),
-    m_pOwnerPool(NULL),
+    CTraceData::CTraceData() :
     m_eType(eTT_User),
     m_Flags(),
     m_RepositoryId(0),
@@ -41,7 +33,7 @@ namespace TraceClientCore
 
     }
 
-    CTraceData::CIdentifier::CIdentifier(const int& repositoryId, const int& traceId, const int& level) :
+    CTraceData::CIdentifier::CIdentifier(quint32 repositoryId, quint32 traceId, quint32 level) :
         m_RepositoryId(repositoryId),
         m_TraceId(traceId),
         m_Level(level)

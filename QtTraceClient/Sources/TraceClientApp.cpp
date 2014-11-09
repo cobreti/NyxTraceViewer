@@ -102,6 +102,8 @@ void CTraceClientApp::Init(int &argc, char **argv)
     settings.UseHandshake() = true;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(0).Start(settings);
 
+//    _textInputServer.Start();
+
     settings.PortNumber() = basePortNumber + 1;
     settings.UseHandshake() = false;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);

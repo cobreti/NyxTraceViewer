@@ -4,6 +4,7 @@
 #include "AppSettings.hpp"
 #include "WindowsManager.hpp"
 #include "DevicesMapping.h"
+#include "Servers/TextInputServer.h"
 
 class CMainWindow;
 class CTracesWindow;
@@ -102,6 +103,8 @@ protected:
     CDevicesMgr*                m_pDevicesMgr;
     CDevicesMapping             m_DevicesMapping;
     CTracesGroupViewMgr*        m_pTracesGroupViewMgr;
+
+    CTextInputServer            _textInputServer;
 
     static CTraceClientApp*     s_pInstance;
 };
