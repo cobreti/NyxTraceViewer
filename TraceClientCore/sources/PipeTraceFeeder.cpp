@@ -32,7 +32,7 @@ TraceClientCore::CPipeTraceFeeder::~CPipeTraceFeeder()
  */
 void TraceClientCore::CPipeTraceFeeder::Start()
 {
-    m_Name = Channel()->Name();
+    m_Name = Channel()->Name().toStdString().c_str();
 	m_Name += "_Pipe";
     m_pLastTrace = NULL;
 

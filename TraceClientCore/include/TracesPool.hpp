@@ -7,6 +7,7 @@
 #include "TraceDataRepository.hpp"
 #include "TraceFeeder.hpp"
 
+#include <QtCore>
 
 namespace TraceClientCore
 {
@@ -21,14 +22,14 @@ namespace TraceClientCore
 	class CTracesPool : public Nyx::CRefCount_Impl<>
 	{
 	public:
-		CTracesPool(Nyx::CMemoryPool* pMemoryPool, const wchar_t* wszName);
+        CTracesPool(Nyx::CMemoryPool* pMemoryPool, const QString& name);
 		virtual ~CTracesPool();
 		
-		virtual const Nyx::CWString& Name() const	{ return m_Name; }
-		virtual void SetName(const wchar_t* wszName);
+        virtual const QString& Name() const	{ return m_Name; }
+        virtual void SetName(const QString& name);
 
-		virtual void setDescription(const wchar_t* wszDescription);
-		virtual const Nyx::CWString& getDescription() const		{ return m_Description; }
+        virtual void setDescription(const QString& description);
+        virtual const QString& getDescription() const		{ return m_Description; }
 		
 		CTraceDataRepository&	    Repository()		    { return *m_pRepository; }
         const CTraceDataRepository& Repository() const      { return *m_pRepository; }
@@ -37,8 +38,8 @@ namespace TraceClientCore
 		
 	protected:
 	
-		Nyx::CWString				m_Name;
-		Nyx::CWString				m_Description;
+        QString                     m_Name;
+        QString     				m_Description;
 		CTraceDataRepository*		m_pRepository;
 		Nyx::CMemoryPoolRef			m_refMemoryPool;
 	};

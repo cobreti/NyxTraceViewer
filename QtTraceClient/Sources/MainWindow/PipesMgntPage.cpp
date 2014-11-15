@@ -103,7 +103,7 @@ void CPipesMgntPage::OnNewPool()
     // Add pool
     //
 
-    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), L"new pool");
+    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(1024*1024), "new pool");
 	rModule.TracesPools().Add(refPool);
     rModule.PoolsUpdateClock().Insert(refPool);
 
@@ -148,17 +148,17 @@ void CPipesMgntPage::OnPoolItemChanged( QTreeWidgetItem* pItem, int )
 
     if ( pPoolItem->TraceChannel() && pPoolItem->TraceChannel()->Name() != pItem->text(3).toStdString().c_str() )
     {
-        Nyx::CAString            AnsiName( pItem->text(3).toStdString().c_str() );
-        Nyx::CWString            WName;
+//        Nyx::CAString            AnsiName( pItem->text(3).toStdString().c_str() );
+//        Nyx::CWString            WName;
         
-        WName = AnsiName;
+//        WName = AnsiName;
 
-        pPoolItem->TraceChannel()->Name() = AnsiName; //pItem->text(0).toStdString().c_str();
+        pPoolItem->TraceChannel()->Name() = pItem->text(3); //pItem->text(0).toStdString().c_str();
 
         TraceClientCore::CModule&			rModule = TraceClientCore::CModule::Instance();
         rModule.TraceChannels().Update( pPoolItem->TraceChannel() );
 
-        pPoolItem->TraceChannel()->Pool()->SetName( WName.c_str() );
+        pPoolItem->TraceChannel()->Pool()->SetName( pItem->text(3) );
         rModule.TracesPools().Update(pPoolItem->TraceChannel()->Pool());
     }
 }

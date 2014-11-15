@@ -17,7 +17,7 @@ namespace TraceClientCore
         virtual ~CTraceChannels();
         
         virtual Nyx::NyxResult Add( CTraceChannel* pChannel );
-        virtual CTraceChannel* Get( const Nyx::CAString& name, bool bCreateIfDontExist = false );
+        virtual CTraceChannel* Get( const QString& name, bool bCreateIfDontExist = false );
         virtual void Update( CTraceChannel* pChannel );
         virtual void Stop();
         
@@ -25,7 +25,7 @@ namespace TraceClientCore
         
     protected:
         
-        typedef     std::map<Nyx::CAString, CTraceChannel*>        TraceChannelsMap;
+        typedef     std::map<QString, CTraceChannel*>        TraceChannelsMap;
         
     protected:
         

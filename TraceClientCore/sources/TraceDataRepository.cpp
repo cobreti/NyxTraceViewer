@@ -71,7 +71,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CTraceDataRepository::Clear(const Nyx::CAString& ModuleName)
+    void CTraceDataRepository::Clear(const QString& ModuleName)
     {
         
 		// notify traces are about to be cleared

@@ -3,6 +3,8 @@
 
 #include <Nyx.hpp>
 
+#include <QtCore>
+
 namespace TraceClientCore
 {
     class CTraceData;
@@ -19,8 +21,8 @@ namespace TraceClientCore
         virtual void BeginUpdate();
         virtual void EndUpdate();
         virtual void Insert( CTraceData* pTraceData );
-        virtual void BeginClear( const Nyx::CAString& ModuleName );
-        virtual void EndClear( const Nyx::CAString& ModuleName );
+        virtual void BeginClear( const QString& ModuleName );
+        virtual void EndClear( const QString& ModuleName );
 
 	protected:
 

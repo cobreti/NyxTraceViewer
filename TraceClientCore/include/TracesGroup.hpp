@@ -13,7 +13,7 @@
 #include "TracesViewNotificationsListener.hpp"
 
 #include <list>
-
+#include <QtCore>
 
 namespace TraceClientCore
 {
@@ -79,8 +79,8 @@ namespace TraceClientCore
     public:
         const TracesGroupId&        Id() const                          { return m_Id; }
         
-        const Nyx::CAString&    Name() const                            { return m_Name; }
-        Nyx::CAString&          Name()                                  { return m_Name; }
+        const QString&    Name() const                                  { return m_Name; }
+        QString&          Name()                                        { return m_Name; }
         
         CTracesGroupNotificationsListeners&     Listeners()             { return m_Listeners; }
         
@@ -112,7 +112,7 @@ namespace TraceClientCore
     protected:
         
         TracesGroupId                           m_Id;
-        Nyx::CAString                           m_Name;
+        QString                                 m_Name;
         TTracesViews                            m_Views;
         CTracesGroupNotificationsListeners      m_Listeners;
         

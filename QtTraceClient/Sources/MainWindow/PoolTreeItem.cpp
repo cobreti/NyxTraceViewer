@@ -28,9 +28,9 @@ namespace MainWindow
     {
         m_pChannel = pChannel;
 
-        QString     name = pChannel->Name().c_str();
+//        QString     name = pChannel->Name().c_str();
 
-        setText(3, name);
+        setText(3, pChannel->Name());
     }
 }
 

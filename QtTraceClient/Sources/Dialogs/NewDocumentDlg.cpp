@@ -80,11 +80,11 @@ void CNewDocumentDlg::FillPoolsListView( TraceClientCore::CPoolsList& Pools )
 	for (pos = Pools.begin(); pos != Pools.end(); ++pos)
 	{
         TraceClientCore::CTracesPool*	pPool = (*pos).Pool();
-		QString	text = QString::fromStdWString(pPool->Name().c_str());
+        QString	text = pPool->Name();
 		
 		QListWidgetItem*		pItem = new QListWidgetItem(text, ui->m_pPoolsList, Qt::ItemIsUserCheckable);
 		pItem->setCheckState(Qt::Unchecked);
-		pItem->setData( Qt::UserRole, QVariant(QString::fromStdWString(pPool->Name().c_str())) );
+        pItem->setData( Qt::UserRole, QVariant(pPool->Name()) );
 
 		ui->m_pPoolsList->addItem(pItem);
 	}
@@ -108,7 +108,7 @@ void CNewDocumentDlg::ExtractSelectedPools( TraceClientCore::CPoolsList& Selecte
 		if ( pItem->checkState() == Qt::Checked )
 		{
 			QString PoolName = pItem->data(Qt::UserRole).toString();
-			pPool = Module.TracesPools()[PoolName.toStdWString().c_str()];
+            pPool = Module.TracesPools()[PoolName];
 			//pPool = pItem->data(QVariant::UserType).value<TraceClientCore::CTracesPool*>();
             SelectedPools.push_back( TraceClientCore::CPoolsListItem(pPool) );
 		}

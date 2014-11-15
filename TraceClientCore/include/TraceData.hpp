@@ -11,7 +11,7 @@
 
 namespace TraceClientCore
 {
-	class CTracesPool;
+    class CTraceChannel;
 	
     class CTraceData// : public Nyx::CMemPoolObj<>
 	{
@@ -84,6 +84,9 @@ namespace TraceClientCore
         const quint32& Level() const                    { return m_Level; }
         quint32& Level()                                { return m_Level; }
 
+        CTraceChannel*& Channel()                       { return m_pOwnerTraceChannel; }
+        CTraceChannel* Channel() const                  { return m_pOwnerTraceChannel; }
+
         const CIdentifier identifier() const                { return CIdentifier(m_RepositoryId, m_TraceId, m_Level); }
 		
 	protected:
@@ -99,6 +102,7 @@ namespace TraceClientCore
         quint32                 m_RepositoryId;
         quint32                 m_TraceId;
         quint32                 m_Level;
+        CTraceChannel*          m_pOwnerTraceChannel;
 	};
 }
 

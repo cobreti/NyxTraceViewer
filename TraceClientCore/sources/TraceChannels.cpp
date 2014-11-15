@@ -44,7 +44,7 @@ namespace TraceClientCore
     /**
      *
      */
-    CTraceChannel* CTraceChannels::Get( const Nyx::CAString& name, bool bCreateIfDontExist /* = false*/ )
+    CTraceChannel* CTraceChannels::Get( const QString& name, bool bCreateIfDontExist /* = false*/ )
     {
         TraceChannelsMap::const_iterator       pos = m_Channels.find(name);
         
@@ -53,11 +53,11 @@ namespace TraceClientCore
 
         if ( bCreateIfDontExist )
         {
-            Nyx::CWString                       poolName;
+//            Nyx::CWString                       poolName;
             
-            poolName = name;
+//            poolName = name;
             
-            TraceClientCore::CTracesPoolRef     refPool = new TraceClientCore::CTracesPool( Nyx::CMemoryPool::Alloc(10 * 1024 * 1024), poolName.c_str());
+            TraceClientCore::CTracesPoolRef     refPool = new TraceClientCore::CTracesPool( Nyx::CMemoryPool::Alloc(10 * 1024 * 1024), name);
             
             TraceClientCore::CTraceChannel*     pChannel = new TraceClientCore::CTraceChannel(refPool);
             pChannel->Name() = name;

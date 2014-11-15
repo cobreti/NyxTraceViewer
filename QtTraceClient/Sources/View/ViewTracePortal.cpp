@@ -1,7 +1,7 @@
 #include "ViewTracePortal.h"
 #include "TraceData.hpp"
 #include "TracesPool.hpp"
-
+#include "TraceChannel.hpp"
 
 CViewTracePortal::CViewTracePortal(TraceClientCore::CTraceData &rTraceData, Nyx::UInt32 lineNumber) :
     m_rTraceData(rTraceData),
@@ -34,7 +34,8 @@ QString CViewTracePortal::GetColumnText(EViewColumnId columnId) const
         text = m_rTraceData.TickCount();
         break;
     case eVCI_ModuleName:
-        text = "Default"; //m_rTraceData.OwnerPool();
+        text = m_rTraceData.Channel()->Name();
+//        text = "Default"; //m_rTraceData.OwnerPool();
         break;
     case eVCI_ThreadId:
         text = m_rTraceData.ThreadId();

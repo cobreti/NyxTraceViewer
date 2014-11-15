@@ -9,6 +9,8 @@
 #include <list>
 #include <set>
 
+#include <QtCore>
+
 namespace TraceClientCore
 {
     class CTraceData;
@@ -24,8 +26,8 @@ namespace TraceClientCore
         CTraceChannel( CTracesPool* pPool );
         virtual ~CTraceChannel();
         
-        const Nyx::CAString&        Name() const        { return m_Name; }
-        Nyx::CAString&              Name()              { return m_Name; }
+        const QString&              Name() const        { return m_Name; }
+        QString&                    Name()              { return m_Name; }
         
         CTracesPool*                Pool() const        { return m_refPool; }
 
@@ -39,7 +41,8 @@ namespace TraceClientCore
         
     protected:
         
-        Nyx::CAString               m_Name;
+//        Nyx::CAString               m_Name;
+        QString                     m_Name;
         CTracesPoolRef              m_refPool;
 		CTraceFeederRef				m_refFeeder;
     };

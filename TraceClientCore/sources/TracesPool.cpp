@@ -4,9 +4,9 @@
 /**
  *
  */
-TraceClientCore::CTracesPool::CTracesPool(Nyx::CMemoryPool* pMemoryPool, const wchar_t* wszName) :
+TraceClientCore::CTracesPool::CTracesPool(Nyx::CMemoryPool* pMemoryPool, const QString& name) :
 	m_pRepository(NULL),
-	m_Name(wszName),
+    m_Name(name),
 	m_refMemoryPool(pMemoryPool)
 {
 	m_pRepository = new CTraceDataRepository();
@@ -25,17 +25,17 @@ TraceClientCore::CTracesPool::~CTracesPool()
 /**
  *
  */
-void TraceClientCore::CTracesPool::SetName(const wchar_t* wszName)
+void TraceClientCore::CTracesPool::SetName(const QString& name)
 {
-	m_Name = wszName;
+    m_Name = name;
 }
 
 
 /**
  *
  */
-void TraceClientCore::CTracesPool::setDescription(const wchar_t* wszDescription)
+void TraceClientCore::CTracesPool::setDescription(const QString& description)
 {
-	m_Description = wszDescription;
+    m_Description = description;
 }
 

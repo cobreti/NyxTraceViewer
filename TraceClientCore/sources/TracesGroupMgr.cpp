@@ -35,7 +35,7 @@ namespace TraceClientCore
      * @param name
      * @return
      */
-    CTracesGroup* CTracesGroupMgr::GetGroup(const Nyx::CAString& name) const
+    CTracesGroup* CTracesGroupMgr::GetGroup(const QString& name) const
     {
         TTracesGroupMap::const_iterator     pos = m_TracesGroups.begin();
         CTracesGroup*                       pGroup = NULL;
@@ -57,7 +57,7 @@ namespace TraceClientCore
     /**
      *
      */
-    CTracesGroup* CTracesGroupMgr::CreateTracesGroup(const Nyx::CAString& name)
+    CTracesGroup* CTracesGroupMgr::CreateTracesGroup(const QString& name)
     {
         if ( NULL != GetGroup(name) )
             return NULL;

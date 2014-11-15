@@ -9,6 +9,7 @@
 #include "TraceData.hpp"
 #include "RepositoryTraceInserter.hpp"
 
+#include <QtCore>
 
 namespace TraceClientCore
 {
@@ -27,7 +28,7 @@ namespace TraceClientCore
 		virtual ~CTraceDataRepository();
 		
 		virtual void Insert(TraceClientCore::CTraceData* pTraceData);
-        virtual void Clear(const Nyx::CAString& ModuleName);
+        virtual void Clear(const QString& ModuleName);
         virtual void InsertDisconnection(TraceClientCore::CTraceData* pTraceData);
         virtual void Insert(CRepositoryObserver* pObserver);
         virtual void Remove(CRepositoryObserver* pObserver);
@@ -42,9 +43,9 @@ namespace TraceClientCore
         class XObserverData
         {
         public:
-            XObserverData() : m_bEnabled(true) {};
+            XObserverData() : m_bEnabled(true) {}
             XObserverData(const XObserverData& data) : m_StartPos(data.m_StartPos), m_bEnabled(data.m_bEnabled) {}
-            ~XObserverData() {};
+            ~XObserverData() {}
 
             TraceDataList::const_iterator&      StartPos() { return m_StartPos; }
             

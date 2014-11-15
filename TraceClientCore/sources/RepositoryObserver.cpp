@@ -52,7 +52,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CRepositoryObserver::BeginClear(const Nyx::CAString& ModuleName)
+    void CRepositoryObserver::BeginClear(const QString& ModuleName)
     {
         
     }
@@ -61,7 +61,7 @@ namespace TraceClientCore
     /**
      *
      */
-    void CRepositoryObserver::EndClear(const Nyx::CAString& ModuleName)
+    void CRepositoryObserver::EndClear(const QString& ModuleName)
     {
         
     }

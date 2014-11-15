@@ -11,7 +11,8 @@ namespace TraceClientCore
     m_Flags(),
     m_RepositoryId(0),
     m_TraceId(0),
-    m_Level(0)
+    m_Level(0),
+    m_pOwnerTraceChannel(NULL)
     {
     }
 

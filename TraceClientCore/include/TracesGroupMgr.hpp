@@ -67,9 +67,9 @@ namespace TraceClientCore
         CTracesGroupMgr();
         virtual ~CTracesGroupMgr();
         
-        CTracesGroup* GetGroup(const Nyx::CAString& name) const;
+        CTracesGroup* GetGroup(const QString& name) const;
 
-        CTracesGroup* CreateTracesGroup(const Nyx::CAString& name);
+        CTracesGroup* CreateTracesGroup(const QString& name);
         void ReleaseTracesGroup( CTracesGroup* pTracesGroup );
         
         CTracesGroupMgrNotificationsListeners&     Listeners()         { return m_Listeners; }

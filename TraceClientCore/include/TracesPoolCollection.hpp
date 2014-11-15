@@ -18,13 +18,13 @@ namespace TraceClientCore
 		virtual void Update( CTracesPool* pPool );
 		virtual void Clear();
 		
-		CTracesPool* operator [] ( const wchar_t* wszPoolName );
+        CTracesPool* operator [] ( const QString& poolName );
 
 		void GetPoolsList( CPoolsList& rList );
 		
 	protected: // protected types
 
-		typedef		std::map<const Nyx::CWString, CTracesPoolRef>		TracesPoolTable;
+        typedef		std::map<const QString, CTracesPoolRef>		TracesPoolTable;
 
 	protected: // protected members
 	

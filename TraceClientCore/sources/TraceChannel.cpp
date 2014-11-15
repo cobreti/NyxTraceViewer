@@ -28,7 +28,8 @@ namespace TraceClientCore
      *
      */
     void CTraceChannel::Insert(CTraceData* pTraceData)
-    {        
+    {
+        pTraceData->Channel() = this;
         m_refPool->Repository().Insert(pTraceData);
     }
 

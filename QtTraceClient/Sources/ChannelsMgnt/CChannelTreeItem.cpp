@@ -28,7 +28,7 @@ void CChannelTreeItem::SetChannel( TraceClientCore::CTraceChannel* pChannel )
 {
     m_pChannel = pChannel;
 
-    QString     name = pChannel->Name().c_str();
+//    QString     name = pChannel->Name().c_str();
 
-    setText(2, name);
+    setText(2, pChannel->Name());
 }

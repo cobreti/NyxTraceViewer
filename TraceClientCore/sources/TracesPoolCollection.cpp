@@ -72,12 +72,12 @@ void TraceClientCore::CTracesPoolCollection::Clear()
 /**
  *
  */
-TraceClientCore::CTracesPool* TraceClientCore::CTracesPoolCollection::operator [] (const wchar_t* wszPoolName)
+TraceClientCore::CTracesPool* TraceClientCore::CTracesPoolCollection::operator [] (const QString& poolName)
 {
-	Nyx::CWString		name( wszPoolName );
+//	Nyx::CWString		name( wszPoolName );
 
-	if ( m_TracesPools.count(name) > 0 )
-		return m_TracesPools[name];
+    if ( m_TracesPools.count(poolName) > 0 )
+        return m_TracesPools[poolName];
 
 	return 0;
 }

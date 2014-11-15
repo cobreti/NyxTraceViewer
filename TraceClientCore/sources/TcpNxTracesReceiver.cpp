@@ -86,7 +86,7 @@ namespace TraceClientCore
     {
         NyxNet::NxDataSize          TotalSize = 0;
         Nyx::UInt32                 SectionsCount = 0;
-        Nyx::CAString               Name;
+        QString                     Name;
         
         try
         {

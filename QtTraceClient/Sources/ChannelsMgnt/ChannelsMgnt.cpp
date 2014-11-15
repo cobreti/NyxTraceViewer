@@ -74,16 +74,18 @@ void CChannelsMgnt::OnNewChannel()
     CChannelTreeItem*                           pItem = new CChannelTreeItem();
     TraceClientCore::CPipeTraceFeeder*          pPipeTraceFeeder = NULL;
     TraceClientCore::CModule&					rModule = TraceClientCore::CModule::Instance();
-    Nyx::CWString                               channelName(50);
+    QString                                     channelName;
+//    Nyx::CWString                               channelName(50);
 
-    channelName.Format(L"Channel_%i", m_NextChannelNumber);
+    channelName = QString("Channel %1").arg( QString::number(m_NextChannelNumber) );
+//    channelName.Format(L"Channel_%i", m_NextChannelNumber);
     ++m_NextChannelNumber;
 
     //
     // Add pool
     //
 
-    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(10 * 1024*1024), channelName.c_str());
+    refPool = new TraceClientCore::CTracesPool(Nyx::CMemoryPool::Alloc(10 * 1024*1024), channelName);
     rModule.TracesPools().Add(refPool);
     rModule.PoolsUpdateClock().Insert(refPool);
 
@@ -132,17 +134,18 @@ void CChannelsMgnt::OnChannelItemChanged( QTreeWidgetItem* pItem, int )
 
     if ( pChannelItem->TraceChannel() && pChannelItem->TraceChannel()->Name() != pItem->text(2).toStdString().c_str() )
     {
-        Nyx::CAString            AnsiName( pItem->text(2).toStdString().c_str() );
-        Nyx::CWString            WName;
+        QString                 name = pItem->text(2);
+//        Nyx::CAString            AnsiName( pItem->text(2).toStdString().c_str() );
+//        Nyx::CWString            WName;
 
-        WName = AnsiName;
+//        WName = AnsiName;
 
-        pChannelItem->TraceChannel()->Name() = AnsiName;
+        pChannelItem->TraceChannel()->Name() = name;
 
         TraceClientCore::CModule&			rModule = TraceClientCore::CModule::Instance();
         rModule.TraceChannels().Update( pChannelItem->TraceChannel() );
 
-        pChannelItem->TraceChannel()->Pool()->SetName( WName.c_str() );
+        pChannelItem->TraceChannel()->Pool()->SetName( name );
         rModule.TracesPools().Update(pChannelItem->TraceChannel()->Pool());
     }
 }
@@ -304,7 +307,7 @@ void CChannelsMgnt::showEvent(QShowEvent *pEvent)
  */
 void CChannelsMgnt::EmptyChannel(TraceClientCore::CTraceChannel* pChannel)
 {
-    CClearChannelContentConfirmationDlg     dlg(QString::fromLocal8Bit(pChannel->Name().c_str()), this);
+    CClearChannelContentConfirmationDlg     dlg(pChannel->Name(), this);
 
     dlg.exec();
 
