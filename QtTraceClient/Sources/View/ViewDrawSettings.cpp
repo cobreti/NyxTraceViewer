@@ -1,6 +1,6 @@
 #include "ViewDrawSettings.hpp"
 
-static char* HeightCalcString = "abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+static const char* HeightCalcString = "abcdefghijklmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
 #include <QFont>
 #include <QFontMetrics>

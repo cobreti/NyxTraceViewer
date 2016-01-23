@@ -20,12 +20,10 @@
 #include "NyxTaskExecuterPool.hpp"
 
 
-
-
-
-
-
-
+FILE* __cdecl __iob_func(unsigned idx)
+{
+    return __acrt_iob_func(idx);
+}
 
 
 #define NYXTRACE(filter, output)    { Nyx::CTraceStream stream(filter); stream << output; }

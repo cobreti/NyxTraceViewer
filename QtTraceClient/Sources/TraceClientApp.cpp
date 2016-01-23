@@ -108,13 +108,13 @@ void CTraceClientApp::Init(int &argc, char **argv)
     settings.UseHandshake() = false;
     TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(1).Start(settings);
 
-    settings.PortNumber() = basePortNumber + 2;
-    settings.UseHandshake() = false;
-    settings.UseSSL() = true;
-    settings.CertificateFile() = certificateFile;
-    settings.PrivKeyFile() = privKeyFile;
-    settings.DhFile() = bioFile;
-    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(2).Start(settings);
+//    settings.PortNumber() = basePortNumber + 2;
+//    settings.UseHandshake() = false;
+//    settings.UseSSL() = true;
+//    settings.CertificateFile() = certificateFile;
+//    settings.PrivKeyFile() = privKeyFile;
+//    settings.DhFile() = bioFile;
+//    TraceClientCore::CModule::Instance().TcpModule().TcpTracesReceiversSvr(2).Start(settings);
 
     m_pMainWindow = new CMainWindow();
     m_pMainWindow->move( rcScreen.left(), rcScreen.top() );

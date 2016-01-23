@@ -23,67 +23,67 @@
 
 namespace TraceClientCore
 {
-	char *base64(const unsigned char *input, int length)
-	{
-	  BIO *bmem, *b64;
-	  BUF_MEM *bptr;
+//	char *base64(const unsigned char *input, int length)
+//	{
+//	  BIO *bmem, *b64;
+//	  BUF_MEM *bptr;
 
-	  b64 = BIO_new(BIO_f_base64());
-	  bmem = BIO_new(BIO_s_mem());
-	  b64 = BIO_push(b64, bmem);
+//	  b64 = BIO_new(BIO_f_base64());
+//	  bmem = BIO_new(BIO_s_mem());
+//	  b64 = BIO_push(b64, bmem);
 
-		bool done = false;
-		int res = 0;
-		while(!done)
-		{
-			res = BIO_write(b64, input, length);
+//		bool done = false;
+//		int res = 0;
+//		while(!done)
+//		{
+//			res = BIO_write(b64, input, length);
 
-			if(res <= 0) // if failed
-			{
-				if(BIO_should_retry(b64)){
-					continue;
-				}
-				else // encoding failed
-				{
-					/* Handle Error!!! */
-				}
-			}
-			else // success!
-				done = true;
-		}
+//			if(res <= 0) // if failed
+//			{
+//				if(BIO_should_retry(b64)){
+//					continue;
+//				}
+//				else // encoding failed
+//				{
+//					/* Handle Error!!! */
+//				}
+//			}
+//			else // success!
+//				done = true;
+//		}
 
-		BIO_flush(b64);
+//		BIO_flush(b64);
 
-		// get a pointer to mem's data
-		char* dt;
-		long len = BIO_get_mem_data(bmem, &dt);
+//		// get a pointer to mem's data
+//		char* dt;
+//		long len = BIO_get_mem_data(bmem, &dt);
 
-		char* buff = (char*)malloc(len);
-		memcpy(buff, dt, len-1);
-		buff[len-1] = 0;
+//		char* buff = (char*)malloc(len);
+//		memcpy(buff, dt, len-1);
+//		buff[len-1] = 0;
 
-		BIO_free_all(b64);
+//		BIO_free_all(b64);
 
-		return buff;
-	}
+//		return buff;
+//	}
 
-	char *decode64(unsigned char *input, int length)
-	{
-	  BIO *b64, *bmem;
+//	char *decode64(unsigned char *input, int length)
+//	{
+//	  BIO *b64, *bmem;
 
-	  char *buffer = (char *)malloc(length);
-	  memset(buffer, 0, length);
+//	  char *buffer = (char *)malloc(length);
+//	  memset(buffer, 0, length);
 
-	  b64 = BIO_new(BIO_f_base64());
-	  bmem = BIO_new_mem_buf(input, length);
-	  bmem = BIO_push(b64, bmem);
+//	  b64 = BIO_new(BIO_f_base64());
+//	  bmem = BIO_new_mem_buf(input, length);
+//	  bmem = BIO_push(b64, bmem);
 
-	  BIO_read(bmem, buffer, length);
+//	  BIO_read(bmem, buffer, length);
 
-	  BIO_free_all(bmem);
+//	  BIO_free_all(bmem);
 
-	  return buffer;
-	}
+//	  return buffer;
+//	}
 
     
     class CHttpHandlerCB : public Nyx::CRefCount_Impl<NyxWebSvr::CHttpHandler>
@@ -365,57 +365,57 @@ namespace TraceClientCore
      */
     void CTcpTxtTracesReceiver::SendWebSocketAnswer(char* szInHeader, Nyx::IStreamRW& rStream)
     {
-    	char szResponse[2048] = "\0";
-    	char szResponseContent[2048] = "\0";
+//    	char szResponse[2048] = "\0";
+//    	char szResponseContent[2048] = "\0";
 
-    	char* szHost = strstr(szInHeader, "Host:");
-    	char* szWebSocketKey = strstr(szInHeader, "Sec-WebSocket-Key:");
-    	char* szOrigin = strstr(szInHeader, "Origin:");
-    	char* szHostEnd = strchr(szHost, '\r');
-    	*szHostEnd = '\0';
+//    	char* szHost = strstr(szInHeader, "Host:");
+//    	char* szWebSocketKey = strstr(szInHeader, "Sec-WebSocket-Key:");
+//    	char* szOrigin = strstr(szInHeader, "Origin:");
+//    	char* szHostEnd = strchr(szHost, '\r');
+//    	*szHostEnd = '\0';
 
-    	char* szWebSocketKeyEnd = strchr(szWebSocketKey, '\r');
-    	*szWebSocketKeyEnd = '\0';
+//    	char* szWebSocketKeyEnd = strchr(szWebSocketKey, '\r');
+//    	*szWebSocketKeyEnd = '\0';
 
-    	char* szOriginEnd = strchr(szOrigin, '\r');
-    	*szOriginEnd = '\0';
+//    	char* szOriginEnd = strchr(szOrigin, '\r');
+//    	*szOriginEnd = '\0';
 
-    	Nyx::NyxSize		sizeWritten = 0;
+//    	Nyx::NyxSize		sizeWritten = 0;
 
-    	szHost += strlen("Host:");
-    	szWebSocketKey += strlen("Sec-WebSocket-Key: ");
+//    	szHost += strlen("Host:");
+//    	szWebSocketKey += strlen("Sec-WebSocket-Key: ");
 
 
-    	unsigned char inbuf[1024] = "\0"; //"nUYteBM0xuBjUXQ6VHvhvA==";
-    	unsigned char outbuf[1024] = "\0";
+//    	unsigned char inbuf[1024] = "\0"; //"nUYteBM0xuBjUXQ6VHvhvA==";
+//    	unsigned char outbuf[1024] = "\0";
 
-    	strcpy((char*)inbuf, szWebSocketKey);
-    	strcat((char*)inbuf, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
+//    	strcpy((char*)inbuf, szWebSocketKey);
+//    	strcat((char*)inbuf, "258EAFA5-E914-47DA-95CA-C5AB0DC85B11");
 
-    	SHA1(inbuf, strlen((char*)inbuf), outbuf);
+//    	SHA1(inbuf, strlen((char*)inbuf), outbuf);
 
-    	char* base64output = base64(outbuf, strlen((char*)outbuf));
+//    	char* base64output = base64(outbuf, strlen((char*)outbuf));
 
-        strcat(szResponseContent, "HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
-    	strcat(szResponseContent, "Upgrade: WebSocket\r\n");
-    	strcat(szResponseContent, "Connection: Upgrade\r\n");
+//        strcat(szResponseContent, "HTTP/1.1 101 Web Socket Protocol Handshake\r\n");
+//    	strcat(szResponseContent, "Upgrade: WebSocket\r\n");
+//    	strcat(szResponseContent, "Connection: Upgrade\r\n");
 
-    	strcat(szResponseContent, "Sec-WebSocket-Accept: ");
-    	strcat(szResponseContent, base64output);
-    	strcat(szResponseContent, "\r\n");
+//    	strcat(szResponseContent, "Sec-WebSocket-Accept: ");
+//    	strcat(szResponseContent, base64output);
+//    	strcat(szResponseContent, "\r\n");
 
-    	strcat(szResponseContent, "\r\n");
+//    	strcat(szResponseContent, "\r\n");
 
-    	::free(base64output);
+//    	::free(base64output);
 
-    	NYXTRACE(0x0, szResponseContent);
+//    	NYXTRACE(0x0, szResponseContent);
 
-    	rStream.Write(szResponseContent, strlen(szResponseContent), sizeWritten);
+//    	rStream.Write(szResponseContent, strlen(szResponseContent), sizeWritten);
 
-    	if ( m_pProtocol )
-    		delete m_pProtocol;
+//    	if ( m_pProtocol )
+//    		delete m_pProtocol;
 
-    	m_pProtocol = new CTracesReceiverProtocol_WebSocket();
+//    	m_pProtocol = new CTracesReceiverProtocol_WebSocket();
     }
     
     

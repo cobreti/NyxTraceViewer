@@ -6,6 +6,8 @@ QT += xml
 QT += widgets
 QT += network
 QT += script
+QT += core
+QT += gui
 
 CONFIG += c++11
 
@@ -300,6 +302,9 @@ CONFIG(debug, debug | release) {
             LIBS += -lwinmm
             LIBS += -lws2_32
             LIBS += -ladvapi32
+            LIBS += -luser32
+            LIBS += -lucrtd
+            LIBS += -lmsvcrtd
             LIBS += -lTraceClientCore \
                 -L../../Lib/Qt/Debug_64
             LIBS += -lNyxBase \
@@ -308,10 +313,10 @@ CONFIG(debug, debug | release) {
                 -L$${NyxPath}/Lib/Qt/Debug_64
             LIBS += -lNyxWebSvr \
                 -L$${NyxPath}/Lib/Qt/Debug_64
-            LIBS += -lssleay32 \
-                -L$${NyxPath}/Lib/Windows/x64/openssl
-            LIBS += -llibeay32 \
-                -L$${NyxPath}/Lib/Windows/x64/openssl
+#            LIBS += -lssleay32 \
+#                -L$${NyxPath}/Lib/Windows/x64/openssl
+#            LIBS += -llibeay32 \
+#                -L$${NyxPath}/Lib/Windows/x64/openssl
     }
 
     DESTDIR = ./Debug_64
@@ -346,6 +351,7 @@ CONFIG(release, debug | release) {
             LIBS += -lwinmm
             LIBS += -lws2_32
             LIBS += -ladvapi32
+            LIBS += -luser32
             LIBS += -lTraceClientCore \
                 -L../../Lib/Qt/Release_64
             LIBS += -lNyxBase \
